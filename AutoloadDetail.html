@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>台账登记</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/sm.min.css" />
+    <link rel="stylesheet" href="libs/sm-extend.min.css" />
+    <link rel="stylesheet" href="AutoloadDetail.js" />
+</head>
+
+<div class="content">
+    <div class="content-block">
+        <div class="row" id="tab-nav">
+            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a></div>
+            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="delete">删除</a>
+            </div>
+            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="copy">复制</a></div>
+            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="save">保存</a></div>
+        </div>
+    </div>
+    <div class="buttons-tab fixed-tab" data-offset="44">
+        <a href="#tab1" class="tab-link active button">测试1</a>
+        <a href="#tab2" class="tab-link button">测试2</a>
+        <a href="#tab3" class="tab-link button">测
+            试3</a>
+    </div>
+    <div class="tabs">
+        <div id="tab1" class="tab active">
+            <div class="content-block">
+                <div class="list-block">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-name"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">姓名</div>
+                                    <div class="item-input">
+                                        <input type="text" placeholder="Your name">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-email"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">邮箱</div>
+                                    <div class="item-input">
+                                        <input type="email" placeholder="E-mail">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-password"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">密码</div>
+                                    <div class="item-input">
+                                        <input type="password" placeholder="Password" class="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-gender"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">性别</div>
+                                    <div class="item-input">
+                                        <select>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">生日</div>
+                                    <div class="item-input">
+                                        <input type="date" placeholder="Birth day" value="2014-04-30">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Switch (Checkbox) -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-toggle"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">开关</div>
+                                    <div class="item-input">
+                                        <label class="label-switch">
+                                            <input type="checkbox">
+                                            <div class="checkbox"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon icon-form-comment"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title label">文本域</div>
+                                    <div class="item-input">
+                                        <textarea></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+        <div id="tab2" class="tab">
+            <div class="content-block">
+                <p style="height:600px">This is tab 2 content start</p>
+                <p>This is tab 2 content end</p>
+            </div>
+        </div>
+        <div id="tab3" class="tab">
+            <div class="content-block">
+                <p style="height:600px">This is tab 3 content start</p>
+                <p>This is tab 3 content end</p>
+            </div>
+        </div>
+    </div>
+
+</div>
