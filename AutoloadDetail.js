@@ -30,7 +30,9 @@ var CustomerDevice = (function () {
             $(".tab-pane.active").removeClass("active");
             count++;
             var name = "addModal" + count;
-            var text = selectInfo.name;
+            //假数据
+            var text = "假的" + count;
+            // var text = selectInfo.name;
             var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button">' + text + '</a>';
             // var string = '<li role="presentation" class="active">' +
             //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + text + '</a></li>';
@@ -48,7 +50,10 @@ var CustomerDevice = (function () {
             if (data != undefined) {
                 creatInfo(data, $("#addVarContain" + count), count);
             } else {
-                creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
+                //假数据
+                creatInfo(130, $("#addVarContain" + count), count);
+
+                // creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
             }
         };
 
@@ -296,21 +301,21 @@ $(function () {
     $('#tab-nav').on('click', '#Add', function () {
         var info = customerDevice.getselectInfo();
 
-        if (info.fFunctionfield == undefined) {
-            alert("暂无设备信息，请增加相关信息！");
-            return;
-        }
+        // if (info.fFunctionfield == undefined) {
+        //     alert("暂无设备信息，请增加相关信息！");
+        //     return;
+        // }
 
-        var fTemplateid = info.id;
-        var fPagename = info.name;
-        var json = info.fFunctionfield;
+        // var fTemplateid = info.id;
+        // var fPagename = info.name;
+        // var json = info.fFunctionfield;
 
-        var formdata = new FormData();
-        formdata.append("fSubid", 10100001);
-        formdata.append("fTemplateid", fTemplateid);
-        formdata.append("fPagename", encodeURIComponent(fPagename));
-        formdata.append("fPagejson", json);
-        var url = "authority/pageCustomInsert";
+        // var formdata = new FormData();
+        // formdata.append("fSubid", 10100001);
+        // formdata.append("fTemplateid", fTemplateid);
+        // formdata.append("fPagename", encodeURIComponent(fPagename));
+        // formdata.append("fPagejson", json);
+        // var url = "authority/pageCustomInsert";
         // $.ajax({
         //     url: Substation.Common.addHead() + url,
         //     type: 'POST',
@@ -325,7 +330,9 @@ $(function () {
         //         alert("新增失败！");
         //     } else {
         customerDevice.addModal();
-        $(".active[role='presentation']").attr("name", data.data.fId);
+        // 假数据
+        $(".active[role='presentation']").attr("name", 2);
+        // $(".active[role='presentation']").attr("name", data.data.fId);
         $("#save").removeAttr("disabled");
         //     }
         // }).fail(function (res) {

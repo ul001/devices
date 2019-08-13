@@ -11,36 +11,45 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <link rel="stylesheet" href="libs/sm.min.css" />
     <link rel="stylesheet" href="libs/sm-extend.min.css" />
+
     <script src="libs/jquery-1.11.1.min.js"></script>
+    <script src="libs/zepto.min.js"></script>
+    <script src="libs/sm.min.js"></script>
+    <script src="libs/sm-extend.min.js"></script>
+    <script src="libs/config.js"></script>
     <script src="AutoloadDetail.js"></script>
-    <!-- <script src="libs/config.js"></script> -->
+    <script src="libs/tools.js"></script>
 
 </head>
 
-<div class="content">
-    <div class="content-block">
-        <div class="row" id="tab-nav">
-            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a></div>
-            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="delete">删除</a>
+<div class="page-group">
+    <div class=" page page-current" id="page-tab">
+        <div class="content-block">
+            <div class="row" id="tab-nav">
+                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a>
+                </div>
+                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="delete">删除</a>
+                </div>
+                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="copy">复制</a>
+                </div>
+                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="save">保存</a>
+                </div>
             </div>
-            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="copy">复制</a></div>
-            <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="save">保存</a></div>
         </div>
-    </div>
-    <div id="addDataUL" class="buttons-tab fixed-tab" data-offset="44">
-        <a role="presentation" href="#tab1" class="tab-link active button">测试点击</a>
-        <!-- <a href="#tab1" class="tab-link active button">测试1</a> -->
-        <a href="#tab2" class="tab-link button">测试2</a>
-        <a href="#tab3" class="tab-link button">测
-            试3</a>
-    </div>
-    <div class="tabs tab-content">
-        <div id="tab1 name" role="tabpanel" class="tab active">
-            <div class="content-block" id="addVarContain123">
-                <label class="header">信息一</label>
-                <div id="12" class="list-block baseInfoDiv" style="height: 44px" name="zhejiuduile">
-                    <ul>
-                        <!-- <li>
+        <div id="addDataUL" class="buttons-tab fixed-tab" data-offset="44">
+            <a role="presentation" href="#tab1" class="tab-link active button">测试点击</a>
+            <!-- <a href="#tab1" class="tab-link active button">测试1</a> -->
+            <a href="#tab2" class="tab-link button">测试2</a>
+            <a href="#tab3" class="tab-link button">测
+                试3</a>
+        </div>
+        <div class="tabs tab-content">
+            <div id="tab1 name" role="tabpanel" class="tab active">
+                <div class="content-block" id="addVarContain123">
+                    <label class="header">信息一</label>
+                    <div id="12" class="list-block baseInfoDiv" style="height: 44px" name="zhejiuduile">
+                        <ul>
+                            <!-- <li>
                             <div class="item-content showDiv">
                                 <div class="item-inner">
                                     <div class="item-title label">显示名字</div>
@@ -50,65 +59,66 @@
                                     </div>
                                 </div>
                         </li> -->
-                        <li>
-                            <div class="item-content showDiv">
-                                <div class="item-inner">
-                                    <div class="item-title label">显示名字</div>
-                                    <div class="item-input"><input type="text" id="input1234" class="valueInput"
-                                            value="有些什么值" name="类型名字" validator="required">
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label">显示名字</div>
+                                        <div class="item-input"><input type="text" id="input1234" class="valueInput"
+                                                value="有些什么值" name="类型名字" validator="required">
+                                        </div>
+                                    </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">' +
+                                        '<label class="item-title label nameInputInfo" name="radio">
+                                            测试选项 </label>' +
+                                        '<input type="radio" id="operation' + count + '" name="operation' + count + '"
+                                            value="yes" style="margin-left: 10px" checked><label
+                                            style="margin-right: 10px" for="operation' + count + '">是</label>' +
+                                        '<input type="radio" id="operationNo' + count + '" name="operation' + count + '"
+                                            value="no"><label style="margin-right: 10px"
+                                            for="operationNo' + count + '">否</label>' +
+                                        '</div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">' +
+                                        '<label class="nameInputInfo item-title label" name="select">列表</label><select>
+                                            <option selected>' + opval.opName + '</option>
+                                            <option>' + opval.opName + '</option>
+                                            <option>' + opval.opName + '</option>
+
+                                        </select></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label nameInputInfo" name="date">日期</div>
+                                        <input type="date" class="item-input daycalendarBox6 dateTime"
+                                            value="2012-02-12">
                                     </div>
                                 </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">' +
-                                    '<label class="item-title label nameInputInfo" name="radio">
-                                        测试选项 </label>' +
-                                    '<input type="radio" id="operation' + count + '" name="operation' + count + '"
-                                        value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px"
-                                        for="operation' + count + '">是</label>' +
-                                    '<input type="radio" id="operationNo' + count + '" name="operation' + count + '"
-                                        value="no"><label style="margin-right: 10px"
-                                        for="operationNo' + count + '">否</label>' +
-                                    '</div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">' +
-                                    '<label class="nameInputInfo item-title label" name="select">列表</label><select>
-                                        <option selected>' + opval.opName + '</option>
-                                        <option>' + opval.opName + '</option>
-                                        <option>' + opval.opName + '</option>
-
-                                    </select></div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label nameInputInfo" name="date">日期</div>
-                                    <input type="date" class="item-input daycalendarBox6 dateTime" value="2012-02-12">
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Text inputs -->
-                    </ul>
+                            </li>
+                            <!-- Text inputs -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="tab2" class="tab">
+                <div class="content-block">
+                    <p style="height:600px">This is tab 2 content start</p>
+                    <p>This is tab 2 content end</p>
+                </div>
+            </div>
+            <div id="tab3" class="tab">
+                <div class="content-block">
+                    <p style="height:600px">This is tab 3 content start</p>
+                    <p>This is tab 3 content end</p>
                 </div>
             </div>
         </div>
-        <div id="tab2" class="tab">
-            <div class="content-block">
-                <p style="height:600px">This is tab 2 content start</p>
-                <p>This is tab 2 content end</p>
-            </div>
-        </div>
-        <div id="tab3" class="tab">
-            <div class="content-block">
-                <p style="height:600px">This is tab 3 content start</p>
-                <p>This is tab 3 content end</p>
-            </div>
-        </div>
     </div>
-
 </div>
