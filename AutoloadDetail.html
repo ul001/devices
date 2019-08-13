@@ -11,7 +11,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <link rel="stylesheet" href="libs/sm.min.css" />
     <link rel="stylesheet" href="libs/sm-extend.min.css" />
-    <link rel="stylesheet" href="AutoloadDetail.js" />
+    <script src="libs/jquery-1.11.1.min.js"></script>
+    <script src="AutoloadDetail.js"></script>
+    <!-- <script src="libs/config.js"></script> -->
+
 </head>
 
 <div class="content">
@@ -24,106 +27,74 @@
             <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="save">保存</a></div>
         </div>
     </div>
-    <div class="buttons-tab fixed-tab" data-offset="44">
-        <a href="#tab1" class="tab-link active button">测试1</a>
+    <div id="addDataUL" class="buttons-tab fixed-tab" data-offset="44">
+        <a role="presentation" href="#tab1" class="tab-link active button">测试点击</a>
+        <!-- <a href="#tab1" class="tab-link active button">测试1</a> -->
         <a href="#tab2" class="tab-link button">测试2</a>
         <a href="#tab3" class="tab-link button">测
             试3</a>
     </div>
-    <div class="tabs">
-        <div id="tab1" class="tab active">
-            <div class="content-block">
-                <div class="list-block">
+    <div class="tabs tab-content">
+        <div id="tab1 name" role="tabpanel" class="tab active">
+            <div class="content-block" id="addVarContain123">
+                <label class="header">信息一</label>
+                <div id="12" class="list-block baseInfoDiv" style="height: 44px" name="zhejiuduile">
                     <ul>
+                        <!-- <li>
+                            <div class="item-content showDiv">
+                                <div class="item-inner">
+                                    <div class="item-title label">显示名字</div>
+                                    <div class="item-input"><input type="text" id="input1234" class="valueInput"
+                                            value="有些什么值" name="类型名字" validator="required" onblur="blurEvent(this)"
+                                            onfocus="focusEvent(this)">
+                                    </div>
+                                </div>
+                        </li> -->
+                        <li>
+                            <div class="item-content showDiv">
+                                <div class="item-inner">
+                                    <div class="item-title label">显示名字</div>
+                                    <div class="item-input"><input type="text" id="input1234" class="valueInput"
+                                            value="有些什么值" name="类型名字" validator="required">
+                                    </div>
+                                </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">' +
+                                    '<label class="item-title label nameInputInfo" name="radio">
+                                        测试选项 </label>' +
+                                    '<input type="radio" id="operation' + count + '" name="operation' + count + '"
+                                        value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px"
+                                        for="operation' + count + '">是</label>' +
+                                    '<input type="radio" id="operationNo' + count + '" name="operation' + count + '"
+                                        value="no"><label style="margin-right: 10px"
+                                        for="operationNo' + count + '">否</label>' +
+                                    '</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">' +
+                                    '<label class="nameInputInfo item-title label" name="select">列表</label><select>
+                                        <option selected>' + opval.opName + '</option>
+                                        <option>' + opval.opName + '</option>
+                                        <option>' + opval.opName + '</option>
+
+                                    </select></div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label nameInputInfo" name="date">日期</div>
+                                    <input type="date" class="item-input daycalendarBox6 dateTime" value="2012-02-12">
+                                </div>
+                            </div>
+                        </li>
                         <!-- Text inputs -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-name"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title label">姓名</div>
-                                    <div class="item-input">
-                                        <input type="text" placeholder="Your name">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-email"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title label">邮箱</div>
-                                    <div class="item-input">
-                                        <input type="email" placeholder="E-mail">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-password"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title label">密码</div>
-                                    <div class="item-input">
-                                        <input type="password" placeholder="Password" class="">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-gender"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title label">性别</div>
-                                    <div class="item-input">
-                                        <select>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Date -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-calendar"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title label">生日</div>
-                                    <div class="item-input">
-                                        <input type="date" placeholder="Birth day" value="2014-04-30">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Switch (Checkbox) -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-toggle"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title label">开关</div>
-                                    <div class="item-input">
-                                        <label class="label-switch">
-                                            <input type="checkbox">
-                                            <div class="checkbox"></div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="align-top">
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon icon-form-comment"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title label">文本域</div>
-                                    <div class="item-input">
-                                        <textarea></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
                     </ul>
                 </div>
-
             </div>
         </div>
         <div id="tab2" class="tab">
