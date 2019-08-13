@@ -1,0 +1,25 @@
+.bar_color{
+    background-color:#02A8A6;
+}
+.title_color{
+    color:#fff;
+}
+.bar .click_btn{
+    color:#fff;
+}
+.left_title{
+    position: absolute;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0 -.5rem;
+    font-size: .85rem;
+    font-weight: 500;
+    line-height: 2.2rem;
+    color: #3d4145;
+    white-space: nowrap;
+}
+img{
+    width:1.5rem;
+    height:1.5rem;
+}
