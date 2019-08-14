@@ -11,52 +11,86 @@
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/selectedSubstation.css">
 </head>
 
 <body>
-<div class="page-group">
-    <div class="page">
-        <header class="bar bar-nav bar_color">
-            <button class="button button-link button-nav pull-left click_btn">
-                <span class="icon icon-left"></span>
-                返回
-            </button>
-            <h1 class="title title_color">已选变电所</h1>
-        </header>
-        <header class="bar bar-header-secondary">
-            <p class="left_title"><img src="image/loginp.png" alt="touxiang">青岛(7602)</p>
-        </header>
-        <div class="content">
-            <div class="card">
-                <div class="">
-                    <span>青岛</span><br>
-                    <span>联系人：代科长</span>
+    <div class="page-group" id="router1">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <h1 class="title title_color">选择变电所</h1>
+            </header>
+            <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel">取消</a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='请输入变电所名称' />
+                    </div>
                 </div>
-                <div class="card-content">
-                    <div class="card-content-inner">
-                        <div class="content-padded grid-demo">
-                            <div class="row">
-                                <div class="col-80">
-                                    <span>电房名称</span><br>
-                                    <span>地址</span>
+            </div>
+            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div class="list-container">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content-padded">
+                                <div class="row  no-gutter sub_card">
+                                    <div class="col-80">
+                                        <p class="subName">安科瑞变电所</p>
+                                        <P><span>dst</span> <span>138546486142</span></P>
+                                        <p>地址：上海嘉定</p>
+                                    </div>
+                                    <div class="col-20">
+                                        <button class='bg-primary goPhoto' type="button">照片
+                                        </button>
+                                        <br>
+                                        <button class='bg-primary goLocation' type="button">位置
+                                        </button>
+                                    </div>
                                 </div>
-                                <div class="col-20">
-                                    <button type="button">照片</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content-padded">
+                                <div class="row  no-gutter sub_card">
+                                    <div class="col-80">
+                                        <p class="subName">安科瑞变电所</p>
+                                        <P><span>dst</span> <span>138546486142</span></P>
+                                        <p>地址：上海嘉定</p>
+                                    </div>
+                                    <div class="col-20">
+                                        <button class='bg-primary external goPhoto' type="button">照片
+                                        </button>
+                                        <br>
+                                        <button class='bg-primary external goLocation' type="button">位置
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- preloader -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
-<script>
-    $.init();
-
-</script>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script src="js/selectedSubstation.js"></script>
 </body>
+
 </html>

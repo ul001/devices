@@ -1,0 +1,18 @@
+.sub_card{
+    display:flex;
+    align-items:center;
+}
+.sub_card p{
+    margin:0 0;
+}
+.sub_card .subName{
+    font-weight:bold;
+    margin:0.4rem 0;
+}
+.sub_card button{
+    border:none;
+    border-radius:0.2rem;
+    padding:0.2rem 0;
+    width:100%;
+    margin:0.1rem 0;
+}
