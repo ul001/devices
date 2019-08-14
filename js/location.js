@@ -36,4 +36,5 @@
     function onError(data) {
         console.log(data.message);
     }
+
     $.init();

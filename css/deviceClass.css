@@ -1,0 +1,20 @@
+i.icon.icon-device {
+    width: 1.45rem;
+    height: 1.45rem;
+    background-image: url(../img/i-device.png);
+}
+.list-block{
+    margin:0;
+}
+/*.parent-page{
+    display:none;
+}*/
+.child-page{
+    display:none;
+}
+#no-click:active{
+    color:#fff;
+}
+.child-page .bar{
+    position:static;
+}

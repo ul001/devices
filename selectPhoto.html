@@ -11,49 +11,55 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
-    <link rel="stylesheet" href="css/selectPhoto.css"/>
     <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/selectPhoto.css" />
 </head>
 
 <body>
-<div class="page-group">
-    <div class="page page-current">
-        <!-- 标题栏 -->
-        <header class="bar bar-nav bar_color">
-            <h1 class="title title_color">标题</h1>
-        </header>
-        <div class="content">
-            <div class="custom_img">
-                <div class="custom_img_top">
-                    <p></p>
-                    <!--<p><span class="upload_img_length">0</span>/9</p>-->
-                </div>
-
-                <!--点击上传图片 触发下面的div 点击事件-->
-                <div class="upload_img_wrap">
-                    <div id="imgBox"><img class="upload_img" src="image/upload_img.png"/>
+    <div class="page-group">
+        <div class="page" id="router2">
+            <!-- 标题栏 -->
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left external click_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <button class="button button-link button-nav pull-right click_btn">
+                    保存
+                </button>
+                <h1 class="title title_color">标题</h1>
+            </header>
+            <div class="content">
+                <div class="custom_img">
+                    <div class="custom_img_top">
+                        <p></p>
+                        <!--<p><span class="upload_img_length">0</span>/9</p>-->
                     </div>
-                    <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
-                </div>
-                <div style="display: none;width: 100%;height: 100vh;position: relative;">
-                    <form id="upBox" class="upload_form" action="" method="post"
-                          enctype="multipart/form-data">
-                        <div style="display: none;" id="inputBox">
-                            <input type="file" name="image[]" data-id="1" title="请选择图片" id="file1"
-                                   accept="image/png,image/jpg,image/gif,image/JPEG"/><!--
+                    <!--点击上传图片 触发下面的div 点击事件-->
+                    <div class="upload_img_wrap">
+                        <div id="imgBox"><img class="upload_img" src="img/upload_img.png" />
+                        </div>
+                        <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                    </div>
+                    <div style="display: none;width: 100%;height: 100vh;position: relative;">
+                        <form id="upBox" class="upload_form" action="" method="post" enctype="multipart/form-data">
+                            <div style="display: none;" id="inputBox">
+                                <input type="file" name="image[]" data-id="1" title="请选择图片" id="file1" accept="image/png,image/jpg,image/gif,image/JPEG" />
+                                <!--
                         <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
                         <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
-                        </div>
-                        <input style="display:none" type="submit" id="sub"/>
-                    </form>
+                            </div>
+                            <input style="display:none" type="submit" id="sub" />
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
-<script src="js/selectPhoto.js"></script>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script src="js/selectPhoto.js"></script>
 </body>
+
 </html>

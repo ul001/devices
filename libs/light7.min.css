@@ -716,7 +716,7 @@ body.panel-closing .page{-webkit-transition:.4s;-o-transition:.4s;transition:.4s
 .notification .notification-media{width:1rem;height:1rem}
 .notification .notification-media img{width:100%}
 .notification .notification-handle-bar{position:absolute;bottom:.2rem;left:50%;width:2rem;height:.3rem;background:#fff;border-radius:.15rem;opacity:.5;-webkit-transform:translate3d(-50%,0,0);transform:translate3d(-50%,0,0)}
-@font-face{font-family:iconfont-sm;src:url(//at.alicdn.com/t/font_1433401008_2229297.eot);src:url(//at.alicdn.com/t/font_1433401008_2229297.eot?#iefix) format('embedded-opentype'),url(//at.alicdn.com/t/font_1433401008_2229297.woff) format('woff'),url(//at.alicdn.com/t/font_1433401008_2229297.ttf) format('truetype'),url(//at.alicdn.com/t/font_1433401008_2229297.svg#iconfont) format('svg')}
+@font-face{font-family:iconfont-sm;src:url(font_1433401008_2229297.eot);src:url(font_1433401008_2229297.eot?#iefix) format('embedded-opentype'),url(font_1433401008_2229297.woff) format('woff'),url(font_1433401008_2229297.ttf) format('truetype'),url(font_1433401008_2229297.svg#iconfont) format('svg')}
 .icon{font-family:iconfont-sm!important;font-style:normal;-webkit-font-smoothing:antialiased;-webkit-text-stroke-width:.2px;-moz-osx-font-smoothing:grayscale}
 .icon-app:before{content:"\e605"}
 .icon-browser:before{content:"\e606"}
