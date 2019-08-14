@@ -136,3 +136,15 @@ a:hover {
 .imgContainer:hover p {
 	display: block;
 }
+
+.upload_img_wrap,#imgBox{
+    display:block;
+}
+
+.upload_img{
+    margin-left:1%;
+}
+
+.custom_img{
+height:100%;
+}
