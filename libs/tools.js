@@ -16,7 +16,8 @@ var Substation = {
                 url: Substation.Common.addHead() + url,
                 data: params,
                 beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+                    // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+                    request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjU5NTk5OTQsInVzZXJuYW1lIjoiYWRtaW4ifQ.1WhB3EvQZ2IJ3uMDOr1sQ-X8brr3SU1OJoR52Ovg-Kw");
                 },
                 success: function (data) {
                     if (data == undefined) {
@@ -44,7 +45,8 @@ var Substation = {
                 cache: false,
                 data: params,
                 beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+                    request.setRequestHeader("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjU5NTk5OTQsInVzZXJuYW1lIjoiYWRtaW4ifQ.1WhB3EvQZ2IJ3uMDOr1sQ-X8brr3SU1OJoR52Ovg-Kw");
+                    // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
                 },
                 processData: false,
                 contentType: false

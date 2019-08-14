@@ -1,13 +1,16 @@
-.bar_color{
-    background-color:#02A8A6;
+.bar_color {
+    background-color: #02A8A6;
 }
-.title_color{
-    color:#fff;
+
+.title_color {
+    color: #fff;
 }
-.bar .click_btn{
-    color:#fff;
+
+.bar .click_btn {
+    color: #fff;
 }
-.left_title{
+
+.left_title {
     position: absolute;
     display: block;
     width: 100%;

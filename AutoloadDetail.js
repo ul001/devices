@@ -5,7 +5,7 @@ var CustomerDevice = (function () {
         var selectInfo;
         var count = 100;
         var curNodeInfo;
-
+        // selectInfo.id = 130;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
             Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + selectInfo.id, function (data) {
@@ -112,19 +112,19 @@ var CustomerDevice = (function () {
         }
 
         function initHtml() {
-            $(".megbox").remove();
-            $(":text").css({
-                "border": '1px solid #ababab',
-                "box-shadow": '0px 0px 0px #ababab'
-            });
-            $(".tab-content").html('');
-            $("li[role='presentation']").remove(); //清空原有信息
+            // $(".megbox").remove();
+            // $(":text").css({
+            //     "border": '1px solid #ababab',
+            //     "box-shadow": '0px 0px 0px #ababab'
+            // });
+            // $(".tab-content").html('');
+            // $("li[role='presentation']").remove(); //清空原有信息
         }
 
         // 是否显示全部树结构
-        $("#showAllNodes").change(function () {
-            getData();
-        });
+        // $("#showAllNodes").change(function () {
+        //     getData();
+        // });
 
         // 点击一个节点
         function onClick(treeNode) {
@@ -287,243 +287,243 @@ var CustomerDevice = (function () {
 })();
 
 // jQuery(document).ready(function () {
-$(function () {
-    var customerDevice = new CustomerDevice();
+// $(function () {
+var customerDevice = new CustomerDevice();
 
-    // if ($.cookie("stationId") != undefined && $.cookie("subName") != undefined) {
-    //     $("#StationName").html($.cookie('subName'));
-    customerDevice.show();
-    // } else {
+// if ($.cookie("stationId") != undefined && $.cookie("subName") != undefined) {
+//     $("#StationName").html($.cookie('subName'));
+customerDevice.show();
+// } else {
+//     return;
+// }
+
+// 新增按钮
+$('#tab-nav').on('click', '#Add', function () {
+    var info = customerDevice.getselectInfo();
+
+    // if (info.fFunctionfield == undefined) {
+    //     alert("暂无设备信息，请增加相关信息！");
     //     return;
     // }
 
-    // 新增按钮
-    $('#tab-nav').on('click', '#Add', function () {
-        var info = customerDevice.getselectInfo();
+    // var fTemplateid = info.id;
+    // var fPagename = info.name;
+    // var json = info.fFunctionfield;
 
-        // if (info.fFunctionfield == undefined) {
-        //     alert("暂无设备信息，请增加相关信息！");
-        //     return;
-        // }
-
-        // var fTemplateid = info.id;
-        // var fPagename = info.name;
-        // var json = info.fFunctionfield;
-
-        // var formdata = new FormData();
-        // formdata.append("fSubid", 10100001);
-        // formdata.append("fTemplateid", fTemplateid);
-        // formdata.append("fPagename", encodeURIComponent(fPagename));
-        // formdata.append("fPagejson", json);
-        // var url = "authority/pageCustomInsert";
-        // $.ajax({
-        //     url: Substation.Common.addHead() + url,
-        //     type: 'POST',
-        //     data: formdata,
-        //     beforeSend: function (request) {
-        //         request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-        //     },
-        //     processData: false,
-        //     contentType: false
-        // }).done(function (data) {
-        //     if (data.msg != "ok") {
-        //         alert("新增失败！");
-        //     } else {
-        customerDevice.addModal();
-        // 假数据
-        $(".active[role='presentation']").attr("name", 2);
-        // $(".active[role='presentation']").attr("name", data.data.fId);
-        $("#save").removeAttr("disabled");
-        //     }
-        // }).fail(function (res) {
-        //     alert("新增失败！");
-        // });
-    });
-
-    // 复制按钮
-    $('#tab-nav').on('click', '#copy', function () {
-        var info = customerDevice.getselectInfo();
-
-        var fTemplateid = info.id;
-        var fPagename = info.name;
-
-        var nodeInfo = customerDevice.returnNodeInfo();
-        var json;
-        var selectDevice = $(".active[role='presentation']").attr("name");
-        $.each(nodeInfo, function (key, val) {
-            if (selectDevice == (val.fId).toString()) {
-                json = val.fPagejson;
-            }
-        });
-
-        var formdata = new FormData();
-        formdata.append("fSubid", 10100001);
-        formdata.append("fTemplateid", fTemplateid);
-        formdata.append("fPagename", encodeURIComponent(fPagename));
-        formdata.append("fPagejson", json);
-        var url = "authority/pageCustomInsert";
-        // $.ajax({
-        //     url: Substation.Common.addHead() + url,
-        //     type: 'POST',
-        //     data: formdata,
-        //     beforeSend: function (request) {
-        //         request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-        //     },
-        //     processData: false,
-        //     contentType: false
-        // }).done(function (data) {
-        //     if (data.msg != "ok") {
-        //         alert("复制失败！");
-        //     } else {
-        customerDevice.addModal(json);
-        $(".active[role='presentation']").attr("name", data.data.fId);
-        //     }
-        // }).fail(function (res) {
-        //     alert("复制失败！");
-        // });
-    });
-
-    // 删除按钮
-    $('#tab-nav').on('click', '#delete', function () {
-        var selectId = $(".active[role='presentation']").attr("name");
-        var name = $(".active[role='presentation']").children('a').text();
-        if (confirm("确认删除" + name + " 吗？")) {
-            // Substation.Common.requestData("authority/pageCustomDelete", "fId=" + selectId, function (data) {
-            //     if (data == true) {
-            alert("删除成功！");
-            var id = $(".active[role='presentation']").children('a').attr('href');
-            var prevLi = $(".active[role='presentation']").prev('li');
-            $(".active[role='presentation']").remove();
-            $(id).remove();
-            if (prevLi != undefined) {
-                $('a', $(prevLi)).tab('show');
-            }
-            // } else {
-            //     alert("删除失败！");
-            // }
-            // })
-        }
-    });
-
-    // 修改保存按钮点击
-    $('#tab-nav').on('click', '#save', function () {
-        var isTrue = true;
-        var input = $(".tab-pane.active").find(".valueInput[name='true']");
-        $.each(input, function (key, val) {
-            if (!Substation.Validator.validate($(val), "")) {
-                $("#save").attr("disabled", true);
-                isTrue = false;
-                return false;
-            }
-        });
-
-        if (isTrue) {
-            var fFunctionfield = [];
-            var divList = $(".tab-pane.active").find(".baseInfoDiv");
-            $.each(divList, function (key, val) {
-                var text = $(val).attr("name");
-                fFunctionfield.push({
-                    name: encodeURIComponent(text),
-                    value: []
-                });
-                var infoList = $(val).children('.showDiv');
-                $.each(infoList, function (index, val) {
-                    var row = {};
-                    var select = $(val).children(".nameInputInfo");
-                    var name = $(select).text();
-                    var type = $(select).attr("name");
-                    var value;
-                    switch (type) {
-                        case "input":
-                            var row = {};
-                            row.inpName = $(val).find($(".valueInput")).val();
-                            row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
-                            value = JSON.stringify(row);
-                            break;
-                        case "radio":
-                            value = $(val).find($("input:checked")).val();
-                            break;
-                        case "select":
-                            var list = [];
-                            var options = $(val).find('select').children('option');
-                            $.each(options, function (opkey, opval) {
-                                var row = {};
-                                row.opName = $(opval).val();
-                                row.opType = $(opval).is(":checked");
-                                list.push(row);
-                            });
-                            value = JSON.stringify(list);
-                            break;
-                        case "date":
-                            value = $(val).find($(".dateTime")).val();
-                            break;
-                    }
-                    row.type = type;
-                    row.name = encodeURIComponent(name);
-                    row.value = encodeURIComponent(value);
-                    fFunctionfield[key].value.push(row);
-                });
-            });
-            upData(fFunctionfield);
-        }
-    });
-
-    function upData(fFunctionfield) {
-        var json = JSON.stringify(fFunctionfield);
-
-        var fId = $(".active[role='presentation']").attr("name");
-
-        var formdata = new FormData();
-        formdata.append("fId", fId);
-        formdata.append("fPagejson", json);
-        var url = "authority/pageCustomUpdate";
-        $.ajax({
-            url: Substation.Common.addHead() + url,
-            type: 'POST',
-            data: formdata,
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-            },
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            if (data.data == true) {
-                alert("保存成功！");
-                customerDevice.reNewCurNodeInfo();
-            } else {
-                alert("保存失败！");
-            }
-        }).fail(function (res) {
-            alert("保存失败！");
-        });
-    }
-
-    //点击弹出弹窗加载信息
-    $("#myModal").on('shown.bs.modal', function () {
-        Substation.DOMOperator.pagenation("main/getSubstationListByUser", 1, 8);
-    });
-    $("#myModal").on('hide.bs.modal', function () {
-        $("#tableSubName").html("");
-        $(".substationlist").val('');
-    });
-
-    $("#yesBtn").click(function (event) {
-        var row = selectedInfoModal;
-        Substation.DOMOperator.yesBtnClick(row);
-        $("#myModal").modal('hide');
-        $("#treeDemo").html('');
-        customerDevice.show();
-    });
-
-    $(document).on('click', '.nav-tabs li', function () {
-        $(".megbox").remove();
-        $(":text").css({
-            "border": '1px solid #ababab',
-            "box-shadow": '0px 0px 0px #ababab'
-        });
-        $("#save").removeAttr("disabled");
-    });
+    // var formdata = new FormData();
+    // formdata.append("fSubid", 10100001);
+    // formdata.append("fTemplateid", fTemplateid);
+    // formdata.append("fPagename", encodeURIComponent(fPagename));
+    // formdata.append("fPagejson", json);
+    // var url = "authority/pageCustomInsert";
+    // $.ajax({
+    //     url: Substation.Common.addHead() + url,
+    //     type: 'POST',
+    //     data: formdata,
+    //     beforeSend: function (request) {
+    //         request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+    //     },
+    //     processData: false,
+    //     contentType: false
+    // }).done(function (data) {
+    //     if (data.msg != "ok") {
+    //         alert("新增失败！");
+    //     } else {
+    customerDevice.addModal();
+    // 假数据
+    $(".active[role='presentation']").attr("name", 2);
+    // $(".active[role='presentation']").attr("name", data.data.fId);
+    $("#save").removeAttr("disabled");
+    //     }
+    // }).fail(function (res) {
+    //     alert("新增失败！");
+    // });
 });
+
+// 复制按钮
+$('#tab-nav').on('click', '#copy', function () {
+    var info = customerDevice.getselectInfo();
+
+    var fTemplateid = info.id;
+    var fPagename = info.name;
+
+    var nodeInfo = customerDevice.returnNodeInfo();
+    var json;
+    var selectDevice = $(".active[role='presentation']").attr("name");
+    $.each(nodeInfo, function (key, val) {
+        if (selectDevice == (val.fId).toString()) {
+            json = val.fPagejson;
+        }
+    });
+
+    var formdata = new FormData();
+    formdata.append("fSubid", 10100001);
+    formdata.append("fTemplateid", fTemplateid);
+    formdata.append("fPagename", encodeURIComponent(fPagename));
+    formdata.append("fPagejson", json);
+    var url = "authority/pageCustomInsert";
+    // $.ajax({
+    //     url: Substation.Common.addHead() + url,
+    //     type: 'POST',
+    //     data: formdata,
+    //     beforeSend: function (request) {
+    //         request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+    //     },
+    //     processData: false,
+    //     contentType: false
+    // }).done(function (data) {
+    //     if (data.msg != "ok") {
+    //         alert("复制失败！");
+    //     } else {
+    customerDevice.addModal(json);
+    $(".active[role='presentation']").attr("name", data.data.fId);
+    //     }
+    // }).fail(function (res) {
+    //     alert("复制失败！");
+    // });
+});
+
+// 删除按钮
+$('#tab-nav').on('click', '#delete', function () {
+    var selectId = $(".active[role='presentation']").attr("name");
+    var name = $(".active[role='presentation']").children('a').text();
+    if (confirm("确认删除" + name + " 吗？")) {
+        // Substation.Common.requestData("authority/pageCustomDelete", "fId=" + selectId, function (data) {
+        //     if (data == true) {
+        alert("删除成功！");
+        var id = $(".active[role='presentation']").children('a').attr('href');
+        var prevLi = $(".active[role='presentation']").prev('li');
+        $(".active[role='presentation']").remove();
+        $(id).remove();
+        if (prevLi != undefined) {
+            $('a', $(prevLi)).tab('show');
+        }
+        // } else {
+        //     alert("删除失败！");
+        // }
+        // })
+    }
+});
+
+// 修改保存按钮点击
+$('#tab-nav').on('click', '#save', function () {
+    var isTrue = true;
+    var input = $(".tab-pane.active").find(".valueInput[name='true']");
+    $.each(input, function (key, val) {
+        if (!Substation.Validator.validate($(val), "")) {
+            $("#save").attr("disabled", true);
+            isTrue = false;
+            return false;
+        }
+    });
+
+    if (isTrue) {
+        var fFunctionfield = [];
+        var divList = $(".tab-pane.active").find(".baseInfoDiv");
+        $.each(divList, function (key, val) {
+            var text = $(val).attr("name");
+            fFunctionfield.push({
+                name: encodeURIComponent(text),
+                value: []
+            });
+            var infoList = $(val).children('.showDiv');
+            $.each(infoList, function (index, val) {
+                var row = {};
+                var select = $(val).children(".nameInputInfo");
+                var name = $(select).text();
+                var type = $(select).attr("name");
+                var value;
+                switch (type) {
+                    case "input":
+                        var row = {};
+                        row.inpName = $(val).find($(".valueInput")).val();
+                        row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
+                        value = JSON.stringify(row);
+                        break;
+                    case "radio":
+                        value = $(val).find($("input:checked")).val();
+                        break;
+                    case "select":
+                        var list = [];
+                        var options = $(val).find('select').children('option');
+                        $.each(options, function (opkey, opval) {
+                            var row = {};
+                            row.opName = $(opval).val();
+                            row.opType = $(opval).is(":checked");
+                            list.push(row);
+                        });
+                        value = JSON.stringify(list);
+                        break;
+                    case "date":
+                        value = $(val).find($(".dateTime")).val();
+                        break;
+                }
+                row.type = type;
+                row.name = encodeURIComponent(name);
+                row.value = encodeURIComponent(value);
+                fFunctionfield[key].value.push(row);
+            });
+        });
+        upData(fFunctionfield);
+    }
+});
+
+function upData(fFunctionfield) {
+    var json = JSON.stringify(fFunctionfield);
+
+    var fId = $(".active[role='presentation']").attr("name");
+
+    var formdata = new FormData();
+    formdata.append("fId", fId);
+    formdata.append("fPagejson", json);
+    var url = "authority/pageCustomUpdate";
+    $.ajax({
+        url: Substation.Common.addHead() + url,
+        type: 'POST',
+        data: formdata,
+        beforeSend: function (request) {
+            request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+        },
+        processData: false,
+        contentType: false
+    }).done(function (data) {
+        if (data.data == true) {
+            alert("保存成功！");
+            customerDevice.reNewCurNodeInfo();
+        } else {
+            alert("保存失败！");
+        }
+    }).fail(function (res) {
+        alert("保存失败！");
+    });
+}
+
+//点击弹出弹窗加载信息
+$("#myModal").on('shown.bs.modal', function () {
+    Substation.DOMOperator.pagenation("main/getSubstationListByUser", 1, 8);
+});
+$("#myModal").on('hide.bs.modal', function () {
+    $("#tableSubName").html("");
+    $(".substationlist").val('');
+});
+
+$("#yesBtn").click(function (event) {
+    var row = selectedInfoModal;
+    Substation.DOMOperator.yesBtnClick(row);
+    $("#myModal").modal('hide');
+    $("#treeDemo").html('');
+    customerDevice.show();
+});
+
+$(document).on('click', '.nav-tabs li', function () {
+    // $(".megbox").remove();
+    // $(":text").css({
+    //     "border": '1px solid #ababab',
+    //     "box-shadow": '0px 0px 0px #ababab'
+    // });
+    $("#save").removeAttr("disabled");
+});
+// });
 
 // 初始化时间控件
 // function initDate(select) {
