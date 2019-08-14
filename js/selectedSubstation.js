@@ -1,10 +1,20 @@
-$(".goPhoto").on("click", function() {
-    window.location.href = "selectPhoto.html";
-});
+    addClick();
 
-$(".goLocation").on("click", function() {
-    window.location.href = "location.html";
-});
+    function addClick(){
+        $(".card").click(function(){
+            window.location.href="deviceClass.html";
+        });
+
+        $(".goPhoto").click(function(e) {
+            e.stopPropagation();
+            window.location.href = "selectPhoto.html";
+        });
+
+        $(".goLocation").click(function(e) {
+            e.stopPropagation();
+            window.location.href = "location.html";
+        });
+    }
 
 $(document).on('refresh', '.pull-to-refresh-content', function(e) {
     setTimeout(function() {
@@ -44,6 +54,7 @@ function addItems(number, lastIndex) {
             "                </div>";
     }
     $('.list-container').append(html);
+    addClick();
 }
 addItems(itemsPerLoad, 0);
 
@@ -71,4 +82,5 @@ $(document).on('infinite', '.infinite-scroll', function() {
         lastIndex = $('.list-container .card').length;
     }, 1000);
 });
+
 $.init();
