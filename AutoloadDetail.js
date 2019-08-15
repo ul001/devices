@@ -310,9 +310,9 @@ var CustomerDevice = (function () {
                     // string = '<div class="showDiv">' +
                     //     '<label class="nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' + ':' +
                     //     '<input type="text" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '">';
-                    string = '<li><div class="showDiv"><div class="item-inner">' +
-                        '<div class="item-title label nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</div>' + '<div>'
-                    '<input type="date" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '"></div></div></li>';
+                    string = '<li><div class="showDiv item-content"><div class="item-inner">' +
+                        '<label class="item-title label nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' +
+                        '<input type="date" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '"></div></div></li>';
                     break;
             }
             $(select).append(string);
