@@ -7,7 +7,7 @@ var Substation = {
     Common: {
         addHead: function () {
             // return "http://192.168.255.20:8080/SubstationWEBV2/";
-            return "http://116.236.149.162:8090/SubstationWEBV2/";
+            return "http://116.236.149.162:8090/SubstationWEBV2/v1/";
         },
 
         requestData: function (url, params, successCallback) {

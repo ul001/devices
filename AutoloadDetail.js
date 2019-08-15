@@ -8,7 +8,7 @@ var CustomerDevice = (function () {
         // selectInfo.id = 130;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
-            Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + selectInfo.id, function (data) {
+            Substation.Common.requestData("pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + selectInfo.id, function (data) {
                 curNodeInfo = data;
             })
             // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
@@ -33,21 +33,21 @@ var CustomerDevice = (function () {
             $(".tab-pane.active").removeClass("active");
             count++;
             var name = "addModal" + count;
-
             var text = selectInfo.name;
-            var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button">' + text + '</a>';
+            var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
             // var string = '<li role="presentation" class="active">' +
             //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + text + '</a></li>';
 
             // var containStr = '<div role="tabpanel" class="tab active" id="' + name +
             // '"> <div class="content-block">< div class ="list-block"><ul id="addVarContain' + count + '"></ul></div></div></div>';
-            var containStr = '<div role="tabpanel" class="tab active" id="' + name +
+            var containStr = '<div role="tabpanel" class="tab" id="' + name +
                 '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
             // '<div id="addVarContain' + count + '"></div></div>';
 
             $("#addDataUL").append(string);
             $(".tab-content").append(containStr);
+            $("#tab" + name).click();
             //传信息参数为复制设备，无信息参数为新增设备
             if (data != undefined) {
                 creatInfo(data, $("#addVarContain" + count), count);
@@ -62,16 +62,66 @@ var CustomerDevice = (function () {
         // 初始化获取信息
         this.show = function () {
             initHtml();
-            getData();
+            // getData();
+            getNetData();
         };
+
+        function getNetData() {
+            Substation.Common.requestData("pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
+                // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
+                curNodeInfo = data;
+                // 如果有设备信息
+                if (data.length > 0) {
+                    $.each(data, function (key, val) {
+                        count++;
+                        var name = "addModal" + val.fId;
+                        //  var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
+                        if (key == 0) {
+                            // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
+                            //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>'; 
+                            // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
+                            //     '<div id="addVarContain' + count + '"></div>' +
+                            //     '</div>';
+                            var string = ' <a role="presentation" href="#' + name + '" class="tab-link button" name="' + val.fId + ' id="tab' + name + '">' + decodeURIComponent(val.fPagename) + '</a>';
+                            var containStr = '<div role="tabpanel" class="tab" id="' + name +
+                                '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
+                        } else {
+                            // var string = '<li role="presentation" name="' + val.fId + '">' +
+                            //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+                            // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
+                            //     '<div id="addVarContain' + count + '"></div>' +
+                            //     '</div>';
+                            var string = ' <a role="presentation" href="#' + name + '" class="tab-link button" name="' + val.fId + ' id="tab' + name + '">' + decodeURIComponent(val.fPagename) + '</a>';
+                            var containStr = '<div role="tabpanel" class="tab" id="' + name +
+                                '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
+                        }
+                        $("#addDataUL").append(string);
+                        $(".tab-content").append(containStr);
+                        if (count == 101) {
+                            $("#tab" + name).click();
+                            selectInfo = val;
+                        }
+                        if (val.fPagejson != undefined && val.fPagejson != 'undefined') {
+                            creatInfo(val.fPagejson, $("#addVarContain" + count), count);
+                        }
+                    });
+                } else {
+                    $("#delete").attr("disabled", true);
+                    $("#copy").attr("disabled", true);
+                    $("#save").attr("disabled", true);
+                    $("#container-info").html("暂无相关信息！").css("text-align", "center");
+                }
+            });
+        }
 
         function getData() {
             // $("body").showLoading();
-            var url = "authority/appMenuSelectHideOrShow";
+            var url = "appMenuSelectHideOrShow";
             var params = "fSubid=" + 10100001;
             Substation.Common.requestData(url, params, function (data) {
                 var state = $("#showAllNodes").prop("checked"); //获取是否显示
                 var showData = data;
+
                 if (state == false) {
                     showData = data.filter(function (index) {
                         return index.state == "true";
@@ -141,7 +191,7 @@ var CustomerDevice = (function () {
         // 点击一个节点
         function onClick(treeNode) {
             // $("body").showLoading();
-            Substation.Common.requestData("authority/pageCustomList", "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id, function (data) {
+            Substation.Common.requestData("pageCustomList", "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id, function (data) {
                 // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
                 curNodeInfo = data;
                 // 如果有设备信息
@@ -378,6 +428,7 @@ jQuery(document).ready(function () {
 
         var fTemplateid = info.id;
         var fPagename = info.name;
+
         var json = info.fFunctionfield;
 
         var formdata = new FormData();
@@ -385,7 +436,7 @@ jQuery(document).ready(function () {
         formdata.append("fTemplateid", fTemplateid);
         formdata.append("fPagename", encodeURIComponent(fPagename));
         formdata.append("fPagejson", json);
-        var url = "authority/pageCustomInsert";
+        var url = "pageCustomInsert";
         $.ajax({
             url: Substation.Common.addHead() + url,
             type: 'POST',
@@ -430,7 +481,7 @@ jQuery(document).ready(function () {
         formdata.append("fTemplateid", fTemplateid);
         formdata.append("fPagename", encodeURIComponent(fPagename));
         formdata.append("fPagejson", json);
-        var url = "authority/pageCustomInsert";
+        var url = "pageCustomInsert";
         $.ajax({
             url: Substation.Common.addHead() + url,
             type: 'POST',
@@ -457,7 +508,7 @@ jQuery(document).ready(function () {
         var selectId = $(".active[role='presentation']").attr("name");
         var name = $(".active[role='presentation']").children('a').text();
         if (confirm("确认删除" + name + " 吗？")) {
-            Substation.Common.requestData("authority/pageCustomDelete", "fId=" + selectId, function (data) {
+            Substation.Common.requestData("pageCustomDelete", "fId=" + selectId, function (data) {
                 if (data == true) {
                     alert("删除成功！");
                     var id = $(".active[role='presentation']").children('a').attr('href');
@@ -545,7 +596,7 @@ jQuery(document).ready(function () {
         var formdata = new FormData();
         formdata.append("fId", fId);
         formdata.append("fPagejson", json);
-        var url = "authority/pageCustomUpdate";
+        var url = "pageCustomUpdate";
         $.ajax({
             url: Substation.Common.addHead() + url,
             type: 'POST',
@@ -620,4 +671,5 @@ jQuery(document).ready(function () {
         Substation.Validator.setFocus($(select));
         $("#save").removeAttr("disabled");
     }
+    $.init();
 });
