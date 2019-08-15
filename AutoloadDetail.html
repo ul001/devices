@@ -15,7 +15,7 @@
     <script src="libs/jquery-1.12.4.min.js"></script>
     <script src="libs/light7.min.js"></script>
     <script src="libs/light7-swiper.min.js"></script>
-    <!-- <script src="libs/config.js"></script> -->
+    <script src="libs/config.js"></script>
     <script src="libs/tools.js"></script>
     <script src="AutoloadDetail.js"></script>
 </head>
@@ -30,7 +30,25 @@
                 </a>
                 <h1 class="title">设备配置</h1>
             </head> -->
-            <div class="content-block">
+            <!-- <div class="content-block">
+                <div class="row" id="tab-nav">
+                    <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a>
+                    </div>
+                    <div class="col-25"><a href="#" class="button button-big button-fill button-success"
+                            id="delete">删除</a>
+                    </div>
+                    <div class="col-25"><a href="#" class="button button-big button-fill button-success"
+                            id="copy">复制</a>
+                    </div>
+                    <div class="col-25"><a href="#" class="button button-big button-fill button-success"
+                            id="save">保存</a>
+                    </div>
+                </div> -->
+            <header class="bar bar-nav">
+                <h1 class="title">设备管理</h1>
+            </header>
+
+            <div class="content">
                 <div class="row" id="tab-nav">
                     <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a>
                     </div>
@@ -44,38 +62,20 @@
                             id="save">保存</a>
                     </div>
                 </div>
-            </div>
-            <div id="addDataUL" class="buttons-tab fixed-tab" data-offset="44" style="overflow:auto;">
-                <a role="presentation" href="#tab1" class="tab-link active button">测试点击</a>
-                <!-- <a href="#tab1" class="tab-link active button">测试1</a> -->
+                <div id="addDataUL" class="buttons-tab fixed-tab" data-offset="44" style="overflow:auto;">
+                    <!-- <a role="presentation" href="#tab1" class="tab-link active button">测试点击</a>
                 <a href="#tab2" class="tab-link button">测试2</a>
                 <a href="#tab3" class="tab-link button">测
-                    试3</a>
-                <a href="#tab3" class="tab-link button">测
-                    试3</a>
-                <a href="#tab3" class="tab-link button">测
-                    试3</a>
-                <a href="#tab3" class="tab-link button">测
-                    试3</a>
-            </div>
-            <div class="tabs tab-content"
-                style="overflow:auto;position: absolute;bottom: 0;top: 7rem;left: 0;right: 0;">
-                <div id="tab1" role="tabpanel" class="tab active">
+                    试3</a> -->
+                </div>
+                <div class="tabs tab-content" style="overflow:auto;">
+                    <!-- <div class="tabs tab-content"
+                    style="overflow:auto;position: absolute;bottom: 0;top: 7rem;left: 0;right: 0;"> -->
+                    <!-- <div id="tab1" role="tabpanel" class="tab active">
                     <div class="content-block" id="addVarContain123">
-                        <!-- <label class="header">信息一</label> -->
                         <div class="content-block-title">信息一</div>
                         <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
                             <ul>
-                                <!-- <li>
-                            <div class="item-content showDiv">
-                                <div class="item-inner">
-                                    <div class="item-title label">显示名字</div>
-                                    <div class="item-input"><input type="text" id="input1234" class="valueInput"
-                                            value="有些什么值" name="类型名字" validator="required" onblur="blurEvent(this)"
-                                            onfocus="focusEvent(this)">
-                                    </div>
-                                </div>
-                        </li> -->
                                 <li>
                                     <div class="item-content showDiv">
                                         <div class="item-inner">
@@ -124,12 +124,10 @@
                                         </div>
                                     </div>
                                 </li>
-                                <!-- Text inputs -->
                             </ul>
                         </div>
                     </div>
                     <div class="content-block" id="addVarContain125">
-                        <!-- <label class="header">信息一</label> -->
                         <div class="content-block-title">信息一</div>
                         <div id="123" class="list-block baseInfoDiv" name="zhejiuduile">
                             <ul>
@@ -178,12 +176,10 @@
                                         </div>
                                     </div>
                                 </li>
-                                <!-- Text inputs -->
                             </ul>
                         </div>
                     </div>
                 </div>
-
                 <div id="tab2" class="tab">
                     <div class="content-block">
                         <p style="height:600px">This is tab 2 content start</p>
@@ -195,6 +191,7 @@
                         <p style="height:600px">This is tab 3 content start</p>
                         <p>This is tab 3 content end</p>
                     </div>
+                </div> -->
                 </div>
             </div>
         </div>

@@ -13,7 +13,7 @@
 })(document, window);*/
 var imgNum = 0;
 $("#inputBox").html("");
-$(".upload_img_wrap .upload_img").on("click", function() {
+$(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
@@ -21,7 +21,7 @@ $(".upload_img_wrap .upload_img").on("click", function() {
     }
     var that = this;
     $("#file" + index).click();
-    $("#file" + index).unbind().change(function(e) {
+    $("#file" + index).unbind().change(function (e) {
         var index = e.currentTarget.dataset.id;
         if ($('#file' + index).val() == '') {
             $("#inputBox input").eq(index - 1).remove();
@@ -45,7 +45,7 @@ function changeImg(e, filePath, index) {
     //获取并记录图片的base64编码
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
         var dataURL = reader.result;
         // console.log(dataURL)
