@@ -1,4 +1,4 @@
-    var map = new AMap.Map('container', {
+    /*var map = new AMap.Map('container', {
         resizeEnable: true
     });
     AMap.plugin('AMap.Geolocation', function() {
@@ -35,6 +35,23 @@
     //解析定位错误信息
     function onError(data) {
         console.log(data.message);
-    }
-
+    }*/
+    var locationItem = JSON.parse(localStorage.getItem("locationItem"));
+    var map = new BMap.Map("container");
+    var point = new BMap.Point(locationItem.fLon,locationItem.fLat);
+    map.centerAndZoom(point, 15);
+    map.addControl(new BMap.NavigationControl());
+    var marker = new BMap.Marker(point);        // 创建标注
+    var lable = new BMap.Label(locationItem.fSubName,{offset :new BMap.Size(0,-32)});
+    lable.setStyle({
+                    maxWidth:'none',
+                    fontSize:'15px',
+                    padding:'5px',
+                    border:'none',
+                    color:'#fff',
+                    background:'#ff8355',
+                    borderRadius:'5px'
+    				});
+    marker.setLabel(lable);
+    map.addOverlay(marker);
     $.init();

@@ -3,7 +3,63 @@
  * @date 2017-04-26 09:46
  * @description 存放常用工具类
  */
+var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v1";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYwNzE4OTIsInVzZXJuYW1lIjoiYWRtaW4ifQ.FnbqIDX9ojAcpRzwLaHvY-wYc-FWoH6VG7LabSSETnw";
+    //iOS安卓基础传参
+/*    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //判断数组中是否包含某字符串
+    var baseUrlFromAPP;
+    var tokenFromAPP;
+    var subidFromAPP;
+    if (isIOS) { //ios系统的处理
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        // storage = storage ? JSON.parse(storage):[];
+        storage = JSON.parse(storage);
+        baseUrlFromAPP = storage.baseurl;
+        tokenFromAPP = storage.token;
+    } else {
+        baseUrlFromAPP = android.getBaseUrl();
+        tokenFromAPP = android.getToken();
+    }*/
+
 var Substation = {
+
+    removeUndefined:function(data){
+        var dataStr = (data==undefined?"无":data);
+        return dataStr;
+    },
+
+    getDataByAjax:function(url, params, successCallback){
+        $.showPreloader();
+            $.ajax({
+                    type: "GET",
+                    url: baseUrlFromAPP + url,
+                    data: params,
+                    beforeSend: function (request) {
+                        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+                        request.setRequestHeader("Authorization",tokenFromAPP);
+                    },
+                    success: function (data) {
+                        if (data == undefined) {
+                            console.log("信息错误");
+                            return;
+                        } else {
+                            if (data.code == "200") {
+                                $.hidePreloader();
+                                successCallback(data.data);
+                            }
+                        }
+                    },
+                    error: function () {
+                        alert("操作失败请重试！");
+                    }
+            });
+    },
+
     Common: {
         addHead: function () {
             // return "http://192.168.255.20:8080/SubstationWEBV2/";
