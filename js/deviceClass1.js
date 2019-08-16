@@ -58,6 +58,7 @@ function fillData(parentId) {
                 if(fField!="" && fField!=null){
                     localStorage.setItem("fTempId",clickId);
                     localStorage.setItem("fFunctionfield",fField);
+                    localStorage.setItem("fPid",parentId);
                     window.location.href="AutoloadDetail.html";
                 }else{
                     clickNum++;
