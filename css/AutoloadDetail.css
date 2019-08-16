@@ -1,0 +1,9 @@
+.button-success.button-fill {
+    color: white;
+    background-color: #02A8A6;
+    top: 0.3rem;
+}
+
+#tab-nav {
+    height: 3rem;
+}
