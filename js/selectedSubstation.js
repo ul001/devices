@@ -15,19 +15,20 @@
         });
     }*/
 
-function goToLocation(lat,lon,subid,subname){
-    var locationItem = {fLat:lat,fLon:lon,fSubid:subid,fSubName:subname};
-    localStorage.setItem("locationItem",JSON.stringify(locationItem));
+function goToLocation(lat, lon, subid, subname) {
+    var locationItem = { fLat: lat, fLon: lon, fSubid: subid, fSubName: subname };
+    localStorage.setItem("locationItem", JSON.stringify(locationItem));
     window.location.href = "location.html";
 }
 
-function goToDevice(subId){
-    localStorage.setItem("fSubid",subId);
+function goToDevice(subId, subname) {
+    localStorage.setItem("fSubid", subId);
+    localStorage.setItem("fSubname", subname);
     window.location.href = "deviceClass.html";
 }
 
-function goToPhoto(subId){
-    localStorage.setItem("fSubid",subId);
+function goToPhoto(subId) {
+    localStorage.setItem("fSubid", subId);
     window.location.href = "selectPhoto.html";
 }
 
@@ -36,15 +37,19 @@ var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
 
+function getFirstPage() {
+    $(".list-container").empty();
+    pageNum = 1;
+    addItems(itemsPerLoad, 0);
+    lastIndex = 10;
+    $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
+    loading = false;
+    $.attachInfiniteScroll($('.infinite-scroll'));
+}
+
 $(document).on('refresh', '.pull-to-refresh-content', function(e) {
     setTimeout(function() {
-        $(".list-container").empty();
-        pageNum = 1;
-        addItems(itemsPerLoad, 0);
-        lastIndex = 10;
-        $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
-        loading = false;
-        $.attachInfiniteScroll($('.infinite-scroll'));
+        getFirstPage();
         // done
         $.pullToRefreshDone('.pull-to-refresh-content');
     }, 2000);
@@ -52,39 +57,46 @@ $(document).on('refresh', '.pull-to-refresh-content', function(e) {
 
 function addItems(number, lastIndex) {
     var html = '';
-    var url ="/getSubstationListByUser";
+    var url = "/getSubstationListByUser";
+    var searchKey = $("#search").val();
     var params = {
-        pageNo:pageNum,
-        pageSize:number
+        pageNo: pageNum,
+        pageSize: number,
+        key: searchKey
     }
-    Substation.getDataByAjax(url,params,function(data){
-        if(data.hasOwnProperty("list")&&data.list.length>0){
-            $(data.list).each(function(){
-            html += "<div class=\"card\">\n" +
-            "                    <div class=\"card-content\">\n" +
-            "                        <div class=\"content-padded\">\n" +
-            "                            <div class=\"row  no-gutter sub_card\">\n" +
-            "                                <div class=\"col-80\"  onClick=\"goToDevice("+this.fSubid+")\">\n" +
-            "                                    <p class=\"subName\">"+this.fSubname+"</p>\n" +
-            "                                    <P><span>"+Substation.removeUndefined(this.fContacts)+"</span> <span>"+Substation.removeUndefined(this.fContactsPhone)+"</span></P>\n" +
-            "                                    <p>地址："+this.fAddress+"</p>\n" +
-            "                                </div>\n" +
-            "                                <div class=\"col-20\">\n" +
-            "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto("+this.fSubid+")\">照片\n" +
-            "                                    </button>\n" +
-            "                                    <br>\n" +
-            "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation("+this.fLatitude+","+this.fLongitude+","+this.fSubid+",'"+this.fSubname+"')\" type=\"button\">位置\n" +
-            "                                    </button>\n" +
-            "                                </div>\n" +
-            "                            </div>\n" +
-            "                        </div>\n" +
-            "                    </div>\n" +
-            "                </div>";
+    Substation.getDataByAjax(url, params, function(data) {
+        if (data.hasOwnProperty("list") && data.list.length > 0) {
+            $(data.list).each(function() {
+                html += "<div class=\"card\">\n" +
+                    "                    <div class=\"card-content\">\n" +
+                    "                        <div class=\"content-padded\">\n" +
+                    "                            <div class=\"row  no-gutter sub_card\">\n" +
+                    "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
+                    "                                    <p class=\"subName\">" + this.fSubname + "</p>\n" +
+                    "                                    <P><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</P>\n" +
+                    "                                    <p>地址：" + this.fAddress + "</p>\n" +
+                    "                                </div>\n" +
+                    "                                <div class=\"col-20\">\n" +
+                    "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">照片\n" +
+                    "                                    </button>\n" +
+                    "                                    <br>\n" +
+                    "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fLatitude + "," + this.fLongitude + "," + this.fSubid + ",'" + this.fSubname + "')\" type=\"button\">位置\n" +
+                    "                                    </button>\n" +
+                    "                                </div>\n" +
+                    "                            </div>\n" +
+                    "                        </div>\n" +
+                    "                    </div>\n" +
+                    "                </div>";
             });
-    $('.list-container').append(html);
-    //addClick();
-    pageNum++;
-        }else{
+            $('.list-container').append(html);
+            //addClick();
+            pageNum++;
+        } else {
+            $.detachInfiniteScroll($('.infinite-scroll'));
+            $('.infinite-scroll-preloader').html("--end--");
+            return;
+        }
+        if (data.list.length < itemsPerLoad) {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
             return;
@@ -118,5 +130,15 @@ $(document).on('infinite', '.infinite-scroll', function() {
     }, 1000);
 });
 
+$('#search').bind('keydown', function(event) {
+    if (event.keyCode == 13) {
+        getFirstPage();
+    }
+});
+
+$(".searchbar-cancel").click(function() {
+    $("#search").val("");
+    getFirstPage();
+});
 
 $.init();

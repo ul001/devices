@@ -41,33 +41,50 @@
     var lng = locationItem.fLon;
     var lat = locationItem.fLat;
     var map = new BMap.Map("container");
-    var point = new BMap.Point(lng,lat);
+    var point = new BMap.Point(lng, lat);
+    var geoc = new BMap.Geocoder();
+    var dizhi;
     map.centerAndZoom(point, 15);
     map.addControl(new BMap.NavigationControl());
-    var marker = new BMap.Marker(point);        // 创建标注
+    var marker = new BMap.Marker(point); // 创建标注
     marker.enableDragging();
-    var lable = new BMap.Label(locationItem.fSubName,{offset :new BMap.Size(0,-32)});
+    var lable = new BMap.Label(locationItem.fSubName, { offset: new BMap.Size(0, -32) });
     lable.setStyle({
-                    maxWidth:'none',
-                    fontSize:'15px',
-                    padding:'5px',
-                    border:'none',
-                    color:'#fff',
-                    background:'#ff8355',
-                    borderRadius:'5px'
-    				});
+        maxWidth: 'none',
+        fontSize: '15px',
+        padding: '5px',
+        border: 'none',
+        color: '#fff',
+        background: '#ff8355',
+        borderRadius: '5px'
+    });
     marker.setLabel(lable);
-    marker.addEventListener("dragend", function(e){
-            lable.setContent("当前位置");
+    marker.addEventListener("dragend", function(e) {
+        lng = e.point.lng;
+        lat = e.point.lat;
+        geoc.getLocation(e.point, function(rs){
+            var addComp = rs.addressComponents;
+            dizhi = addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+            lable.setContent(dizhi);
             marker.setLabel(lable);
-            lng = e.point.lng;
-            lat = e.point.lat;
-            //alert("当前位置：" + e.point.lng + ", " + e.point.lat);
-    })
+        //alert("当前位置：" + e.point.lng + ", " + e.point.lat);
+        });
+    });
     map.addOverlay(marker);
 
-    function saveLocation(){
-        alert(selectSubid+"\n"+"lng:"+lng+"\nlat:"+lat);
+    function saveLocation() {
+        var params = {
+            fSubid:selectSubid,
+            fLongitude:lng,
+            fLatitude:lat,
+            fAddress:dizhi
+        };
+        Substation.postDataByAjax("/updateSubstationLocation",params,function(data){
+            if(data.code==200){
+                $.toast("保存成功");
+            }
+        });
+        //alert(selectSubid + "\n" + "lng:" + lng + "\nlat:" + lat);
     }
 
     $.init();
