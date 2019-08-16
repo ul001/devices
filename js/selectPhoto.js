@@ -19,7 +19,7 @@ $(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
-        $("#inputBox").append("<input type=\"file\" name=\"image[]\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        $("#inputBox").append("<input type=\"file\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
     }
     var that = this;
     $("#file" + index).click();
@@ -79,8 +79,30 @@ function closePicture(obj) {
     $(obj).parent("div").remove();
 }
 
-function savePhoto(){
+function loadSavePic(){
+    Substation.getDataByAjax("/selectSubstationImg",{fSubid:selectSubid},function(data){
+        if(data.hasOwnProperty("substationImgList")&&data.substationImgList.length>0){
+            var imgUrl = data.substationImgUrl;
+            $(data.substationImgList).each(function(){
+                var imgDiv = '<div class="imgContainer" id='+this.fId+' data-index=' + index + '><img   src=' + ("/"+ imgUrl+ "/" +this.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>';
+                $("#imgBox").append(imgDiv);
+            });
+        }
+    });
+}
 
+loadSavePic();
+
+function savePhoto(){
+    var params={
+        fSubid:selectSubid,
+        myFiles:$("#upBox").serialize()
+    }
+    Substation.getDataByAjax("/uploadSubstationImg",params,function(data){
+        if(data.hasOwnProperty("substationImgList")&&data.substationImgList.length>0){
+
+           }
+       });
 }
 
 $.init();

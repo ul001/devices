@@ -41,7 +41,7 @@ function fillData(parentId) {
                         "                    </li>";
                 } else if (this.state == "false") {
                     li = "<li class=\"item-content item-dis pId" + this.PId + "\">\n" +
-                        "                        <div class=\"item-media\"><i class=\"icon icon-f7\"></i></div>\n" +
+                        "                        <div class=\"item-media\"><i class=\"icon icon-nodevice\"></i></div>\n" +
                         "                        <div class=\"item-inner\">\n" +
                         "                            <div class=\"item-title\">" + this.name + "</div>\n" +
                         "                        </div>\n" +
