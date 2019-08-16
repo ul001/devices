@@ -3,6 +3,13 @@ i.icon.icon-device {
     height: 1.45rem;
     background-image: url(../img/i-device.png);
 }
+
+i.icon.icon-nodevice {
+    width: 1.45rem;
+    height: 1.45rem;
+    background-image: url(../img/i-nodevice.png);
+}
+
 .list-block{
     margin:0;
 }
