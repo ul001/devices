@@ -1,16 +1,18 @@
 var CustomerDevice = (function () {
-
     function _customerDevice() {
-
         var selectInfo;
         var count = 100;
         var curNodeInfo;
         // selectInfo.id = 130;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
-            Substation.Common.requestData("pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + selectInfo.id, function (data) {
-                curNodeInfo = data;
-            })
+            Substation.Common.requestData(
+                "pageCustomList",
+                "fSubid=" + 10100001 + "&fTemplateid=" + selectInfo.id,
+                function (data) {
+                    curNodeInfo = data;
+                }
+            );
             // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
             //     curNodeInfo = data;
             // })
@@ -34,14 +36,25 @@ var CustomerDevice = (function () {
             count++;
             var name = "addModal" + count;
             var text = selectInfo.name;
-            var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
+            var string =
+                ' <a role="presentation" href="#' +
+                name +
+                '" class="tab-link active button" id="tab' +
+                name +
+                '">' +
+                text +
+                "</a>";
             // var string = '<li role="presentation" class="active">' +
             //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + text + '</a></li>';
 
             // var containStr = '<div role="tabpanel" class="tab active" id="' + name +
             // '"> <div class="content-block">< div class ="list-block"><ul id="addVarContain' + count + '"></ul></div></div></div>';
-            var containStr = '<div role="tabpanel" class="tab" id="' + name +
-                '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
+            var containStr =
+                '<div role="tabpanel" class="tab" id="' +
+                name +
+                '"> <div class="content-block" id="addVarContain' +
+                count +
+                '"></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
             // '<div id="addVarContain' + count + '"></div></div>';
 
@@ -52,9 +65,12 @@ var CustomerDevice = (function () {
             if (data != undefined) {
                 creatInfo(data, $("#addVarContain" + count), count);
             } else {
-
                 var json = JSON.parse(selectInfo.fFunctionfield);
-                creatInfo(JSON.stringify(json.deviceInfo), $("#addVarContain" + count), count);
+                creatInfo(
+                    JSON.stringify(json.deviceInfo),
+                    $("#addVarContain" + count),
+                    count
+                );
                 // creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
             }
         };
@@ -67,51 +83,93 @@ var CustomerDevice = (function () {
         };
 
         function getNetData() {
-            Substation.Common.requestData("pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
-                // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
-                curNodeInfo = data;
-                // 如果有设备信息
-                if (data.length > 0) {
-                    $.each(data, function (key, val) {
-                        count++;
-                        var name = "addModal" + val.fId;
-                        //  var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
-                        if (key == 0) {
-                            // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
-                            //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>'; 
-                            // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
-                            //     '<div id="addVarContain' + count + '"></div>' +
-                            //     '</div>';
-                            var string = ' <a role="presentation" href="#' + name + '" class="tab-link button" name="' + val.fId + ' id="tab' + name + '">' + decodeURIComponent(val.fPagename) + '</a>';
-                            var containStr = '<div role="tabpanel" class="tab" id="' + name +
-                                '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
-                        } else {
-                            // var string = '<li role="presentation" name="' + val.fId + '">' +
-                            //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
-                            // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
-                            //     '<div id="addVarContain' + count + '"></div>' +
-                            //     '</div>';
-                            var string = ' <a role="presentation" href="#' + name + '" class="tab-link button" name="' + val.fId + ' id="tab' + name + '">' + decodeURIComponent(val.fPagename) + '</a>';
-                            var containStr = '<div role="tabpanel" class="tab" id="' + name +
-                                '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
-                        }
-                        $("#addDataUL").append(string);
-                        $(".tab-content").append(containStr);
-                        if (count == 101) {
-                            $("#tab" + name).click();
-                            selectInfo = val;
-                        }
-                        if (val.fPagejson != undefined && val.fPagejson != 'undefined') {
-                            creatInfo(val.fPagejson, $("#addVarContain" + count), count);
-                        }
-                    });
-                } else {
-                    $("#delete").attr("disabled", true);
-                    $("#copy").attr("disabled", true);
-                    $("#save").attr("disabled", true);
-                    $("#container-info").html("暂无相关信息！").css("text-align", "center");
+            Substation.Common.requestData(
+                "pageCustomList",
+                "fSubid=" + 10100001 + "&fTemplateid=" + 130,
+                function (data) {
+                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
+                    curNodeInfo = data;
+                    selectInfo = {
+                        id: 130,
+                        name: "户外隔离刀闸",
+                        pId: 129,
+                        fParentid: "129",
+                        fTemplateid: "",
+                        parentId: "129",
+                        state: "true",
+                        fFunctionfield: '{"deviceInfo":[{"name":"%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF","value":[{"inpName":"","inpType":false,"type":"input","name":"%E7%BC%96%E5%8F%B7%E5%8F%8A%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E5%9E%8B%E5%8F%B7%E8%A7%84%E6%A0%BC","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81(A)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%BA%A6%E7%94%B5%E5%8E%8B(kV)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E7%94%9F%E4%BA%A7%E5%8E%82%E5%AE%B6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"date","name":"%E7%94%9F%E4%BA%A7%E6%97%A5%E6%9C%9F","value":""},{"type":"date","name":"%E6%8A%95%E8%BF%90%E6%97%A5%E6%9C%9F","value":""},{"inpName":"","inpType":false,"type":"input","name":"%E6%95%B0%E9%87%8F(%E5%8F%B0)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"select","name":"%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81","value":"%5B%7B%22opName%22%3A%22%E8%BF%90%E8%A1%8C%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%81%9C%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%A4%87%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E6%95%85%E9%9A%9C%22%2C%22opType%22%3Afalse%7D%5D"},{"inpName":"","inpType":false,"type":"input","name":"","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]},{"name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87","value":[{"inpName":"","inpType":false,"type":"input","name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87%E5%8F%8A%E7%BC%96%E5%8F%B7%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E6%8E%92%E5%BA%8F%E5%8F%B7","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]}],"checkInfo":[{"type":"radio","name":"%E5%B7%A1%E6%A3%80%E4%BF%A1%E6%81%AF-%E6%88%B7%E5%A4%96%E9%9A%94%E7%A6%BB%E5%88%80%E9%97%B8","value":"yes"},{"inpName":"","inpType":true,"type":"input","name":"%E6%B8%A9%E5%BA%A6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D"}]}'
+                    };
+                    // 如果有设备信息
+                    if (data.length > 0) {
+                        $.each(data, function (key, val) {
+                            count++;
+                            var name = "addModal" + val.fId;
+                            //  var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
+                            if (key == 0) {
+                                // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
+                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+                                // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
+                                //     '<div id="addVarContain' + count + '"></div>' +
+                                //     '</div>';
+                                var string =
+                                    ' <a role="presentation" href="#' +
+                                    name +
+                                    '" class="tab-link button" name="' +
+                                    val.fId +
+                                    '" id="tab' +
+                                    name +
+                                    '">' +
+                                    decodeURIComponent(val.fPagename) +
+                                    "</a>";
+                                var containStr =
+                                    '<div role="tabpanel" class="tab" id="' +
+                                    name +
+                                    '"> <div class="content-block" id="addVarContain' +
+                                    count +
+                                    '"></div></div>';
+                            } else {
+                                // var string = '<li role="presentation" name="' + val.fId + '">' +
+                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+                                // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
+                                //     '<div id="addVarContain' + count + '"></div>' +
+                                //     '</div>';
+                                var string =
+                                    ' <a role="presentation" href="#' +
+                                    name +
+                                    '" class="tab-link button" name="' +
+                                    val.fId +
+                                    '" id="tab' +
+                                    name +
+                                    '">' +
+                                    decodeURIComponent(val.fPagename) +
+                                    "</a>";
+                                var containStr =
+                                    '<div role="tabpanel" class="tab" id="' +
+                                    name +
+                                    '"> <div class="content-block" id="addVarContain' +
+                                    count +
+                                    '"></div></div>';
+                            }
+                            $("#addDataUL").append(string);
+                            $(".tab-content").append(containStr);
+                            if (count == 101) {
+                                $("#tab" + name).click();
+                                // selectInfo = val;
+                            }
+                            if (val.fPagejson != undefined && val.fPagejson != "undefined") {
+                                creatInfo(val.fPagejson, $("#addVarContain" + count), count);
+                            }
+                        });
+                    } else {
+                        $("#delete").attr("disabled", true);
+                        $("#copy").attr("disabled", true);
+                        $("#save").attr("disabled", true);
+                        $("#container-info")
+                            .html("暂无相关信息！")
+                            .css("text-align", "center");
+                    }
                 }
-            });
+            );
         }
 
         function getData() {
@@ -127,16 +185,7 @@ var CustomerDevice = (function () {
                         return index.state == "true";
                     });
                 }
-                selectInfo = {
-                    id: 130,
-                    name: "户外隔离刀闸",
-                    pId: 129,
-                    fParentid: "129",
-                    fTemplateid: "",
-                    parentId: "129",
-                    state: "true",
-                    fFunctionfield: "{\"deviceInfo\":[{\"name\":\"%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF\",\"value\":[{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E7%BC%96%E5%8F%B7%E5%8F%8A%E5%90%8D%E7%A7%B0\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E5%9E%8B%E5%8F%B7%E8%A7%84%E6%A0%BC\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81(A)\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E9%A2%9D%E5%BA%A6%E7%94%B5%E5%8E%8B(kV)\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E7%94%9F%E4%BA%A7%E5%8E%82%E5%AE%B6\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"type\":\"date\",\"name\":\"%E7%94%9F%E4%BA%A7%E6%97%A5%E6%9C%9F\",\"value\":\"\"},{\"type\":\"date\",\"name\":\"%E6%8A%95%E8%BF%90%E6%97%A5%E6%9C%9F\",\"value\":\"\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E6%95%B0%E9%87%8F(%E5%8F%B0)\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"type\":\"select\",\"name\":\"%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81\",\"value\":\"%5B%7B%22opName%22%3A%22%E8%BF%90%E8%A1%8C%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%81%9C%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%A4%87%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E6%95%85%E9%9A%9C%22%2C%22opType%22%3Afalse%7D%5D\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"}]},{\"name\":\"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87\",\"value\":[{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87%E5%8F%8A%E7%BC%96%E5%8F%B7%E5%90%8D%E7%A7%B0\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E6%8E%92%E5%BA%8F%E5%8F%B7\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"}]}],\"checkInfo\":[{\"type\":\"radio\",\"name\":\"%E5%B7%A1%E6%A3%80%E4%BF%A1%E6%81%AF-%E6%88%B7%E5%A4%96%E9%9A%94%E7%A6%BB%E5%88%80%E9%97%B8\",\"value\":\"yes\"},{\"inpName\":\"\",\"inpType\":true,\"type\":\"input\",\"name\":\"%E6%B8%A9%E5%BA%A6\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D\"}]}"
-                };
+
                 // var setting = {
                 //     edit: {
                 //         enable: true
@@ -170,7 +219,7 @@ var CustomerDevice = (function () {
                 // };
                 // $.fn.zTree.init($("#treeDemo"), setting, showData); //初始化树结构
                 // $("body").hideLoading();
-            })
+            });
         }
 
         function initHtml() {
@@ -179,7 +228,7 @@ var CustomerDevice = (function () {
             //     "border": '1px solid #ababab',
             //     "box-shadow": '0px 0px 0px #ababab'
             // });
-            $(".tab-content").html('');
+            $(".tab-content").html("");
             $("a[role='presentation']").remove(); //清空原有信息
         }
 
@@ -191,47 +240,75 @@ var CustomerDevice = (function () {
         // 点击一个节点
         function onClick(treeNode) {
             // $("body").showLoading();
-            Substation.Common.requestData("pageCustomList", "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id, function (data) {
-                // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
-                curNodeInfo = data;
-                // 如果有设备信息
-                if (data.length > 0) {
-                    $.each(data, function (key, val) {
-                        count++;
-                        var name = "addModal" + val.fId;
-                        if (key == 0) {
-                            // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
-                            //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>'; 
-                            // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
-                            //     '<div id="addVarContain' + count + '"></div>' +
-                            //     '</div>';
-                            var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" name="' + val.fId + '">' + decodeURIComponent(val.fPagename) + '</a>';
-                            var containStr = '<div role="tabpanel" class="tab active" id="' + name +
-                                '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
-                        } else {
-                            // var string = '<li role="presentation" name="' + val.fId + '">' +
-                            //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
-                            // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
-                            //     '<div id="addVarContain' + count + '"></div>' +
-                            //     '</div>';
-                            var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" name="' + val.fId + '">' + decodeURIComponent(val.fPagename) + '</a>';
-                            var containStr = '<div role="tabpanel" class="tab active" id="' + name +
-                                '"> <div class="content-block" id="addVarContain' + count + '"></div></div>';
-                        }
-                        $("#addDataUL").append(string);
-                        $(".tab-content").append(containStr);
-                        if (val.fPagejson != undefined && val.fPagejson != 'undefined') {
-                            creatInfo(val.fPagejson, $("#addVarContain" + count), count);
-                        }
-                    });
-                } else {
-                    $("#delete").attr("disabled", true);
-                    $("#copy").attr("disabled", true);
-                    $("#save").attr("disabled", true);
-                    $("#container-info").html("暂无相关信息！").css("text-align", "center");
+            Substation.Common.requestData(
+                "pageCustomList",
+                "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id,
+                function (data) {
+                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
+                    curNodeInfo = data;
+                    // 如果有设备信息
+                    if (data.length > 0) {
+                        $.each(data, function (key, val) {
+                            count++;
+                            var name = "addModal" + val.fId;
+                            if (key == 0) {
+                                // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
+                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+                                // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
+                                //     '<div id="addVarContain' + count + '"></div>' +
+                                //     '</div>';
+                                var string =
+                                    ' <a role="presentation" href="#' +
+                                    name +
+                                    '" class="tab-link active button" name="' +
+                                    val.fId +
+                                    '">' +
+                                    decodeURIComponent(val.fPagename) +
+                                    "</a>";
+                                var containStr =
+                                    '<div role="tabpanel" class="tab active" id="' +
+                                    name +
+                                    '"> <div class="content-block" id="addVarContain' +
+                                    count +
+                                    '"></div></div>';
+                            } else {
+                                // var string = '<li role="presentation" name="' + val.fId + '">' +
+                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+                                // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
+                                //     '<div id="addVarContain' + count + '"></div>' +
+                                //     '</div>';
+                                var string =
+                                    ' <a role="presentation" href="#' +
+                                    name +
+                                    '" class="tab-link active button" name="' +
+                                    val.fId +
+                                    '">' +
+                                    decodeURIComponent(val.fPagename) +
+                                    "</a>";
+                                var containStr =
+                                    '<div role="tabpanel" class="tab active" id="' +
+                                    name +
+                                    '"> <div class="content-block" id="addVarContain' +
+                                    count +
+                                    '"></div></div>';
+                            }
+                            $("#addDataUL").append(string);
+                            $(".tab-content").append(containStr);
+                            if (val.fPagejson != undefined && val.fPagejson != "undefined") {
+                                creatInfo(val.fPagejson, $("#addVarContain" + count), count);
+                            }
+                        });
+                    } else {
+                        $("#delete").attr("disabled", true);
+                        $("#copy").attr("disabled", true);
+                        $("#save").attr("disabled", true);
+                        $("#container-info")
+                            .html("暂无相关信息！")
+                            .css("text-align", "center");
+                    }
+                    $("body").hideLoading();
                 }
-                $("body").hideLoading();
-            });
+            );
         }
 
         // 显示已有信息
@@ -247,16 +324,23 @@ var CustomerDevice = (function () {
             if (data != "") {
                 var info = JSON.parse(data);
                 if (info != undefined) {
-                    var divHeight = '300';
+                    var divHeight = "300";
                     $.each(info, function (index, val) {
                         var id = "showInfoDiv" + count + index;
-                        $(select).append('<div class="content-block-title">' + decodeURIComponent(val.name) +
-                            '</div><div id="' + id + '" class="list-block baseInfoDiv" name="' + decodeURIComponent(val.name) + '"><ul class="selectUl"></ul></div>');
+                        $(select).append(
+                            '<div class="content-block-title">' +
+                            decodeURIComponent(val.name) +
+                            '</div><div id="' +
+                            id +
+                            '" class="list-block baseInfoDiv" name="' +
+                            decodeURIComponent(val.name) +
+                            '"><ul class="selectUl"></ul></div>'
+                        );
                         // $(select).append('<div class="content-block-title">' + decodeURIComponent(val.name) +
                         //     '</div><div id="' + id + '" class="list-block baseInfoDiv" name="' + decodeURIComponent(val.name) + '"><ul></ul></div>');
                         $.each(val.value, function (key, value) {
                             showInfo(value, $("#" + id + " .selectUl"));
-                        })
+                        });
                     });
                 }
             }
@@ -273,9 +357,18 @@ var CustomerDevice = (function () {
                         // '<label class="nameInputInfo" name="input">' + decodeURIComponent(val.name) + '</label>' + ':' +
                         // '<input type="text" id="input' + count + '" class="valueInput" value="' + info.inpName + '" name="'
                         //  + info.inpType + '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' + '</div>';
-                        string = '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label">' + decodeURIComponent(val.name) +
-                            '</div> <div class="item-input">' + '<input type="text" id="input' + count + '" class="valueInput" value="' + info.inpName + '" name="' +
-                            info.inpType + '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' + '</div></div></li>';
+                        string =
+                            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label">' +
+                            decodeURIComponent(val.name) +
+                            '</div> <div class="item-input">' +
+                            '<input type="text" id="input' +
+                            count +
+                            '" class="valueInput" value="' +
+                            info.inpName +
+                            '" name="' +
+                            info.inpType +
+                            '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' +
+                            "</div></div></li>";
                     }
                     // < li >
                     //     <
@@ -299,8 +392,16 @@ var CustomerDevice = (function () {
                         // string = '<div class="showDiv">' +
                         //     '<label class="nameInputInfo" name="input">' + decodeURIComponent(val.name) + '</label>' + ':' +
                         //     '<input type="text" class="valueInput" value="' + info.inpName + '" name="' + info.inpType + '">' + '</div>';
-                        string = '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label">' + decodeURIComponent(val.name) +
-                            '</div> <div class="item-input">' + '<input type="text" class="valueInput" value="' + info.inpName + '" name="' + info.inpType + '">' + '</div></div></li>';
+                        string =
+                            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label">' +
+                            decodeURIComponent(val.name) +
+                            '</div> <div class="item-input">' +
+                            '<input type="text" class="valueInput" value="' +
+                            info.inpName +
+                            '" name="' +
+                            info.inpType +
+                            '">' +
+                            "</div></div></li>";
                     }
                     break;
                 case "radio":
@@ -310,11 +411,26 @@ var CustomerDevice = (function () {
                         //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' + count + '">是</label>' +
                         //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no"><label style="margin-right: 10px" for="operationNo' + count + '">否</label>' +
                         //     '</div>';
-                        string = '<li><div class="showDiv item-content"><div class="item-inner">' +
-                            '<label class="item-title label nameInputInfo" name="radio">' + decodeURIComponent(val.name) + '</label>' +
-                            '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' + count + '">是</label>' +
-                            '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no"><label style="margin-right: 10px" for="operationNo' + count + '">否</label>' +
-                            '</div></div></li>';
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
+                            '<label class="item-title label nameInputInfo" name="radio">' +
+                            decodeURIComponent(val.name) +
+                            "</label>" +
+                            '<input type="radio" id="operation' +
+                            count +
+                            '" name="operation' +
+                            count +
+                            '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' +
+                            count +
+                            '">是</label>' +
+                            '<input type="radio" id="operationNo' +
+                            count +
+                            '" name="operation' +
+                            count +
+                            '" value="no"><label style="margin-right: 10px" for="operationNo' +
+                            count +
+                            '">否</label>' +
+                            "</div></div></li>";
                     }
                     if (val.value == "no") {
                         // string = '<div class="showDiv">' +
@@ -322,28 +438,47 @@ var CustomerDevice = (function () {
                         //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' + count + '">是</label>' +
                         //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no" checked><label style="margin-right: 10px" for="operationNo' + count + '">否</label>' +
                         //     '</div>';
-                        string = '<li><div class="showDiv item-content"><div class="item-inner">' +
-                            '<label class="item-title label nameInputInfo" name="radio">' + decodeURIComponent(val.name) + '</label>' +
-                            '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' + count + '">是</label>' +
-                            '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no" checked><label style="margin-right: 10px" for="operationNo' + count + '">否</label>' +
-                            '</div></div></li>';
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
+                            '<label class="item-title label nameInputInfo" name="radio">' +
+                            decodeURIComponent(val.name) +
+                            "</label>" +
+                            '<input type="radio" id="operation' +
+                            count +
+                            '" name="operation' +
+                            count +
+                            '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' +
+                            count +
+                            '">是</label>' +
+                            '<input type="radio" id="operationNo' +
+                            count +
+                            '" name="operation' +
+                            count +
+                            '" value="no" checked><label style="margin-right: 10px" for="operationNo' +
+                            count +
+                            '">否</label>' +
+                            "</div></div></li>";
                     }
                     break;
                 case "select":
                     var list = JSON.parse(decodeURIComponent(val.value));
-                    var opString = '<select>';
+                    var opString = "<select>";
                     $.each(list, function (key, opval) {
                         if (opval.opType == true) {
-                            opString += '<option selected>' + opval.opName + '</option>';
+                            opString += "<option selected>" + opval.opName + "</option>";
                         } else {
-                            opString += '<option>' + opval.opName + '</option>';
+                            opString += "<option>" + opval.opName + "</option>";
                         }
                     });
-                    opString += '</select>';
+                    opString += "</select>";
 
-                    string = '<li><div class="showDiv item-content"><div class="item-inner">' +
-                        '<label class="nameInputInfo item-title label"  name="select">' + decodeURIComponent(val.name) + '</label>' +
-                        opString + '</div></div></li>';
+                    string =
+                        '<li><div class="showDiv item-content"><div class="item-inner">' +
+                        '<label class="nameInputInfo item-title label"  name="select">' +
+                        decodeURIComponent(val.name) +
+                        "</label>" +
+                        opString +
+                        "</div></div></li>";
                     break;
                 case "date":
                     //         <li>
@@ -360,9 +495,16 @@ var CustomerDevice = (function () {
                     // string = '<div class="showDiv">' +
                     //     '<label class="nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' + ':' +
                     //     '<input type="text" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '">';
-                    string = '<li><div class="showDiv item-content"><div class="item-inner">' +
-                        '<label class="item-title label nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' +
-                        '<input type="date" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '"></div></div></li>';
+                    string =
+                        '<li><div class="showDiv item-content"><div class="item-inner">' +
+                        '<label class="item-title label nameInputInfo" name="date">' +
+                        decodeURIComponent(val.name) +
+                        "</label>" +
+                        '<input type="date" class="daycalendarBox' +
+                        count +
+                        ' dateTime" value="' +
+                        decodeURIComponent(val.value) +
+                        '"></div></div></li>';
                     break;
             }
             $(select).append(string);
@@ -380,7 +522,7 @@ jQuery(document).ready(function () {
 
     var u = navigator.userAgent,
         app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     //判断数组中是否包含某字符串
     var baseUrlFromAPP;
@@ -406,7 +548,8 @@ jQuery(document).ready(function () {
     //     });
     // }
 
-    tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYxMzM4ODMsInVzZXJuYW1lIjoiYWRtaW4ifQ.PuEZubDfdnVf76XEg4lXjTXlNHp-0xvbiTYZdry3voc";
+    tokenFromAPP =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYxMzM4ODMsInVzZXJuYW1lIjoiYWRtaW4ifQ.PuEZubDfdnVf76XEg4lXjTXlNHp-0xvbiTYZdry3voc";
 
     var customerDevice = new CustomerDevice();
 
@@ -418,50 +561,59 @@ jQuery(document).ready(function () {
     // }
 
     // 新增按钮
-    $('#tab-nav').on('click', '#Add', function () {
+    $("#tab-nav").on("click", "#Add", function () {
         var info = customerDevice.getselectInfo();
 
-        // if (info.fFunctionfield == undefined) {
-        //     alert("暂无设备信息，请增加相关信息！");
-        //     return;
-        // }
+        if (info.fFunctionfield == undefined) {
+            alert("暂无设备信息，请增加相关信息！");
+            return;
+        }
 
         var fTemplateid = info.id;
         var fPagename = info.name;
+        // var json = info.fFunctionfield;
+        var json = JSON.parse(info.fFunctionfield);
+        var newJson = JSON.stringify(json.deviceInfo);
 
-        var json = info.fFunctionfield;
 
         var formdata = new FormData();
         formdata.append("fSubid", 10100001);
         formdata.append("fTemplateid", fTemplateid);
         formdata.append("fPagename", encodeURIComponent(fPagename));
-        formdata.append("fPagejson", json);
+        // formdata.append("fPagejson", json);
+        if (newJson != undefined) {
+            formdata.append("fPagejson", newJson);
+        } else {
+            console.log("信息错误！");
+            return;
+        }
         var url = "pageCustomInsert";
         $.ajax({
-            url: Substation.Common.addHead() + url,
-            type: 'POST',
-            data: formdata,
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", tokenFromAPP);
-            },
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            if (data.msg != "ok") {
+                url: Substation.Common.addHead() + url,
+                type: "POST",
+                data: formdata,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", tokenFromAPP);
+                },
+                processData: false,
+                contentType: false
+            })
+            .done(function (data) {
+                if (data.msg != "ok") {
+                    alert("新增失败！");
+                } else {
+                    customerDevice.addModal();
+                    $(".active[role='presentation']").attr("name", data.data.fId);
+                    $("#save").removeAttr("disabled");
+                }
+            })
+            .fail(function (res) {
                 alert("新增失败！");
-            } else {
-                customerDevice.addModal();
-
-                $(".active[role='presentation']").attr("name", data.data.fId);
-                $("#save").removeAttr("disabled");
-            }
-        }).fail(function (res) {
-            alert("新增失败！");
-        });
+            });
     });
 
     // 复制按钮
-    $('#tab-nav').on('click', '#copy', function () {
+    $("#tab-nav").on("click", "#copy", function () {
         var info = customerDevice.getselectInfo();
 
         var fTemplateid = info.id;
@@ -471,7 +623,7 @@ jQuery(document).ready(function () {
         var json;
         var selectDevice = $(".active[role='presentation']").attr("name");
         $.each(nodeInfo, function (key, val) {
-            if (selectDevice == (val.fId).toString()) {
+            if (selectDevice == val.fId.toString()) {
                 json = val.fPagejson;
             }
         });
@@ -483,50 +635,61 @@ jQuery(document).ready(function () {
         formdata.append("fPagejson", json);
         var url = "pageCustomInsert";
         $.ajax({
-            url: Substation.Common.addHead() + url,
-            type: 'POST',
-            data: formdata,
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", tokenFromAPP);
-            },
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            if (data.msg != "ok") {
+                url: Substation.Common.addHead() + url,
+                type: "POST",
+                data: formdata,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", tokenFromAPP);
+                },
+                processData: false,
+                contentType: false
+            })
+            .done(function (data) {
+                if (data.msg != "ok") {
+                    alert("复制失败！");
+                } else {
+                    customerDevice.addModal(json);
+                    $(".active[role='presentation']").attr("name", data.data.fId);
+                }
+            })
+            .fail(function (res) {
                 alert("复制失败！");
-            } else {
-                customerDevice.addModal(json);
-                $(".active[role='presentation']").attr("name", data.data.fId);
-            }
-        }).fail(function (res) {
-            alert("复制失败！");
-        });
+            });
     });
 
     // 删除按钮
-    $('#tab-nav').on('click', '#delete', function () {
+    $("#tab-nav").on("click", "#delete", function () {
         var selectId = $(".active[role='presentation']").attr("name");
-        var name = $(".active[role='presentation']").children('a').text();
+        var name = $(".active[role='presentation']")
+            .text();
         if (confirm("确认删除" + name + " 吗？")) {
-            Substation.Common.requestData("pageCustomDelete", "fId=" + selectId, function (data) {
-                if (data == true) {
-                    alert("删除成功！");
-                    var id = $(".active[role='presentation']").children('a').attr('href');
-                    var prevLi = $(".active[role='presentation']").prev('li');
-                    $(".active[role='presentation']").remove();
-                    $(id).remove();
-                    if (prevLi != undefined) {
-                        $('a', $(prevLi)).tab('show');
+            Substation.Common.requestData(
+                "pageCustomDelete",
+                "fId=" + selectId,
+                function (data) {
+                    if (data == true) {
+                        alert("删除成功！");
+                        var id = $(".active[role='presentation']")
+                            .attr("href");
+                        var prevLi = $(".active[role='presentation']").prev();
+                        // var prevLi = $(".active[role='presentation']");
+                        $(".active[role='presentation']").remove();
+                        $(id).remove();
+                        if (prevLi != undefined) {
+                            //TODO: 如有其它tab则选中它
+                            $(prevLi).tab("show");
+                            // $("a", $(prevLi)).tab("show");
+                        }
+                    } else {
+                        alert("删除失败！");
                     }
-                } else {
-                    alert("删除失败！");
                 }
-            })
+            );
         }
     });
 
     // 修改保存按钮点击
-    $('#tab-nav').on('click', '#save', function () {
+    $("#tab-nav").on("click", "#save", function () {
         var isTrue = true;
         var input = $(".tab-pane.active").find(".valueInput[name='true']");
         $.each(input, function (key, val) {
@@ -546,7 +709,7 @@ jQuery(document).ready(function () {
                     name: encodeURIComponent(text),
                     value: []
                 });
-                var infoList = $(val).children('.showDiv');
+                var infoList = $(val).children(".showDiv");
                 $.each(infoList, function (index, val) {
                     var row = {};
                     var select = $(val).children(".nameInputInfo");
@@ -556,16 +719,26 @@ jQuery(document).ready(function () {
                     switch (type) {
                         case "input":
                             var row = {};
-                            row.inpName = $(val).find($(".valueInput")).val();
-                            row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
+                            row.inpName = $(val)
+                                .find($(".valueInput"))
+                                .val();
+                            row.inpType = JSON.parse(
+                                $(val)
+                                .find($(".valueInput"))
+                                .attr("name")
+                            );
                             value = JSON.stringify(row);
                             break;
                         case "radio":
-                            value = $(val).find($("input:checked")).val();
+                            value = $(val)
+                                .find($("input:checked"))
+                                .val();
                             break;
                         case "select":
                             var list = [];
-                            var options = $(val).find('select').children('option');
+                            var options = $(val)
+                                .find("select")
+                                .children("option");
                             $.each(options, function (opkey, opval) {
                                 var row = {};
                                 row.opName = $(opval).val();
@@ -575,7 +748,9 @@ jQuery(document).ready(function () {
                             value = JSON.stringify(list);
                             break;
                         case "date":
-                            value = $(val).find($(".dateTime")).val();
+                            value = $(val)
+                                .find($(".dateTime"))
+                                .val();
                             break;
                     }
                     row.type = type;
@@ -598,44 +773,46 @@ jQuery(document).ready(function () {
         formdata.append("fPagejson", json);
         var url = "pageCustomUpdate";
         $.ajax({
-            url: Substation.Common.addHead() + url,
-            type: 'POST',
-            data: formdata,
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", tokenFromAPP);
-            },
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            if (data.data == true) {
-                alert("保存成功！");
-                customerDevice.reNewCurNodeInfo();
-            } else {
+                url: Substation.Common.addHead() + url,
+                type: "POST",
+                data: formdata,
+                beforeSend: function (request) {
+                    request.setRequestHeader("Authorization", tokenFromAPP);
+                },
+                processData: false,
+                contentType: false
+            })
+            .done(function (data) {
+                if (data.data == true) {
+                    alert("保存成功！");
+                    customerDevice.reNewCurNodeInfo();
+                } else {
+                    alert("保存失败！");
+                }
+            })
+            .fail(function (res) {
                 alert("保存失败！");
-            }
-        }).fail(function (res) {
-            alert("保存失败！");
-        });
+            });
     }
 
     //点击弹出弹窗加载信息
-    $("#myModal").on('shown.bs.modal', function () {
+    $("#myModal").on("shown.bs.modal", function () {
         Substation.DOMOperator.pagenation("main/getSubstationListByUser", 1, 8);
     });
-    $("#myModal").on('hide.bs.modal', function () {
+    $("#myModal").on("hide.bs.modal", function () {
         $("#tableSubName").html("");
-        $(".substationlist").val('');
+        $(".substationlist").val("");
     });
 
     $("#yesBtn").click(function (event) {
         var row = selectedInfoModal;
         Substation.DOMOperator.yesBtnClick(row);
-        $("#myModal").modal('hide');
-        $("#treeDemo").html('');
+        $("#myModal").modal("hide");
+        $("#treeDemo").html("");
         customerDevice.show();
     });
 
-    $(document).on('click', '.nav-tabs li', function () {
+    $(document).on("click", ".nav-tabs li", function () {
         // $(".megbox").remove();
         // $(":text").css({
         //     "border": '1px solid #ababab',

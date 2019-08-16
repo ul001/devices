@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>台账登记</title>
@@ -12,26 +11,26 @@
     <link rel="stylesheet" href="libs/light7.min.css" />
     <link rel="stylesheet" href="libs/light7-swiper.min.css" />
     <link rel="stylesheet" href="libs/light7-swipeout.css" />
-    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/general.css" />
     <script src="libs/jquery-1.12.4.min.js"></script>
     <script src="libs/light7.min.js"></script>
     <script src="libs/light7-swiper.min.js"></script>
     <script src="libs/config.js"></script>
     <script src="libs/tools.js"></script>
     <script src="AutoloadDetail.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <!-- <div class="page-group"> -->
     <div class="page page-current page-inited" id="page-tab">
-        <!-- <head class="bar bar-nav">
+      <!-- <head class="bar bar-nav">
                 <a class="button button-link button-nav pull-left back" href="/demos">
                     <span class="icon icon-left"></span>
                     返回
                 </a>
                 <h1 class="title">设备配置</h1>
             </head> -->
-        <!-- <div class="content-block">
+      <!-- <div class="content-block">
                 <div class="row" id="tab-nav">
                     <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a>
                     </div>
@@ -45,35 +44,67 @@
                             id="save">保存</a>
                     </div>
                 </div> -->
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
-                <span class="icon icon-left"></span>
-                返回
-            </a>
-            <h1 class="title title_color">安科瑞变电所</h1>
-        </header>
+      <header class="bar bar-nav bar_color">
+        <a
+          class="button button-link button-nav pull-left click_btn"
+          onclick="window.history.back()"
+        >
+          <span class="icon icon-left"></span>
+          返回
+        </a>
+        <h1 class="title title_color">安科瑞变电所</h1>
+      </header>
 
-        <div class="content">
-            <div class="row" id="tab-nav">
-                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a>
-                </div>
-                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="delete">删除</a>
-                </div>
-                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="copy">复制</a>
-                </div>
-                <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="save">保存</a>
-                </div>
-            </div>
-            <div id="addDataUL" class="buttons-tab fixed-tab" data-offset="44" style="overflow:auto;">
-                <!-- <a role="presentation" href="#tab1" class="tab-link active button">测试点击</a>
+      <div class="content">
+        <div class="row" id="tab-nav">
+          <div class="col-25">
+            <a
+              href="#"
+              class="button button-big button-fill button-success"
+              id="Add"
+              >新增</a
+            >
+          </div>
+          <div class="col-25">
+            <a
+              href="#"
+              class="button button-big button-fill button-success"
+              id="delete"
+              >删除</a
+            >
+          </div>
+          <div class="col-25">
+            <a
+              href="#"
+              class="button button-big button-fill button-success"
+              id="copy"
+              >复制</a
+            >
+          </div>
+          <div class="col-25">
+            <a
+              href="#"
+              class="button button-big button-fill button-success"
+              id="save"
+              >保存</a
+            >
+          </div>
+        </div>
+        <div
+          id="addDataUL"
+          class="buttons-tab fixed-tab"
+          data-offset="44"
+          style="overflow:auto;"
+        >
+          <!-- <a role="presentation" href="#tab1" class="tab-link active button">测试点击</a>
                 <a href="#tab2" class="tab-link button">测试2</a>
                 <a href="#tab3" class="tab-link button">测
                     试3</a> -->
-            </div>
-            <div class="tabs tab-content" style="overflow:auto;">
-                <!-- <div class="tabs tab-content"
+        </div>
+        <div class="tabs tab-content" style="overflow:auto;">
+          <!-- <div class="tabs tab-content"
                 style="overflow:auto;position: absolute;bottom: 0;top: 7rem;left: 0;right: 0;"> -->
-                <!-- <div id="tab1" role="tabpanel" class="tab active">
+          <!-- <div id="tab1" role="tabpanel" class="tab active">
                     <div class="content-block" id="addVarContain123">
                         <div class="content-block-title">信息一</div>
                         <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
@@ -196,13 +227,12 @@
                         <p>This is tab 3 content end</p>
                     </div>
                 </div> -->
-            </div>
         </div>
+      </div>
     </div>
     <!-- </div> -->
     <!-- <script>
         $.init();
     </script> -->
-</body>
-
+  </body>
 </html>
