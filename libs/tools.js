@@ -45,7 +45,7 @@ var Substation = {
                     },
                     success: function (data) {
                         if (data == undefined) {
-                            console.log("信息错误");
+                            $.toast("信息错误");
                             return;
                         } else {
                             if (data.code == "200") {
@@ -55,7 +55,7 @@ var Substation = {
                         }
                     },
                     error: function () {
-                        alert("操作失败请重试！");
+                        $.toast("数据请求失败");
                     }
             });
     },

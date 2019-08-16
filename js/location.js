@@ -37,11 +37,15 @@
         console.log(data.message);
     }*/
     var locationItem = JSON.parse(localStorage.getItem("locationItem"));
+    var selectSubid = locationItem.fSubid;
+    var lng = locationItem.fLon;
+    var lat = locationItem.fLat;
     var map = new BMap.Map("container");
-    var point = new BMap.Point(locationItem.fLon,locationItem.fLat);
+    var point = new BMap.Point(lng,lat);
     map.centerAndZoom(point, 15);
     map.addControl(new BMap.NavigationControl());
     var marker = new BMap.Marker(point);        // 创建标注
+    marker.enableDragging();
     var lable = new BMap.Label(locationItem.fSubName,{offset :new BMap.Size(0,-32)});
     lable.setStyle({
                     maxWidth:'none',
@@ -53,5 +57,17 @@
                     borderRadius:'5px'
     				});
     marker.setLabel(lable);
+    marker.addEventListener("dragend", function(e){
+            lable.setContent("当前位置");
+            marker.setLabel(lable);
+            lng = e.point.lng;
+            lat = e.point.lat;
+            //alert("当前位置：" + e.point.lng + ", " + e.point.lat);
+    })
     map.addOverlay(marker);
+
+    function saveLocation(){
+        alert(selectSubid+"\n"+"lng:"+lng+"\nlat:"+lat);
+    }
+
     $.init();

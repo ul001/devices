@@ -1,19 +1,22 @@
 var CustomerDevice = (function () {
     function _customerDevice() {
-        var selectInfo;
+        //var selectInfo;
         var count = 100;
         var curNodeInfo;
-        // selectInfo.id = 130;
+        var subid=  localStorage.getItem("fSubid");
+        var tempId = localStorage.getItem("fTempId");
+        var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
+        // selectInfo.id = tempId;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
             Substation.Common.requestData(
                 "pageCustomList",
-                "fSubid=" + 10100001 + "&fTemplateid=" + selectInfo.id,
+                "fSubid=" + subid + "&fTemplateid=" + selectInfo.id,
                 function (data) {
                     curNodeInfo = data;
                 }
             );
-            // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
+            // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
             //     curNodeInfo = data;
             // })
         };
@@ -85,20 +88,20 @@ var CustomerDevice = (function () {
         function getNetData() {
             Substation.Common.requestData(
                 "pageCustomList",
-                "fSubid=" + 10100001 + "&fTemplateid=" + 130,
+                "fSubid=" + subid + "&fTemplateid=" + tempId,
                 function (data) {
-                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
+                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
                     curNodeInfo = data;
-                    selectInfo = {
-                        id: 130,
-                        name: "户外隔离刀闸",
-                        pId: 129,
-                        fParentid: "129",
-                        fTemplateid: "",
-                        parentId: "129",
-                        state: "true",
-                        fFunctionfield: '{"deviceInfo":[{"name":"%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF","value":[{"inpName":"","inpType":false,"type":"input","name":"%E7%BC%96%E5%8F%B7%E5%8F%8A%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E5%9E%8B%E5%8F%B7%E8%A7%84%E6%A0%BC","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81(A)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%BA%A6%E7%94%B5%E5%8E%8B(kV)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E7%94%9F%E4%BA%A7%E5%8E%82%E5%AE%B6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"date","name":"%E7%94%9F%E4%BA%A7%E6%97%A5%E6%9C%9F","value":""},{"type":"date","name":"%E6%8A%95%E8%BF%90%E6%97%A5%E6%9C%9F","value":""},{"inpName":"","inpType":false,"type":"input","name":"%E6%95%B0%E9%87%8F(%E5%8F%B0)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"select","name":"%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81","value":"%5B%7B%22opName%22%3A%22%E8%BF%90%E8%A1%8C%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%81%9C%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%A4%87%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E6%95%85%E9%9A%9C%22%2C%22opType%22%3Afalse%7D%5D"},{"inpName":"","inpType":false,"type":"input","name":"","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]},{"name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87","value":[{"inpName":"","inpType":false,"type":"input","name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87%E5%8F%8A%E7%BC%96%E5%8F%B7%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E6%8E%92%E5%BA%8F%E5%8F%B7","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]}],"checkInfo":[{"type":"radio","name":"%E5%B7%A1%E6%A3%80%E4%BF%A1%E6%81%AF-%E6%88%B7%E5%A4%96%E9%9A%94%E7%A6%BB%E5%88%80%E9%97%B8","value":"yes"},{"inpName":"","inpType":true,"type":"input","name":"%E6%B8%A9%E5%BA%A6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D"}]}'
-                    };
+//                     selectInfo = {
+//                         id: tempId,
+//                         name: "户外隔离刀闸",
+//                         pId: 129,
+//                         fParentid: "129",
+//                         fTemplateid: "",
+//                         parentId: "129",
+//                         state: "true",
+//                         fFunctionfield: '{"deviceInfo":[{"name":"%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF","value":[{"inpName":"","inpType":false,"type":"input","name":"%E7%BC%96%E5%8F%B7%E5%8F%8A%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E5%9E%8B%E5%8F%B7%E8%A7%84%E6%A0%BC","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81(A)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%BA%A6%E7%94%B5%E5%8E%8B(kV)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E7%94%9F%E4%BA%A7%E5%8E%82%E5%AE%B6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"date","name":"%E7%94%9F%E4%BA%A7%E6%97%A5%E6%9C%9F","value":""},{"type":"date","name":"%E6%8A%95%E8%BF%90%E6%97%A5%E6%9C%9F","value":""},{"inpName":"","inpType":false,"type":"input","name":"%E6%95%B0%E9%87%8F(%E5%8F%B0)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"select","name":"%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81","value":"%5B%7B%22opName%22%3A%22%E8%BF%90%E8%A1%8C%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%81%9C%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%A4%87%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E6%95%85%E9%9A%9C%22%2C%22opType%22%3Afalse%7D%5D"},{"inpName":"","inpType":false,"type":"input","name":"","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]},{"name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87","value":[{"inpName":"","inpType":false,"type":"input","name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87%E5%8F%8A%E7%BC%96%E5%8F%B7%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E6%8E%92%E5%BA%8F%E5%8F%B7","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]}],"checkInfo":[{"type":"radio","name":"%E5%B7%A1%E6%A3%80%E4%BF%A1%E6%81%AF-%E6%88%B7%E5%A4%96%E9%9A%94%E7%A6%BB%E5%88%80%E9%97%B8","value":"yes"},{"inpName":"","inpType":true,"type":"input","name":"%E6%B8%A9%E5%BA%A6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D"}]}'
+//                     };
                     // 如果有设备信息
                     if (data.length > 0) {
                         $.each(data, function (key, val) {
@@ -175,7 +178,7 @@ var CustomerDevice = (function () {
         function getData() {
             // $("body").showLoading();
             var url = "appMenuSelectHideOrShow";
-            var params = "fSubid=" + 10100001;
+            var params = "fSubid=" + subid;
             Substation.Common.requestData(url, params, function (data) {
                 var state = $("#showAllNodes").prop("checked"); //获取是否显示
                 var showData = data;
@@ -244,7 +247,7 @@ var CustomerDevice = (function () {
                 "pageCustomList",
                 "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id,
                 function (data) {
-                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + 10100001 + "&fTemplateid=" + 130, function (data) {
+                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
                     curNodeInfo = data;
                     // 如果有设备信息
                     if (data.length > 0) {
@@ -577,7 +580,7 @@ jQuery(document).ready(function () {
 
 
         var formdata = new FormData();
-        formdata.append("fSubid", 10100001);
+        formdata.append("fSubid", subid);
         formdata.append("fTemplateid", fTemplateid);
         formdata.append("fPagename", encodeURIComponent(fPagename));
         // formdata.append("fPagejson", json);
@@ -629,7 +632,7 @@ jQuery(document).ready(function () {
         });
 
         var formdata = new FormData();
-        formdata.append("fSubid", 10100001);
+        formdata.append("fSubid", subid);
         formdata.append("fTemplateid", fTemplateid);
         formdata.append("fPagename", encodeURIComponent(fPagename));
         formdata.append("fPagejson", json);

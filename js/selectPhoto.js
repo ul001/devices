@@ -12,6 +12,8 @@
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);*/
 var imgNum = 0;
+var selectSubid = localStorage.getItem("fSubid");
+
 $("#inputBox").html("");
 $(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
@@ -75,6 +77,10 @@ function imgDisplay(obj) {
 
 function closePicture(obj) {
     $(obj).parent("div").remove();
+}
+
+function savePhoto(){
+
 }
 
 $.init();

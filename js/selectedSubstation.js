@@ -15,8 +15,8 @@
         });
     }*/
 
-function goToLocation(lat,lon,subname){
-    var locationItem = {fLat:lat,fLon:lon,fSubName:subname};
+function goToLocation(lat,lon,subid,subname){
+    var locationItem = {fLat:lat,fLon:lon,fSubid:subid,fSubName:subname};
     localStorage.setItem("locationItem",JSON.stringify(locationItem));
     window.location.href = "location.html";
 }
@@ -44,6 +44,7 @@ $(document).on('refresh', '.pull-to-refresh-content', function(e) {
         lastIndex = 10;
         $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
         loading = false;
+        $.attachInfiniteScroll($('.infinite-scroll'));
         // done
         $.pullToRefreshDone('.pull-to-refresh-content');
     }, 2000);
@@ -72,7 +73,7 @@ function addItems(number, lastIndex) {
             "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto("+this.fSubid+")\">照片\n" +
             "                                    </button>\n" +
             "                                    <br>\n" +
-            "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation("+this.fLatitude+","+this.fLongitude+",'"+this.fSubname+"')\" type=\"button\">位置\n" +
+            "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation("+this.fLatitude+","+this.fLongitude+","+this.fSubid+",'"+this.fSubname+"')\" type=\"button\">位置\n" +
             "                                    </button>\n" +
             "                                </div>\n" +
             "                            </div>\n" +
@@ -84,6 +85,7 @@ function addItems(number, lastIndex) {
     //addClick();
     pageNum++;
         }else{
+            $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
