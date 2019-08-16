@@ -53,7 +53,7 @@ var CustomerDevice = (function () {
             var containStr =
                 '<div role="tabpanel" class="tab" id="' +
                 name +
-                '"> <div class="content-block" id="addVarContain' +
+                '"> <div class="content-block tab-pane" id="addVarContain' +
                 count +
                 '"></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
@@ -143,7 +143,7 @@ var CustomerDevice = (function () {
                                 var containStr =
                                     '<div role="tabpanel" class="tab" id="' +
                                     name +
-                                    '"> <div class="content-block" id="addVarContain' +
+                                    '"> <div class="content-block tab-pane" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             } else {
@@ -165,7 +165,7 @@ var CustomerDevice = (function () {
                                 var containStr =
                                     '<div role="tabpanel" class="tab" id="' +
                                     name +
-                                    '"> <div class="content-block" id="addVarContain' +
+                                    '"> <div class="content-block tab-pane" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             }
@@ -376,7 +376,7 @@ var CustomerDevice = (function () {
                         // '<input type="text" id="input' + count + '" class="valueInput" value="' + info.inpName + '" name="'
                         //  + info.inpType + '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' + '</div>';
                         string =
-                            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label">' +
+                            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" name="input">' +
                             decodeURIComponent(val.name) +
                             '</div> <div class="item-input">' +
                             '<input type="text" id="input' +
@@ -411,7 +411,7 @@ var CustomerDevice = (function () {
                         //     '<label class="nameInputInfo" name="input">' + decodeURIComponent(val.name) + '</label>' + ':' +
                         //     '<input type="text" class="valueInput" value="' + info.inpName + '" name="' + info.inpType + '">' + '</div>';
                         string =
-                            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label">' +
+                            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" name="input">' +
                             decodeURIComponent(val.name) +
                             '</div> <div class="item-input">' +
                             '<input type="text" class="valueInput" value="' +
@@ -712,7 +712,7 @@ jQuery(document).ready(function () {
     // 修改保存按钮点击
     $("#tab-nav").on("click", "#save", function () {
         var isTrue = true;
-        var input = $(".tab-pane.active").find(".valueInput[name='true']");
+        var input = $(".tab.active").find(".valueInput[name='true']");
         $.each(input, function (key, val) {
             if (!Substation.Validator.validate($(val), "")) {
                 $("#save").attr("disabled", true);
@@ -723,17 +723,17 @@ jQuery(document).ready(function () {
 
         if (isTrue) {
             var fPagejson = [];
-            var divList = $(".tab-pane.active").find(".baseInfoDiv");
+            var divList = $(".tab.active").find(".baseInfoDiv");
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
                 fPagejson.push({
                     name: encodeURIComponent(text),
                     value: []
                 });
-                var infoList = $(val).children('.showDiv');
+                var infoList = $(val).children().children().children('.showDiv');
                 $.each(infoList, function (index, val) {
                     var row = {};
-                    var select = $(val).children(".nameInputInfo");
+                    var select = $(val).children().children(".item-title");
                     var name = $(select).text();
                     var type = $(select).attr("name");
                     var value;
