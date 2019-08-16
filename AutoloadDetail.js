@@ -88,9 +88,14 @@ var CustomerDevice = (function () {
         function getSelectInfo() {
             Substation.Common.requestData(
                 "appMenuSelectByPid",
-                "fSubid=" + subid + "&fTemplateid=" + parentId,
+                "fSubid=" + subid + "&fParentId=" + parentId,
                 function (data) {
-                    selectInfo = data;
+                    var menuList = data.menuList;
+                    $.each(menuList, function (key, val) {
+                        if (tempId == val.id.toString()) {
+                            selectInfo = val;
+                        }
+                    });
                 }
             );
 
@@ -532,15 +537,17 @@ var CustomerDevice = (function () {
 
 jQuery(document).ready(function () {
     // $(function () {
-
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //判断数组中是否包含某字符串
-    var baseUrlFromAPP;
-    var tokenFromAPP;
-    var subidFromAPP;
+    var subid = localStorage.getItem("fSubid");
+    // var tempId = localStorage.getItem("fTempId");
+    // var parentId = localStorage.getItem("fPid");
+    // var u = navigator.userAgent,
+    //     app = navigator.appVersion;
+    // var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    // //判断数组中是否包含某字符串
+    // var baseUrlFromAPP;
+    // var tokenFromAPP;
+    // var subidFromAPP;
     // if (isIOS) { //ios系统的处理
     //     window.webkit.messageHandlers.iOS.postMessage(null);
     //     var storage = localStorage.getItem("accessToken");
@@ -715,15 +722,15 @@ jQuery(document).ready(function () {
         });
 
         if (isTrue) {
-            var fFunctionfield = [];
+            var fPagejson = [];
             var divList = $(".tab-pane.active").find(".baseInfoDiv");
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
-                fFunctionfield.push({
+                fPagejson.push({
                     name: encodeURIComponent(text),
                     value: []
                 });
-                var infoList = $(val).children(".showDiv");
+                var infoList = $(val).children('.showDiv');
                 $.each(infoList, function (index, val) {
                     var row = {};
                     var select = $(val).children(".nameInputInfo");
@@ -733,26 +740,16 @@ jQuery(document).ready(function () {
                     switch (type) {
                         case "input":
                             var row = {};
-                            row.inpName = $(val)
-                                .find($(".valueInput"))
-                                .val();
-                            row.inpType = JSON.parse(
-                                $(val)
-                                .find($(".valueInput"))
-                                .attr("name")
-                            );
+                            row.inpName = $(val).find($(".valueInput")).val();
+                            row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
                             value = JSON.stringify(row);
                             break;
                         case "radio":
-                            value = $(val)
-                                .find($("input:checked"))
-                                .val();
+                            value = $(val).find($("input:checked")).val();
                             break;
                         case "select":
                             var list = [];
-                            var options = $(val)
-                                .find("select")
-                                .children("option");
+                            var options = $(val).find('select').children('option');
                             $.each(options, function (opkey, opval) {
                                 var row = {};
                                 row.opName = $(opval).val();
@@ -762,23 +759,21 @@ jQuery(document).ready(function () {
                             value = JSON.stringify(list);
                             break;
                         case "date":
-                            value = $(val)
-                                .find($(".dateTime"))
-                                .val();
+                            value = $(val).find($(".dateTime")).val();
                             break;
                     }
                     row.type = type;
                     row.name = encodeURIComponent(name);
                     row.value = encodeURIComponent(value);
-                    fFunctionfield[key].value.push(row);
+                    fPagejson[key].value.push(row);
                 });
             });
-            upData(fFunctionfield);
+            upData(fPagejson);
         }
     });
 
-    function upData(fFunctionfield) {
-        var json = JSON.stringify(fFunctionfield);
+    function upData(fPagejson) {
+        var json = JSON.stringify(fPagejson);
 
         var fId = $(".active[role='presentation']").attr("name");
 
@@ -787,26 +782,24 @@ jQuery(document).ready(function () {
         formdata.append("fPagejson", json);
         var url = "pageCustomUpdate";
         $.ajax({
-                url: Substation.Common.addHead() + url,
-                type: "POST",
-                data: formdata,
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", tokenFromAPP);
-                },
-                processData: false,
-                contentType: false
-            })
-            .done(function (data) {
-                if (data.data == true) {
-                    alert("保存成功！");
-                    customerDevice.reNewCurNodeInfo();
-                } else {
-                    alert("保存失败！");
-                }
-            })
-            .fail(function (res) {
+            url: Substation.Common.addHead() + url,
+            type: 'POST',
+            data: formdata,
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", tokenFromAPP);
+            },
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            if (data.data == true) {
+                alert("保存成功！");
+                customerDevice.reNewCurNodeInfo();
+            } else {
                 alert("保存失败！");
-            });
+            }
+        }).fail(function (res) {
+            alert("保存失败！");
+        });
     }
 
     //点击弹出弹窗加载信息
