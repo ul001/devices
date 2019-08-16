@@ -3,9 +3,10 @@ var CustomerDevice = (function () {
         //var selectInfo;
         var count = 100;
         var curNodeInfo;
-        var subid=  localStorage.getItem("fSubid");
+        var subid = localStorage.getItem("fSubid");
         var tempId = localStorage.getItem("fTempId");
-        var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
+        var parentId = localStorage.getItem("fPid");
+        // var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
         // selectInfo.id = tempId;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
@@ -16,9 +17,6 @@ var CustomerDevice = (function () {
                     curNodeInfo = data;
                 }
             );
-            // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
-            //     curNodeInfo = data;
-            // })
         };
 
         // 获取当前选中节点信息
@@ -82,7 +80,20 @@ var CustomerDevice = (function () {
         this.show = function () {
             initHtml();
             // getData();
+            getSelectInfo();
             getNetData();
+
+        };
+
+        function getSelectInfo() {
+            Substation.Common.requestData(
+                "appMenuSelectByPid",
+                "fSubid=" + subid + "&fTemplateid=" + parentId,
+                function (data) {
+                    selectInfo = data;
+                }
+            );
+
         };
 
         function getNetData() {
@@ -92,16 +103,16 @@ var CustomerDevice = (function () {
                 function (data) {
                     // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
                     curNodeInfo = data;
-//                     selectInfo = {
-//                         id: tempId,
-//                         name: "户外隔离刀闸",
-//                         pId: 129,
-//                         fParentid: "129",
-//                         fTemplateid: "",
-//                         parentId: "129",
-//                         state: "true",
-//                         fFunctionfield: '{"deviceInfo":[{"name":"%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF","value":[{"inpName":"","inpType":false,"type":"input","name":"%E7%BC%96%E5%8F%B7%E5%8F%8A%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E5%9E%8B%E5%8F%B7%E8%A7%84%E6%A0%BC","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81(A)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%BA%A6%E7%94%B5%E5%8E%8B(kV)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E7%94%9F%E4%BA%A7%E5%8E%82%E5%AE%B6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"date","name":"%E7%94%9F%E4%BA%A7%E6%97%A5%E6%9C%9F","value":""},{"type":"date","name":"%E6%8A%95%E8%BF%90%E6%97%A5%E6%9C%9F","value":""},{"inpName":"","inpType":false,"type":"input","name":"%E6%95%B0%E9%87%8F(%E5%8F%B0)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"select","name":"%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81","value":"%5B%7B%22opName%22%3A%22%E8%BF%90%E8%A1%8C%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%81%9C%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%A4%87%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E6%95%85%E9%9A%9C%22%2C%22opType%22%3Afalse%7D%5D"},{"inpName":"","inpType":false,"type":"input","name":"","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]},{"name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87","value":[{"inpName":"","inpType":false,"type":"input","name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87%E5%8F%8A%E7%BC%96%E5%8F%B7%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E6%8E%92%E5%BA%8F%E5%8F%B7","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]}],"checkInfo":[{"type":"radio","name":"%E5%B7%A1%E6%A3%80%E4%BF%A1%E6%81%AF-%E6%88%B7%E5%A4%96%E9%9A%94%E7%A6%BB%E5%88%80%E9%97%B8","value":"yes"},{"inpName":"","inpType":true,"type":"input","name":"%E6%B8%A9%E5%BA%A6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D"}]}'
-//                     };
+                    //                     selectInfo = {
+                    //                         id: tempId,
+                    //                         name: "户外隔离刀闸",
+                    //                         pId: 129,
+                    //                         fParentid: "129",
+                    //                         fTemplateid: "",
+                    //                         parentId: "129",
+                    //                         state: "true",
+                    //                         fFunctionfield: '{"deviceInfo":[{"name":"%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF","value":[{"inpName":"","inpType":false,"type":"input","name":"%E7%BC%96%E5%8F%B7%E5%8F%8A%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E5%9E%8B%E5%8F%B7%E8%A7%84%E6%A0%BC","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81(A)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%BA%A6%E7%94%B5%E5%8E%8B(kV)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E7%94%9F%E4%BA%A7%E5%8E%82%E5%AE%B6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"date","name":"%E7%94%9F%E4%BA%A7%E6%97%A5%E6%9C%9F","value":""},{"type":"date","name":"%E6%8A%95%E8%BF%90%E6%97%A5%E6%9C%9F","value":""},{"inpName":"","inpType":false,"type":"input","name":"%E6%95%B0%E9%87%8F(%E5%8F%B0)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"select","name":"%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81","value":"%5B%7B%22opName%22%3A%22%E8%BF%90%E8%A1%8C%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%81%9C%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%A4%87%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E6%95%85%E9%9A%9C%22%2C%22opType%22%3Afalse%7D%5D"},{"inpName":"","inpType":false,"type":"input","name":"","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]},{"name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87","value":[{"inpName":"","inpType":false,"type":"input","name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87%E5%8F%8A%E7%BC%96%E5%8F%B7%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E6%8E%92%E5%BA%8F%E5%8F%B7","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]}],"checkInfo":[{"type":"radio","name":"%E5%B7%A1%E6%A3%80%E4%BF%A1%E6%81%AF-%E6%88%B7%E5%A4%96%E9%9A%94%E7%A6%BB%E5%88%80%E9%97%B8","value":"yes"},{"inpName":"","inpType":true,"type":"input","name":"%E6%B8%A9%E5%BA%A6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D"}]}'
+                    //                     };
                     // 如果有设备信息
                     if (data.length > 0) {
                         $.each(data, function (key, val) {
@@ -157,7 +168,6 @@ var CustomerDevice = (function () {
                             $(".tab-content").append(containStr);
                             if (count == 101) {
                                 $("#tab" + name).click();
-                                // selectInfo = val;
                             }
                             if (val.fPagejson != undefined && val.fPagejson != "undefined") {
                                 creatInfo(val.fPagejson, $("#addVarContain" + count), count);
@@ -680,7 +690,8 @@ jQuery(document).ready(function () {
                         $(id).remove();
                         if (prevLi != undefined) {
                             //TODO: 如有其它tab则选中它
-                            $(prevLi).tab("show");
+                            prevLi.click();
+                            // $(prevLi).tab("show");
                             // $("a", $(prevLi)).tab("show");
                         }
                     } else {
