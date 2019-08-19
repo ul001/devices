@@ -28,6 +28,8 @@ var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjY1MDE1Mzg
 
 var Substation = {
 
+    baseUrl:baseUrlFromAPP,
+
     removeUndefined: function (data) {
         var dataStr = (data == undefined ? "无" : data);
         return dataStr;
