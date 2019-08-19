@@ -14,11 +14,20 @@ $("#platform").html(string);
 
 unreadCountSum = bianweiCount + yuexianCount + platformCount;
 
-//iOS回调未读数
-var message = {
-    'unreadCountSum': unreadCountSum
-};
-window.webkit.messageHandlers.jsToOcWithPrams.postMessage(message);
+var u = navigator.userAgent,
+    app = navigator.appVersion;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+if (isIOS) {
+    //iOS回调未读数
+    var message = {
+        'unreadCountSum': unreadCountSum
+    };
+    window.webkit.messageHandlers.jsToOcWithPrams.postMessage(message);
+} else {
+
+}
+
 
 function fillData(parentId) {
     // var params = {
