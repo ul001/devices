@@ -19,7 +19,15 @@ $(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
-        $("#inputBox").append("<input type=\"file\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        var ua = navigator.userAgent.toLowerCase(); //获取浏览器的userAgent,并转化为小写——注：userAgent是用户可以修改的
+        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1); //判断是否是苹果手机，是则是true
+        if (isIos) {
+            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" capture=\"camera\" multiple/>");
+            // $("input:file").removeAttr("capture");
+        }else
+        {
+            $("#inputBox").append("<input type=\"file\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        }
     }
     var that = this;
     $("#file" + index).click();
@@ -79,12 +87,14 @@ function closePicture(obj) {
     $(obj).parent("div").remove();
 }
 
-function loadSavePic(){
-    Substation.getDataByAjax("/selectSubstationImg",{fSubid:selectSubid},function(data){
-        if(data.hasOwnProperty("substationImgList")&&data.substationImgList.length>0){
+function loadSavePic() {
+    Substation.getDataByAjax("/selectSubstationImg", {
+        fSubid: selectSubid
+    }, function (data) {
+        if (data.hasOwnProperty("substationImgList") && data.substationImgList.length > 0) {
             var imgUrl = data.substationImgUrl;
-            $(data.substationImgList).each(function(){
-                var imgDiv = '<div class="imgContainer" id='+this.fId+' data-index=' + index + '><img   src=' + ("/"+ imgUrl+ "/" +this.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>';
+            $(data.substationImgList).each(function () {
+                var imgDiv = '<div class="imgContainer" id=' + this.fId + ' data-index=' + index + '><img   src=' + ("/" + imgUrl + "/" + this.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>';
                 $("#imgBox").append(imgDiv);
             });
         }
@@ -93,16 +103,16 @@ function loadSavePic(){
 
 loadSavePic();
 
-function savePhoto(){
-    var params={
-        fSubid:selectSubid,
-        myFiles:$("#upBox").serialize()
+function savePhoto() {
+    var params = {
+        fSubid: selectSubid,
+        myFiles: $("#upBox").serialize()
     }
-    Substation.getDataByAjax("/uploadSubstationImg",params,function(data){
-        if(data.hasOwnProperty("substationImgList")&&data.substationImgList.length>0){
+    Substation.getDataByAjax("/uploadSubstationImg", params, function (data) {
+        if (data.hasOwnProperty("substationImgList") && data.substationImgList.length > 0) {
 
-           }
-       });
+        }
+    });
 }
 
 $.init();

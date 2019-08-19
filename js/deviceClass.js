@@ -1,11 +1,14 @@
 var showDisItem = 1;
-var pids = [{ pId: 0, pName: "" }];
+var pids = [{
+    pId: 0,
+    pName: ""
+}];
 var clickNum = 0;
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 $(".title_color").text(selectSubname);
 
-$(".back-parent").click(function() {
+$(".back-parent").click(function () {
     var obj = pids[clickNum];
     clickNum--;
     var lastPId = pids[clickNum].pId;
@@ -28,9 +31,9 @@ function fillData(parentId) {
         ul = $(".parent-page .list-container");
     }
     ul.empty();
-    Substation.getDataByAjax("/appMenuSelectByPid", params, function(data) {
+    Substation.getDataByAjax("/appMenuSelectByPid", params, function (data) {
         if (data.hasOwnProperty("menuList")) {
-            $(data.menuList).each(function() {
+            $(data.menuList).each(function () {
                 var li = "";
                 if (this.state == "true") {
                     li = "<li class=\"item-content item-link pId" + this.pId + "\" id=\"" + this.id + "\" value='" + this.fFunctionfield + "'>\n" +
@@ -54,7 +57,7 @@ function fillData(parentId) {
             } else {
                 $(".item-dis").css("display", "flex");
             }
-            $(".item-link").unbind().click(function() {
+            $(".item-link").unbind().click(function () {
                 var fField = $(this).attr("value");
                 var clickId = $(this).attr("id");
                 if (fField != "" && fField != null) {
@@ -65,14 +68,17 @@ function fillData(parentId) {
                 } else {
                     clickNum++;
                     var parentName = $(this).text();
-                    pids.push({ pId: clickId, pName: parentName });
+                    pids.push({
+                        pId: clickId,
+                        pName: parentName
+                    });
                     $("#no-click").text(parentName);
                     $(".parent-page").css("display", "none");
                     $(".child-page").css("display", "block");
                     fillData(clickId);
                 }
             });
-            $("#show-class").unbind().click(function() {
+            $("#show-class").unbind().click(function () {
                 if (showDisItem == 0) {
                     showDisItem = 1;
                     $("#show-class").text("隐藏无设备分类");
