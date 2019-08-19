@@ -60,6 +60,31 @@ var Substation = {
         });
     },
 
+    getDataByAjaxNoLoading: function (url, params, successCallback) {
+        $.ajax({
+            type: "GET",
+            url: baseUrlFromAPP + url,
+            data: params,
+            beforeSend: function (request) {
+                // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+                request.setRequestHeader("Authorization", tokenFromAPP);
+            },
+            success: function (data) {
+                if (data == undefined) {
+                    $.toast("信息错误");
+                    return;
+                } else {
+                    if (data.code == "200") {
+                        successCallback(data.data);
+                    }
+                }
+            },
+            error: function () {
+                $.toast("数据请求失败");
+            }
+        });
+    },
+
     postDataByAjax: function (url, params, successCallback) {
         $.showPreloader();
         $.ajax({

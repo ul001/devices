@@ -64,7 +64,7 @@ function addItems(number, lastIndex) {
         pageSize: number,
         key: searchKey
     }
-    Substation.getDataByAjax(url, params, function(data) {
+    Substation.getDataByAjaxNoLoading(url, params, function(data) {
         if (data.hasOwnProperty("list") && data.list.length > 0) {
             $(data.list).each(function() {
                 html += "<div class=\"card\">\n" +
