@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v1";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYyMzg1NzcsInVzZXJuYW1lIjoiYWRtaW4ifQ.3ykmtPxVLS5D5031ts7-VrLe90jm-3OTQVV19Dp2RQg";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjY1MDE1MzgsInVzZXJuYW1lIjoiYWRtaW4ifQ.7Rsm3UNfXxY7VprMtfU6h_lWkEokC5v5LNuYriYu0ps";
 //iOS安卓基础传参
 /*    var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -102,6 +102,28 @@ var Substation = {
             error: function () {
                 $.toast("数据请求失败");
             }
+        });
+    },
+
+    postFormDataByAjax: function (url, params, successCallback) {
+        $.showPreloader();
+        $.ajax({
+            url: baseUrlFromAPP + url,
+            type: 'POST',
+            data: params,
+            dataType: 'JSON',
+            cache: false,
+            processData: false,
+            contentType: false,
+            beforeSend: function (request) {
+                request.setRequestHeader("Authorization", tokenFromAPP);
+                // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+            }
+        }).done(function (data) {
+            $.hidePreloader();
+            successCallback(data);
+        }).fail(function () {
+            $.toast("数据请求失败");
         });
     },
 

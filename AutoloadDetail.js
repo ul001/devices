@@ -630,18 +630,16 @@ jQuery(document).ready(function () {
         //     .fail(function (res) {
         //         alert("新增失败！");
         //     });
-        Substation.postDataByAjax(
+        Substation.postFormDataByAjax(
             url,
             formdata,
             function (data) {
-                if (data == true) {
-                    if (data.msg != "ok") {
-                        alert("新增失败！");
-                    } else {
-                        customerDevice.addModal();
-                        $(".active[role='presentation']").attr("name", data.data.fId);
-                        $("#save").removeAttr("disabled");
-                    }
+                if (data.msg != "ok") {
+                    alert("新增失败！");
+                } else {
+                    customerDevice.addModal();
+                    $(".active[role='presentation']").attr("name", data.data.fId);
+                    $("#save").removeAttr("disabled");
                 }
             }
         );
