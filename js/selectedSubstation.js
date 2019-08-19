@@ -16,7 +16,12 @@
     }*/
 
 function goToLocation(lat, lon, subid, subname) {
-    var locationItem = { fLat: lat, fLon: lon, fSubid: subid, fSubName: subname };
+    var locationItem = {
+        fLat: lat,
+        fLon: lon,
+        fSubid: subid,
+        fSubName: subname
+    };
     localStorage.setItem("locationItem", JSON.stringify(locationItem));
     window.location.href = "location.html";
 }
@@ -47,8 +52,8 @@ function getFirstPage() {
     $.attachInfiniteScroll($('.infinite-scroll'));
 }
 
-$(document).on('refresh', '.pull-to-refresh-content', function(e) {
-    setTimeout(function() {
+$(document).on('refresh', '.pull-to-refresh-content', function (e) {
+    setTimeout(function () {
         getFirstPage();
         // done
         $.pullToRefreshDone('.pull-to-refresh-content');
@@ -64,9 +69,9 @@ function addItems(number, lastIndex) {
         pageSize: number,
         key: searchKey
     }
-    Substation.getDataByAjaxNoLoading(url, params, function(data) {
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
         if (data.hasOwnProperty("list") && data.list.length > 0) {
-            $(data.list).each(function() {
+            $(data.list).each(function () {
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
@@ -108,7 +113,7 @@ addItems(itemsPerLoad, 0);
 var lastIndex = 10;
 
 
-$(document).on('infinite', '.infinite-scroll', function() {
+$(document).on('infinite', '.infinite-scroll', function () {
 
     // 如果正在加载，则退出
     if (loading) return;
@@ -116,7 +121,7 @@ $(document).on('infinite', '.infinite-scroll', function() {
     // 设置flag
     loading = true;
 
-    setTimeout(function() {
+    setTimeout(function () {
         loading = false;
 
         if (lastIndex >= maxItems) {
@@ -130,24 +135,24 @@ $(document).on('infinite', '.infinite-scroll', function() {
     }, 1000);
 });
 
-$('#search').bind('keydown', function(event) {
+$('#search').bind('keydown', function (event) {
     if (event.keyCode == 13) {
         getFirstPage();
     }
 });
 
-$(".searchbar-cancel").click(function() {
+$(".searchbar-cancel").click(function () {
     $("#search").val("");
     getFirstPage();
 });
 
-$(".back_btn").click(function(){
+$(".back_btn").click(function () {
     var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     if (isIOS) {
-
+        window.webkit.messageHandlers.goBackiOS.postMessage("");
     } else {
         android.goBack();
     }
