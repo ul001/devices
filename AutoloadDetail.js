@@ -569,7 +569,7 @@ jQuery(document).ready(function () {
     // }
 
     tokenFromAPP =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYxMzM4ODMsInVzZXJuYW1lIjoiYWRtaW4ifQ.PuEZubDfdnVf76XEg4lXjTXlNHp-0xvbiTYZdry3voc";
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYyMzg1NzcsInVzZXJuYW1lIjoiYWRtaW4ifQ.3ykmtPxVLS5D5031ts7-VrLe90jm-3OTQVV19Dp2RQg";
 
     var customerDevice = new CustomerDevice();
 

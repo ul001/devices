@@ -3,15 +3,34 @@
 <!-- 网关离线 -->
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="lib/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="lib/mescroll.css"> -->
-    <!-- <link rel="stylesheet" href="css/gatewayOffline.css"> -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>报警</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/AutoloadDetail.css" />
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/config.js"></script>
+    <script src="libs/tools.js"></script>
+
 </head>
 
 <body>
+    <header class="bar bar-nav bar_color">
+        <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
+            <span class="icon icon-left"></span>
+            返回
+        </a>
+        <h1 class="title title_color">报警</h1>
+    </header>
     <div id="mescroll" class="mescroll mescroll-bar">
 
         <p class="data">
