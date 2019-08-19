@@ -666,28 +666,20 @@ jQuery(document).ready(function () {
         formdata.append("fTemplateid", fTemplateid);
         formdata.append("fPagename", encodeURIComponent(fPagename));
         formdata.append("fPagejson", json);
-        var url = "pageCustomInsert";
-        $.ajax({
-                url: Substation.Common.addHead() + url,
-                type: "POST",
-                data: formdata,
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", tokenFromAPP);
-                },
-                processData: false,
-                contentType: false
-            })
-            .done(function (data) {
+        var url = "/pageCustomInsert";
+        Substation.postFormDataByAjax(
+            url,
+            formdata,
+            function (data) {
                 if (data.msg != "ok") {
                     alert("复制失败！");
                 } else {
                     customerDevice.addModal(json);
                     $(".active[role='presentation']").attr("name", data.data.fId);
                 }
-            })
-            .fail(function (res) {
-                alert("复制失败！");
-            });
+            }
+        );
+
     });
 
     // 删除按钮
@@ -793,26 +785,33 @@ jQuery(document).ready(function () {
         var formdata = new FormData();
         formdata.append("fId", fId);
         formdata.append("fPagejson", json);
-        var url = "pageCustomUpdate";
-        $.ajax({
-            url: Substation.Common.addHead() + url,
-            type: 'POST',
-            data: formdata,
-            beforeSend: function (request) {
-                request.setRequestHeader("Authorization", tokenFromAPP);
-            },
-            processData: false,
-            contentType: false
-        }).done(function (data) {
-            if (data.data == true) {
-                alert("保存成功！");
-                customerDevice.reNewCurNodeInfo();
-            } else {
-                alert("保存失败！");
+        var url = "/pageCustomUpdate";
+        // $.ajax({
+        //     url: Substation.Common.addHead() + url,
+        //     type: 'POST',
+        //     data: formdata,
+        //     beforeSend: function (request) {
+        //         request.setRequestHeader("Authorization", tokenFromAPP);
+        //     },
+        //     processData: false,
+        //     contentType: false
+        // }).done(function (data) {
+
+        // }).fail(function (res) {
+        //     alert("保存失败！");
+        // });
+        Substation.postFormDataByAjax(
+            url,
+            formdata,
+            function (data) {
+                if (data.data == true) {
+                    alert("保存成功！");
+                    customerDevice.reNewCurNodeInfo();
+                } else {
+                    alert("保存失败！");
+                }
             }
-        }).fail(function (res) {
-            alert("保存失败！");
-        });
+        );
     }
 
     //点击弹出弹窗加载信息
