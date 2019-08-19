@@ -10,8 +10,8 @@ var CustomerDevice = (function () {
         // selectInfo.id = tempId;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
-            Substation.Common.requestData(
-                "pageCustomList",
+            Substation.getDataByAjax(
+                "/pageCustomList",
                 "fSubid=" + subid + "&fTemplateid=" + selectInfo.id,
                 function (data) {
                     curNodeInfo = data;
@@ -86,8 +86,8 @@ var CustomerDevice = (function () {
         };
 
         function getSelectInfo() {
-            Substation.Common.requestData(
-                "appMenuSelectByPid",
+            Substation.getDataByAjax(
+                "/appMenuSelectByPid",
                 "fSubid=" + subid + "&fParentId=" + parentId,
                 function (data) {
                     var menuList = data.menuList;
@@ -102,11 +102,11 @@ var CustomerDevice = (function () {
         };
 
         function getNetData() {
-            Substation.Common.requestData(
-                "pageCustomList",
+            Substation.getDataByAjax(
+                "/pageCustomList",
                 "fSubid=" + subid + "&fTemplateid=" + tempId,
                 function (data) {
-                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
+                    // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
                     curNodeInfo = data;
                     //                     selectInfo = {
                     //                         id: tempId,
@@ -192,9 +192,9 @@ var CustomerDevice = (function () {
 
         function getData() {
             // $("body").showLoading();
-            var url = "appMenuSelectHideOrShow";
+            var url = "/appMenuSelectHideOrShow";
             var params = "fSubid=" + subid;
-            Substation.Common.requestData(url, params, function (data) {
+            Substation.getDataByAjax(url, params, function (data) {
                 var state = $("#showAllNodes").prop("checked"); //获取是否显示
                 var showData = data;
 
@@ -258,11 +258,11 @@ var CustomerDevice = (function () {
         // 点击一个节点
         function onClick(treeNode) {
             // $("body").showLoading();
-            Substation.Common.requestData(
-                "pageCustomList",
+            Substation.getDataByAjax(
+                "/pageCustomList",
                 "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id,
                 function (data) {
-                    // Substation.Common.requestData("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
+                    // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
                     curNodeInfo = data;
                     // 如果有设备信息
                     if (data.length > 0) {
@@ -607,29 +607,44 @@ jQuery(document).ready(function () {
             console.log("信息错误！");
             return;
         }
-        var url = "pageCustomInsert";
-        $.ajax({
-                url: Substation.Common.addHead() + url,
-                type: "POST",
-                data: formdata,
-                beforeSend: function (request) {
-                    request.setRequestHeader("Authorization", tokenFromAPP);
-                },
-                processData: false,
-                contentType: false
-            })
-            .done(function (data) {
-                if (data.msg != "ok") {
-                    alert("新增失败！");
-                } else {
-                    customerDevice.addModal();
-                    $(".active[role='presentation']").attr("name", data.data.fId);
-                    $("#save").removeAttr("disabled");
+        var url = "/pageCustomInsert";
+        // $.ajax({
+        //         url: Substation.Common.addHead() + url,
+        //         type: "POST",
+        //         data: formdata,
+        //         beforeSend: function (request) {
+        //             request.setRequestHeader("Authorization", tokenFromAPP);
+        //         },
+        //         processData: false,
+        //         contentType: false
+        //     })
+        //     .done(function (data) {
+        //         if (data.msg != "ok") {
+        //             alert("新增失败！");
+        //         } else {
+        //             customerDevice.addModal();
+        //             $(".active[role='presentation']").attr("name", data.data.fId);
+        //             $("#save").removeAttr("disabled");
+        //         }
+        //     })
+        //     .fail(function (res) {
+        //         alert("新增失败！");
+        //     });
+        Substation.postDataByAjax(
+            url,
+            formdata,
+            function (data) {
+                if (data == true) {
+                    if (data.msg != "ok") {
+                        alert("新增失败！");
+                    } else {
+                        customerDevice.addModal();
+                        $(".active[role='presentation']").attr("name", data.data.fId);
+                        $("#save").removeAttr("disabled");
+                    }
                 }
-            })
-            .fail(function (res) {
-                alert("新增失败！");
-            });
+            }
+        );
     });
 
     // 复制按钮
@@ -683,8 +698,8 @@ jQuery(document).ready(function () {
         var name = $(".active[role='presentation']")
             .text();
         if (confirm("确认删除" + name + " 吗？")) {
-            Substation.Common.requestData(
-                "pageCustomDelete",
+            Substation.getDataByAjax(
+                "/pageCustomDelete",
                 "fId=" + selectId,
                 function (data) {
                     if (data == true) {
