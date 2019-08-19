@@ -36,41 +36,51 @@
     function onError(data) {
         console.log(data.message);
     }*/
+
     var locationItem = JSON.parse(localStorage.getItem("locationItem"));
     var selectSubid = locationItem.fSubid;
     var lng = locationItem.fLon;
     var lat = locationItem.fLat;
-    var map = new BMap.Map("container");
-    var point = new BMap.Point(lng, lat);
-    var geoc = new BMap.Geocoder();
     var dizhi;
-    map.centerAndZoom(point, 15);
-    map.addControl(new BMap.NavigationControl());
-    var marker = new BMap.Marker(point); // 创建标注
-    marker.enableDragging();
-    var lable = new BMap.Label(locationItem.fSubName, { offset: new BMap.Size(0, -32) });
-    lable.setStyle({
-        maxWidth: 'none',
-        fontSize: '15px',
-        padding: '5px',
-        border: 'none',
-        color: '#fff',
-        background: '#ff8355',
-        borderRadius: '5px'
-    });
-    marker.setLabel(lable);
-    marker.addEventListener("dragend", function(e) {
-        lng = e.point.lng;
-        lat = e.point.lat;
-        geoc.getLocation(e.point, function(rs){
-            var addComp = rs.addressComponents;
-            dizhi = addComp.city + addComp.district + addComp.street + addComp.streetNumber;
-            lable.setContent(dizhi);
-            marker.setLabel(lable);
-        //alert("当前位置：" + e.point.lng + ", " + e.point.lat);
-        });
-    });
-    map.addOverlay(marker);
+
+    function initialize() {
+      var map = new BMap.Map("container");
+      var point = new BMap.Point(lng, lat);
+      var geoc = new BMap.Geocoder();
+      map.centerAndZoom(point, 15);
+      map.addControl(new BMap.NavigationControl());
+      var marker = new BMap.Marker(point); // 创建标注
+      var lable = new BMap.Label(locationItem.fSubName, { offset: new BMap.Size(0, -32) });
+      lable.setStyle({
+          maxWidth: 'none',
+          fontSize: '15px',
+          padding: '5px',
+          border: 'none',
+          color: '#fff',
+          background: '#ff8355',
+          borderRadius: '5px'
+      });
+      marker.setLabel(lable);
+      map.addOverlay(marker);
+      marker.enableDragging();
+      marker.addEventListener("dragend", function(e) {
+          lng = e.point.lng;
+          lat = e.point.lat;
+          geoc.getLocation(e.point, function(rs){
+              var addComp = rs.addressComponents;
+              dizhi = addComp.city + addComp.district + addComp.street + addComp.streetNumber;
+              //lable.setContent(dizhi);
+              marker.setLabel(lable);
+          //alert("当前位置：" + e.point.lng + ", " + e.point.lat);
+          });
+      });
+    }
+
+    function loadScript() {
+      var script = document.createElement("script");
+      script.src = "http://api.map.baidu.com/api?v=3.0&ak=Ysaj307vcP9KgGcn8w2qqaxIdybbBG6d&callback=initialize";
+      document.body.appendChild(script);
+    }
 
     function saveLocation() {
         var params = {
@@ -82,9 +92,12 @@
         Substation.postDataByAjax("/updateSubstationLocation",params,function(data){
             if(data.code==200){
                 $.toast("保存成功");
+                window.location.href="selectedSubstation.html";
             }
         });
         //alert(selectSubid + "\n" + "lng:" + lng + "\nlat:" + lat);
     }
+
+    window.onload = loadScript;
 
     $.init();
