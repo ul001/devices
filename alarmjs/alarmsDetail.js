@@ -24,6 +24,7 @@ var loading = false;
 var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
+var clickID = localStorage.getItem("clickId");
 
 function getFirstPage() {
     $(".list-container").empty();
@@ -45,31 +46,40 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number, lastIndex) {
     var html = '';
-    var url = "/getSubstationListByUser";
-    var searchKey = $("#search").val();
+    var url = "";
+    if (clickID == "1") {
+        url = "/getWarningMessageSignalEvents";
+        $("title").html("遥信变位报警");
+    } else if (clickID == "2") {
+        url = "/getWarningMessageOverLimitEvents";
+        $("title").html("遥测越限报警");
+    } else {
+        url = "/getWarningMessagePlatformRunEvents";
+        $("title").html("平台运行报警");
+    }
+    // var searchKey = $("#search").val();
     var params = {
         pageNo: pageNum,
-        pageSize: number,
-        key: searchKey
+        pageSize: number
+        // key: searchKey
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        if (data.hasOwnProperty("list") && data.list.length > 0) {
-            $(data.list).each(function () {
+        var datadic = data.WarningMessage;
+        if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
+            $(datadic.list).each(function () {
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
                     "                            <div class=\"row  no-gutter sub_card\">\n" +
                     "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
-                    "                                    <p class=\"subName\">" + this.fSubname + "</p>\n" +
-                    "                                    <P><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</P>\n" +
-                    "                                    <p>地址：" + this.fAddress + "</p>\n" +
+                    "                                    <p class=\"subName\">" + "<img src=\"img/jiancedian.png\">" + this.fSubname + "</p>\n" +
+                    "                                    <P>仪表名称：" + Substation.removeUndefined(this.fMetername) + "</P>\n" +
+                    "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
                     "                                </div>\n" +
-                    "                                <div class=\"col-20\">\n" +
-                    "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">照片\n" +
-                    "                                    </button>\n" +
+                    "                                <div class=\"col-30\">\n" +
+                    "                                    <p><span>" + this.fStarttime + "</span></p>\n" +
                     "                                    <br>\n" +
-                    "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fLatitude + "," + this.fLongitude + "," + this.fSubid + ",'" + this.fSubname + "')\" type=\"button\">位置\n" +
-                    "                                    </button>\n" +
+                    "                                     <img src=\"img/alarmp.png\" width=\"44\">\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     "                        </div>\n" +
@@ -84,7 +94,7 @@ function addItems(number, lastIndex) {
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
-        if (data.list.length < itemsPerLoad) {
+        if (datadic.list.length < itemsPerLoad) {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
             return;
