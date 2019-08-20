@@ -1,100 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
-<!-- 网关离线 -->
+<html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>报警</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link rel="stylesheet" href="libs/light7.min.css" />
-    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
-    <link rel="stylesheet" href="libs/light7-swipeout.css" />
-    <link rel="stylesheet" href="css/general.css" />
-    <link rel="stylesheet" href="css/AutoloadDetail.css" />
-    <script src="libs/jquery-1.12.4.min.js"></script>
-    <script src="libs/light7.min.js"></script>
-    <script src="libs/light7-swiper.min.js"></script>
-    <script src="libs/config.js"></script>
-    <script src="libs/tools.js"></script>
-
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/selectedSubstation.css">
 </head>
 
 <body>
-    <header class="bar bar-nav bar_color">
-        <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
-            <span class="icon icon-left"></span>
-            返回
-        </a>
-        <h1 class="title title_color">报警</h1>
-    </header>
-    <div id="mescroll" class="mescroll mescroll-bar">
-
-        <p class="data">
-            日期：<a id="startDate">2019-06-11</a>&nbsp;&nbsp;&nbsp;
-            至&nbsp;&nbsp;&nbsp;<a id="endDate">2019-06-11</a>
-            <img id="select" src="image/select.png" />
-        </p>
-        <ul class="list-unstyled" id="listUl">
-            <!--        <div class="container">
-            <h1>智能网关</h1>
-            <div class="type">
-                <img src="image/znwg.png"/>
-                <p class="list">设备编号</p>
-                <p>T2010411</p>
-                <p class="list">2019-06-11 02:08:14</p>
-            </div>
-        </div>-->
-        </ul>
-
-    </div>
-
-    <div class="selectcontain" style="display:none;">
-        <div class="selectcontain-main">
-            <div class="functionDate">
-                <button id="today" type="button" class="btn select">当日</button>
-                <button id="yesterday" type="button" class="btn">昨日</button>
-                <button id="thisMon" type="button" class="btn">当月</button>
-                <button id="lastMon" type="button" class="btn">上月</button>
-            </div>
-            <div class="form-group function-group" id="startDiv">
-                <label for="dtp_input2" class="col-md-2 control-label"><img src="image/date.png" />起始日期</label>
-                <div class="input-group date form_date_start col-md-5" data-date="" data-link-field="dtp_input2">
-                    <input readonly type="text" id="dateStart" class="startDate">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    <div class="page-group" id="router1">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick=" window.history.back()">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <h1 class="title title_color">报警</h1>
+            </header>
+            <!-- <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel">取消</a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='请输入变电所名称' />
+                    </div>
                 </div>
-                <input type="hidden" id="dtp_input2" value="">
-
-            </div>
-            <div class="form-group function-group" id="endDiv">
-                <label for="dtp_input2" class="col-md-2 control-label"><img src="image/date.png" />截止日期</label>
-                <div class="input-group date form_date_end col-md-5" data-date="" data-link-field="dtp_input2">
-                    <input readonly type="text" id="dateEnd" class="endDate">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div> -->
+            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
                 </div>
-                <input type="hidden" id="dtp_input3" value="">
+                <div class="list-container">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content-padded">
+                                <div class="row no-gutter sub_card">
+                                    <div class="col-80">
+                                        <p class="subName">
+                                            <img src="img/jiancedian.png">安科瑞变电所
+                                        </p>
+                                        <p><span>dst</span> <span>138546486142</span></p>
+                                        <p>地址：上海嘉定</p>
+                                    </div>
+                                    <div class="col-30">
+                                        <p><span>2019/08/20</span></p>
+                                        <br>
+                                        <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
+                                            width="44">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- preloader -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
             </div>
-            <div class="sRow">
-                <span><img src="image/yibiao.png" />设备编号</span>
-                <input type="text" id="meterId" placeholder="请输入设备编号" />
-            </div>
-            <!--<div class="sRow">
-            <span>参数名称：</span>
-            <input type="text" id="paramName" />
-        </div>-->
-            <button type="button" class="cancel">取消</button>
-            <button type="button" class="search">查询</button>
         </div>
     </div>
-    <!-- <script src="lib/mescroll.js" type="text/javascript" charset="utf-8"></script> -->
-    <script src="libs/jquery-1.12.4.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
     <script src="libs/tools.js"></script>
-    <!-- <script src="lib/bootstrap.min.js" type="text/javascript" charset="utf-8"></script> -->
-    <!-- <script src="js/gatewayOffline.js" type="text/javascript" charset="utf-8"></script> -->
-    <!-- <script src="js/tools.js" type="text/javascript" charset="utf-8"></script> -->
+    <!-- <script src="alarmjs/alarmsDetail.js"></script> -->
 </body>
 
 </html>

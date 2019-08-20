@@ -44,7 +44,7 @@ function fillData(parentId) {
 
         }
         $(".item-link").unbind().click(function () {
-            var fField = $(this).attr("value");
+
             var clickId = $(this).attr("id");
             // if (fField != "" && fField != null) {
             localStorage.setItem("fTempId", clickId);
