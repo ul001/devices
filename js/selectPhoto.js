@@ -103,7 +103,7 @@ function loadSavedPic() {
             var imgUrl = data.substationImgUrl;
             $.each(data.substationImgList,function (i,value) {
                 imgNum++;
-                var imgDiv = '<div class="imgContainer" id=' + value.fId + ' data-index=' + (i+1) + '><img   src=' + ("http://116.236.149.162:8090/" + imgUrl + "/" + value.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + (i+1) + ')"  class="imgDelete" src="img/del_img.png" /></div>';
+                var imgDiv = '<div class="imgContainer" id=' + value.fId + ' data-index=' + (i+1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + (i+1) + ')"  class="imgDelete" src="img/del_img.png" /></div>';
                 $("#imgBox").append(imgDiv);
             });
         }
