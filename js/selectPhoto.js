@@ -28,9 +28,12 @@ $(".upload_img_wrap .upload_img").on("click", function () {
             $("#inputBox").append("<input type=\"file\" class=\"fileInput\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
 //        }
     }
-    getClick();
-    $("#clickBtn").click();
-    //$("#file" + index).click();
+    $("#file" + index).click();
+    var u = navigator.userAgent,app = navigator.appVersion;
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    if (isIOS) {
+        $("#file" + index).click();
+    }
     $("#file" + index).unbind().change(function (e) {
         var index = e.currentTarget.dataset.id;
         if ($('#file' + index).val() == '') {
@@ -44,11 +47,6 @@ $(".upload_img_wrap .upload_img").on("click", function () {
         return;
     });
 });
-
-function clickBtn(){
-    $.alert("nihao");
-    $("#file3").click();
-}
 
 function changeImg(e, filePath, index) {
     fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
