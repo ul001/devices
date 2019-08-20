@@ -568,8 +568,8 @@ jQuery(document).ready(function () {
     //     });
     // }
 
-    tokenFromAPP =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYyMzg1NzcsInVzZXJuYW1lIjoiYWRtaW4ifQ.3ykmtPxVLS5D5031ts7-VrLe90jm-3OTQVV19Dp2RQg";
+    // tokenFromAPP =
+    // "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjYyMzg1NzcsInVzZXJuYW1lIjoiYWRtaW4ifQ.3ykmtPxVLS5D5031ts7-VrLe90jm-3OTQVV19Dp2RQg";
 
     var customerDevice = new CustomerDevice();
 

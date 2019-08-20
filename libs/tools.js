@@ -7,27 +7,28 @@ var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v1";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjY1MDE1MzgsInVzZXJuYW1lIjoiYWRtaW4ifQ.7Rsm3UNfXxY7VprMtfU6h_lWkEokC5v5LNuYriYu0ps";
 var ipAddress = "http://116.236.149.162:8090";
 //iOS安卓基础传参
-/*    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    //判断数组中是否包含某字符串
-    if (isIOS) { //ios系统的处理
-        window.webkit.messageHandlers.iOS.postMessage(null);
-        var storage = localStorage.getItem("accessToken");
-        // storage = storage ? JSON.parse(storage):[];
-        storage = JSON.parse(storage);
-        baseUrlFromAPP = storage.baseurl;
-        tokenFromAPP = storage.token;
-    } else {
-        baseUrlFromAPP = android.getBaseUrl();
-        tokenFromAPP = android.getToken();
-        ipAddress = android.getIpAddress();
-    }*/
+var u = navigator.userAgent,
+    app = navigator.appVersion;
+var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//判断数组中是否包含某字符串
+if (isIOS) { //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    ipAddress = storage.ipAddress;
+} else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    ipAddress = android.getIpAddress();
+}
 
 var Substation = {
 
-    ipAddressFromAPP:ipAddress+"/",
+    ipAddressFromAPP: ipAddress + "/",
 
     removeUndefined: function (data) {
         var dataStr = (data == undefined ? "无" : data);
@@ -56,6 +57,7 @@ var Substation = {
                 }
             },
             error: function () {
+                $.hidePreloader();
                 $.toast("数据请求失败");
             }
         });
@@ -101,6 +103,7 @@ var Substation = {
                 successCallback(data);
             },
             error: function () {
+                $.hidePreloader();
                 $.toast("数据请求失败");
             }
         });
@@ -124,6 +127,7 @@ var Substation = {
             $.hidePreloader();
             successCallback(data);
         }).fail(function () {
+            $.hidePreloader();
             $.toast("数据请求失败");
         });
     },

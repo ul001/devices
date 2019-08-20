@@ -76,7 +76,7 @@ function addItems(number, lastIndex) {
                     "                                    <P>仪表名称：" + Substation.removeUndefined(this.fMetername) + "</P>\n" +
                     "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
                     "                                </div>\n" +
-                    "                                <div class=\"col-30\">\n" +
+                    "                                <div class=\"col-25\">\n" +
                     "                                    <p><span>" + this.fStarttime + "</span></p>\n" +
                     "                                    <br>\n" +
                     "                                     <img src=\"img/alarmp.png\" width=\"44\">\n" +
