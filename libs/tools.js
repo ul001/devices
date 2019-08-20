@@ -7,7 +7,7 @@ var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v1";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjY1MDE1MzgsInVzZXJuYW1lIjoiYWRtaW4ifQ.7Rsm3UNfXxY7VprMtfU6h_lWkEokC5v5LNuYriYu0ps";
 var ipAddress = "http://116.236.149.162:8090";
 //iOS安卓基础传参
-    var u = navigator.userAgent,
+/*    var u = navigator.userAgent,
         app = navigator.appVersion;
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -23,7 +23,7 @@ var ipAddress = "http://116.236.149.162:8090";
         baseUrlFromAPP = android.getBaseUrl();
         tokenFromAPP = android.getToken();
         ipAddress = android.getIpAddress();
-    }
+    }*/
 
 var Substation = {
 

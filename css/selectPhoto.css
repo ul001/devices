@@ -143,6 +143,7 @@ a:hover {
 
 .upload_img{
     margin-left:1%;
+    cursor:pointer;
 }
 
 .custom_img{
