@@ -77,9 +77,9 @@ function addItems(number, lastIndex) {
                     "                        <div class=\"content-padded\">\n" +
                     "                            <div class=\"row  no-gutter sub_card\">\n" +
                     "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
-                    "                                    <p class=\"subName\">" + this.fSubname + "</p>\n" +
+                    "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
                     "                                    <P><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</P>\n" +
-                    "                                    <p>地址：" + this.fAddress + "</p>\n" +
+                    "                                    <p class=\"limit-length\">地址：" + Substation.removeUndefined(this.fAddress) + "</p>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"col-20\">\n" +
                     "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">照片\n" +

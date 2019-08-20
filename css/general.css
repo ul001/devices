@@ -22,3 +22,14 @@
     color: #3d4145;
     white-space: nowrap;
 }
+
+.limit-length{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#titleContent{
+    width:64%;
+    margin:0 auto;
+}

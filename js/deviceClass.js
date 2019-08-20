@@ -6,7 +6,7 @@ var pids = [{
 var clickNum = 0;
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
-$(".title_color").text(selectSubname);
+$("#titleContent").text(selectSubname);
 
 $(".back-parent").click(function () {
     var obj = pids[clickNum];

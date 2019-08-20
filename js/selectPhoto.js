@@ -19,15 +19,14 @@ $(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
-        var ua = navigator.userAgent.toLowerCase(); //获取浏览器的userAgent,并转化为小写——注：userAgent是用户可以修改的
-        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1); //判断是否是苹果手机，是则是true
-        if (isIos) {
-            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
-            // $("input:file").removeAttr("capture");
-        }else
-        {
-            $("#inputBox").append("<input type=\"file\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
-        }
+//        var ua = navigator.userAgent.toLowerCase(); //获取浏览器的userAgent,并转化为小写——注：userAgent是用户可以修改的
+//        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1); //判断是否是苹果手机，是则是true
+//        if (isIos) {
+//            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+//            // $("input:file").removeAttr("capture");
+//        }else{
+            $("#inputBox").append("<input type=\"file\" class=\"fileInput\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+//        }
     }
     var that = this;
     $("#file" + index).click();
@@ -68,8 +67,17 @@ function changeImg(e, filePath, index) {
 function removeImg(obj, index) {
     for (var i = 0; i < $(".imgContainer").length; i++) {
         if ($(".imgContainer").eq(i).attr("data-index") == index) {
+            var imgId = $(".imgContainer").eq(i).attr("id");
             $(".imgContainer").eq(i).remove();
-            $("#inputBox input").eq(i - 1).remove();
+            if(imgId==undefined){
+                $("#file"+(i+1)).remove();
+            }else{
+                Substation.getDataByAjax("/deleteSubstationImg", {
+                        fId: imgId
+                    }, function () {
+
+                    });
+            }
         }
     }
     imgNum--;
@@ -87,30 +95,34 @@ function closePicture(obj) {
     $(obj).parent("div").remove();
 }
 
-function loadSavePic() {
+function loadSavedPic() {
     Substation.getDataByAjax("/selectSubstationImg", {
         fSubid: selectSubid
     }, function (data) {
         if (data.hasOwnProperty("substationImgList") && data.substationImgList.length > 0) {
             var imgUrl = data.substationImgUrl;
-            $(data.substationImgList).each(function () {
-                var imgDiv = '<div class="imgContainer" id=' + this.fId + ' data-index=' + index + '><img   src=' + ("/" + imgUrl + "/" + this.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>';
+            $.each(data.substationImgList,function (i,value) {
+                imgNum++;
+                var imgDiv = '<div class="imgContainer" id=' + value.fId + ' data-index=' + (i+1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + (i+1) + ')"  class="imgDelete" src="img/del_img.png" /></div>';
                 $("#imgBox").append(imgDiv);
             });
         }
     });
 }
 
-loadSavePic();
+loadSavedPic();
 
 function savePhoto() {
-    var params = {
-        fSubid: selectSubid,
-        myFiles: $("#upBox").serialize()
-    }
-    Substation.getDataByAjax("/uploadSubstationImg", params, function (data) {
-        if (data.hasOwnProperty("substationImgList") && data.substationImgList.length > 0) {
-
+    $(".fileInput").each(function(){
+        if($(this).val()==""||$(this).val()==null){
+            $(this).remove();
+        }
+    });
+    var params = new FormData($('#upBox')[0]);
+    params.append("fSubid",selectSubid);
+    Substation.postFormDataByAjax("/uploadSubstationImg", params, function (data) {
+        if (data.code==200) {
+            window.history.back();
         }
     });
 }
