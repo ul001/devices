@@ -29,6 +29,7 @@ $(".upload_img_wrap .upload_img").on("click", function () {
 //        }
     }
     getClick();
+    $("#clickBtn").click();
     //$("#file" + index).click();
     $("#file" + index).unbind().change(function (e) {
         var index = e.currentTarget.dataset.id;
@@ -44,7 +45,8 @@ $(".upload_img_wrap .upload_img").on("click", function () {
     });
 });
 
-function getClick(){
+function clickBtn(){
+    alert("nihao");
     $("#file3").click();
 }
 
