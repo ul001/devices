@@ -49,13 +49,13 @@ function addItems(number, lastIndex) {
     var url = "";
     if (clickID == "1") {
         url = "/getWarningMessageSignalEvents";
-        $("title").html("遥信变位报警");
+        $(".title").html("遥信变位报警");
     } else if (clickID == "2") {
         url = "/getWarningMessageOverLimitEvents";
-        $("title").html("遥测越限报警");
+        $(".title").html("遥测越限报警");
     } else {
         url = "/getWarningMessagePlatformRunEvents";
-        $("title").html("平台运行报警");
+        $(".title").html("平台运行报警");
     }
     // var searchKey = $("#search").val();
     var params = {
