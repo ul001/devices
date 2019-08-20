@@ -46,7 +46,7 @@ $(".upload_img_wrap .upload_img").on("click", function () {
 });
 
 function clickBtn(){
-    alert("nihao");
+    $.alert("nihao");
     $("#file3").click();
 }
 
