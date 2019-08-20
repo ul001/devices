@@ -28,8 +28,8 @@ $(".upload_img_wrap .upload_img").on("click", function () {
             $("#inputBox").append("<input type=\"file\" class=\"fileInput\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
 //        }
     }
-    var that = this;
-    $("#file" + index).click();
+    getClick();
+    //$("#file" + index).click();
     $("#file" + index).unbind().change(function (e) {
         var index = e.currentTarget.dataset.id;
         if ($('#file' + index).val() == '') {
@@ -42,7 +42,11 @@ $(".upload_img_wrap .upload_img").on("click", function () {
         //$(".upload_img_length").html(imgNum);
         return;
     });
-})
+});
+
+function getClick(){
+    $("#file3").click();
+}
 
 function changeImg(e, filePath, index) {
     fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
@@ -72,18 +76,27 @@ function removeImg(obj, index) {
                 $(".imgContainer").eq(i).remove();
                 $("#file"+(i+1)).remove();
             }else{
-                if(confirm("确定要删除已保存的图片？")){
+//                if(confirm("确定要删除已保存的图片？")){
+            $.confirm("确定要删除已保存的图片？",function(){
                     $(".imgContainer").eq(i).remove();
                     Substation.getDataByAjax("/deleteSubstationImg", {
                         fId: imgId
                     }, function () {
 
                     });
-                }
+            });
+                    /*$(".imgContainer").eq(i).remove();
+                    Substation.getDataByAjax("/deleteSubstationImg", {
+                        fId: imgId
+                    }, function () {
+
+                    });*/
+//                }
             }
+            imgNum--;
+            break;
         }
     }
-    imgNum--;
     //$(".upload_img_length").html(imgNum);
 }
 
@@ -125,6 +138,7 @@ function savePhoto() {
     params.append("fSubid",selectSubid);
     Substation.postFormDataByAjax("/uploadSubstationImg", params, function (data) {
         if (data.code==200) {
+            $.toast("保存成功");
             window.history.back();
         }
     });
