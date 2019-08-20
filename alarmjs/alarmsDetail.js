@@ -145,9 +145,10 @@ $(".back_btn").click(function () {
     var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     if (isIOS) {
-        window.webkit.messageHandlers.goBackiOS.postMessage("");
+        window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
+
     } else {
-        android.goBack();
+
     }
 });
 

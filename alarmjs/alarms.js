@@ -46,11 +46,11 @@ function fillData(parentId) {
         $(".item-link").unbind().click(function () {
 
             var clickId = $(this).attr("id");
-            // if (fField != "" && fField != null) {
-            localStorage.setItem("clickId", clickId);
-            //localStorage.setItem("fFunctionfield",fField);
-            // localStorage.setItem("fPid", parentId);
-            window.location.href = "alarmsDetail.html";
+            if (clickId != "" && clickId != null) {
+                localStorage.setItem("clickId", clickId);
+                window.webkit.messageHandlers.needHiddenTabbar.postMessage("YES");
+                window.location.href = "alarmsDetail.html";
+            }
         });
     });
     // }
