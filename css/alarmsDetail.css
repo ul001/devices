@@ -20,14 +20,18 @@
     margin: 0.1rem 0;
 }
 
-i.icon.icon-contact {
-    width: 0.8rem;
-    height: 0.8rem;
-    background-image: url(../img/i-contact.png);
+i.icon.icon-subIcon {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-jiancedian.png);
 }
 
-i.icon.icon-contactphone {
-    width: 0.8rem;
-    height: 0.8rem;
-    background-image: url(../img/i-contactPhone.png);
+i.icon.icon-alarm {
+    width: 1.8rem;
+    height: 1.8rem;
+    background-image: url(../img/i-alarmp.png);
+}
+
+.card .col-25 p{
+    margin:0.2rem 0;
 }

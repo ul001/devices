@@ -44,20 +44,14 @@ function fillData(parentId) {
 
         }
         $(".item-link").unbind().click(function () {
-
             var clickId = $(this).attr("id");
+            var titleName = $(this).find($(".item-title")).text();
             if (clickId != "" && clickId != null) {
-                localStorage.setItem("clickId", clickId);
-                var u = navigator.userAgent,
-                    app = navigator.appVersion;
-                var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-                var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                 if (isIOS) {
                     window.webkit.messageHandlers.needHiddenTabbar.postMessage("YES");
                 } else {
-
+                    android.goToWebActivity(titleName,"alarmsDetail.html?clickID="+clickId);
                 }
-                window.location.href = "alarmsDetail.html";
             }
         });
     });

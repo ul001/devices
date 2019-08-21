@@ -1,30 +1,8 @@
-function goToLocation(lat, lon, subid, subname) {
-    // var locationItem = {
-    //     fLat: lat,
-    //     fLon: lon,
-    //     fSubid: subid,
-    //     fSubName: subname
-    // };
-    // localStorage.setItem("locationItem", JSON.stringify(locationItem));
-    // window.location.href = "location.html";
-}
-
-function goToDevice(subId, subname) {
-    // localStorage.setItem("fSubid", subId);
-    // localStorage.setItem("fSubname", subname);
-    // window.location.href = "deviceClass.html";
-}
-
-function goToPhoto(subId) {
-    // localStorage.setItem("fSubid", subId);
-    // window.location.href = "selectPhoto.html";
-}
-
 var loading = false;
 var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
-var clickID = localStorage.getItem("clickId");
+var clickID = Substation.GetQueryString("clickID");
 
 function getFirstPage() {
     $(".list-container").empty();
@@ -62,7 +40,7 @@ function addItems(number, lastIndex) {
         pageNo: pageNum,
         pageSize: number
         // key: searchKey
-    }
+    };
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         var datadic = data.WarningMessage;
         if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
@@ -72,14 +50,13 @@ function addItems(number, lastIndex) {
                     "                        <div class=\"content-padded\">\n" +
                     "                            <div class=\"row  no-gutter sub_card\">\n" +
                     "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
-                    "                                    <p class=\"subName\">" + "<img src=\"img/jiancedian.png\">" + this.fSubname + "</p>\n" +
+                    "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
                     "                                    <P>仪表名称：" + Substation.removeUndefined(this.fMetername) + "</P>\n" +
                     "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"col-25\">\n" +
                     "                                    <p><span>" + this.fStarttime + "</span></p>\n" +
-                    "                                    <br>\n" +
-                    "                                     <img src=\"img/alarmp.png\" width=\"44\">\n" +
+                    "                                    <p><i class=\"icon icon-alarm\"></i></p>" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     "                        </div>\n" +
@@ -128,17 +105,6 @@ $(document).on('infinite', '.infinite-scroll', function () {
     }, 1000);
 });
 
-$('#search').bind('keydown', function (event) {
-    if (event.keyCode == 13) {
-        getFirstPage();
-    }
-});
-
-$(".searchbar-cancel").click(function () {
-    $("#search").val("");
-    getFirstPage();
-});
-
 $(".back_btn").click(function () {
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -146,7 +112,6 @@ $(".back_btn").click(function () {
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     if (isIOS) {
         window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
-
     } else {
 
     }
