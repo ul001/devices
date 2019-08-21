@@ -48,9 +48,12 @@ function fillData(parentId) {
             var titleName = $(this).find($(".item-title")).text();
             if (clickId != "" && clickId != null) {
                 if (isIOS) {
-                    window.webkit.messageHandlers.needHiddenTabbar.postMessage("YES");
+                    window.webkit.messageHandlers.pushNewWebView.postMessage({
+                        "title": titleName,
+                        "url": "?clickID=" + clickId
+                    });
                 } else {
-                    android.goToWebActivity(titleName,"alarmsDetail.html?clickID="+clickId);
+                    android.goToWebActivity(titleName, "alarmsDetail.html?clickID=" + clickId);
                 }
             }
         });
