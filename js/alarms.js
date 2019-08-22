@@ -47,7 +47,7 @@ function fillData(parentId) {
         $(data).each(function (key, value) {
             var name = value.name;
             if (name == "遥测越限") {
-                if ($("#bianwei")) {
+                if ($("#yuexian")) {
                     if (value.count > 0) {
                         var string = '<span class="badge">' + value.count + '</span>';
                         $("#bianwei").html(string);
@@ -55,7 +55,7 @@ function fillData(parentId) {
                     }
                 }
             } else if (name == "遥信变位") {
-                if ($("#yuexian")) {
+                if ($("#bianwei")) {
                     if (value.count > 0) {
                         var string = '<span class="badge">' + value.count + '</span>';
                         $("#yuexian").html(string);
