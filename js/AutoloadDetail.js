@@ -579,6 +579,8 @@ jQuery(document).ready(function () {
     // } else {
     //     return;
     // }
+    var Subname = localStorage.getItem("fSubname");
+    $(".title").html(Subname);
 
     // 新增按钮
     $("#tab-nav").on("click", "#Add", function () {
