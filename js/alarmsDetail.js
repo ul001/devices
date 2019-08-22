@@ -25,13 +25,13 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 function addItems(number, lastIndex) {
     var html = '';
     var url = "";
-    if (clickID == "1") {
+    if (clickID == "bianwei") {
         url = "/getWarningMessageSignalEvents";
         $(".title").html("遥信变位报警");
-    } else if (clickID == "2") {
+    } else if (clickID == "yuexian") {
         url = "/getWarningMessageOverLimitEvents";
         $(".title").html("遥测越限报警");
-    } else {
+    } else if(clickID == "platform"){
         url = "/getWarningMessagePlatformRunEvents";
         $(".title").html("平台运行报警");
     }
