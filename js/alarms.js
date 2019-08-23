@@ -40,7 +40,7 @@ function loadMenu() {
 }
 
 function fillData(parentId) {
-    Substation.getDataByAjax("/getUnreadWarningMessage", {}, function (data) {
+    Substation.getDataByAjaxNoLoading("/getUnreadWarningMessage", {}, function (data) {
         if (!data.length) {
             return;
         }
