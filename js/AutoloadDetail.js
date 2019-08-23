@@ -580,7 +580,7 @@ jQuery(document).ready(function () {
     //     return;
     // }
     var Subname = localStorage.getItem("fSubname");
-    $(".title").html(Subname);
+    $("#titleContent").html(Subname);
 
     // 新增按钮
     $("#tab-nav").on("click", "#Add", function () {
