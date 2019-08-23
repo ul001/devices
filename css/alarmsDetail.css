@@ -35,3 +35,7 @@ i.icon.icon-alarm {
 .card .col-25 p{
     margin:0.2rem 0;
 }
+
+.unRead{
+    color:#FF0000;
+}

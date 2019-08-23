@@ -27,13 +27,13 @@ function addItems(number, lastIndex) {
     var url = "";
     if (clickID == "bianwei") {
         url = "/getWarningMessageSignalEvents";
-        $(".title").html("遥信变位报警");
+        //$(".title").html("遥信变位报警");
     } else if (clickID == "yuexian") {
         url = "/getWarningMessageOverLimitEvents";
-        $(".title").html("遥测越限报警");
+        //$(".title").html("遥测越限报警");
     } else if(clickID == "platform"){
         url = "/getWarningMessagePlatformRunEvents";
-        $(".title").html("平台运行报警");
+        //$(".title").html("平台运行报警");
     }
     // var searchKey = $("#search").val();
     var params = {
@@ -48,8 +48,8 @@ function addItems(number, lastIndex) {
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
-                    "                            <div class=\"row  no-gutter sub_card\">\n" +
-                    "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
+                    "                            <div class=\"row  no-gutter sub_card"+(this.fIsread==true?"":" unRead")+"\">\n" +
+                    "                                <div class=\"col-75\">\n" +
                     "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
                     "                                    <P>仪表名称：" + Substation.removeUndefined(this.fMetername) + "</P>\n" +
                     "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
@@ -76,6 +76,7 @@ function addItems(number, lastIndex) {
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
+        Substation.getDataByAjaxNoLoading("/close");
     });
 }
 addItems(itemsPerLoad, 0);
@@ -103,18 +104,6 @@ $(document).on('infinite', '.infinite-scroll', function () {
         addItems(itemsPerLoad, lastIndex);
         lastIndex = $('.list-container .card').length;
     }, 1000);
-});
-
-$(".back_btn").click(function () {
-    // var u = navigator.userAgent,
-    //     app = navigator.appVersion;
-    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    // if (isIOS) {
-    //     window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
-    // } else {
-
-    // }
 });
 
 $.init();

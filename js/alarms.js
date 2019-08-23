@@ -50,7 +50,7 @@ function fillData(parentId) {
                 if ($("#yuexian")) {
                     if (value.count > 0) {
                         var string = '<span class="badge">' + value.count + '</span>';
-                        $("#bianwei").html(string);
+                        $("#yuexian").html(string);
                         unreadCountSum += value.count;
                     }
                 }
@@ -58,7 +58,7 @@ function fillData(parentId) {
                 if ($("#bianwei")) {
                     if (value.count > 0) {
                         var string = '<span class="badge">' + value.count + '</span>';
-                        $("#yuexian").html(string);
+                        $("#bianwei").html(string);
                         unreadCountSum += value.count;
                     }
                 }
