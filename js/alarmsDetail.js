@@ -8,6 +8,7 @@ function getFirstPage() {
     $(".list-container").empty();
     pageNum = 1;
     addItems(itemsPerLoad, 0);
+    Substation.getDataByAjaxNoLoading("/close");
     lastIndex = 10;
     $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
     loading = false;
@@ -71,26 +72,17 @@ function addItems(number, lastIndex) {
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
-
-        var cleanMsg = {
-            updateMessage: 0
-        };
-        Substation.getDataByAjaxNoLoading("/close", cleanMsg);
         if (datadic.list.length < itemsPerLoad) {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
-
     });
 }
 
 addItems(itemsPerLoad, 0);
 
-
-
 var lastIndex = 10;
-
 
 $(document).on('infinite', '.infinite-scroll', function () {
 
