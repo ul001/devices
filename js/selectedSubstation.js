@@ -29,6 +29,8 @@ function goToLocation(lat, lon, subid, subname) {
 function goToDevice(subId, subname) {
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
+    localStorage.setItem("fclickNum", 0);
+    localStorage.setItem("fpid", 0);
     window.location.href = "deviceClass.html";
 }
 

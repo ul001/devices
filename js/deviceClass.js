@@ -1,9 +1,10 @@
 var showDisItem = 1;
 var pids = [{
-    pId: 0,
+    pId: localStorage.getItem("fpid"),
     pName: ""
 }];
-var clickNum = 0;
+// var clickNum = 0;
+var clickNum = localStorage.getItem("fclickNum");
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 $("#titleContent").text(selectSubname);
@@ -92,6 +93,19 @@ function fillData(parentId) {
         }
     });
 }
+
+$(".click_btn").click(function () {
+    localStorage.setItem("fclickNum", clickNum);
+    // var u = navigator.userAgent,
+    //     app = navigator.appVersion;
+    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    // if (isIOS) {
+
+    // } else {
+    //     android.goBack();
+    // }
+});
 
 fillData(0);
 
