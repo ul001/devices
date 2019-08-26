@@ -31,7 +31,7 @@ function addItems(number, lastIndex) {
     } else if (clickID == "yuexian") {
         url = "/getWarningMessageOverLimitEvents";
         //$(".title").html("遥测越限报警");
-    } else if(clickID == "platform"){
+    } else if (clickID == "platform") {
         url = "/getWarningMessagePlatformRunEvents";
         //$(".title").html("平台运行报警");
     }
@@ -48,7 +48,7 @@ function addItems(number, lastIndex) {
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
-                    "                            <div class=\"row  no-gutter sub_card"+(this.fIsread==true?"":" unRead")+"\">\n" +
+                    "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
                     "                                <div class=\"col-75\">\n" +
                     "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
                     "                                    <P>仪表名称：" + Substation.removeUndefined(this.fMetername) + "</P>\n" +
@@ -71,15 +71,23 @@ function addItems(number, lastIndex) {
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
+
+        var cleanMsg = {
+            updateMessage: 0
+        };
+        Substation.getDataByAjaxNoLoading("/close", cleanMsg);
         if (datadic.list.length < itemsPerLoad) {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
-        Substation.getDataByAjaxNoLoading("/close");
+
     });
 }
+
 addItems(itemsPerLoad, 0);
+
+
 
 var lastIndex = 10;
 
