@@ -8,7 +8,6 @@ function getFirstPage() {
     $(".list-container").empty();
     pageNum = 1;
     addItems(itemsPerLoad, 0);
-    Substation.getDataByAjaxNoLoading("/close");
     lastIndex = 10;
     $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
     loading = false;
@@ -67,6 +66,7 @@ function addItems(number, lastIndex) {
             $('.list-container').append(html);
             //addClick();
             pageNum++;
+            Substation.getDataByAjaxNoLoading("/close");
         } else {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
