@@ -1,20 +1,21 @@
 // jQuery(document).ready(function () {
 $("#titleContent").text("待办事项");
 // });
-$(".tab-link").click(function () {
-    if ($("#daiban").attr("id") == "daiban") {
+$("#tab1").click();
+
+$(".buttons-tab .tab-link").click(function () {
+    if ($(".tab-link").attr("name") == "daiban") {
         // url = "/getWarningMessageSignalEvents";
         $("#titleContent").text("待办事项");
-    } else if ($("#zaiban").attr("id") == "zaiban") {
+    } else if ($(".tab-link").attr("name") == "zaiban") {
         // url = "/getWarningMessageOverLimitEvents";
         $("#titleContent").text("在办事项");
-    } else if ($("#banbi").attr("id") == "banbi") {
+    } else if ($(".tab-link").attr("name") == "banbi") {
         // url = "/getWarningMessagePlatformRunEvents";
         $("#titleContent").text("办毕事项");
     }
 });
 
-$("#tab1").click();
 $(".back_btn").click(function () {
     var u = navigator.userAgent,
         app = navigator.appVersion;

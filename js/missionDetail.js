@@ -1,5 +1,5 @@
- var Subname = localStorage.getItem("fSubname");
- $("#titleContent").text(Subname);
+ var titlename = localStorage.getItem("fSubname");
+ $("#titleContent").text(titlename);
 
  //现场签到按钮事件
  $("#checkIn").click(function () {
