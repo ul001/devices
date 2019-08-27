@@ -1,16 +1,20 @@
+// jQuery(document).ready(function () {
+$("#titleContent").text("待办事项");
+// });
 $(".tab-link").click(function () {
     if ($("#daiban").attr("id") == "daiban") {
         // url = "/getWarningMessageSignalEvents";
-        $(".title").html("待办事项");
+        $("#titleContent").text("待办事项");
     } else if ($("#zaiban").attr("id") == "zaiban") {
         // url = "/getWarningMessageOverLimitEvents";
-        $(".title").html("在办事项");
+        $("#titleContent").text("在办事项");
     } else if ($("#banbi").attr("id") == "banbi") {
         // url = "/getWarningMessagePlatformRunEvents";
-        $(".title").html("办毕事项");
+        $("#titleContent").text("办毕事项");
     }
 });
 
+$("#tab1").click();
 $(".back_btn").click(function () {
     var u = navigator.userAgent,
         app = navigator.appVersion;
@@ -21,6 +25,11 @@ $(".back_btn").click(function () {
     } else {
         android.goBack();
     }
+});
+
+$("#dealMission").click(function () {
+    localStorage.setItem("fSubname", "任务详情");
+    window.location.href = "missionDetail.html";
 });
 
 $.init();

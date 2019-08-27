@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>台账登记</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/missionDetail.css" />
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/config.js"></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/missionDetail.js"></script>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="route5">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <h1 class="title title_color">
+                    <p class="limit-length" id="titleContent"></p>
+                </h1>
+            </header>
+            <div class="content">
+                <div class="content-block" id="addVarContain123">
+                    <div class="content-block-title">任务详情</div>
+                    <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务编号:</div>
+                                        <div class="item-input"><input type="text" readonly="readonly" id="input1"
+                                                class="valueInput" value="201900826000030" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务类型:</div>
+                                        <div class="item-input"><input type="text" readonly="readonly" id="input2"
+                                                class="valueInput" value="巡视任务" name="type" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务名称:</div>
+                                        <div class="item-input"><input type="text" readonly="readonly" id="input3"
+                                                class="valueInput" value="上海安科瑞电气股份有限公司" name="name"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">发起人:</div>
+                                        <div class="item-input"><input type="text" readonly="readonly" id="input4"
+                                                class="valueInput" value="张三" name="sender" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">发起时间:</div>
+                                        <div class="item-input"><input type="text" readonly="readonly" id="input5"
+                                                class="valueInput" value="2019-8-26 13:11:26" name="sendTime"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">完成时间:</div>
+                                        <div class="item-input"><input type="text" readonly="readonly" id="input6"
+                                                class="valueInput" value="2019-9-26 13:11:26" name="finishTime"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">内容:</div>
+                                        <div class="item-input"><textarea
+                                                readonly="readonly">注意安全，在此说明一些任务的详细描述，或者任务的一些备注</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain124">
+                    <div class="content-block-title">执行情况</div>
+                    <div id="13" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label">执行情况:</div>
+                                        <div class="item-input"><textarea>注意安全，在此说明一些任务的详细描述，或者任务的一些备注</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain125">
+                    <div class="content-block-title">任务进度</div>
+                    <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label">1 李四</div>
+                                        <div class="item-input">
+                                            <input type="text" readonly="readonly" id="input9" class="valueInput"
+                                                value="执行中" name="number" validator="required" style="color:red">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label">2 王五</div>
+                                        <div class="item-input">
+                                            <input type="text" readonly="readonly" id="input10" class="valueInput"
+                                                value="已完成" name="number" validator="required"
+                                                style="color:springgreen">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain126">
+                    <div class="row buttonsEvent">
+                        <div class="col-33"><a href="#" class="button button-big button-fill bottom-btn"
+                                id="checkIn">现场签到</a>
+                        </div>
+                        <div class="col-33"><a href="#" class="button button-big button-fill bottom-btn"
+                                id="carryOut">执行任务</a>
+                        </div>
+                        <div class="col-33"><a href="#" class="button button-big button-fill bottom-btn"
+                                id="submitTo">提交</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

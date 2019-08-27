@@ -19,17 +19,18 @@ $(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
-//        var ua = navigator.userAgent.toLowerCase(); //获取浏览器的userAgent,并转化为小写——注：userAgent是用户可以修改的
-//        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1); //判断是否是苹果手机，是则是true
-//        if (isIos) {
-//            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
-//            // $("input:file").removeAttr("capture");
-//        }else{
-            $("#inputBox").append("<input type=\"file\" class=\"fileInput\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
-//        }
+        //        var ua = navigator.userAgent.toLowerCase(); //获取浏览器的userAgent,并转化为小写——注：userAgent是用户可以修改的
+        //        var isIos = (ua.indexOf('iphone') != -1) || (ua.indexOf('ipad') != -1); //判断是否是苹果手机，是则是true
+        //        if (isIos) {
+        //            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        //            // $("input:file").removeAttr("capture");
+        //        }else{
+        $("#inputBox").append("<input type=\"file\" class=\"fileInput\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        //        }
     }
     $("#file" + index).click();
-    var u = navigator.userAgent,app = navigator.appVersion;
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     if (isIOS) {
         $("#file" + index).click();
@@ -72,26 +73,26 @@ function removeImg(obj, index) {
     for (var i = 0; i < $(".imgContainer").length; i++) {
         if ($(".imgContainer").eq(i).attr("data-index") == index) {
             var imgId = $(".imgContainer").eq(i).attr("id");
-            if(imgId==undefined){
+            if (imgId == undefined) {
                 $(".imgContainer").eq(i).remove();
-                $("#file"+(i+1)).remove();
-            }else{
-//                if(confirm("确定要删除已保存的图片？")){
-            $.confirm("确定要删除已保存的图片？",function(){
+                $("#file" + (i + 1)).remove();
+            } else {
+                //                if(confirm("确定要删除已保存的图片？")){
+                $.confirm("确定要删除已保存的图片？", function () {
                     $(".imgContainer").eq(i).remove();
                     Substation.getDataByAjax("/deleteSubstationImg", {
                         fId: imgId
                     }, function () {
 
                     });
-            });
-                    /*$(".imgContainer").eq(i).remove();
-                    Substation.getDataByAjax("/deleteSubstationImg", {
-                        fId: imgId
-                    }, function () {
+                });
+                /*$(".imgContainer").eq(i).remove();
+                Substation.getDataByAjax("/deleteSubstationImg", {
+                    fId: imgId
+                }, function () {
 
-                    });*/
-//                }
+                });*/
+                //                }
             }
             imgNum--;
             break;
@@ -117,9 +118,9 @@ function loadSavedPic() {
     }, function (data) {
         if (data.hasOwnProperty("substationImgList") && data.substationImgList.length > 0) {
             var imgUrl = data.substationImgUrl;
-            $.each(data.substationImgList,function (i,value) {
+            $.each(data.substationImgList, function (i, value) {
                 imgNum++;
-                var imgDiv = '<div class="imgContainer" id=' + value.fId + ' data-index=' + (i+1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + (i+1) + ')"  class="imgDelete" src="img/del_img.png" /></div>';
+                var imgDiv = '<div class="imgContainer" id=' + value.fId + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fImagename) + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + (i + 1) + ')"  class="imgDelete" src="img/del_img.png" /></div>';
                 $("#imgBox").append(imgDiv);
             });
         }
@@ -129,15 +130,15 @@ function loadSavedPic() {
 loadSavedPic();
 
 function savePhoto() {
-    $(".fileInput").each(function(){
-        if($(this).val()==""||$(this).val()==null){
+    $(".fileInput").each(function () {
+        if ($(this).val() == "" || $(this).val() == null) {
             $(this).remove();
         }
     });
     var params = new FormData($('#upBox')[0]);
-    params.append("fSubid",selectSubid);
+    params.append("fSubid", selectSubid);
     Substation.postFormDataByAjax("/uploadSubstationImg", params, function (data) {
-        if (data.code==200) {
+        if (data.code == 200) {
             $.toast("保存成功");
             window.history.back();
         }
