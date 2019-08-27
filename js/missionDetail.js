@@ -1,25 +1,33 @@
- var titlename = localStorage.getItem("fSubname");
- $("#titleContent").text(titlename);
+ jQuery(document).ready(function () {
+     // $(function () {
+     var titlename = localStorage.getItem("fSubname");
+     $("#titleContent").text(titlename);
 
- //现场签到按钮事件
- $("#checkIn").click(function () {
+     //现场签到按钮事件
+     $("#checkIn").click(function () {
 
+     });
+
+     //执行任务按钮事件
+     $("#carryOut").click(function () {
+
+     });
+
+     //提交按钮事件
+     $("#submitTo").click(function () {
+
+     });
+
+     //管理页面
+     $("#clickManager").click(function () {
+         localStorage.setItem("fSubname", "执行情况");
+         window.location.href = "missionManager.html";
+     });
  });
 
- //执行任务按钮事件
- $("#carryOut").click(function () {
+ //  function alinkClick() {
+ //      localStorage.setItem("fSubname", "执行情况");
+ //      window.location.href = "missionManager.html";
+ //  }
 
- });
-
- //提交按钮事件
- $("#submitTo").click(function () {
-
- });
-
- //管理页面
- $("a[name='clickManager']").click(function () {
-     localStorage.setItem("fSubname", "执行情况");
-     window.location.href = "missionManager.html";
- });
-
- $.init();
+ //  $.init();
