@@ -14,26 +14,20 @@ if (isIOS) {
 }
 
 function loadMenu() {
-    $(".content").empty();
+    $(".list-container").empty();
     Substation.getDataByAjax("/getSubinfoVoByPid", {
         pid: menuId
     }, function (data) {
         if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
             $(data.menuList).each(function () {
-                $(".content").append("<div class=\"content-block-title\"></div>\n" +
-                    "            <div class=\"list-block\">\n" +
-                    "                <ul>\n" +
-                    "                    <li class=\"item-content item-link\" id=\"" + this.fMenuid + "\" value=\"" + this.fCode + "\">\n" +
-                    "                        <div class=\"item-media\"><img src=\"img/alarmPic.png\" width=\"20\"></div>\n" +
-                    "                        <div class=\"item-inner\">\n" +
-                    "                            <div class=\"item-title\">" + this.fMenuname + "</div>\n" +
-                    "                            <div class=\"item-after\" id=\"" + this.fCode + "\"></div>\n" +
-                    "                        </div>\n" +
-                    "                    </li>\n" +
-                    "                </ul>\n" +
-                    "                <div class=\"list-block-label\"></div>\n" +
-                    "            </div>");
-            });
+                $(".list-container").append("<li class=\"item-content item-link\" id=\""+this.fMenuid+"\" value=\"" + this.fCode + "\">\n" +
+                                "                        <div class=\"item-media\"><i class=\"icon icon-alarm\"></i></div>\n" +
+                                "                        <div class=\"item-inner\">\n" +
+                                "                            <div class=\"item-title\">" + this.fMenuname + "</div>\n" +
+                                "                            <div class=\"item-after\" id=\"" + this.fCode + "\"></div>\n" +
+                                "                        </div>\n" +
+                                "                    </li>")
+                });
             fillData(0);
         }
     });

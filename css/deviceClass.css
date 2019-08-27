@@ -26,3 +26,33 @@ i.icon.icon-nodevice {
 .child-page .bar{
     position:static;
 }
+#show-class{
+    display:inline-block;
+}
+#add-class{
+    display:none;
+}
+.item-content .button{
+    display:none;
+}
+.item-content.item-edit .button{
+    display:inline-block;
+}
+.item-content.item-edit .item-inner{
+    background:none;
+    color:#fff;
+    padding-right: 0.5rem;
+}
+.item-content.item-edit{
+    background-color:#02A8A6;
+}
+.icon.icon-upChange{
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-up.png);
+}
+.icon.icon-downChange{
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-down.png);
+}

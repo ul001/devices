@@ -22,20 +22,33 @@
                     <span class="icon icon-left"></span>
                     返回
                 </button>
-                <h1 class="title title_color">
-                    <p class="limit-length" id="titleContent"></p>
-                </h1>
+                <button class="button button-link button-nav pull-right click_btn" id="editBtn" onclick="editContent()">
+                    编辑
+                </button>
+                <h1 class="title title_color"><p class="limit-length" id="titleContent"></p></h1>
             </header>
             <div class="bar bar-header-secondary">
                 <button id="show-class" type="button" class="button bg-primary">隐藏无设备分类</button>
+                <button id="add-class" type="button" class="button bg-primary" onclick="addDeviceClass()">新增额外设备分类</button>
             </div>
+            <nav class="bar bar-footer">
+                <a href="#" class="button bg-primary pull-left" style="width:40%;" onclick="changeUp()"><i class="icon icon-upChange"></i>上移</a>
+                <a href="#" class="button bg-primary pull-right" style="width:40%;" onclick="changeDown()"><i class="icon icon-downChange"></i>下移</a>
+            </nav>
             <div class="content parent-page">
                 <div class="list-block">
                     <ul class="list-container">
-                        <li class="item-content item-link">
+                        <li class="item-content item-link item-edit">
                             <div class="item-media"><i class="icon icon-device"></i></div>
                             <div class="item-inner">
-                                <div class="item-title">商品名称</div>
+                                <div class="col-50">
+                                    <div class="item-title">商品名称</div>
+                                </div>
+                                <div class="col-50">
+                                    <button class='button bg-primary' type="button">重命名</button>
+                                    <button class='button bg-primary' type="button">复制</button>
+                                    <button class='button bg-primary' type="button">删除</button>
+                                </div>
                             </div>
                         </li>
                         <li class="item-content item-link">
