@@ -16,4 +16,10 @@
 
  });
 
+ //管理页面
+ $("a[name='clickManager']").click(function () {
+     localStorage.setItem("fSubname", "执行情况");
+     window.location.href = "missionManager.html";
+ });
+
  $.init();

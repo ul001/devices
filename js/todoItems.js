@@ -4,17 +4,27 @@ $("#titleContent").text("待办事项");
 $("#tab1").click();
 
 $(".buttons-tab .tab-link").click(function () {
-    if ($(".tab-link").attr("name") == "daiban") {
+    var i = $(this).index();
+    if (i == 0) {
         // url = "/getWarningMessageSignalEvents";
         $("#titleContent").text("待办事项");
-    } else if ($(".tab-link").attr("name") == "zaiban") {
+    } else if (i == 1) {
         // url = "/getWarningMessageOverLimitEvents";
         $("#titleContent").text("在办事项");
-    } else if ($(".tab-link").attr("name") == "banbi") {
+    } else if (i == 2) {
         // url = "/getWarningMessagePlatformRunEvents";
         $("#titleContent").text("办毕事项");
     }
 });
+
+function getSelectedTabIndex() {
+    var retIndex = $("#tabs").tabs('option', 'active');
+
+    //alert("retIndex="+retIndex);
+
+    return retIndex;
+
+}
 
 $(".back_btn").click(function () {
     var u = navigator.userAgent,

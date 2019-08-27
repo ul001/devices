@@ -23,13 +23,13 @@
     white-space: nowrap;
 }
 
-.limit-length{
+.limit-length {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-#titleContent{
-    width:64%;
-    margin:0 auto;
+#titleContent {
+    width: 64%;
+    margin: 0 auto;
 }
