@@ -588,7 +588,7 @@ jQuery(document).ready(function () {
     $("#titleContent").html(Subname);
 
     // 新增按钮
-    $("#tab-nav").on("click", "#Add", function () {
+    $("#Add").on("click", function () {
         var info = customerDevice.getselectInfo();
 
         if (info.fFunctionfield == undefined) {
@@ -653,7 +653,7 @@ jQuery(document).ready(function () {
     });
 
     // 复制按钮
-    $("#tab-nav").on("click", "#copy", function () {
+    $("#copy").on("click",function () {
         var info = customerDevice.getselectInfo();
 
         var fTemplateid = info.id;
@@ -690,7 +690,7 @@ jQuery(document).ready(function () {
     });
 
     // 删除按钮
-    $("#tab-nav").on("click", "#delete", function () {
+    $("#delete").on("click", function () {
         var selectId = $(".active[role='presentation']").attr("name");
         var name = $(".active[role='presentation']")
             .text();
@@ -722,7 +722,7 @@ jQuery(document).ready(function () {
     });
 
     // 修改保存按钮点击
-    $("#tab-nav").on("click", "#save", function () {
+    $("#save").on("click", function () {
         var isTrue = true;
         var input = $(".tab.active").find(".valueInput[name='true']");
         $.each(input, function (key, val) {

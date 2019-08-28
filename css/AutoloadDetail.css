@@ -1,7 +1,9 @@
-.button-success.button-fill {
+.bar-header-secondary .button{
     color: white;
     background-color: #02A8A6;
-    top: 0.3rem;
+    border:none;
+    height:1.5rem;
+    line-height:1.5rem;
 }
 
 #tab-nav {
