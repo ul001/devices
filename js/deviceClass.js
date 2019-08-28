@@ -57,14 +57,11 @@ function fillData(parentId) {
         if (data.hasOwnProperty("menuList")) {
             $(data.menuList).each(function () {
                 var li = "";
-                var linkStr = "";
-                var linkIcon = "";
+                var linkStr = "<li class=\"item-content item-dis pId";
+                var linkIcon = "<div class=\"item-media\"><i class=\"icon icon-nodevice\"></i></div>\n";
                 if (this.state == "true") {
                     linkStr = "<li class=\"item-content item-link pId";
                     linkIcon = "<div class=\"item-media\"><i class=\"icon icon-device\"></i></div>\n";
-                } else if (this.state == "false") {
-                    linkStr = "<li class=\"item-content item-dis pId";
-                    linkIcon = "<div class=\"item-media\"><i class=\"icon icon-nodevice\"></i></div>\n";
                 }
                 li = linkStr + this.pId + "\" id=\"" + this.id + "\" value='" + this.fFunctionfield + "'>\n" +
                     linkIcon +
