@@ -15,7 +15,8 @@ if (isIOS) {
 
 function loadMenu() {
     $(".list-container").empty();
-    Substation.getDataByAjax("/getSubinfoVoByPid", {
+    $.showPreloader();
+    Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
         pid: menuId
     }, function (data) {
         if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
@@ -90,6 +91,7 @@ function fillData(parentId) {
                 }
             }
         });
+        $.hidePreloader();
     });
     // }
     // });
