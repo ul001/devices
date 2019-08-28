@@ -85,9 +85,13 @@ function addDevice(){
     if($(".selectLi").length>0){
         var idVal = $(".selectLi").attr("id");
         Substation.postDataByAjax("/subDeviceTreeAdd",{pid:jumpPid,modelId:idVal,fSubid:selectSubid},function(data){
-            window.location.href = "deviceClass.html?pid="+jumpPid+"&editState=1&clickNum="+lastClickNum;
+            goBackLastPid();
         });
     }
+}
+
+function goBackLastPid(){
+        window.location.href = "deviceClass.html?pid="+jumpPid+"&editState=1&clickNum="+lastClickNum;
 }
 
 fillData(0);
