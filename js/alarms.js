@@ -98,3 +98,5 @@ function fillData(parentId) {
 }
 
 loadMenu();
+
+$.init();
