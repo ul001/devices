@@ -25,6 +25,9 @@
                 <h1 class="title title_color">
                     <p class="limit-length" id="titleContent">待办</p>
                 </h1>
+                <button class="button pull-right clickrightbtn" style="color:white;border:1px solid white;">
+                    任务类型
+                </button>
             </header>
             <div class="content">
                 <div class="buttons-tab">
@@ -33,7 +36,7 @@
                     <a href="#tab3" class="tab-link button" id="banbi" name="banbi">办毕</a>
                 </div>
                 <div class="tabs">
-                    <div id="tab1" class="tab">
+                    <div id="tab1" class="tab active">
                         <!-- 待办 -->
                         <div class="content-block">
                             <div class="bar bar-header-secondary">
@@ -55,12 +58,16 @@
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="row no-gutter sub_card">
-                                                <div class="col-80">
-                                                    <!-- <div class="item-subtitle">安科瑞变电所</div> -->
-                                                    <p class="subName">安科瑞变电所</p>
+                                                <div class="col-10">
+                                                    <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
+                                                        style='width: 2.2rem;' />
+                                                </div>
+                                                <div class="col-75">
+                                                    <p class="subName">安科瑞变电所
+                                                    </p>
                                                     <p><span>name</span> <span>2019-08-26 13:11:26</span></p>
                                                 </div>
-                                                <div class="col-20">
+                                                <div class="col-15">
                                                     <button class="button button-fill button-success" id="dealMission"
                                                         type="button">我要处理
                                                     </button>
@@ -97,13 +104,17 @@
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="row no-gutter sub_card">
-                                                <div class="col-80">
-                                                    <!-- <div class="item-subtitle">安科瑞变电所</div> -->
-                                                    <p class="subName">安科瑞变电所</p>
+                                                <div class="col-10">
+                                                    <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
+                                                        style='width: 2.2rem;' />
+                                                </div>
+                                                <div class="col-75">
+                                                    <p class="subName">安科瑞变电所
+                                                    </p>
                                                     <p><span>name</span> <span>2019-08-26 13:11:26</span></p>
                                                 </div>
-                                                <div class="col-20">
-                                                    <button class="button button-fill button-success" id="dealMission2"
+                                                <div class="col-15">
+                                                    <button class="button button-fill button-success" id="dealMission1"
                                                         type="button">我要处理
                                                     </button>
                                                 </div>
@@ -117,7 +128,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="tab3" class="tab active">
+                    <div id="tab3" class="tab">
                         <div class="content-block">
                             <!-- 办毕 -->
                             <div class="content-block">
@@ -130,7 +141,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <p>办毕页面</p>
+                                <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
+                                    data-distance="100">
+                                    <div class="pull-to-refresh-layer">
+                                        <div class="preloader"></div>
+                                        <div class="pull-to-refresh-arrow"></div>
+                                    </div>
+                                    <div class="list-container">
+                                        <div class="card">
+                                            <div class="card-content">
+                                                <div class="row no-gutter sub_card">
+                                                    <div class="col-10">
+                                                        <img src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg"
+                                                            style='width: 2.2rem;' />
+                                                    </div>
+                                                    <div class="col-75">
+                                                        <p class="subName">安科瑞变电所
+                                                        </p>
+                                                        <p><span>name</span> <span>2019-08-26 13:11:26</span></p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="infinite-scroll-preloader">
+                                        <div class="preloader"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -138,13 +176,13 @@
             </div>
         </div>
     </div>
-
     <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
     <script src='libs/cn.min.js'></script>
     <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
     <script src="libs/tools.js"></script>
     <script src="js/todoItems.js"></script>
+
 </body>
 
 </html>
