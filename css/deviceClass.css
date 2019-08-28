@@ -56,3 +56,6 @@ i.icon.icon-nodevice {
     height: 1rem;
     background-image: url(../img/i-down.png);
 }
+.bar-footer{
+    display:none;
+}

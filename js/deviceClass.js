@@ -7,6 +7,19 @@ var pids = [{
 var clickNum = 0;
 var thisPid = 0;
 var editID = -1;
+var getClickNum = Substation.GetQueryString("clickNum");
+var getUrlPid=Substation.GetQueryString("pid");
+var getUrlState = Substation.GetQueryString("editState");
+if(getUrlPid!=""&&getUrlPid!=null){
+    thisPid = getUrlPid;
+}
+if(getUrlState!=""&&getUrlState!=null){
+    editState = getUrlState;
+}
+if(getClickNum!=""&&getClickNum!=null){
+    clickNum = getClickNum;
+    pids = JSON.parse(localStorage.getItem("pids"));
+}
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 $("#titleContent").text(selectSubname);
@@ -20,21 +33,27 @@ $(".back-parent").click(function () {
         $(".child-page").css("display", "none");
         $(".parent-page").css("display", "block");
     }
-    $("#no-click").text(pids[clickNum].pName);
+    //$("#no-click").text(pids[clickNum].pName);
     fillData(lastPId);
 });
 
 function fillData(parentId) {
+    thisPid = parentId;
     var params = {
         fSubid: selectSubid,
         fParentId: parentId
     }
-    var ul = $(".child-page .list-container");
-    if (parentId == 0) {
-        ul = $(".parent-page .list-container");
+    $(".child-page").css("display", "none");
+    $(".parent-page").css("display", "block");
+    var ul = $(".parent-page .list-container");
+    if (parentId != 0) {
+        ul = $(".child-page .list-container");
+        $(".parent-page").css("display", "none");
+        $(".child-page").css("display", "block");
+        $("#no-click").text(pids[clickNum].pName);
     }
     ul.empty();
-    Substation.getDataByAjax("/appMenuSelectByPid", params, function (data) {
+    Substation.getDataByAjax("/subDeviceTreeSelectByPid", params, function (data) {
         if (data.hasOwnProperty("menuList")) {
             $(data.menuList).each(function () {
                 var li = "";
@@ -77,8 +96,15 @@ function fillData(parentId) {
             });
         }
         if(editState==1){
+            $("#editBtn").text("退出");
+            $("#add-class").css("display","inline-block");
+            $(".bar-footer").css("display","block");
             $(".item-content").unbind().click(function(){
+                $(".item-edit").removeClass("item-edit");
+                $(".col-40").removeClass("col-40");
                 $(this).addClass("item-edit").siblings().removeClass("item-edit");
+                $(this).find(".item-title").addClass("col-40");
+                editID = $(this).attr("id");
             });
         }
         if(editID!=-1){
@@ -96,7 +122,6 @@ function fillData(parentId) {
 }
 
 function linkClick(parentId) {
-    thisPid = parentId;
     $(".item-link").click(function(event){
         var fField = $(this).attr("value");
         var clickId = $(this).attr("id");
@@ -104,7 +129,8 @@ function linkClick(parentId) {
             localStorage.setItem("fTempId", clickId);
             //localStorage.setItem("fFunctionfield",fField);
             localStorage.setItem("fPid", parentId);
-            window.location.href = "AutoloadDetail.html";
+            localStorage.setItem("pids",JSON.stringify(pids));
+            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum;
         } else {
             clickNum++;
             var parentName = $(this).find(".item-title").text();
@@ -112,7 +138,7 @@ function linkClick(parentId) {
                 pId: clickId,
                 pName: parentName
             });
-            $("#no-click").text(parentName);
+            //$("#no-click").text(parentName);
             $(".parent-page").css("display", "none");
             $(".child-page").css("display", "block");
             fillData(clickId);
@@ -126,6 +152,7 @@ function editContent(){
         editState = 1;
         $("#editBtn").text("退出");
         $("#add-class").css("display","inline-block");
+        $(".bar-footer").css("display","block");
         $(".item-content").unbind().click(function(){
             $(".item-edit").removeClass("item-edit");
             $(".col-40").removeClass("col-40");
@@ -137,6 +164,7 @@ function editContent(){
         editState = 0;
         editID = -1;
         $("#editBtn").text("编辑");
+        $(".bar-footer").css("display","none");
         $(".col-40").removeClass("col-40");
         $("#add-class").css("display","none");
         $(".item-content").removeClass("item-edit");
@@ -179,28 +207,33 @@ function deleteLi(dataId){
 }
 
 function changeUp(){
-    var index = $(".item-edit");
-    var idVal = $(".item-edit").attr("id");
-    if(index.index() != 0){
-        Substation.getDataByAjax("/moveAppMenu",{id:idVal,flag:"up"},function(){
-            index.prev().before(index);
-        });
+    if($(".item-edit").length>0){
+        var index = $(".item-edit");
+        var idVal = $(".item-edit").attr("id");
+        if(index.index() != 0){
+            Substation.getDataByAjax("/moveAppMenu",{id:idVal,flag:"up"},function(){
+                index.prev().before(index);
+            });
+        }
     }
 }
 
 function changeDown(){
-    var index = $(".item-edit");
-    var idVal = $(".item-edit").attr("id");
-    var list = $(".item-edit").siblings();
-    if(index.index()!=list.length){
-        Substation.getDataByAjax("/moveAppMenu",{id:idVal,flag:"down"},function(){
-            index.next().after(index);
-        });
+    if($(".item-edit").length>0){
+        var index = $(".item-edit");
+        var idVal = $(".item-edit").attr("id");
+        var list = $(".item-edit").siblings();
+        if(index.index()!=list.length){
+            Substation.getDataByAjax("/moveAppMenu",{id:idVal,flag:"down"},function(){
+                index.next().after(index);
+            });
+        }
     }
 }
 
 function addDeviceClass(){
-    window.location.href = "addDeviceClass.html";
+    localStorage.setItem("pids",JSON.stringify(pids));
+    window.location.href = "addDeviceClass.html?pid="+thisPid+"&clickNum="+clickNum;
 }
 
 fillData(thisPid);

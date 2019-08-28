@@ -538,6 +538,11 @@ var CustomerDevice = (function () {
 jQuery(document).ready(function () {
     // $(function () {
     var subid = localStorage.getItem("fSubid");
+    var jumpPid = Substation.GetQueryString("pid");
+    var lastClickNum = Substation.GetQueryString("clickNum");
+    $("#goBackLastPid").click(function(){
+        window.location.href = "deviceClass.html?pid="+jumpPid+"&clickNum="+lastClickNum;
+    });
     // var tempId = localStorage.getItem("fTempId");
     // var parentId = localStorage.getItem("fPid");
     // var u = navigator.userAgent,
@@ -869,5 +874,8 @@ jQuery(document).ready(function () {
         Substation.Validator.setFocus($(select));
         $("#save").removeAttr("disabled");
     }
+
     $.init();
 });
+
+
