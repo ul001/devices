@@ -32,6 +32,21 @@ jQuery(document).ready(function () {
     //我要处理
     $("#dealMission").click(function () {
         localStorage.setItem("fSubname", "任务详情");
+        localStorage.setItem("showType", "missionDoing");
+        window.location.href = "missionDetail.html";
+    });
+
+    //我要处理
+    $("#dealMission1").click(function () {
+        localStorage.setItem("fSubname", "任务详情");
+        localStorage.setItem("showType", "missionDoing");
+        window.location.href = "missionDetail.html";
+    });
+
+    //点击卡片
+    $("#cardFinish").click(function () {
+        localStorage.setItem("fSubname", "任务详情");
+        localStorage.setItem("showType", "missionFinish");
         window.location.href = "missionDetail.html";
     });
 

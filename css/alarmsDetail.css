@@ -32,10 +32,16 @@ i.icon.icon-alarm {
     background-image: url(../img/i-alarmp.png);
 }
 
-.card .col-25 p{
-    margin:0.2rem 0;
+.card .col-25 p {
+    margin: 0.2rem 0;
 }
 
-.unRead{
-    color:#FF0000;
+.unRead {
+    color: #FF0000;
 }
+
+.item-label {
+    color: #3E4145;
+}
+
+/* #3E4145 */

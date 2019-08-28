@@ -47,7 +47,7 @@
                     <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
                         <ul>
                             <li>
-                                <div class="showDiv item-content">
+                                <div class=" showDiv item-content">
                                     <div class="item-inner">
                                         <div class="item-title label">执行人:</div>
                                         <div class="item-input">
@@ -84,6 +84,22 @@
                                         <div class="item-title label">执行情况:</div>
                                         <div class="item-input"><input type="text" readonly="readonly"
                                                 class="valueInput" value="" name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- 除自己外 且状态在执行中的任务 -->
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">
+                                            代提交任务:
+                                        </div>
+                                        <div class="item-input">
+                                            <label class="label-switch">
+                                                <input type="checkbox">
+                                                <div class="checkbox"></div>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
@@ -126,7 +142,7 @@
                             <li>
                                 <div class="showDiv item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">执行情况:</div>
+                                        <div class="item-title label" style="overflow:auto;">执行情况:</div>
                                         <div class="item-input"><input type="text" readonly="readonly"
                                                 class="valueInput" value="已初步完成任务，没啥问题" name="number"
                                                 validator="required">
