@@ -26,10 +26,10 @@ function goToLocation(lat, lon, subid, subname) {
     window.location.href = "location.html";
 }
 
-function goToDevice(subId, subname) {
+function goToRecord(subId, subname) {
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
-    window.location.href = "deviceClass.html";
+    window.location.href = "patrolRecord.html";
 }
 
 function goToPhoto(subId) {
@@ -76,7 +76,7 @@ function addItems(number, lastIndex) {
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
                     "                            <div class=\"row  no-gutter sub_card\">\n" +
-                    "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
+                    "                                <div class=\"col-80\"  onClick=\"goToRecord(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
                     "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
                     "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
                     "                                    <p class=\"limit-length\">地址：" + Substation.removeUndefined(this.fAddress) + "</p>\n" +

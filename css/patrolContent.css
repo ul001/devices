@@ -1,0 +1,30 @@
+#panel-left-demo{
+    background-color:#eee;
+    color:#3d4145;
+}
+.content-block{
+    margin: 1rem 0;
+}
+.content-block .button{
+    text-align:center;
+    margin:0 auto;
+}
+.icon.icon-goprev{
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-previcon.png);
+}
+.selectLi{
+    background-color:#02A8A6;
+    color:#fff;
+}
+.list-block{
+    margin:0;
+}
+.pull-right div{
+    display:inline-block;
+}
+.pull-right label.label-checkbox i.icon-form-checkbox{
+    width:0.8rem;
+    height:0.8rem;
+}

@@ -41,13 +41,9 @@ function fillData(parentId) {
         if (data.hasOwnProperty("menuList")) {
             $(data.menuList).each(function () {
                 var li = "";
-                var linkStr = "";
+                var linkStr = "<li class=\"item-content item-dis pId";
                 if (this.state == "true"&&this.fFunctionfield=="") {
                     linkStr = "<li class=\"item-content item-link pId";
-                } else if (this.state == "false") {
-                    linkStr = "<li class=\"item-content item-dis pId";
-                }else if(this.state=="true"&&this.fFunctionfield!=""){
-                    linkStr = "<li class=\"item-content item-dis pId";
                 }
                 li = linkStr + this.pId + "\" id=\"" + this.id + "\">\n" +
                     "                        <div class=\"item-inner row no-gutter\">\n" +
@@ -66,7 +62,6 @@ function fillData(parentId) {
 }
 
 function linkClick(parentId) {
-    thisPid = parentId;
     $(".item-link").unbind().click(function(event){
         $(".selectLi").removeClass("selectLi");
         var clickId = $(this).attr("id");

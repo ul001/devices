@@ -1,0 +1,23 @@
+.card-content-inner p{
+    margin:0;
+}
+.card-content-inner .subName{
+    font-weight:bold;
+}
+.list-container{
+    width:100%;
+}
+.item-footer{
+    width:100%;
+    border-bottom:1px #ccc dashed;
+}
+.blueColor{
+    color:#4682B4;
+}
+.redColor{
+    color:#DC143C;
+}
+.row.no-gutter{
+    display:flex;
+    align-items:center;
+}
