@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>计量表数据采集</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/powerMeterCompute.css" />
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src='libs/cn.min.js'></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/config.js"></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/powerMeterCompute.js"></script>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="route6">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <h1 class="title title_color">计量表数据采集
+                    <!-- < class="limit-length" id="titleContent"></> -->
+                </h1>
+            </header>
+            <div class="content">
+                <div class="content-block" id="addVarContain125">
+                    <div class="content-block-title">
+                    </div>
+                    <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">名称:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="1#" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">表类型:</div>
+                                        <div class="item-input">
+                                            <select>
+                                                <option>峰平谷</option>
+                                                <option>峰平谷尖峰</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">用电类别:</div>
+                                        <div class="item-input">
+                                            <select>
+                                                <option>非工业</option>
+                                                <option>大工业</option>
+                                                <option>普通工业</option>
+                                                <option>商业</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">主计量方式:</div>
+                                        <div class="item-input">
+                                            <select>
+                                                <option>低压用户</option>
+                                                <option>高供高计</option>
+                                                <option>高供低计</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">考核标准:</div>
+                                        <div class="item-input">
+                                            <select>
+                                                <option>功率因素0.85考核</option>
+                                                <option>不考核</option>
+                                                <option>功率因素0.80考核</option>
+                                                <option>功率因素0.90考核</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">变压器总容:</div>
+                                        <div class="item-input"><input type="text" class="valueInput" value="1000"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- 除自己外 且状态在执行中的任务 -->
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">
+                                            倍率:
+                                        </div>
+                                        <div class="item-input">
+                                            <div class="item-input"><input type="text" class="valueInput" value="1200"
+                                                    name="number" validator="required">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">
+                                            电压等级:
+                                        </div>
+                                        <div class="item-input">
+                                            <select>
+                                                <option>1-10千伏</option>
+                                                <option>35-110千伏</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">
+                                            是否计费点:
+                                        </div>
+                                        <div class="item-input">
+                                            <label class="label-switch">
+                                                <input type="checkbox">
+                                                <div class="checkbox"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <!-- 点击后 跳转选择监测点的页面 -->
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">对应监测点:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="1000KVA低压监测点" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain126">
+                    <div class="content-block-title">每月
+                    </div>
+                    <div id="15" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">19年6月有功:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="峰：" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="平：" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="谷：" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="尖：" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">19年7月有功:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="峰：1295.24" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="平：1672.04" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="谷：649.45" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="尖：621.92" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">19年7月有功总:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="3616.73" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">19年7月无功总:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="1991.14" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain127">
+                    <div class="content-block-title">每次
+                    </div>
+                    <div id="16" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">上次采集时间:</div>
+                                        <div class="item-input">
+                                            <input type="date" placeholder="显示时间,每15分钟一次" value="2019-08-19 12:15">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">上次有功总:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="0.0" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">上次无功总:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="0.0" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">本次采集时间:</div>
+                                        <div class="item-input">
+                                            <input type="date" placeholder="显示时间,每15分钟一次" value="2019-08-29 12:45">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">本次有功总:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="4298.79" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">本次无功总:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="2004.11" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">相隔天数:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="11" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">本次忽略变损功率因素:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="0.91" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">本次计算变损功率因素:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">上月忽略变损功率因素:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">上月计算变损功率因素:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">实际用电量:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="5158548.0 kw.h"
+                                                readonly="readonly" name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">最少用电量:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value=" kw.h" readonly="readonly"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">功率因数评价:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="功率因数合格；补偿效果理想；" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">运行建议:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <p>注意：为核对数据准确性，请采集0分、15分、30分、45分左右的数据</p>
+                </div>
+                <div class="content-block" id="addVarContain128">
+                    <div class="content-block-title">监测表数据
+                    </div>
+                    <div id="17" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">19-08-19 00：00</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="有功总：1026997.6" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="无功总：225444.4" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">19-08-19 09：15</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="有功总：1026997.6" name="number"
+                                                validator="required">
+                                            <input type="text" class="valueInput" value="无功总：225444.4" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">实际用电量</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="709.6 kw.h" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain129">
+                    <div class="content-block-title">每月电量数据平均负荷率与误差
+                    </div>
+                    <div id="18" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">19年7月平均负荷率:</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">19年7月误差值：</div>
+                                        <div class="item-input">
+                                            <input type="text" class="valueInput" value="数据缺失，不能对比" name="number"
+                                                validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">误差原因</div>
+                                        <div class="item-input">
+                                            <select>
+                                                <option>监测容量与实际不一致</option>
+                                                <option>现场接线，设置不正确</option>
+                                                <option>装表不足一个月或重新设置</option>
+                                                <option>用电量小</option>
+                                                <option>互感器或电流表等损坏</option>
+                                                <option>设备过负荷</option>
+                                                <option>供电所计量表更换</option>
+                                                <option>dtu数据上传不正常或离线</option>
+                                                <option>关联有误或没有关联</option>
+                                                <option>抄表数据有误</option>
+                                                <option>无装表</option>
+                                                <option>其他原因</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain130">
+                    <div class="row buttonsEvent">
+                        <div class="col-50"><a href="#" class="button button-big button-fill bottom-btn"
+                                id="checkIn">计算</a>
+                        </div>
+                        <div class="col-50"><a href="#" class="button button-big button-fill bottom-btn"
+                                id="submitTo">保存</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>执行情况</title>
+    <title>供电计量表</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -13,14 +13,14 @@
     <link rel="stylesheet" href="libs/light7-swiper.min.css" />
     <link rel="stylesheet" href="libs/light7-swipeout.css" />
     <link rel="stylesheet" href="css/general.css" />
-    <link rel="stylesheet" href="css/missionManager.css" />
+    <link rel="stylesheet" href="css/powerMeter.css" />
     <script src="libs/jquery-1.12.4.min.js"></script>
     <script src="libs/light7.min.js"></script>
     <script src='libs/cn.min.js'></script>
     <script src="libs/light7-swiper.min.js"></script>
     <script src="libs/config.js"></script>
     <script src="libs/tools.js"></script>
-    <script src="js/missionManager.js"></script>
+    <script src="js/powerMeter.js"></script>
 </head>
 
 <body>
@@ -31,27 +31,41 @@
                     <span class="icon icon-left"></span>
                     返回
                 </a>
-                <h1 class="title title_color">执行情况
+                <h1 class="title title_color">供电计量表
                     <!-- < class="limit-length" id="titleContent"></> -->
                 </h1>
+                <button class="button pull-right clickrightbtn" style="color:white;">
+                    新增
+                </button>
             </header>
             <div class="content">
-                <!-- <div class="content-block" id="addVarContain123">
-                    <div class="content-block-title">任务详情</div>
-
+                <!-- <div class="list-block cards-list">
+                    <ul>
+                        <li class="card">
+                            <div class="card-header">1#<a href="#" class="button button-big button-fill bottom-btn"
+                                    id="delete">删除</a></div>
+                            <div class="card-content">
+                                <div class="card-content-inner">卡内容</div>
+                            </div>
+                            <div class="card-footer">卡脚</div>
+                        </li>
+                    </ul>
                 </div> -->
-
                 <div class="content-block" id="addVarContain125">
-                    <div class="content-block-title">任务进度
+                    <div class="content-block-title">
                     </div>
                     <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
                         <ul>
                             <li>
+                                <div class="card-header">1#<a href="#" class="button button-big button-fill bottom-btn"
+                                        id="delete">删除</a></div>
+                            </li>
+                            <li>
                                 <div class=" showDiv item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">执行人:</div>
+                                        <div class="item-title label">用电类别:</div>
                                         <div class="item-input">
-                                            <input type="text" readonly="readonly" class="valueInput" value="李四"
+                                            <input type="text" readonly="readonly" class="valueInput" value="大工业"
                                                 name="number" validator="required">
                                         </div>
                                     </div>
@@ -60,10 +74,9 @@
                             <li>
                                 <div class="showDiv item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">状态:</div>
+                                        <div class="item-title label">主计量方式:</div>
                                         <div class="item-input"><input type="text" readonly="readonly"
-                                                class="valueInput" value="执行中" name="sender" validator="required"
-                                                style="color:red">
+                                                class="valueInput" value="高供高计" name="sender" validator="required">
                                         </div>
                                     </div>
                                 </div>
@@ -71,9 +84,10 @@
                             <li>
                                 <div class="showDiv item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">提交时间:</div>
+                                        <div class="item-title label">考核标准:</div>
                                         <div class="item-input"><input type="text" readonly="readonly"
-                                                class="valueInput" value="" name="number" validator="required">
+                                                class="valueInput" value="功率因素0，90考核" name="number"
+                                                validator="required">
                                         </div>
                                     </div>
                                 </div>
@@ -81,9 +95,9 @@
                             <li>
                                 <div class="showDiv item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">执行情况:</div>
+                                        <div class="item-title label">变压器总容:</div>
                                         <div class="item-input"><input type="text" readonly="readonly"
-                                                class="valueInput" value="" name="number" validator="required">
+                                                class="valueInput" value="1000" name="number" validator="required">
                                         </div>
                                     </div>
                                 </div>
@@ -93,7 +107,37 @@
                                 <div class="showDiv item-content">
                                     <div class="item-inner">
                                         <div class="item-title label">
-                                            代提交任务:
+                                            倍率:
+                                        </div>
+                                        <div class="item-input">
+                                            <div class="item-label">1200
+                                                <!-- <input type="checkbox"> -->
+                                                <!-- <div class="checkbox"></div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">
+                                            电压等级:
+                                        </div>
+                                        <div class="item-input">
+                                            <div class="item-label">1-10千伏
+                                                <!-- <input type="checkbox"> -->
+                                                <!-- <div class="checkbox"></div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">
+                                            是否计费点:
                                         </div>
                                         <div class="item-input">
                                             <label class="label-switch">
@@ -104,84 +148,31 @@
                                     </div>
                                 </div>
                             </li>
-                        </ul>
-                        <ul>
                             <li>
                                 <div class="showDiv item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">执行人:</div>
+                                        <div class="item-title label">
+                                            表类型:
+                                        </div>
                                         <div class="item-input">
-                                            <input type="text" readonly="readonly" class="valueInput" value="王五"
-                                                name="number" validator="required">
+                                            <div class="item-label">峰平谷尖峰
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
                             <li>
                                 <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">状态:</div>
-                                        <div class="item-input"><input type="text" readonly="readonly"
-                                                class="valueInput" value="已完成" name="sender" validator="required"
-                                                style="color:springgreen">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">提交时间:</div>
-                                        <div class="item-input"><input type="text" readonly="readonly"
-                                                class="valueInput" value="2019-08-27 14:03:50" name="number"
-                                                validator="required">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label" style="overflow:auto;">执行情况:</div>
-                                        <div class="item-input">
-                                            <textarea readonly="readonly">已初步完成任务，没啥问题</textarea>
-                                            <!-- <input type="text" readonly="readonly"
-                                                class="valueInput" value="已初步完成任务，没啥问题" name="number"
-                                                validator="required"> -->
-                                        </div>
+                                    <div class="col-100"><a href="#" class="button button-big button-fill bottom-btn"
+                                            id="powerMeterCollection">计量表数据采集</a>
                                     </div>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="content-block" id="addVarContain124">
-                    <div class="content-block-title">重派任务</div>
-                    <div id="13" class="list-block baseInfoDiv" name="zhejiuduile">
-                        <ul>
-                            <li>
-                                <div class="item-content showDiv">
-                                    <div class="item-inner">
-                                        <div class="item-title label">现场巡视人员:</div>
-                                        <div class="item-input"><input type="text" readonly="readonly"
-                                                class="valueInput" value="选人" name="number" validator="required">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="content-block" id="addVarContain126">
-                    <div class="row buttonsEvent">
-                        <div class="col-50"><a href="#" class="button button-big button-fill bottom-btn"
-                                id="checkIn">重派任务</a>
-                        </div>
-                        <div class="col-50"><a href="#" class="button button-big button-fill bottom-btn"
-                                id="submitTo">提交任务</a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
