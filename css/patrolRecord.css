@@ -11,12 +11,6 @@
     width:100%;
     border-bottom:1px #ccc dashed;
 }
-.blueColor{
-    color:#4682B4;
-}
-.redColor{
-    color:#DC143C;
-}
 .row.no-gutter{
     display:flex;
     align-items:center;

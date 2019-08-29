@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/defectPage.css">
+</head>
+
+<body>
+<div class="page-group">
+    <div class="page">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back_btn">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <h1 class="title title_color">缺陷登记</h1>
+            <a class="button button-link button-nav pull-right click_btn" onclick="">
+                新增
+            </a>
+        </header>
+        <div class="content">
+            <div class="content">
+                <div class="list-block">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">缺陷描述：</div>
+                                    <div class="item-input">
+                                        <input type="text" value="户外隔离刀闸合闸不到位">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span class="redColor">*</span><span class="blueColor">缺陷位置：</span></div>
+                                    <div class="item-input">
+                                        <input type="checkbox" value="A" id="checkA"><label for="checkA">A相</label>
+                                        <input type="checkbox" value="B" id="checkB"><label for="checkB">B相</label>
+                                        <input type="checkbox" value="C" id="checkC"><label for="checkC">C相</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">缺陷类别：</div>
+                                    <div class="item-input">
+                                        <select name="">
+                                            <option value="">导电类</option>
+                                            <option value="">标识类</option>
+                                            <option value="">支撑类</option>
+                                            <option value="">保护类</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">缺陷类型：</div>
+                                    <div class="item-input">
+                                        <select name="">
+                                            <option value="">一般</option>
+                                            <option value="">重大</option>
+                                            <option value="">紧急</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Birth date</div>
+                                    <div class="item-input">
+                                        <input type="date" placeholder="Birth day" value="2014-04-30">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Switch (Checkbox) -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Switch</div>
+                                    <div class="item-input">
+                                        <label class="label-switch">
+                                            <input type="checkbox">
+                                            <div class="checkbox"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span class="redColor">*</span><span class="blueColor">现场照：</span></div>
+                                    <div class="item-input">
+                                        <div class="custom_img">
+                                            <!--点击上传图片 触发下面的div 点击事件-->
+                                            <div class="upload_img_wrap">
+                                                <div id="imgBox"><img class="upload_img" src="img/upload_img.png" />
+                                                </div>
+                                                <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                                            </div>
+                                            <div style="display: none;width: 100%;height: 100vh;position: relative;">
+                                                <form id="upBox" class="upload_form" action="" method="post" enctype="multipart/form-data">
+                                                    <div style="display: none;" id="inputBox">
+                                                        <input type="file" name="myFiles" data-id="1" title="请选择图片" id="file1" accept="image/png,image/jpg,image/gif,image/JPEG" />
+                                                        <!--
+                                                <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
+                                                <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
+                                                    </div>
+                                                    <input style="display:none" type="submit" id="sub" />
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-block">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Name</div>
+                                    <div class="item-input">
+                                        <input type="text" placeholder="Your name">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">E-mail</div>
+                                    <div class="item-input">
+                                        <input type="email" placeholder="E-mail">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Password</div>
+                                    <div class="item-input">
+                                        <input type="password" placeholder="Password" class="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Gender</div>
+                                    <div class="item-input">
+                                        <select>
+                                            <option>Male</option>
+                                            <option>Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Birth date</div>
+                                    <div class="item-input">
+                                        <input type="date" placeholder="Birth day" value="2014-04-30">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Switch (Checkbox) -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Switch</div>
+                                    <div class="item-input">
+                                        <label class="label-switch">
+                                            <input type="checkbox">
+                                            <div class="checkbox"></div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">Textarea</div>
+                                    <div class="item-input">
+                                        <textarea></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+<script src='libs/cn.min.js'></script>
+<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<script src="libs/tools.js"></script>
+<script src="js/defectPage.js"></script>
+</body>
+
+</html>
