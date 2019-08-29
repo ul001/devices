@@ -29,17 +29,35 @@ jQuery(document).ready(function () {
         }
     });
 
-    //我要处理
+    //我要处理 巡视
     $("#dealMission").click(function () {
         localStorage.setItem("fSubname", "任务详情");
         localStorage.setItem("showType", "missionDoing");
+        localStorage.setItem("missionType", "patrol");
         window.location.href = "missionDetail.html";
     });
 
-    //我要处理
+    //我要处理 巡视
     $("#dealMission1").click(function () {
         localStorage.setItem("fSubname", "任务详情");
         localStorage.setItem("showType", "missionDoing");
+        localStorage.setItem("missionType", "patrol");
+        window.location.href = "missionDetail.html";
+    });
+
+    //现场交接
+    $("#dealMission2").click(function () {
+        localStorage.setItem("fSubname", "任务详情");
+        localStorage.setItem("showType", "missionDoing");
+        localStorage.setItem("missionType", "scene");
+        window.location.href = "missionDetail.html";
+    });
+
+    //缺陷整改
+    $("#dealMission3").click(function () {
+        localStorage.setItem("fSubname", "任务详情");
+        localStorage.setItem("showType", "missionDoing");
+        localStorage.setItem("missionType", "defect");
         window.location.href = "missionDetail.html";
     });
 
