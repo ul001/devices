@@ -28,3 +28,9 @@
     width:0.8rem;
     height:0.8rem;
 }
+i.icon.icon-select{
+    width: 1.2rem;
+    height: 1.2rem;
+    margin-bottom:0.2rem;
+    background-image: url(../img/i-select.png);
+}

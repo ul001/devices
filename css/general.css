@@ -33,3 +33,14 @@
     width: 64%;
     margin: 0 auto;
 }
+
+.blueColor{
+    color:#4682B4;
+}
+
+.redColor{
+    color:#DC143C;
+}
+.item-input select{
+    background: url('../img/right.png') no-repeat right center;
+}
