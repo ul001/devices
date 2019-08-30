@@ -51,7 +51,7 @@ function addItems(number, lastIndex) {
                     "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
                     "                                <div class=\"col-75\">\n" +
                     "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
-                    "                                    <P>仪表名称：" + Substation.removeUndefined(this.fMetername) + "</P>\n" +
+                    "                                    <P>仪表名称：" + (clickID=="platform"?(this.fDevicename):(this.fMetername)) + "</P>\n" +
                     "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"col-25\">\n" +
