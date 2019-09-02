@@ -30,6 +30,7 @@ i.icon.icon-alarm {
     width: 1.8rem;
     height: 1.8rem;
     background-image: url(../img/i-alarmp.png);
+    margin-top: 0.2rem;
 }
 
 .card .col-25 p {
@@ -38,4 +39,15 @@ i.icon.icon-alarm {
 
 .unRead {
     color: #FF0000;
+}
+
+.row .col-25 {
+    width: 21%;
+    margin-left: 4%;
+    text-align: center;
+}
+
+.cardtime {
+    font-size: 0.6rem;
+    line-height: 0.1rem;
 }
