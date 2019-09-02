@@ -89,7 +89,7 @@ var Substation = {
                     if (data.code == "200") {
                         successCallback(data.data);
                     }else{
-                        //$.toast("操作失败");
+//                        $.toast("操作失败");
                     }
                 }
             },
