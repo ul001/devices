@@ -1,11 +1,12 @@
 var CustomerDevice = (function () {
     function _customerDevice() {
-        //var selectInfo;
+        var selectInfo;
         var count = 100;
         var curNodeInfo;
         var subid = localStorage.getItem("fSubid");
         var tempId = localStorage.getItem("fTempId");
         var parentId = localStorage.getItem("fPid");
+        // var selectInfo = localStorage.getItem("fFunctionfield");
         // var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
         // selectInfo.id = tempId;
         //修改信息保存后，更新设备信息（复制设备时使用）
@@ -388,28 +389,8 @@ var CustomerDevice = (function () {
                             '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' +
                             "</div></div></li>";
                     }
-                    // < li >
-                    //     <
-                    //     div class = "item-content showDiv" >
-                    //     <
-                    //     div class = "item-inner" >
-                    //     <
-                    //     div class = "item-title label" > 显示名字 < /div> <
-                    //     div class = "item-input" > < input type = "text"
-                    // id = "input1234"
-                    // class = "valueInput"
-                    // value = "有些什么值"
-                    // name = "类型名字"
-                    // validator = "required" >
-                    //     <
-                    //     /div> <
-                    //     /div> <
-                    //     /div> <
-                    //     /li>
                     if (info.inpType == false) {
-                        // string = '<div class="showDiv">' +
-                        //     '<label class="nameInputInfo" name="input">' + decodeURIComponent(val.name) + '</label>' + ':' +
-                        //     '<input type="text" class="valueInput" value="' + info.inpName + '" name="' + info.inpType + '">' + '</div>';
+
                         string =
                             '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" name="input">' +
                             decodeURIComponent(val.name) +
@@ -540,8 +521,8 @@ jQuery(document).ready(function () {
     var subid = localStorage.getItem("fSubid");
     var jumpPid = Substation.GetQueryString("pid");
     var lastClickNum = Substation.GetQueryString("clickNum");
-    $("#goBackLastPid").click(function(){
-        window.location.href = "deviceClass.html?pid="+jumpPid+"&clickNum="+lastClickNum;
+    $("#goBackLastPid").click(function () {
+        window.location.href = "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;
     });
     // var tempId = localStorage.getItem("fTempId");
     // var parentId = localStorage.getItem("fPid");
@@ -653,7 +634,7 @@ jQuery(document).ready(function () {
     });
 
     // 复制按钮
-    $("#copy").on("click",function () {
+    $("#copy").on("click", function () {
         var info = customerDevice.getselectInfo();
 
         var fTemplateid = info.id;
@@ -877,5 +858,3 @@ jQuery(document).ready(function () {
 
     $.init();
 });
-
-
