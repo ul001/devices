@@ -1,14 +1,14 @@
-jQuery(document).ready(function () {
-    // $(function () {
-    var titlename = localStorage.getItem("fSubname");
-    $("#titleContent").text(titlename);
+jQuery(document).ready(function() {
+  // $(function () {
+  var titlename = localStorage.getItem("fSubname");
+  $("#titleContent").text(titlename);
 
-    var showmissionBtn = localStorage.getItem("showType");
-    var missionType = localStorage.getItem("missionType");
+  var showmissionBtn = localStorage.getItem("showType");
+  var missionType = localStorage.getItem("missionType");
 
-    //客户签名
-    $("#checkIn").click(function () {
-        localStorage.setItem("fSubname", "客户签名");
-        window.location.href = "draw.html";
-    });
+  //客户签名
+  $("#checkIn").click(function() {
+    localStorage.setItem("fSubname", "客户签名");
+    window.location.href = "draw.html";
+  });
 });
