@@ -3,8 +3,8 @@
  * @date 2017-04-26 09:46
  * @description 存放常用工具类
  */
-var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v2";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njc3NzA1MzgsInVzZXJuYW1lIjoiYWRtaW4ifQ.GiRkr_eg_8KOaCkb_q-2rI89bwjYM62aT9gZlsbHumw";
+var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v3";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njc4NzM5NzYsInVzZXJuYW1lIjoiYWRtaW4ifQ.fp20FoQB928n4vpM_bymhgObbzWToGWw9HFR4k0-REo";
 var ipAddress = "http://116.236.149.162:8090";
 //iOS安卓基础传参
 /*var u = navigator.userAgent,
@@ -42,38 +42,64 @@ var Substation = {
     return null;
   },
 
-    getDeviceGroupListByPid:function(pid,successCallback){
-        var deviceGroupTree = JSON.parse(localStorage.getItem("subDeviceGroupTree"));
-        var list = [];
-        $(deviceGroupTree).each(function(){
-            if(this.fParentid==pid){
-                list.push(this);
+  loadGroupList:function(successCallback){
+    Substation.getDataByAjax("/selectSubDeviceGroupList", {fSubid:selectSubid}, function (data) {
+        var thisTemids = [];
+        var thisList = data.subdevicegroupList;
+        $(thisList).each(function(){
+            if(this.hasOwnProperty("fPagedesigntemplateid")){
+                thisTemids.push(this);
             }
         });
-        successCallback(list);
+        var devicelist = [];
+        $(data.deviceList).each(function(index,obj){
+            $(thisTemids).each(function(){
+                if(this.fSubdevicegroupid==obj.fSubdevicegroupid){
+                    devicelist.push(this);
+                    return false;
+                }
+            });
+        });
+        Substation.addState(devicelist,thisList,'fSubdevicegroupid','fParentid');
+//        localStorage.setItem("subDeviceGroupTree",JSON.stringify(thisList));
+        successCallback(thisList);
+    });
+  },
+
+    getDeviceGroupListByPid:function(pid,successCallback){
+        this.loadGroupList(function(groupList){
+            var deviceGroupTree=groupList;
+            var list = [];
+            $(deviceGroupTree).each(function(){
+                if(this.fParentid==pid){
+                    list.push(this);
+                }
+            });
+            successCallback(list);
+        });
+//        var deviceGroupTree = JSON.parse(localStorage.getItem("subDeviceGroupTree"));
     },
 
-    changeSortNum:function(firstId,secordId){
-        var deviceGroupTree = JSON.parse(localStorage.getItem("subDeviceGroupTree"));
+    changeSortNum:function(arrList,firstId,secordId){
         var firstIndex,secordIndex;
         var firstNum,secordNum;
-        $(deviceGroupTree).each(function(index,obj){
+        $(arrList).each(function(index,obj){
             if(obj.fSubdevicegroupid==firstId){
                 firstIndex=index;
                 firstNum = obj.fSortnum;
                 return false;
             }
         });
-        $(deviceGroupTree).each(function(index,obj){
+        $(arrList).each(function(index,obj){
             if(obj.fSubdevicegroupid==secordId){
                 secordIndex=index;
                 secordNum = obj.fSortnum;
                 return false;
             }
         });
-        deviceGroupTree[firstIndex]['fSortnum']=secordNum;
-        deviceGroupTree[secordIndex]['fSortnum']=firstNum;
-        swapArr(deviceGroupTree,firstIndex,secordIndex);
+        arrList[firstIndex]['fSortnum']=secordNum;
+        arrList[secordIndex]['fSortnum']=firstNum;
+        swapArr(arrList,firstIndex,secordIndex);
         function swapArr(arr, index1, index2) {
             arr[index1] = arr.splice(index2, 1, arr[index1])[0];
             return arr;
@@ -157,7 +183,7 @@ var Substation = {
           if (data.code == "200") {
             successCallback(data.data);
           } else {
-            $.toast("操作失败");
+//            $.toast("操作失败");
           }
         }
       },

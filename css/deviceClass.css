@@ -56,6 +56,11 @@ i.icon.icon-nodevice {
     height: 1rem;
     background-image: url(../img/i-down.png);
 }
+.icon.icon-yes{
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-yes.png);
+}
 .bar-footer{
     display:none;
 }

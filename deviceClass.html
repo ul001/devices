@@ -34,10 +34,12 @@
                 <button id="add-class" type="button" class="button bg-primary"
                     onclick="addDeviceClass()">新增额外设备分类</button>
             </div>
-            <nav class="bar bar-footer">
-                <a href="#" class="button bg-primary pull-left" style="width:40%;" onclick="changeUp()"><i
+            <nav class="bar bar-footer row">
+                <a href="#" class="button bg-primary col-33" onclick="changeUp()"><i
                         class="icon icon-upChange"></i>上移</a>
-                <a href="#" class="button bg-primary pull-right" style="width:40%;" onclick="changeDown()"><i
+                <a href="#" class="button bg-primary col-33" onclick="confirmSort()"><i
+                        class="icon icon-yes"></i>确定排序</a>
+                <a href="#" class="button bg-primary col-33" onclick="changeDown()"><i
                         class="icon icon-downChange"></i>下移</a>
             </nav>
             <div class="content parent-page">

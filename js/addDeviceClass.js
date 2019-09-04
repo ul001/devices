@@ -37,7 +37,7 @@ function fillData(parentId) {
         if (tempList.length>0) {
             $(tempList).each(function () {
                 var li = "";
-                var linkStr = "<li class=\"item-content item-dis pId";
+                var linkStr = "<li class=\"item-content item-dis\"";
                 var valueStr="";
                 if (this.state == "true"&&!this.hasOwnProperty("fFunctionfield")) {
                     linkStr = "<li class=\"item-content item-link\"";
