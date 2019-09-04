@@ -175,14 +175,57 @@ reSetCanvas.onclick = function () {
 };
 
 save.onclick = function () {
-    let imgUrl = canvas.toDataURL("image/png");
-    let saveA = document.createElement("a");
-    document.body.appendChild(saveA);
-    saveA.href = imgUrl;
-    saveA.download = "zspic" + (new Date).getTime();
-    saveA.target = "_blank";
-    saveA.click();
+    var imgUrl = canvas.toDataURL("image/png");
+    var b64 = imgUrl.substring(22);
+    // $.ajax({
+    //     url: "RotateCanvas.aspx",
+    //     data: {
+    //         data: b64,
+    //         name: "i.toString"
+    //     },
+    //     success: function () {
+    //         //alert('OK');
+    //     }
+    // });
+    // let saveA = document.createElement("a");
+    // document.body.appendChild(saveA);
+    // saveA.href = imgUrl;
+    // saveA.download = "zspic" + (new Date).getTime();
+    // saveA.target = "_blank";
+    // saveA.click();
+    // savePicture(imgUrl);
 };
+
+function savePicture(Url) {
+    var blob = new Blob([''], {
+        type: 'application/octet-stream'
+    });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = Url;
+    a.download = Url.replace(/(.*\/)*([^.]+.*)/ig, "$2").split("?")[0];
+    var e = document.createEvent('MouseEvents');
+    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    a.dispatchEvent(e);
+    URL.revokeObjectURL(url);
+    // var imgDtask = plus.downloader.createDownload(imgurl, {
+    //     //                                method: 'GET'
+    // }, function (d, status) {
+    //     if (status == 200) {
+    //         plus.gallery.save(d.filename, function () { //保存到相册
+    //             plus.io.resolveLocalFileSystemURL(d.filename, function (enpty) {
+    //                 // 关闭弹框
+    //                 mui('#picture').popover('toggle');
+    //                 // mui.toast('保存成功')
+    //             });
+
+    //         })
+    //     } else {
+    //         // mui.toast('保存失败')
+    //     }
+    // });
+    // imgDtask.start();
+}
 
 function getColor() {
     for (let i = 0; i < aColorBtn.length; i++) {
