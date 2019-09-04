@@ -1,11 +1,11 @@
 var showDisItem = 1;
 var editState = 0;
 var pids = [{
-    pId: 0,
+    pId: -1,
     pName: ""
 }];
 var clickNum = 0;
-var thisPid = 0;
+var thisPid = -1;
 var editID = -1;
 var getClickNum = Substation.GetQueryString("clickNum");
 var getUrlPid=Substation.GetQueryString("pid");
@@ -29,7 +29,7 @@ $(".back-parent").click(function () {
     clickNum--;
     var lastPId = pids[clickNum].pId;
     pids.splice(jQuery.inArray(obj, pids), 1);
-    if (lastPId == 0) {
+    if (lastPId == -1) {
         $(".child-page").css("display", "none");
         $(".parent-page").css("display", "block");
     }
@@ -39,37 +39,37 @@ $(".back-parent").click(function () {
 
 function fillData(parentId) {
     thisPid = parentId;
-    var params = {
-        fSubid: selectSubid,
-        fParentId: parentId
-    }
     $(".child-page").css("display", "none");
     $(".parent-page").css("display", "block");
     var ul = $(".parent-page .list-container");
-    if (parentId != 0) {
+    if (parentId != -1) {
         ul = $(".child-page .list-container");
         $(".parent-page").css("display", "none");
         $(".child-page").css("display", "block");
         $("#no-click").text(pids[clickNum].pName);
     }
     ul.empty();
-    Substation.getDataByAjax("/subDeviceTreeSelectByPid", params, function (data) {
-        if (data.hasOwnProperty("menuList")) {
-            $(data.menuList).each(function () {
+    Substation.getDeviceGroupListByPid(parentId, function (menuList) {
+        if (menuList.length>0) {
+            $(menuList).each(function () {
                 var li = "";
-                var linkStr = "<li class=\"item-content item-dis pId";
+                var linkStr = "<li class=\"item-content item-link item-dis\"";
                 var linkIcon = "<div class=\"item-media\"><i class=\"icon icon-nodevice\"></i></div>\n";
+                var valueStr = "";
                 if (this.state == "true") {
-                    linkStr = "<li class=\"item-content item-link pId";
+                    linkStr = "<li class=\"item-content item-link\"";
                     linkIcon = "<div class=\"item-media\"><i class=\"icon icon-device\"></i></div>\n";
                 }
-                li = linkStr + this.pId + "\" id=\"" + this.id + "\" value='" + this.fFunctionfield + "'>\n" +
+                if(this.hasOwnProperty("fPagedesigntemplateid")){
+                    valueStr = this.fPagedesigntemplateid;
+                }
+                li = linkStr +  " id=\"" + this.fSubdevicegroupid + "\" data-num=\""+this.fSortnum+"\" value=\""+valueStr+"\">\n" +
                     linkIcon +
                     "                        <div class=\"item-inner row no-gutter\">\n" +
-                    "                            <div class=\"item-title\">" + this.name + "</div>\n" +
-                    "                                <div class=\"col-58\"><button class='button bg-primary' type=\"button\" onclick=\"renameLi("+this.id+")\">重命名</button>\n" +
-                    "                                <button class='button bg-primary' type=\"button\" onclick=\"cloneLi("+this.id+")\">复制</button>\n" +
-                    "                                <button class='button bg-primary' type=\"button\" onclick=\"deleteLi("+this.id+")\">删除</button></div>\n"+
+                    "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
+                    "                                <div class=\"col-58\"><button class='button bg-primary' type=\"button\">重命名</button>\n" +
+                    "                                <button class='button bg-primary' type=\"button\">复制</button>\n" +
+                    "                                <button class='button bg-primary' type=\"button\">删除</button></div>\n"+
                     "                        </div>\n" +
                     "                    </li>";
                 ul.append(li);
@@ -119,7 +119,7 @@ function fillData(parentId) {
 }
 
 function linkClick(parentId) {
-    $(".item-link").click(function(event){
+    $(".item-content").click(function(event){
         var fField = $(this).attr("value");
         var clickId = $(this).attr("id");
         if (fField != "" && fField != null) {
@@ -172,7 +172,7 @@ function editContent(){
 
 function renameLi(dataId){
     $.prompt('重命名', function (value) {
-          Substation.postDataByAjax("/subDeviceTreeUpdate",{fMenuname:value,fMenuid:dataId},function(data){
+          Substation.postDataByAjax("/updateSubDeviceGroup",{fSubdevicegroupname:value,fSubdevicegroupid:dataId},function(data){
             if(data.code==200){
                 $.toast("重命名成功");
                 $("#"+dataId).find(".item-title").text(value);
@@ -197,7 +197,7 @@ function cloneLi(dataId){
 
 function deleteLi(dataId){
     $.confirm('确定要删除吗?', function () {
-        Substation.getDataByAjax("/subDeviceTreeDelete",{deleteMenuId:dataId},function(){
+        Substation.getDataByAjax("/deleteSubDeviceGroup",{deleteId:dataId,fSubid:selectSubid},function(){
             $("#"+dataId).remove();
         });
     });
@@ -208,9 +208,8 @@ function changeUp(){
         var index = $(".item-edit");
         var idVal = $(".item-edit").attr("id");
         if(index.index() != 0){
-            Substation.getDataByAjax("/moveAppMenu",{id:idVal,flag:"up"},function(){
-                index.prev().before(index);
-            });
+            var secordId = index.prev.attr("id");
+            index.prev().before(index);
         }
     }
 }
@@ -221,9 +220,7 @@ function changeDown(){
         var idVal = $(".item-edit").attr("id");
         var list = $(".item-edit").siblings();
         if(index.index()!=list.length){
-            Substation.getDataByAjax("/moveAppMenu",{id:idVal,flag:"down"},function(){
-                index.next().after(index);
-            });
+            index.next().after(index);
         }
     }
 }
@@ -233,6 +230,25 @@ function addDeviceClass(){
     window.location.href = "addDeviceClass.html?pid="+thisPid+"&clickNum="+clickNum;
 }
 
-fillData(thisPid);
+Substation.getDataByAjax("/selectSubDeviceGroupList", {fSubid:selectSubid}, function (data) {
+    var thisTemids = [];
+    var thisList = data.subdevicegroupList;
+    $(thisList).each(function(){
+        if(this.hasOwnProperty("fPagedesigntemplateid")){
+            thisTemids.push(this);
+        }
+    });
+    var devicelist = [];
+    $(data.deviceList).each(function(index,obj){
+        $(thisTemids).each(function(){
+            if(this.fSubdevicegroupid==obj.fSubdevicegroupid){
+                devicelist.push(this);
+            }
+        });
+    });
+    Substation.addState(devicelist,thisList,'fSubdevicegroupid','fParentid');
+    localStorage.setItem("subDeviceGroupTree",JSON.stringify(thisList));
+    fillData(thisPid);
+});
 
 $.init();

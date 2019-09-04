@@ -1,5 +1,5 @@
 var pids = [{
-    pId: 0
+    pId: -1
 }];
 var jumpPid = Substation.GetQueryString("pid");
 var lastClickNum = Substation.GetQueryString("clickNum");
@@ -12,7 +12,7 @@ function addBackClick(){
         clickNum--;
         var lastPId = pids[clickNum].pId;
         pids.splice(jQuery.inArray(obj, pids), 1);
-        if (lastPId == 0) {
+        if (lastPId == -1) {
             $(".child-page").css("display", "none");
             $(".parent-page").css("display", "block");
         }
@@ -21,12 +21,8 @@ function addBackClick(){
 }
 
 function fillData(parentId) {
-    var params = {
-        fSubid: selectSubid,
-        fParentId: parentId
-    }
     var ul;
-    if (parentId == 0) {
+    if (parentId == -1) {
         ul = $(".parent-page .list-container");
         ul.empty();
     }else{
@@ -37,17 +33,21 @@ function fillData(parentId) {
                 "                        </div>\n" +
                 "                    </li>");
     }
-    Substation.getDataByAjax("/appMenuSelectByPid", params, function (data) {
-        if (data.hasOwnProperty("menuList")) {
-            $(data.menuList).each(function () {
+    Substation.getTemplateListByPid(parentId, function (tempList) {
+        if (tempList.length>0) {
+            $(tempList).each(function () {
                 var li = "";
                 var linkStr = "<li class=\"item-content item-dis pId";
-                if (this.state == "true"&&this.fFunctionfield=="") {
-                    linkStr = "<li class=\"item-content item-link pId";
+                var valueStr="";
+                if (this.state == "true"&&!this.hasOwnProperty("fFunctionfield")) {
+                    linkStr = "<li class=\"item-content item-link\"";
                 }
-                li = linkStr + this.pId + "\" id=\"" + this.id + "\">\n" +
+/*                if(this.hasOwnProperty("fFunctionfield")){
+                    valueStr = this.fFunctionfield;
+                }*/
+                li = linkStr + " id=\"" + this.fPagedesigntemplateid + "\" value=\""+valueStr+"\">\n" +
                     "                        <div class=\"item-inner row no-gutter\">\n" +
-                    "                            <div class=\"item-title\"><i class=\"icon icon-round\"></i>" + this.name + "</div>\n" +
+                    "                            <div class=\"item-title\"><i class=\"icon icon-round\"></i>" + this.fDesigntemplatename + "</div>\n" +
                     "                        </div>\n" +
                     "                    </li>";
                 ul.append(li);
@@ -79,7 +79,7 @@ function linkClick(parentId) {
 function addDevice(){
     if($(".selectLi").length>0){
         var idVal = $(".selectLi").attr("id");
-        Substation.postDataByAjax("/subDeviceTreeAdd",{pid:jumpPid,modelId:idVal,fSubid:selectSubid},function(data){
+        Substation.postDataByAjax("/addSubDeviceGroup",{parentId:jumpPid,templateId:idVal,fSubid:selectSubid},function(data){
             goBackLastPid();
         });
     }
@@ -89,6 +89,17 @@ function goBackLastPid(){
         window.location.href = "deviceClass.html?pid="+jumpPid+"&editState=1&clickNum="+lastClickNum;
 }
 
-fillData(0);
+Substation.getDataByAjax("/selectTemplateList",{},function(data){
+    var thisList = data.subdevicegroupList;
+    var haveList = [];
+    $(thisList).each(function(){
+        if(this.hasOwnProperty("fFunctionfield")){
+            haveList.push(this);
+        }
+    });
+    Substation.addState(haveList,thisList,'fPagedesigntemplateid','fParentid');
+    localStorage.setItem("templateTree",JSON.stringify(thisList));
+    fillData(-1);
+});
 
 $.init();

@@ -4,10 +4,10 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v2";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjcxMDYyMjcsInVzZXJuYW1lIjoiYWRtaW4ifQ.IXfNZMenCNB71da7EGNOjceOBKf0rKuA4qrKCRybStI";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njc3NzA1MzgsInVzZXJuYW1lIjoiYWRtaW4ifQ.GiRkr_eg_8KOaCkb_q-2rI89bwjYM62aT9gZlsbHumw";
 var ipAddress = "http://116.236.149.162:8090";
 //iOS安卓基础传参
-var u = navigator.userAgent,
+/*var u = navigator.userAgent,
   app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -25,7 +25,7 @@ if (isIOS) {
   baseUrlFromAPP = android.getBaseUrl();
   tokenFromAPP = android.getToken();
   ipAddress = android.getIpAddress();
-}
+}*/
 
 var Substation = {
   ipAddressFromAPP: ipAddress + "/",
@@ -41,6 +41,73 @@ var Substation = {
     if (r != null) return unescape(r[2]);
     return null;
   },
+
+    getDeviceGroupListByPid:function(pid,successCallback){
+        var deviceGroupTree = JSON.parse(localStorage.getItem("subDeviceGroupTree"));
+        var list = [];
+        $(deviceGroupTree).each(function(){
+            if(this.fParentid==pid){
+                list.push(this);
+            }
+        });
+        successCallback(list);
+    },
+
+    changeSortNum:function(firstId,secordId){
+        var deviceGroupTree = JSON.parse(localStorage.getItem("subDeviceGroupTree"));
+        var firstIndex,secordIndex;
+        var firstNum,secordNum;
+        $(deviceGroupTree).each(function(index,obj){
+            if(obj.fSubdevicegroupid==firstId){
+                firstIndex=index;
+                firstNum = obj.fSortnum;
+                return false;
+            }
+        });
+        $(deviceGroupTree).each(function(index,obj){
+            if(obj.fSubdevicegroupid==secordId){
+                secordIndex=index;
+                secordNum = obj.fSortnum;
+                return false;
+            }
+        });
+        deviceGroupTree[firstIndex]['fSortnum']=secordNum;
+        deviceGroupTree[secordIndex]['fSortnum']=firstNum;
+        swapArr(deviceGroupTree,firstIndex,secordIndex);
+        function swapArr(arr, index1, index2) {
+            arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+            return arr;
+        }
+        localStorage.setItem("tempSortTree",JSON.stringify(deviceGroupTree));
+    },
+
+    getTemplateListByPid:function(pid,successCallback){
+        var templateTree = JSON.parse(localStorage.getItem("templateTree"));
+        var list = [];
+        $(templateTree).each(function(){
+            if(this.pId==pid){
+                list.push(this);
+            }
+        });
+        successCallback(list);
+    },
+
+    addState:function(deviceList,list,thisid,pid){
+        if(deviceList.length>0){
+            var lastdids=[];
+            $(deviceList).each(function(index,obj){
+                $(list).each(function(){
+                    if(obj[thisid]==this[thisid]){
+                        this['state']="true";
+                    }
+                    if(this[thisid]==obj[pid]){
+                        lastdids.push(this);
+                    }
+                });
+            });
+            this.addState(lastdids,list,thisid,pid);
+        }
+    },
 
   getDataByAjax: function(url, params, successCallback) {
     $.showPreloader();
