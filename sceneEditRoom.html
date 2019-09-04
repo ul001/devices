@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>编辑电房</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/powerMeter.css" />
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src='libs/cn.min.js'></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/config.js"></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/powerMeter.js"></script>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="route6">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <h1 class="title title_color">编辑电房
+                    <!-- < class="limit-length" id="titleContent"></> -->
+                </h1>
+                <button class="button pull-right clickrightbtn" style="color:white;">
+                    保存
+                </button>
+            </header>
+            <div class="content">
+                <div class="content-block" id="addVarContain125">
+                    <div class="content-block-title">
+                    </div>
+                    <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class=" showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label requiredLabel">电房类型:</div>
+                                        <div class="item-input">
+                                            <select>
+                                                <option>室内配电房(新)</option>
+                                                <option>室外配电房(新)</option>
+                                                <option>箱式变电站(新)</option>
+                                                <option>公变用户(新)</option>
+                                                <option>室内配电房35kV(新)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">电房编号名称:</div>
+                                        <div class="item-input"><input type="text" class="valueInput" value="#电房1"
+                                                name="sender" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">地址:</div>
+                                        <div class="item-input"><input type="text" class="valueInput" value="北关办事处"
+                                                name="number" validator="required">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

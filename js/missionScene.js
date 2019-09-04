@@ -6,14 +6,20 @@ jQuery(document).ready(function () {
     var showmissionBtn = localStorage.getItem("showType");
     var missionType = localStorage.getItem("missionType");
 
-    $("#clickDefect").click(function () {
+    //拍照
+    $("#takeRoomPhoto").click(function () {
         localStorage.setItem("fSubname", "缺陷登记");
         window.location.href = "patrolContent.html";
     });
 
-    //客户签名
-    $("#checkIn").click(function () {
-        localStorage.setItem("fSubname", "客户签名");
-        window.location.href = "draw.html";
+    //编辑
+    $("#editRoom").click(function () {
+        localStorage.setItem("fSubname", "编辑电房");
+        window.location.href = "sceneEditRoom.html";
+    });
+
+    //删除
+    $("#deleteRoom").click(function () {
+
     });
 });
