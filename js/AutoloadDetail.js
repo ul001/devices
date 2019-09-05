@@ -6,10 +6,12 @@ var CustomerDevice = (function () {
         var subid = localStorage.getItem("fSubid");
         //查询模板fPagedesigntemplateid 用父级的fParentid查模板
         // 用父级的fParentid查模板
-        var parentId = Substation.GetQueryString("fDeviceGroupId");
-        var tempId = Substation.GetQueryString("pid");
+        var parentId = Substation.GetQueryString("pid");
+        var tempId = Substation.GetQueryString("fTempid");
         //用fSubdeviceinfoid组id查真实数据
         var deviceGroupId = Substation.GetQueryString("fDeviceGroupId");
+
+        deviceGroupId = 41;
 
         // var selectInfo = localStorage.getItem("fFunctionfield");
         // var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
@@ -86,34 +88,36 @@ var CustomerDevice = (function () {
         this.show = function () {
             initHtml();
             // getData();
-            getSelectInfo();
+            // getSelectInfo();
+            //初始化页面
             getNetData();
-
         };
 
-        function getSelectInfo() {
-            Substation.getDataByAjax(
-                "/selectPageTemplateByPid",
-                "parentId=" + parentId,
-                function (data) {
-                    var menuList = data.menuList;
-                    $.each(menuList, function (key, val) {
-                        if (tempId == val.id.toString()) {
-                            selectInfo = val;
-                        }
-                    });
-                }
-            );
+        // function getSelectInfo() {
+        //     Substation.getDataByAjax(
+        //         "/selectDeviceList",
+        //         "subDeviceGroupId=" + deviceGroupId,
+        //         function (data) {
+        //             selectInfo = data.template;
+        //             // $.each(menuList, function (key, val) {
+        //             //     if (tempId == val.fPagedesigntemplateid.toString()) {
+        //             //         selectInfo = val;
+        //             //     }
+        //             // });
+        //         }
+        //     );
 
-        };
+        // };
 
         function getNetData() {
             Substation.getDataByAjax(
                 "/selectDeviceList",
-                "&subDeviceGroupId=" + tempId,
+                "subDeviceGroupId=" + deviceGroupId,
                 function (data) {
+                    //赋模板
+                    selectInfo = data.template;
                     // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
-                    curNodeInfo = data;
+                    curNodeInfo = data.deviceList;
                     //                     selectInfo = {
                     //                         id: tempId,
                     //                         name: "户外隔离刀闸",
@@ -125,10 +129,10 @@ var CustomerDevice = (function () {
                     //                         fFunctionfield: '{"deviceInfo":[{"name":"%E8%AE%BE%E5%A4%87%E4%BF%A1%E6%81%AF","value":[{"inpName":"","inpType":false,"type":"input","name":"%E7%BC%96%E5%8F%B7%E5%8F%8A%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E5%9E%8B%E5%8F%B7%E8%A7%84%E6%A0%BC","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%AE%9A%E7%94%B5%E6%B5%81(A)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E9%A2%9D%E5%BA%A6%E7%94%B5%E5%8E%8B(kV)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E7%94%9F%E4%BA%A7%E5%8E%82%E5%AE%B6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"date","name":"%E7%94%9F%E4%BA%A7%E6%97%A5%E6%9C%9F","value":""},{"type":"date","name":"%E6%8A%95%E8%BF%90%E6%97%A5%E6%9C%9F","value":""},{"inpName":"","inpType":false,"type":"input","name":"%E6%95%B0%E9%87%8F(%E5%8F%B0)","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"type":"select","name":"%E5%BD%93%E5%89%8D%E7%8A%B6%E6%80%81","value":"%5B%7B%22opName%22%3A%22%E8%BF%90%E8%A1%8C%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%81%9C%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E5%A4%87%E7%94%A8%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E6%95%85%E9%9A%9C%22%2C%22opType%22%3Afalse%7D%5D"},{"inpName":"","inpType":false,"type":"input","name":"","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]},{"name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87","value":[{"inpName":"","inpType":false,"type":"input","name":"%E4%B8%8A%E7%BA%A7%E8%AE%BE%E5%A4%87%E5%8F%8A%E7%BC%96%E5%8F%B7%E5%90%8D%E7%A7%B0","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"},{"inpName":"","inpType":false,"type":"input","name":"%E6%8E%92%E5%BA%8F%E5%8F%B7","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D"}]}],"checkInfo":[{"type":"radio","name":"%E5%B7%A1%E6%A3%80%E4%BF%A1%E6%81%AF-%E6%88%B7%E5%A4%96%E9%9A%94%E7%A6%BB%E5%88%80%E9%97%B8","value":"yes"},{"inpName":"","inpType":true,"type":"input","name":"%E6%B8%A9%E5%BA%A6","value":"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D"}]}'
                     //                     };
                     // 如果有设备信息
-                    if (data.length > 0) {
-                        $.each(data, function (key, val) {
+                    if (data.deviceList.length > 0) {
+                        $.each(data.deviceList, function (key, val) {
                             count++;
-                            var name = "addModal" + val.fId;
+                            var name = "addModal" + val.fSubdeviceinfoid;
                             //  var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
                             if (key == 0) {
                                 // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
@@ -140,11 +144,11 @@ var CustomerDevice = (function () {
                                     ' <a role="presentation" href="#' +
                                     name +
                                     '" class="tab-link button" name="' +
-                                    val.fId +
+                                    val.fSubdeviceinfoid +
                                     '" id="tab' +
                                     name +
                                     '">' +
-                                    decodeURIComponent(val.fPagename) +
+                                    decodeURIComponent(val.fDevicename) +
                                     "</a>";
                                 var containStr =
                                     '<div role="tabpanel" class="tab" id="' +
@@ -162,11 +166,11 @@ var CustomerDevice = (function () {
                                     ' <a role="presentation" href="#' +
                                     name +
                                     '" class="tab-link button" name="' +
-                                    val.fId +
+                                    val.fSubdeviceinfoid +
                                     '" id="tab' +
                                     name +
                                     '">' +
-                                    decodeURIComponent(val.fPagename) +
+                                    decodeURIComponent(val.fDevicename) +
                                     "</a>";
                                 var containStr =
                                     '<div role="tabpanel" class="tab" id="' +
@@ -180,8 +184,8 @@ var CustomerDevice = (function () {
                             if (count == 101) {
                                 $("#tab" + name).click();
                             }
-                            if (val.fPagejson != undefined && val.fPagejson != "undefined") {
-                                creatInfo(val.fPagejson, $("#addVarContain" + count), count);
+                            if (val.fDevicejson != undefined && val.fDevicejson != "undefined") {
+                                creatInfo(val.fDevicejson, $("#addVarContain" + count), count);
                             }
                         });
                     } else {
@@ -373,9 +377,10 @@ var CustomerDevice = (function () {
         function showInfo(val, select) {
             count++;
             var string;
+            var info = JSON.parse(selectInfo.fFunctionfield);
             switch (val.type) {
                 case "input":
-                    var info = JSON.parse(decodeURIComponent(val.value));
+                    // var info = JSON.parse(decodeURIComponent(selectInfo.fFunctionfield));
                     if (info.inpType == true) {
                         // string = '<div class="showDiv">' +
                         // '<label class="nameInputInfo" name="input">' + decodeURIComponent(val.name) + '</label>' + ':' +
@@ -395,7 +400,6 @@ var CustomerDevice = (function () {
                             "</div></div></li>";
                     }
                     if (info.inpType == false) {
-
                         string =
                             '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" name="input">' +
                             decodeURIComponent(val.name) +
@@ -582,8 +586,8 @@ jQuery(document).ready(function () {
             return;
         }
 
-        var fTemplateid = info.id;
-        var fPagename = info.name;
+        var fSubdevicegroupid = info.fPagedesigntemplateid;
+        var fDevicename = info.name;
         // var json = info.fFunctionfield;
         var json = JSON.parse(info.fFunctionfield);
         var newJson = JSON.stringify(json.deviceInfo);
@@ -591,8 +595,8 @@ jQuery(document).ready(function () {
 
         var formdata = new FormData();
         formdata.append("fSubid", subid);
-        formdata.append("fTemplateid", fTemplateid);
-        formdata.append("fPagename", encodeURIComponent(fPagename));
+        formdata.append("fSubdevicegroupid", fSubdevicegroupid);
+        formdata.append("fDevicename", encodeURIComponent(fDevicename));
         // formdata.append("fPagejson", json);
         if (newJson != undefined) {
             formdata.append("fPagejson", newJson);
@@ -600,29 +604,8 @@ jQuery(document).ready(function () {
             console.log("信息错误！");
             return;
         }
-        var url = "/pageCustomInsert";
-        // $.ajax({
-        //         url: Substation.Common.addHead() + url,
-        //         type: "POST",
-        //         data: formdata,
-        //         beforeSend: function (request) {
-        //             request.setRequestHeader("Authorization", tokenFromAPP);
-        //         },
-        //         processData: false,
-        //         contentType: false
-        //     })
-        //     .done(function (data) {
-        //         if (data.msg != "ok") {
-        //             alert("新增失败！");
-        //         } else {
-        //             customerDevice.addModal();
-        //             $(".active[role='presentation']").attr("name", data.data.fId);
-        //             $("#save").removeAttr("disabled");
-        //         }
-        //     })
-        //     .fail(function (res) {
-        //         alert("新增失败！");
-        //     });
+        var url = "/addDevice";
+
         Substation.postFormDataByAjax(
             url,
             formdata,
@@ -631,7 +614,7 @@ jQuery(document).ready(function () {
                     alert("新增失败！");
                 } else {
                     customerDevice.addModal();
-                    $(".active[role='presentation']").attr("name", data.data.fId);
+                    $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
                     $("#save").removeAttr("disabled");
                 }
             }
@@ -682,8 +665,8 @@ jQuery(document).ready(function () {
             .text();
         if (confirm("确认删除" + name + " 吗？")) {
             Substation.getDataByAjax(
-                "/pageCustomDelete",
-                "fId=" + selectId,
+                "/deleteDevice",
+                "deleteId=" + selectId,
                 function (data) {
                     if (data == true) {
                         alert("删除成功！");
