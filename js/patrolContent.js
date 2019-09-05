@@ -1,4 +1,4 @@
-var pids = [0];
+var pids = [-1];
 var clickNum = 0;
 var selectSubid = 10100001;
 //var selectSubid = localStorage.getItem("fSubid");
@@ -18,7 +18,7 @@ function fillData(parentId) {
         fParentId: parentId
     }
     var ul;
-    if (parentId == 0) {
+    if (parentId == -1) {
         ul = $(".list-block .list-container");
         ul.empty();
     }else{
@@ -29,17 +29,17 @@ function fillData(parentId) {
                 "                        </div>\n" +
                 "                    </li>");
     }
-    Substation.getDataByAjax("/subDeviceTreeSelectByPid", params, function (data) {
+    Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
         if (data.hasOwnProperty("menuList")) {
             $(data.menuList).each(function () {
                 var li = "";
                 var linkStr = "<li class=\"item-content item-dis";
-                if (this.state == "true"&&this.fFunctionfield=="") {
+                if (this.displayOrHideState == true&&!this.hasOwnProperty("fPagedesigntemplateid")) {
                     linkStr = "<li class=\"item-content item-link";
                 }
-                li = linkStr + "\" id=\"" + this.id + "\">\n" +
+                li = linkStr + "\" id=\"" + this.fSubdevicegroupid + "\">\n" +
                     "                        <div class=\"item-inner\">\n" +
-                    "                            <div class=\"item-title\">" + this.name + "</div>\n" +
+                    "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
                     "                        </div>\n" +
                     "                    </li>";
                 ul.append(li);
@@ -68,6 +68,6 @@ function linkClick(parentId) {
     event.stopPropagation();
 };
 
-fillData(0);
+fillData(-1);
 
 $.init();
