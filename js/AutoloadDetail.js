@@ -5,9 +5,12 @@ var CustomerDevice = (function () {
         var curNodeInfo;
         var subid = localStorage.getItem("fSubid");
         //查询模板fPagedesigntemplateid 用父级的fParentid查模板
-        var tempId = localStorage.getItem("fTempId");
+        // 用父级的fParentid查模板
+        var parentId = Substation.GetQueryString("fDeviceGroupId");
+        var tempId = Substation.GetQueryString("pid");
         //用fSubdeviceinfoid组id查真实数据
-        var parentId = localStorage.getItem("fPid");
+        var deviceGroupId = Substation.GetQueryString("fDeviceGroupId");
+
         // var selectInfo = localStorage.getItem("fFunctionfield");
         // var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
         // selectInfo.id = tempId;
@@ -91,7 +94,7 @@ var CustomerDevice = (function () {
         function getSelectInfo() {
             Substation.getDataByAjax(
                 "/selectPageTemplateByPid",
-                "&parentId=" + parentId,
+                "parentId=" + parentId,
                 function (data) {
                     var menuList = data.menuList;
                     $.each(menuList, function (key, val) {
