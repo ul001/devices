@@ -1,14 +1,17 @@
-var pids = [-1];
+var pids = [{pid:-1,pname:""}];
 var clickNum = 0;
 var selectSubid = 10100001;
 //var selectSubid = localStorage.getItem("fSubid");
 
 function addBackClick(){
     $(".back-parent").unbind().click(function () {
+        if(pids[clickNum+1]!=null){
+            pids.splice(-1, 1);
+        }
         clickNum--;
         var lastPId = pids[clickNum];
         pids.splice(-1, 1);
-        fillData(lastPId);
+        fillData(lastPId.pid);
     });
 }
 
@@ -47,6 +50,18 @@ function fillData(parentId) {
             $(".list-block .item-content").click(function(){
                 $(this).addClass("selectLi").siblings().removeClass("selectLi");
                 var thisId = $(this).attr("id");
+                var clickName = $("#"+thisId+" .item-title").text();
+                if(pids[clickNum+1]==null){
+                    pids.push({pid:thisId,pname:clickName});
+                }else{
+                    pids[clickNum+1] = {pid:thisId,pname:clickName};
+                }
+                var titleTree="";
+                $(pids).each(function(){
+                    titleTree+=this.pname+">";
+                });
+                var titleTreeName=titleTree.substring(1,titleTree.length-1);
+                $("#subName").text(titleTreeName);
                 $(".close-panel").click();
             });
             addBackClick();
@@ -59,8 +74,14 @@ function linkClick(parentId) {
     $(".list-block .item-link").unbind().click(function(event){
         $(".selectLi").removeClass("selectLi");
         var clickId = $(this).attr("id");
+        var clickName = $("#"+clickId+" .item-title").text();
+        if(clickNum==0){
+            if(pids[clickNum+1]!=null){
+                pids.splice(-1, 1);
+            }
+        }
         clickNum++;
-        pids.push(clickId);
+        pids.push({pid:clickId,pname:clickName});
         $(".parent-page").css("display", "none");
         $(".child-page").css("display", "block");
         fillData(clickId);
@@ -69,5 +90,7 @@ function linkClick(parentId) {
 };
 
 fillData(-1);
+
+$(".open-panel").click();
 
 $.init();

@@ -34,3 +34,13 @@ i.icon.icon-select{
     margin-bottom:0.2rem;
     background-image: url(../img/i-select.png);
 }
+.content .card label.label-checkbox:active{
+    background:none;
+}
+.content .content-block{
+    margin:0;
+    padding:0;
+}
+p.limit-length{
+    margin:0;
+}

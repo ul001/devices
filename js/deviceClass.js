@@ -25,6 +25,7 @@ if(getClickNum!=""&&getClickNum!=null){
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 $("#titleContent").text(selectSubname);
+var thisMenuList = [];
 
 function addBack(){
     $(".back-parent").unbind().click(function () {
@@ -37,11 +38,28 @@ function addBack(){
             $(".parent-page").css("display", "block");
         }
         //$("#no-click").text(pids[clickNum].pName);
+        thisMenuList=[];
         fillData(lastPId);
     });
 }
 
 function fillData(parentId) {
+    if(thisMenuList.length==0){
+        Substation.getDataByAjax("/selectSubDeviceGroupListByPid",{fSubid:selectSubid,fParentId:parentId},function (data) {
+            if (data.hasOwnProperty("menuList")){
+                if(data.menuList.length>0) {
+                    thisMenuList = data.menuList;
+                    changeArr=data.menuList;
+                    fillH5(parentId);
+                }
+            }
+        });
+    }else{
+        fillH5(parentId);
+    }
+}
+
+function fillH5(parentId){
     changeTemp = false;
     thisPid = parentId;
     $(".child-page").css("display", "none");
@@ -57,106 +75,110 @@ function fillData(parentId) {
     if(editState==0){
         addBack();
     }
-    Substation.getDataByAjax("/selectSubDeviceGroupListByPid",{fSubid:selectSubid,fParentId:parentId},function (data) {
-        if (data.hasOwnProperty("menuList")&&data.menuList.length>0) {
-            changeArr=data.menuList;
-            $(data.menuList).each(function () {
-                var li = "";
-                var linkStr = "<li class=\"item-content item-link item-dis\"";
-                var linkIcon = "<div class=\"item-media\"><i class=\"icon icon-nodevice\"></i></div>\n";
-                var valueStr = "";
-                if (this.displayOrHideState == true) {
-                    linkStr = "<li class=\"item-content item-link\"";
-                    linkIcon = "<div class=\"item-media\"><i class=\"icon icon-device\"></i></div>\n";
-                }
-                if(this.hasOwnProperty("fPagedesigntemplateid")){
-                    valueStr = this.fPagedesigntemplateid;
-                }
-                li = linkStr +  " id=\"" + this.fSubdevicegroupid + "\" data-num=\""+this.fSortnum+"\" value=\""+valueStr+"\">\n" +
-                    linkIcon +
-                    "                        <div class=\"item-inner row no-gutter\">\n" +
-                    "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
-                    "                                <div class=\"col-58\"><button class='button bg-primary' type=\"button\" onclick=\"renameLi()\">重命名</button>\n" +
-                    "                                <button class='button bg-primary' type=\"button\" onclick=\"cloneLi()\">复制</button>\n" +
-                    "                                <button class='button bg-primary' type=\"button\" onclick=\"deleteLi()\">删除</button></div>\n"+
-                    "                        </div>\n" +
-                    "                    </li>";
-                ul.append(li);
-            });
-            if (showDisItem == 0) {
-                $(".item-dis").css("display", "none");
-            } else {
-                $(".item-dis").css("display", "flex");
-            }
-            linkClick(parentId);
-            $("#show-class").unbind().click(function () {
-                if (showDisItem == 0) {
-                    showDisItem = 1;
-                    $("#show-class").text("隐藏无设备分类");
-                    $(".item-dis").css("display", "flex");
-                } else {
-                    showDisItem = 0;
-                    $("#show-class").text("显示无设备分类");
-                    $(".item-dis").css("display", "none");
-                }
-            });
+    $(thisMenuList).each(function () {
+        var li = "";
+        var linkStr = "<li class=\"item-content item-link item-dis\"";
+        var linkIcon = "<div class=\"item-media\"><i class=\"icon icon-nodevice\"></i></div>\n";
+        var valueStr = "";
+        if (this.displayOrHideState == true) {
+            linkStr = "<li class=\"item-content item-link\"";
+            linkIcon = "<div class=\"item-media\"><i class=\"icon icon-device\"></i></div>\n";
         }
-        if(editState==1){
-            $(".back-parent").unbind();
-            $("#editBtn").text("退出");
-            $("#add-class").css("display","inline-block");
-            $(".bar-header-secondary").after("            <nav class=\"bar bar-footer row\">\n" +
-                                   "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeUp()\"><i\n" +
-                                   "                        class=\"icon icon-upChange\"></i>上移</a>\n" +
-                                   "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"confirmSort()\"><i\n" +
-                                   "                        class=\"icon icon-yes\"></i>确定排序</a>\n" +
-                                   "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeDown()\"><i\n" +
-                                   "                        class=\"icon icon-downChange\"></i>下移</a>\n" +
-                                   "            </nav>");
-            $(".item-content").unbind().click(function(){
-                $(".item-edit").removeClass("item-edit");
-                $(".col-40").removeClass("col-40");
-                $(this).addClass("item-edit").siblings().removeClass("item-edit");
-                $(this).find(".item-title").addClass("col-40");
-                editID = $(this).attr("id");
-            });
+        if(this.hasOwnProperty("fPagedesigntemplateid")){
+            valueStr = this.fPagedesigntemplateid;
         }
-        if(editID!=-1){
-            $("#"+editID).addClass("item-edit").siblings().removeClass("item-edit");
-            $("#"+editID).find(".item-title").addClass("col-40");
-            $(".item-content").unbind().click(function(){
-                $(".item-edit").removeClass("item-edit");
-                $(".col-40").removeClass("col-40");
-                $(this).addClass("item-edit").siblings().removeClass("item-edit");
-                $(this).find(".item-title").addClass("col-40");
-                editID = $(this).attr("id");
-            });
+        li = linkStr +  " id=\"" + this.fSubdevicegroupid + "\" data-num=\""+this.fSortnum+"\" value=\""+valueStr+"\">\n" +
+            linkIcon +
+            "                        <div class=\"item-inner row no-gutter\">\n" +
+            "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
+            "                                <div class=\"col-58\"><button class='button bg-primary' type=\"button\" onclick=\"renameLi()\">重命名</button>\n" +
+            "                                <button class='button bg-primary' type=\"button\" onclick=\"cloneLi()\">复制</button>\n" +
+            "                                <button class='button bg-primary' type=\"button\" onclick=\"deleteLi()\">删除</button></div>\n"+
+            "                        </div>\n" +
+            "                    </li>";
+        ul.append(li);
+    });
+    if (showDisItem == 0) {
+        $(".item-dis").css("display", "none");
+    } else {
+        $(".item-dis").css("display", "flex");
+    }
+    linkClick(parentId);
+    $("#show-class").unbind().click(function () {
+        if (showDisItem == 0) {
+            showDisItem = 1;
+            $("#show-class").text("隐藏无设备分类");
+            $(".item-dis").css("display", "flex");
+        } else {
+            showDisItem = 0;
+            $("#show-class").text("显示无设备分类");
+            $(".item-dis").css("display", "none");
         }
     });
+    if(editState==1){
+        $(".back-parent").unbind();
+        $("#editBtn").text("退出");
+        $("#add-class").css("display","inline-block");
+        $(".bar-header-secondary").after("            <nav class=\"bar bar-footer row\">\n" +
+                               "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeUp()\"><i\n" +
+                               "                        class=\"icon icon-upChange\"></i>上移</a>\n" +
+                               "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"confirmSort()\"><i\n" +
+                               "                        class=\"icon icon-yes\"></i>确定排序</a>\n" +
+                               "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeDown()\"><i\n" +
+                               "                        class=\"icon icon-downChange\"></i>下移</a>\n" +
+                               "            </nav>");
+        $(".item-content").unbind().click(function(){
+            $(".item-edit").removeClass("item-edit");
+            $(".col-40").removeClass("col-40");
+            $(this).addClass("item-edit").siblings().removeClass("item-edit");
+            $(this).find(".item-title").addClass("col-40");
+            editID = $(this).attr("id");
+        });
+    }
+    if(editID!=-1){
+        $("#"+editID).addClass("item-edit").siblings().removeClass("item-edit");
+        $("#"+editID).find(".item-title").addClass("col-40");
+        $(".item-content").unbind().click(function(){
+            $(".item-edit").removeClass("item-edit");
+            $(".col-40").removeClass("col-40");
+            $(this).addClass("item-edit").siblings().removeClass("item-edit");
+            $(this).find(".item-title").addClass("col-40");
+            editID = $(this).attr("id");
+        });
+    }
 }
 
 function linkClick(parentId) {
     $(".item-content").click(function(event){
         var fField = $(this).attr("value");
         var clickId = $(this).attr("id");
-        if (fField != "" && fField != null) {
+        Substation.getDataByAjax("/selectSubDeviceGroupListByPid",{fSubid:selectSubid,fParentId:clickId},function (data) {
+            if (data.hasOwnProperty("menuList")){
+                if(data.menuList.length>0) {
+                     thisMenuList = data.menuList;
+                     changeArr=data.menuList;
+                     clickNum++;
+                     var parentName = $("#"+clickId).find(".item-title").text();
+                     pids.push({
+                         pId: clickId,
+                         pName: parentName
+                     });
+                     //$("#no-click").text(parentName);
+                     $(".parent-page").css("display", "none");
+                     $(".child-page").css("display", "block");
+                     fillData(clickId);
+                     return;
+                }
+            }
+            localStorage.setItem("pids",JSON.stringify(pids));
+            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum+"&fDeviceGroupId="+clickId+"&fTempid="+fField;
+       /* if (fField != "" && fField != null) {
 //            localStorage.setItem("fDeviceGroupId", clickId);
             //localStorage.setItem("fFunctionfield",fField);
 //            localStorage.setItem("fPid", parentId);
-            localStorage.setItem("pids",JSON.stringify(pids));
-            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum+"&fDeviceGroupId="+clickId+"&fTempid="+fField;
-        } else {
-            clickNum++;
-            var parentName = $(this).find(".item-title").text();
-            pids.push({
-                pId: clickId,
-                pName: parentName
-            });
-            //$("#no-click").text(parentName);
-            $(".parent-page").css("display", "none");
-            $(".child-page").css("display", "block");
-            fillData(clickId);
-        }
+
+        } */
+        });
         event.stopPropagation();
     });
 }
@@ -220,6 +242,7 @@ function cloneLi(){
     var idVal = $(".item-edit").attr("id");
     Substation.postDataByAjax("/copySubDeviceGroup",{copyId:idVal},function(data){
         if(data.code==200){
+            thisMenuList=[];
             fillData(thisPid);
         }else{
             $.toast("操作失败");
@@ -264,14 +287,16 @@ function changeDown(){
 }
 
 function confirmSort(){
-    var jsonStr = JSON.stringify(changeArr);
-    Substation.postDataByAjax("/updateBatchDeviceGroup",{groupList:jsonStr},function(data){
-        if(data.code==200){
-            $.toast("排序成功");
-        }else{
-            $.toast("操作失败");
-        }
-    })
+    if(changeTemp){
+        var jsonStr = JSON.stringify(changeArr);
+        Substation.postDataByAjax("/updateBatchDeviceGroup",{groupList:jsonStr},function(data){
+            if(data.code==200){
+                $.toast("排序成功");
+            }else{
+                $.toast("操作失败");
+            }
+        });
+    }
 }
 
 function addDeviceClass(){
@@ -322,6 +347,6 @@ function getChangeArr(arr,firstId,secordId){
     Substation.addState(devicelist,thisList,'fSubdevicegroupid','fParentid');
     localStorage.setItem("subDeviceGroupTree",JSON.stringify(thisList));
 });*/
-    fillData(thisPid);
+fillData(thisPid);
 
 $.init();
