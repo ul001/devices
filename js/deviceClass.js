@@ -105,7 +105,14 @@ function fillData(parentId) {
             $(".back-parent").unbind();
             $("#editBtn").text("退出");
             $("#add-class").css("display","inline-block");
-            $(".bar-footer").css("display","block");
+            $(".bar-header-secondary").after("            <nav class=\"bar bar-footer row\">\n" +
+                                   "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeUp()\"><i\n" +
+                                   "                        class=\"icon icon-upChange\"></i>上移</a>\n" +
+                                   "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"confirmSort()\"><i\n" +
+                                   "                        class=\"icon icon-yes\"></i>确定排序</a>\n" +
+                                   "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeDown()\"><i\n" +
+                                   "                        class=\"icon icon-downChange\"></i>下移</a>\n" +
+                                   "            </nav>");
             $(".item-content").unbind().click(function(){
                 $(".item-edit").removeClass("item-edit");
                 $(".col-40").removeClass("col-40");
@@ -133,11 +140,11 @@ function linkClick(parentId) {
         var fField = $(this).attr("value");
         var clickId = $(this).attr("id");
         if (fField != "" && fField != null) {
-            localStorage.setItem("fTempId", clickId);
+//            localStorage.setItem("fDeviceGroupId", clickId);
             //localStorage.setItem("fFunctionfield",fField);
-            localStorage.setItem("fPid", parentId);
+//            localStorage.setItem("fPid", parentId);
             localStorage.setItem("pids",JSON.stringify(pids));
-            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum;
+            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum+"&fDeviceGroupId="+clickId;
         } else {
             clickNum++;
             var parentName = $(this).find(".item-title").text();
@@ -160,7 +167,14 @@ function editContent(){
         $(".back-parent").unbind();
         $("#editBtn").text("退出");
         $("#add-class").css("display","inline-block");
-        $(".bar-footer").css("display","block");
+        $(".bar-header-secondary").after("            <nav class=\"bar bar-footer row\">\n" +
+                               "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeUp()\"><i\n" +
+                               "                        class=\"icon icon-upChange\"></i>上移</a>\n" +
+                               "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"confirmSort()\"><i\n" +
+                               "                        class=\"icon icon-yes\"></i>确定排序</a>\n" +
+                               "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeDown()\"><i\n" +
+                               "                        class=\"icon icon-downChange\"></i>下移</a>\n" +
+                               "            </nav>");
         $(".item-content").unbind().click(function(){
             $(".item-edit").removeClass("item-edit");
             $(".col-40").removeClass("col-40");
@@ -173,7 +187,7 @@ function editContent(){
         editID = -1;
         addBack();
         $("#editBtn").text("编辑");
-        $(".bar-footer").css("display","none");
+        $(".bar-footer").remove();
         $(".col-40").removeClass("col-40");
         $("#add-class").css("display","none");
         $(".item-content").removeClass("item-edit");
