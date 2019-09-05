@@ -144,7 +144,7 @@ function linkClick(parentId) {
             //localStorage.setItem("fFunctionfield",fField);
 //            localStorage.setItem("fPid", parentId);
             localStorage.setItem("pids",JSON.stringify(pids));
-            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum+"&fDeviceGroupId="+clickId;
+            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum+"&fDeviceGroupId="+clickId+"&fTempid="+fField;
         } else {
             clickNum++;
             var parentName = $(this).find(".item-title").text();
