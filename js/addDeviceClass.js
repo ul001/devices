@@ -45,7 +45,7 @@ function fillData(parentId) {
 /*                if(this.hasOwnProperty("fFunctionfield")){
                     valueStr = this.fFunctionfield;
                 }*/
-                li = linkStr + " id=\"" + this.fPagedesigntemplateid + "\" value=\""+valueStr+"\">\n" +
+                li = linkStr + " id=\"" + this.fPagedesigntemplateid + "\">\n" +
                     "                        <div class=\"item-inner row no-gutter\">\n" +
                     "                            <div class=\"item-title\"><i class=\"icon icon-round\"></i>" + this.fDesigntemplatename + "</div>\n" +
                     "                        </div>\n" +
