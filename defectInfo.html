@@ -22,9 +22,9 @@
                 <span class="icon icon-left"></span>
                 返回
             </a>
-            <h1 class="title title_color">缺陷登记</h1>
+            <h1 class="title title_color">缺陷信息</h1>
             <a class="button button-link button-nav pull-right click_btn" onclick="">
-                新增
+                保存
             </a>
         </header>
         <div class="content">
@@ -32,6 +32,16 @@
                 <div class="list-block">
                     <ul>
                         <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">设备编号：</div>
+                                    <div class="item-input">
+                                        <input type="text" value="0.4kV部分\0.4kV电容柜\电容器\电容器" readonly>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                         <li>
                             <div class="item-content">
                                 <div class="item-inner">
@@ -45,7 +55,7 @@
                         <li>
                             <div class="item-content">
                                 <div class="item-inner">
-                                    <div class="item-title label"><span class="redColor">*</span><span class="blueColor">缺陷位置：</span></div>
+                                    <div class="item-title label"><span class="blueColor">缺陷位置：</span></div>
                                     <div class="item-input">
                                         <input type="checkbox" value="A" id="checkA"><label for="checkA">A相</label>
                                         <input type="checkbox" value="B" id="checkB"><label for="checkB">B相</label>
@@ -111,7 +121,25 @@
                         <li class="align-top">
                             <div class="item-content">
                                 <div class="item-inner">
-                                    <div class="item-title label"><span class="redColor">*</span><span class="blueColor">现场照：</span></div>
+                                    <div class="item-title label"><span class="blueColor">现场照：</span></div>
+                                    <div class="item-input">
+                                        <div class="custom_img">
+                                            <!--点击上传图片 触发下面的div 点击事件-->
+                                            <div class="upload_img_wrap">
+                                                <div class="imgContainer" data-index="">
+                                                    <img src="img/i-f7.png" onclick="imgDisplay()">
+                                                </div>
+                                                <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span class="blueColor">现场照：</span></div>
                                     <div class="item-input">
                                         <div class="custom_img">
                                             <!--点击上传图片 触发下面的div 点击事件-->
@@ -136,17 +164,12 @@
                                 </div>
                             </div>
                         </li>
-                    </ul>
-                </div>
-                <div class="list-block">
-                    <ul>
-                        <!-- Text inputs -->
                         <li>
                             <div class="item-content">
                                 <div class="item-inner">
-                                    <div class="item-title label">Name</div>
+                                    <div class="item-title label blueColor">处理建议：</div>
                                     <div class="item-input">
-                                        <input type="text" placeholder="Your name">
+                                        <input type="text" value="更换">
                                     </div>
                                 </div>
                             </div>
@@ -154,67 +177,25 @@
                         <li>
                             <div class="item-content">
                                 <div class="item-inner">
-                                    <div class="item-title label">E-mail</div>
+                                    <div class="item-title label blueColor">客户意见：</div>
                                     <div class="item-input">
-                                        <input type="email" placeholder="E-mail">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Password</div>
-                                    <div class="item-input">
-                                        <input type="password" placeholder="Password" class="">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Gender</div>
-                                    <div class="item-input">
-                                        <select>
-                                            <option>Male</option>
-                                            <option>Female</option>
+                                        <select name="">
+                                            <option value="">待客户答复</option>
+                                            <option value="">待客户购买零件</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                         </li>
-                        <!-- Date -->
                         <li>
                             <div class="item-content">
                                 <div class="item-inner">
-                                    <div class="item-title label">Birth date</div>
+                                    <div class="item-title label blueColor">处理情况：</div>
                                     <div class="item-input">
-                                        <input type="date" placeholder="Birth day" value="2014-04-30">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Switch (Checkbox) -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Switch</div>
-                                    <div class="item-input">
-                                        <label class="label-switch">
-                                            <input type="checkbox">
-                                            <div class="checkbox"></div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="align-top">
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Textarea</div>
-                                    <div class="item-input">
-                                        <textarea></textarea>
+                                        <select name="">
+                                            <option value="">待处理</option>
+                                            <option value="">已处理</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

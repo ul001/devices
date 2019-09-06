@@ -15,11 +15,21 @@ function addBackClick(){
     });
 }
 
-function fillData(parentId) {
+function fillData(parentId){
     var params = {
         fSubid: selectSubid,
         fParentId: parentId
     }
+    Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+        if(data.hasOwnProperty("menuList")){
+            if(data.menuList.length>0){
+                fillH5(parentId,data.menuList);
+            }
+        }
+    });
+}
+
+function fillH5(parentId,thisList) {
     var ul;
     if (parentId == -1) {
         ul = $(".list-block .list-container");
@@ -32,62 +42,77 @@ function fillData(parentId) {
                 "                        </div>\n" +
                 "                    </li>");
     }
-    Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
-        if (data.hasOwnProperty("menuList")) {
-            $(data.menuList).each(function () {
-                var li = "";
-                var linkStr = "<li class=\"item-content item-dis";
-                if (this.displayOrHideState == true&&!this.hasOwnProperty("fPagedesigntemplateid")) {
-                    linkStr = "<li class=\"item-content item-link";
-                }
-                li = linkStr + "\" id=\"" + this.fSubdevicegroupid + "\">\n" +
-                    "                        <div class=\"item-inner\">\n" +
-                    "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
-                    "                        </div>\n" +
-                    "                    </li>";
-                ul.append(li);
-            });
-            $(".list-block .item-content").click(function(){
-                $(this).addClass("selectLi").siblings().removeClass("selectLi");
-                var thisId = $(this).attr("id");
-                var clickName = $("#"+thisId+" .item-title").text();
-                if(pids[clickNum+1]==null){
-                    pids.push({pid:thisId,pname:clickName});
-                }else{
-                    pids[clickNum+1] = {pid:thisId,pname:clickName};
-                }
-                var titleTree="";
-                $(pids).each(function(){
-                    titleTree+=this.pname+">";
-                });
-                var titleTreeName=titleTree.substring(1,titleTree.length-1);
-                $("#subName").text(titleTreeName);
-                $(".close-panel").click();
-            });
-            addBackClick();
-            linkClick(parentId);
-        }
+    $(thisList).each(function () {
+        var li = "";
+//                var linkStr = "<li class=\"item-content item-dis";
+//                if (this.displayOrHideState == true) {
+        var linkStr = "<li class=\"item-content item-link";
+//                }
+        li = linkStr + "\" id=\"" + this.fSubdevicegroupid + "\">\n" +
+            "                        <div class=\"item-inner\">\n" +
+            "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
+            "                        </div>\n" +
+            "                    </li>";
+        ul.append(li);
     });
+    linkClick(parentId);
+    addBackClick();
 }
 
 function linkClick(parentId) {
     $(".list-block .item-link").unbind().click(function(event){
-        $(".selectLi").removeClass("selectLi");
         var clickId = $(this).attr("id");
-        var clickName = $("#"+clickId+" .item-title").text();
-        if(clickNum==0){
-            if(pids[clickNum+1]!=null){
-                pids.splice(-1, 1);
-            }
+        var params = {
+            fSubid: selectSubid,
+            fParentId: clickId
         }
-        clickNum++;
-        pids.push({pid:clickId,pname:clickName});
-        $(".parent-page").css("display", "none");
-        $(".child-page").css("display", "block");
-        fillData(clickId);
+        Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+            if(data.hasOwnProperty("menuList")){
+                if(data.menuList.length>0){
+                   $(".selectLi").removeClass("selectLi");
+                   var clickName = $("#"+clickId+" .item-title").text();
+                   if(clickNum==0){
+                       if(pids[clickNum+1]!=null){
+                           pids.splice(-1, 1);
+                       }
+                   }
+                   clickNum++;
+                   pids.push({pid:clickId,pname:clickName});
+                   $(".parent-page").css("display", "none");
+                   $(".child-page").css("display", "block");
+                   fillH5(clickId,data.menuList);
+                   return;
+                }
+            }
+            $("#"+clickId).addClass("selectLi").siblings().removeClass("selectLi");
+            var thisId = clickId;
+            var clickName = $("#"+thisId+" .item-title").text();
+            if(pids[clickNum+1]==null){
+             pids.push({pid:thisId,pname:clickName});
+            }else{
+             pids[clickNum+1] = {pid:thisId,pname:clickName};
+            }
+            var titleTree="";
+            $(pids).each(function(){
+             titleTree+=this.pname+">";
+            });
+            var titleTreeName=titleTree.substring(1,titleTree.length-1);
+            $("#subName").text(titleTreeName);
+            $(".close-panel").click();
+        });
+        event.stopPropagation();
     });
-    event.stopPropagation();
 };
+
+function addRadioClick(){
+    $(":radio").click(function(){
+        if($(this).val()==1){
+            window.location.href="defectPage.html";
+        }
+    });
+}
+
+addRadioClick();
 
 fillData(-1);
 

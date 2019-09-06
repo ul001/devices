@@ -61,6 +61,10 @@ jQuery(document).ready(function () {
         window.location.href = "missionDetail.html";
     });
 
+    $("#dealMission4").click(function(){
+        window.location.href="patrolContent.html";
+    });
+
     //点击卡片
     $("#cardFinish").click(function () {
         localStorage.setItem("fSubname", "任务详情");

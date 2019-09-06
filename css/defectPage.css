@@ -82,8 +82,8 @@ a:hover {
 	margin-top: 0.6rem;
 }
 .upload_img{
-	width: 3rem;
-	height: 3rem;
+	width: 2.9rem;
+	height: 2.9rem;
 }
 .upload_img_wrap{
 	display: flex;
@@ -147,5 +147,5 @@ a:hover {
 }
 
 .custom_img{
-height:100%;
+    height:100%;
 }

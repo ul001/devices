@@ -1,0 +1,10 @@
+.col-10.button{
+    padding:0;
+}
+.row.no-gutter {
+    display: flex;
+    align-items: center;
+}
+.card-content-inner p{
+    margin:0;
+}
