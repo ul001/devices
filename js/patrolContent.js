@@ -1,6 +1,7 @@
 var pids = [{pid:-1,pname:""}];
 var clickNum = 0;
 var selectSubid = 10100001;
+var showState = 1;
 //var selectSubid = localStorage.getItem("fSubid");
 
 function addBackClick(){
@@ -44,16 +45,32 @@ function fillH5(parentId,thisList) {
     }
     $(thisList).each(function () {
         var li = "";
-//                var linkStr = "<li class=\"item-content item-dis";
-//                if (this.displayOrHideState == true) {
         var linkStr = "<li class=\"item-content item-link";
-//                }
+        if (this.displayOrHideState == false) {
+                linkStr = "<li class=\"item-content item-link item-dis";
+        }
         li = linkStr + "\" id=\"" + this.fSubdevicegroupid + "\">\n" +
             "                        <div class=\"item-inner\">\n" +
             "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
             "                        </div>\n" +
             "                    </li>";
         ul.append(li);
+    });
+    if (showState == 0) {
+        $(".item-dis").css("display", "none");
+    } else {
+        $(".item-dis").css("display", "flex");
+    }
+    $("#showOrHide").unbind().click(function () {
+        if (showState == 0) {
+            showState = 1;
+            $("#showOrHide").text("仅显示有设备分类");
+            $(".item-dis").css("display", "flex");
+        } else {
+            showState = 0;
+            $("#showOrHide").text("显示全部分类");
+            $(".item-dis").css("display", "none");
+        }
     });
     linkClick(parentId);
     addBackClick();

@@ -31,7 +31,7 @@ jQuery(document).ready(function () {
         if (missionType == "patrol") {
             //巡检任务
             localStorage.setItem("fSubname", "执行情况");
-            window.location.href = "powerMeter.html";
+            window.location.href = "patrolContent.html";
         } else if (missionType == "scene") {
             //现场交接任务
             localStorage.setItem("fSubname", "执行情况");
