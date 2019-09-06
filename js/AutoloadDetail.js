@@ -11,20 +11,20 @@ var CustomerDevice = (function () {
         //用fSubdeviceinfoid组id查真实数据
         var deviceGroupId = Substation.GetQueryString("fDeviceGroupId");
 
-        deviceGroupId = 41;
+        // deviceGroupId = 41;
 
         // var selectInfo = localStorage.getItem("fFunctionfield");
         // var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
         // selectInfo.id = tempId;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
-            Substation.getDataByAjax(
-                "/pageCustomList",
-                "fSubid=" + subid + "&fTemplateid=" + selectInfo.id,
-                function (data) {
-                    curNodeInfo = data;
-                }
-            );
+            // Substation.getDataByAjax(
+            //     "/pageCustomList",
+            //     "fSubid=" + subid + "&fTemplateid=" + selectInfo.id,
+            //     function (data) {
+            //         curNodeInfo = data;
+            //     }
+            // );
         };
 
         // 获取当前选中节点信息
@@ -61,7 +61,7 @@ var CustomerDevice = (function () {
             var containStr =
                 '<div role="tabpanel" class="tab" id="' +
                 name +
-                '"> <div class="content-block tab-pane" id="addVarContain' +
+                '"> <div class="content-block tab-pane active" id="addVarContain' +
                 count +
                 '"></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
@@ -71,16 +71,23 @@ var CustomerDevice = (function () {
             $(".tab-content").append(containStr);
             $("#tab" + name).click();
             //传信息参数为复制设备，无信息参数为新增设备
+            // if (data != undefined) {
+            //     creatInfo(data, $("#addVarContain" + count), count);
+            // } else {
+            //     var json = JSON.parse(selectInfo.fFunctionfield);
+            //     creatInfo(
+            //         JSON.stringify(json.deviceInfo),
+            //         $("#addVarContain" + count),
+            //         count
+            //     );
+            //     // creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
+            // }
+            //创建模板
+            // var json = JSON.parse(selectInfo.fFunctionfield);
+            var select = $("#addVarContain" + count);
+            creatInfo(selectInfo.fFunctionfield, select, count);
             if (data != undefined) {
-                creatInfo(data, $("#addVarContain" + count), count);
-            } else {
-                var json = JSON.parse(selectInfo.fFunctionfield);
-                creatInfo(
-                    JSON.stringify(json.deviceInfo),
-                    $("#addVarContain" + count),
-                    count
-                );
-                // creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
+                showPageInfo(data, select);
             }
         };
 
@@ -153,7 +160,7 @@ var CustomerDevice = (function () {
                                 var containStr =
                                     '<div role="tabpanel" class="tab" id="' +
                                     name +
-                                    '"> <div class="content-block tab-pane" id="addVarContain' +
+                                    '"> <div class="content-block tab-pane active" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             } else {
@@ -184,8 +191,15 @@ var CustomerDevice = (function () {
                             if (count == 101) {
                                 $("#tab" + name).click();
                             }
-                            if (val.fDevicejson != undefined && val.fDevicejson != "undefined") {
-                                creatInfo(val.fDevicejson, $("#addVarContain" + count), count);
+                            //创建模板
+                            var select = $("#addVarContain" + count);
+                            creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
+                            if (
+                                val.fDevicejson != undefined &&
+                                val.fDevicejson != "undefined"
+                            ) {
+                                //填充数据
+                                showPageInfo(val.fDevicejson, select);
                             }
                         });
                     } else {
@@ -353,7 +367,7 @@ var CustomerDevice = (function () {
                 var info = JSON.parse(data);
                 if (info != undefined) {
                     var divHeight = "300";
-                    $.each(info, function (index, val) {
+                    $.each(info.deviceInfo, function (index, val) {
                         var id = "showInfoDiv" + count + index;
                         $(select).append(
                             '<div class="content-block-title">' +
@@ -374,12 +388,46 @@ var CustomerDevice = (function () {
             }
         }
 
+        //根据真实数据填充
+        function showPageInfo(data, parent) {
+            var pageInfo = JSON.parse(data);
+            pageInfo.forEach(function (val) {
+                val.value.forEach(function (value) {
+                    var name = decodeURIComponent(value.name);
+                    var prevLable = $(parent).find("div:contains('" + name + "')");
+                    switch (value.type) {
+                        case "input":
+                            $(prevLable).next("div").find("input").val(decodeURIComponent(value.value));
+                            break;
+                        case "radio":
+
+                            break;
+                        case "select":
+                            var selectOption = decodeURIComponent(value.value);
+                            var options = $(prevLable).find("select").children("option");
+                            $.each(options, function (key, value2) {
+                                if (value2.innerHTML == selectOption) {
+                                    $(value2).attr('selected', true);
+                                }
+                            });
+                            break;
+                        case "date":
+                            $(prevLable).children(".dateTime").val(value.value);
+                            break;
+                    }
+                })
+            })
+            // console.log(pageInfo);
+        }
+
         function showInfo(val, select) {
             count++;
             var string;
-            var info = JSON.parse(selectInfo.fFunctionfield);
+            // var functionfield = JSON.parse(selectInfo.fFunctionfield);
+            // var info = functionfield.deviceInfo;
             switch (val.type) {
                 case "input":
+                    var info = JSON.parse(decodeURIComponent(val.value));
                     // var info = JSON.parse(decodeURIComponent(selectInfo.fFunctionfield));
                     if (info.inpType == true) {
                         // string = '<div class="showDiv">' +
@@ -472,11 +520,11 @@ var CustomerDevice = (function () {
                     var list = JSON.parse(decodeURIComponent(val.value));
                     var opString = "<select>";
                     $.each(list, function (key, opval) {
-                        if (opval.opType == true) {
-                            opString += "<option selected>" + opval.opName + "</option>";
-                        } else {
-                            opString += "<option>" + opval.opName + "</option>";
-                        }
+                        // if (opval.opType == true) {
+                        //     opString += "<option selected>" + opval.opName + "</option>";
+                        // } else {
+                        opString += "<option>" + opval.opName + "</option>";
+                        // }
                     });
                     opString += "</select>";
 
@@ -527,11 +575,14 @@ var CustomerDevice = (function () {
 
 jQuery(document).ready(function () {
     // $(function () {
+    var deviceGroupId = Substation.GetQueryString("fDeviceGroupId");
+
     var subid = localStorage.getItem("fSubid");
     var jumpPid = Substation.GetQueryString("pid");
     var lastClickNum = Substation.GetQueryString("clickNum");
     $("#goBackLastPid").click(function () {
-        window.location.href = "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;
+        window.location.href =
+            "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;
     });
     // var tempId = localStorage.getItem("fTempId");
     // var parentId = localStorage.getItem("fPid");
@@ -586,16 +637,15 @@ jQuery(document).ready(function () {
             return;
         }
 
-        var fSubdevicegroupid = info.fPagedesigntemplateid;
+        var fSubdevicegroupid = info.id;
         var fDevicename = info.name;
         // var json = info.fFunctionfield;
         var json = JSON.parse(info.fFunctionfield);
         var newJson = JSON.stringify(json.deviceInfo);
 
-
         var formdata = new FormData();
         formdata.append("fSubid", subid);
-        formdata.append("fSubdevicegroupid", fSubdevicegroupid);
+        formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fDevicename", encodeURIComponent(fDevicename));
         // formdata.append("fPagejson", json);
         if (newJson != undefined) {
@@ -606,72 +656,66 @@ jQuery(document).ready(function () {
         }
         var url = "/addDevice";
 
-        Substation.postFormDataByAjax(
-            url,
-            formdata,
-            function (data) {
-                if (data.msg != "ok") {
-                    alert("新增失败！");
-                } else {
-                    customerDevice.addModal();
-                    $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
-                    $("#save").removeAttr("disabled");
-                }
+        Substation.postFormDataByAjax(url, formdata, function (data) {
+            if (data.msg != "ok") {
+                alert("新增失败！");
+            } else {
+                customerDevice.addModal();
+                $(".active[role='presentation']").attr(
+                    "name",
+                    data.data.fSubdeviceinfoid
+                );
+                $("#save").removeAttr("disabled");
             }
-        );
+        });
     });
 
     // 复制按钮
     $("#copy").on("click", function () {
         var info = customerDevice.getselectInfo();
 
-        var fTemplateid = info.id;
+        var infoid = info.id;
         var fPagename = info.name;
 
         var nodeInfo = customerDevice.returnNodeInfo();
         var json;
         var selectDevice = $(".active[role='presentation']").attr("name");
         $.each(nodeInfo, function (key, val) {
-            if (selectDevice == val.fId.toString()) {
-                json = val.fPagejson;
+            if (selectDevice == (val.fSubdeviceinfoid).toString()) {
+                json = val.fDevicejson;
             }
         });
 
         var formdata = new FormData();
         formdata.append("fSubid", subid);
-        formdata.append("fTemplateid", fTemplateid);
-        formdata.append("fPagename", encodeURIComponent(fPagename));
-        formdata.append("fPagejson", json);
-        var url = "/pageCustomInsert";
-        Substation.postFormDataByAjax(
-            url,
-            formdata,
-            function (data) {
-                if (data.msg != "ok") {
-                    alert("复制失败！");
-                } else {
-                    customerDevice.addModal(json);
-                    $(".active[role='presentation']").attr("name", data.data.fId);
-                }
+        formdata.append("fSubdevicegroupid", deviceGroupId);
+        formdata.append("fDevicename", encodeURIComponent(fPagename));
+        if (json != undefined) {
+            formdata.append("fDevicejson", json);
+        }
+        var url = "/addDevice";
+        Substation.postFormDataByAjax(url, formdata, function (data) {
+            if (data.msg != "ok") {
+                alert("复制失败！");
+            } else {
+                customerDevice.addModal(json);
+                $(".active[role='presentation']").attr("name", data.data.Subdeviceinfoid);
             }
-        );
-
+        });
     });
 
     // 删除按钮
     $("#delete").on("click", function () {
         var selectId = $(".active[role='presentation']").attr("name");
-        var name = $(".active[role='presentation']")
-            .text();
+        var name = $(".active[role='presentation']").text();
         if (confirm("确认删除" + name + " 吗？")) {
-            Substation.getDataByAjax(
+            Substation.getDataByAjaxAllData(
                 "/deleteDevice",
                 "deleteId=" + selectId,
                 function (data) {
-                    if (data == true) {
+                    if (data.code == 200) {
                         alert("删除成功！");
-                        var id = $(".active[role='presentation']")
-                            .attr("href");
+                        var id = $(".active[role='presentation']").attr("href");
                         var prevLi = $(".active[role='presentation']").prev();
                         // var prevLi = $(".active[role='presentation']");
                         $(".active[role='presentation']").remove();
@@ -690,7 +734,7 @@ jQuery(document).ready(function () {
         }
     });
 
-    // 修改保存按钮点击
+    // 保存按钮点击
     $("#save").on("click", function () {
         var isTrue = true;
         var input = $(".tab.active").find(".valueInput[name='true']");
@@ -703,41 +747,92 @@ jQuery(document).ready(function () {
         });
 
         if (isTrue) {
+            // var fPagejson = [];
+            // var divList = $(".tab.active").find(".baseInfoDiv");
+            // $.each(divList, function (key, val) {
+            //     var text = $(val).attr("name");
+            //     fPagejson.push({
+            //         name: encodeURIComponent(text),
+            //         value: []
+            //     });
+            //     var infoList = $(val)
+            //         .children()
+            //         .children()
+            //         .children(".showDiv");
+            //     $.each(infoList, function (index, val) {
+            //         var row = {};
+            //         var select = $(val)
+            //             .children()
+            //             .children(".item-title");
+            //         var name = $(select).text();
+            //         var type = $(select).attr("name");
+            //         var value;
+            //         switch (type) {
+            //             case "input":
+            //                 var row = {};
+            //                 row.inpName = $(val)
+            //                     .find($(".valueInput"))
+            //                     .val();
+            //                 row.inpType = JSON.parse(
+            //                     $(val)
+            //                     .find($(".valueInput"))
+            //                     .attr("name")
+            //                 );
+            //                 value = JSON.stringify(row);
+            //                 break;
+            //             case "radio":
+            //                 value = $(val)
+            //                     .find($("input:checked"))
+            //                     .val();
+            //                 break;
+            //             case "select":
+            //                 var list = [];
+            //                 var options = $(val)
+            //                     .find("select")
+            //                     .children("option");
+            //                 $.each(options, function (opkey, opval) {
+            //                     var row = {};
+            //                     row.opName = $(opval).val();
+            //                     row.opType = $(opval).is(":checked");
+            //                     list.push(row);
+            //                 });
+            //                 value = JSON.stringify(list);
+            //                 break;
+            //             case "date":
+            //                 value = $(val)
+            //                     .find($(".dateTime"))
+            //                     .val();
+            //                 break;
+            //         }
+            //         row.type = type;
+            //         row.name = encodeURIComponent(name);
+            //         row.value = encodeURIComponent(value);
+            //         fPagejson[key].value.push(row);
+            //     });
             var fPagejson = [];
-            var divList = $(".tab.active").find(".baseInfoDiv");
+            var divList = $(".tab-pane.active").find(".baseInfoDiv");
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
                 fPagejson.push({
                     name: encodeURIComponent(text),
                     value: []
                 });
-                var infoList = $(val).children().children().children('.showDiv');
+                var infoList = $(val).children('.showDiv');
                 $.each(infoList, function (index, val) {
                     var row = {};
-                    var select = $(val).children().children(".item-title");
+                    var select = $(val).children(".nameInputInfo");
                     var name = $(select).text();
                     var type = $(select).attr("name");
                     var value;
                     switch (type) {
                         case "input":
-                            var row = {};
-                            row.inpName = $(val).find($(".valueInput")).val();
-                            row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
-                            value = JSON.stringify(row);
+                            value = $(val).find($(".valueInput")).val();
                             break;
                         case "radio":
                             value = $(val).find($("input:checked")).val();
                             break;
                         case "select":
-                            var list = [];
-                            var options = $(val).find('select').children('option');
-                            $.each(options, function (opkey, opval) {
-                                var row = {};
-                                row.opName = $(opval).val();
-                                row.opType = $(opval).is(":checked");
-                                list.push(row);
-                            });
-                            value = JSON.stringify(list);
+                            value = $(val).find('select option:selected').val();
                             break;
                         case "date":
                             value = $(val).find($(".dateTime")).val();
@@ -754,40 +849,32 @@ jQuery(document).ready(function () {
     });
 
     function upData(fPagejson) {
+        // var json = JSON.stringify(fPagejson);
+
+        // var fId = $(".active[role='presentation']").attr("name");
+
+        // var formdata = new FormData();
+        // formdata.append("fId", fId);
+        // formdata.append("fPagejson", json);
+        // var url = "/updateDevice";
         var json = JSON.stringify(fPagejson);
 
         var fId = $(".active[role='presentation']").attr("name");
-
+        var info = customerDevice.getselectInfo();
         var formdata = new FormData();
-        formdata.append("fId", fId);
-        formdata.append("fPagejson", json);
-        var url = "/pageCustomUpdate";
-        // $.ajax({
-        //     url: Substation.Common.addHead() + url,
-        //     type: 'POST',
-        //     data: formdata,
-        //     beforeSend: function (request) {
-        //         request.setRequestHeader("Authorization", tokenFromAPP);
-        //     },
-        //     processData: false,
-        //     contentType: false
-        // }).done(function (data) {
-
-        // }).fail(function (res) {
-        //     alert("保存失败！");
-        // });
-        Substation.postFormDataByAjax(
-            url,
-            formdata,
-            function (data) {
-                if (data.data == true) {
-                    alert("保存成功！");
-                    customerDevice.reNewCurNodeInfo();
-                } else {
-                    alert("保存失败！");
-                }
+        formdata.append("fSubid", subid);
+        formdata.append("fSubdevicegroupid", deviceGroupId);
+        formdata.append("fSubdeviceinfoid", fId);
+        formdata.append("fDevicejson", json);
+        var url = "/updateDevice";;
+        Substation.postFormDataByAjax(url, formdata, function (data) {
+            if (data.code == 200) {
+                alert("保存成功！");
+                customerDevice.reNewCurNodeInfo();
+            } else {
+                alert("保存失败！");
             }
-        );
+        });
     }
 
     //点击弹出弹窗加载信息
