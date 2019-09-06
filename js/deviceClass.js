@@ -2,7 +2,8 @@ var showDisItem = 1;
 var editState = 0;
 var pids = [{
     pId: -1,
-    pName: ""
+    pName: "",
+    tempId:-1
 }];
 var changeArr = [];
 var clickNum = 0;
@@ -12,6 +13,7 @@ var changeTemp = false;
 var getClickNum = Substation.GetQueryString("clickNum");
 var getUrlPid=Substation.GetQueryString("pid");
 var getUrlState = Substation.GetQueryString("editState");
+var thisTempid = -1;
 if(getUrlPid!=""&&getUrlPid!=null){
     thisPid = getUrlPid;
 }
@@ -21,6 +23,7 @@ if(getUrlState!=""&&getUrlState!=null){
 if(getClickNum!=""&&getClickNum!=null){
     clickNum = getClickNum;
     pids = JSON.parse(localStorage.getItem("pids"));
+    thisTempid = pids[clickNum].tempId;
 }
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
@@ -32,6 +35,7 @@ function addBack(){
         var obj = pids[clickNum];
         clickNum--;
         var lastPId = pids[clickNum].pId;
+        thisTempid = pids[clickNum].tempId;
         pids.splice(jQuery.inArray(obj, pids), 1);
         if (lastPId == -1) {
             $(".child-page").css("display", "none");
@@ -151,6 +155,7 @@ function fillH5(parentId){
 function linkClick(parentId) {
     $(".item-content").click(function(event){
         var fField = $(this).attr("value");
+        thisTempid = fField;
         var clickId = $(this).attr("id");
         Substation.getDataByAjax("/selectSubDeviceGroupListByPid",{fSubid:selectSubid,fParentId:clickId},function (data) {
             if (data.hasOwnProperty("menuList")){
@@ -161,7 +166,8 @@ function linkClick(parentId) {
                      var parentName = $("#"+clickId).find(".item-title").text();
                      pids.push({
                          pId: clickId,
-                         pName: parentName
+                         pName: parentName,
+                         tempId:fField
                      });
                      //$("#no-click").text(parentName);
                      $(".parent-page").css("display", "none");
@@ -171,7 +177,7 @@ function linkClick(parentId) {
                 }
             }
             localStorage.setItem("pids",JSON.stringify(pids));
-            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum+"&fDeviceGroupId="+clickId+"&fTempid="+fField;
+            window.location.href = "AutoloadDetail.html?pid="+thisPid+"&clickNum="+clickNum+"&fDeviceGroupId="+clickId+"&fTempid="+thisTempid;
        /* if (fField != "" && fField != null) {
 //            localStorage.setItem("fDeviceGroupId", clickId);
             //localStorage.setItem("fFunctionfield",fField);
@@ -301,7 +307,7 @@ function confirmSort(){
 
 function addDeviceClass(){
     localStorage.setItem("pids",JSON.stringify(pids));
-    window.location.href = "addDeviceClass.html?pid="+thisPid+"&clickNum="+clickNum;
+    window.location.href = "addDeviceClass.html?pid="+thisPid+"&clickNum="+clickNum+"&tempId="+thisTempid;
 }
 
 function getChangeArr(arr,firstId,secordId){
