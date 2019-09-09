@@ -7,7 +7,7 @@ var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v3";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjgyOTExOTcsInVzZXJuYW1lIjoiYWRtaW4ifQ.XW48VS2sP-HgBtloaatGsKfr6_tdsPHn7g0lZMiO0eo";
 var ipAddress = "http://116.236.149.162:8090";
 //iOS安卓基础传参
-/*var u = navigator.userAgent,
+var u = navigator.userAgent,
   app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -25,7 +25,7 @@ if (isIOS) {
   baseUrlFromAPP = android.getBaseUrl();
   tokenFromAPP = android.getToken();
   ipAddress = android.getIpAddress();
-}*/
+}
 
 var Substation = {
   ipAddressFromAPP: ipAddress + "/",
@@ -218,7 +218,7 @@ var Substation = {
           if (data.code == "200") {
             successCallback(data.data);
           } else {
-            //            $.toast("操作失败");
+            $.toast("操作失败");
           }
         }
       },
