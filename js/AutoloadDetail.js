@@ -699,7 +699,7 @@ jQuery(document).ready(function () {
                 alert("复制失败！");
             } else {
                 customerDevice.addModal(json);
-                $(".active[role='presentation']").attr("name", data.data.Subdeviceinfoid);
+                $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
             }
         });
     });
@@ -737,7 +737,8 @@ jQuery(document).ready(function () {
     // 保存按钮点击
     $("#save").on("click", function () {
         var isTrue = true;
-        var input = $(".tab.active").find(".valueInput[name='true']");
+        // var input = $(".tab.active").find(".valueInput[name='true']");
+        var input = $(".tab-pane.active").find(".valueInput[name='true']");
         $.each(input, function (key, val) {
             if (!Substation.Validator.validate($(val), "")) {
                 $("#save").attr("disabled", true);
@@ -817,10 +818,13 @@ jQuery(document).ready(function () {
                     name: encodeURIComponent(text),
                     value: []
                 });
-                var infoList = $(val).children('.showDiv');
+                var infoList = $(val).children().children().children('.showDiv');
                 $.each(infoList, function (index, val) {
                     var row = {};
-                    var select = $(val).children(".nameInputInfo");
+                    // var select = $(val).children(".nameInputInfo");
+                    var select = $(val)
+                        .children()
+                        .children(".item-title");
                     var name = $(select).text();
                     var type = $(select).attr("name");
                     var value;
