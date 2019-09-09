@@ -41,7 +41,7 @@ var CustomerDevice = (function () {
         this.addModal = function (data) {
             // 取消选中tabpanel
             $(".active[role='presentation']").removeClass("active");
-            $(".tab-pane.active").removeClass("active");
+            $(".tab.active").removeClass("active");
             count++;
             var name = "addModal" + count;
             var text = selectInfo.name;
@@ -59,7 +59,7 @@ var CustomerDevice = (function () {
             // var containStr = '<div role="tabpanel" class="tab active" id="' + name +
             // '"> <div class="content-block">< div class ="list-block"><ul id="addVarContain' + count + '"></ul></div></div></div>';
             var containStr =
-                '<div role="tabpanel" class="tab" id="' +
+                '<div role="tabpanel" class="tab active" id="' +
                 name +
                 '"> <div class="content-block tab-pane active" id="addVarContain' +
                 count +
@@ -310,7 +310,7 @@ var CustomerDevice = (function () {
                                 var containStr =
                                     '<div role="tabpanel" class="tab active" id="' +
                                     name +
-                                    '"> <div class="content-block" id="addVarContain' +
+                                    '"> <div class="content-block tab-pane active" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             } else {
@@ -330,7 +330,7 @@ var CustomerDevice = (function () {
                                 var containStr =
                                     '<div role="tabpanel" class="tab active" id="' +
                                     name +
-                                    '"> <div class="content-block" id="addVarContain' +
+                                    '"> <div class="content-block tab-pane" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             }
@@ -749,7 +749,7 @@ jQuery(document).ready(function () {
     $("#save").on("click", function () {
         var isTrue = true;
         // var input = $(".tab.active").find(".valueInput[name='true']");
-        var input = $(".tab-pane.active").find(".valueInput[name='true']");
+        var input = $(".tab.active").find(".valueInput[name='true']");
         $.each(input, function (key, val) {
             if (!Substation.Validator.validate($(val), "")) {
                 $("#save").attr("disabled", true);
@@ -822,7 +822,7 @@ jQuery(document).ready(function () {
             //         fPagejson[key].value.push(row);
             //     });
             var fPagejson = [];
-            var divList = $(".tab-pane.active").find(".baseInfoDiv");
+            var divList = $(".tab.active").find(".baseInfoDiv");
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
                 fPagejson.push({
@@ -841,19 +841,23 @@ jQuery(document).ready(function () {
                     var value;
                     switch (type) {
                         case "input":
-                            // value = $(val).find($(".valueInput")).val();
-                            value = $(val).children().children(".item-input").val();
+                            value = $(val).find($(".valueInput")).val();
+                            // value = $(val).children().children(".item-input").val();
+                            // var row = {};
+                            // row.inpName = $(val).find($(".valueInput")).val();
+                            // row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
+                            // value = JSON.stringify(row);
                             break;
                         case "radio":
                             value = $(val).children().find($("input:checked")).val();
                             break;
                         case "select":
-                            // value = $(val).find('select option:selected').val();
-                            value = $(val).children().children("select").val();
+                            value = $(val).find('select option:selected').val();
+                            // value = $(val).children().children("select").val();
                             break;
                         case "date":
-                            value = $(val).children().children(".dateTime").val();
-                            // value = $(val).find($(".dateTime")).val();
+                            // value = $(val).children().children(".dateTime").val();
+                            value = $(val).find($(".dateTime")).val();
                             break;
                     }
                     row.type = type;
