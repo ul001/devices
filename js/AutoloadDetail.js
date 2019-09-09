@@ -18,13 +18,13 @@ var CustomerDevice = (function () {
         // selectInfo.id = tempId;
         //修改信息保存后，更新设备信息（复制设备时使用）
         this.reNewCurNodeInfo = function () {
-            // Substation.getDataByAjax(
-            //     "/pageCustomList",
-            //     "fSubid=" + subid + "&fTemplateid=" + selectInfo.id,
-            //     function (data) {
-            //         curNodeInfo = data;
-            //     }
-            // );
+            Substation.getDataByAjax(
+                "/selectDeviceList",
+                "subDeviceGroupId=" + deviceGroupId,
+                function (data) {
+                    curNodeInfo = data.deviceList;
+                }
+            );
         };
 
         // 获取当前选中节点信息
