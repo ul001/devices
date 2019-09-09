@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v3";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njc4NzM5NzYsInVzZXJuYW1lIjoiYWRtaW4ifQ.fp20FoQB928n4vpM_bymhgObbzWToGWw9HFR4k0-REo";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjgyOTExOTcsInVzZXJuYW1lIjoiYWRtaW4ifQ.XW48VS2sP-HgBtloaatGsKfr6_tdsPHn7g0lZMiO0eo";
 var ipAddress = "http://116.236.149.162:8090";
 //iOS安卓基础传参
 /*var u = navigator.userAgent,
@@ -30,122 +30,125 @@ if (isIOS) {
 var Substation = {
   ipAddressFromAPP: ipAddress + "/",
 
-  removeUndefined: function(data) {
+  removeUndefined: function (data) {
     var dataStr = data == undefined ? "无" : data;
     return dataStr;
   },
 
-  GetQueryString: function(name) {
+  GetQueryString: function (name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]);
     return null;
   },
 
-  loadGroupList:function(successCallback){
-    Substation.getDataByAjax("/selectSubDeviceGroupList", {fSubid:selectSubid}, function (data) {
-        var thisTemids = [];
-        var thisList = data.subdevicegroupList;
-        $(thisList).each(function(){
-            if(this.hasOwnProperty("fPagedesigntemplateid")){
-                thisTemids.push(this);
-            }
+  loadGroupList: function (successCallback) {
+    Substation.getDataByAjax("/selectSubDeviceGroupList", {
+      fSubid: selectSubid
+    }, function (data) {
+      var thisTemids = [];
+      var thisList = data.subdevicegroupList;
+      $(thisList).each(function () {
+        if (this.hasOwnProperty("fPagedesigntemplateid")) {
+          thisTemids.push(this);
+        }
+      });
+      var devicelist = [];
+      $(data.deviceList).each(function (index, obj) {
+        $(thisTemids).each(function () {
+          if (this.fSubdevicegroupid == obj.fSubdevicegroupid) {
+            devicelist.push(this);
+            return false;
+          }
         });
-        var devicelist = [];
-        $(data.deviceList).each(function(index,obj){
-            $(thisTemids).each(function(){
-                if(this.fSubdevicegroupid==obj.fSubdevicegroupid){
-                    devicelist.push(this);
-                    return false;
-                }
-            });
-        });
-        Substation.addState(devicelist,thisList,'fSubdevicegroupid','fParentid');
-//        localStorage.setItem("subDeviceGroupTree",JSON.stringify(thisList));
-        successCallback(thisList);
+      });
+      Substation.addState(devicelist, thisList, 'fSubdevicegroupid', 'fParentid');
+      //        localStorage.setItem("subDeviceGroupTree",JSON.stringify(thisList));
+      successCallback(thisList);
     });
   },
 
-    getDeviceGroupListByPid:function(pid,successCallback){
-        this.loadGroupList(function(groupList){
-            var deviceGroupTree=groupList;
-            var list = [];
-            $(deviceGroupTree).each(function(){
-                if(this.fParentid==pid){
-                    list.push(this);
-                }
-            });
-            successCallback(list);
-        });
-//        var deviceGroupTree = JSON.parse(localStorage.getItem("subDeviceGroupTree"));
-    },
-
-    changeSortNum:function(arrList,firstId,secordId){
-        var firstIndex,secordIndex;
-        var firstNum,secordNum;
-        $(arrList).each(function(index,obj){
-            if(obj.fSubdevicegroupid==firstId){
-                firstIndex=index;
-                firstNum = obj.fSortnum;
-                return false;
-            }
-        });
-        $(arrList).each(function(index,obj){
-            if(obj.fSubdevicegroupid==secordId){
-                secordIndex=index;
-                secordNum = obj.fSortnum;
-                return false;
-            }
-        });
-        arrList[firstIndex]['fSortnum']=secordNum;
-        arrList[secordIndex]['fSortnum']=firstNum;
-        swapArr(arrList,firstIndex,secordIndex);
-        function swapArr(arr, index1, index2) {
-            arr[index1] = arr.splice(index2, 1, arr[index1])[0];
-            return arr;
+  getDeviceGroupListByPid: function (pid, successCallback) {
+    this.loadGroupList(function (groupList) {
+      var deviceGroupTree = groupList;
+      var list = [];
+      $(deviceGroupTree).each(function () {
+        if (this.fParentid == pid) {
+          list.push(this);
         }
-        localStorage.setItem("tempSortTree",JSON.stringify(deviceGroupTree));
-    },
+      });
+      successCallback(list);
+    });
+    //        var deviceGroupTree = JSON.parse(localStorage.getItem("subDeviceGroupTree"));
+  },
 
-    getTemplateListByPid:function(pid,successCallback){
-        var templateTree = JSON.parse(localStorage.getItem("templateTree"));
-        var list = [];
-        $(templateTree).each(function(){
-            if(this.pId==pid){
-                list.push(this);
-            }
+  changeSortNum: function (arrList, firstId, secordId) {
+    var firstIndex, secordIndex;
+    var firstNum, secordNum;
+    $(arrList).each(function (index, obj) {
+      if (obj.fSubdevicegroupid == firstId) {
+        firstIndex = index;
+        firstNum = obj.fSortnum;
+        return false;
+      }
+    });
+    $(arrList).each(function (index, obj) {
+      if (obj.fSubdevicegroupid == secordId) {
+        secordIndex = index;
+        secordNum = obj.fSortnum;
+        return false;
+      }
+    });
+    arrList[firstIndex]['fSortnum'] = secordNum;
+    arrList[secordIndex]['fSortnum'] = firstNum;
+    swapArr(arrList, firstIndex, secordIndex);
+
+    function swapArr(arr, index1, index2) {
+      arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+      return arr;
+    }
+    localStorage.setItem("tempSortTree", JSON.stringify(deviceGroupTree));
+  },
+
+  getTemplateListByPid: function (pid, successCallback) {
+    var templateTree = JSON.parse(localStorage.getItem("templateTree"));
+    var list = [];
+    $(templateTree).each(function () {
+      if (this.pId == pid) {
+        list.push(this);
+      }
+    });
+    successCallback(list);
+  },
+
+  addState: function (deviceList, list, thisid, pid) {
+    if (deviceList.length > 0) {
+      var lastdids = [];
+      $(deviceList).each(function (index, obj) {
+        $(list).each(function () {
+          if (obj[thisid] == this[thisid]) {
+            this['state'] = "true";
+          }
+          if (this[thisid] == obj[pid]) {
+            lastdids.push(this);
+          }
         });
-        successCallback(list);
-    },
+      });
+      this.addState(lastdids, list, thisid, pid);
+    }
+  },
 
-    addState:function(deviceList,list,thisid,pid){
-        if(deviceList.length>0){
-            var lastdids=[];
-            $(deviceList).each(function(index,obj){
-                $(list).each(function(){
-                    if(obj[thisid]==this[thisid]){
-                        this['state']="true";
-                    }
-                    if(this[thisid]==obj[pid]){
-                        lastdids.push(this);
-                    }
-                });
-            });
-            this.addState(lastdids,list,thisid,pid);
-        }
-    },
-
-  getDataByAjax: function(url, params, successCallback) {
+  getDataByAjax: function (url, params, successCallback) {
     $.showPreloader();
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
       data: params,
-      beforeSend: function(request) {
+      beforeSend: function (request) {
         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
         request.setRequestHeader("Authorization", tokenFromAPP);
       },
-      success: function(data) {
+      success: function (data) {
         if (data == undefined) {
           $.toast("信息错误");
           return;
@@ -159,51 +162,25 @@ var Substation = {
           }
         }
       },
-      error: function() {
+      error: function () {
         $.hidePreloader();
         $.toast("数据请求失败");
       }
     });
   },
 
-  getDataByAjaxNoLoading: function(url, params, successCallback) {
+  //部分接口无Data但返回code码
+  getDataByAjaxAllData: function (url, params, successCallback) {
+    $.showPreloader();
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
       data: params,
-      beforeSend: function(request) {
+      beforeSend: function (request) {
         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
         request.setRequestHeader("Authorization", tokenFromAPP);
       },
-      success: function(data) {
-        if (data == undefined) {
-          $.toast("信息错误");
-          return;
-        } else {
-          if (data.code == "200") {
-            successCallback(data.data);
-          } else {
-//            $.toast("操作失败");
-          }
-        }
-      },
-      error: function() {
-        $.toast("数据请求失败");
-      }
-    });
-  },
-
-  postDataByAjax: function(url, params, successCallback) {
-    $.showPreloader();
-    $.ajax({
-      url: baseUrlFromAPP + url,
-      type: "POST",
-      data: params,
-      beforeSend: function(request) {
-        request.setRequestHeader("Authorization", tokenFromAPP);
-        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-      },
-      success: function(data) {
+      success: function (data) {
         if (data == undefined) {
           $.toast("信息错误");
           return;
@@ -217,54 +194,112 @@ var Substation = {
           }
         }
       },
-      error: function() {
+      error: function () {
         $.hidePreloader();
         $.toast("数据请求失败");
       }
     });
   },
 
-  postFormDataByAjax: function(url, params, successCallback) {
+  getDataByAjaxNoLoading: function (url, params, successCallback) {
+    $.ajax({
+      type: "GET",
+      url: baseUrlFromAPP + url,
+      data: params,
+      beforeSend: function (request) {
+        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+        request.setRequestHeader("Authorization", tokenFromAPP);
+      },
+      success: function (data) {
+        if (data == undefined) {
+          $.toast("信息错误");
+          return;
+        } else {
+          if (data.code == "200") {
+            successCallback(data.data);
+          } else {
+            //            $.toast("操作失败");
+          }
+        }
+      },
+      error: function () {
+        $.toast("数据请求失败");
+      }
+    });
+  },
+
+  postDataByAjax: function (url, params, successCallback) {
     $.showPreloader();
     $.ajax({
       url: baseUrlFromAPP + url,
       type: "POST",
       data: params,
-      dataType: "JSON",
-      cache: false,
-      processData: false,
-      contentType: false,
-      beforeSend: function(request) {
+      beforeSend: function (request) {
         request.setRequestHeader("Authorization", tokenFromAPP);
         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+      },
+      success: function (data) {
+        if (data == undefined) {
+          $.toast("信息错误");
+          return;
+        } else {
+          if (data.code == "200") {
+            $.hidePreloader();
+            successCallback(data);
+          } else {
+            $.hidePreloader();
+            $.toast("操作失败");
+          }
+        }
+      },
+      error: function () {
+        $.hidePreloader();
+        $.toast("数据请求失败");
       }
-    })
-      .done(function(data) {
+    });
+  },
+
+  postFormDataByAjax: function (url, params, successCallback) {
+    $.showPreloader();
+    $.ajax({
+        url: baseUrlFromAPP + url,
+        type: "POST",
+        data: params,
+        dataType: "JSON",
+        cache: false,
+        processData: false,
+        contentType: false,
+        beforeSend: function (request) {
+          request.setRequestHeader("Authorization", tokenFromAPP);
+          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+        }
+      })
+      .done(function (data) {
         $.hidePreloader();
         successCallback(data);
       })
-      .fail(function() {
+      .fail(function () {
         $.hidePreloader();
         $.toast("数据请求失败");
       });
   },
 
   Common: {
-    addHead: function() {
+    addHead: function () {
       // return "http://192.168.255.20:8080/SubstationWEBV2/";
       return "http://116.236.149.162:8090/SubstationWEBV2/v1/";
     },
 
-    requestData: function(url, params, successCallback) {
+    requestData: function (url, params, successCallback) {
       $.ajax({
         type: "GET",
         url: Substation.Common.addHead() + url,
         data: params,
-        beforeSend: function(request) {
+        beforeSend: function (request) {
           // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
           request.setRequestHeader("Authorization", tokenFromAPP);
         },
-        success: function(data) {
+        success: function (data) {
           if (data == undefined) {
             console.log("信息错误");
             return;
@@ -278,42 +313,42 @@ var Substation = {
             }
           }
         },
-        error: function() {
+        error: function () {
           alert("操作失败请重试！");
         }
       });
     },
-    requestDataByPOST: function(url, params, successCallback) {
+    requestDataByPOST: function (url, params, successCallback) {
       $.ajax({
-        url: Substation.Common.addHead() + url,
-        type: "POST",
-        cache: false,
-        data: params,
-        beforeSend: function(request) {
-          request.setRequestHeader(
-            "Authorization",
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjU5NTk5OTQsInVzZXJuYW1lIjoiYWRtaW4ifQ.1WhB3EvQZ2IJ3uMDOr1sQ-X8brr3SU1OJoR52Ovg-Kw"
-          );
-          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-        },
-        processData: false,
-        contentType: false
-      })
-        .done(function(data) {
+          url: Substation.Common.addHead() + url,
+          type: "POST",
+          cache: false,
+          data: params,
+          beforeSend: function (request) {
+            request.setRequestHeader(
+              "Authorization",
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjU5NTk5OTQsInVzZXJuYW1lIjoiYWRtaW4ifQ.1WhB3EvQZ2IJ3uMDOr1sQ-X8brr3SU1OJoR52Ovg-Kw"
+            );
+            // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+          },
+          processData: false,
+          contentType: false
+        })
+        .done(function (data) {
           successCallback(data);
         })
-        .fail(function() {
+        .fail(function () {
           alert("操作失败！");
         });
     },
     //配电图
-    showDataOnSVG: function(type, SvgInfo) {
+    showDataOnSVG: function (type, SvgInfo) {
       if (type == "updata") {
         var url = "Subimg/getSubimgInfo";
         var stationid = $.cookie("stationId");
         var customName = $("#Subimglist").val();
         var params = "fSubid=" + stationid + "&fCustomname=" + customName;
-        Substation.Common.requestData(url, params, function(data) {
+        Substation.Common.requestData(url, params, function (data) {
           showDataOnSVG(data.SvgInfo);
         });
       } else {
@@ -324,7 +359,7 @@ var Substation = {
         var map = new Map();
         var group;
         if (data.length > 0) {
-          $.each(data, function(key, val) {
+          $.each(data, function (key, val) {
             group = $("#" + val.fCircuitid);
             for (i = 0; i < val.meterParamValues.length; i++) {
               var paramCode = val.meterParamValues[i].fParamcode;
@@ -335,17 +370,17 @@ var Substation = {
                 switch (paramCode.toUpperCase()) {
                   case "SWITCH":
                   case "SWITCHON":
-                    1 === fvalue
-                      ? (group.children('g[name="off"]').hide(),
-                        group.children('g[name="on"]').show())
-                      : (group.children('g[name="on"]').hide(),
+                    1 === fvalue ?
+                      (group.children('g[name="off"]').hide(),
+                        group.children('g[name="on"]').show()) :
+                      (group.children('g[name="on"]').hide(),
                         group.children('g[name="off"]').show());
                     break;
                   case "SWITCHOFF":
-                    0 === fvalue
-                      ? (group.children('g[name="off"]').hide(),
-                        group.children('g[name="on"]').show())
-                      : (group.children('g[name="on"]').hide(),
+                    0 === fvalue ?
+                      (group.children('g[name="off"]').hide(),
+                        group.children('g[name="on"]').show()) :
+                      (group.children('g[name="on"]').hide(),
                         group.children('g[name="off"]').show());
                     break;
                   default:
@@ -364,11 +399,11 @@ var Substation = {
 
             // 避免重复绑定
             group.unbind("click");
-            group.bind("click", function() {
+            group.bind("click", function () {
               detailData(val.fCircuitid, val.fCircuitname);
             });
 
-            $.each(group.children("g text"), function(index, element) {
+            $.each(group.children("g text"), function (index, element) {
               try {
                 var m = element.attributes.name.textContent;
                 if (map.has(m.toLowerCase())) {
@@ -391,7 +426,7 @@ var Substation = {
         Substation.Common.requestData(
           "main/getCurrentValue",
           "fCircuitid=" + fCircuitids,
-          function(data) {
+          function (data) {
             circuitData = data;
             var select = $(".active")[0].id;
             showDetailTable(fCircuitids, data, select);
@@ -400,12 +435,12 @@ var Substation = {
 
         $(".nav.nav-tabs>li")
           .off("click")
-          .click(function() {
+          .click(function () {
             var select = $(this)[0].id;
             showDetailTable(fCircuitids, circuitData, select);
           });
 
-        $("#myModaldetail").on("hide.bs.modal", function() {
+        $("#myModaldetail").on("hide.bs.modal", function () {
           $("#detailUL a:first").tab("show");
         });
       }
@@ -414,7 +449,7 @@ var Substation = {
 
       function showDetailTable(fCircuitids, data, selectParam) {
         tableData = [];
-        $.each(data, function(key, val) {
+        $.each(data, function (key, val) {
           var paramCode;
           if (selectParam == "P") {
             if (
@@ -517,8 +552,7 @@ var Substation = {
         });
 
         var columns = [
-          [
-            {
+          [{
               field: "Paramname",
               title: "参数",
               colspan: 1,
@@ -555,8 +589,7 @@ var Substation = {
               class: "i18n"
             }
           ],
-          [
-            {
+          [{
               field: "max",
               title: "最大值",
               colspan: 2,
@@ -576,8 +609,7 @@ var Substation = {
             }
           ],
 
-          [
-            {
+          [{
               field: "maxvalue",
               title: "数值",
               valign: "middle",
@@ -644,10 +676,10 @@ var Substation = {
       }
     },
 
-    showDataOnMap: function(type, alarmSubList, mapInfo) {
+    showDataOnMap: function (type, alarmSubList, mapInfo) {
       if (type == "clear") {
         var markers = userMap.getOverlays();
-        $.each(markers, function(key, val) {
+        $.each(markers, function (key, val) {
           var icon = new BMap.Icon(
             "app/image/map-blue.png",
             new BMap.Size(50, 50)
@@ -658,7 +690,7 @@ var Substation = {
       }
       if (type == "updata") {
         var url = "main/survey/navigation";
-        Substation.Common.requestData(url, "", function(data) {
+        Substation.Common.requestData(url, "", function (data) {
           showMap(data);
           showInfo(data);
         });
@@ -672,20 +704,20 @@ var Substation = {
       function showMap(data) {
         if (data.SubstationList.length == 0) return;
         var subnames = [];
-        $.each(alarmSubList, function(key, val) {
-          var subs = data.SubstationList.filter(function(point) {
+        $.each(alarmSubList, function (key, val) {
+          var subs = data.SubstationList.filter(function (point) {
             return point.fSubid === val;
           });
 
           if (subs.length > 0) subnames.push(subs[0].fSubname);
         });
         var markers = userMap.getOverlays();
-        $.each(markers, function(key, val) {
+        $.each(markers, function (key, val) {
           if (markers.length != data.SubstationList.length) return;
 
           var title = val.getTitle();
 
-          var filterResults = subnames.filter(function(point) {
+          var filterResults = subnames.filter(function (point) {
             return point === title;
           });
 
@@ -728,11 +760,11 @@ var Substation = {
       }
     },
 
-    showDataOnMonitor: function(type, monInfo) {
+    showDataOnMonitor: function (type, monInfo) {
       if (type == "updata") {
         var url = "main/energySecurity/leakageMonitor";
         var params = "fSubid=" + $.cookie("stationId");
-        Substation.Common.requestData(url, params, function(data) {
+        Substation.Common.requestData(url, params, function (data) {
           var type = $(".row-leakage")
             .find(".active")
             .attr("name");
@@ -760,8 +792,7 @@ var Substation = {
         );
         $("#dataTable").attr("data-height", $(".overlimit-h").height());
         var columns = [
-          [
-            {
+          [{
               field: "fMeterName",
               title: "监测点名称",
               rowspan: 2,
@@ -798,8 +829,7 @@ var Substation = {
               align: "center"
             }
           ],
-          [
-            {
+          [{
               field: "tempA",
               title: "A",
               valign: "middle",
@@ -823,7 +853,7 @@ var Substation = {
         var tableRows = [];
 
         //遍历数据生成表格
-        $.each(data.leakageCurrentValues, function(key, val) {
+        $.each(data.leakageCurrentValues, function (key, val) {
           var row = {};
           row.fMetercode = val.fMetercode;
           row.fMeterName = val.fMeterName;
@@ -851,7 +881,7 @@ var Substation = {
         );
         $(".fixed-table-container").css("padding-bottom", "0");
 
-        $("#dataTable").on("click-row.bs.table", function(e, row, $element) {
+        $("#dataTable").on("click-row.bs.table", function (e, row, $element) {
           $(".currentSelect")
             .css("background", "white")
             .removeClass("currentSelect");
@@ -939,7 +969,7 @@ var Substation = {
             childDiv.innerHTML = divString;
             parentDiv.append(childDiv);
           }
-          $(document).on("click", ".searchList", function() {
+          $(document).on("click", ".searchList", function () {
             var $this = $(this);
             var id = $this.parent("div")[0].id;
             var name = $this.parent("div").attr("value");
@@ -957,7 +987,7 @@ var Substation = {
     },
 
     //运维管理打开新页面
-    openNewTab: function(url) {
+    openNewTab: function (url) {
       var href = document.createElement("a");
       href.id = "newLink";
       href.target = "_blank";
@@ -969,7 +999,7 @@ var Substation = {
     },
 
     //上一天
-    upDate: function() {
+    upDate: function () {
       var time = $("#daycalendarBox").val();
       var date = new Date(time);
       var timeUp = new Date(date.getTime() - 1000 * 60 * 60 * 24);
@@ -977,7 +1007,7 @@ var Substation = {
     },
 
     //下一天
-    downDate: function() {
+    downDate: function () {
       var time = $("#daycalendarBox").val();
       var date = new Date(time);
       var timeDown = new Date(date.getTime() + 1000 * 60 * 60 * 24);
@@ -985,7 +1015,7 @@ var Substation = {
     },
 
     //上一月
-    upMonth: function() {
+    upMonth: function () {
       var time = $("#daycalendarBox").val();
       var date = new Date(time);
       var year = date.getFullYear();
@@ -1004,7 +1034,7 @@ var Substation = {
     },
 
     //下一月
-    downMonth: function() {
+    downMonth: function () {
       var time = $("#daycalendarBox").val();
       var date = new Date(time);
       var year = date.getFullYear();
@@ -1025,7 +1055,7 @@ var Substation = {
     },
 
     //JSON所有key值转为大写
-    upperJSONKey: function(jsonobj) {
+    upperJSONKey: function (jsonobj) {
       for (var key in jsonobj) {
         if (jsonobj[key.toUpperCase()] != jsonobj[key]) {
           jsonobj[key.toUpperCase()] = jsonobj[key];
@@ -1035,33 +1065,33 @@ var Substation = {
       return jsonobj;
     },
 
-    addZero: function(num) {
+    addZero: function (num) {
       if (num < 10) return "0" + num;
       else return num;
     },
 
     //input option设置选中状态
-    setSelect: function($option, info) {
-      $.each($option, function(index, val) {
+    setSelect: function ($option, info) {
+      $.each($option, function (index, val) {
         if ($(val)[0].value == info) {
           $(val).attr("selected", true);
         }
       });
     },
 
-    encryptByMD5: function(rawString) {
+    encryptByMD5: function (rawString) {
       return MD5(rawString);
     },
 
     //确认删除
-    isDelete: function() {
+    isDelete: function () {
       var isDel = confirm("是否要删除当前选中数据？");
 
       return isDel;
     },
 
     //单位
-    getUnitOfParam: function(param) {
+    getUnitOfParam: function (param) {
       var unit;
       switch (param) {
         case "I":
@@ -1103,7 +1133,7 @@ var Substation = {
      * type = "DATEONLY" => yyyy-MM-dd
      * type="DATETIME" => yyyy-MM-dd HH:mm:ss
      */
-    dateTimeFormat: function(type, date) {
+    dateTimeFormat: function (type, date) {
       var year = date.getFullYear();
       var month = date.getMonth() + 1;
       var dayOfMonth = date.getDate();
@@ -1160,11 +1190,11 @@ var Substation = {
 
       return result;
     },
-    addZero: function(num) {
+    addZero: function (num) {
       if (num < 10) return "0" + num;
       else return num;
     },
-    getAnyDateAgo: function(curDate, dayInterval) {
+    getAnyDateAgo: function (curDate, dayInterval) {
       var curMillis = curDate.getTime();
       var preMillis = curMillis - (dayInterval - 1) * 86400000;
 
@@ -1173,7 +1203,7 @@ var Substation = {
       return preDate;
     },
     //strDate:'yyyy-MM-dd HH:mm:ss'结构
-    getDateFromStringDate: function(strDate) {
+    getDateFromStringDate: function (strDate) {
       if (strDate == undefined) return;
       var dateTimeArr = strDate.split(" ");
       var datePart = dateTimeArr[0].split("-");
@@ -1189,7 +1219,7 @@ var Substation = {
       );
     },
 
-    isArrayEquals: function(array1, array2) {
+    isArrayEquals: function (array1, array2) {
       array1.sort();
       array2.sort();
       if (array1.length != array2.length) return false;
@@ -1205,48 +1235,48 @@ var Substation = {
   },
 
   DOMOperator: {
-    selectAppender: function(data, $select, text, value, name, selectOption) {
+    selectAppender: function (data, $select, text, value, name, selectOption) {
       $select.html("");
-      $.each(data, function(key, val) {
+      $.each(data, function (key, val) {
         if (selectOption != undefined) {
           if (val[value] == selectOption) {
             $select.append(
               "<option class='i18n' value=" +
-                val[value] +
-                " name=" +
-                val[name] +
-                " selected>" +
-                val[text] +
-                "</option>"
+              val[value] +
+              " name=" +
+              val[name] +
+              " selected>" +
+              val[text] +
+              "</option>"
             );
           } else {
             $select.append(
               "<option class='i18n' value=" +
-                val[value] +
-                " name=" +
-                val[name] +
-                ">" +
-                val[text] +
-                "</option>"
-            );
-          }
-        } else {
-          $select.append(
-            "<option class='i18n' value=" +
               val[value] +
               " name=" +
               val[name] +
               ">" +
               val[text] +
               "</option>"
+            );
+          }
+        } else {
+          $select.append(
+            "<option class='i18n' value=" +
+            val[value] +
+            " name=" +
+            val[name] +
+            ">" +
+            val[text] +
+            "</option>"
           );
         }
       });
       return this;
     },
-    selectAppenderHarm: function(data, $select, text, value) {
+    selectAppenderHarm: function (data, $select, text, value) {
       $select.html("");
-      $.each(data, function(key, val) {
+      $.each(data, function (key, val) {
         $select.append(
           "<option value=" + val[value] + ">" + val[text] + "</option>"
         );
@@ -1254,7 +1284,7 @@ var Substation = {
       return this;
     },
 
-    initDateTimePicker: function(date, $Date, $Box, initObj, format) {
+    initDateTimePicker: function (date, $Date, $Box, initObj, format) {
       var initDate;
       if (format != null || format != undefined)
         initDate = Substation.ObjectOperation.dateTimeFormat(format, date);
@@ -1281,7 +1311,7 @@ var Substation = {
       }
       return this;
     },
-    initDateTimePicker2: function(date, $Date, $Box, initObj, format) {
+    initDateTimePicker2: function (date, $Date, $Box, initObj, format) {
       var initDate;
       if (format != null || format != undefined)
         initDate = Substation.ObjectOperation.dateTimeFormat(format, date);
@@ -1306,7 +1336,7 @@ var Substation = {
       return this;
     },
     //显示上月第一天至最后一天
-    lastMonthInitDate: function() {
+    lastMonthInitDate: function () {
       var date = new Date();
       var year = date.getFullYear();
       var month = date.getMonth();
@@ -1341,7 +1371,7 @@ var Substation = {
     },
 
     //日期限制为不能出现重复天数，例：1-01至1-31
-    timeCompare: function() {
+    timeCompare: function () {
       var startTime = $("#startDateBox").val();
       var endTime = $("#endDateBox").val();
       var startYear = new Date(startTime).getFullYear();
@@ -1366,9 +1396,9 @@ var Substation = {
     },
 
     //请求变电所列表时分页
-    pagenation: function(url, pageNo, pageSize) {
+    pagenation: function (url, pageNo, pageSize) {
       var params = "pageNo=" + pageNo + "&pageSize=" + pageSize;
-      Substation.Common.requestData(url, params, function(data) {
+      Substation.Common.requestData(url, params, function (data) {
         showSubNameInfo(data, "normal");
       });
       //生成列表框
@@ -1378,8 +1408,7 @@ var Substation = {
           "data-height",
           $(".substation-list").height()
         );
-        var columns = [
-          {
+        var columns = [{
             field: "fSubstation",
             title: "变配电站名称",
             class: "i18n"
@@ -1391,7 +1420,7 @@ var Substation = {
           }
         ];
         var subNameRows = [];
-        $.each(data.list, function(key, val) {
+        $.each(data.list, function (key, val) {
           var row = {};
           row.fSubid = val.fSubid;
           row.fSubstation = val.fSubname;
@@ -1408,7 +1437,7 @@ var Substation = {
           [4, 8]
         );
 
-        $("#tableSubName").on("click-row.bs.table", function(e, row, $element) {
+        $("#tableSubName").on("click-row.bs.table", function (e, row, $element) {
           $(".insideSelect")
             .css("background", "white")
             .removeClass("insideSelect");
@@ -1421,8 +1450,7 @@ var Substation = {
 
       function pagination(data, type) {
         BootstrapPagination($("#table_pagination"), {
-          layoutScheme:
-            "firstpage,prevgrouppage,prevpage,pagenumber,nextpage,nextgrouppage,lastpage",
+          layoutScheme: "firstpage,prevgrouppage,prevpage,pagenumber,nextpage,nextgrouppage,lastpage",
           total: data.total,
           pageSize: data.pageSize,
           pageIndex: data.prePage,
@@ -1430,7 +1458,7 @@ var Substation = {
           pageInputTimeout: 800,
           pageSizeList: [5, 10, 20, 50, 100, 200],
           //当分页更改后引发此事件。
-          pageChanged: function(pageIndex, pageSize) {
+          pageChanged: function (pageIndex, pageSize) {
             var pageIndex = pageIndex + 1;
             if (type == "normal") {
               var url = "main/getSubstationListByUser";
@@ -1447,12 +1475,12 @@ var Substation = {
               var url = "main/getSubstationListByFuzzyLookup";
             }
 
-            Substation.Common.requestData(url, params, function(data) {
+            Substation.Common.requestData(url, params, function (data) {
               showSubNameInfo(data);
             });
           }
         });
-        $("#tableSubName").on("click-row.bs.table", function(e, row, $element) {
+        $("#tableSubName").on("click-row.bs.table", function (e, row, $element) {
           $(".insideSelect")
             .css("background", "white")
             .removeClass("insideSelect");
@@ -1464,7 +1492,7 @@ var Substation = {
       //模糊查询
       $("#refreshBtn")
         .off("click")
-        .on("click", function() {
+        .on("click", function () {
           var list = $(".substationlist").val();
           var params =
             "pageNo=" +
@@ -1474,14 +1502,14 @@ var Substation = {
             "&fPartsubname=" +
             encodeURI(list);
           var url = "main/getSubstationListByFuzzyLookup";
-          Substation.Common.requestData(url, params, function(data) {
+          Substation.Common.requestData(url, params, function (data) {
             showSubNameInfo(data, "fuzzy");
           });
         });
     },
 
     //变配电站选择确认时更改cookie
-    yesBtnClick: function(row) {
+    yesBtnClick: function (row) {
       var stationId = row.fSubid;
       var subName = row.fSubstation;
       $.cookie("stationId", stationId);
@@ -1490,7 +1518,7 @@ var Substation = {
       $("#StationName").attr("value", stationId);
     },
 
-    chartSize: function($container, isResize) {
+    chartSize: function ($container, isResize) {
       $container.removeAttr("_echarts_instance_");
       $container.html("");
       $container.css("width", "100%");
@@ -1501,7 +1529,7 @@ var Substation = {
     },
 
     //全选树结构
-    checkAllTree: function(data) {
+    checkAllTree: function (data) {
       $("#treeview").html("");
 
       var array = [];
@@ -1521,7 +1549,7 @@ var Substation = {
       if (array != null) {
         array = [];
       }
-      $("#treeview").on("nodeChecked", function(event, node) {
+      $("#treeview").on("nodeChecked", function (event, node) {
         if ($.inArray(node.id, array) < 0) {
           array.push(node.id);
         }
@@ -1537,7 +1565,7 @@ var Substation = {
           ]);
       });
 
-      $("#treeview").on("nodeUnchecked", function(event, node) {
+      $("#treeview").on("nodeUnchecked", function (event, node) {
         if (node.id == array[0]) {
           array.shift();
         } else if ($.inArray(node.id, array)) {
@@ -1562,7 +1590,7 @@ var Substation = {
         var str = JSON.stringify(node);
         var pattern = new RegExp("nodes");
         if (pattern.test(str)) {
-          $.each(node.nodes, function(key, val) {
+          $.each(node.nodes, function (key, val) {
             $Tree.treeview("checkNode", [val.nodeId]);
             checkChildren(val, $Tree);
           });
@@ -1573,7 +1601,7 @@ var Substation = {
         var str = JSON.stringify(node);
         var pattern = new RegExp("nodes");
         if (pattern.test(str)) {
-          $.each(node.nodes, function(key, val) {
+          $.each(node.nodes, function (key, val) {
             $Tree.treeview("uncheckNode", [val.nodeId]);
             unCheckChildren(val, $Tree);
           });
@@ -1583,7 +1611,7 @@ var Substation = {
     },
 
     //单选树结构
-    treeGenerate: function(data, $Tree, initObj) {
+    treeGenerate: function (data, $Tree, initObj) {
       var treedata = new Array();
       var pattern = new RegExp('\\,\\"nodes\\"\\:\\[\\]', "g");
       //2018/2/8修改BUG
@@ -1602,12 +1630,12 @@ var Substation = {
               expanded: true
             };
             data[i].state = state;
-            $.each(data[i].nodes, function(key, val) {
+            $.each(data[i].nodes, function (key, val) {
               if (val.fChecked == true) {
                 data[i].nodes[key].state = state;
               }
               if (val.nodes != undefined) {
-                $.each(val.nodes, function(key, value) {
+                $.each(val.nodes, function (key, value) {
                   if (value.fChecked == true) {
                     value.state = state;
                   }
@@ -1637,36 +1665,36 @@ var Substation = {
       return this;
     },
 
-    checkTreeChildNode: function(node, $Tree) {
+    checkTreeChildNode: function (node, $Tree) {
       var str = JSON.stringify(node);
       var pattern = new RegExp("nodes");
       if (pattern.test(str)) {
-        $.each(node.nodes, function(key, val) {
+        $.each(node.nodes, function (key, val) {
           $Tree.treeview("checkNode", [val.nodeId]);
           Substation.DOMOperator.checkTreeChildNode(val, $Tree);
         });
       }
     },
 
-    unCheckTreeChildNode: function(node, $Tree) {
+    unCheckTreeChildNode: function (node, $Tree) {
       var str = JSON.stringify(node);
       var pattern = new RegExp("nodes");
       if (pattern.test(str)) {
-        $.each(node.nodes, function(key, val) {
+        $.each(node.nodes, function (key, val) {
           $Tree.treeview("uncheckNode", [val.nodeId]);
           Substation.DOMOperator.unCheckTreeChildNode(val, $Tree);
         });
       }
     },
 
-    setRole: function(meun, successCallback) {
-      Substation.Common.requestData("authority/getRoleMenu", "", function(
+    setRole: function (meun, successCallback) {
+      Substation.Common.requestData("authority/getRoleMenu", "", function (
         data
       ) {
         if (data.role.permissionlist.length > 0) {
-          $.each(data.role.permissionlist, function(key, val) {
+          $.each(data.role.permissionlist, function (key, val) {
             if (val.fIcon == meun) {
-              $.each(val.nodes, function(key, value) {
+              $.each(val.nodes, function (key, value) {
                 if (value.fMenuurl == $.cookie("left-menu")) {
                   if (value.nodes != undefined) {
                     successCallback(value.nodes);
@@ -1679,7 +1707,7 @@ var Substation = {
       });
     },
 
-    generateTable: function(
+    generateTable: function (
       $table,
       columns,
       data,
@@ -1713,7 +1741,7 @@ var Substation = {
             pageSize: size,
             columns: columns,
             pageList: pageList,
-            rowStyle: function(row, index) {
+            rowStyle: function (row, index) {
               if (row.isRed) {
                 var style = {
                   css: {
@@ -1756,7 +1784,7 @@ var Substation = {
       }
       language.common.tableSelect($table);
     },
-    tableSubstationName: function(
+    tableSubstationName: function (
       $table,
       columns,
       data,
@@ -1804,7 +1832,7 @@ var Substation = {
     },
 
     //文件导出
-    exportTable: function($table, name) {
+    exportTable: function ($table, name) {
       $table.tableExport({
         type: "xlsx",
         fileName: name
@@ -1812,19 +1840,19 @@ var Substation = {
     },
 
     //视频监控
-    generateVideo: function(divName, videoUrl, index) {
+    generateVideo: function (divName, videoUrl, index) {
       $("#" + divName).html("");
       var value = videoUrl.split(";");
       $("#" + divName).append(
         '<video id="video-' +
-          index +
-          '" poster="" style="width:100%;height:100%" controls playsInline webkit-playsinline autoplay>' +
-          '<source src="' +
-          value[1] +
-          '" type="" />' +
-          '<source src="' +
-          value[0] +
-          '" type="application/x-mpegURL" />'
+        index +
+        '" poster="" style="width:100%;height:100%" controls playsInline webkit-playsinline autoplay>' +
+        '<source src="' +
+        value[1] +
+        '" type="" />' +
+        '<source src="' +
+        value[0] +
+        '" type="application/x-mpegURL" />'
       );
 
       new EZUIPlayer("video-" + index);
@@ -1832,7 +1860,7 @@ var Substation = {
   },
 
   Validator: {
-    setErrorStyle: function($selector, message) {
+    setErrorStyle: function ($selector, message) {
       $(":text").css({
         border: "1px solid #ababab",
         "box-shadow": "0px 0px 0px #ababab"
@@ -1845,7 +1873,7 @@ var Substation = {
 
       new MessageBox($selector.get(0), $selector.get(0).id, message).Show();
     },
-    setFocus: function($selector) {
+    setFocus: function ($selector) {
       var bubbleId = "megbox_" + $selector.get(0).id;
 
       if ($("#" + bubbleId).length > 0) $("#" + bubbleId).remove();
@@ -1856,7 +1884,7 @@ var Substation = {
       });
     },
     //条件筛选
-    validate: function($selector, name, type) {
+    validate: function ($selector, name, type) {
       var validateContent = $selector.attr("validator");
 
       if (validateContent == undefined) return;
@@ -1868,7 +1896,7 @@ var Substation = {
 
       var flag = false; //定义局部flag表示是否已经出现错误标记
 
-      $.each(validateArr, function(index, val) {
+      $.each(validateArr, function (index, val) {
         if (flag) return;
 
         switch (val.split(":")[0]) {
@@ -2034,7 +2062,7 @@ var Substation = {
               return;
             } else {
               var arr = textValue.split(";");
-              $.each(arr, function(key, val) {
+              $.each(arr, function (key, val) {
                 PhoneNum = val;
                 var phone = /^1[34578]\d{9}$/;
                 if (!phone.test(PhoneNum)) {
@@ -2055,7 +2083,7 @@ var Substation = {
               return;
             } else {
               var arr = textValue.split(";");
-              $.each(arr, function(key, val) {
+              $.each(arr, function (key, val) {
                 var num = val;
                 var phone = /^1[0-9]+$/;
                 if (!phone.test(num)) {
