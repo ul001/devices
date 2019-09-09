@@ -639,7 +639,7 @@ jQuery(document).ready(function () {
         var info = customerDevice.getselectInfo();
 
         if (info.fFunctionfield == undefined) {
-            alert("暂无设备信息，请增加相关信息！");
+            $.toast("暂无设备信息，请增加相关信息！");
             return;
         }
 
@@ -664,7 +664,7 @@ jQuery(document).ready(function () {
 
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                alert("新增失败！");
+                $.toast("新增失败！");
             } else {
                 customerDevice.addModal();
                 $(".active[role='presentation']").attr(
@@ -702,7 +702,7 @@ jQuery(document).ready(function () {
         var url = "/addDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                alert("复制失败！");
+                $.toast("复制失败！");
             } else {
                 customerDevice.addModal(json);
                 $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
@@ -714,30 +714,30 @@ jQuery(document).ready(function () {
     $("#delete").on("click", function () {
         var selectId = $(".active[role='presentation']").attr("name");
         var name = $(".active[role='presentation']").text();
-        if (confirm("确认删除" + name + " 吗？")) {
-            Substation.getDataByAjaxAllData(
-                "/deleteDevice",
-                "deleteId=" + selectId,
-                function (data) {
-                    if (data.code == 200) {
-                        alert("删除成功！");
-                        var id = $(".active[role='presentation']").attr("href");
-                        var prevLi = $(".active[role='presentation']").prev();
-                        // var prevLi = $(".active[role='presentation']");
-                        $(".active[role='presentation']").remove();
-                        $(id).remove();
-                        if (prevLi != undefined) {
-                            //TODO: 如有其它tab则选中它
-                            prevLi.click();
-                            // $(prevLi).tab("show");
-                            // $("a", $(prevLi)).tab("show");
+        $.confirm("确认删除" + name + "吗？",function(){
+                    Substation.getDataByAjaxAllData(
+                        "/deleteDevice",
+                        "deleteId=" + selectId,
+                        function (data) {
+                            if (data.code == 200) {
+                                $.toast("删除成功！");
+                                var id = $(".active[role='presentation']").attr("href");
+                                var prevLi = $(".active[role='presentation']").prev();
+                                // var prevLi = $(".active[role='presentation']");
+                                $(".active[role='presentation']").remove();
+                                $(id).remove();
+                                if (prevLi != undefined) {
+                                    //TODO: 如有其它tab则选中它
+                                    prevLi.click();
+                                    // $(prevLi).tab("show");
+                                    // $("a", $(prevLi)).tab("show");
+                                }
+                            } else {
+                                $.toast("删除失败！");
+                            }
                         }
-                    } else {
-                        alert("删除失败！");
-                    }
-                }
-            );
-        }
+                    );
+        });
     });
 
     // 保存按钮点击
@@ -879,10 +879,10 @@ jQuery(document).ready(function () {
         var url = "/updateDevice";;
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.code == 200) {
-                alert("保存成功！");
+                $.toast("保存成功！");
                 customerDevice.reNewCurNodeInfo();
             } else {
-                alert("保存失败！");
+                $.toast("保存失败！");
             }
         });
     }
