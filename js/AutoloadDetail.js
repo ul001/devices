@@ -411,11 +411,16 @@ var CustomerDevice = (function () {
                         case "select":
                             var selectOption = decodeURIComponent(value.value);
                             var options = $(prevLable).find("select").children("option");
+                            var select = $(prevLable).find("select");
                             $.each(options, function (key, value2) {
                                 if (value2.innerHTML == selectOption) {
-                                    $(value2).attr('selected', true);
+                                    // $(value2).attr('selected', true);
+                                    $(select).val(value2.value);
                                 }
                             });
+
+
+
                             break;
                         case "date":
                             $(prevLable).children(".dateTime").val(value.value);
@@ -529,7 +534,7 @@ var CustomerDevice = (function () {
                         // if (opval.opType == true) {
                         //     opString += "<option selected>" + opval.opName + "</option>";
                         // } else {
-                        opString += "<option>" + opval.opName + "</option>";
+                        opString += '<option value=' + opval.opName + '>' + opval.opName + "</option>";
                         // }
                     });
                     opString += "</select>";
@@ -714,29 +719,29 @@ jQuery(document).ready(function () {
     $("#delete").on("click", function () {
         var selectId = $(".active[role='presentation']").attr("name");
         var name = $(".active[role='presentation']").text();
-        $.confirm("确认删除" + name + "吗？",function(){
-                    Substation.getDataByAjaxAllData(
-                        "/deleteDevice",
-                        "deleteId=" + selectId,
-                        function (data) {
-                            if (data.code == 200) {
-                                $.toast("删除成功！");
-                                var id = $(".active[role='presentation']").attr("href");
-                                var prevLi = $(".active[role='presentation']").prev();
-                                // var prevLi = $(".active[role='presentation']");
-                                $(".active[role='presentation']").remove();
-                                $(id).remove();
-                                if (prevLi != undefined) {
-                                    //TODO: 如有其它tab则选中它
-                                    prevLi.click();
-                                    // $(prevLi).tab("show");
-                                    // $("a", $(prevLi)).tab("show");
-                                }
-                            } else {
-                                $.toast("删除失败！");
-                            }
+        $.confirm("确认删除" + name + "吗？", function () {
+            Substation.getDataByAjaxAllData(
+                "/deleteDevice",
+                "deleteId=" + selectId,
+                function (data) {
+                    if (data.code == 200) {
+                        $.toast("删除成功！");
+                        var id = $(".active[role='presentation']").attr("href");
+                        var prevLi = $(".active[role='presentation']").prev();
+                        // var prevLi = $(".active[role='presentation']");
+                        $(".active[role='presentation']").remove();
+                        $(id).remove();
+                        if (prevLi != undefined) {
+                            //TODO: 如有其它tab则选中它
+                            prevLi.click();
+                            // $(prevLi).tab("show");
+                            // $("a", $(prevLi)).tab("show");
                         }
-                    );
+                    } else {
+                        $.toast("删除失败！");
+                    }
+                }
+            );
         });
     });
 
@@ -836,16 +841,19 @@ jQuery(document).ready(function () {
                     var value;
                     switch (type) {
                         case "input":
-                            value = $(val).find($(".valueInput")).val();
+                            // value = $(val).find($(".valueInput")).val();
+                            value = $(val).children().children(".item-input").val();
                             break;
                         case "radio":
-                            value = $(val).find($("input:checked")).val();
+                            value = $(val).children().find($("input:checked")).val();
                             break;
                         case "select":
-                            value = $(val).find('select option:selected').val();
+                            // value = $(val).find('select option:selected').val();
+                            value = $(val).children().children("select").val();
                             break;
                         case "date":
-                            value = $(val).find($(".dateTime")).val();
+                            value = $(val).children().children(".dateTime").val();
+                            // value = $(val).find($(".dateTime")).val();
                             break;
                     }
                     row.type = type;
@@ -929,6 +937,7 @@ jQuery(document).ready(function () {
     //         pickerPosition: "bottom-left"
     //     });
     // }
+
     //必填项绑定事件
     function blurEvent(select) {
         if (!Substation.Validator.validate($(select), "")) {
@@ -936,10 +945,10 @@ jQuery(document).ready(function () {
         }
     }
 
+    // input选中事件
     function focusEvent(select) {
         Substation.Validator.setFocus($(select));
         $("#save").removeAttr("disabled");
     }
-
-    $.init();
+    // $.init();
 });

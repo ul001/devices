@@ -1,0 +1,20 @@
+.megbox{
+    position: absolute;
+    background-color: #FFF;
+    border: 1px solid red;
+    padding: 5px 10px;
+    border-radius: 5px;
+    z-index: 9999;
+}
+.megbox_top{
+    width: 13px;
+    height: 7px;
+    position: absolute;
+    background: url(../image/arrow.gif) no-repeat;
+    top: -7px;
+}
+.megbox_meg{
+    padding-left: 25px;
+    background: url(../image/info.jpg) no-repeat;
+    line-height: 20px;
+}
