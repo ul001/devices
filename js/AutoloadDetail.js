@@ -395,12 +395,18 @@ var CustomerDevice = (function () {
                 val.value.forEach(function (value) {
                     var name = decodeURIComponent(value.name);
                     var prevLable = $(parent).find("div:contains('" + name + "')");
+                    var info = decodeURIComponent(value.value);
                     switch (value.type) {
                         case "input":
                             $(prevLable).next("div").find("input").val(decodeURIComponent(value.value));
                             break;
                         case "radio":
-
+                            if (info == "yes") {
+                                $(prevLable).children(".item-inner").find("input[value='yes']").attr("checked", true);
+                            }
+                            if (info == "no") {
+                                $(prevLable).children(".item-inner").find("input[value='no']").attr("checked", true);
+                            }
                             break;
                         case "select":
                             var selectOption = decodeURIComponent(value.value);
