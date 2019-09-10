@@ -15,8 +15,6 @@ jQuery(document).ready(function () {
         }
     });
 
-    $("#tab1").click();
-
     $(".back_btn").click(function () {
         var u = navigator.userAgent,
             app = navigator.appVersion;
@@ -131,6 +129,159 @@ jQuery(document).ready(function () {
                 },
             ]
         })
+    });
+
+    var loading = false;
+    var maxItems = 1000;
+    var itemsPerLoad = 10;
+    var pageNum = 1;
+
+    //点击tab
+    $(".tab-link.button").click(function () {
+        var tabName = Number(this.name);
+        pageNum = 1;
+        getFirstPage(tabName);
+    });
+
+    $("#tab1").click();
+
+    function getFirstPage(clickNum) {
+        var num = "#tab" + clickNum;
+        // if (num == 1) {
+        //     $("#tab1").empty();
+        //     addItems(itemsPerLoad, 0);
+        //     lastIndex = 10;
+        // } else if (num == 2) {
+        //     $("#tab2").empty();
+        //     addItems(itemsPerLoad, 0);
+        //     lastIndex = 10;
+        // } else {
+        //     $("#tab3").empty();
+        //     addItems(itemsPerLoad, 0);
+        //     lastIndex = 10;
+        // }
+        // $(".list-container").empty();
+        $(num).empty();
+        $(num).html('<div class="list-container"></div>');
+        pageNum = 1;
+        addItems(itemsPerLoad, 0, clickNum);
+        lastIndex = 10;
+        $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
+        // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
+        loading = false;
+        $.attachInfiniteScroll($('.infinite-scroll'));
+    }
+
+    //下拉刷新
+    $(document).on('refresh', '.pull-to-refresh-content', function (e) {
+        setTimeout(function () {
+            var tabName = $(".tab-link.button").attr("name");
+            getFirstPage(Number(tabName));
+            // done
+            $.pullToRefreshDone('.pull-to-refresh-content');
+        }, 2000);
+    });
+
+    //初始化页面接口
+    function addItems(number, lastIndex, clickNum) {
+        var text = '';
+        var url = "/selectByStateAndType";
+        // var searchKey = $("#search").val();
+        var params = {
+            pageNo: pageNum,
+            pageSize: number,
+            fTaskstateid: clickNum
+            // fSubid: 10100001
+            // key: searchKey
+        };
+
+        Substation.getDataByAjaxNoLoading(url, params, function (data) {
+            if (data.hasOwnProperty("taskList") && data.taskList.length > 0) {
+                if (clickNum == 3) {
+                    $(data.taskList).each(function () {
+                        text += "                            <div class=\"card\">";
+                        text += "                                <div class=\"card-content\">";
+                        text += "                                    <div class=\"row no-gutter sub_card\">";
+                        text += "                                        <div class=\"col-10\">";
+                        text += "                                            <img class=\"showImg\"";
+                        text += "                                                src=\"http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg\" />";
+                        text += "                                        </div>";
+                        text += "                                        <div class=\"col-75\">";
+                        text += "                                            <p class=\"subName\">" + this.fTaskcontent;
+                        text += "                                            </p>";
+                        text += "                                            <p><span>" + this.user.userName + "</span>";
+                        text += "                                                <span>" + this.fTaskcreatedate + "</span></p>";
+                        text += "                                        </div>";
+                        text += "                                        <div class=\"col-15\">";
+                        text += "                                        </div>";
+                        text += "                                    </div>";
+                        text += "                                </div>";
+                        text += "                            </div>";
+                    });
+                } else {
+                    $(data.taskList).each(function () {
+                        text += "                            <div class=\"card\">";
+                        text += "                                <div class=\"card-content\">";
+                        text += "                                    <div class=\"row no-gutter sub_card\">";
+                        text += "                                        <div class=\"col-10\">";
+                        text += "                                            <img class=\"showImg\"";
+                        text += "                                                src=\"http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg\" />";
+                        text += "                                        </div>";
+                        text += "                                        <div class=\"col-75\">";
+                        text += "                                            <p class=\"subName\">" + this.fTaskcontent;
+                        text += "                                            </p>";
+                        text += "                                            <p><span>" + this.user.userName + "</span>";
+                        text += "                                                <span>" + this.fTaskcreatedate + "</span></p>";
+                        text += "                                        </div>";
+                        text += "                                        <div class=\"col-15\">";
+                        text += "                                            <button class=\"button button-fill button-success\" id=\"dealMission\"";
+                        text += "                                                type=\"button\">我要处理";
+                        text += "                                            </button>";
+                        text += "                                        </div>";
+                        text += "                                    </div>";
+                        text += "                                </div>";
+                        text += "                            </div>";
+                    });
+                }
+                $('.list-container').append(text);
+                //addClick();
+                pageNum++;
+            } else {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
+            if (data.taskList.length < itemsPerLoad) {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
+        });
+    }
+    addItems(itemsPerLoad, 0, 1);
+
+    var lastIndex = 10;
+    //上拉加载
+    $(document).on('infinite', '.infinite-scroll', function () {
+
+        // 如果正在加载，则退出
+        if (loading) return;
+
+        // 设置flag
+        loading = true;
+
+        setTimeout(function () {
+            loading = false;
+
+            if (lastIndex >= maxItems) {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
+            var tabName = $(".tab-link.button").attr("name");
+            addItems(itemsPerLoad, lastIndex, Number(tabName));
+            lastIndex = $('.list-container .card').length;
+        }, 1000);
     });
 
     $.init();

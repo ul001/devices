@@ -8,12 +8,14 @@ jQuery(document).ready(function () {
 
     if (showmissionBtn == "missionDoing") {
         var showStr =
-            '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut" >执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
+            '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
         $("#addVarContain126").append(showStr);
+        $("#carryOut").attr('name', "true");
     } else if (showmissionBtn == "missionFinish") {
         var showstr =
             '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
         $("#addVarContain126").append(showstr);
+        $("#carryOut").attr('name', "false");
     }
 
     //现场签到按钮事件
@@ -24,22 +26,27 @@ jQuery(document).ready(function () {
         $("#submitToCss").removeClass("col-33");
         $("#carryOutCss").toggleClass("col-50");
         $("#submitToCss").toggleClass("col-50");
+        $("#carryOut").attr('name', "false");
     });
 
     //执行任务按钮事件
     $("#carryOut").click(function () {
-        if (missionType == "patrol") {
-            //巡检任务
-            localStorage.setItem("fSubname", "执行情况");
-            window.location.href = "patrolContent.html";
-        } else if (missionType == "scene") {
-            //现场交接任务
-            localStorage.setItem("fSubname", "执行情况");
-            window.location.href = "missionScene.html";
-        } else if (missionType == "defect") {
-            //缺陷整改
-            localStorage.setItem("fSubname", "执行情况");
-            window.location.href = "missionDefect.html";
+        if (this.name == "true") {
+            alert("执行任务前，请先签到。");
+        } else {
+            if (missionType == "patrol") {
+                //巡检任务
+                localStorage.setItem("fSubname", "执行情况");
+                window.location.href = "patrolContent.html";
+            } else if (missionType == "scene") {
+                //现场交接任务
+                localStorage.setItem("fSubname", "执行情况");
+                window.location.href = "missionScene.html";
+            } else if (missionType == "defect") {
+                //缺陷整改
+                localStorage.setItem("fSubname", "执行情况");
+                window.location.href = "missionDefect.html";
+            }
         }
     });
 

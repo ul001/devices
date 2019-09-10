@@ -597,11 +597,11 @@ jQuery(document).ready(function () {
     });
 
     //解决键盘遮挡问题
-    window.addEventListener("resize", function() {
-        if(document.activeElement.tagName=="INPUT" || document.activeElement.tagName=="TEXTAREA") {
-            window.setTimeout(function() {
+    window.addEventListener("resize", function () {
+        if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+            window.setTimeout(function () {
                 document.activeElement.scrollIntoViewIfNeeded();
-            },0);
+            }, 0);
         }
     });
     // var tempId = localStorage.getItem("fTempId");
