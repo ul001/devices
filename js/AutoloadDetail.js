@@ -595,6 +595,15 @@ jQuery(document).ready(function () {
         window.location.href =
             "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;
     });
+
+    //解决键盘遮挡
+    window.addEventListener("resize", function() {
+        if(document.activeElement.tagName=="INPUT" || document.activeElement.tagName=="TEXTAREA") {
+            window.setTimeout(function() {
+                document.activeElement.scrollIntoViewIfNeeded();
+            },0);
+        }
+    });
     // var tempId = localStorage.getItem("fTempId");
     // var parentId = localStorage.getItem("fPid");
     // var u = navigator.userAgent,
