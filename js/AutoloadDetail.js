@@ -596,7 +596,7 @@ jQuery(document).ready(function () {
             "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;
     });
 
-    //解决键盘遮挡
+    //解决键盘遮挡问题
     window.addEventListener("resize", function() {
         if(document.activeElement.tagName=="INPUT" || document.activeElement.tagName=="TEXTAREA") {
             window.setTimeout(function() {
