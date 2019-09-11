@@ -1,3 +1,6 @@
+.card-content-inner{
+    padding:0.3rem;
+}
 .card-content-inner p{
     margin:0;
 }
@@ -9,9 +12,33 @@
 }
 .item-footer{
     width:100%;
-    border-bottom:1px #ccc dashed;
+    border-bottom:0.05rem #ccc dashed;
 }
 .row.no-gutter{
     display:flex;
     align-items:center;
+}
+i.icon.icon-sub{
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-jiancedian.png);
+    margin-bottom:0.2rem;
+}
+i.icon.icon-week{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url(../img/i-week.png);
+}
+i.icon.icon-month{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url(../img/i-month.png);
+}
+i.icon.icon-year{
+    width: 1.5rem;
+    height: 1.5rem;
+    background-image: url(../img/i-year.png);
+}
+.bar p{
+    margin:0;
 }

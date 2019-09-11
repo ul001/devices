@@ -1,9 +1,158 @@
+function loadPage(){
 var pids = [{pid:-1,pname:""}];
 var clickNum = 0;
 var selectSubid = 10100001;
 var showState = 1;
+var thisGroupid = -1;
 //var selectSubid = localStorage.getItem("fSubid");
 
+//主页内容
+function fillRightData(){
+    Substation.getDataByAjax("/getDeviceInspectionTemplate",{fSubdevicegroupid:41,fSubid:10100001},function(data){
+        $(".content-block .tabs").empty();
+        $(".buttons-tab").empty();
+        var tempJson = "";
+        if(data.hasOwnProperty("template")){
+            tempJson = data.template;
+            tempJson = JSON.parse(tempJson);
+        }
+        $(data.list).each(function(index,obj){
+            var thisValueJson;
+            if(this.hasOwnProperty("fInspectionslipjson")){
+                if(this.fInspectionslipjson!=""&&this.fInspectionslipjson!=null){
+                    thisValueJson = JSON.parse(this.fInspectionslipjson);
+                }
+            }
+            var tempStr = "";
+            var num = 0;
+            $(tempJson.checkInfo).each(function(){
+                        num++;
+                        if(this.type=="radio"){
+                            inputStr = "<div class=\"card\">\n" +
+            "                                <div class=\"card-content\">\n" +
+            "                                    <div class=\"card-content-inner\">\n" +
+            "                                        "+decodeURIComponent(this.name)+"\n" +
+            "                                        <div class=\"pull-right\">\n" +
+            "                                            <label class=\"label-checkbox item-content\">\n" +
+            "                                                <input type=\"radio\" data-code=\""+this.code+"\" name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"yes\">\n" +
+            "                                                <div class=\"item-media\"><i\n" +
+            "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
+            "                                                <div class=\"item-inner\">\n" +
+            "                                                    是\n" +
+            "                                                </div>\n" +
+            "                                            </label>\n" +
+            "                                            &nbsp;\n" +
+            "                                            <label class=\"label-checkbox item-content\">\n" +
+            "                                                <input type=\"radio\" data-code=\""+this.code+"\" name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"no\" checked>\n" +
+            "                                                <div class=\"item-media\"><i\n" +
+            "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
+            "                                                <div class=\"item-inner\">\n" +
+            "                                                    否\n" +
+            "                                                </div>\n" +
+            "                                            </label>\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                </div>\n" +
+            "                            </div>\n";
+                        }else if(this.type=="input"){
+                            var thisInputName=decodeURIComponent(this.name);
+                            if(this.value=="true"){
+                                thisInputName = "<span class=\"redColor\">*</span>"+thisInputName;
+                            }
+                            inputStr="<div class=\"card\">\n" +
+            "                                <div class=\"card-content\">\n" +
+            "                                    <div class=\"card-content-inner\">\n" +
+            "                                        "+thisInputName+"\n" +
+            "                                        <div class=\"pull-right\">\n" +
+            "                                            <input type=\"text\" data-code=\""+this.code+"\" data-state=\""+this.value+"\">\n" +
+            "                                        </div>\n" +
+            "                                    </div>\n" +
+            "                                </div>\n" +
+            "                            </div>";
+                        }
+                        tempStr+=inputStr;
+    });
+            $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
+            $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab\">\n" +
+                                                "<div class=\"content-block\">\n"+tempStr+
+                                                "</div>\n"+
+                                             "</div>");
+            //给模板赋值
+            if(thisValueJson!=null&&thisValueJson!=""){
+                $(thisValueJson).each(function(){
+                    if(this.type=="radio"){
+                        $("input[name='"+(obj.fSubdeviceinfoid+""+this.code)+"'][value='"+this.value+"']").attr("checked",true);
+                    }else{
+                        $("#"+obj.fSubdeviceinfoid+" input[data-code='"+this.code+"']").val(this.value);
+                    }
+                });
+            }
+        });
+        addRadioClick();
+        getGroupidContent();
+        $(".tab-link").eq(0).click();
+    });
+}
+
+function getGroupidContent(){
+    if(thisGroupid==-1){
+        $(".content").css("display","none");
+    }else{
+        $(".content").css("display","block");
+    }
+}
+
+getGroupidContent();
+
+function saveThisPage(){
+    var changeJson=[];
+    if($("input[data-state='true']")){
+        var thisTemp=false;
+        $("input[data-state='true']").each(function(){
+            if($(this).val()==""){
+                $.toast("请填入必填项");
+                thisTemp = true;
+                return;
+            }
+        });
+        if(thisTemp){
+            return;
+        }
+    }
+    $(".tabs .tab").each(function(){
+        var deviceJson={};
+        var deviceId = $(this).attr("id");
+        var inputArray=[];
+        $("#"+deviceId+" .card").each(function(index,obj){
+            var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
+            var thisObj={};
+            if(thisInput){
+                thisObj['code']=$(thisInput).attr("data-code");
+                thisObj['value']=$(thisInput).attr("value");
+                thisObj['type']="radio";
+            }else{
+                thisObj['code']=$(obj).find($("input")).attr("data-code");
+                thisObj['value']=$(obj).find($("input")).val();
+                thisObj['type']="input";
+            }
+            inputArray.push(thisObj);
+        });
+        deviceJson['fInspectionslipjson']=inputArray;
+        deviceJson['fSubdeviceinfoid']=deviceId;
+        deviceJson['fPlacecheckformid']=4;
+        changeJson.push(deviceJson);
+    });
+    var jsonStr = JSON.stringify(changeJson);
+    Substation.postDataByAjax("/updateInspectionDetail",{deviceList:jsonStr},function(data){
+        if(data.code==200){
+            $.toast("保存成功");
+        }else{
+            $.toast("操作失败");
+        }
+    });
+}
+
+//左侧菜单
 function addBackClick(){
     $(".back-parent").unbind().click(function () {
         if(pids[clickNum+1]!=null){
@@ -101,6 +250,7 @@ function linkClick(parentId) {
                    return;
                 }
             }
+            thisGroupid = clickId;
             $("#"+clickId).addClass("selectLi").siblings().removeClass("selectLi");
             var thisId = clickId;
             var clickName = $("#"+thisId+" .item-title").text();
@@ -116,6 +266,7 @@ function linkClick(parentId) {
             var titleTreeName=titleTree.substring(1,titleTree.length-1);
             $("#subName").text(titleTreeName);
             $(".close-panel").click();
+            fillRightData();
         });
         event.stopPropagation();
     });
@@ -123,16 +274,23 @@ function linkClick(parentId) {
 
 function addRadioClick(){
     $(":radio").click(function(){
-        if($(this).val()==1){
+        if($(this).val()=="yes"){
+
             window.location.href="defectPage.html";
         }
     });
 }
 
-addRadioClick();
+$("#saveBtn").click(function(){
+    saveThisPage();
+});
 
 fillData(-1);
 
 $(".open-panel").click();
+
+}
+
+loadPage();
 
 $.init();

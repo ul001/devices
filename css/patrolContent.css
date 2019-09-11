@@ -14,7 +14,7 @@
     height: 1rem;
     background-image: url(../img/i-previcon.png);
 }
-.selectLi{
+.item-link.selectLi{
     background-color:#02A8A6;
     color:#fff;
 }
@@ -43,4 +43,9 @@ i.icon.icon-select{
 }
 p.limit-length{
     margin:0;
+}
+.card-content-inner{
+    padding: .5rem;
+    clear:both;
+    overflow:hidden;
 }
