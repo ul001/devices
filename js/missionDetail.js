@@ -4,7 +4,7 @@ jQuery(document).ready(function () {
     $("#titleContent").text(titlename);
 
     var showmissionBtn = localStorage.getItem("showType");
-    var missionType = localStorage.getItem("missionType");
+    // var missionType = localStorage.getItem("missionType");
 
     if (showmissionBtn == "missionDoing") {
         var showStr =
@@ -24,6 +24,8 @@ jQuery(document).ready(function () {
     var placeCheckFormId;
     //巡检的变电所id
     var missionsubid;
+    //任务类型 fTasktypeid 
+    var missionType;
 
     function getNetData() {
         Substation.getDataByAjax(
@@ -51,6 +53,7 @@ jQuery(document).ready(function () {
                     $("#finishTime").html(taskInfo.fDeadlinedate);
                     var missionContent = '<textarea readonly="readonly">' + taskInfo.fTaskcontent + '</textarea>';
                     $("#missionCont").append(missionContent);
+                    missionType = data.fTasktypeid;
                 }
                 if (data.hasOwnProperty("taskUserList") && data.taskUserList.length > 0) {
                     $(data.taskUserList).each(function () {
@@ -76,7 +79,6 @@ jQuery(document).ready(function () {
                         }
                     });
                 }
-
             });
     }
 
@@ -110,15 +112,15 @@ jQuery(document).ready(function () {
             localStorage.setItem("missionSubid", missionsubid);
             localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
             localStorage.setItem("missiontaskID", taskID);
-            if (missionType == "patrol") {
+            if (missionType == 1) {
                 //巡检任务
                 localStorage.setItem("fSubname", "执行情况");
                 window.location.href = "patrolContent.html";
-            } else if (missionType == "scene") {
+            } else if (missionType == 2) {
                 //现场交接任务
                 localStorage.setItem("fSubname", "执行情况");
                 window.location.href = "missionScene.html";
-            } else if (missionType == "defect") {
+            } else if (missionType == 3) {
                 //缺陷整改
                 localStorage.setItem("fSubname", "执行情况");
                 window.location.href = "missionDefect.html";
@@ -134,6 +136,9 @@ jQuery(document).ready(function () {
     //管理页面
     $("#clickManager").click(function () {
         localStorage.setItem("fSubname", "执行情况");
+        localStorage.setItem("missionSubid", missionsubid);
+        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
+        localStorage.setItem("missiontaskID", taskID);
         window.location.href = "missionManager.html";
     });
 });
