@@ -28,43 +28,38 @@ jQuery(document).ready(function () {
     });
 
     //我要处理 巡视
-    $("#dealMission").click(function () {
-        localStorage.setItem("fSubname", "任务详情");
-        localStorage.setItem("showType", "missionDoing");
-        localStorage.setItem("missionType", "patrol");
-        window.location.href = "missionDetail.html";
-    });
+    // $("#dealMission1").click(function () {
+    //     localStorage.setItem("fSubname", "任务详情");
+    //     localStorage.setItem("showType", "missionDoing");
+    //     localStorage.setItem("missionType", "patrol");
+    //     window.location.href = "missionDetail.html";
+    // });
 
-    //我要处理 巡视
-    $("#dealMission1").click(function () {
-        localStorage.setItem("fSubname", "任务详情");
-        localStorage.setItem("showType", "missionDoing");
-        localStorage.setItem("missionType", "patrol");
-        window.location.href = "missionDetail.html";
-    });
+    // //现场交接
+    // $("#dealMission2").click(function () {
+    //     localStorage.setItem("fSubname", "任务详情");
+    //     localStorage.setItem("showType", "missionDoing");
+    //     localStorage.setItem("missionType", "scene");
+    //     window.location.href = "missionDetail.html";
+    // });
 
-    //现场交接
-    $("#dealMission2").click(function () {
-        localStorage.setItem("fSubname", "任务详情");
-        localStorage.setItem("showType", "missionDoing");
-        localStorage.setItem("missionType", "scene");
-        window.location.href = "missionDetail.html";
-    });
+    // //缺陷整改
+    // $("#dealMission3").click(function () {
+    //     localStorage.setItem("fSubname", "任务详情");
+    //     localStorage.setItem("showType", "missionDoing");
+    //     localStorage.setItem("missionType", "defect");
+    //     window.location.href = "missionDetail.html";
+    // });
 
-    //缺陷整改
-    $("#dealMission3").click(function () {
-        localStorage.setItem("fSubname", "任务详情");
-        localStorage.setItem("showType", "missionDoing");
-        localStorage.setItem("missionType", "defect");
-        window.location.href = "missionDetail.html";
-    });
+
 
     //点击卡片
-    $("#cardFinish").click(function () {
-        localStorage.setItem("fSubname", "任务详情");
-        localStorage.setItem("showType", "missionFinish");
-        window.location.href = "missionDetail.html";
-    });
+    // $(".card").click(function () {
+    //     var id = this.attr("id");
+    //     localStorage.setItem("fSubname", "任务详情");
+    //     localStorage.setItem("showType", "missionFinish");
+    //     window.location.href = "missionDetail.html";
+    // });
 
     //右上角按钮事件
     $(".clickrightbtn").click(function () {
@@ -79,54 +74,54 @@ jQuery(document).ready(function () {
 
                     }
                 },
-                {
-                    text: '首次拜访',
-                    onClick: function () {
-                        $(".clickrightbtn").text("首次拜访");
-                    }
-                },
-                {
-                    text: '拜访',
-                    onClick: function () {
-                        $(".clickrightbtn").text("拜访");
-                    }
-                },
-                {
-                    text: '交接驱动',
-                    onClick: function () {
-                        $(".clickrightbtn").text("交接驱动");
-                    }
-                },
-                {
-                    text: '现场交接',
-                    onClick: function () {
-                        $(".clickrightbtn").text("现场交接");
-                    }
-                },
+                // {
+                //     text: '首次拜访',
+                //     onClick: function () {
+                //         $(".clickrightbtn").text("首次拜访");
+                //     }
+                // },
+                // {
+                //     text: '拜访',
+                //     onClick: function () {
+                //         $(".clickrightbtn").text("拜访");
+                //     }
+                // },
+                // {
+                //     text: '交接驱动',
+                //     onClick: function () {
+                //         $(".clickrightbtn").text("交接驱动");
+                //     }
+                // },
+                // {
+                //     text: '现场交接',
+                //     onClick: function () {
+                //         $(".clickrightbtn").text("现场交接");
+                //     }
+                // },
                 {
                     text: '巡视',
                     onClick: function () {
                         $(".clickrightbtn").text("巡视");
                     }
                 },
-                {
-                    text: '缺陷整改',
-                    onClick: function () {
-                        $(".clickrightbtn").text("缺陷整改");
-                    }
-                },
-                {
-                    text: '合同收款',
-                    onClick: function () {
-                        $(".clickrightbtn").text("合同收款");
-                    }
-                },
-                {
-                    text: '合同续签',
-                    onClick: function () {
-                        $(".clickrightbtn").text("合同续签");
-                    }
-                },
+                // {
+                //     text: '缺陷整改',
+                //     onClick: function () {
+                //         $(".clickrightbtn").text("缺陷整改");
+                //     }
+                // },
+                // {
+                //     text: '合同收款',
+                //     onClick: function () {
+                //         $(".clickrightbtn").text("合同收款");
+                //     }
+                // },
+                // {
+                //     text: '合同续签',
+                //     onClick: function () {
+                //         $(".clickrightbtn").text("合同续签");
+                //     }
+                // },
             ]
         })
     });
@@ -196,10 +191,16 @@ jQuery(document).ready(function () {
         };
 
         Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            if (data.hasOwnProperty("taskList") && data.taskList.length > 0) {
+            var taskList = data.taskList;
+            if (taskList.hasOwnProperty("list") && taskList.list.length > 0) {
+                var user = this.fTaskcreateuserid;
+                var username = "";
+                if (user != undefined) {
+                    username = user;
+                }
                 if (clickNum == 3) {
-                    $(data.taskList).each(function () {
-                        text += "                            <div class=\"card\">";
+                    $(taskList.list).each(function () {
+                        text += "                            <div class=\"card\" id=" + this.fTaskid + ">";
                         text += "                                <div class=\"card-content\">";
                         text += "                                    <div class=\"row no-gutter sub_card\">";
                         text += "                                        <div class=\"col-10\">";
@@ -209,7 +210,7 @@ jQuery(document).ready(function () {
                         text += "                                        <div class=\"col-75\">";
                         text += "                                            <p class=\"subName\">" + this.fTaskcontent;
                         text += "                                            </p>";
-                        text += "                                            <p><span>" + this.user.userName + "</span>";
+                        text += "                                            <p><span>" + this.fTaskcreateuserid + "</span>";
                         text += "                                                <span>" + this.fTaskcreatedate + "</span></p>";
                         text += "                                        </div>";
                         text += "                                        <div class=\"col-15\">";
@@ -219,8 +220,8 @@ jQuery(document).ready(function () {
                         text += "                            </div>";
                     });
                 } else {
-                    $(data.taskList).each(function () {
-                        text += "                            <div class=\"card\">";
+                    $(taskList.list).each(function () {
+                        text += "                            <div class=\"card\" id=" + this.fTaskid + ">";
                         text += "                                <div class=\"card-content\">";
                         text += "                                    <div class=\"row no-gutter sub_card\">";
                         text += "                                        <div class=\"col-10\">";
@@ -230,12 +231,12 @@ jQuery(document).ready(function () {
                         text += "                                        <div class=\"col-75\">";
                         text += "                                            <p class=\"subName\">" + this.fTaskcontent;
                         text += "                                            </p>";
-                        text += "                                            <p><span>" + this.user.userName + "</span>";
+                        text += "                                            <p><span>" + this.fTaskcreateuserid + "</span>";
                         text += "                                                <span>" + this.fTaskcreatedate + "</span></p>";
                         text += "                                        </div>";
                         text += "                                        <div class=\"col-15\">";
-                        text += "                                            <button class=\"button button-fill button-success\" id=\"dealMission\"";
-                        text += "                                                type=\"button\">我要处理";
+                        text += "                                            <button class=\"button button-fill button-success\" id=\"dealMission" + this.fTaskid + "\"";
+                        text += "                                                type=\"button\" name=" + this.fTaskid + " >我要处理";
                         text += "                                            </button>";
                         text += "                                        </div>";
                         text += "                                    </div>";
@@ -245,6 +246,15 @@ jQuery(document).ready(function () {
                 }
                 $('.list-container').append(text);
                 //addClick();
+                //我要处理 巡视
+                $(".button.button-fill").click(function () {
+                    var taskID = this.name;
+                    localStorage.setItem("fSubname", "任务详情");
+                    localStorage.setItem("showType", "missionDoing");
+                    localStorage.setItem("missionType", "patrol");
+                    localStorage.setItem("taskID", taskID);
+                    window.location.href = "missionDetail.html";
+                });
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
@@ -256,6 +266,8 @@ jQuery(document).ready(function () {
                 $('.infinite-scroll-preloader').html("--end--");
                 return;
             }
+
+
         });
     }
     addItems(itemsPerLoad, 0, 1);

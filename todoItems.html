@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
@@ -38,24 +38,21 @@
                     </div>
                 </div>
             </div>
-            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
-                <div class="pull-to-refresh-layer">
-                    <div class="preloader"></div>
-                    <div class="pull-to-refresh-arrow"></div>
-                </div>
+            <div class="content" data-ptr-distance="55" data-distance="100">
                 <div class="buttons-tab">
                     <a href="#tab1" class="tab-link button active" id="daiban" name="1">待办</a>
                     <a href="#tab2" class="tab-link button" id="zaiban" name="2">在办</a>
                     <a href="#tab3" class="tab-link button" id="banbi" name="3">办毕</a>
                 </div>
                 <div class="tabs">
-                    <div id="tab1" class="tab active content pull-to-refresh-content infinite-scroll">
+                    <div id="tab1" class="tab active content pull-to-refresh-content infinite-scroll"
+                        data-ptr-distance="55" data-distance="100">
                         <div class="pull-to-refresh-layer">
                             <div class="preloader"></div>
                             <div class="pull-to-refresh-arrow"></div>
                         </div>
                         <!-- 待办 -->
-                        <div class="list-container">
+                        <!-- <div class="list-container">
                             <div class="card">
                                 <div class="card-content">
                                     <div class="row no-gutter sub_card">
@@ -77,14 +74,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="infinite-scroll-preloader">
                             <div class="preloader"></div>
                         </div>
                     </div>
-                    <div id="tab2" class="tab">
+                    <div id="tab2" class="tab content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
+                        data-distance="100">
+                        <div class=" pull-to-refresh-layer">
+                            <div class="preloader"></div>
+                            <div class="pull-to-refresh-arrow"></div>
+                        </div>
                         <!-- 在办 -->
-                        <div class="list-container">
+                        <!-- <div class="list-container">
                             <div class="card">
                                 <div class="card-content">
                                     <div class="row no-gutter sub_card">
@@ -148,11 +150,19 @@
                                     </div>
                                 </div>
                             </div>
+                        </div> -->
+                        <div class="infinite-scroll-preloader">
+                            <div class="preloader"></div>
                         </div>
                     </div>
-                    <div id="tab3" class="tab">
+                    <div id="tab3" class="tab content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
+                        data-distance="100">
+                        <div class="pull-to-refresh-layer">
+                            <div class="preloader"></div>
+                            <div class="pull-to-refresh-arrow"></div>
+                        </div>
                         <!-- 办毕 -->
-                        <div class="list-container">
+                        <!-- <div class="list-container">
                             <div class="card" id="cardFinish">
                                 <div class="card-content">
                                     <div class="row no-gutter sub_card">
@@ -192,12 +202,13 @@
                                     </div>
                                 </div>
                             </div>
+                        </div> -->
+                        <div class="infinite-scroll-preloader">
+                            <div class="preloader"></div>
                         </div>
                     </div>
                 </div>
-                <div class="infinite-scroll-preloader">
-                    <div class="preloader"></div>
-                </div>
+
             </div>
         </div>
     </div>

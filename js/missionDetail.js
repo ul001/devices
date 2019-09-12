@@ -18,15 +18,88 @@ jQuery(document).ready(function () {
         $("#carryOut").attr('name', "false");
     }
 
+    //任务id
+    var taskID = localStorage.getItem("taskID");
+    //巡检单id
+    var placeCheckFormId;
+    //巡检的变电所id
+    var missionsubid;
+
+    function getNetData() {
+        Substation.getDataByAjax(
+            "/selectTaskByTaskId",
+            "taskId=" + taskID,
+            function (data) {
+                if (data.hasOwnProperty("placeCheckFormId")) {
+                    placeCheckFormId = data.placeCheckFormId;
+                    $("#checkIn").removeClass("col-33");
+                    $("#checkIn").hide();
+                    $("#carryOutCss").removeClass("col-33");
+                    $("#submitToCss").removeClass("col-33");
+                    $("#carryOutCss").toggleClass("col-50");
+                    $("#submitToCss").toggleClass("col-50");
+                    $("#carryOut").attr('name', "false");
+                }
+                var taskInfo = data.taskInfo;
+                if (taskInfo) {
+                    missionsubid = data.fSubid;
+                    $("#missionId").html(taskInfo.fTaskid);
+                    $("#missionType").html(taskInfo.fTasktypeexplain);
+                    $("#missionName").html(taskInfo.fTaskname);
+                    $("#createName").html(taskInfo.fTaskcreateusername);
+                    $("#createTime").html(taskInfo.fStartdate);
+                    $("#finishTime").html(taskInfo.fDeadlinedate);
+                    var missionContent = '<textarea readonly="readonly">' + taskInfo.fTaskcontent + '</textarea>';
+                    $("#missionCont").append(missionContent);
+                }
+                if (data.hasOwnProperty("taskUserList") && data.taskUserList.length > 0) {
+                    $(data.taskUserList).each(function () {
+                        var text = "";
+                        text += "<li>";
+                        text += "                                <div class=\"item-content showDiv\">";
+                        text += "                                    <div class=\"item-inner\">";
+                        text += "                                        <div class=\"item-title label\">" + this.userName + "</div>";
+                        text += "                                        <div class=\"item-input\">";
+                        text += "                                            <div class = \"item-label\" id=\"input" + this.fUserid + "\" ";
+                        text += "                                                name=\"number\" >" + this.taskState + "</div>";
+                        text += "                                        </div>";
+                        text += "                                    </div>";
+                        text += "                                </div>";
+                        text += "                            </li>";
+                        $("#missionState").append(text);
+                        if (this.fTaskstateid == 1) {
+                            $("#input" + this.fUserid).css("color", "gray");
+                        } else if (this.fTaskstateid == 2) {
+                            $("#input" + this.fUserid).css("color", "red");
+                        } else {
+                            $("#input" + this.fUserid).css("color", "springgreen");
+                        }
+                    });
+                }
+
+            });
+    }
+
+    getNetData();
+
     //现场签到按钮事件
     $("#checkIn").click(function () {
-        $("#checkIn").removeClass("col-33");
-        $("#checkIn").hide();
-        $("#carryOutCss").removeClass("col-33");
-        $("#submitToCss").removeClass("col-33");
-        $("#carryOutCss").toggleClass("col-50");
-        $("#submitToCss").toggleClass("col-50");
-        $("#carryOut").attr('name', "false");
+        Substation.getDataByAjax(
+            "/taskSingIn",
+            "taskId=" + taskID,
+            function (data) {
+                if (data.placeCheckFormId) {
+                    placeCheckFormId = data.placeCheckFormId;
+                    $("#checkIn").removeClass("col-33");
+                    $("#checkIn").hide();
+                    $("#carryOutCss").removeClass("col-33");
+                    $("#submitToCss").removeClass("col-33");
+                    $("#carryOutCss").toggleClass("col-50");
+                    $("#submitToCss").toggleClass("col-50");
+                    $("#carryOut").attr('name', "false");
+                }
+            });
+
     });
 
     //执行任务按钮事件
@@ -34,6 +107,9 @@ jQuery(document).ready(function () {
         if (this.name == "true") {
             alert("执行任务前，请先签到。");
         } else {
+            localStorage.setItem("missionSubid", missionsubid);
+            localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
+            localStorage.setItem("missiontaskID", taskID);
             if (missionType == "patrol") {
                 //巡检任务
                 localStorage.setItem("fSubname", "执行情况");

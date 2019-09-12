@@ -45,7 +45,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">任务编号:</div>
                                         <div class="item-input">
-                                            <div class="item-label">201900826000030</div>
+                                            <div class="item-label" id="missionId"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -55,7 +55,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">任务类型:</div>
                                         <div class="item-input">
-                                            <div class="item-label">巡视任务</div>
+                                            <div class="item-label" id="missionType"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@
                                                 validator="required" style="overflow:scroll;">
                                         </div> -->
                                         <div class="item-input">
-                                            <div class="item-label">上海安科瑞电气股份有限公司上海分公司</div>
+                                            <div class="item-label" id="missionName"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">发起人:</div>
                                         <div class="item-input">
-                                            <div class="item-label">张三</div>
+                                            <div class="item-label" id="createName"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -89,7 +89,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">发起时间:</div>
                                         <div class="item-input">
-                                            <div class="item-label">2019-8-26 13:11:26</div>
+                                            <div class="item-label" id="createTime"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -99,7 +99,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">完成时间:</div>
                                         <div class="item-input">
-                                            <div class="item-label">2019-9-26 13:11:26</div>
+                                            <div class="item-label" id="finishTime">2019-9-26 13:11:26</div>
                                         </div>
                                     </div>
                                 </div>
@@ -108,8 +108,9 @@
                                 <div class="showDiv item-content">
                                     <div class="item-inner">
                                         <div class="item-title label">内容:</div>
-                                        <div class="item-input"><textarea
-                                                readonly="readonly">注意安全，在此说明一些任务的详细描述，或者任务的一些备注注意安全，在此说明一些任务的详细描述，或者任务的一些备注注意安全，在此说明一些任务的详细描述，或者任务的一些备注</textarea>
+                                        <div class="item-input" id="missionCont">
+
+                                            <!-- <textarea id="missionContent" readonly="readonly"></textarea> -->
                                         </div>
                                     </div>
                                 </div>
@@ -141,8 +142,8 @@
                         <!-- </nobr> -->
                     </div>
                     <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
-                        <ul>
-                            <li>
+                        <ul id="missionState">
+                            <!-- <li>
                                 <div class="item-content showDiv">
                                     <div class="item-inner">
                                         <div class="item-title label">1 李四</div>
@@ -164,7 +165,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </div>
