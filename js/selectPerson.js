@@ -4,8 +4,8 @@ function loadPage() {
         pname: ""
     }];
     var clickNum = 0;
-    var selectSubid = 10100001;
-    var showState = 1;
+    // var selectSubid = 10100001;
+    // var showState = 1;
     var thisGroupid = -1;
     //var selectSubid = localStorage.getItem("fSubid");
     var showArrayUser = [];
@@ -71,60 +71,10 @@ function loadPage() {
     getGroupidContent();
 
     function saveThisPage() {
-        var changeJson = [];
-        if ($("input[data-state='true']")) {
-            var thisTemp = false;
-            $("input[data-state='true']").each(function () {
-                if ($(this).val() == "") {
-                    $.toast("请填入必填项");
-                    thisTemp = true;
-                    return;
-                }
-            });
-            if (thisTemp) {
-                return;
-            }
-        }
-        $(".tabs .tab").each(function () {
-            var deviceJson = {};
-            var deviceId = $(this).attr("id");
-            var inputArray = [];
-            $("#" + deviceId + " .card").each(function (index, obj) {
-                var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
-                var thisObj = {};
-                if (thisInput) {
-                    thisObj["code"] = $(thisInput).attr("data-code");
-                    thisObj["value"] = $(thisInput).attr("value");
-                    thisObj["type"] = "radio";
-                } else {
-                    thisObj["code"] = $(obj)
-                        .find($("input"))
-                        .attr("data-code");
-                    thisObj["value"] = $(obj)
-                        .find($("input"))
-                        .val();
-                    thisObj["type"] = "input";
-                }
-                inputArray.push(thisObj);
-            });
-            deviceJson["fInspectionslipjson"] = inputArray;
-            deviceJson["fSubdeviceinfoid"] = deviceId;
-            deviceJson["fPlacecheckformid"] = 4;
-            changeJson.push(deviceJson);
-        });
-        var jsonStr = JSON.stringify(changeJson);
-        Substation.postDataByAjax(
-            "/updateInspectionDetail", {
-                deviceList: jsonStr
-            },
-            function (data) {
-                if (data.code == 200) {
-                    $.toast("保存成功");
-                } else {
-                    $.toast("操作失败");
-                }
-            }
-        );
+        var jsonStr = JSON.stringify(showArrayUser);
+        localStorage.setItem("selectPersons", jsonStr);
+        localStorage.setItem("need-refresh", true);
+        window.history.back();
     }
 
     //左侧菜单

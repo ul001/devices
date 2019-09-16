@@ -9,6 +9,37 @@ jQuery(document).ready(function () {
     var placeCheckFormId = localStorage.getItem("missionPlaceCheckFormId");
     //巡检的变电所id
     var missionsubid = localStorage.getItem("missionSubid");
+    //获得选取的重派任务人员
+    var selectPersons = localStorage.getItem("selectPersons");
+    // window.onpageshow = function (event) {
+    //     if (event.persisted) {
+
+    //         window.location.reload();
+    //     }
+    // }
+
+    window.addEventListener('pageshow', function (event) {
+        if (localStorage.getItem("need-refresh")) {
+            location.reload();
+            localStorage.removeItem("need-refresh");
+            selectPersons = localStorage.getItem("selectPersons");
+            if (!selectPersons || selectPersons == undefined) {
+
+            } else {
+                location.reload();
+                var selectp = JSON.parse(selectPersons);
+                if (selectp && selectp.length > 0) {
+                    var nameStr;
+                    var nameArr = [];
+                    $(selectp).each(function (index, obj) {
+                        nameArr.push(this.userName);
+                    });
+                    nameStr = nameArr.join(',');
+                    $("#selectPep").html(nameStr);
+                }
+            }
+        }
+    }, false);
 
     // fCreateTime 提交时间
     // fExplain 执行情况
@@ -101,6 +132,18 @@ jQuery(document).ready(function () {
                             $("#input" + this.fUserid).css("color", "springgreen");
                         }
                     });
+                    if (selectPersons && selectPersons.length > 0) {
+                        var selectp = JSON.parse(selectPersons);
+                        if (selectp && selectp.length > 0) {
+                            var nameStr;
+                            var nameArr = [];
+                            $(selectp).each(function (index, obj) {
+                                nameArr.push(this.userName);
+                            });
+                            nameStr = nameArr.join(',');
+                            $("#selectPep").html(nameStr);
+                        }
+                    }
                 }
             });
     }
@@ -157,6 +200,7 @@ jQuery(document).ready(function () {
 
     //重派选人页面
     $("#selectPep").click(function () {
+
         window.location.href = "selectPerson.html";
     });
 
