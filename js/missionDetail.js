@@ -25,7 +25,7 @@ jQuery(document).ready(function () {
     //巡检的变电所id
     var missionsubid;
     //任务类型 fTasktypeid 
-    var missionType;
+    var missionTypeid;
 
     function getNetData() {
         Substation.getDataByAjax(
@@ -44,7 +44,7 @@ jQuery(document).ready(function () {
                 }
                 var taskInfo = data.taskInfo;
                 if (taskInfo) {
-                    missionsubid = data.fSubid;
+                    missionsubid = taskInfo.fSubid;
                     $("#missionId").html(taskInfo.fTaskid);
                     $("#missionType").html(taskInfo.fTasktypeexplain);
                     $("#missionName").html(taskInfo.fTaskname);
@@ -53,7 +53,33 @@ jQuery(document).ready(function () {
                     $("#finishTime").html(taskInfo.fDeadlinedate);
                     var missionContent = '<textarea readonly="readonly">' + taskInfo.fTaskcontent + '</textarea>';
                     $("#missionCont").append(missionContent);
-                    missionType = data.fTasktypeid;
+                    missionTypeid = taskInfo.fTasktypeid;
+
+                    //执行任务按钮事件
+                    $("#carryOut").click(function () {
+                        if (this.name == "true") {
+                            alert("执行任务前，请先签到。");
+                        } else {
+                            localStorage.setItem("missionSubid", missionsubid);
+                            localStorage.setItem("missionPlaceCheckFormissionTypemId", placeCheckFormId);
+                            localStorage.setItem("missiontaskID", taskID);
+                            if (missionTypeid == 1) {
+                                //巡检任务
+                                localStorage.setItem("fSubname", "执行情况");
+                                window.location.href = "patrolContent.html";
+                            } else if (missionTypeid == 2) {
+                                //现场交接任务
+                                localStorage.setItem("fSubname", "执行情况");
+                                window.location.href = "missionScene.html";
+                            } else if (missionTypeid == 3) {
+                                //缺陷整改
+                                localStorage.setItem("fSubname", "执行情况");
+                                window.location.href = "missionDefect.html";
+                            } else {
+                                alert("fTasktypeid=null，未知任务类型");
+                            }
+                        }
+                    });
                 }
                 if (data.hasOwnProperty("taskUserList") && data.taskUserList.length > 0) {
                     $(data.taskUserList).each(function () {
@@ -101,32 +127,8 @@ jQuery(document).ready(function () {
                     $("#carryOut").attr('name', "false");
                 }
             });
-
     });
 
-    //执行任务按钮事件
-    $("#carryOut").click(function () {
-        if (this.name == "true") {
-            alert("执行任务前，请先签到。");
-        } else {
-            localStorage.setItem("missionSubid", missionsubid);
-            localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
-            localStorage.setItem("missiontaskID", taskID);
-            if (missionType == 1) {
-                //巡检任务
-                localStorage.setItem("fSubname", "执行情况");
-                window.location.href = "patrolContent.html";
-            } else if (missionType == 2) {
-                //现场交接任务
-                localStorage.setItem("fSubname", "执行情况");
-                window.location.href = "missionScene.html";
-            } else if (missionType == 3) {
-                //缺陷整改
-                localStorage.setItem("fSubname", "执行情况");
-                window.location.href = "missionDefect.html";
-            }
-        }
-    });
 
     //提交按钮事件
     $("#submitTo").click(function () {

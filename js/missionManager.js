@@ -131,7 +131,7 @@ jQuery(document).ready(function () {
     //     }
     // });
 
-    //46.任提交按钮事件
+    //46.总任务提交按钮事件
     $("#submitTo").click(function () {
         Substation.getDataByAjax(
             "/submitUserTask",
@@ -153,6 +153,11 @@ jQuery(document).ready(function () {
 
                 }
             });
+    });
+
+    //重派选人页面
+    $("#selectPep").click(function () {
+        window.location.href = "selectPerson.html";
     });
 
     //管理页面
