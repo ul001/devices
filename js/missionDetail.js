@@ -99,9 +99,11 @@ jQuery(document).ready(function () {
                         if (this.fTaskstateid == 1) {
                             $("#input" + this.fUserid).css("color", "gray");
                         } else if (this.fTaskstateid == 2) {
-                            $("#input" + this.fUserid).css("color", "red");
-                        } else {
+                            $("#input" + this.fUserid).css("color", "blue");
+                        } else if (this.fTaskstateid == 3 || this.fTaskstateid == 4) {
                             $("#input" + this.fUserid).css("color", "springgreen");
+                        } else {
+                            $("#input" + this.fUserid).css("color", "red");
                         }
                     });
                 }
@@ -132,7 +134,12 @@ jQuery(document).ready(function () {
 
     //提交按钮事件
     $("#submitTo").click(function () {
-
+        // fExplain 执行情况
+        Substation.getDataByAjax("/submitUserTask", "fTaskid=" + taskID, function (
+            data
+        ) {
+            window.history.back();
+        });
     });
 
     //管理页面

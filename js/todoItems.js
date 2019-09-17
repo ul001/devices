@@ -138,8 +138,6 @@ jQuery(document).ready(function () {
         getFirstPage(tabName);
     });
 
-    $("#tab1").click();
-
     function getFirstPage(clickNum) {
         var num = "#tab" + clickNum;
         // if (num == 1) {
@@ -155,7 +153,7 @@ jQuery(document).ready(function () {
         //     addItems(itemsPerLoad, 0);
         //     lastIndex = 10;
         // }
-        // $(".list-container").empty();
+        $(".list-container").empty();
         $(num).empty();
         $(num).html('<div class="list-container"></div>');
         pageNum = 1;
@@ -200,7 +198,7 @@ jQuery(document).ready(function () {
                 }
                 if (clickNum == 3) {
                     $(taskList.list).each(function () {
-                        text += "                            <div class=\"card\" id=" + this.fTaskid + ">";
+                        text += "                            <div class=\"card\"  id=\"" + this.fTaskid + "\"";
                         text += "                                <div class=\"card-content\">";
                         text += "                                    <div class=\"row no-gutter sub_card\">";
                         text += "                                        <div class=\"col-10\">";
@@ -218,10 +216,20 @@ jQuery(document).ready(function () {
                         text += "                                    </div>";
                         text += "                                </div>";
                         text += "                            </div>";
+                        $('.list-container').append(text);
+                    });
+                    //我要处理 巡视
+                    $(".card").click(function () {
+                        var taskID = $(this).attr("id");
+                        localStorage.setItem("fSubname", "任务详情");
+                        localStorage.setItem("showType", "missionFinish");
+                        localStorage.setItem("missionType", "patrol");
+                        localStorage.setItem("taskID", taskID);
+                        window.location.href = "missionDetail.html";
                     });
                 } else {
                     $(taskList.list).each(function () {
-                        text += "                            <div class=\"card\" id=" + this.fTaskid + ">";
+                        text += "                            <div class=\"card\">";
                         text += "                                <div class=\"card-content\">";
                         text += "                                    <div class=\"row no-gutter sub_card\">";
                         text += "                                        <div class=\"col-10\">";
@@ -242,11 +250,12 @@ jQuery(document).ready(function () {
                         text += "                                    </div>";
                         text += "                                </div>";
                         text += "                            </div>";
+                        $('.list-container').append(text);
                     });
+
                 }
-                $('.list-container').append(text);
                 //addClick();
-                //我要处理 巡视
+
                 $(".button.button-fill").click(function () {
                     var taskID = this.name;
                     localStorage.setItem("fSubname", "任务详情");
@@ -270,7 +279,9 @@ jQuery(document).ready(function () {
 
         });
     }
+
     addItems(itemsPerLoad, 0, 1);
+    $("#tab1").click();
 
     var lastIndex = 10;
     //上拉加载

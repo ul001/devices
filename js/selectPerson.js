@@ -26,7 +26,7 @@ function loadPage() {
                         text += "<div class=\"card\">";
                         text += "                        <div class=\"card-content\">";
                         text += "                            <div class=\"card-content-inner\">";
-                        text += this.fUsername;
+                        text += "                            <label for=\"" + this.fUserid + "\">" + this.fUsername + " </label>";
                         text += "                                <div class=\"pull-right\">";
                         text += "                                    <label class=\"label-checkbox item-content\">";
                         text += "                                        <input type=\"checkbox\"id=\"" + this.fUserid + "\" name=\"" + this.fUsername + "\" value=\"no\">";
@@ -34,7 +34,7 @@ function loadPage() {
                         text += "                                        </div>";
                         text += "                                    </label>";
                         text += "                                </div>";
-                        text += "                            </div>";
+                        text += "                            </label>";
                         text += "                        </div>";
                         text += "                    </div>";
                         $(".content-block.showCard").append(text);
@@ -246,10 +246,6 @@ function loadPage() {
                 $(this).attr("checked", false);
                 // $("#" + this.name).attr("checked", false);
                 $(this).attr("value", "no");
-                // var user = {
-                //     "userId": $(this).attr("id"),
-                //     "userName": this.name
-                // };
                 if (showArrayUser.length > 0) {
                     var indexID;
                     var userID = $(this).attr("id");
@@ -261,8 +257,7 @@ function loadPage() {
                     showArrayUser.splice(indexID, 1);
                 }
             }
-            // showArrayUser();
-            // var nameStr = showArrayUser.userName.join(",");
+            //转字符串拼接
             var nameStr;
             var nameArr = [];
             $(showArrayUser).each(function (index, obj) {
@@ -271,6 +266,9 @@ function loadPage() {
             nameStr = nameArr.join(',');
             $("#inputNameId").val(nameStr);
         });
+        // $(".card-content-inner").click(function () {
+        //     $("#" + $(this).attr("name")).click();
+        // });
     }
 
     $("#saveBtn").click(function () {
