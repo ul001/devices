@@ -11,29 +11,56 @@
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);*/
+var imgNum1 = 0;
 var imgNum = 0;
+var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
 var selectSubid = localStorage.getItem("fSubid");
-var defectJson = JSON.parse(localStorage.getItem("defectJson"));
-var code = defectJson.code;
-var name = decodeURIComponent(defectJson.name);
-var defectPosition = decodeURIComponent(defectJson.defectPosition);
-var identification = decodeURIComponent(defectJson.identification);
-var deadline = decodeURIComponent(defectJson.deadline);
-var dangerous = defectJson.dangerous;
-$("#defectDiscribe").val(name);
-var defectPositionArray = defectPosition.split(";");
-$("#defectPosition").empty();
-$(defectPositionArray).each(function(index,obj){
-    $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label>');
+var clickTree = localStorage.getItem("clickTree");
+
+Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceproblemid},function(data){
+    var imgUrl = data.imgUrl;
+    var defectJson = data.tDevDeviceproblem;
+    var beforeimg = data.beforeimg;
+    var afterimg = data.afterimg;
+    $("#treePathName").val(clickTree);
+    $("#defectDiscribe").val(defectJson.fDeviceproblemdes);
+    var fProblemlocation = defectJson.fProblemlocation;
+    var defectPosition = fProblemlocation.split(",")[0];
+    var defectPositionVal = fProblemlocation.split(",")[1];
+    var defectPositionArray = defectPosition.split(";");
+    var defectPositionValArray = defectPositionVal.split(";");
+    $("#defectPosition").empty();
+    $(defectPositionArray).each(function(index,obj){
+        $("#defectPosition").append('<input type="checkbox" disabled value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label>');
+    });
+    $(defectPositionValArray).each(function(){
+        $("input[type='checkbox'][value='"+this+"']").attr("checked",true);
+    });
+    $("#fProblemtype").val(defectJson.fProblemtype);
+    $("#fProblemlevel").val(defectJson.fProblemlevel);
+    $("#fTimelimit").val(defectJson.fTimelimit);
+    $("#fProblemharm").val(defectJson.fProblemharm);
+    $("#fCreatetime").val(defectJson.fCreatetime);
+    $("#fResolution").val(defectJson.fResolution);
+    if(defectJson.fClientadvice!=""){
+        $("#fClientadvice").val(defectJson.fClientadvice);
+    }
+    $("#fState").val(defectJson.fState);
+    if(beforeimg.length>0){
+        $.each(beforeimg, function (i, value) {
+            imgNum1++;
+            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+            $("#imgBox1").append(imgDiv);
+        });
+    }
+    if(afterimg.length>0){
+        $.each(afterimg, function (i, value) {
+            imgNum++;
+            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+            $("#imgBox").append(imgDiv);
+        });
+    }
 });
-$("#dangerCategory").val(defectJson.dangerCategory);
-$("#dangerType").val(defectJson.dangerType);
-$("#dangerous").val(dangerous);
-$("#suggest").val(defectJson.suggest);
-$("#deadline").val(deadline);
-var defectPositionVal=defectPosition;
-var fPlacecheckformid = localStorage.getItem("fPlacecheckformid");
-var fSubdeviceinfoid = Substation.GetQueryString("fSubdeviceinfoid");
 
 $("#inputBox").html("");
 $(".upload_img_wrap .upload_img").on("click", function () {
@@ -46,7 +73,7 @@ $(".upload_img_wrap .upload_img").on("click", function () {
         //            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
         //            // $("input:file").removeAttr("capture");
         //        }else{
-        $("#inputBox").append("<input type=\"file\" class=\"fileInput\" name=\"file\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        $("#inputBox").append("<input type=\"file\" class=\"fileInput\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
         //        }
     }
     $("#file" + index).click();
@@ -99,14 +126,14 @@ function removeImg(obj, index) {
                 $("#file" + (i + 1)).remove();
             } else {
                 //                if(confirm("确定要删除已保存的图片？")){
-                $.confirm("确定要删除已保存的图片？", function () {
+                /*$.confirm("确定要删除已保存的图片？", function () {
                     $(".imgContainer").eq(i).remove();
                     Substation.getDataByAjax("/deleteSubstationImg", {
                         fId: imgId
                     }, function () {
 
                     });
-                });
+                });*/
                 /*$(".imgContainer").eq(i).remove();
                 Substation.getDataByAjax("/deleteSubstationImg", {
                     fId: imgId
@@ -146,9 +173,9 @@ function closePicture(obj) {
             });
         }
     });
-}
+}*/
 
-loadSavedPic();*/
+//loadSavedPic();
 
 function saveFormData() {
     $(".fileInput").each(function () {
@@ -156,28 +183,9 @@ function saveFormData() {
             $(this).remove();
         }
     });
-    if($("input:checkbox:checked").length==0){
-        $.toast("请选择缺陷位置！");
-        return;
-    }else{
-        var checkedVal=",";
-        $("input:checkbox:checked").each(function(){
-            checkedVal+=$(this).val()+";";
-        });
-        checkedVal=checkedVal.substring(0,checkedVal.length-1);
-        defectPositionVal=defectPosition+checkedVal;
-    }
-    if($(".fileInput")&&$(".fileInput").length==0){
-        $.toast("请上传现场照！");
-        return;
-    }
     var params = new FormData($('#form1')[0]);
-    params.append("fTimelimit", deadline);
-    params.append("fProblemlocation", defectPositionVal);
-    params.append("fPlacecheckformid", fPlacecheckformid);
-    params.append("fSubdeviceinfoid", fSubdeviceinfoid);
-    params.append("fDeviceitem", code);
-    Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (data) {
+    params.append("fDeviceproblemid", fDeviceproblemid);
+    Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
             window.history.back();

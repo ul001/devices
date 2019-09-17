@@ -149,3 +149,11 @@ a:hover {
 .custom_img{
     height:100%;
 }
+
+.list-block{
+    margin:0;
+}
+
+.list-block .item-title.label {
+    width:initial;
+}

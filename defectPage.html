@@ -18,209 +18,240 @@
 <div class="page-group">
     <div class="page">
         <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+            <a class="button button-link button-nav pull-left click_btn back_btn"
+               onclick="window.history.back()">
                 <span class="icon icon-left"></span>
                 返回
             </a>
             <h1 class="title title_color">缺陷登记</h1>
-            <a class="button button-link button-nav pull-right click_btn" onclick="">
-                新增
+            <a class="button button-link button-nav pull-right click_btn" onclick="saveFormData()">
+                保存
             </a>
         </header>
         <div class="content">
             <div class="content">
                 <div class="list-block">
-                    <ul>
-                        <!-- Text inputs -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label blueColor">缺陷描述：</div>
-                                    <div class="item-input">
-                                        <input type="text" value="户外隔离刀闸合闸不到位">
+                    <form id="form1" method="post" enctype="multipart/form-data">
+                        <ul id="listContainer">
+                            <!-- Text inputs -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label blueColor">缺陷描述：</div>
+                                        <div class="item-input">
+                                            <input type="text" id="defectDiscribe" name="fDeviceproblemdes" value="">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label"><span class="redColor">*</span><span class="blueColor">缺陷位置：</span></div>
-                                    <div class="item-input">
-                                        <input type="checkbox" value="A" id="checkA"><label for="checkA">A相</label>
-                                        <input type="checkbox" value="B" id="checkB"><label for="checkB">B相</label>
-                                        <input type="checkbox" value="C" id="checkC"><label for="checkC">C相</label>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span
+                                                class="redColor">*</span><span
+                                                class="blueColor">缺陷位置：</span></div>
+                                        <div class="item-input" id="defectPosition">
+                                            <input type="checkbox" value="A" id="checkA"><label
+                                                for="checkA">A相</label>
+                                            <input type="checkbox" value="B" id="checkB"><label
+                                                for="checkB">B相</label>
+                                            <input type="checkbox" value="C" id="checkC"><label
+                                                for="checkC">C相</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label blueColor">缺陷类别：</div>
-                                    <div class="item-input">
-                                        <select name="" id="selectA">
-                                            <option value="1">导电类</option>
-                                            <option value="2">标识类</option>
-                                            <option value="3">支撑类</option>
-                                            <option value="4">保护类</option>
-                                        </select>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label blueColor">缺陷类别：</div>
+                                        <div class="item-input">
+                                            <select name="fProblemtype" id="dangerCategory">
+                                                <option value="导电类">导电类</option>
+                                                <option value="标识类">标识类</option>
+                                                <option value="支撑类">支撑类</option>
+                                                <option value="保护类">保护类</option>
+                                                <option value="环境类">环境类</option>
+                                                <option value="土建类">土建类</option>
+                                                <option value="防护类">防护类</option>
+                                                <option value="控制类">控制类</option>
+                                                <option value="设施类">设施类</option>
+                                                <option value="量测类">量测类</option>
+                                                <option value="防鼠类">防鼠类</option>
+                                                <option value="框架类">框架类</option>
+                                                <option value="工具类">工具类</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label blueColor">缺陷类型：</div>
-                                    <div class="item-input">
-                                        <select name="">
-                                            <option value="">一般</option>
-                                            <option value="">重大</option>
-                                            <option value="">紧急</option>
-                                        </select>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label blueColor">缺陷类型：</div>
+                                        <div class="item-input">
+                                            <select name="fProblemlevel" id="dangerType">
+                                                <option value="一般">一般</option>
+                                                <option value="重大">重大</option>
+                                                <option value="紧急">紧急</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <!-- Date -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Birth date</div>
-                                    <div class="item-input">
-                                        <input type="date" placeholder="Birth day" value="2014-04-30">
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">消缺期限：</div>
+                                        <div class="item-input">
+                                            <input type="text" name="fTimelimit" id="deadline"
+                                                   value="1天以内" disabled>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <!-- Switch (Checkbox) -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Switch</div>
-                                    <div class="item-input">
-                                        <label class="label-switch">
-                                            <input type="checkbox">
-                                            <div class="checkbox"></div>
-                                        </label>
+                            </li>
+                            <!-- Date -->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label blueColor">缺陷危害：</div>
+                                        <div class="item-input">
+                                            <input type="text" name="fProblemharm" id="dangerous"
+                                                   value="严重影响设备承载能力，随时引起突发停电或缺相供电等事故">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li class="align-top">
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label"><span class="redColor">*</span><span class="blueColor">现场照：</span></div>
-                                    <div class="item-input">
-                                        <div class="custom_img">
-                                            <!--点击上传图片 触发下面的div 点击事件-->
-                                            <div class="upload_img_wrap">
-                                                <div id="imgBox"><img class="upload_img" src="img/upload_img.png" />
-                                                </div>
-                                                <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
-                                            </div>
-                                            <div style="display: none;width: 100%;height: 100vh;position: relative;">
-                                                <form id="upBox" class="upload_form" action="" method="post" enctype="multipart/form-data">
-                                                    <div style="display: none;" id="inputBox">
-                                                        <input type="file" name="myFiles" data-id="1" title="请选择图片" id="file1" accept="image/png,image/jpg,image/gif,image/JPEG" />
-                                                        <!--
-                                                <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
-                                                <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label blueColor">处理建议：</div>
+                                        <div class="item-input">
+                                            <input type="text" name="fResolution" id="suggest"
+                                                   value="重新合闸完好">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="align-top">
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span
+                                                class="redColor">*</span><span
+                                                class="blueColor">现场照：</span></div>
+                                        <div class="item-input">
+                                            <div class="custom_img">
+                                                <!--点击上传图片 触发下面的div 点击事件-->
+                                                <div class="upload_img_wrap">
+                                                    <div id="imgBox"><img class="upload_img"
+                                                                          src="img/upload_img.png"/>
                                                     </div>
-                                                    <input style="display:none" type="submit" id="sub" />
-                                                </form>
+                                                    <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                                                </div>
+                                                <div style="display: none;width: 100%;height: 100vh;position: relative;">
+                                                        <div style="display: none;" id="inputBox">
+                                                            <input type="file" name="file"
+                                                                   data-id="1"
+                                                                   title="请选择图片" id="file1"
+                                                                   accept="image/png,image/jpg,image/gif,image/JPEG"/>
+                                                            <!--
+                                                    <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
+                                                    <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
+                                                        </div>
+                                                        <input style="display:none" type="submit"
+                                                               id="sub"/>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
-                <div class="list-block">
-                    <ul>
-                        <!-- Text inputs -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Name</div>
-                                    <div class="item-input">
-                                        <input type="text" placeholder="Your name">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">E-mail</div>
-                                    <div class="item-input">
-                                        <input type="email" placeholder="E-mail">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Password</div>
-                                    <div class="item-input">
-                                        <input type="password" placeholder="Password" class="">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Gender</div>
-                                    <div class="item-input">
-                                        <select>
-                                            <option>Male</option>
-                                            <option>Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Date -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Birth date</div>
-                                    <div class="item-input">
-                                        <input type="date" placeholder="Birth day" value="2014-04-30">
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- Switch (Checkbox) -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Switch</div>
-                                    <div class="item-input">
-                                        <label class="label-switch">
-                                            <input type="checkbox">
-                                            <div class="checkbox"></div>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="align-top">
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">Textarea</div>
-                                    <div class="item-input">
-                                        <textarea></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                <!--<div class="list-block">-->
+                <!--<ul>-->
+                <!--&lt;!&ndash; Text inputs &ndash;&gt;-->
+                <!--<li>-->
+                <!--<div class="item-content">-->
+                <!--<div class="item-inner">-->
+                <!--<div class="item-title label">Name</div>-->
+                <!--<div class="item-input">-->
+                <!--<input type="text" placeholder="Your name">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<div class="item-content">-->
+                <!--<div class="item-inner">-->
+                <!--<div class="item-title label">E-mail</div>-->
+                <!--<div class="item-input">-->
+                <!--<input type="email" placeholder="E-mail">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<div class="item-content">-->
+                <!--<div class="item-inner">-->
+                <!--<div class="item-title label">Password</div>-->
+                <!--<div class="item-input">-->
+                <!--<input type="password" placeholder="Password" class="">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--<li>-->
+                <!--<div class="item-content">-->
+                <!--<div class="item-inner">-->
+                <!--<div class="item-title label">Gender</div>-->
+                <!--<div class="item-input">-->
+                <!--<select>-->
+                <!--<option>Male</option>-->
+                <!--<option>Female</option>-->
+                <!--</select>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--&lt;!&ndash; Date &ndash;&gt;-->
+                <!--<li>-->
+                <!--<div class="item-content">-->
+                <!--<div class="item-inner">-->
+                <!--<div class="item-title label">Birth date</div>-->
+                <!--<div class="item-input">-->
+                <!--<input type="date" placeholder="Birth day" value="2014-04-30">-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--&lt;!&ndash; Switch (Checkbox) &ndash;&gt;-->
+                <!--<li>-->
+                <!--<div class="item-content">-->
+                <!--<div class="item-inner">-->
+                <!--<div class="item-title label">Switch</div>-->
+                <!--<div class="item-input">-->
+                <!--<label class="label-switch">-->
+                <!--<input type="checkbox">-->
+                <!--<div class="checkbox"></div>-->
+                <!--</label>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--<li class="align-top">-->
+                <!--<div class="item-content">-->
+                <!--<div class="item-inner">-->
+                <!--<div class="item-title label">Textarea</div>-->
+                <!--<div class="item-input">-->
+                <!--<textarea></textarea>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</div>-->
             </div>
         </div>
     </div>
@@ -232,7 +263,6 @@
 <script src="libs/tools.js"></script>
 <script src="js/defectPage.js"></script>
 <script>
-    $("#selectA").val("3");
 </script>
 </body>
 

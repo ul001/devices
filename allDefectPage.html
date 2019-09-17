@@ -18,43 +18,58 @@
 <div class="page-group">
     <div class="page">
         <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+            <a class="button button-link button-nav pull-left click_btn back_btn"
+               onclick="window.history.back()">
                 <span class="icon icon-left"></span>
                 返回
             </a>
             <h1 class="title title_color">变电所所有缺陷</h1>
         </header>
-        <div class="bar bar-header-secondary row no-gutter" style="line-height:2.1rem;">
+        <div class="bar bar-header-secondary row no-gutter" style="">
             <div class="col-50">
                 <label>日期:</label><input type="text" style="width:67%;" id="dateSelect" readonly/>
             </div>
             <div class="col-40">
                 <label>状态:</label>
-                <select style="padding-bottom:.2rem;">
-                    <option>全部</option>
-                    <option>已处理</option>
-                    <option>未处理</option>
+                <select id="fState" style="padding-bottom:.2rem;">
+                    <option value="">全部</option>
+                    <option value="0">未处理</option>
+                    <option value="1">已处理</option>
                 </select>
             </div>
-            <a class="button button-fill button-primary col-10"><span class="icon icon-search"></span></a>
+            <a id="searchBtn" class="button button-fill button-primary col-10" style="margin-bottom:0.6rem;"><span
+                    class="icon icon-search"></span></a>
         </div>
-        <div class="content">
-            <div class="card">
-                <div class="card-content">
-                    <div class="card-content-inner row no-gutter">
-                        <div class="col-10">
-                            <i class="icon icon-f7"></i>
-                        </div>
-                        <div class="col-90">
-                            <p><span class="redColor">(设备编号:0.4kV部分>0.4kV电容柜>电容柜>电容器)电容器故障</span></p>
-                            <p>危害:存在严重安全隐患</p>
-                            <p>具体位置:电容器漏液 缺陷类别:导电类</p>
-                            <p>紧急程度:一般 消缺期限:5天以内</p>
-                            <p>处理建议:更换 客户意见: 处理状态:待处理</p>
-                            <p>发现时间:2019-05-13</p>
+        <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
+             data-distance="100">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div id="list-container">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="card-content-inner row no-gutter">
+                            <div class="col-10">
+                                <i class="icon icon-f7"></i>
+                            </div>
+                            <div class="col-90">
+                                <p><span
+                                        class="redColor">(设备编号:0.4kV部分>0.4kV电容柜>电容柜>电容器)电容器故障</span>
+                                </p>
+                                <p>危害:存在严重安全隐患</p>
+                                <p>具体位置:电容器漏液 缺陷类别:导电类</p>
+                                <p>紧急程度:一般 消缺期限:5天以内</p>
+                                <p>处理建议:更换 客户意见:</p>
+                                <p>处理状态:待处理</p>
+                                <p>发现时间:2019-05-13</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
             </div>
         </div>
     </div>
