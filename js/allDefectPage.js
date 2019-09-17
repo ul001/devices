@@ -2,14 +2,14 @@ var selectSubid = localStorage.getItem("fSubid");
 
 var loading = false;
 var maxItems = 1000;
-var itemsPerLoad = 10;
+var itemsPerLoad = 5;
 var pageNum = 1;
 
 function getFirstPage() {
     $("#list-container").empty();
     pageNum = 1;
     addItems(itemsPerLoad, 0);
-    lastIndex = 10;
+    lastIndex = 5;
     $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
     loading = false;
     $.attachInfiniteScroll($('.infinite-scroll'));
@@ -67,7 +67,7 @@ function addItems(number, lastIndex) {
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"card-content-inner row no-gutter\">\n" +
                         "                            <div class=\"col-10\">\n" +
-                        "                                <i class=\"icon icon-f7\"></i>\n" +
+                        "                                <i class=\"icon icon-alarm\"></i>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"col-85\">\n" +
                         "                                <p><span\n" +
@@ -111,7 +111,7 @@ $("#list-container").empty();
 
 addItems(itemsPerLoad, 0);
 
-var lastIndex = 10;
+var lastIndex = 5;
 
 
 $(document).on('infinite', '.infinite-scroll', function () {

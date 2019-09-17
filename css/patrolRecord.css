@@ -19,26 +19,34 @@
     align-items:center;
 }
 i.icon.icon-sub{
-    width: 1rem;
-    height: 1rem;
+    width: 1.2rem;
+    height: 1.2rem;
     background-image: url(../img/i-jiancedian.png);
     margin-bottom:0.2rem;
 }
 i.icon.icon-week{
     width: 1.5rem;
-    height: 1.5rem;
+    height: 1.55rem;
     background-image: url(../img/i-week.png);
 }
 i.icon.icon-month{
     width: 1.5rem;
-    height: 1.5rem;
+    height: 1.55rem;
     background-image: url(../img/i-month.png);
 }
 i.icon.icon-year{
     width: 1.5rem;
-    height: 1.5rem;
+    height: 1.55rem;
     background-image: url(../img/i-year.png);
+}
+i.icon.icon-alarm{
+    width: 1.3rem;
+    height: 1.3rem;
+    background-image: url(../img/i-alarm.png);
 }
 .bar p{
     margin:0;
+}
+.card.noClick:active{
+    background:#fff;
 }

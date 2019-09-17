@@ -8,9 +8,11 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
     var threeList = data.LatestThree;
     $(".subName").text(selectSubname);
     $("#address").text(subAddress);
-    $("#daily").text("("+(inspectionTotal.weekSum+inspectionTotal.yearSum)+")项");
-    $("#monthly").text("("+inspectionTotal.monSum+")项");
-    $("#total").text("("+(inspectionTotal.weekSum+inspectionTotal.monSum+inspectionTotal.yearSum)+")项");
+    if(inspectionTotal!=null){
+        $("#daily").text("("+(inspectionTotal.weekSum+inspectionTotal.yearSum)+")项");
+        $("#monthly").text("("+inspectionTotal.monSum+")项");
+        $("#total").text("("+(inspectionTotal.weekSum+inspectionTotal.monSum+inspectionTotal.yearSum)+")项");
+    }
     $(".list-container").empty();
     if(threeList.length>0){
         var html='';
@@ -37,7 +39,7 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
                 break;
             }
             html+="<div class=\"item-footer row no-gutter\" data-id=\""+this.fDeviceproblemid+"\">\n" +
-"                            <div class=\"col-10\"><i class=\"icon icon-f7\"></i></div>\n" +
+"                            <div class=\"col-10\"><i class=\"icon icon-alarm\"></i></div>\n" +
 "                            <div class=\"col-85\"><span class=\"redColor\">(设备编号:"+this.treePathName+")"+this.fDeviceproblemdes+"</span><br>\n" +
 "                                位置："+this.fProblemlocation.split(",")[1]+" 状态："+stateStr+"<br>发现时间："+this.fCreatetime+"\n" +
 "                            </div>\n" +
