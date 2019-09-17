@@ -15,8 +15,20 @@ Substation.getDataByAjax("/getLatestThreePlaceCheckForm",{fSubid:selectSubid},fu
     if(threeList.length>0){
         var html='';
         $(threeList).each(function(){
+            var iconStr = "";
+            switch(this.fPeriodType){
+                case "周巡":
+                    iconStr="<i class=\"icon icon-week\"></i>\n";
+                    break;
+                case "月巡":
+                    iconStr="<i class=\"icon icon-month\"></i>\n";
+                    break;
+                case "年巡":
+                    iconStr="<i class=\"icon icon-year\"></i>\n";
+                    break;
+            }
             html+="<div class=\"item-footer row no-gutter\" data-id=\""+this.fPlacecheckformid+"\">\n" +
-"                                <div class=\"col-10\"><i class=\"icon icon-f7\"></i></div>\n" +
+"                                <div class=\"col-10\">"+iconStr+"</div>\n" +
 "                                <div class=\"col-85\"><span class=\"blueColor\">"+this.fTaskName+"</span>("+this.fStateExplain+")<br>\n" +
 "                                    巡检人："+this.fCreatebyuserid+"<br>\n" +
 "                                    本次已发现缺陷：<span class=\"redColor\">"+this.fproblemTotal+" </span>个，未处理：<span class=\"redColor\">"+this.funsolvedTotal+" </span>个\n" +

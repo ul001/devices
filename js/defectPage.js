@@ -24,7 +24,7 @@ $("#defectDiscribe").val(name);
 var defectPositionArray = defectPosition.split(";");
 $("#defectPosition").empty();
 $(defectPositionArray).each(function(index,obj){
-    $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label>');
+    $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
 });
 $("#dangerCategory").val(defectJson.dangerCategory);
 $("#dangerType").val(defectJson.dangerType);
@@ -184,5 +184,14 @@ function saveFormData() {
         }
     });
 }
+
+//解决键盘遮挡问题
+window.addEventListener("resize", function () {
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
+});
 
 $.init();

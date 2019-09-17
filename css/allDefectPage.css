@@ -8,3 +8,8 @@
 .card-content-inner p{
     margin:0;
 }
+i.icon.icon-alarm{
+    width: 1.3rem;
+    height: 1.3rem;
+    background-image: url(../img/i-alarm.png);
+}
