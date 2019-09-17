@@ -60,8 +60,8 @@ jQuery(document).ready(function () {
                         if (this.name == "true") {
                             alert("执行任务前，请先签到。");
                         } else {
-                            localStorage.setItem("missionSubid", missionsubid);
-                            localStorage.setItem("missionPlaceCheckFormissionTypemId", placeCheckFormId);
+                            localStorage.setItem("fSubid", missionsubid);
+                            localStorage.setItem("fPlacecheckformid", placeCheckFormId);
                             localStorage.setItem("missiontaskID", taskID);
                             if (missionTypeid == 1) {
                                 //巡检任务
