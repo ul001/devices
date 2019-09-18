@@ -5,21 +5,22 @@ jQuery(document).ready(function () {
     var maxItems = 1000;
     var itemsPerLoad = 10;
     var pageNum = 1;
+    var tasktypeid = "";
 
     $(".buttons-tab .tab-link").click(function () {
         var i = $(this).index();
         if (i == 0) {
-            pageNum = 1;
+            // pageNum = 1;
             $(".list-container").empty();
             // url = "/getWarningMessageSignalEvents";
             $("#titleContent").text("待办事项");
         } else if (i == 1) {
-            pageNum = 1;
+            // pageNum = 1;
             $(".list-container").empty();
             // url = "/getWarningMessageOverLimitEvents";
             $("#titleContent").text("在办事项");
         } else if (i == 2) {
-            pageNum = 1;
+            // pageNum = 1;
             $(".list-container").empty();
             // url = "/getWarningMessagePlatformRunEvents";
             $("#titleContent").text("办毕事项");
@@ -82,7 +83,7 @@ jQuery(document).ready(function () {
                     text: '全部',
                     onClick: function () {
                         $(".clickrightbtn").text("全部");
-
+                        tasktypeid = "";
                     }
                 },
                 // {
@@ -103,24 +104,27 @@ jQuery(document).ready(function () {
                 //         $(".clickrightbtn").text("交接驱动");
                 //     }
                 // },
-                // {
-                //     text: '现场交接',
-                //     onClick: function () {
-                //         $(".clickrightbtn").text("现场交接");
-                //     }
-                // },
+                {
+                    text: '现场交接',
+                    onClick: function () {
+                        $(".clickrightbtn").text("现场交接");
+                        tasktypeid = 2;
+                    }
+                },
                 {
                     text: '巡视',
                     onClick: function () {
                         $(".clickrightbtn").text("巡视");
+                        tasktypeid = 1;
                     }
                 },
-                // {
-                //     text: '缺陷整改',
-                //     onClick: function () {
-                //         $(".clickrightbtn").text("缺陷整改");
-                //     }
-                // },
+                {
+                    text: '缺陷整改',
+                    onClick: function () {
+                        $(".clickrightbtn").text("缺陷整改");
+                        tasktypeid = 3;
+                    }
+                },
                 // {
                 //     text: '合同收款',
                 //     onClick: function () {
@@ -162,13 +166,14 @@ jQuery(document).ready(function () {
         // }
         $(".list-container").empty();
         $(num).empty();
-        $(num).html('<div class="list-container"></div>');
-        pageNum = 1;
+        $(num).html('<div class="pull-to-refresh-layer"><div class = "preloader"></div><div class = "pull-to-refresh-arrow"></div></div><div class="list-container"></div><div class="infinite-scroll-preloader"><div class = "preloader"></div></div>');
+
         addItems(itemsPerLoad, 0, clickNum);
         lastIndex = 10;
-        $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
+        // $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
         // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
         loading = false;
+        $.initPullToRefresh($('.pull-to-refresh-layer'));
         $.attachInfiniteScroll($('.infinite-scroll'));
     }
 
@@ -186,13 +191,14 @@ jQuery(document).ready(function () {
     function addItems(number, lastIndex, clickNum) {
         var text = '';
         var url = "/selectByStateAndType";
-        // var searchKey = $("#search").val();
+        var searchKey = $("#search").val();
         var params = {
-            pageNo: pageNum,
-            pageSize: number,
-            fTaskstateid: clickNum
+            "pageNo": pageNum,
+            "pageSize": number,
+            "fTaskstateid": clickNum,
+            "fTasktypeid": tasktypeid,
             // fSubid: 10100001
-            // key: searchKey
+            "searchKey": searchKey
         };
 
         Substation.getDataByAjaxNoLoading(url, params, function (data) {
@@ -250,7 +256,16 @@ jQuery(document).ready(function () {
                         text += "                                    <div class=\"row no-gutter sub_card\">";
                         text += "                                        <div class=\"col-10\">";
                         text += "                                            <img class=\"showImg\"";
-                        text += "                                                src=\"http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg\" />";
+                        if (this.fTasktypeid == 2) {
+                            //现场
+                            text += '                                                src="img/missionxian.png" />';
+                        } else if (this.fTasktypeid == 3) {
+                            //缺陷
+                            text += '                                                src="img/missionque.png" />';
+                        } else {
+                            //巡检
+                            text += '                                                src="img/missionxun.png" />';
+                        }
                         text += "                                        </div>";
                         text += "                                        <div class=\"col-75\">";
                         text += "                                            <p class=\"subName\">" + this.fTaskcontent;
