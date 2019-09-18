@@ -25,6 +25,7 @@ i.icon.icon-subIcon {
     height: 0.85rem;
     background-image: url(../img/i-jiancedian.png);
     margin-bottom:0.2rem;
+    margin-right:0.1rem;
 }
 
 i.icon.icon-alarm {
