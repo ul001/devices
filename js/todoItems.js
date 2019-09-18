@@ -164,16 +164,16 @@ jQuery(document).ready(function () {
         //     addItems(itemsPerLoad, 0);
         //     lastIndex = 10;
         // }
-        $(".list-container").empty();
+        // $(".list-container").empty();
         $(num).empty();
-        $(num).html('<div class="pull-to-refresh-layer"><div class = "preloader"></div><div class = "pull-to-refresh-arrow"></div></div><div class="list-container"></div><div class="infinite-scroll-preloader"><div class = "preloader"></div></div>');
+        $(num).html('<div class="pull-to-refresh-layer"><div class ="preloader"></div><div class ="pull-to-refresh-arrow"></div></div><div class="list-container"></div><div class="infinite-scroll-preloader"><div class = "preloader"></div></div>');
 
         addItems(itemsPerLoad, 0, clickNum);
         lastIndex = 10;
         // $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
         // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
         loading = false;
-        $.initPullToRefresh($('.pull-to-refresh-layer'));
+        // $.initPullToRefresh($('.pull-to-refresh-layer'));
         $.attachInfiniteScroll($('.infinite-scroll'));
     }
 
@@ -186,6 +186,21 @@ jQuery(document).ready(function () {
             $.pullToRefreshDone('.pull-to-refresh-content');
         }, 2000);
     });
+
+    //下拉刷新
+    $(document).on("pageInit", "#page-ptr-tabs", function (e, id, page) {
+        $(page).find(".pull-to-refresh-content").on('refresh', function (e) {
+            // 2s timeout
+            var $this = $(this);
+            setTimeout(function () {
+
+                $this.find('.content-block').prepend("<p>New Content......</p>");
+                // Done
+                $.pullToRefreshDone($this);
+            }, 2000);
+        });
+    });
+
 
     //初始化页面接口
     function addItems(number, lastIndex, clickNum) {

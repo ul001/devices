@@ -17,7 +17,7 @@
 
 <body>
     <!-- <div class="page-group"> -->
-    <div class="page page-from-right-to-center page-current page-inited" id="route4">
+    <div class="page page-current page-inited" id="page-ptr-tabs">
         <header class="bar bar-nav bar_color">
             <button class="button button-link button-nav pull-left click_btn back_btn">
                 <span class="icon icon-left"></span>
@@ -46,25 +46,27 @@
                 <a href="#tab3" class="tab-link button" id="banbi" name="3">办毕</a>
             </div>
             <div class="tabs pull-to-refresh-container">
-                <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll">
+                <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
+                    data-distance="100">
                     <!-- <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll pull-up" data-ptr-distance="55"
                         data-distance="100"> -->
                     <!-- 待办 -->
-                    <!-- <div class="pull-to-refresh-layer">
+                    <div class="pull-to-refresh-layer">
                         <div class="preloader"></div>
                         <div class="pull-to-refresh-arrow"></div>
                     </div>
-                    
+
 
                     <div class="infinite-scroll-preloader">
                         <div class="preloader"></div>
-                    </div> -->
+                    </div>
                 </div>
-                <div id="tab2" class="tab content pull-to-refresh-content infinite-scroll">
-                    <!-- <div class=" pull-to-refresh-layer">
+                <div id="tab2" class="tab content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
+                    data-distance="100">
+                    <div class=" pull-to-refresh-layer">
                         <div class="preloader"></div>
                         <div class="pull-to-refresh-arrow"></div>
-                    </div> -->
+                    </div>
                     <!-- 在办 -->
                     <!-- <div class="list-container">
                             <div class="card">
@@ -131,15 +133,16 @@
                                 </div>
                             </div>
                         </div> -->
-                    <!-- <div class="infinite-scroll-preloader">
+                    <div class="infinite-scroll-preloader">
                         <div class="preloader"></div>
-                    </div> -->
+                    </div>
                 </div>
-                <div id="tab3" class="tab content pull-to-refresh-content infinite-scroll">
-                    <!-- <div class="pull-to-refresh-layer">
+                <div id="tab3" class="tab content pull-to-refresh-content infinite-scroll " data-ptr-distance="55"
+                    data-distance="100">
+                    <div class="pull-to-refresh-layer">
                         <div class="preloader"></div>
                         <div class="pull-to-refresh-arrow"></div>
-                    </div> -->
+                    </div>
                     <!-- 办毕 -->
                     <!-- <div class="list-container">
                             <div class="card" id="cardFinish">
@@ -182,9 +185,9 @@
                                 </div>
                             </div>
                         </div> -->
-                    <!-- <div class="infinite-scroll-preloader">
+                    <div class="infinite-scroll-preloader">
                         <div class="preloader"></div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
 
