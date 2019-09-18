@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
@@ -15,79 +16,57 @@
 </head>
 
 <body>
-    <div class="page-group">
-        <div class="page" id="route4">
-            <header class="bar bar-nav bar_color">
-                <button class="button button-link button-nav pull-left click_btn back_btn">
-                    <span class="icon icon-left"></span>
-                    返回
-                </button>
-                <h1 class="title title_color">
-                    <p class="limit-length" id="titleContent">待办</p>
-                </h1>
-                <button class="button pull-right clickrightbtn" style="color:white;border:1px solid white;">
-                    任务类型
-                </button>
-            </header>
-            <div class="bar bar-header-secondary">
-                <div class="searchbar">
-                    <a class="searchbar-cancel">取消</a>
-                    <div class="search-input">
-                        <label class="icon icon-search" for="searchDaiban"></label>
-                        <input type="search" id="searchDaiban" placeholder="请输入名称或用电户号" />
-                    </div>
+    <!-- <div class="page-group"> -->
+    <div class="page page-from-right-to-center page-current page-inited" id="route4">
+        <header class="bar bar-nav bar_color">
+            <button class="button button-link button-nav pull-left click_btn back_btn">
+                <span class="icon icon-left"></span>
+                返回
+            </button>
+            <h1 class="title title_color">
+                <p class="limit-length" id="titleContent">待办</p>
+            </h1>
+            <button class="button pull-right clickrightbtn" style="color:white;border:1px solid white;">
+                任务类型
+            </button>
+        </header>
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel">取消</a>
+                <div class="search-input">
+                    <label class="icon icon-search" for="searchDaiban"></label>
+                    <input type="search" id="searchDaiban" placeholder="请输入任务名称" />
                 </div>
             </div>
-            <div class="content" data-ptr-distance="55" data-distance="100">
-                <div class="buttons-tab">
-                    <a href="#tab1" class="tab-link button active" id="daiban" name="1">待办</a>
-                    <a href="#tab2" class="tab-link button" id="zaiban" name="2">在办</a>
-                    <a href="#tab3" class="tab-link button" id="banbi" name="3">办毕</a>
-                </div>
-
-                <div class="tabs">
-                    <div id="tab1" class="tab active content pull-to-refresh-content infinite-scroll"
-                        data-ptr-distance="55" data-distance="100">
-                        <div class="pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <!-- 待办 -->
-                        <!-- <div class="list-container">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="row no-gutter sub_card">
-                                        <div class="col-10">
-                                            <img class="showImg"
-                                                src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
-                                        </div>
-                                        <div class="col-75">
-                                            <p class="subName">安科瑞变电所
-                                            </p>
-                                            <p><span>name</span>
-                                                <span>2019-08-26 13:11:26</span></p>
-                                        </div>
-                                        <div class="col-15">
-                                            <button class="button button-fill button-success" id="dealMission"
-                                                type="button">我要处理
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
+        </div>
+        <div class="content">
+            <div class="buttons-tab">
+                <a href="#tab1" class="tab-link button active" id="daiban" name="1">待办</a>
+                <a href="#tab2" class="tab-link button" id="zaiban" name="2">在办</a>
+                <a href="#tab3" class="tab-link button" id="banbi" name="3">办毕</a>
+            </div>
+            <div class="tabs pull-to-refresh-container">
+                <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll">
+                    <!-- <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll pull-up" data-ptr-distance="55"
+                        data-distance="100"> -->
+                    <!-- 待办 -->
+                    <!-- <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
                     </div>
-                    <div id="tab2" class="tab content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
-                        data-distance="100">
-                        <div class=" pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <!-- 在办 -->
-                        <!-- <div class="list-container">
+                    
+
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div> -->
+                </div>
+                <div id="tab2" class="tab content pull-to-refresh-content infinite-scroll">
+                    <!-- <div class=" pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div> -->
+                    <!-- 在办 -->
+                    <!-- <div class="list-container">
                             <div class="card">
                                 <div class="card-content">
                                     <div class="row no-gutter sub_card">
@@ -152,18 +131,17 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
-                    </div>
-                    <div id="tab3" class="tab content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
-                        data-distance="100">
-                        <div class="pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <!-- 办毕 -->
-                        <!-- <div class="list-container">
+                    <!-- <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div> -->
+                </div>
+                <div id="tab3" class="tab content pull-to-refresh-content infinite-scroll">
+                    <!-- <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div> -->
+                    <!-- 办毕 -->
+                    <!-- <div class="list-container">
                             <div class="card" id="cardFinish">
                                 <div class="card-content">
                                     <div class="row no-gutter sub_card">
@@ -204,16 +182,16 @@
                                 </div>
                             </div>
                         </div> -->
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
-                    </div>
+                    <!-- <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div> -->
                 </div>
-
             </div>
+
         </div>
     </div>
-    </div>
+    <!-- </div> -->
+    <!-- </div> -->
     <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
     <script src='libs/cn.min.js'></script>

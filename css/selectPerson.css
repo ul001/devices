@@ -61,3 +61,7 @@ p.limit-length {
     clear: both;
     overflow: hidden;
 }
+
+.valueInput {
+    width: 100%;
+}
