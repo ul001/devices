@@ -83,7 +83,8 @@ function loadPage(){
                             tempStr+=inputStr;
         });
                 $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
-                $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab\">\n" +
+                $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
+                                                    "<div class=\"pull-to-refresh-layer\"></div>\n"+
                                                     "<div class=\"content-block\">\n"+tempStr+
                                                     "</div>\n"+
                                                  "</div>");
@@ -295,7 +296,7 @@ function loadPage2(){
     var defectPositionArray = defectPosition.split(";");
     $("#defectPosition").empty();
     $(defectPositionArray).each(function(index,obj){
-        $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label>');
+        $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
     });
     $("#dangerCategory").val(defectJson.dangerCategory);
     $("#dangerType").val(defectJson.dangerType);

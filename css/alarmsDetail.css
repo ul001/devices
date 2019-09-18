@@ -21,9 +21,10 @@
 }
 
 i.icon.icon-subIcon {
-    width: 1rem;
-    height: 1rem;
+    width: 0.85rem;
+    height: 0.85rem;
     background-image: url(../img/i-jiancedian.png);
+    margin-bottom:0.2rem;
 }
 
 i.icon.icon-alarm {
