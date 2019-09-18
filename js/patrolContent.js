@@ -27,7 +27,7 @@ function loadPage(){
                 tempNum = tempJson.checkInfo.length;
             }
             $(data.list).each(function(index,obj){
-                var thisValueJson;
+                var thisValueJson=[];
                 if(this.hasOwnProperty("fInspectionslipjson")){
                     if(this.fInspectionslipjson!=""&&this.fInspectionslipjson!=null){
                         thisValueJson = JSON.parse(this.fInspectionslipjson);
@@ -89,7 +89,7 @@ function loadPage(){
                                                     "</div>\n"+
                                                  "</div>");
                 //给模板赋值
-                if(thisValueJson!=null&&thisValueJson!=""){
+                if(thisValueJson.length>0){
                     $(thisValueJson).each(function(){
                         if(this.type=="radio"){
                             $("input[name='"+(obj.fSubdeviceinfoid+""+this.code)+"'][value='"+this.value+"']").attr("checked",true);
