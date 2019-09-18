@@ -272,19 +272,6 @@ function loadPage(){
 }
 
 function loadPage2(){
-    /*
-    (function(doc, win) {
-        var docEl = doc.documentElement,
-            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-            recalc = function() {
-                var clientWidth = docEl.clientWidth;
-                if(!clientWidth) return;
-                //docEl.style.fontSize = 100 * (clientWidth / 1125) + 'px';
-            };
-        if(!doc.addEventListener) return;
-        win.addEventListener(resizeEvt, recalc, false);
-        doc.addEventListener('DOMContentLoaded', recalc, false);
-    })(document, window);*/
     var defectJson = JSON.parse(localStorage.getItem("defectJson"));
     var code = defectJson.code;
     var name = decodeURIComponent(defectJson.name);
@@ -513,5 +500,14 @@ function saveFormData() {
         }
     });
 }
+
+//解决键盘遮挡问题
+window.addEventListener("resize", function () {
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
+});
 
 $.init();
