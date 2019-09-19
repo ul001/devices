@@ -176,7 +176,23 @@ reSetCanvas.onclick = function () {
 
 save.onclick = function () {
     var imgUrl = canvas.toDataURL("image/png");
-    var b64 = imgUrl.substring(22);
+    var fileName = (new Date()).getTime() + ".jpeg"; //随机文件名
+
+    // var imgfile = convertBase64UrlToImgFile(imgUrl, fileName, 'image/jpeg'); //转换成file
+    var blob = dataURLtoBlob(imgUrl);
+    var imgfile = blobToFile(blob, fileName);
+
+    var formData = new FormData();
+    formData.append('file', imgfile); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
+    formData.append('fTaskid', 35);
+    Substation.postFormDataByAjax("/saveClientSignImg", formData, function (data) {
+        if (data.code == 200) {
+            $.toast("保存成功");
+            window.history.back();
+        }
+    });
+
+    // var b64 = imgUrl.substring(22);
     // $.ajax({
     //     url: "RotateCanvas.aspx",
     //     data: {
@@ -253,3 +269,47 @@ undo.onclick = function () {
     ctx.putImageData(historyDeta[historyDeta.length - 1], 0, 0);
     historyDeta.pop()
 };
+
+/**
+ * 有些浏览器(如edge)不支持new File，所以为了兼容，base64要先转换成blob再设置type，name，lastModifiedDate
+ * 属性间接转换成文件，而不推荐直接new File()的方式
+ **/
+function convertBase64UrlToImgFile(urlData, fileName, fileType) {
+    var bytes = window.atob(urlData); //转换为byte
+    //处理异常,将ascii码小于0的转换为大于0
+    var ab = new ArrayBuffer(bytes.length);
+    var ia = new Int8Array(ab);
+    var i;
+    for (i = 0; i < bytes.length; i++) {
+        ia[i] = bytes.charCodeAt(i);
+    }
+    //转换成文件，添加文件的type，name，lastModifiedDate属性
+    var blob = new Blob([ab], {
+        type: fileType
+    });
+    blob.lastModifiedDate = new Date();
+    blob.name = fileName;
+    return blob;
+}
+
+//将base64转换为blob
+var dataURLtoBlob = function (dataurl) {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {
+        type: mime
+    });
+}
+
+//将blob转换为file
+var blobToFile = function (theBlob, fileName) {
+    theBlob.lastModifiedDate = new Date();
+    theBlob.name = fileName;
+    return theBlob;
+}
