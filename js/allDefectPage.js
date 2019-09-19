@@ -1,7 +1,6 @@
 var selectSubid = localStorage.getItem("fSubid");
 
 var loading = false;
-var maxItems = 1000;
 var itemsPerLoad = 5;
 var pageNum = 1;
 
@@ -124,15 +123,8 @@ $(document).on('infinite', '.infinite-scroll', function () {
 
     setTimeout(function () {
         loading = false;
-
-        if (lastIndex >= maxItems) {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
-            return;
-        }
-
         addItems(itemsPerLoad, lastIndex);
-        lastIndex = $('.list-container .card').length;
+        lastIndex = $('#list-container .card').length;
     }, 1000);
 });
 

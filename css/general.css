@@ -50,3 +50,6 @@
     -o-transition-duration: 0s;
     transition-duration: 0s;
 }
+.boldText{
+    font-weight:bold;
+}

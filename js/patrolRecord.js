@@ -8,9 +8,11 @@ Substation.getDataByAjax("/getLatestThreePlaceCheckForm",{fSubid:selectSubid},fu
     var threeList = data.ThreeList;
     $(".subName").text(selectSubname);
     $("#address").text(subAddress);
-    $("#daily").text("("+(inspectionTotal.weekSum+inspectionTotal.yearSum)+")项");
-    $("#monthly").text("("+inspectionTotal.monSum+")项");
-    $("#total").text("("+(inspectionTotal.weekSum+inspectionTotal.monSum+inspectionTotal.yearSum)+")项");
+    if(inspectionTotal!=null){
+        $("#daily").text("("+(inspectionTotal.weekSum+inspectionTotal.yearSum)+")项");
+        $("#monthly").text("("+inspectionTotal.monSum+")项");
+        $("#total").text("("+(inspectionTotal.weekSum+inspectionTotal.monSum+inspectionTotal.yearSum)+")项");
+    }
     $(".list-container").empty();
     if(threeList.length>0){
         var html='';

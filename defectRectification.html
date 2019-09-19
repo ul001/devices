@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/patrolRecord.css">
+</head>
+
+<body>
+<div class="page-group">
+    <div class="page" id="router1">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <h1 class="title title_color">最新巡视缺陷记录</h1>
+        </header>
+        <div class="bar bar-header-secondary" style="line-height:2.2rem">
+            <i class="icon icon-sub"></i><span id="subName"></span>
+            <!--<a href="" class="pull-right" style="font-size:0.75rem">巡视方案设置>></a>-->
+        </div>
+        <div class="content">
+            <div class="card noClick">
+                <div class="card-content">
+                    <div class="card-content-inner row no-gutter">
+                        <div class="col-10">
+                            <i class="icon icon-alarm"></i>
+                        </div>
+                        <div class="col-85">
+                            <p class="boldText">设备路径：0.4kV部分>0.4kV电容柜>电容柜>电容器</p>
+                            <p>描述：闭闸不到位</p>
+                            <p>危害：存在严重安全隐患</p>
+                            <p>具体位置：电容器漏液</p>
+                            <p>缺陷类别：导电类</p>
+                            <p>紧急程度：一般</p>
+                            <p>消缺期限：5天以内</p>
+                            <p>处理状态：<span class="redColor">待处理</span></p>
+                            <p>发现时间：2019-05-13</p>
+                        </div>
+                        <div class="col-5">
+                            <i class="icon icon-right"></i>
+                        </div>
+                    </div>
+                    <div class="card-content-inner row no-gutter">
+                        <div class="col-10">
+                            <i class="icon icon-alarm"></i>
+                        </div>
+                        <div class="col-85">
+                            <p class="boldText">设备路径：0.4kV部分>0.4kV电容柜>电容柜>电容器</p>
+                            <p>描述：闭闸不到位</p>
+                            <p>危害：存在严重安全隐患</p>
+                            <p>具体位置：电容器漏液</p>
+                            <p>缺陷类别：导电类</p>
+                            <p>紧急程度：一般</p>
+                            <p>消缺期限：5天以内</p>
+                            <p>处理状态：<span class="redColor">待处理</span></p>
+                            <p>发现时间：2019-05-13</p>
+                        </div>
+                        <div class="col-5">
+                            <i class="icon icon-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>
+                    <!--<img src="img/i-alarm.png" style="width:100%;">-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+<script src='libs/cn.min.js'></script>
+<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<script src="libs/tools.js"></script>
+<script src="js/defectRectification.js"></script>
+</body>
+
+</html>

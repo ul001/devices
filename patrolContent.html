@@ -32,14 +32,14 @@
         </div>
         <div class="content">
             <div class="buttons-tab" style="overflow:auto;">
-                <a href="#tab1" class="tab-link button">All</a>
+                <!--<a href="#tab1" class="tab-link button">All</a>
                 <a href="#tab2" class="tab-link button active">Potatos</a>
                 <a href="#tab2" class="tab-link button">Potatos</a>
                 <a href="#tab2" class="tab-link button">Potatos</a>
                 <a href="#tab3" class="tab-link button">Tomatos</a>
                 <a href="#tab3" class="tab-link button">Tomatos</a>
                 <a href="#tab3" class="tab-link button">Tomatos</a>
-                <a href="#tab3" class="tab-link button">Tomatos</a>
+                <a href="#tab3" class="tab-link button">Tomatos</a>-->
             </div>
             <div class="content-block">
                 <div class="tabs pull-to-refresh-container">
@@ -486,8 +486,8 @@
                                             <div class="custom_img">
                                                 <!--点击上传图片 触发下面的div 点击事件-->
                                                 <div class="upload_img_wrap">
-                                                    <div id="imgBox"><img class="upload_img"
-                                                                          src="img/upload_img.png"/>
+                                                    <div id="imgBox">
+                                                        <img class="upload_img" src="img/upload_img.png"/>
                                                     </div>
                                                     <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
                                                 </div>
@@ -620,6 +620,11 @@
     </div>
 </div>
 <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script>
+    $.config={
+        swipePanelOnlyClose:true
+    }
+</script>
 <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
 <script src='libs/cn.min.js'></script>
 <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>

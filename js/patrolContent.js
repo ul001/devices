@@ -294,6 +294,7 @@ function loadPage2(){
     var fSubdeviceinfoid = clickDeviceInfoId;
 
     $("#inputBox").html("");
+    $("#imgBox").html('<img class="upload_img" src="img/upload_img.png"/>');
     $(".upload_img_wrap .upload_img").on("click", function () {
         //console.log(ev.currentTarget.dataset.id)
         var index = imgNum + 1;
@@ -366,14 +367,16 @@ function saveThisPage(){
             });
             deviceJson['fInspectionslipjson']=inputArray;
             deviceJson['fSubdeviceinfoid']=deviceId;
-            deviceJson['fPlacecheckformid']=4;
+            deviceJson['fPlacecheckformid']=fPlacecheckformid;
             deviceJson['fItemNum']=tempNum;
             changeJson.push(deviceJson);
         });
         var jsonStr = JSON.stringify(changeJson);
-        Substation.postDataByAjax("/updateInspectionDetail",{deviceList:jsonStr},function(data){
+        Substation.postDataByAjax("/updateInspectionDetail",{fPlacecheckformid:fPlacecheckformid,deviceList:jsonStr},function(data){
             if(data.code==200){
                 $.toast("保存成功");
+            }else if(data.code==130){
+                $.toast("任务已闭合，保存失败！");
             }else{
                 $.toast("操作失败");
             }

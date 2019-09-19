@@ -102,7 +102,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
             return;
         }
         addItems(itemsPerLoad);
-        lastIndex = $('.list-container .card').length;
+        lastIndex = $('#listContainer .card').length;
     }, 1000);
 });
 
