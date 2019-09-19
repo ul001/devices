@@ -185,9 +185,9 @@ jQuery(document).ready(function () {
 
         var list = "#listtab" + clickNum;
         $(list).empty();
+         $(num+' .infinite-scroll-preloader').html('<div class="preloader"></div>');
         addItems(itemsPerLoad, 0, clickNum);
         lastIndex = 10;
-        // $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
         // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
         loading = false;
         // $.initPullToRefresh($('.pull-to-refresh-layer'));
