@@ -250,7 +250,7 @@ jQuery(document).ready(function () {
                         text +=
                             '                            <div class="card"  id="' +
                             this.fTaskid +
-                            '"';
+                            '" name="' + this.fTasktypeid + '"';
                         text +=
                             '                                <div class="card-content">';
                         text +=

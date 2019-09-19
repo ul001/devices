@@ -145,7 +145,7 @@ jQuery(document).ready(function () {
             "fExplain": textDetail
         };
         // fExplain 执行情况
-        Substation.getDataByAjax("/submitUserTask", "fTaskid=" + taskID, function (
+        Substation.getDataByAjax("/submitUserTask", param, function (
             data
         ) {
             localStorage.setItem("need-refresh", true);
