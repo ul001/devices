@@ -14,7 +14,7 @@
     width:100%;
     border-bottom:0.05rem #ccc dashed;
 }
-.card-content-inner{
+#resolve .card-content-inner{
     width:100%;
     border-bottom:0.05rem solid #e1e1e1;
 }

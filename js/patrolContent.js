@@ -44,7 +44,7 @@ function loadPage(){
                 "                                        "+decodeURIComponent(this.name)+"\n" +
                 "                                        <div class=\"pull-right\">\n" +
                 "                                            <label class=\"label-checkbox item-content\">\n" +
-                "                                                <input type=\"radio\" data-code=\""+this.code+"\" data-json='"+JSON.stringify(this)+"' name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"yes\">\n" +
+                "                                                <input type=\"radio\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" data-json='"+JSON.stringify(this)+"' name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"yes\">\n" +
                 "                                                <div class=\"item-media\"><i\n" +
                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                 "                                                <div class=\"item-inner\">\n" +
@@ -53,7 +53,7 @@ function loadPage(){
                 "                                            </label>\n" +
                 "                                            &nbsp;\n" +
                 "                                            <label class=\"label-checkbox item-content\">\n" +
-                "                                                <input type=\"radio\" data-code=\""+this.code+"\" name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"no\" checked>\n" +
+                "                                                <input type=\"radio\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"no\" checked>\n" +
                 "                                                <div class=\"item-media\"><i\n" +
                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                 "                                                <div class=\"item-inner\">\n" +
@@ -74,7 +74,7 @@ function loadPage(){
                 "                                    <div class=\"card-content-inner\">\n" +
                 "                                        "+thisInputName+"\n" +
                 "                                        <div class=\"pull-right\">\n" +
-                "                                            <input type=\"text\" data-code=\""+this.code+"\" data-state=\""+this.value+"\">\n" +
+                "                                            <input type=\"text\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" data-state=\""+this.value+"\">\n" +
                 "                                        </div>\n" +
                 "                                    </div>\n" +
                 "                                </div>\n" +
@@ -356,10 +356,12 @@ function saveThisPage(){
                 var thisObj={};
                 if(thisInput){
                     thisObj['code']=$(thisInput).attr("data-code");
+                    thisObj['name']=$(thisInput).attr("data-name");
                     thisObj['value']=$(thisInput).attr("value");
                     thisObj['type']="radio";
                 }else{
                     thisObj['code']=$(obj).find($("input")).attr("data-code");
+                    thisObj['name']=$(obj).find($("input")).attr("data-name");
                     thisObj['value']=$(obj).find($("input")).val();
                     thisObj['type']="input";
                 }
