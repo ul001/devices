@@ -27,6 +27,8 @@ jQuery(document).ready(function () {
     //任务类型 fTasktypeid 
     var missionTypeid;
 
+    var missionDetail = "";
+
     function getNetData() {
         Substation.getDataByAjax(
             "/selectTaskByTaskId",
@@ -134,6 +136,14 @@ jQuery(document).ready(function () {
 
     //提交按钮事件
     $("#submitTo").click(function () {
+        var textDetail = $("#textareaDetail").val();
+        if (!textDetail) {
+            textDetail = "";
+        }
+        var param = {
+            "fTaskid": taskID,
+            "fExplain": textDetail
+        };
         // fExplain 执行情况
         Substation.getDataByAjax("/submitUserTask", "fTaskid=" + taskID, function (
             data
