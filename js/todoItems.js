@@ -12,17 +12,17 @@ jQuery(document).ready(function () {
         var i = $(this).index();
         if (i == 0) {
             // pageNum = 1;
-            $(".list-container").empty();
+            // $(".list-container").empty();
             // url = "/getWarningMessageSignalEvents";
             $("#titleContent").text("待办事项");
         } else if (i == 1) {
             // pageNum = 1;
-            $(".list-container").empty();
+            // $(".list-container").empty();
             // url = "/getWarningMessageOverLimitEvents";
             $("#titleContent").text("在办事项");
         } else if (i == 2) {
             // pageNum = 1;
-            $(".list-container").empty();
+            // $(".list-container").empty();
             // url = "/getWarningMessagePlatformRunEvents";
             $("#titleContent").text("办毕事项");
         }
@@ -167,11 +167,14 @@ jQuery(document).ready(function () {
         //     lastIndex = 10;
         // }
         // $(".list-container").empty();
-        $(num).empty();
-        $(num).html(
-            '<div class="pull-to-refresh-layer"><div class ="preloader"></div><div class ="pull-to-refresh-arrow"></div></div><div class="list-container"></div><div class="infinite-scroll-preloader"><div class = "preloader"></div></div>'
-        );
 
+        // $(num).empty();
+        // $(num).html(
+        //     '<div class="pull-to-refresh-layer"><div class ="preloader"></div><div class ="pull-to-refresh-arrow"></div></div><div class="list-container"></div><div class="infinite-scroll-preloader"><div class = "preloader"></div></div>'
+        // );
+
+        var list = "#listtab" + clickNum;
+        $(list).empty();
         addItems(itemsPerLoad, 0, clickNum);
         lastIndex = 10;
         // $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
@@ -184,7 +187,7 @@ jQuery(document).ready(function () {
     //下拉刷新
     $(document).on("refresh", ".pull-to-refresh-content", function (e) {
         setTimeout(function () {
-            var tabName = $(".tab-link.button").attr("name");
+            var tabName = $(".tab-link.button.active").attr("name");
             getFirstPage(Number(tabName));
             // done
             $.pullToRefreshDone(".pull-to-refresh-content");
@@ -215,7 +218,7 @@ jQuery(document).ready(function () {
             searchStr = "";
         }
         var params = {
-            pageNo: pageNum,
+            pageNum: pageNum,
             pageSize: number,
             fTaskstateid: clickNum,
             fTasktypeid: tasktypeid,
@@ -279,8 +282,10 @@ jQuery(document).ready(function () {
                         text += "                                    </div>";
                         text += "                                </div>";
                         text += "                            </div>";
-                        $(".list-container").append(text);
                     });
+                    var list = "#listtab" + clickNum;
+                    $(list).append(text);
+                    // $(".list-container").append(text);
                     //我要处理 巡视
                     $(".card").click(function () {
                         var taskID = $(this).attr("id");
@@ -345,11 +350,12 @@ jQuery(document).ready(function () {
                         text += "                                    </div>";
                         text += "                                </div>";
                         text += "                            </div>";
-                        $(".list-container").append(text);
                     });
+                    // $(".list-container").append(text);
+                    var list = "#listtab" + clickNum;
+                    $(list).append(text);
                 }
                 //addClick();
-
                 $(".button.button-fill").click(function () {
                     var taskID = this.name;
                     localStorage.setItem("fSubname", "任务详情");
@@ -403,7 +409,7 @@ jQuery(document).ready(function () {
                 $(".infinite-scroll-preloader").html("--end--");
                 return;
             }
-            var tabName = $(".tab-link.button").attr("name");
+            tabName = $(".tab-link.button.active").attr("name");
             addItems(itemsPerLoad, lastIndex, Number(tabName));
             lastIndex = $(".list-container .card").length;
         }, 1000);

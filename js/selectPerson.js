@@ -37,7 +37,7 @@ function loadPage() {
                         text += "                            </label>";
                         text += "                        </div>";
                         text += "                    </div>";
-                        $(".content-block.showCard").append(text);
+
                         //给历史赋值
                         if (showArrayUser.length > 0) {
                             var fuserid = this.fUserid;
@@ -48,7 +48,9 @@ function loadPage() {
                                 }
                             });
                         }
+                        $(".content-block.showCard").append(text);
                     });
+
                     addCheckClick();
                     getGroupidContent();
                     // $(".tab-link")
