@@ -44,3 +44,7 @@ i.icon.icon-contactphone {
 .list-container {
     margin-top: 2.5rem;
 }
+
+.tab.pull-to-refresh-content {
+    top: -1rem;
+}

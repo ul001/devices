@@ -40,6 +40,16 @@ jQuery(document).ready(function () {
         }
     });
 
+    window.addEventListener(
+        "pageshow",
+        function (event) {
+            if (localStorage.getItem("need-refresh")) {
+                location.reload();
+                localStorage.removeItem("need-refresh");
+            }
+        },
+        false
+    );
     //我要处理 巡视
     // $("#dealMission1").click(function () {
     //     localStorage.setItem("fSubname", "任务详情");
@@ -187,7 +197,8 @@ jQuery(document).ready(function () {
     //下拉刷新
     $(document).on("refresh", ".pull-to-refresh-content", function (e) {
         setTimeout(function () {
-            var tabName = $(".tab-link.button.active").attr("name");
+            pageNum = 1;
+            tabName = $(".tab-link.button.active").attr("name");
             getFirstPage(Number(tabName));
             // done
             $.pullToRefreshDone(".pull-to-refresh-content");
@@ -195,19 +206,19 @@ jQuery(document).ready(function () {
     });
 
     //下拉刷新
-    $(document).on("pageInit", "#page-ptr-tabs", function (e, id, page) {
-        $(page)
-            .find(".pull-to-refresh-content")
-            .on("refresh", function (e) {
-                // 2s timeout
-                var $this = $(this);
-                setTimeout(function () {
-                    $this.find(".content-block").prepend("<p>New Content......</p>");
-                    // Done
-                    $.pullToRefreshDone($this);
-                }, 2000);
-            });
-    });
+    // $(document).on("pageInit", "#page-ptr-tabs", function (e, id, page) {
+    //     $(page)
+    //         .find(".pull-to-refresh-content")
+    //         .on("refresh", function (e) {
+    //             // 2s timeout
+    //             var $this = $(this);
+    //             setTimeout(function () {
+    //                 $this.find(".content-block").prepend("<p>New Content......</p>");
+    //                 // Done
+    //                 $.pullToRefreshDone($this);
+    //             }, 2000);
+    //         });
+    // });
 
     //初始化页面接口
     function addItems(number, lastIndex, clickNum) {
@@ -228,13 +239,14 @@ jQuery(document).ready(function () {
         Substation.getDataByAjaxNoLoading(url, params, function (data) {
             var taskList = data.taskList;
             if (taskList.hasOwnProperty("list") && taskList.list.length > 0) {
-                var user = this.fTaskcreateuserid;
-                var username = "";
-                if (user != undefined) {
-                    username = user;
-                }
+
                 if (clickNum == 3) {
                     $(taskList.list).each(function () {
+                        var user = this.fTaskcreateusername;
+                        var username = "";
+                        if (user != undefined) {
+                            username = user;
+                        }
                         text +=
                             '                            <div class="card"  id="' +
                             this.fTaskid +
@@ -269,7 +281,7 @@ jQuery(document).ready(function () {
                         text += "                                            </p>";
                         text +=
                             "                                            <p><span>" +
-                            this.fTaskcreateuserid +
+                            username +
                             "</span>";
                         text +=
                             "                                                <span>" +
@@ -297,6 +309,11 @@ jQuery(document).ready(function () {
                     });
                 } else {
                     $(taskList.list).each(function () {
+                        var user = this.fTaskcreateusername;
+                        var username = "";
+                        if (user != undefined) {
+                            username = user;
+                        }
                         text += '                            <div class="card">';
                         text +=
                             '                                <div class="card-content">';
@@ -328,7 +345,7 @@ jQuery(document).ready(function () {
                         text += "                                            </p>";
                         text +=
                             "                                            <p><span>" +
-                            this.fTaskcreateuserid +
+                            username +
                             "</span>";
                         text +=
                             "                                                <span>" +
@@ -370,7 +387,7 @@ jQuery(document).ready(function () {
                 $(".infinite-scroll-preloader").html("--end--");
                 return;
             }
-            if (data.taskList.length < itemsPerLoad) {
+            if (taskList.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("--end--");
                 return;
@@ -412,6 +429,7 @@ jQuery(document).ready(function () {
             tabName = $(".tab-link.button.active").attr("name");
             addItems(itemsPerLoad, lastIndex, Number(tabName));
             lastIndex = $(".list-container .card").length;
+            // $.pullToRefreshDone(".pull-to-refresh-content");
         }, 1000);
     });
 

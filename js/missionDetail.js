@@ -148,8 +148,14 @@ jQuery(document).ready(function () {
         Substation.getDataByAjax("/submitUserTask", "fTaskid=" + taskID, function (
             data
         ) {
+            localStorage.setItem("need-refresh", true);
             window.history.back();
         });
+    });
+
+    $(".pull-left.click_btn").click(function () {
+        localStorage.setItem("need-refresh", true);
+        window.history.back();
     });
 
     //管理页面
