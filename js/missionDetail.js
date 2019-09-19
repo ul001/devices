@@ -76,7 +76,7 @@ jQuery(document).ready(function () {
                             } else if (missionTypeid == 3) {
                                 //缺陷整改
                                 localStorage.setItem("fSubname", "执行情况");
-                                window.location.href = "missionDefect.html";
+                                window.location.href = "defectRectification.html";
                             } else {
                                 alert("fTasktypeid=null，未知任务类型");
                             }
