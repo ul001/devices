@@ -1,5 +1,4 @@
 var selectSubid = localStorage.getItem("fSubid");
-var subAddress = localStorage.getItem("subAddress");
 var taskId = localStorage.getItem("missiontaskID");
 
 Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(data){
