@@ -1,8 +1,7 @@
 var selectSubid = localStorage.getItem("fSubid");
-var subAddress = localStorage.getItem("subAddress");
 var taskId = localStorage.getItem("missiontaskID");
 
-Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:4},function(data){
+Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(data){
     var imgUrl = data.imgUrl;
     $(".card-content").empty();
     $(".card-footer").empty();
@@ -66,8 +65,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:4},function(data){
             $(".card-footer").html('<img src="'+(Substation.ipAddressFromAPP + imgUrl + "/" + data.imgName)+'" style="width:100%;">');
         }
     }else{
-        $(".card-content").html("无匹配数据");
-        $(".card-footer").remove();
+        $(".content").html("无匹配数据");
     }
 
 });
