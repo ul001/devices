@@ -176,16 +176,25 @@ reSetCanvas.onclick = function () {
 
 save.onclick = function () {
     var imgUrl = canvas.toDataURL("image/png");
-    var fileName = (new Date()).getTime() + ".jpeg"; //随机文件名
+    // var fileName = (new Date()).getTime() + ".jpeg"; //随机文件名
 
-    // var imgfile = convertBase64UrlToImgFile(imgUrl, fileName, 'image/jpeg'); //转换成file
-    var blob = dataURLtoBlob(imgUrl);
-    var imgfile = blobToFile(blob, fileName);
+    // // var imgfile = convertBase64UrlToImgFile(imgUrl, fileName, 'image/jpeg'); //转换成file
+    // var blob = dataURLtoBlob(imgUrl);
+    // var imgfile = blobToFile(blob, fileName);
+    // var taskID = localStorage.getItem("missiontaskID");
+    // var formData = new FormData();
+    // formData.append('file', imgfile); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
+    // formData.append('fTaskid', taskID);
+
+    var image = new Image();
+    image.src = canvas.toDataURL("image/png");
     var taskID = localStorage.getItem("missiontaskID");
-    var formData = new FormData();
-    formData.append('file', imgfile); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
-    formData.append('fTaskid', taskID);
-    Substation.postFormDataByAjax("/saveClientSignImg", formData, function (data) {
+    var param = new FormData();
+    param.append('file', image); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
+    param.append('fTaskid', taskID);
+    // downloadFile('emmm', imgUrl);
+
+    Substation.postFormDataByAjax("/saveClientSignImg", param, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
             window.history.back();
@@ -212,6 +221,35 @@ save.onclick = function () {
     // savePicture(imgUrl);
 };
 
+function downloadFile(content, fileName) { //下载base64图片
+    var base64ToBlob = function (code) {
+        let parts = code.split(';base64,');
+        let contentType = parts[0].split(':')[1];
+        let raw = window.atob(parts[1]);
+        let rawLength = raw.length;
+        let uInt8Array = new Uint8Array(rawLength);
+        for (let i = 0; i < rawLength; ++i) {
+            uInt8Array[i] = raw.charCodeAt(i);
+        }
+        return new Blob([uInt8Array], {
+            type: contentType
+        });
+    };
+    let aLink = document.createElement('a');
+    let blob = base64ToBlob(content); //new Blob([content]);
+    let evt = document.createEvent("HTMLEvents");
+    evt.initEvent("click", true, true); //initEvent 不加后两个参数在FF下会报错  事件类型，是否冒泡，是否阻止浏览器的默认行为
+    aLink.download = fileName;
+    aLink.href = URL.createObjectURL(blob);
+    aLink.click();
+};
+
+function convertCanvasToImage(canvas) {
+    var image = new Image();
+    image.src = canvas.toDataURL("image/png");
+    return image;
+}
+
 function savePicture(Url) {
     var blob = new Blob([''], {
         type: 'application/octet-stream'
@@ -224,23 +262,23 @@ function savePicture(Url) {
     e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(e);
     URL.revokeObjectURL(url);
-    // var imgDtask = plus.downloader.createDownload(imgurl, {
-    //     //                                method: 'GET'
-    // }, function (d, status) {
-    //     if (status == 200) {
-    //         plus.gallery.save(d.filename, function () { //保存到相册
-    //             plus.io.resolveLocalFileSystemURL(d.filename, function (enpty) {
-    //                 // 关闭弹框
-    //                 mui('#picture').popover('toggle');
-    //                 // mui.toast('保存成功')
-    //             });
+    var imgDtask = plus.downloader.createDownload(imgurl, {
+        //                                method: 'GET'
+    }, function (d, status) {
+        if (status == 200) {
+            plus.gallery.save(d.filename, function () { //保存到相册
+                plus.io.resolveLocalFileSystemURL(d.filename, function (enpty) {
+                    // 关闭弹框
+                    mui('#picture').popover('toggle');
+                    // mui.toast('保存成功')
+                });
 
-    //         })
-    //     } else {
-    //         // mui.toast('保存失败')
-    //     }
-    // });
-    // imgDtask.start();
+            })
+        } else {
+            // mui.toast('保存失败')
+        }
+    });
+    imgDtask.start();
 }
 
 function getColor() {

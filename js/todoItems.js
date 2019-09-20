@@ -93,6 +93,7 @@ jQuery(document).ready(function () {
                     onClick: function () {
                         $(".clickrightbtn").text("全部");
                         tasktypeid = "";
+                        pageNum = 1;
                         getFirstPage(tabName);
                     }
                 },
@@ -119,6 +120,7 @@ jQuery(document).ready(function () {
                     onClick: function () {
                         $(".clickrightbtn").text("现场交接");
                         tasktypeid = 2;
+                        pageNum = 1;
                         getFirstPage(tabName);
                     }
                 },
@@ -127,6 +129,7 @@ jQuery(document).ready(function () {
                     onClick: function () {
                         $(".clickrightbtn").text("巡视");
                         tasktypeid = 1;
+                        pageNum = 1;
                         getFirstPage(tabName);
                     }
                 },
@@ -135,6 +138,7 @@ jQuery(document).ready(function () {
                     onClick: function () {
                         $(".clickrightbtn").text("缺陷整改");
                         tasktypeid = 3;
+                        pageNum = 1;
                         getFirstPage(tabName);
                     }
                 }
@@ -185,7 +189,7 @@ jQuery(document).ready(function () {
 
         var list = "#listtab" + clickNum;
         $(list).empty();
-         $(num+' .infinite-scroll-preloader').html('<div class="preloader"></div>');
+        $(num + ' .infinite-scroll-preloader').html('<div class="preloader"></div>');
         addItems(itemsPerLoad, 0, clickNum);
         lastIndex = 10;
         // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
@@ -301,6 +305,7 @@ jQuery(document).ready(function () {
                     //我要处理 巡视
                     $(".card").click(function () {
                         var taskID = $(this).attr("id");
+                        var tasktypeid = $(this).attr("name");
                         localStorage.setItem("fSubname", "任务详情");
                         localStorage.setItem("showType", "missionFinish");
                         localStorage.setItem("missionType", "patrol");
@@ -314,7 +319,7 @@ jQuery(document).ready(function () {
                         if (user != undefined) {
                             username = user;
                         }
-                        text += '                            <div class="card">';
+                        text += '                            <div class="card" >';
                         text +=
                             '                                <div class="card-content">';
                         text +=
@@ -357,7 +362,7 @@ jQuery(document).ready(function () {
                         text +=
                             '                                            <button class="button button-fill button-success" id="dealMission' +
                             this.fTaskid +
-                            '"';
+                            '"  name="' + this.fTaskid + '" data-taskid="' + this.fTasktypeid + '"';
                         text +=
                             '                                                type="button" name=' +
                             this.fTaskid +
@@ -374,12 +379,30 @@ jQuery(document).ready(function () {
                 }
                 //addClick();
                 $(".button.button-fill").click(function () {
-                    var taskID = this.name;
-                    localStorage.setItem("fSubname", "任务详情");
-                    localStorage.setItem("showType", "missionDoing");
-                    localStorage.setItem("missionType", "patrol");
-                    localStorage.setItem("taskID", taskID);
-                    window.location.href = "missionDetail.html";
+                    var taskID = $(this).attr("name");
+                    var tasktypeid = $(this).attr("data-taskid");
+                    if (tasktypeid == 1) {
+                        //巡视任务
+                        localStorage.setItem("fSubname", "任务详情");
+                        localStorage.setItem("showType", "missionDoing");
+                        localStorage.setItem("missionType", "patrol");
+                        localStorage.setItem("taskID", taskID);
+                        window.location.href = "missionDetail.html";
+                    } else if (tasktypeid == 3) {
+                        //缺陷登记
+                        localStorage.setItem("fSubname", "任务详情");
+                        localStorage.setItem("showType", "missiondefect");
+                        localStorage.setItem("missionType", "patrol");
+                        localStorage.setItem("taskID", taskID);
+                        window.location.href = "missionDetail.html";
+                    } else {
+                        //现场交接
+                        localStorage.setItem("fSubname", "任务详情");
+                        localStorage.setItem("showType", "missionDoing");
+                        localStorage.setItem("missionType", "patrol");
+                        localStorage.setItem("taskID", taskID);
+                        window.location.href = "missionDetail.html";
+                    }
                 });
                 pageNum++;
             } else {

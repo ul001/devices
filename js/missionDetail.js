@@ -16,6 +16,11 @@ jQuery(document).ready(function () {
             '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
         $("#addVarContain126").append(showstr);
         $("#carryOut").attr("name", "false");
+    } else if (showmissionBtn == "missiondefect") {
+        var showStr =
+            '<div class="row buttonsEvent">  <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+        $("#addVarContain126").append(showStr);
+        $("#carryOut").attr("name", "false");
     }
 
     //任务id
@@ -59,6 +64,43 @@ jQuery(document).ready(function () {
                         "</textarea>";
                     $("#missionCont").append(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
+
+                    //现场签到按钮事件
+                    $("#checkIn").click(function () {
+                        Substation.getDataByAjax("/taskSingIn", "taskId=" + taskID, function (data) {
+                            if (data.placeCheckFormId) {
+                                placeCheckFormId = data.placeCheckFormId;
+                                $("#checkIn").removeClass("col-33");
+                                $("#checkIn").hide();
+                                $("#carryOutCss").removeClass("col-33");
+                                $("#submitToCss").removeClass("col-33");
+                                $("#carryOutCss").toggleClass("col-50");
+                                $("#submitToCss").toggleClass("col-50");
+                                $("#carryOut").attr("name", "false");
+                            }
+                        });
+                    });
+
+                    //提交按钮事件
+                    $("#submitTo").click(function () {
+                        if (this.name == "true") {
+                            alert("提交任务前，请先签到。");
+                        } else {
+                            var textDetail = $("#textareaDetail").val();
+                            if (!textDetail) {
+                                textDetail = "";
+                            }
+                            var param = {
+                                fTaskid: taskID,
+                                fExplain: textDetail
+                            };
+                            // fExplain 执行情况
+                            Substation.getDataByAjax("/submitUserTask", param, function (data) {
+                                localStorage.setItem("need-refresh", true);
+                                window.history.back();
+                            });
+                        }
+                    });
 
                     //执行任务按钮事件
                     $("#carryOut").click(function () {
@@ -133,38 +175,6 @@ jQuery(document).ready(function () {
 
     getNetData();
 
-    //现场签到按钮事件
-    $("#checkIn").click(function () {
-        Substation.getDataByAjax("/taskSingIn", "taskId=" + taskID, function (data) {
-            if (data.placeCheckFormId) {
-                placeCheckFormId = data.placeCheckFormId;
-                $("#checkIn").removeClass("col-33");
-                $("#checkIn").hide();
-                $("#carryOutCss").removeClass("col-33");
-                $("#submitToCss").removeClass("col-33");
-                $("#carryOutCss").toggleClass("col-50");
-                $("#submitToCss").toggleClass("col-50");
-                $("#carryOut").attr("name", "false");
-            }
-        });
-    });
-
-    //提交按钮事件
-    $("#submitTo").click(function () {
-        var textDetail = $("#textareaDetail").val();
-        if (!textDetail) {
-            textDetail = "";
-        }
-        var param = {
-            fTaskid: taskID,
-            fExplain: textDetail
-        };
-        // fExplain 执行情况
-        Substation.getDataByAjax("/submitUserTask", param, function (data) {
-            localStorage.setItem("need-refresh", true);
-            window.history.back();
-        });
-    });
 
     $(".pull-left.click_btn").click(function () {
         localStorage.setItem("need-refresh", true);
