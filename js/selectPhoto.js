@@ -15,7 +15,7 @@ var imgNum = 0;
 var selectSubid = localStorage.getItem("fSubid");
 
 $("#inputBox").html("");
-$(".upload_img_wrap .upload_img").on("click", function() {
+$(".upload_img_wrap .upload_img").on("click", function () {
   //console.log(ev.currentTarget.dataset.id)
   var index = imgNum + 1;
   if ($("#file" + index).length < 1) {
@@ -27,10 +27,10 @@ $(".upload_img_wrap .upload_img").on("click", function() {
     //        }else{
     $("#inputBox").append(
       '<input type="file" class="fileInput" name="myFiles" data-id="' +
-        index +
-        '" title="请选择图片" id="file' +
-        index +
-        '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
+      index +
+      '" title="请选择图片" id="file' +
+      index +
+      '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
     );
     //        }
   }
@@ -43,7 +43,7 @@ $(".upload_img_wrap .upload_img").on("click", function() {
   }
   $("#file" + index)
     .unbind()
-    .change(function(e) {
+    .change(function (e) {
       var index = e.currentTarget.dataset.id;
       if ($("#file" + index).val() == "") {
         $("#inputBox input")
@@ -69,19 +69,19 @@ function changeImg(e, filePath, index) {
   //获取并记录图片的base64编码
   var reader = new FileReader();
   reader.readAsDataURL(e.target.files[0]);
-  reader.onloadend = function() {
+  reader.onloadend = function () {
     // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
     var dataURL = reader.result;
     // console.log(dataURL)
     // 显示图片
     $("#imgBox").append(
       '<div class="imgContainer" data-index=' +
-        index +
-        "><img   src=" +
-        dataURL +
-        ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
-        index +
-        ')"  class="imgDelete" src="img/del_img.png" /></div>'
+      index +
+      "><img   src=" +
+      dataURL +
+      ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
+      index +
+      ')"  class="imgDelete" src="img/del_img.png" /></div>'
     );
   };
 }
@@ -90,8 +90,8 @@ function removeImg(obj, index) {
   for (var i = 0; i < $(".imgContainer").length; i++) {
     if (
       $(".imgContainer")
-        .eq(i)
-        .attr("data-index") == index
+      .eq(i)
+      .attr("data-index") == index
     ) {
       var imgId = $(".imgContainer")
         .eq(i)
@@ -103,16 +103,15 @@ function removeImg(obj, index) {
         $("#file" + (i + 1)).remove();
       } else {
         //                if(confirm("确定要删除已保存的图片？")){
-        $.confirm("确定要删除已保存的图片？", function() {
+        $.confirm("确定要删除已保存的图片？", function () {
           $(".imgContainer")
             .eq(i)
             .remove();
           Substation.getDataByAjax(
-            "/deleteSubstationImg",
-            {
+            "/deleteSubstationImg", {
               fId: imgId
             },
-            function() {}
+            function () {}
           );
         });
         /*$(".imgContainer").eq(i).remove();
@@ -147,17 +146,16 @@ function closePicture(obj) {
 
 function loadSavedPic() {
   Substation.getDataByAjax(
-    "/selectSubstationImg",
-    {
+    "/selectSubstationImg", {
       fSubid: selectSubid
     },
-    function(data) {
+    function (data) {
       if (
         data.hasOwnProperty("substationImgList") &&
         data.substationImgList.length > 0
       ) {
         var imgUrl = data.substationImgUrl;
-        $.each(data.substationImgList, function(i, value) {
+        $.each(data.substationImgList, function (i, value) {
           imgNum++;
           var imgDiv =
             '<div class="imgContainer" id=' +
@@ -179,14 +177,14 @@ function loadSavedPic() {
 loadSavedPic();
 
 function savePhoto() {
-  $(".fileInput").each(function() {
+  $(".fileInput").each(function () {
     if ($(this).val() == "" || $(this).val() == null) {
       $(this).remove();
     }
   });
   var params = new FormData($("#upBox")[0]);
   params.append("fSubid", selectSubid);
-  Substation.postFormDataByAjax("/uploadSubstationImg", params, function(data) {
+  Substation.postFormDataByAjax("/uploadSubstationImg", params, function (data) {
     if (data.code == 200) {
       $.toast("保存成功");
       window.history.back();

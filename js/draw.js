@@ -181,10 +181,10 @@ save.onclick = function () {
     // var imgfile = convertBase64UrlToImgFile(imgUrl, fileName, 'image/jpeg'); //转换成file
     var blob = dataURLtoBlob(imgUrl);
     var imgfile = blobToFile(blob, fileName);
-
+    var taskID = localStorage.getItem("missiontaskID");
     var formData = new FormData();
     formData.append('file', imgfile); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
-    formData.append('fTaskid', 35);
+    formData.append('fTaskid', taskID);
     Substation.postFormDataByAjax("/saveClientSignImg", formData, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
