@@ -177,8 +177,9 @@ jQuery(document).ready(function () {
 
 
     $(".pull-left.click_btn").click(function () {
-        localStorage.setItem("need-refresh", true);
-        window.history.back();
+        //localStorage.setItem("need-refresh", true);
+        /*window.history.back();*/
+        window.location.href="todoItems.html";
     });
 
     //管理页面

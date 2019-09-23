@@ -1,6 +1,6 @@
 var selectSubid = localStorage.getItem("fSubid");
 var taskId = localStorage.getItem("missiontaskID");
-
+//Substation.reloadPrePage();
 Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(data){
     var imgUrl = data.imgUrl;
     $(".card-content").empty();
