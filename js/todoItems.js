@@ -398,7 +398,7 @@ jQuery(document).ready(function () {
                     } else {
                         //现场交接
                         localStorage.setItem("fSubname", "任务详情");
-                        localStorage.setItem("showType", "missionDoing");
+                        localStorage.setItem("showType", "missiondefect");
                         localStorage.setItem("missionType", "patrol");
                         localStorage.setItem("taskID", taskID);
                         window.location.href = "missionDetail.html";

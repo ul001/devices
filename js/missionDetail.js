@@ -16,7 +16,7 @@ jQuery(document).ready(function () {
             '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
         $("#addVarContain126").append(showstr);
         $("#carryOut").attr("name", "false");
-    } else if (showmissionBtn == "missiondefect") {
+    } else {
         var showStr =
             '<div class="row buttonsEvent">  <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
         $("#addVarContain126").append(showStr);
