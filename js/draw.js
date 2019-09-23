@@ -175,7 +175,7 @@ reSetCanvas.onclick = function () {
 };
 
 save.onclick = function () {
-    var imgUrl = canvas.toDataURL("image/png");
+    var imgBase64 = canvas.toDataURL("image/png");
     // var fileName = (new Date()).getTime() + ".jpeg"; //随机文件名
 
     // // var imgfile = convertBase64UrlToImgFile(imgUrl, fileName, 'image/jpeg'); //转换成file
@@ -185,12 +185,11 @@ save.onclick = function () {
     // var formData = new FormData();
     // formData.append('file', imgfile); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
     // formData.append('fTaskid', taskID);
-
-    var image = new Image();
-    image.src = canvas.toDataURL("image/png");
+    //var blob = dataURLtoBlob(imgBase64);
+    //var imgFile = blobToFile(blob,"signName.png");
     var taskID = localStorage.getItem("missiontaskID");
     var param = new FormData();
-    param.append('file', image); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
+    param.append('file', dataURLtoFile(imgBase64)); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
     param.append('fTaskid', taskID);
     // downloadFile('emmm', imgUrl);
 
@@ -350,4 +349,19 @@ var blobToFile = function (theBlob, fileName) {
     theBlob.lastModifiedDate = new Date();
     theBlob.name = fileName;
     return theBlob;
+}
+
+function dataURLtoFile(dataurl, filename = 'file') {
+  let arr = dataurl.split(',')
+  let mime = arr[0].match(/:(.*?);/)[1]
+  let suffix = mime.split('/')[1]
+  let bstr = atob(arr[1])
+  let n = bstr.length
+  let u8arr = new Uint8Array(n)
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n)
+  }
+  return new File([u8arr], `${filename}.${suffix}`, {
+    type: mime
+  })
 }

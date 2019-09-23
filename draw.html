@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>涂鸦板</title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link rel="stylesheet" href="libs/light7.min.css" />
-    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
-    <link rel="stylesheet" href="libs/light7-swipeout.css" />
-    <link rel="stylesheet" href="css/general.css" />
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" href="libs/light7.min.css"/>
+    <link rel="stylesheet" href="libs/light7-swiper.min.css"/>
+    <link rel="stylesheet" href="libs/light7-swipeout.css"/>
+    <link rel="stylesheet" href="css/general.css"/>
     <!-- <link rel="stylesheet" href="css/missionDetail.css" /> -->
     <script src="libs/jquery-1.12.4.min.js"></script>
     <script src="libs/light7.min.js"></script>
@@ -25,40 +25,48 @@
 </head>
 
 <body>
-    <header class="bar bar-nav bar_color">
-        <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
-            <span class="icon icon-left"></span>
-            返回
-        </a>
-        <h1 class="title title_color">客户签名
-            <!-- < class="limit-length" id="titleContent"></> -->
-        </h1>
-        <button class="button pull-right clickrightbtn" id="save" style="color:white;border:1px solid white;">
-            确定
-        </button>
-    </header>
-
-    <canvas id="drawing-board"></canvas>
-    <div class="color-group">
-        <ul>
-            <li id="white" class="color-item" style="background-color: white;"></li>
-            <li id="black" class="color-item active" style="background-color: black;"></li>
-            <li id="red" class="color-item" style="background-color: #FF3333;"></li>
-            <li id="blue" class="color-item" style="background-color: #0066FF;"></li>
-            <li id="yellow" class="color-item" style="background-color: #FFFF33;"></li>
-            <li id="green" class="color-item" style="background-color: #33CC66;"></li>
-            <li id="gray" class="color-item" style="background-color: gray;"></li>
-        </ul>
+<div class="page-group">
+    <div class="page">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn"
+               onclick="window.history.back()">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <h1 class="title title_color">客户签名
+                <!-- < class="limit-length" id="titleContent"></> -->
+            </h1>
+            <button class="button pull-right clickrightbtn" id="save"
+                    style="color:white;border:1px solid white;">
+                确定
+            </button>
+        </header>
+        <div class="content">
+            <canvas id="drawing-board"></canvas>
+            <div class="color-group">
+                <ul>
+                    <li id="white" class="color-item" style="background-color: white;"></li>
+                    <li id="black" class="color-item active" style="background-color: black;"></li>
+                    <li id="red" class="color-item" style="background-color: #FF3333;"></li>
+                    <li id="blue" class="color-item" style="background-color: #0066FF;"></li>
+                    <li id="yellow" class="color-item" style="background-color: #FFFF33;"></li>
+                    <li id="green" class="color-item" style="background-color: #33CC66;"></li>
+                    <li id="gray" class="color-item" style="background-color: gray;"></li>
+                </ul>
+            </div>
+            <div id="range-wrap"><input type="range" id="range" min="1" max="30" value="5"
+                                        title="调整笔刷粗细"></div>
+            <div class="tools">
+                <button id="brush" class="active" title="画笔"><i class="iconfont icon-qianbi"></i>
+                </button>
+                <button id="eraser" title="橡皮擦"><i class="iconfont icon-xiangpi"></i></button>
+                <button id="clear" title="清空"><i class="iconfont icon-qingchu"></i></button>
+                <button id="undo" title="撤销"><i class="iconfont icon-chexiao"></i></button>
+                <!-- <button id="save" title="保存"><i class="iconfont icon-fuzhi"></i></button> -->
+            </div>
+        </div>
     </div>
-    <div id="range-wrap"><input type="range" id="range" min="1" max="30" value="5" title="调整笔刷粗细"></div>
-    <div class="tools">
-        <button id="brush" class="active" title="画笔"><i class="iconfont icon-qianbi"></i></button>
-        <button id="eraser" title="橡皮擦"><i class="iconfont icon-xiangpi"></i></button>
-        <button id="clear" title="清空"><i class="iconfont icon-qingchu"></i></button>
-        <button id="undo" title="撤销"><i class="iconfont icon-chexiao"></i></button>
-        <!-- <button id="save" title="保存"><i class="iconfont icon-fuzhi"></i></button> -->
-    </div>
-
+</div>
 </body>
 <script src="libs/tools.js"></script>
 <script src="js/draw.js"></script>
