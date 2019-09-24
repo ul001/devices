@@ -18,7 +18,7 @@ jQuery(document).ready(function () {
         $("#carryOut").attr("name", "false");
     } else {
         var showStr =
-            '<div class="row buttonsEvent">  <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+            '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
         $("#addVarContain126").append(showStr);
         $("#carryOut").attr("name", "false");
     }
@@ -179,7 +179,7 @@ jQuery(document).ready(function () {
     $(".pull-left.click_btn").click(function () {
         //localStorage.setItem("need-refresh", true);
         /*window.history.back();*/
-        window.location.href="todoItems.html";
+        window.location.href = "todoItems.html";
     });
 
     //管理页面
