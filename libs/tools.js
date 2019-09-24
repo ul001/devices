@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v3";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njk1MTUxNzYsInVzZXJuYW1lIjoibWlzc2lvbjEifQ.OM8QYG1FfaQiVAXHitqhh_p-MRTKa1ugrDC4ImBcpT4";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njk2MTAxMzcsInVzZXJuYW1lIjoibWlzc2lvbjEwMCJ9.fP7M-ONxCdE9SZ313O5j7Dq5DHCdLFslGm05vk1ffzI";
 var ipAddress = "http://116.236.149.162:8090";
 //iOS安卓基础传参
 var u = navigator.userAgent,
@@ -243,10 +243,14 @@ var Substation = {
           $.toast("信息错误");
           return;
         } else {
-          if (data.code == "200") {
+          if (data.code == 200) {
             $.hidePreloader();
             successCallback(data);
-          } else {
+          } else if(data.code==130){
+            $.hidePreloader();
+            $.toast("任务已闭合，保存失败！");
+          }
+          else {
             $.hidePreloader();
             $.toast("操作失败");
           }

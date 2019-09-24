@@ -281,7 +281,7 @@ jQuery(document).ready(function () {
                             '                                        <div class="col-75">';
                         text +=
                             '                                            <p class="subName">' +
-                            this.fTaskcontent;
+                            this.fTaskname;
                         text += "                                            </p>";
                         text +=
                             "                                            <p><span>" +
@@ -346,7 +346,7 @@ jQuery(document).ready(function () {
                             '                                        <div class="col-75">';
                         text +=
                             '                                            <p class="subName">' +
-                            this.fTaskcontent;
+                            this.fTaskname;
                         text += "                                            </p>";
                         text +=
                             "                                            <p><span>" +

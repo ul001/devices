@@ -1,6 +1,11 @@
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 var subAddress = localStorage.getItem("subAddress");
+var needUpdate = localStorage.getItem("need-update");
+if(needUpdate){
+    location.reload();
+    localStorage.removeItem("need-update");
+}
 $("#subName").text(selectSubname);
 
 Substation.getDataByAjax("/getLatestThreePlaceCheckForm",{fSubid:selectSubid},function(data){

@@ -440,7 +440,7 @@ var CustomerDevice = (function () {
                 case "input":
                     var info = JSON.parse(decodeURIComponent(val.value));
                     // var info = JSON.parse(decodeURIComponent(selectInfo.fFunctionfield));
-                    if (info.inpType == true) {
+                    if (info == true) {
                         // string = '<div class="showDiv">' +
                         // '<label class="nameInputInfo" name="input">' + decodeURIComponent(val.name) + '</label>' + ':' +
                         // '<input type="text" id="input' + count + '" class="valueInput" value="' + info.inpName + '" name="'
@@ -452,21 +452,21 @@ var CustomerDevice = (function () {
                             '<input type="text" id="input' +
                             count +
                             '" class="valueInput" value="' +
-                            info.inpName +
+//                            info.inpName +
                             '" name="' +
-                            info.inpType +
+//                            info.inpType +
                             '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' +
                             "</div></div></li>";
                     }
-                    if (info.inpType == false) {
+                    if (info == false) {
                         string =
                             '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" name="input">' +
                             decodeURIComponent(val.name) +
                             '</div> <div class="item-input">' +
                             '<input type="text" class="valueInput" value="' +
-                            info.inpName +
+//                            info.inpName +
                             '" name="' +
-                            info.inpType +
+//                            info.inpType +
                             '">' +
                             "</div></div></li>";
                     }

@@ -188,6 +188,7 @@ function saveFormData() {
     Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
+            localStorage.setItem("need-update",true);
             window.history.back();
         }
     });

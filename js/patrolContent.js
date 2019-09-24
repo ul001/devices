@@ -370,17 +370,14 @@ function saveThisPage(){
             deviceJson['fInspectionslipjson']=inputArray;
             deviceJson['fSubdeviceinfoid']=deviceId;
             deviceJson['fPlacecheckformid']=fPlacecheckformid;
-            deviceJson['fItemNum']=tempNum;
+            deviceJson['fItemnum']=tempNum;
             changeJson.push(deviceJson);
         });
         var jsonStr = JSON.stringify(changeJson);
         Substation.postDataByAjax("/updateInspectionDetail",{fPlacecheckformid:fPlacecheckformid,deviceList:jsonStr},function(data){
             if(data.code==200){
                 $.toast("保存成功");
-            }else if(data.code==130){
-                $.toast("任务已闭合，保存失败！");
-            }else{
-                $.toast("操作失败");
+                localStorage.setItem("need-update",true);
             }
         });
 
