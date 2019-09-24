@@ -23,7 +23,7 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
     var beforeimg = data.beforeimg;
     var afterimg = data.afterimg;
     $("#treePathName").val(clickTree);
-    $("#defectDiscribe").val(defectJson.fDeviceproblemdes);
+    $("#fDeviceproblemdes").val(defectJson.fDeviceproblemdes);
     var fProblemlocation = defectJson.fProblemlocation;
     var defectPosition = fProblemlocation.split(",")[0];
     var defectPositionVal = fProblemlocation.split(",")[1];

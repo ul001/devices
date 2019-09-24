@@ -73,9 +73,12 @@ function addItems(number, lastIndex) {
                         "                                        class=\"redColor\">(设备编号:"+this.treePathName+")"+this.fDeviceproblemdes+"</span>\n" +
                         "                                </p>\n" +
                         "                                <p>危害:"+this.fProblemharm+"</p>\n" +
-                        "                                <p>具体位置:"+this.fProblemlocation.split(",")[1]+" 缺陷类别:"+this.fProblemtype+"</p>\n" +
-                        "                                <p>紧急程度:"+this.fProblemlevel+" 消缺期限:"+this.fTimelimit+"</p>\n" +
-                        "                                <p>处理建议:"+this.fResolution+" 客户意见:"+this.fClientadvice+"</p>\n" +
+                        "                                <p>具体位置:"+this.fProblemlocation.split(",")[1]+"</p>\n" +
+                        "                                <p>缺陷类别:"+this.fProblemtype+"</p>\n" +
+                        "                                <p>紧急程度:"+this.fProblemlevel+"</p>\n" +
+                        "                                <p>消缺期限:"+this.fTimelimit+"</p>\n" +
+                        "                                <p>处理建议:"+this.fResolution+"</p>\n" +
+                        "                                <p>客户意见:"+this.fClientadvice+"</p>\n" +
                         "                                <p>处理状态:"+stateStr+"</p>\n" +
                         "                                <p>发现时间:"+this.fCreatetime+"</p>\n" +
                         "                            </div>\n" +
