@@ -5,6 +5,7 @@ if(needUpdate){
     localStorage.removeItem("need-update");
     location.reload();
 }
+var taskchargeid = Substation.GetQueryString("taskchargeid");
 Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(data){
     var imgUrl = data.imgUrl;
     $(".card-content").empty();

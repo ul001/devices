@@ -31,6 +31,8 @@ jQuery(document).ready(function () {
     var missionsubid;
     //任务类型 fTasktypeid
     var missionTypeid;
+    //任务负责人 fTaskchargerid
+    var taskchargerid;
 
     var missionDetail = "";
 
@@ -64,7 +66,7 @@ jQuery(document).ready(function () {
                         "</textarea>";
                     $("#missionCont").append(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
-
+                    taskchargerid = taskInfo.fTaskchargerid;
                     //现场签到按钮事件
                     $("#checkIn").click(function () {
                         Substation.getDataByAjax("/taskSingIn", "taskId=" + taskID, function (data) {
@@ -84,7 +86,7 @@ jQuery(document).ready(function () {
                     //提交按钮事件
                     $("#submitTo").click(function () {
                         if (this.name == "true") {
-                            alert("提交任务前，请先签到。");
+                            $.toast("提交任务前，请先签到。");
                         } else {
                             var textDetail = $("#textareaDetail").val();
                             if (!textDetail) {
@@ -105,7 +107,7 @@ jQuery(document).ready(function () {
                     //执行任务按钮事件
                     $("#carryOut").click(function () {
                         if (this.name == "true") {
-                            alert("执行任务前，请先签到。");
+                            $.toast("执行任务前，请先签到。");
                         } else {
                             localStorage.setItem("fSubid", missionsubid);
                             localStorage.setItem("fPlacecheckformid", placeCheckFormId);
@@ -121,9 +123,9 @@ jQuery(document).ready(function () {
                             } else if (missionTypeid == 3) {
                                 //缺陷整改
                                 localStorage.setItem("fSubname", "执行情况");
-                                window.location.href = "defectRectification.html";
+                                window.location.href = "defectRectification.html?taskchargeid="+taskchargerid;
                             } else {
-                                alert("fTasktypeid=null，未知任务类型");
+                                $.toast("fTasktypeid=null，未知任务类型");
                             }
                         }
                     });
