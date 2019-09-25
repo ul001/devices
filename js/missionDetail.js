@@ -126,11 +126,18 @@ jQuery(document).ready(function () {
                                 fTaskid: taskID,
                                 fExplain: textDetail
                             };
-                            // fExplain 执行情况
-                            Substation.getDataByAjax("/submitUserTask", param, function (data) {
-                                localStorage.setItem("need-refresh", true);
-                                window.history.back();
-                            });
+                            if(missionTypeid==3){
+                                Substation.getDataByAjax("/submitTask", param, function (data) {
+                                    localStorage.setItem("need-refresh", true);
+                                    window.history.back();
+                                });
+                            }else{
+                                // fExplain 执行情况
+                                Substation.getDataByAjax("/submitUserTask", param, function (data) {
+                                    localStorage.setItem("need-refresh", true);
+                                    window.history.back();
+                                });
+                            }
                         }
                     });
 
