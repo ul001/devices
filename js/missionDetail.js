@@ -7,16 +7,19 @@ jQuery(document).ready(function () {
     // var missionType = localStorage.getItem("missionType");
 
     if (showmissionBtn == "missionDoing") {
+        localStorage.setItem("canClick",true);
         var showStr =
             '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
         $("#addVarContain126").append(showStr);
         $("#carryOut").attr("name", "true");
     } else if (showmissionBtn == "missionFinish") {
+        localStorage.setItem("canClick",false);
         var showstr =
             '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
         $("#addVarContain126").append(showstr);
         $("#carryOut").attr("name", "false");
     } else {
+        localStorage.setItem("canClick",true);
         var showStr =
             '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
         $("#addVarContain126").append(showStr);
@@ -33,6 +36,8 @@ jQuery(document).ready(function () {
     var missionTypeid;
     //任务负责人 fTaskchargerid
     var taskchargerid;
+    //任务客户 ftaskcheckid
+    var taskcheckerid;
 
     var missionDetail = "";
 
@@ -52,6 +57,7 @@ jQuery(document).ready(function () {
                     $("#carryOut").attr("name", "false");
                 }
                 var taskInfo = data.taskInfo;
+                var userList = data.taskUserList;
                 if (taskInfo) {
                     missionsubid = taskInfo.fSubid;
                     $("#missionId").html(taskInfo.fTaskid);
@@ -67,18 +73,42 @@ jQuery(document).ready(function () {
                     $("#missionCont").append(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
                     taskchargerid = taskInfo.fTaskchargerid;
+                    taskcheckerid = taskInfo.fTaskcheckerid;
+                    var temp = false;
+                    $(userList).each(function(){
+                        if(this.fUserid==taskchargerid){
+                            temp = true;
+                            return false;
+                        }
+                    });
+                    if(taskchargerid!=Substation.loginUserid){
+                        $("#clickManager").css("display","none");
+                    }else{
+                        if (missionTypeid == 1) {
+                            if(!temp){
+                                var showstr =
+                                    '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
+                                $("#addVarContain126").html(showstr);
+                                $("#carryOut").attr("name", "false");
+                                localStorage.setItem("canClick",false);
+                            }
+                        }else{
+                            $("#addVarContain125").css("display","none");
+                        }
+                    }
                     //现场签到按钮事件
                     $("#checkIn").click(function () {
                         Substation.getDataByAjax("/taskSingIn", "taskId=" + taskID, function (data) {
                             if (data.placeCheckFormId) {
                                 placeCheckFormId = data.placeCheckFormId;
-                                $("#checkIn").removeClass("col-33");
+                                location.reload();
+                                /*$("#checkIn").removeClass("col-33");
                                 $("#checkIn").hide();
                                 $("#carryOutCss").removeClass("col-33");
                                 $("#submitToCss").removeClass("col-33");
                                 $("#carryOutCss").toggleClass("col-50");
                                 $("#submitToCss").toggleClass("col-50");
-                                $("#carryOut").attr("name", "false");
+                                $("#carryOut").attr("name", "false");*/
                             }
                         });
                     });
@@ -123,7 +153,7 @@ jQuery(document).ready(function () {
                             } else if (missionTypeid == 3) {
                                 //缺陷整改
                                 localStorage.setItem("fSubname", "执行情况");
-                                window.location.href = "defectRectification.html?taskchargeid="+taskchargerid;
+                                window.location.href = "defectRectification.html?fTaskcheckerid="+taskcheckerid;
                             } else {
                                 $.toast("fTasktypeid=null，未知任务类型");
                             }

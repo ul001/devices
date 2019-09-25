@@ -94,6 +94,7 @@ function addItems(number, lastIndex) {
                 var clickId = $(this).attr("id");
                 var clickTree = $(this).attr("value");
                 localStorage.setItem("clickTree",clickTree);
+                localStorage.setItem("canClick",false);
                 window.location.href="defectInfo.html?fDeviceproblemid="+clickId;
             });
             pageNum++;

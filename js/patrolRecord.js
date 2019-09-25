@@ -49,6 +49,7 @@ Substation.getDataByAjax("/getLatestThreePlaceCheckForm",{fSubid:selectSubid},fu
         $(".list-container .item-footer").unbind().click(function(){
             var fPlacecheckformid = $(this).attr("data-id");
             localStorage.setItem("fPlacecheckformid",fPlacecheckformid);
+            localStorage.setItem("canClick",false);
             window.location.href="patrolContent.html";
         });
     }

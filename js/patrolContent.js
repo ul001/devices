@@ -1,6 +1,7 @@
 var clickRadioName="";
 var selectSubid = localStorage.getItem("fSubid");
 var fPlacecheckformid = localStorage.getItem("fPlacecheckformid");
+var canClick = localStorage.getItem("canClick");
 var defectPosition = "";
 var defectPositionVal="";
 var deadline="";
@@ -102,6 +103,11 @@ function loadPage(){
             addRadioClick();
             getGroupidContent();
             $(".tab-link").eq(0).click();
+            if(canClick=="false"){
+                $($("input")).each(function(){
+                    $(this).attr("disabled",true);
+                });
+            }
         });
     }
 
@@ -280,11 +286,13 @@ function loadPage2(){
     deadline = decodeURIComponent(defectJson.deadline);
     var dangerous = defectJson.dangerous;
     $("#defectDiscribe").val(name);
-    var defectPositionArray = defectPosition.split(";");
     $("#defectPosition").empty();
-    $(defectPositionArray).each(function(index,obj){
-        $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
-    });
+    if(defectPosition!=""&&defectPosition!=null){
+        var defectPositionArray = defectPosition.split(";");
+        $(defectPositionArray).each(function(index,obj){
+            $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
+        });
+    }
     $("#dangerCategory").val(defectJson.dangerCategory);
     $("#dangerType").val(defectJson.dangerType);
     $("#dangerous").val(dangerous);
@@ -473,16 +481,18 @@ function saveFormData() {
             $(this).remove();
         }
     });
-    if($("input:checkbox:checked").length==0){
-        $.toast("请选择缺陷位置！");
-        return;
-    }else{
-        var checkedVal=",";
-        $("input:checkbox:checked").each(function(){
-            checkedVal+=$(this).val()+";";
-        });
-        checkedVal=checkedVal.substring(0,checkedVal.length-1);
-        defectPositionVal=defectPosition+checkedVal;
+    if($("input:checkbox").length>0){
+        if($("input:checkbox:checked").length==0){
+            $.toast("请选择缺陷位置！");
+            return;
+        }else{
+            var checkedVal=",";
+            $("input:checkbox:checked").each(function(){
+                checkedVal+=$(this).val()+";";
+            });
+            checkedVal=checkedVal.substring(0,checkedVal.length-1);
+            defectPositionVal=defectPosition+checkedVal;
+        }
     }
     if($(".fileInput")&&$(".fileInput").length==0){
         $.toast("请上传现场照！");

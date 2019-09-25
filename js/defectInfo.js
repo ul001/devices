@@ -16,6 +16,7 @@ var imgNum = 0;
 var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
 var selectSubid = localStorage.getItem("fSubid");
 var clickTree = localStorage.getItem("clickTree");
+var canClick = localStorage.getItem("canClick");
 
 Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceproblemid},function(data){
     var imgUrl = data.imgUrl;
@@ -58,6 +59,11 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
             imgNum++;
             var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
             $("#imgBox").append(imgDiv);
+        });
+    }
+    if(canClick=="false"){
+        $($("input")).each(function(){
+            $(this).attr("disabled",true);
         });
     }
 });

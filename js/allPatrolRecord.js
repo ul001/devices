@@ -69,6 +69,7 @@ function addItems(number) {
                 $(".card").unbind().click(function(){
                     var fPlacecheckformid = $(this).attr("id");
                     localStorage.setItem("fPlacecheckformid",fPlacecheckformid);
+                    localStorage.setItem("canClick",false);
                     window.location.href="patrolContent.html";
                 });
                 pageNum++;

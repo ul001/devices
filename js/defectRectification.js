@@ -5,7 +5,7 @@ if(needUpdate){
     localStorage.removeItem("need-update");
     location.reload();
 }
-var taskchargeid = Substation.GetQueryString("taskchargeid");
+var fTaskcheckerid = Substation.GetQueryString("fTaskcheckerid");
 var loginUserid = Substation.loginUserid;
 Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(data){
     var imgUrl = data.imgUrl;
@@ -65,7 +65,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
         if(data.imgName==null||data.imgName==""){
             $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
             $("#goToWrite").click(function(){
-                if(loginUserid==taskchargeid){
+                if(loginUserid==fTaskcheckerid){
                     window.location.href="draw.html";
                 }else{
                     $.toast("您没有此权限");

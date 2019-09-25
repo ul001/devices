@@ -51,6 +51,7 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
         $(".list-container").append(html);
         $(".list-container .item-footer").unbind().click(function(){
             var problemId = $(this).attr("data-id");
+            localStorage.setItem("canClick",false);
             window.location.href="defectInfo.html?fDeviceproblemid="+problemId;
         });
     }
