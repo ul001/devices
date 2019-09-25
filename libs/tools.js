@@ -6,6 +6,7 @@
 var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v3";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njk2MTAxMzcsInVzZXJuYW1lIjoibWlzc2lvbjEwMCJ9.fP7M-ONxCdE9SZ313O5j7Dq5DHCdLFslGm05vk1ffzI";
 var ipAddress = "http://116.236.149.162:8090";
+var userId = "";
 //iOS安卓基础传参
 var u = navigator.userAgent,
   app = navigator.appVersion;
@@ -21,14 +22,18 @@ if (isIOS) {
   baseUrlFromAPP = storage.baseurl;
   tokenFromAPP = storage.token;
   ipAddress = storage.ipAddress;
+  userId = storage.userID;
 } else {
   baseUrlFromAPP = android.getBaseUrl();
   tokenFromAPP = android.getToken();
   ipAddress = android.getIpAddress();
+  userId = android.getUserid();
 }
 
 var Substation = {
   ipAddressFromAPP: ipAddress + "/",
+
+  loginUserid:userId,
 
   removeUndefined: function (data) {
     var dataStr = data == undefined ? "无" : data;
