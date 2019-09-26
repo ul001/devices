@@ -182,6 +182,10 @@ function savePhoto() {
       $(this).remove();
     }
   });
+  if($(".fileInput").length>6){
+    $.toast("最多上传6张图片");
+    return;
+  }
   var params = new FormData($("#upBox")[0]);
   params.append("fSubid", selectSubid);
   Substation.postFormDataByAjax("/uploadSubstationImg", params, function (data) {

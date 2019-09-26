@@ -486,6 +486,10 @@ function saveFormData() {
             $(this).remove();
         }
     });
+    if($(".fileInput").length>6){
+        $.toast("最多上传6张图片");
+        return;
+    }
     if($("input:checkbox").length>0){
         if($("input:checkbox:checked").length==0){
             $.toast("请选择缺陷位置！");

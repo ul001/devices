@@ -196,6 +196,10 @@ function saveFormData() {
             $(this).remove();
         }
     });
+    if($(".fileInput").length>6){
+        $.toast("最多上传6张图片");
+        return;
+    }
     var params = new FormData($('#form1')[0]);
     params.append("fDeviceproblemid", fDeviceproblemid);
     Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
