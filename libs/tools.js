@@ -8,7 +8,7 @@ var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1Njk3Nzc2MTI
 var ipAddress = "http://116.236.149.162:8090";
 var userId = "265";
 //iOS安卓基础传参
-/*var u = navigator.userAgent,
+var u = navigator.userAgent,
   app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -28,7 +28,7 @@ if (isIOS) {
   tokenFromAPP = android.getToken();
   ipAddress = android.getIpAddress();
   userId = android.getUserid();
-}*/
+}
 
 var Substation = {
   ipAddressFromAPP: ipAddress + "/",
