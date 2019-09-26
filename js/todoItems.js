@@ -243,7 +243,10 @@ jQuery(document).ready(function () {
         Substation.getDataByAjaxNoLoading(url, params, function (data) {
             var taskList = data.taskList;
             if (taskList.hasOwnProperty("list") && taskList.list.length > 0) {
-
+                if (lastIndex == 0) {
+                    var list = "#listtab" + clickNum;
+                    $(list).empty();
+                }
                 if (clickNum == 3) {
                     $(taskList.list).each(function () {
                         var user = this.fTaskcreateusername;
