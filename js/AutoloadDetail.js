@@ -902,8 +902,6 @@ jQuery(document).ready(function () {
             if (data.code == 200) {
                 $.toast("保存成功！");
                 customerDevice.reNewCurNodeInfo();
-            } else {
-                $.toast("保存失败！");
             }
         });
     }

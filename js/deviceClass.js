@@ -235,8 +235,6 @@ function renameLi(){
             if(data.code==200){
                 $.toast("重命名成功");
                 $("#"+idVal).find(".item-title").text(value);
-            }else{
-                $.toast("操作失败");
             }
           });
     });
@@ -250,8 +248,6 @@ function cloneLi(){
         if(data.code==200){
             thisMenuList=[];
             fillData(thisPid);
-        }else{
-            $.toast("操作失败");
         }
     });
 }
@@ -298,8 +294,6 @@ function confirmSort(){
         Substation.postDataByAjax("/updateBatchDeviceGroup",{groupList:jsonStr},function(data){
             if(data.code==200){
                 $.toast("排序成功");
-            }else{
-                $.toast("操作失败");
             }
         });
     }

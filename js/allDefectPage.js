@@ -38,7 +38,7 @@ function addItems(number, lastIndex) {
     if(stateVal!=""){
         params['fState']=stateVal;
     }
-    Substation.getDataByAjaxNoLoading(url, params, function (data) {
+    Substation.yAjaxNoLoading(url, params, function (data) {
         if (data.tDevDeviceproblemList.list.length > 0) {
             $(data.tDevDeviceproblemList.list).each(function () {
                 var stateStr = "";
