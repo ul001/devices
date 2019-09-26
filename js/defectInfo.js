@@ -26,17 +26,19 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
     $("#treePathName").val(clickTree);
     $("#fDeviceproblemdes").val(defectJson.fDeviceproblemdes);
     var fProblemlocation = defectJson.fProblemlocation;
-    var defectPosition = fProblemlocation.split(",")[0];
-    var defectPositionVal = fProblemlocation.split(",")[1];
-    var defectPositionArray = defectPosition.split(";");
-    var defectPositionValArray = defectPositionVal.split(";");
     $("#defectPosition").empty();
-    $(defectPositionArray).each(function(index,obj){
-        $("#defectPosition").append('<input type="checkbox" disabled value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
-    });
-    $(defectPositionValArray).each(function(){
-        $("input[type='checkbox'][value='"+this+"']").attr("checked",true);
-    });
+    if(fProblemlocation.indexOf(",")!=-1){
+        var defectPosition = fProblemlocation.split(",")[0];
+        var defectPositionVal = fProblemlocation.split(",")[1];
+        var defectPositionArray = defectPosition.split(";");
+        var defectPositionValArray = defectPositionVal.split(";");
+        $(defectPositionArray).each(function(index,obj){
+            $("#defectPosition").append('<input type="checkbox" disabled value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
+        });
+        $(defectPositionValArray).each(function(){
+            $("input[type='checkbox'][value='"+this+"']").attr("checked",true);
+        });
+    }
     $("#fProblemtype").val(defectJson.fProblemtype);
     $("#fProblemlevel").val(defectJson.fProblemlevel);
     $("#fTimelimit").val(defectJson.fTimelimit);
@@ -65,6 +67,11 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
         $($("input")).each(function(){
             $(this).attr("disabled",true);
         });
+        $($("select")).each(function(){
+            $(this).attr("disabled",true);
+        });
+        $(".upload_img_wrap .upload_img").unbind();
+        $("#saveData").css("display","none");
     }
 });
 

@@ -15,25 +15,29 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
     $(".title_color").text(data.subName);
     if(data.tDevDeviceproblemList.list.length>0){
         $(data.tDevDeviceproblemList.list).each(function(){
+            var problemStr = "";
+            if(this.fProblemlocation.indexOf(",")!=-1){
+                problemStr=this.fProblemlocation.split(",")[1]
+            }
             var stateStr = "";
             switch(this.fState){
                 case "0":
-                stateStr="未处理";
+                stateStr="<span class=\"redColor\">未处理</span>";
                 break;
                 case "2":
-                stateStr="待处理";
+                stateStr="<span class=\"redColor\">待处理</span>";
                 break;
                 case "3":
-                stateStr="待客户停电处理";
+                stateStr="<span class=\"redColor\">待客户停电处理</span>";
                 break;
                 case "4":
-                stateStr="待线路停电处理";
+                stateStr="<span class=\"redColor\">待线路停电处理</span>";
                 break;
                 case "5":
-                stateStr="其他";
+                stateStr="<span class=\"redColor\">其他</span>";
                 break;
                 case "1":
-                stateStr="已处理";
+                stateStr="<span class=\"button-success\">已处理</span>";
                 break;
             }
             $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\""+this.treePathName+"\" id=\""+this.fDeviceproblemid+"\">\n" +
@@ -44,11 +48,11 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
                   "                            <p class=\"boldText\">设备路径："+this.treePathName+"</p>\n" +
                   "                            <p>描述："+this.fDeviceproblemdes+"</p>\n" +
                   "                            <p>危害："+this.fProblemharm+"</p>\n" +
-                  "                            <p>具体位置："+this.fProblemlocation.split(",")[1]+"</p>\n" +
+                  "                            <p>具体位置："+problemStr+"</p>\n" +
                   "                            <p>缺陷类别："+this.fProblemtype+"</p>\n" +
                   "                            <p>紧急程度："+this.fProblemlevel+"</p>\n" +
                   "                            <p>消缺期限："+this.fTimelimit+"</p>\n" +
-                  "                            <p>处理状态：<span class=\"redColor\">"+stateStr+"</span></p>\n" +
+                  "                            <p>处理状态："+stateStr+"</p>\n" +
                   "                            <p>发现时间："+this.fCreatetime+"</p>\n" +
                   "                        </div>\n" +
                   "                        <div class=\"col-5\">\n" +

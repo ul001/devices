@@ -107,6 +107,11 @@ function loadPage(){
                 $($("input")).each(function(){
                     $(this).attr("disabled",true);
                 });
+                $($("select")).each(function(){
+                    $(this).attr("disabled",true);
+                });
+                $(".upload_img_wrap .upload_img").unbind();
+                $("#saveBtn").css("display","none");
             }
         });
     }

@@ -71,6 +71,9 @@ function addItems(number, lastIndex) {
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         if (data.hasOwnProperty("list") && data.list.length > 0) {
+            if (pageNum == 1) {
+                $(".list-container").empty();
+            }
             $(data.list).each(function () {
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +

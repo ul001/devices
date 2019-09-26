@@ -17,6 +17,10 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
     if(threeList.length>0){
         var html='';
         $(threeList).each(function(){
+            var problemStr = "";
+            if(this.fProblemlocation.indexOf(",")!=-1){
+                problemStr=this.fProblemlocation.split(",")[1]
+            }
             var stateStr = "";
             switch(this.fState){
                 case "0":
@@ -41,7 +45,7 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
             html+="<div class=\"item-footer row no-gutter\" data-id=\""+this.fDeviceproblemid+"\">\n" +
 "                            <div class=\"col-10\"><i class=\"icon icon-alarm\"></i></div>\n" +
 "                            <div class=\"col-85\"><span class=\"redColor\">(设备编号:"+this.treePathName+")"+this.fDeviceproblemdes+"</span><br>\n" +
-"                                位置："+this.fProblemlocation.split(",")[1]+" 状态："+stateStr+"<br>发现时间："+this.fCreatetime+"\n" +
+"                                位置："+problemStr+" 状态："+stateStr+"<br>发现时间："+this.fCreatetime+"\n" +
 "                            </div>\n" +
 "                            <div class=\"col-5\">\n" +
 "                                <i class=\"icon icon-right\"></i>\n" +

@@ -194,6 +194,9 @@ var Substation = {
                 case "315":
                     $.toast($.i18n.prop('code_315'));
                     break;
+                default:
+                    $.toast("操作失败");
+                    break;
             }
         }
     });

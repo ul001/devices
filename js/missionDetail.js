@@ -92,9 +92,10 @@ jQuery(document).ready(function () {
                                 $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick",false);
                             }
-                        }else{
-                            $("#addVarContain125").css("display","none");
                         }
+                    }
+                    if(missionTypeid!=1){
+                        $("#addVarContain125").css("display","none");
                     }
                     //现场签到按钮事件
                     $("#checkIn").click(function () {

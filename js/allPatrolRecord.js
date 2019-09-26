@@ -34,6 +34,9 @@ function addItems(number) {
     };
     Substation.getDataByAjaxNoLoading("/getPlaceCheckFormList",params,function(data){
             if(data.placecheckformAllList.list.length>0){
+                if (pageNum == 1) {
+                    $("#listContainer").empty();
+                }
                 $(data.placecheckformAllList.list).each(function(){
                     var iconStr = "";
                     switch(this.fPeriodType){

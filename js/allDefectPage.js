@@ -38,9 +38,16 @@ function addItems(number, lastIndex) {
     if(stateVal!=""){
         params['fState']=stateVal;
     }
-    Substation.yAjaxNoLoading(url, params, function (data) {
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
         if (data.tDevDeviceproblemList.list.length > 0) {
+            if (pageNum == 1) {
+                $("#list-container").empty();
+            }
             $(data.tDevDeviceproblemList.list).each(function () {
+                var problemStr = "";
+                if(this.fProblemlocation.indexOf(",")!=-1){
+                    problemStr=this.fProblemlocation.split(",")[1]
+                }
                 var stateStr = "";
                 switch(this.fState){
                     case "0":
@@ -73,7 +80,7 @@ function addItems(number, lastIndex) {
                         "                                        class=\"redColor\">(设备编号:"+this.treePathName+")"+this.fDeviceproblemdes+"</span>\n" +
                         "                                </p>\n" +
                         "                                <p>危害:"+this.fProblemharm+"</p>\n" +
-                        "                                <p>具体位置:"+this.fProblemlocation.split(",")[1]+"</p>\n" +
+                        "                                <p>具体位置:"+problemStr+"</p>\n" +
                         "                                <p>缺陷类别:"+this.fProblemtype+"</p>\n" +
                         "                                <p>紧急程度:"+this.fProblemlevel+"</p>\n" +
                         "                                <p>消缺期限:"+this.fTimelimit+"</p>\n" +
