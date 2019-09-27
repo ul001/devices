@@ -14,6 +14,7 @@ jQuery(document).ready(function () {
         $("#carryOut").attr("name", "true");
     } else if (showmissionBtn == "missionFinish") {
         localStorage.setItem("canClick",false);
+        $("#clickManager").css("display","none");
         var showstr =
             '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
         $("#addVarContain126").append(showstr);
@@ -76,26 +77,36 @@ jQuery(document).ready(function () {
                     taskcheckerid = taskInfo.fTaskcheckerid;
                     var temp = false;
                     $(userList).each(function(){
-                        if(this.fUserid==taskchargerid){
+                        if(this.fUserid==Substation.loginUserid){
                             temp = true;
                             return false;
                         }
                     });
                     if(taskchargerid!=Substation.loginUserid){
                         $("#clickManager").css("display","none");
-                    }else{
-                        if (missionTypeid == 1) {
-                            if(!temp){
-                                var showstr =
-                                    '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
-                                $("#addVarContain126").html(showstr);
-                                $("#carryOut").attr("name", "false");
-                                localStorage.setItem("canClick",false);
-                            }
-                        }
                     }
                     if(missionTypeid!=1){
                         $("#addVarContain125").css("display","none");
+                    }
+                    if (showmissionBtn != "missionFinish") {
+                        if(!temp){
+                            var showstr =
+                                '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
+                            $("#addVarContain126").html(showstr);
+                            $("#carryOut").attr("name", "false");
+                            localStorage.setItem("canClick",false);
+                        }
+                        if(missionTypeid!=1){
+                            if(taskchargerid==Substation.loginUserid){
+                                var showStr =
+                                    '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+                                $("#addVarContain126").html(showStr);
+                                $("#carryOut").attr("name", "false");
+                                localStorage.setItem("canClick",true);
+                            }else if(taskcheckerid==Substation.loginUserid){
+                                localStorage.setItem("canClick",true);
+                            }
+                        }
                     }
                     //现场签到按钮事件
                     $("#checkIn").click(function () {
@@ -129,14 +140,16 @@ jQuery(document).ready(function () {
                             };
                             if(missionTypeid==3){
                                 Substation.getDataByAjax("/submitTask", param, function (data) {
-                                    localStorage.setItem("need-refresh", true);
-                                    window.history.back();
+                                    /*localStorage.setItem("need-refresh", true);
+                                    window.history.back();*/
+                                    window.location.href="todoItems.html";
                                 });
                             }else{
                                 // fExplain 执行情况
                                 Substation.getDataByAjax("/submitUserTask", param, function (data) {
-                                    localStorage.setItem("need-refresh", true);
-                                    window.history.back();
+                                    /*localStorage.setItem("need-refresh", true);
+                                    window.history.back();*/
+                                    window.location.href="todoItems.html";
                                 });
                             }
                         }
