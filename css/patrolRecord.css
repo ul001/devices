@@ -34,6 +34,11 @@ i.icon.icon-sub{
     background-image: url(../img/i-jiancedian.png);
     margin-bottom:0.2rem;
 }
+i.icon.icon-day{
+    width: 1.5rem;
+    height: 1.55rem;
+    background-image: url(../img/i-day.png);
+}
 i.icon.icon-week{
     width: 1.5rem;
     height: 1.55rem;

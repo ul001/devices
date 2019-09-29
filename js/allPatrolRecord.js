@@ -49,6 +49,9 @@ function addItems(number) {
                         case "年巡":
                             iconStr="<i class=\"icon icon-year\"></i>\n";
                             break;
+                        default:
+                            iconStr="<i class=\"icon icon-day\"></i>\n";
+                            break;
                     }
                     $("#listContainer").append("<div class=\"card\" id=\""+this.fPlacecheckformid+"\">\n" +
                                                "                    <div class=\"card-content\">\n" +

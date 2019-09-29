@@ -30,6 +30,13 @@ if (isIOS) {
   userId = android.getUserid();
 }
 
+//取消回车事件
+$(document).keydown(function (event) {
+    if (event.keyCode == 13) {
+        window.event.returnValue = false;
+    }
+});
+
 var Substation = {
   ipAddressFromAPP: ipAddress + "/",
 

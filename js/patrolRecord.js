@@ -33,6 +33,9 @@ Substation.getDataByAjax("/getLatestThreePlaceCheckForm",{fSubid:selectSubid},fu
                 case "年巡":
                     iconStr="<i class=\"icon icon-year\"></i>\n";
                     break;
+                default:
+                    iconStr="<i class=\"icon icon-day\"></i>\n";
+                    break;
             }
             html+="<div class=\"item-footer row no-gutter\" data-id=\""+this.fPlacecheckformid+"\">\n" +
 "                                <div class=\"col-10\">"+iconStr+"</div>\n" +
