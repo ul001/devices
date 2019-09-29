@@ -23,15 +23,15 @@ var dangerous = defectJson.dangerous;
 $("#defectDiscribe").val(name);
 var defectPositionArray = defectPosition.split(";");
 $("#defectPosition").empty();
-$(defectPositionArray).each(function(index,obj){
-    $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
+$(defectPositionArray).each(function (index, obj) {
+    $("#defectPosition").append('<input type="checkbox" value="' + obj + '" id="' + index + '"><label for="' + index + '">' + obj + '</label><br>');
 });
 $("#dangerCategory").val(defectJson.dangerCategory);
 $("#dangerType").val(defectJson.dangerType);
 $("#dangerous").val(dangerous);
 $("#suggest").val(defectJson.suggest);
 $("#deadline").val(deadline);
-var defectPositionVal=defectPosition;
+var defectPositionVal = defectPosition;
 var fPlacecheckformid = localStorage.getItem("fPlacecheckformid");
 var fSubdeviceinfoid = Substation.GetQueryString("fSubdeviceinfoid");
 
@@ -156,22 +156,22 @@ function saveFormData() {
             $(this).remove();
         }
     });
-    if($(".fileInput").length>6){
+    if ($(".fileInput").length > 6) {
         $.toast("最多上传6张图片");
         return;
     }
-    if($("input:checkbox:checked").length==0){
+    if ($("input:checkbox:checked").length == 0) {
         $.toast("请选择缺陷位置！");
         return;
-    }else{
-        var checkedVal=",";
-        $("input:checkbox:checked").each(function(){
-            checkedVal+=$(this).val()+";";
+    } else {
+        var checkedVal = ",";
+        $("input:checkbox:checked").each(function () {
+            checkedVal += $(this).val() + ";";
         });
-        checkedVal=checkedVal.substring(0,checkedVal.length-1);
-        defectPositionVal=defectPosition+checkedVal;
+        checkedVal = checkedVal.substring(0, checkedVal.length - 1);
+        defectPositionVal = defectPosition + checkedVal;
     }
-    if($(".fileInput")&&$(".fileInput").length==0){
+    if ($(".fileInput") && $(".fileInput").length == 0) {
         $.toast("请上传现场照！");
         return;
     }

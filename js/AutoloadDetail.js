@@ -452,9 +452,9 @@ var CustomerDevice = (function () {
                             '<input type="text" id="input' +
                             count +
                             '" class="valueInput" value="' +
-//                            info.inpName +
+                            //                            info.inpName +
                             '" name="' +
-//                            info.inpType +
+                            //                            info.inpType +
                             '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' +
                             "</div></div></li>";
                     }
@@ -464,9 +464,9 @@ var CustomerDevice = (function () {
                             decodeURIComponent(val.name) +
                             '</div> <div class="item-input">' +
                             '<input type="text" class="valueInput" value="' +
-//                            info.inpName +
+                            //                            info.inpName +
                             '" name="' +
-//                            info.inpType +
+                            //                            info.inpType +
                             '">' +
                             "</div></div></li>";
                     }
@@ -901,7 +901,9 @@ jQuery(document).ready(function () {
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.code == 200) {
                 $.toast("保存成功！");
-                customerDevice.reNewCurNodeInfo();
+                setTimeout(function () {
+                    customerDevice.reNewCurNodeInfo();
+                }, 3000);
             }
         });
     }
