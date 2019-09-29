@@ -56,6 +56,7 @@ jQuery(document).ready(function () {
                     $("#carryOutCss").toggleClass("col-50");
                     $("#submitToCss").toggleClass("col-50");
                     $("#carryOut").attr("name", "false");
+                    $("#submitTo").attr("name","true");
                 }
                 var taskInfo = data.taskInfo;
                 var userList = data.taskUserList;
@@ -88,7 +89,7 @@ jQuery(document).ready(function () {
                     if(missionTypeid!=1){
                         $("#addVarContain125").css("display","none");
                     }
-                    if (showmissionBtn != "missionFinish") {
+                    if(missionTypeid==1){
                         if(!temp){
                             var showstr =
                                 '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
@@ -96,6 +97,8 @@ jQuery(document).ready(function () {
                             $("#carryOut").attr("name", "false");
                             localStorage.setItem("canClick",false);
                         }
+                    }
+                    if (showmissionBtn != "missionFinish") {
                         if(missionTypeid!=1){
                             if(taskchargerid==Substation.loginUserid){
                                 var showStr =
@@ -127,7 +130,7 @@ jQuery(document).ready(function () {
 
                     //提交按钮事件
                     $("#submitTo").click(function () {
-                        if (this.name == "true") {
+                        if (this.name != "true") {
                             $.toast("提交任务前，请先签到。");
                         } else {
                             var textDetail = $("#textareaDetail").val();

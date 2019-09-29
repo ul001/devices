@@ -454,7 +454,7 @@ jQuery(document).ready(function () {
             data
         ) {
             localStorage.removeItem("selectPersons");
-            window.history.go(-2);
+            window.location.href="todoItems.html";
         });
     });
 
