@@ -68,8 +68,8 @@ function addItems(number, lastIndex) {
             });
             $('.list-container').append(html);
             //addClick();
+//            Substation.getDataByAjaxNoLoading("/close");
             pageNum++;
-            Substation.getDataByAjaxNoLoading("/close");
         } else {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");

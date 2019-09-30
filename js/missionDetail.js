@@ -92,7 +92,7 @@ jQuery(document).ready(function () {
                     if(missionTypeid==1){
                         if(!temp){
                             var showstr =
-                                '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
+                                '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看巡检项</a> </div> </div>';
                             $("#addVarContain126").html(showstr);
                             $("#carryOut").attr("name", "false");
                             localStorage.setItem("canClick",false);
@@ -105,8 +105,12 @@ jQuery(document).ready(function () {
                                     '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "false");
+                                $("#submitTo").attr("name", "true");
                                 localStorage.setItem("canClick",true);
                             }else if(taskcheckerid==Substation.loginUserid){
+                                var showstr ='<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行任务</a> </div> </div>';
+                                $("#addVarContain126").html(showstr);
+                                $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick",true);
                             }
                         }

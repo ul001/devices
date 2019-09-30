@@ -193,6 +193,7 @@ jQuery(document).ready(function() {
     $(num + " .infinite-scroll-preloader").html(
       '<div class="preloader"></div>'
     );
+    pageNum=1;
     addItems(itemsPerLoad, 0, clickNum);
     lastIndex = 10;
     // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
