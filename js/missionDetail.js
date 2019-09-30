@@ -66,6 +66,13 @@ jQuery(document).ready(function () {
                     $("#missionType").html(taskInfo.fTasktypeexplain);
                     $("#missionName").html(taskInfo.fTaskname);
                     $("#createName").html(taskInfo.fTaskcreateusername);
+                    $("#chargerName").html(taskInfo.fTaskchargername);
+                    if(taskInfo.hasOwnProperty("fTaskcheckername")){
+                        if(taskInfo.fTaskcheckername!=""&&taskInfo.fTaskcheckername!=null){
+                            $("#checkerDiv").css("display","flex");
+                            $("#checkerName").html(taskInfo.fTaskcheckername);
+                        }
+                    }
                     $("#createTime").html(taskInfo.fStartdate);
                     $("#finishTime").html(taskInfo.fDeadlinedate);
                     var missionContent =
