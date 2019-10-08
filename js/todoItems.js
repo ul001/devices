@@ -116,7 +116,7 @@ jQuery(document).ready(function() {
         //         $(".clickrightbtn").text("交接驱动");
         //     }
         // },
-        {
+/*        {
           text: "现场交接",
           onClick: function() {
             $(".clickrightbtn").text("现场交接");
@@ -124,7 +124,7 @@ jQuery(document).ready(function() {
             pageNum = 1;
             getFirstPage(tabName);
           }
-        },
+        },*/
         {
           text: "巡视",
           onClick: function() {

@@ -81,7 +81,7 @@ function addItems(number, lastIndex) {
                     "                            <div class=\"row  no-gutter sub_card\">\n" +
                     "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
                     "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
-                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
+//                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
                     "                                    <p class=\"limit-length\">地址：" + Substation.removeUndefined(this.fAddress) + "</p>\n" +
                     "                                </div>\n" +
                     "                                <div class=\"col-20\">\n" +
