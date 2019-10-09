@@ -58,14 +58,14 @@ jQuery(document).ready(function () {
             function (data) {
                 if (data.hasOwnProperty("placeCheckFormId")) {
                     placeCheckFormId = data.placeCheckFormId;
-                    $("#checkIn").removeClass("col-33");
-                    $("#checkIn").hide();
-                    $("#carryOutCss").removeClass("col-33");
-                    $("#submitToCss").removeClass("col-33");
-                    $("#carryOutCss").toggleClass("col-50");
-                    $("#submitToCss").toggleClass("col-50");
-                    $("#carryOut").attr("name", "false");
-                    $("#submitTo").attr("name", "true");
+                    // $("#checkIn").removeClass("col-33");
+                    // $("#checkIn").hide();
+                    // $("#carryOutCss").removeClass("col-33");
+                    // $("#submitToCss").removeClass("col-33");
+                    // $("#carryOutCss").toggleClass("col-50");
+                    // $("#submitToCss").toggleClass("col-50");
+                    // $("#carryOut").attr("name", "false");
+                    // $("#submitTo").attr("name", "true");
                 }
                 var taskInfo = data.taskInfo;
                 var userList = data.taskUserList;

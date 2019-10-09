@@ -402,7 +402,6 @@ jQuery(document).ready(function () {
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missionDoing");
             localStorage.setItem("missionType", taskstatus);
-            localStorage.setItem("taskstatus");
             localStorage.setItem("taskID", taskID);
             window.location.href = "missionDetail.html";
           } else if (tasktypeid == 3) {
