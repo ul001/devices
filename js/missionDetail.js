@@ -4,23 +4,32 @@ jQuery(document).ready(function () {
     $("#titleContent").text(titlename);
 
     var showmissionBtn = localStorage.getItem("showType");
-    // var missionType = localStorage.getItem("missionType");
+
 
     if (showmissionBtn == "missionDoing") {
-        localStorage.setItem("canClick",true);
-        var showStr =
-            '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
-        $("#addVarContain126").append(showStr);
-        $("#carryOut").attr("name", "true");
+        localStorage.setItem("canClick", true);
+        var missionType = localStorage.getItem("missionType");
+        if (missionType == 0) {
+            var showStr =
+                '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
+            $("#addVarContain126").append(showStr);
+            $("#carryOut").attr("name", "true");
+        } else {
+            localStorage.setItem("canClick", true);
+            var showStr =
+                '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+            $("#addVarContain126").append(showStr);
+            $("#carryOut").attr("name", "true");
+        }
     } else if (showmissionBtn == "missionFinish") {
-        localStorage.setItem("canClick",false);
-        $("#clickManager").css("display","none");
+        localStorage.setItem("canClick", false);
+        $("#clickManager").css("display", "none");
         var showstr =
             '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
         $("#addVarContain126").append(showstr);
         $("#carryOut").attr("name", "false");
     } else {
-        localStorage.setItem("canClick",true);
+        localStorage.setItem("canClick", true);
         var showStr =
             '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
         $("#addVarContain126").append(showStr);
@@ -56,7 +65,7 @@ jQuery(document).ready(function () {
                     $("#carryOutCss").toggleClass("col-50");
                     $("#submitToCss").toggleClass("col-50");
                     $("#carryOut").attr("name", "false");
-                    $("#submitTo").attr("name","true");
+                    $("#submitTo").attr("name", "true");
                 }
                 var taskInfo = data.taskInfo;
                 var userList = data.taskUserList;
@@ -67,9 +76,9 @@ jQuery(document).ready(function () {
                     $("#missionName").html(taskInfo.fTaskname);
                     $("#createName").html(taskInfo.fTaskcreateusername);
                     $("#chargerName").html(taskInfo.fTaskchargername);
-                    if(taskInfo.hasOwnProperty("fTaskcheckername")){
-                        if(taskInfo.fTaskcheckername!=""&&taskInfo.fTaskcheckername!=null){
-                            $("#checkerDiv").css("display","flex");
+                    if (taskInfo.hasOwnProperty("fTaskcheckername")) {
+                        if (taskInfo.fTaskcheckername != "" && taskInfo.fTaskcheckername != null) {
+                            $("#checkerDiv").css("display", "flex");
                             $("#checkerName").html(taskInfo.fTaskcheckername);
                         }
                     }
@@ -84,41 +93,41 @@ jQuery(document).ready(function () {
                     taskchargerid = taskInfo.fTaskchargerid;
                     taskcheckerid = taskInfo.fTaskcheckerid;
                     var temp = false;
-                    $(userList).each(function(){
-                        if(this.fUserid==Substation.loginUserid){
+                    $(userList).each(function () {
+                        if (this.fUserid == Substation.loginUserid) {
                             temp = true;
                             return false;
                         }
                     });
-                    if(taskchargerid!=Substation.loginUserid){
-                        $("#clickManager").css("display","none");
+                    if (taskchargerid != Substation.loginUserid) {
+                        $("#clickManager").css("display", "none");
                     }
-                    if(missionTypeid!=1){
-                        $("#addVarContain125").css("display","none");
+                    if (missionTypeid != 1) {
+                        $("#addVarContain125").css("display", "none");
                     }
-                    if(missionTypeid==1){
-                        if(!temp){
+                    if (missionTypeid == 1) {
+                        if (!temp) {
                             var showstr =
                                 '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看巡检项</a> </div> </div>';
                             $("#addVarContain126").html(showstr);
                             $("#carryOut").attr("name", "false");
-                            localStorage.setItem("canClick",false);
+                            localStorage.setItem("canClick", false);
                         }
                     }
                     if (showmissionBtn != "missionFinish") {
-                        if(missionTypeid!=1){
-                            if(taskchargerid==Substation.loginUserid){
+                        if (missionTypeid != 1) {
+                            if (taskchargerid == Substation.loginUserid) {
                                 var showStr =
                                     '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "false");
                                 $("#submitTo").attr("name", "true");
-                                localStorage.setItem("canClick",true);
-                            }else if(taskcheckerid==Substation.loginUserid){
-                                var showstr ='<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行任务</a> </div> </div>';
+                                localStorage.setItem("canClick", true);
+                            } else if (taskcheckerid == Substation.loginUserid) {
+                                var showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行任务</a> </div> </div>';
                                 $("#addVarContain126").html(showstr);
                                 $("#carryOut").attr("name", "false");
-                                localStorage.setItem("canClick",true);
+                                localStorage.setItem("canClick", true);
                             }
                         }
                     }
@@ -152,18 +161,18 @@ jQuery(document).ready(function () {
                                 fTaskid: taskID,
                                 fExplain: textDetail
                             };
-                            if(missionTypeid==3){
+                            if (missionTypeid == 3) {
                                 Substation.getDataByAjax("/submitTask", param, function (data) {
                                     /*localStorage.setItem("need-refresh", true);
                                     window.history.back();*/
-                                    window.location.href="todoItems.html";
+                                    window.location.href = "todoItems.html";
                                 });
-                            }else{
+                            } else {
                                 // fExplain 执行情况
                                 Substation.getDataByAjax("/submitUserTask", param, function (data) {
                                     /*localStorage.setItem("need-refresh", true);
                                     window.history.back();*/
-                                    window.location.href="todoItems.html";
+                                    window.location.href = "todoItems.html";
                                 });
                             }
                         }
@@ -188,7 +197,7 @@ jQuery(document).ready(function () {
                             } else if (missionTypeid == 3) {
                                 //缺陷整改
                                 localStorage.setItem("fSubname", "执行情况");
-                                window.location.href = "defectRectification.html?fTaskcheckerid="+taskcheckerid;
+                                window.location.href = "defectRectification.html?fTaskcheckerid=" + taskcheckerid;
                             } else {
                                 $.toast("fTasktypeid=null，未知任务类型");
                             }

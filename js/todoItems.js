@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
   $("#titleContent").text("待办事项");
 
   var loading = false;
@@ -7,28 +7,32 @@ jQuery(document).ready(function() {
   var pageNum = 1;
   var tasktypeid = "";
   var tabName = 1;
+  var taskstatus = 0;
 
-  $(".buttons-tab .tab-link").click(function() {
+  $(".buttons-tab .tab-link").click(function () {
     var i = $(this).index();
     if (i == 0) {
       // pageNum = 1;
       // $(".list-container").empty();
       // url = "/getWarningMessageSignalEvents";
+      taskstatus = 0;
       $("#titleContent").text("待办事项");
     } else if (i == 1) {
       // pageNum = 1;
       // $(".list-container").empty();
       // url = "/getWarningMessageOverLimitEvents";
+      taskstatus = 1;
       $("#titleContent").text("在办事项");
     } else if (i == 2) {
       // pageNum = 1;
       // $(".list-container").empty();
       // url = "/getWarningMessagePlatformRunEvents";
+      taskstatus = 2;
       $("#titleContent").text("办毕事项");
     }
   });
 
-  $(".back_btn").click(function() {
+  $(".back_btn").click(function () {
     var u = navigator.userAgent,
       app = navigator.appVersion;
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
@@ -42,7 +46,7 @@ jQuery(document).ready(function() {
 
   window.addEventListener(
     "pageshow",
-    function(event) {
+    function (event) {
       if (localStorage.getItem("need-refresh")) {
         location.reload();
         localStorage.removeItem("need-refresh");
@@ -83,15 +87,14 @@ jQuery(document).ready(function() {
   // });
 
   //右上角按钮事件
-  $(".clickrightbtn").click(function() {
+  $(".clickrightbtn").click(function () {
     $.modal({
       title: "任务类型筛选",
       text: "",
       verticalButtons: true,
-      buttons: [
-        {
+      buttons: [{
           text: "全部",
-          onClick: function() {
+          onClick: function () {
             $(".clickrightbtn").text("全部");
             tasktypeid = "";
             pageNum = 1;
@@ -116,18 +119,18 @@ jQuery(document).ready(function() {
         //         $(".clickrightbtn").text("交接驱动");
         //     }
         // },
-/*        {
-          text: "现场交接",
-          onClick: function() {
-            $(".clickrightbtn").text("现场交接");
-            tasktypeid = 2;
-            pageNum = 1;
-            getFirstPage(tabName);
-          }
-        },*/
+        /*        {
+                  text: "现场交接",
+                  onClick: function() {
+                    $(".clickrightbtn").text("现场交接");
+                    tasktypeid = 2;
+                    pageNum = 1;
+                    getFirstPage(tabName);
+                  }
+                },*/
         {
           text: "巡视",
-          onClick: function() {
+          onClick: function () {
             $(".clickrightbtn").text("巡视");
             tasktypeid = 1;
             pageNum = 1;
@@ -136,7 +139,7 @@ jQuery(document).ready(function() {
         },
         {
           text: "缺陷整改",
-          onClick: function() {
+          onClick: function () {
             $(".clickrightbtn").text("缺陷整改");
             tasktypeid = 3;
             pageNum = 1;
@@ -160,7 +163,7 @@ jQuery(document).ready(function() {
   });
 
   //点击tab
-  $(".tab-link.button").click(function() {
+  $(".tab-link.button").click(function () {
     tabName = Number(this.name);
     pageNum = 1;
     getFirstPage(tabName);
@@ -193,7 +196,7 @@ jQuery(document).ready(function() {
     $(num + " .infinite-scroll-preloader").html(
       '<div class="preloader"></div>'
     );
-    pageNum=1;
+    pageNum = 1;
     addItems(itemsPerLoad, 0, clickNum);
     lastIndex = 10;
     // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
@@ -203,8 +206,8 @@ jQuery(document).ready(function() {
   }
 
   //下拉刷新
-  $(document).on("refresh", ".pull-to-refresh-content", function(e) {
-    setTimeout(function() {
+  $(document).on("refresh", ".pull-to-refresh-content", function (e) {
+    setTimeout(function () {
       pageNum = 1;
       tabName = $(".tab-link.button.active").attr("name");
       getFirstPage(Number(tabName));
@@ -244,7 +247,7 @@ jQuery(document).ready(function() {
       // fSubid: 10100001
       searchKey: searchStr
     };
-    Substation.getDataByAjaxNoLoading(url, params, function(data) {
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
       var taskList = data.taskList;
       if (taskList.hasOwnProperty("list") && taskList.list.length > 0) {
         if (lastIndex == 0) {
@@ -252,7 +255,7 @@ jQuery(document).ready(function() {
           $(list).empty();
         }
         if (clickNum == 3) {
-          $(taskList.list).each(function() {
+          $(taskList.list).each(function () {
             var user = this.fTaskcreateusername;
             var username = "";
             if (user != undefined) {
@@ -312,7 +315,7 @@ jQuery(document).ready(function() {
           $(list).append(text);
           // $(".list-container").append(text);
           //我要处理 巡视
-          $(".card").click(function() {
+          $(".card").click(function () {
             var taskID = $(this).attr("id");
             var tasktypeid = $(this).attr("name");
             localStorage.setItem("fSubname", "任务详情");
@@ -322,7 +325,7 @@ jQuery(document).ready(function() {
             window.location.href = "missionDetail.html";
           });
         } else {
-          $(taskList.list).each(function() {
+          $(taskList.list).each(function () {
             var user = this.fTaskcreateusername;
             var username = "";
             if (user != undefined) {
@@ -391,14 +394,15 @@ jQuery(document).ready(function() {
           $(list).append(text);
         }
         //addClick();
-        $(".button.button-fill").click(function() {
+        $(".button.button-fill").click(function () {
           var taskID = $(this).attr("name");
           var tasktypeid = $(this).attr("data-taskid");
           if (tasktypeid == 1) {
             //巡视任务
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missionDoing");
-            localStorage.setItem("missionType", "patrol");
+            localStorage.setItem("missionType", taskstatus);
+            localStorage.setItem("taskstatus");
             localStorage.setItem("taskID", taskID);
             window.location.href = "missionDetail.html";
           } else if (tasktypeid == 3) {
@@ -431,13 +435,13 @@ jQuery(document).ready(function() {
     });
   }
 
-  $("#searchDaiban").bind("keydown", function(event) {
+  $("#searchDaiban").bind("keydown", function (event) {
     if (event.keyCode == 13) {
       getFirstPage(tabName);
     }
   });
 
-  $(".searchbar-cancel").click(function() {
+  $(".searchbar-cancel").click(function () {
     $("#searchDaiban").val("");
     getFirstPage(tabName);
   });
@@ -447,14 +451,14 @@ jQuery(document).ready(function() {
 
   var lastIndex = 10;
   //上拉加载
-  $(document).on("infinite", ".infinite-scroll", function() {
+  $(document).on("infinite", ".infinite-scroll", function () {
     // 如果正在加载，则退出
     if (loading) return;
 
     // 设置flag
     loading = true;
 
-    setTimeout(function() {
+    setTimeout(function () {
       loading = false;
 
       if (lastIndex >= maxItems) {
