@@ -129,18 +129,18 @@ jQuery(document).ready(function () {
                   }
                 },*/
         {
-          text: "巡视",
+          text: "巡检",
           onClick: function () {
-            $(".clickrightbtn").text("巡视");
+            $(".clickrightbtn").text("巡检");
             tasktypeid = 1;
             pageNum = 1;
             getFirstPage(tabName);
           }
         },
         {
-          text: "缺陷整改",
+          text: "消缺",
           onClick: function () {
-            $(".clickrightbtn").text("缺陷整改");
+            $(".clickrightbtn").text("消缺");
             tasktypeid = 3;
             pageNum = 1;
             getFirstPage(tabName);
@@ -382,7 +382,7 @@ jQuery(document).ready(function () {
             text +=
               '                                                type="button" name=' +
               this.fTaskid +
-              " >我要处理";
+              " >处理";
             text += "                                            </button>";
             text += "                                        </div>";
             text += "                                    </div>";
