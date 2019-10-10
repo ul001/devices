@@ -438,23 +438,25 @@ jQuery(document).ready(function () {
     //46.总任务提交按钮事件
     // userIds 1,2,3
     $("#submitTo").click(function () {
-        var param;
-        if (taskTobeSubmitArr.length > 0) {
-            var arrStr = taskTobeSubmitArr.join(',');
-            param = {
-                "fTaskid": taskID,
-                "userIds": arrStr
-            };
-        } else {
-            param = {
-                "fTaskid": taskID
-            };
-        }
-        Substation.getDataByAjax("/submitTask", param, function (
-            data
-        ) {
-            localStorage.removeItem("selectPersons");
-            window.location.href="todoItems.html";
+        $.confirm("确定要结束该任务吗？",function(){
+            var param;
+            if (taskTobeSubmitArr.length > 0) {
+                var arrStr = taskTobeSubmitArr.join(',');
+                param = {
+                    "fTaskid": taskID,
+                    "userIds": arrStr
+                };
+            } else {
+                param = {
+                    "fTaskid": taskID
+                };
+            }
+            Substation.getDataByAjax("/submitTask", param, function (
+                data
+            ) {
+                localStorage.removeItem("selectPersons");
+                window.location.href="todoItems.html";
+            });
         });
     });
 

@@ -290,9 +290,9 @@ jQuery(document).ready(function () {
             }
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-75">';
+              '                                        <div class="col-70">';
             text +=
-              '                                            <p class="subName">' +
+              '                                            <p class="subName limit-length">['+this.fTaskid+']' +
               this.fTaskname;
             text += "                                            </p>";
             text +=
@@ -305,7 +305,7 @@ jQuery(document).ready(function () {
               "</span></p>";
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-15">';
+              '                                        <div class="col-10">';
             text += "                                        </div>";
             text += "                                    </div>";
             text += "                                </div>";
@@ -325,6 +325,24 @@ jQuery(document).ready(function () {
             window.location.href = "missionDetail.html";
           });
         } else {
+          var showHasCommit = "";
+          var showCommitClass = "";
+          if (clickNum == 2) {
+            if(this.fTasktypeid!=3){
+                var doNum =this.taskUserNum;
+                var finishNum = this.taskUserFinishNum;
+                if(doNum==finishNum){
+                    showHasCommit = "<span class='redColor'>("+finishNum+"/"+doNum+")</span>";
+                    showCommitClass=" hasBoom";
+                }else if(finishNum==0){
+                    showHasCommit = "<span class='button-light'>("+finishNum+"/"+doNum+")</span>";
+                    showCommitClass=" hasBoom";
+                }else{
+                    showHasCommit = "<span class='button-success'>("+finishNum+"/"+doNum+")</span>";
+                    showCommitClass=" hasBoom";
+                }
+            }
+          }
           $(taskList.list).each(function () {
             var user = this.fTaskcreateusername;
             var username = "";
@@ -355,7 +373,7 @@ jQuery(document).ready(function () {
             }
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-75 hasBoom">';
+              '                                        <div class="col-75'+showCommitClass+'">';
             text +=
               '                                            <p class="subName limit-length">['+this.fTaskid+']' +
               this.fTaskname;
@@ -367,7 +385,7 @@ jQuery(document).ready(function () {
             text +=
               "                                                <span>" +
               this.fTaskcreatedate.substring(0,11) +
-              "</span><span class='redColor'>(3/6)</span></p>";
+              "</span>"+showHasCommit+"</p>";
             text += "                                        </div>";
             text +=
               '                                        <div class="col-15">';

@@ -4,11 +4,11 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v3";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzA4ODc4ODcsInVzZXJuYW1lIjoibWlzc2lvbjEifQ.n_IeSbXSoxBsgsX-mb-lFrstIUScq2MZyu5nx1NTZhM";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzA5ODg5NjUsInVzZXJuYW1lIjoibWlzc2lvbjAxIn0.OOXtSPIDnsQiWPya_FBq4qW3nE0AGSmk1NrY5sqejFM";
 var ipAddress = "http://116.236.149.162:8090";
 var userId = "265";
 //iOS安卓基础传参
-/*var u = navigator.userAgent,
+var u = navigator.userAgent,
   app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
@@ -28,7 +28,7 @@ if (isIOS) {
   tokenFromAPP = android.getToken();
   ipAddress = android.getIpAddress();
   userId = android.getUserid();
-}*/
+}
 
 //取消回车事件
 $(document).keydown(function (event) {
