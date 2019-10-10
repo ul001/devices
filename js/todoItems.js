@@ -301,7 +301,7 @@ jQuery(document).ready(function () {
               "</span>";
             text +=
               "                                                <span>" +
-              this.fTaskcreatedate +
+              this.fTaskcreatedate.substring(0,11) +
               "</span></p>";
             text += "                                        </div>";
             text +=
@@ -355,9 +355,9 @@ jQuery(document).ready(function () {
             }
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-75">';
+              '                                        <div class="col-75 hasBoom">';
             text +=
-              '                                            <p class="subName">' +
+              '                                            <p class="subName limit-length">['+this.fTaskid+']' +
               this.fTaskname;
             text += "                                            </p>";
             text +=
@@ -366,8 +366,8 @@ jQuery(document).ready(function () {
               "</span>";
             text +=
               "                                                <span>" +
-              this.fTaskcreatedate +
-              "</span></p>";
+              this.fTaskcreatedate.substring(0,11) +
+              "</span><span class='redColor'>(3/6)</span></p>";
             text += "                                        </div>";
             text +=
               '                                        <div class="col-15">';

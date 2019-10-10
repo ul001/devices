@@ -46,8 +46,6 @@ jQuery(document).ready(function () {
     var missionTypeid;
     //任务负责人 fTaskchargerid
     var taskchargerid;
-    //任务客户 ftaskcheckid
-    var taskcheckerid;
 
     var missionDetail = "";
 
@@ -58,14 +56,14 @@ jQuery(document).ready(function () {
             function (data) {
                 if (data.hasOwnProperty("placeCheckFormId")) {
                     placeCheckFormId = data.placeCheckFormId;
-                    // $("#checkIn").removeClass("col-33");
-                    // $("#checkIn").hide();
-                    // $("#carryOutCss").removeClass("col-33");
-                    // $("#submitToCss").removeClass("col-33");
-                    // $("#carryOutCss").toggleClass("col-50");
-                    // $("#submitToCss").toggleClass("col-50");
-                    // $("#carryOut").attr("name", "false");
-                    // $("#submitTo").attr("name", "true");
+//                    $("#checkIn").removeClass("col-33");
+//                    $("#checkIn").hide();
+//                    $("#carryOutCss").removeClass("col-33");
+//                    $("#submitToCss").removeClass("col-33");
+//                    $("#carryOutCss").toggleClass("col-50");
+//                    $("#submitToCss").toggleClass("col-50");
+//                    $("#carryOut").attr("name", "false");
+//                    $("#submitTo").attr("name", "true");
                 }
                 var taskInfo = data.taskInfo;
                 var userList = data.taskUserList;
@@ -91,7 +89,6 @@ jQuery(document).ready(function () {
                     $("#missionCont").append(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
                     taskchargerid = taskInfo.fTaskchargerid;
-                    taskcheckerid = taskInfo.fTaskcheckerid;
                     var temp = false;
                     $(userList).each(function () {
                         if (this.fUserid == Substation.loginUserid) {
@@ -102,49 +99,63 @@ jQuery(document).ready(function () {
                     if (taskchargerid != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
                     }
-                    if (missionTypeid != 1) {
-                        $("#addVarContain125").css("display", "none");
-                    }
-                    if (missionTypeid == 1) {
-                        if (!temp) {
-                            var showstr =
-                                '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看巡检项</a> </div> </div>';
+                    if (!temp) {
+                        var showstr="";
+                        if (missionTypeid == 1) {
+                            showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看巡检项</a> </div> </div>';
                             $("#addVarContain126").html(showstr);
                             $("#carryOut").attr("name", "false");
                             localStorage.setItem("canClick", false);
                         }
+/*                        else{
+                            showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看缺陷项</a> </div> </div>';
+                        }*/
                     }
                     if (showmissionBtn != "missionFinish") {
                         if (missionTypeid != 1) {
-                            if (taskchargerid == Substation.loginUserid) {
-                                var showStr =
-                                    '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
-                                $("#addVarContain126").html(showStr);
-                                $("#carryOut").attr("name", "false");
-                                $("#submitTo").attr("name", "true");
-                                localStorage.setItem("canClick", true);
-                            } else if (taskcheckerid == Substation.loginUserid) {
-                                var showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行任务</a> </div> </div>';
-                                $("#addVarContain126").html(showstr);
-                                $("#carryOut").attr("name", "false");
-                                localStorage.setItem("canClick", true);
-                            }
+                            var showStr =
+                                '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+                            $("#addVarContain126").html(showStr);
+                            $("#carryOut").attr("name", "false");
+                            $("#submitTo").attr("name", "true");
+                            localStorage.setItem("canClick", true);
                         }
                     }
                     //现场签到按钮事件
                     $("#checkIn").click(function () {
-                        Substation.getDataByAjax("/taskSingIn", "taskId=" + taskID, function (data) {
-                            if (data.placeCheckFormId) {
-                                placeCheckFormId = data.placeCheckFormId;
-                                location.reload();
-                                /*$("#checkIn").removeClass("col-33");
-                                $("#checkIn").hide();
-                                $("#carryOutCss").removeClass("col-33");
-                                $("#submitToCss").removeClass("col-33");
-                                $("#carryOutCss").toggleClass("col-50");
-                                $("#submitToCss").toggleClass("col-50");
-                                $("#carryOut").attr("name", "false");*/
-                            }
+                        //iOS安卓基础传参
+                        var u = navigator.userAgent,
+                          app = navigator.appVersion;
+                        var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+                        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+                        var loc="";
+                        if(isIOS){
+
+                        }else{
+                            loc = android.getLocation();
+                        }
+                        var lat = "";
+                        var lon = "";
+                        var addr = "";
+                        if(loc!=""&&loc!=null){
+                            var array = loc.split(";");
+                            lat = array[0];
+                            lon = array[1];
+                            addr = array[2];
+//                            alert(lat+"\n"+lon+"\n"+addr);
+                        }
+                        var param = {taskId:taskID,fLongitude:lon,fLatitude:lat,fLocation:addr};
+//                        alert(""+taskID+","+lon+","+lat+","+addr);
+                        Substation.postDataByAjax("/taskSingIn", param, function (data) {
+//                                location.reload();
+                            $.toast("签到成功！");
+                            $("#checkIn").removeClass("col-33");
+                            $("#checkIn").hide();
+                            $("#carryOutCss").removeClass("col-33");
+                            $("#submitToCss").removeClass("col-33");
+                            $("#carryOutCss").toggleClass("col-50");
+                            $("#submitToCss").toggleClass("col-50");
+                            $("#carryOut").attr("name", "false");
                         });
                     });
 
@@ -197,7 +208,7 @@ jQuery(document).ready(function () {
                             } else if (missionTypeid == 3) {
                                 //缺陷整改
                                 localStorage.setItem("fSubname", "执行情况");
-                                window.location.href = "defectRectification.html?fTaskcheckerid=" + taskcheckerid;
+                                window.location.href = "defectRectification.html";
                             } else {
                                 $.toast("fTasktypeid=null，未知任务类型");
                             }
@@ -266,6 +277,8 @@ jQuery(document).ready(function () {
         localStorage.setItem("missiontaskID", taskID);
         window.location.href = "missionManager.html";
     });
+
+    $.init();
 });
 
 //  function alinkClick() {
@@ -273,4 +286,17 @@ jQuery(document).ready(function () {
 //      window.location.href = "missionManager.html";
 //  }
 
-//  $.init();
+
+/*var geolocation = new BMap.Geolocation();
+// 开启辅助定位
+//android.openSDKLocation();
+geolocation.enableSDKLocation();
+geolocation.getCurrentPosition(function(r){
+    if (this.getStatus() === BMAP_STATUS_SUCCESS) {
+        alert('您的位置：'+r.point.lng+','+r.point.lat);
+        geolocation.disableSDKLocation();
+//        android.closeSDKLocation();
+    }else {
+        alert('failed'+this.getStatus());
+    }
+},{enableHighAccuracy:true});*/

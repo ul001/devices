@@ -40,3 +40,6 @@ i.icon.icon-contactphone {
     margin-left: 0.2rem;
     border-radius: 1.0rem;
 }
+.hasBoom{
+    background:url(../img/i-hasCommit.png) right no-repeat;
+}
