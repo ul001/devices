@@ -57,16 +57,16 @@ jQuery(document).ready(function () {
                 if (data.hasOwnProperty("placeCheckFormId")) {
                     placeCheckFormId = data.placeCheckFormId;
                 }
-/*                if(data.taskInfo.fTaskstateid==2){
-                    $("#checkIn").removeClass("col-33");
-                    $("#checkIn").hide();
-                    $("#carryOutCss").removeClass("col-33");
-                    $("#submitToCss").removeClass("col-33");
-                    $("#carryOutCss").addClass("col-50");
-                    $("#submitToCss").addClass("col-50");
-                    $("#carryOut").attr("name", "false");
-                    $("#submitTo").attr("name", "false");
-                }*/
+                /*                if(data.taskInfo.fTaskstateid==2){
+                                    $("#checkIn").removeClass("col-33");
+                                    $("#checkIn").hide();
+                                    $("#carryOutCss").removeClass("col-33");
+                                    $("#submitToCss").removeClass("col-33");
+                                    $("#carryOutCss").addClass("col-50");
+                                    $("#submitToCss").addClass("col-50");
+                                    $("#carryOut").attr("name", "false");
+                                    $("#submitTo").attr("name", "false");
+                                }*/
                 var taskInfo = data.taskInfo;
                 var userList = data.taskUserList;
                 if (taskInfo) {
@@ -76,8 +76,8 @@ jQuery(document).ready(function () {
                     $("#missionName").html(taskInfo.fTaskname);
                     $("#createName").html(taskInfo.fTaskcreateusername);
                     $("#chargerName").html(taskInfo.fTaskchargername);
-                    $("#createTime").html(taskInfo.fStartdate.substring(0,11));
-                    $("#finishTime").html(taskInfo.fDeadlinedate.substring(0,11));
+                    $("#createTime").html(taskInfo.fStartdate.substring(0, 11));
+                    $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 11));
                     var missionContent =
                         '<textarea readonly="readonly">' +
                         taskInfo.fTaskcontent +
@@ -97,30 +97,30 @@ jQuery(document).ready(function () {
                     if (taskchargerid != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
                     }
-                    if(missionTypeid!=1){
+                    if (missionTypeid != 1) {
                         $("#addVarContain125").css("display", "none");
                     }
                     if (showmissionBtn != "missionFinish") {
                         if (!temp) {
-                            var showstr="";
+                            var showstr = "";
                             if (missionTypeid == 1) {
                                 showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
                                 $("#addVarContain126").html(showstr);
                                 $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick", false);
                             }
-    /*                        else{
-                                showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看缺陷项</a> </div> </div>';
-                            }*/
-                        }else{
-                            if(thisTempState==1){
+                            /*                        else{
+                                                        showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看缺陷项</a> </div> </div>';
+                                                    }*/
+                        } else {
+                            if (thisTempState == 1) {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
                                     '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "true");
                                 $("#submitTo").attr("name", "true");
-                            }else{
+                            } else {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
                                     '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
@@ -141,37 +141,48 @@ jQuery(document).ready(function () {
                     $("#checkIn").click(function () {
                         //iOS安卓基础传参
                         var u = navigator.userAgent,
-                          app = navigator.appVersion;
+                            app = navigator.appVersion;
                         var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
                         var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-                        var loc="";
-                        if(isIOS){
+                        var loc = "";
+                        if (isIOS) {
+                            window.webkit.messageHandlers.getLocation.postMessage("");
+                            loc = localStorage.getItem("locationStrJS");
 
-                        }else{
+                        } else {
                             loc = android.getLocation();
                         }
                         var lat = "";
                         var lon = "";
                         var addr = "";
-                        if(loc!=""&&loc!=null){
+                        if (!loc.length) {
+                            $.toast("无法获取地理位置，请检查网络后重试。");
+                            return;
+                        }
+                        if (loc != "" && loc != null) {
                             var array = loc.split(";");
                             lat = array[0];
                             lon = array[1];
                             addr = array[2];
-//                            alert(lat+"\n"+lon+"\n"+addr);
+                            //                            alert(lat+"\n"+lon+"\n"+addr);
                         }
-                        var param = {taskId:taskID,fLongitude:lon,fLatitude:lat,fLocation:addr};
-//                        alert(""+taskID+","+lon+","+lat+","+addr);
+                        var param = {
+                            taskId: taskID,
+                            fLongitude: lon,
+                            fLatitude: lat,
+                            fLocation: addr
+                        };
+                        //                        alert(""+taskID+","+lon+","+lat+","+addr);
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
                             $.toast("签到成功！");
                             location.reload();
-//                            $("#checkIn").removeClass("col-33");
-//                            $("#checkIn").hide();
-//                            $("#carryOutCss").removeClass("col-33");
-//                            $("#submitToCss").removeClass("col-33");
-//                            $("#carryOutCss").toggleClass("col-50");
-//                            $("#submitToCss").toggleClass("col-50");
-//                            $("#carryOut").attr("name", "false");
+                            //                            $("#checkIn").removeClass("col-33");
+                            //                            $("#checkIn").hide();
+                            //                            $("#carryOutCss").removeClass("col-33");
+                            //                            $("#submitToCss").removeClass("col-33");
+                            //                            $("#carryOutCss").toggleClass("col-50");
+                            //                            $("#submitToCss").toggleClass("col-50");
+                            //                            $("#carryOut").attr("name", "false");
                         });
                     });
 
@@ -184,25 +195,25 @@ jQuery(document).ready(function () {
                                 function () {
                                     var textDetail = $("#textareaDetail").val();
                                     if (!textDetail) {
-                                      textDetail = "";
+                                        textDetail = "";
                                     }
                                     var param = {
-                                      fTaskid: taskID,
-                                      fExplain: textDetail
+                                        fTaskid: taskID,
+                                        fExplain: textDetail
                                     };
                                     if (missionTypeid == 3) {
-                                      Substation.getDataByAjax("/submitTask", param, function (data) {
-                                          /*localStorage.setItem("need-refresh", true);
-                                          window.history.back();*/
-                                          window.location.href = "todoItems.html";
-                                      });
+                                        Substation.getDataByAjax("/submitTask", param, function (data) {
+                                            /*localStorage.setItem("need-refresh", true);
+                                            window.history.back();*/
+                                            window.location.href = "todoItems.html";
+                                        });
                                     } else {
-                                      // fExplain 执行情况
-                                      Substation.getDataByAjax("/submitUserTask", param, function (data) {
-                                          /*localStorage.setItem("need-refresh", true);
-                                          window.history.back();*/
-                                          window.location.href = "todoItems.html";
-                                      });
+                                        // fExplain 执行情况
+                                        Substation.getDataByAjax("/submitUserTask", param, function (data) {
+                                            /*localStorage.setItem("need-refresh", true);
+                                            window.history.back();*/
+                                            window.location.href = "todoItems.html";
+                                        });
                                     }
                                 }
                             );
