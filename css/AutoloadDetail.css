@@ -1,11 +1,46 @@
 .bar-header-secondary .button{
     color: white;
-    background-color: #02A8A6;
     border:none;
-    height:1.5rem;
-    line-height:1.5rem;
+    height:1.8rem;
+    line-height:1.8rem;
+    margin-top: -0.2rem;
+    font-size: 0.85rem;
 }
 
-#tab-nav {
-    height: 3rem;
+.bar-nav~.content {
+    top: 4.4rem;
+}
+
+.buttons-tab .button {
+    bottom:0;
+}
+.icon.icon-add{
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-bottom:0.2rem;
+    background-image: url(../img/i-add.png);
+}
+.icon.icon-delete{
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-bottom:0.2rem;
+    background-image: url(../img/i-delete.png);
+}
+.icon.icon-clone{
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-bottom:0.2rem;
+    background-image: url(../img/i-clone.png);
+}
+.icon.icon-save{
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-bottom:0.2rem;
+    background-image: url(../img/i-save.png);
+}
+.bar-header-secondary .button i.icon:first-child:last-child{
+    margin-right:0.2rem;
+}
+.button i.icon.icon-edit:first-child:last-child{
+    margin-left:0.2rem;
 }

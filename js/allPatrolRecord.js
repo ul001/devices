@@ -61,7 +61,7 @@ function addItems(number) {
                                                "                            </div>\n" +
                                                "                            <div class=\"col-85\">\n" +
                                                "                                <p class=\"subName\">"+this.fTaskName+"<span class=\"blueColor\">("+this.fStateExplain+")</span></p>\n" +
-                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
+//                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
                                                "                                <p>最新一次巡检时间：<span class=\"blueColor\">"+this.fCreatetime+"</span></p>\n" +
                                                "                                <p>本次已发现缺陷：<span class=\"redColor\">"+this.fproblemTotal+" </span>个  未处理：<span class=\"redColor\">"+this.funsolvedTotal+" </span>个</p>\n" +
                                                "                            </div>\n" +

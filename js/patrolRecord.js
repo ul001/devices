@@ -40,7 +40,7 @@ Substation.getDataByAjax("/getLatestThreePlaceCheckForm",{fSubid:selectSubid},fu
             html+="<div class=\"item-footer row no-gutter\" data-id=\""+this.fPlacecheckformid+"\">\n" +
 "                                <div class=\"col-10\">"+iconStr+"</div>\n" +
 "                                <div class=\"col-85\"><span class=\"blueColor\">"+this.fTaskName+"</span>("+this.fStateExplain+")<br>\n" +
-"                                    巡检人："+this.fCreatebyuserid+"<br>\n" +
+//"                                    巡检人："+this.fCreatebyuserid+"<br>\n" +
 "                                    本次已发现缺陷：<span class=\"redColor\">"+this.fproblemTotal+" </span>个，未处理：<span class=\"redColor\">"+this.funsolvedTotal+" </span>个\n" +
 "                                </div>\n" +
 "                                <div class=\"col-5\">\n" +

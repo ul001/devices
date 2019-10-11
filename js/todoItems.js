@@ -334,13 +334,13 @@ jQuery(document).ready(function () {
                     var finishNum = this.taskUserFinishNum;
                     if(doNum==finishNum){
                         showHasCommit = "<span class='greenColor'>("+finishNum+"/"+doNum+")</span>";
-//                        showCommitClass=" hasBoom";
+                        showCommitClass=" canBoom";
                     }else if(finishNum==0){
                         showHasCommit = "<span class='grayColor'>("+finishNum+"/"+doNum+")</span>";
 //                        showCommitClass=" hasBoom";
                     }else{
                         showHasCommit = "<span class='redColor'>("+finishNum+"/"+doNum+")</span>";
-//                        showCommitClass=" hasBoom";
+                        showCommitClass=" hasBoom";
                     }
                 }
             }

@@ -41,5 +41,10 @@ i.icon.icon-contactphone {
     border-radius: 1.0rem;
 }
 .hasBoom{
-    background:url(../img/i-hasCommit.png) right 1rem center no-repeat;
+    background:url(../img/i-hascommit.png) right 1rem top no-repeat;
+    background-size:3.2rem;
+}
+.canBoom{
+    background:url(../img/i-commitall.png) right 1rem top no-repeat;
+    background-size:3.2rem;
 }

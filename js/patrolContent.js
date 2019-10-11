@@ -83,12 +83,23 @@ function loadPage(){
                             }
                             tempStr+=inputStr;
         });
-                $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
-                $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
-                                                    "<div class=\"pull-to-refresh-layer\"></div>\n"+
-                                                    "<div class=\"content-block\">\n"+tempStr+
-                                                    "</div>\n"+
-                                                 "</div>");
+                if(canClick=="false"){
+                    if(thisValueJson.length>0){
+                        $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
+                        $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
+                                                            "<div class=\"pull-to-refresh-layer\"></div>\n"+
+                                                            "<div class=\"content-block\">\n"+tempStr+
+                                                            "</div>\n"+
+                                                         "</div>");
+                    }
+                }else{
+                    $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
+                                    $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
+                                                                        "<div class=\"pull-to-refresh-layer\"></div>\n"+
+                                                                        "<div class=\"content-block\">\n"+tempStr+
+                                                                        "</div>\n"+
+                                                                     "</div>");
+                }
                 //给模板赋值
                 if(thisValueJson.length>0){
                     $(thisValueJson).each(function(){
