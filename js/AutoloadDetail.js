@@ -141,13 +141,15 @@ var CustomerDevice = (function () {
                             count++;
                             var name = "addModal" + val.fSubdeviceinfoid;
                             //  var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
+                            var string="";
+                            var containStr ="";
                             if (key == 0) {
                                 // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
                                 //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
                                 // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
                                 //     '<div id="addVarContain' + count + '"></div>' +
                                 //     '</div>';
-                                var string =
+                                string =
                                     ' <a role="presentation" href="#' +
                                     name +
                                     '" class="tab-link button" name="' +
@@ -157,7 +159,7 @@ var CustomerDevice = (function () {
                                     '">' +
                                     decodeURIComponent(val.fDevicename) +
                                     "</a>";
-                                var containStr =
+                                containStr =
                                     '<div role="tabpanel" class="tab" id="' +
                                     name +
                                     '"> <div class="content-block tab-pane active" id="addVarContain' +
@@ -169,7 +171,7 @@ var CustomerDevice = (function () {
                                 // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
                                 //     '<div id="addVarContain' + count + '"></div>' +
                                 //     '</div>';
-                                var string =
+                                string =
                                     ' <a role="presentation" href="#' +
                                     name +
                                     '" class="tab-link button" name="' +
@@ -179,7 +181,7 @@ var CustomerDevice = (function () {
                                     '">' +
                                     decodeURIComponent(val.fDevicename) +
                                     "</a>";
-                                var containStr =
+                                containStr =
                                     '<div role="tabpanel" class="tab" id="' +
                                     name +
                                     '"> <div class="content-block tab-pane" id="addVarContain' +
@@ -293,13 +295,15 @@ var CustomerDevice = (function () {
                         $.each(data, function (key, val) {
                             count++;
                             var name = "addModal" + val.fId;
+                            var string ="";
+                            var containStr ="";
                             if (key == 0) {
                                 // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
                                 //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
                                 // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
                                 //     '<div id="addVarContain' + count + '"></div>' +
                                 //     '</div>';
-                                var string =
+                                string =
                                     ' <a role="presentation" href="#' +
                                     name +
                                     '" class="tab-link active button" name="' +
@@ -307,7 +311,7 @@ var CustomerDevice = (function () {
                                     '">' +
                                     decodeURIComponent(val.fPagename) +
                                     "</a>";
-                                var containStr =
+                                containStr =
                                     '<div role="tabpanel" class="tab active" id="' +
                                     name +
                                     '"> <div class="content-block tab-pane active" id="addVarContain' +
@@ -319,7 +323,7 @@ var CustomerDevice = (function () {
                                 // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
                                 //     '<div id="addVarContain' + count + '"></div>' +
                                 //     '</div>';
-                                var string =
+                                string =
                                     ' <a role="presentation" href="#' +
                                     name +
                                     '" class="tab-link active button" name="' +
@@ -327,7 +331,7 @@ var CustomerDevice = (function () {
                                     '">' +
                                     decodeURIComponent(val.fPagename) +
                                     "</a>";
-                                var containStr =
+                                containStr =
                                     '<div role="tabpanel" class="tab active" id="' +
                                     name +
                                     '"> <div class="content-block tab-pane" id="addVarContain' +
@@ -418,9 +422,6 @@ var CustomerDevice = (function () {
                                     $(select).val(value2.value);
                                 }
                             });
-
-
-
                             break;
                         case "date":
                             $(prevLable).children(".dateTime").val(value.value);

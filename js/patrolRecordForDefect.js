@@ -9,9 +9,9 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
     $(".subName").text(selectSubname);
     $("#address").text(subAddress);
     if(inspectionTotal!=null){
-        $("#daily").text("("+(inspectionTotal.weekSum+inspectionTotal.yearSum)+")项");
-        $("#monthly").text("("+inspectionTotal.monSum+")项");
-        $("#total").text("("+(inspectionTotal.weekSum+inspectionTotal.monSum+inspectionTotal.yearSum)+")项");
+        $("#daily").text("("+(inspectionTotal.normalSum)+")项");
+        $("#monthly").text("("+inspectionTotal.periodSum+")项");
+        $("#total").text("("+(inspectionTotal.total)+")项");
     }
     $(".list-container").empty();
     if(threeList.length>0){
