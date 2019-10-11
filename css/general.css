@@ -41,6 +41,14 @@
 .redColor{
     color:#DC143C;
 }
+
+.greenColor{
+    color:#7CFC00;
+}
+
+.grayColor{
+    color:#778899;
+}
 .item-input select{
     background: url('../img/right.png') no-repeat right center;
 }

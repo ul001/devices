@@ -325,25 +325,25 @@ jQuery(document).ready(function () {
             window.location.href = "missionDetail.html";
           });
         } else {
-          var showHasCommit = "";
-          var showCommitClass = "";
-          if (clickNum == 2) {
-            if(this.fTasktypeid!=3){
-                var doNum =this.taskUserNum;
-                var finishNum = this.taskUserFinishNum;
-                if(doNum==finishNum){
-                    showHasCommit = "<span class='redColor'>("+finishNum+"/"+doNum+")</span>";
-                    showCommitClass=" hasBoom";
-                }else if(finishNum==0){
-                    showHasCommit = "<span class='button-light'>("+finishNum+"/"+doNum+")</span>";
-                    showCommitClass=" hasBoom";
-                }else{
-                    showHasCommit = "<span class='button-success'>("+finishNum+"/"+doNum+")</span>";
-                    showCommitClass=" hasBoom";
+          $(taskList.list).each(function () {
+            var showHasCommit = "";
+            var showCommitClass = "";
+            if (clickNum == 2) {
+                if(this.fTasktypeid!=3){
+                    var doNum =this.taskUserNum;
+                    var finishNum = this.taskUserFinishNum;
+                    if(doNum==finishNum){
+                        showHasCommit = "<span class='greenColor'>("+finishNum+"/"+doNum+")</span>";
+//                        showCommitClass=" hasBoom";
+                    }else if(finishNum==0){
+                        showHasCommit = "<span class='grayColor'>("+finishNum+"/"+doNum+")</span>";
+//                        showCommitClass=" hasBoom";
+                    }else{
+                        showHasCommit = "<span class='redColor'>("+finishNum+"/"+doNum+")</span>";
+//                        showCommitClass=" hasBoom";
+                    }
                 }
             }
-          }
-          $(taskList.list).each(function () {
             var user = this.fTaskcreateusername;
             var username = "";
             if (user != undefined) {
