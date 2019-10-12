@@ -50,18 +50,18 @@ var CustomerDevice = (function () {
                 name +
                 '" class="tab-link active button" id="tab' +
                 name +
-                '">' +
+                '"><span>' +
                 text +
-                "</a>";
+                "</span><i class='icon icon-edit'></i></a>";
             // var string = '<li role="presentation" class="active">' +
             //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + text + '</a></li>';
 
             // var containStr = '<div role="tabpanel" class="tab active" id="' + name +
             // '"> <div class="content-block">< div class ="list-block"><ul id="addVarContain' + count + '"></ul></div></div></div>';
             var containStr =
-                '<div role="tabpanel" class="tab active" id="' +
+                '<div role="tabpanel" class="tab pull-to-refresh-content active" id="' +
                 name +
-                '"> <div class="content-block tab-pane active" id="addVarContain' +
+                '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
                 count +
                 '"></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
@@ -89,7 +89,26 @@ var CustomerDevice = (function () {
             if (data != undefined) {
                 showPageInfo(data, select);
             }
+            addEdit();
         };
+
+        //添加编辑按钮事件
+        function addEdit(){
+            $(".icon-edit").unbind().click(function(e){
+                var thisSpan = $(this).prev();
+                var thisDeviceId = $(this).parent().attr("name");
+                console.log(thisDeviceId);
+                $.prompt('重命名', function (value) {
+                    Substation.postDataByAjax("/updateDevice",{fSubdeviceinfoid:thisDeviceId,fDevicename:value},function(data){
+                        $.toast("重命名成功！");
+                        thisSpan.text(value);
+                    });
+                });
+                $(".modal-text-input").val(thisSpan.text());
+                $(".modal-text-input").select();
+                e.stopPropagation();
+            });
+        }
 
         // 初始化获取信息
         this.show = function () {
@@ -156,13 +175,13 @@ var CustomerDevice = (function () {
                                     val.fSubdeviceinfoid +
                                     '" id="tab' +
                                     name +
-                                    '">' +
+                                    '"><span>' +
                                     decodeURIComponent(val.fDevicename) +
-                                    "</a>";
+                                    "</span><i class='icon icon-edit'></i></a>";
                                 containStr =
-                                    '<div role="tabpanel" class="tab" id="' +
+                                    '<div role="tabpanel" class="tab pull-to-refresh-content" id="' +
                                     name +
-                                    '"> <div class="content-block tab-pane active" id="addVarContain' +
+                                    '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             } else {
@@ -178,13 +197,13 @@ var CustomerDevice = (function () {
                                     val.fSubdeviceinfoid +
                                     '" id="tab' +
                                     name +
-                                    '">' +
+                                    '"><span>' +
                                     decodeURIComponent(val.fDevicename) +
-                                    "</a>";
+                                    "</span><i class='icon icon-edit'></i></a>";
                                 containStr =
-                                    '<div role="tabpanel" class="tab" id="' +
+                                    '<div role="tabpanel" class="tab pull-to-refresh-content" id="' +
                                     name +
-                                    '"> <div class="content-block tab-pane" id="addVarContain' +
+                                    '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             }
@@ -212,6 +231,7 @@ var CustomerDevice = (function () {
                             .html("暂无相关信息！")
                             .css("text-align", "center");
                     }
+                    addEdit();
                 }
             );
         }
@@ -282,80 +302,80 @@ var CustomerDevice = (function () {
         // });
 
         // 点击一个节点
-        function onClick(treeNode) {
-            // $("body").showLoading();
-            Substation.getDataByAjax(
-                "/pageCustomList",
-                "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id,
-                function (data) {
-                    // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
-                    curNodeInfo = data;
-                    // 如果有设备信息
-                    if (data.length > 0) {
-                        $.each(data, function (key, val) {
-                            count++;
-                            var name = "addModal" + val.fId;
-                            var string ="";
-                            var containStr ="";
-                            if (key == 0) {
-                                // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
-                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
-                                // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
-                                //     '<div id="addVarContain' + count + '"></div>' +
-                                //     '</div>';
-                                string =
-                                    ' <a role="presentation" href="#' +
-                                    name +
-                                    '" class="tab-link active button" name="' +
-                                    val.fId +
-                                    '">' +
-                                    decodeURIComponent(val.fPagename) +
-                                    "</a>";
-                                containStr =
-                                    '<div role="tabpanel" class="tab active" id="' +
-                                    name +
-                                    '"> <div class="content-block tab-pane active" id="addVarContain' +
-                                    count +
-                                    '"></div></div>';
-                            } else {
-                                // var string = '<li role="presentation" name="' + val.fId + '">' +
-                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
-                                // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
-                                //     '<div id="addVarContain' + count + '"></div>' +
-                                //     '</div>';
-                                string =
-                                    ' <a role="presentation" href="#' +
-                                    name +
-                                    '" class="tab-link active button" name="' +
-                                    val.fId +
-                                    '">' +
-                                    decodeURIComponent(val.fPagename) +
-                                    "</a>";
-                                containStr =
-                                    '<div role="tabpanel" class="tab active" id="' +
-                                    name +
-                                    '"> <div class="content-block tab-pane" id="addVarContain' +
-                                    count +
-                                    '"></div></div>';
-                            }
-                            $("#addDataUL").append(string);
-                            $(".tab-content").append(containStr);
-                            if (val.fPagejson != undefined && val.fPagejson != "undefined") {
-                                creatInfo(val.fPagejson, $("#addVarContain" + count), count);
-                            }
-                        });
-                    } else {
-                        $("#delete").attr("disabled", true);
-                        $("#copy").attr("disabled", true);
-                        $("#save").attr("disabled", true);
-                        $("#container-info")
-                            .html("暂无相关信息！")
-                            .css("text-align", "center");
-                    }
-                    $("body").hideLoading();
-                }
-            );
-        }
+//        function onClick(treeNode) {
+//            // $("body").showLoading();
+//            Substation.getDataByAjax(
+//                "/pageCustomList",
+//                "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id,
+//                function (data) {
+//                    // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
+//                    curNodeInfo = data;
+//                    // 如果有设备信息
+//                    if (data.length > 0) {
+//                        $.each(data, function (key, val) {
+//                            count++;
+//                            var name = "addModal" + val.fId;
+//                            var string ="";
+//                            var containStr ="";
+//                            if (key == 0) {
+//                                // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
+//                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+//                                // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
+//                                //     '<div id="addVarContain' + count + '"></div>' +
+//                                //     '</div>';
+//                                string =
+//                                    ' <a role="presentation" href="#' +
+//                                    name +
+//                                    '" class="tab-link active button" name="' +
+//                                    val.fId +
+//                                    '">' +
+//                                    decodeURIComponent(val.fPagename) +
+//                                    "</a>";
+//                                containStr =
+//                                    '<div role="tabpanel" class="tab active" id="' +
+//                                    name +
+//                                    '"> <div class="content-block tab-pane active" id="addVarContain' +
+//                                    count +
+//                                    '"></div></div>';
+//                            } else {
+//                                // var string = '<li role="presentation" name="' + val.fId + '">' +
+//                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+//                                // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
+//                                //     '<div id="addVarContain' + count + '"></div>' +
+//                                //     '</div>';
+//                                string =
+//                                    ' <a role="presentation" href="#' +
+//                                    name +
+//                                    '" class="tab-link active button" name="' +
+//                                    val.fId +
+//                                    '">' +
+//                                    decodeURIComponent(val.fPagename) +
+//                                    "</a>";
+//                                containStr =
+//                                    '<div role="tabpanel" class="tab active" id="' +
+//                                    name +
+//                                    '"> <div class="content-block tab-pane" id="addVarContain' +
+//                                    count +
+//                                    '"></div></div>';
+//                            }
+//                            $("#addDataUL").append(string);
+//                            $(".tab-content").append(containStr);
+//                            if (val.fPagejson != undefined && val.fPagejson != "undefined") {
+//                                creatInfo(val.fPagejson, $("#addVarContain" + count), count);
+//                            }
+//                        });
+//                    } else {
+//                        $("#delete").attr("disabled", true);
+//                        $("#copy").attr("disabled", true);
+//                        $("#save").attr("disabled", true);
+//                        $("#container-info")
+//                            .html("暂无相关信息！")
+//                            .css("text-align", "center");
+//                    }
+//                    $("body").hideLoading();
+//                }
+//            );
+//        }
 
         // 显示已有信息
         // < div id = "tab1"

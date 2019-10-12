@@ -68,7 +68,7 @@ function addItems(number, lastIndex) {
             });
             $('.list-container').append(html);
             //addClick();
-//            Substation.getDataByAjaxNoLoading("/close");
+            Substation.getDataByAjaxNoLoading("/close");
             pageNum++;
         } else {
             $.detachInfiniteScroll($('.infinite-scroll'));

@@ -231,7 +231,9 @@ jQuery(document).ready(function () {
                             if (missionTypeid == 1) {
                                 //巡检任务
                                 localStorage.setItem("fSubname", "执行情况");
-                                window.location.href = "patrolContent.html";
+                                $.confirm('单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。', '注意！', function () {
+                                    window.location.href = "patrolContent.html";
+                                });
                             } else if (missionTypeid == 2) {
                                 //现场交接任务
                                 localStorage.setItem("fSubname", "执行情况");

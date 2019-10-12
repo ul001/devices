@@ -27,91 +27,96 @@ function loadPage(){
                 tempJson = JSON.parse(tempJson);
                 tempNum = tempJson.checkInfo.length;
             }
-            $(data.list).each(function(index,obj){
-                var thisValueJson=[];
-                if(this.hasOwnProperty("fInspectionslipjson")){
-                    if(this.fInspectionslipjson!=""&&this.fInspectionslipjson!=null){
-                        thisValueJson = JSON.parse(this.fInspectionslipjson);
-                    }
-                }
-                var tempStr = "";
-                var num = 0;
-                $(tempJson.checkInfo).each(function(){
-                            num++;
-                            if(this.type=="radio"){
-                                inputStr = "<div class=\"card\">\n" +
-                "                                <div class=\"card-content\">\n" +
-                "                                    <div class=\"card-content-inner\">\n" +
-                "                                        "+decodeURIComponent(this.name)+"\n" +
-                "                                        <div class=\"pull-right\">\n" +
-                "                                            <label class=\"label-checkbox item-content\">\n" +
-                "                                                <input type=\"radio\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" data-json='"+JSON.stringify(this)+"' name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"yes\">\n" +
-                "                                                <div class=\"item-media\"><i\n" +
-                "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
-                "                                                <div class=\"item-inner\">\n" +
-                "                                                    是\n" +
-                "                                                </div>\n" +
-                "                                            </label>\n" +
-                "                                            &nbsp;\n" +
-                "                                            <label class=\"label-checkbox item-content\">\n" +
-                "                                                <input type=\"radio\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"no\" checked>\n" +
-                "                                                <div class=\"item-media\"><i\n" +
-                "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
-                "                                                <div class=\"item-inner\">\n" +
-                "                                                    否\n" +
-                "                                                </div>\n" +
-                "                                            </label>\n" +
-                "                                        </div>\n" +
-                "                                    </div>\n" +
-                "                                </div>\n" +
-                "                            </div>\n";
-                            }else if(this.type=="input"){
-                                var thisInputName=decodeURIComponent(this.name);
-                                if(this.value=="true"){
-                                    thisInputName = "<span class=\"redColor\">*</span>"+thisInputName;
+            if(data.list.length>0){
+                $(data.list).each(function(index,obj){
+                            var thisValueJson=[];
+                            if(this.hasOwnProperty("fInspectionslipjson")){
+                                if(this.fInspectionslipjson!=""&&this.fInspectionslipjson!=null){
+                                    thisValueJson = JSON.parse(this.fInspectionslipjson);
                                 }
-                                inputStr="<div class=\"card\">\n" +
-                "                                <div class=\"card-content\">\n" +
-                "                                    <div class=\"card-content-inner\">\n" +
-                "                                        "+thisInputName+"\n" +
-                "                                        <div class=\"pull-right\">\n" +
-                "                                            <input type=\"text\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" data-state=\""+this.value+"\">\n" +
-                "                                        </div>\n" +
-                "                                    </div>\n" +
-                "                                </div>\n" +
-                "                            </div>";
                             }
-                            tempStr+=inputStr;
-        });
-                if(canClick=="false"){
-                    if(thisValueJson.length>0){
-                        $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
-                        $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
-                                                            "<div class=\"pull-to-refresh-layer\"></div>\n"+
-                                                            "<div class=\"content-block\">\n"+tempStr+
-                                                            "</div>\n"+
-                                                         "</div>");
-                    }
-                }else{
-                    $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
+                            var tempStr = "";
+                            var num = 0;
+                            $(tempJson.checkInfo).each(function(){
+                                        num++;
+                                        if(this.type=="radio"){
+                                            inputStr = "<div class=\"card\">\n" +
+                            "                                <div class=\"card-content\">\n" +
+                            "                                    <div class=\"card-content-inner\">\n" +
+                            "                                        "+decodeURIComponent(this.name)+"\n" +
+                            "                                        <div class=\"pull-right\">\n" +
+                            "                                            <label class=\"label-checkbox item-content\">\n" +
+                            "                                                <input type=\"radio\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" data-json='"+JSON.stringify(this)+"' name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"yes\">\n" +
+                            "                                                <div class=\"item-media\"><i\n" +
+                            "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
+                            "                                                <div class=\"item-inner\">\n" +
+                            "                                                    是\n" +
+                            "                                                </div>\n" +
+                            "                                            </label>\n" +
+                            "                                            &nbsp;\n" +
+                            "                                            <label class=\"label-checkbox item-content\">\n" +
+                            "                                                <input type=\"radio\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" name=\""+(obj.fSubdeviceinfoid+""+this.code)+"\" value=\"no\" checked>\n" +
+                            "                                                <div class=\"item-media\"><i\n" +
+                            "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
+                            "                                                <div class=\"item-inner\">\n" +
+                            "                                                    否\n" +
+                            "                                                </div>\n" +
+                            "                                            </label>\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                            </div>\n";
+                                        }else if(this.type=="input"){
+                                            var thisInputName=decodeURIComponent(this.name);
+                                            if(this.value=="true"){
+                                                thisInputName = "<span class=\"redColor\">*</span>"+thisInputName;
+                                            }
+                                            inputStr="<div class=\"card\">\n" +
+                            "                                <div class=\"card-content\">\n" +
+                            "                                    <div class=\"card-content-inner\">\n" +
+                            "                                        "+thisInputName+"\n" +
+                            "                                        <div class=\"pull-right\">\n" +
+                            "                                            <input type=\"text\" data-name=\""+decodeURIComponent(this.name)+"\" data-code=\""+this.code+"\" data-state=\""+this.value+"\">\n" +
+                            "                                        </div>\n" +
+                            "                                    </div>\n" +
+                            "                                </div>\n" +
+                            "                            </div>";
+                                        }
+                                        tempStr+=inputStr;
+                    });
+                            if(canClick=="false"){
+                                if(thisValueJson.length>0){
+                                    $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
                                     $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
                                                                         "<div class=\"pull-to-refresh-layer\"></div>\n"+
                                                                         "<div class=\"content-block\">\n"+tempStr+
                                                                         "</div>\n"+
                                                                      "</div>");
-                }
-                //给模板赋值
-                if(thisValueJson.length>0){
-                    $(thisValueJson).each(function(){
-                        if(this.type=="radio"){
-                            $("input[name='"+(obj.fSubdeviceinfoid+""+this.code)+"'][value='"+this.value+"']").attr("checked",true);
-                        }else{
-                            $("#"+obj.fSubdeviceinfoid+" input[data-code='"+this.code+"']").val(this.value);
-                        }
-                    });
-                }
-            });
+                                }
+                            }else{
+                                $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
+                                                $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
+                                                                                    "<div class=\"pull-to-refresh-layer\"></div>\n"+
+                                                                                    "<div class=\"content-block\">\n"+tempStr+
+                                                                                    "</div>\n"+
+                                                                                 "</div>");
+                            }
+                            //给模板赋值
+                            if(thisValueJson.length>0){
+                                $(thisValueJson).each(function(){
+                                    if(this.type=="radio"){
+                                        $("input[name='"+(obj.fSubdeviceinfoid+""+this.code)+"'][value='"+this.value+"']").attr("checked",true);
+                                    }else{
+                                        $("#"+obj.fSubdeviceinfoid+" input[data-code='"+this.code+"']").val(this.value);
+                                    }
+                                });
+                            }
+                        });
+            }else{
+                $("#saveBtn").css("display","none");
+            }
             addRadioClick();
+            goToInfo();
             getGroupidContent();
             $(".tab-link").eq(0).click();
             if(canClick=="false"){
@@ -531,6 +536,27 @@ function saveFormData() {
             $.router.back();
         }
     });
+}
+
+//巡检记录点击是跳转
+function goToInfo(){
+    if(canClick=="false"){
+        $(".card-content").unbind().click(function(){
+            var thisRadio = $(this).find(":radio:checked");
+            if(thisRadio.val()=="yes"){
+                var clickDeviceId = $(".tab.active").attr("id");
+                var deviceItemCode = thisRadio.attr("data-code");
+                var params = {fPlacecheckformid:fPlacecheckformid,fSubdeviceinfoid:clickDeviceId,fDeviceitem:deviceItemCode};
+                Substation.getDataByAjax("/getDeviceProblemIDOnClickingYes",params,function(data){
+                    if(data!=""&&data!=null){
+                        window.location.href="defectInfo.html?fDeviceproblemid="+data;
+                    }else{
+                        $.toast("没有该缺陷详情记录！");
+                    }
+                });
+            }
+        });
+    }
 }
 
 //解决键盘遮挡问题

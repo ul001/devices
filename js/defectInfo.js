@@ -68,9 +68,13 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
             $(this).attr("disabled",true);
         });
         $($("select")).each(function(){
-            $(this).attr("disabled",true);
+            var thisInput = $(this).parent();
+            var thisValue = $(this).text().trim();
+            thisInput.html('<input type="text" disabled value="'+thisValue+'">');
         });
         $(".upload_img_wrap .upload_img").unbind();
+        $(".upload_img_wrap .upload_img").css("display","none");
+        $(".blueColor").removeClass("blueColor");
         $("#saveData").css("display","none");
     }
 });
