@@ -21,14 +21,14 @@ function loadMenu() {
     }, function (data) {
         if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
             $(data.menuList).each(function () {
-                $(".list-container").append("<li class=\"item-content item-link\" id=\""+this.fMenuid+"\" value=\"" + this.fCode + "\">\n" +
-                                "                        <div class=\"item-media\"><i class=\"icon icon-alarm\"></i></div>\n" +
-                                "                        <div class=\"item-inner\">\n" +
-                                "                            <div class=\"item-title\">" + this.fMenuname + "</div>\n" +
-                                "                            <div class=\"item-after\" id=\"" + this.fCode + "\"></div>\n" +
-                                "                        </div>\n" +
-                                "                    </li>")
-                });
+                $(".list-container").append("<li class=\"item-content item-link\" id=\"" + this.fMenuid + "\" value=\"" + this.fCode + "\">\n" +
+                    "                        <div class=\"item-media\"><i class=\"icon icon-alarm\"></i></div>\n" +
+                    "                        <div class=\"item-inner\">\n" +
+                    "                            <div class=\"item-title\">" + this.fMenuname + "</div>\n" +
+                    "                            <div class=\"item-after\" id=\"" + this.fCode + "\"></div>\n" +
+                    "                        </div>\n" +
+                    "                    </li>")
+            });
             fillData(0);
         }
     });
