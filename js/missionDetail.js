@@ -177,6 +177,7 @@ jQuery(document).ready(function () {
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
                             $.toast("签到成功！");
                             location.reload();
+                            localStorage.removeItem("locationStrJS");
                             //                            $("#checkIn").removeClass("col-33");
                             //                            $("#checkIn").hide();
                             //                            $("#carryOutCss").removeClass("col-33");
