@@ -45,8 +45,12 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
     $("#fProblemharm").val(defectJson.fProblemharm);
     $("#fCreatetime").val(defectJson.fCreatetime);
     $("#fResolution").val(defectJson.fResolution);
-    if(defectJson.fClientadvice!=""){
+    if(canClick=="false"){
         $("#fClientadvice").val(defectJson.fClientadvice);
+    }else{
+        if(defectJson.fClientadvice!=""){
+            $("#fClientadvice").val(defectJson.fClientadvice);
+        }
     }
     $("#fState").val(defectJson.fState);
     if(beforeimg.length>0){
@@ -69,7 +73,10 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
         });
         $($("select")).each(function(){
             var thisInput = $(this).parent();
-            var thisValue = $(this).text().trim();
+            var thisValue="";
+            if(this.selectedIndex!=-1){
+                thisValue = (this.options[this.selectedIndex]).innerText;
+            }
             thisInput.html('<input type="text" disabled value="'+thisValue+'">');
         });
         $(".upload_img_wrap .upload_img").unbind();

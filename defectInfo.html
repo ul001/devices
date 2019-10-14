@@ -24,208 +24,208 @@
                 返回
             </a>
             <h1 class="title title_color">缺陷信息</h1>
-            <a class="button button-link button-nav pull-right click_btn" id="saveData" onclick="saveFormData()">
+            <a class="button button-link button-nav pull-right click_btn" id="saveData"
+               onclick="saveFormData()">
                 保存
             </a>
         </header>
         <div class="content">
-            <div class="content">
-                <div class="list-block">
-                    <form id="form1" method="post" enctype="multipart/form-data">
-                        <ul>
-                            <!-- Text inputs -->
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">设备编号：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="treePathName"
-                                                   value="" readonly>
-                                        </div>
+            <div class="list-block">
+                <form id="form1" method="post" enctype="multipart/form-data">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">设备编号：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="treePathName"
+                                               value="" readonly>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">缺陷描述：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="fDeviceproblemdes"
-                                                   value="" disabled>
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷描述：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fDeviceproblemdes"
+                                               value="" disabled>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">缺陷位置：</div>
-                                        <div class="item-input" id="defectPosition">
-                                            <input type="checkbox" value="A相" id="checkA" checked
-                                                   disabled><label
-                                                for="checkA">A相</label>
-                                            <input type="checkbox" value="B相" id="checkB"
-                                                   disabled><label
-                                                for="checkB">B相</label>
-                                            <input type="checkbox" value="C相" id="checkC"
-                                                   disabled><label
-                                                for="checkC">C相</label>
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷位置：</div>
+                                    <div class="item-input" id="defectPosition">
+                                        <input type="checkbox" value="A相" id="checkA" checked
+                                               disabled><label
+                                            for="checkA">A相</label>
+                                        <input type="checkbox" value="B相" id="checkB"
+                                               disabled><label
+                                            for="checkB">B相</label>
+                                        <input type="checkbox" value="C相" id="checkC"
+                                               disabled><label
+                                            for="checkC">C相</label>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">缺陷类别：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="fProblemtype"
-                                                   value="" disabled>
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷类别：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fProblemtype"
+                                               value="" disabled>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">缺陷类型：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="fProblemlevel"
-                                                   value="" disabled>
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷类型：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fProblemlevel"
+                                               value="" disabled>
                                     </div>
                                 </div>
-                            </li>
-                            <!-- Date -->
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">消缺期限：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="fTimelimit"
-                                                   value="" disabled>
-                                        </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">消缺期限：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fTimelimit"
+                                               value="" disabled>
                                     </div>
                                 </div>
-                            </li>
-                            <!-- Date -->
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">缺陷危害：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="fProblemharm" disabled
-                                                   value="">
-                                        </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷危害：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fProblemharm" disabled
+                                               value="">
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">发现时间：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="fCreatetime" disabled
-                                                   value="">
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">发现时间：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fCreatetime" disabled
+                                               value="">
                                     </div>
                                 </div>
-                            </li>
-                            <li class="align-top">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label">现场照片：</div>
-                                        <div class="item-input">
-                                            <div class="custom_img">
-                                                <!--点击上传图片 触发下面的div 点击事件-->
-                                                <div class="upload_img_wrap">
-                                                    <div id="imgBox1">
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">现场照片：</div>
+                                    <div class="item-input">
+                                        <div class="custom_img">
+                                            <!--点击上传图片 触发下面的div 点击事件-->
+                                            <div class="upload_img_wrap">
+                                                <div id="imgBox1">
 
-                                                    </div>
-                                                    <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
                                                 </div>
+                                                <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="align-top">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span
-                                                class="blueColor">整改照片：</span></div>
-                                        <div class="item-input">
-                                            <div class="custom_img">
-                                                <!--点击上传图片 触发下面的div 点击事件-->
-                                                <div class="upload_img_wrap">
-                                                    <div id="imgBox"><img class="upload_img"
-                                                                          src="img/upload_img.png"/>
-                                                    </div>
-                                                    <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            class="blueColor">整改照片：</span></div>
+                                    <div class="item-input">
+                                        <div class="custom_img">
+                                            <!--点击上传图片 触发下面的div 点击事件-->
+                                            <div class="upload_img_wrap">
+                                                <div id="imgBox"><img class="upload_img"
+                                                                      src="img/upload_img.png"/>
                                                 </div>
-                                                <div style="display: none;width: 100%;height: 100vh;position: relative;">
-                                                        <div style="display: none;" id="inputBox">
-                                                            <input type="file" name="myFiles"
-                                                                   data-id="1" title="请选择图片"
-                                                                   id="file1"
-                                                                   accept="image/png,image/jpg,image/gif,image/JPEG"/>
-                                                            <!--
-                                                    <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
-                                                    <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
-                                                        </div>
-                                                        <input style="display:none" type="submit"
-                                                               id="sub"/>
+                                                <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                                            </div>
+                                            <div style="display: none;width: 100%;height: 100vh;position: relative;">
+                                                <div style="display: none;" id="inputBox">
+                                                    <input type="file" name="myFiles"
+                                                           data-id="1" title="请选择图片"
+                                                           id="file1"
+                                                           accept="image/png,image/jpg,image/gif,image/JPEG"/>
+                                                    <!--
+                                            <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
+                                            <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
                                                 </div>
+                                                <input style="display:none" type="submit"
+                                                       id="sub"/>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label blueColor">处理建议：</div>
-                                        <div class="item-input">
-                                            <input type="text" id="fResolution" name="fResolution" value="更换">
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">处理建议：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fResolution" name="fResolution"
+                                               value="更换">
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label blueColor">客户意见：</div>
-                                        <div class="item-input">
-                                            <select id="fClientadvice" name="fClientadvice">
-                                                <option value="待客户答复">待客户答复</option>
-                                                <option value="同意处理">同意处理</option>
-                                                <option value="其他">其他</option>
-                                                <option value="不同意处理">不同意处理</option>
-                                            </select>
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">客户意见：</div>
+                                    <div class="item-input">
+                                        <select id="fClientadvice" name="fClientadvice">
+                                            <option value="待客户答复">待客户答复</option>
+                                            <option value="同意处理">同意处理</option>
+                                            <option value="其他">其他</option>
+                                            <option value="不同意处理">不同意处理</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label blueColor">处理情况：</div>
-                                        <div class="item-input">
-                                            <select id="fState" name="fState">
-                                                <option value="0">未处理</option>
-                                                <option value="2">待处理</option>
-                                                <option value="3">待客户停电处理</option>
-                                                <option value="4">待线路停电处理</option>
-                                                <option value="5">其他</option>
-                                                <option value="1">已处理</option>
-                                            </select>
-                                        </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">处理情况：</div>
+                                    <div class="item-input">
+                                        <select id="fState" name="fState">
+                                            <option value="0">未处理</option>
+                                            <option value="2">待处理</option>
+                                            <option value="3">待客户停电处理</option>
+                                            <option value="4">待线路停电处理</option>
+                                            <option value="5">其他</option>
+                                            <option value="1">已处理</option>
+                                        </select>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </form>
-                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
             </div>
         </div>
     </div>

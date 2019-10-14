@@ -78,11 +78,8 @@ jQuery(document).ready(function () {
                     $("#chargerName").html(taskInfo.fTaskchargername);
                     $("#createTime").html(taskInfo.fStartdate.substring(0, 11));
                     $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 11));
-                    var missionContent =
-                        '<textarea readonly="readonly">' +
-                        taskInfo.fTaskcontent +
-                        "</textarea>";
-                    $("#missionCont").append(missionContent);
+                    var missionContent =taskInfo.fTaskcontent;
+                    $("#missionCont").html(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
                     taskchargerid = taskInfo.fTaskchargerid;
                     var temp = false;
