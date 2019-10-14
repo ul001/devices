@@ -182,7 +182,7 @@ function savePhoto() {
       $(this).remove();
     }
   });
-  if($(".fileInput").length>6){
+  if ($(".fileInput").length > 6) {
     $.toast("最多上传6张图片");
     return;
   }
@@ -191,7 +191,7 @@ function savePhoto() {
   Substation.postFormDataByAjax("/uploadSubstationImg", params, function (data) {
     if (data.code == 200) {
       $.toast("保存成功");
-      window.history.back();
+      // window.history.back();
     }
   });
 }

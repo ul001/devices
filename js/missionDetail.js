@@ -159,6 +159,7 @@ jQuery(document).ready(function () {
                             $.toast("无法获取地理位置，请检查网络后重试。");
                             return;
                         }
+
                         if (loc != "" && loc != null) {
                             var array = loc.split(";");
                             lat = array[0];
@@ -231,9 +232,13 @@ jQuery(document).ready(function () {
                             if (missionTypeid == 1) {
                                 //巡检任务
                                 localStorage.setItem("fSubname", "执行情况");
-                                $.confirm('单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。', '注意！', function () {
+                                if ($("#carryOut").text() == "查看任务") {
                                     window.location.href = "patrolContent.html";
-                                });
+                                } else {
+                                    $.confirm('单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。', '注意！', function () {
+                                        window.location.href = "patrolContent.html";
+                                    });
+                                }
                             } else if (missionTypeid == 2) {
                                 //现场交接任务
                                 localStorage.setItem("fSubname", "执行情况");
