@@ -156,7 +156,7 @@ jQuery(document).ready(function () {
                         var lon = "";
                         var addr = "";
                         if (!loc.length) {
-                            $.toast("无法获取地理位置，请检查网络后重试。");
+                            $.toast("无法获取地理位置，请确保定位授权后重试。");
                             return;
                         }
 
@@ -173,7 +173,7 @@ jQuery(document).ready(function () {
                             fLatitude: lat,
                             fLocation: addr
                         };
-                        //                        alert(""+taskID+","+lon+","+lat+","+addr);
+//                                                alert(""+taskID+","+lon+","+lat+","+addr);
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
                             $.toast("签到成功！");
                             location.reload();
