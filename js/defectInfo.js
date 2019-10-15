@@ -69,7 +69,7 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
     }
     if(canClick=="false"){
         $($("input")).each(function(){
-            $(this).attr("disabled",true);
+            $(this).attr("readonly",true);
         });
         $($("select")).each(function(){
             var thisInput = $(this).parent();
@@ -77,7 +77,7 @@ Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceprob
             if(this.selectedIndex!=-1){
                 thisValue = (this.options[this.selectedIndex]).innerText;
             }
-            thisInput.html('<input type="text" disabled value="'+thisValue+'">');
+            thisInput.html('<input type="text" readonly value="'+thisValue+'">');
         });
         $(".upload_img_wrap .upload_img").unbind();
         $(".upload_img_wrap .upload_img").css("display","none");
@@ -212,7 +212,9 @@ function saveFormData() {
         return;
     }
     var params = new FormData($('#form1')[0]);
+    var taskId = localStorage.getItem("missiontaskID");
     params.append("fDeviceproblemid", fDeviceproblemid);
+    params.append("fTaskid", taskId);
     Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
