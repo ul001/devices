@@ -121,6 +121,9 @@ function loadPage(){
             $(".tab-link").eq(0).click();
             if(canClick=="false"){
                 $($("input")).each(function(){
+                    $(this).attr("readonly",true);
+                });
+                $($(":radio")).each(function(){
                     $(this).attr("disabled",true);
                 });
                 $($("select")).each(function(){

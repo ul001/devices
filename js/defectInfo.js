@@ -214,7 +214,7 @@ function saveFormData() {
     var params = new FormData($('#form1')[0]);
     var taskId = localStorage.getItem("missiontaskID");
     params.append("fDeviceproblemid", fDeviceproblemid);
-    params.append("fTaskid", taskId);
+    params.append("fTaskId", taskId);
     Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");

@@ -334,7 +334,7 @@ jQuery(document).ready(function () {
                     var finishNum = this.taskUserFinishNum;
                     if(doNum==finishNum){
                         showHasCommit = "<span class='greenColor'>("+finishNum+"/"+doNum+")</span>";
-                        showCommitClass=" canBoom";
+                        showCommitClass=" hasBoom";
                     }else if(finishNum==0){
                         showHasCommit = "<span class='grayColor'>("+finishNum+"/"+doNum+")</span>";
 //                        showCommitClass=" hasBoom";

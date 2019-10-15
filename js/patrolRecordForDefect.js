@@ -42,9 +42,9 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
                 stateStr="已处理";
                 break;
             }
-            html+="<div class=\"item-footer row no-gutter\" data-id=\""+this.fDeviceproblemid+"\">\n" +
+            html+="<div class=\"item-footer row no-gutter\" data-id=\""+this.fDeviceproblemid+"\" value=\""+this.treePathName+"\">\n" +
 "                            <div class=\"col-10\"><i class=\"icon icon-alarm\"></i></div>\n" +
-"                            <div class=\"col-85\"><span class=\"redColor\">(设备编号:"+this.treePathName+")"+this.fDeviceproblemdes+"</span><br>\n" +
+"                            <div class=\"col-85\"><span class=\"redColor\">(设备名称:"+this.treePathName+")"+this.fDeviceproblemdes+"</span><br>\n" +
 "                                位置："+problemStr+" 状态："+stateStr+"<br>发现时间："+this.fCreatetime+"\n" +
 "                            </div>\n" +
 "                            <div class=\"col-5\">\n" +
@@ -55,6 +55,8 @@ Substation.getDataByAjax("/getLatestThreeDeviceProblem",{fSubid:selectSubid},fun
         $(".list-container").append(html);
         $(".list-container .item-footer").unbind().click(function(){
             var problemId = $(this).attr("data-id");
+            var clickTree = $(this).attr("value");
+            localStorage.setItem("clickTree",clickTree);
             localStorage.setItem("canClick",false);
             window.location.href="defectInfo.html?fDeviceproblemid="+problemId;
         });

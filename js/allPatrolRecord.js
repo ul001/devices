@@ -56,11 +56,11 @@ function addItems(number) {
                     $("#listContainer").append("<div class=\"card\" id=\""+this.fPlacecheckformid+"\">\n" +
                                                "                    <div class=\"card-content\">\n" +
                                                "                        <div class=\"card-content-inner row no-gutter\">\n" +
-                                               "                            <div class=\"col-10\">\n" +
+/*                                               "                            <div class=\"col-10\">\n" +
                                                 iconStr +
-                                               "                            </div>\n" +
-                                               "                            <div class=\"col-85\">\n" +
-                                               "                                <p class=\"subName\">"+this.fTaskName+"<span class=\"blueColor\">("+this.fStateExplain+")</span></p>\n" +
+                                               "                            </div>\n" +*/
+                                               "                            <div class=\"col-95\">\n" +
+                                               "                                <p class=\"subName\">"+this.fCreatetime.substring(0,11)+"<span class=\"blueColor\">("+this.fStateExplain+")</span></p>\n" +
 //                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
                                                "                                <p>最新一次巡检时间：<span class=\"blueColor\">"+this.fCreatetime+"</span></p>\n" +
                                                "                                <p>本次已发现缺陷：<span class=\"redColor\">"+this.fproblemTotal+" </span>个  未处理：<span class=\"redColor\">"+this.funsolvedTotal+" </span>个</p>\n" +

@@ -77,7 +77,7 @@ function addItems(number, lastIndex) {
                         "                            </div>\n" +
                         "                            <div class=\"col-85\">\n" +
                         "                                <p><span\n" +
-                        "                                        class=\"redColor\">(设备编号:"+this.treePathName+")"+this.fDeviceproblemdes+"</span>\n" +
+                        "                                        class=\"redColor\">(设备名称:"+this.treePathName+")"+this.fDeviceproblemdes+"</span>\n" +
                         "                                </p>\n" +
                         "                                <p>危害:"+this.fProblemharm+"</p>\n" +
                         "                                <p>具体位置:"+problemStr+"</p>\n" +
