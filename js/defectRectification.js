@@ -64,7 +64,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
                 var proId = $(this).attr("id");
                 var dataTree = $(this).attr("data-tree");
                 localStorage.setItem("clickTree",dataTree);
-                window.location.href="defectInfo.html?fDeviceproblemid="+proId;
+                window.location.href="defectInfo.html?fDeviceproblemid="+proId+"&taskProblem=1";
             });
             if(data.imgName==null||data.imgName==""){
                 $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');

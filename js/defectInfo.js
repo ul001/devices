@@ -14,11 +14,19 @@
 var imgNum1 = 0;
 var imgNum = 0;
 var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
+var taskProblem = Substation.GetQueryString("taskProblem");
 var selectSubid = localStorage.getItem("fSubid");
 var clickTree = localStorage.getItem("clickTree");
 var canClick = localStorage.getItem("canClick");
+var url = "/getDeviceProblemDetail";
+var problemParam={fDeviceproblemid:fDeviceproblemid};
+if(taskProblem==1){
+    var taskId = localStorage.getItem("taskID");
+    url = "/getDeviceProblemDetailByfTaskid";
+    problemParam['fTaskid']=taskId;
+}
 
-Substation.getDataByAjax("/getDeviceProblemDetail",{fDeviceproblemid:fDeviceproblemid},function(data){
+Substation.getDataByAjax(url,problemParam,function(data){
     var imgUrl = data.imgUrl;
     var defectJson = data.tDevDeviceproblem;
     var beforeimg = data.beforeimg;

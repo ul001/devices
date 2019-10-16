@@ -94,18 +94,18 @@ jQuery(document).ready(function () {
                     if (taskchargerid != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
                     }
-                    if (missionTypeid != 1) {
+/*                    if (missionTypeid != 1) {
                         $("#addVarContain125").css("display", "none");
-                    }
+                    }*/
                     if (showmissionBtn != "missionFinish") {
                         if (!temp) {
                             var showstr = "";
-                            if (missionTypeid == 1) {
+//                            if (missionTypeid == 1) {
                                 showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
                                 $("#addVarContain126").html(showstr);
                                 $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick", false);
-                            }
+//                            }
                             /*                        else{
                                                         showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看缺陷项</a> </div> </div>';
                                                     }*/
@@ -125,14 +125,14 @@ jQuery(document).ready(function () {
                                 $("#carryOut").attr("name", "false");
                             }
                         }
-                        if (missionTypeid != 1) {
+/*                        if (missionTypeid != 1) {
                             var showStr =
                                 '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
                             $("#addVarContain126").html(showStr);
                             $("#carryOut").attr("name", "false");
                             $("#submitTo").attr("name", "false");
                             localStorage.setItem("canClick", true);
-                        }
+                        }*/
                     }
                     //现场签到按钮事件
                     $("#checkIn").click(function () {
@@ -200,20 +200,12 @@ jQuery(document).ready(function () {
                                         fTaskid: taskID,
                                         fExplain: textDetail
                                     };
-                                    if (missionTypeid == 3) {
-                                        Substation.getDataByAjax("/submitTask", param, function (data) {
-                                            /*localStorage.setItem("need-refresh", true);
-                                            window.history.back();*/
-                                            window.location.href = "todoItems.html";
-                                        });
-                                    } else {
-                                        // fExplain 执行情况
-                                        Substation.getDataByAjax("/submitUserTask", param, function (data) {
-                                            /*localStorage.setItem("need-refresh", true);
-                                            window.history.back();*/
-                                            window.location.href = "todoItems.html";
-                                        });
-                                    }
+                                    // fExplain 执行情况
+                                    Substation.getDataByAjax("/submitUserTask", param, function (data) {
+                                        /*localStorage.setItem("need-refresh", true);
+                                        window.history.back();*/
+                                        window.location.href = "todoItems.html";
+                                    });
                                 }
                             );
                         }
