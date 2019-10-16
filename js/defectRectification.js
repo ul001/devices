@@ -1,6 +1,7 @@
 var selectSubid = localStorage.getItem("fSubid");
 var taskId = localStorage.getItem("missiontaskID");
 var needUpdate = localStorage.getItem("need-update");
+var accessTemp = false;
 if(needUpdate){
     localStorage.removeItem("need-update");
     location.reload();
@@ -61,10 +62,14 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
                       "                    </div>");
             });
             $(".card-content-inner").click(function(){
-                var proId = $(this).attr("id");
-                var dataTree = $(this).attr("data-tree");
-                localStorage.setItem("clickTree",dataTree);
-                window.location.href="defectInfo.html?fDeviceproblemid="+proId+"&taskProblem=1";
+                if(accessTemp){
+                    var proId = $(this).attr("id");
+                    var dataTree = $(this).attr("data-tree");
+                    localStorage.setItem("clickTree",dataTree);
+                    window.location.href="defectInfo.html?fDeviceproblemid="+proId+"&taskProblem=1";
+                }else{
+                    $.toast("请先让客户签名！");
+                }
             });
             if(data.imgName==null||data.imgName==""){
                 $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
@@ -72,6 +77,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
                     window.location.href="draw.html";
                 });
             }else{
+                accessTemp=true;
                 $(".card-footer").html('<img src="'+(Substation.ipAddressFromAPP + imgUrl + "/" + data.imgName)+'" style="width:100%;">');
             }
         }else{

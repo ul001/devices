@@ -55,12 +55,15 @@ Substation.getDataByAjax(url,problemParam,function(data){
     $("#fResolution").val(defectJson.fResolution);
     if(canClick=="false"){
         $("#fClientadvice").val(defectJson.fClientadvice);
+        $("#fState").val(defectJson.fState);
     }else{
-        if(defectJson.fClientadvice!=""){
+        if(defectJson.fClientadvice!=""&&defectJson.fClientadvice!=null&&defectJson.hasOwnProperty("fClientadvice")){
             $("#fClientadvice").val(defectJson.fClientadvice);
         }
+        if(defectJson.fState!=""&&defectJson.hasOwnProperty("fState")&&defectJson.fState!=null){
+            $("#fState").val(defectJson.fState);
+        }
     }
-    $("#fState").val(defectJson.fState);
     if(beforeimg.length>0){
         $.each(beforeimg, function (i, value) {
             imgNum1++;

@@ -19,9 +19,9 @@ listenToUser(canvas);
 
 getColor();
 
-window.onbeforeunload = function () {
+/*window.onbeforeunload = function () {
     return "Reload site?";
-};
+};*/
 
 function autoSetSize(canvas) {
     canvasSetSize();
