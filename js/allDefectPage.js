@@ -29,11 +29,12 @@ function addItems(number, lastIndex) {
         fSubid:selectSubid,
         pageNum:pageNum,
         pageSize:number};
-    var dateSelectVal = $("#dateSelect").val();
+    var dateStartVal = $("#dateStart").val();
+    var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
-    if(dateSelectVal!=""){
-        params['ftimeStart']=dateSelectVal+" 00:00:00";
-        params['ftimeEnd']=dateSelectVal+" 23:59:59";
+    if(dateStartVal!=""&&dateEndVal!=""){
+        params['ftimeStart']=dateStartVal+" 00:00:00";
+        params['ftimeEnd']=dateEndVal+" 23:59:59";
     }
     if(stateVal!=""){
         params['fState']=stateVal;
@@ -143,6 +144,7 @@ $('#searchBtn').click(function () {
     getFirstPage();
 });
 
-$("#dateSelect").calendar();
+$("#dateStart").calendar();
+$("#dateEnd").calendar();
 
 $.init();

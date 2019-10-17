@@ -21,11 +21,15 @@ var identification = decodeURIComponent(defectJson.identification);
 var deadline = decodeURIComponent(defectJson.deadline);
 var dangerous = defectJson.dangerous;
 $("#defectDiscribe").val(name);
-var defectPositionArray = defectPosition.split(";");
-$("#defectPosition").empty();
-$(defectPositionArray).each(function (index, obj) {
-    $("#defectPosition").append('<input type="checkbox" value="' + obj + '" id="' + index + '"><label for="' + index + '">' + obj + '</label><br>');
-});
+if(defectPosition==""||defectPosition==null){
+    $(".redColor").remove();
+}else{
+    var defectPositionArray = defectPosition.split(";");
+    $("#defectPosition").empty();
+    $(defectPositionArray).each(function (index, obj) {
+        $("#defectPosition").append('<input type="checkbox" value="' + obj + '" id="' + index + '"><label for="' + index + '">' + obj + '</label><br>');
+    });
+}
 $("#dangerCategory").val(defectJson.dangerCategory);
 $("#dangerType").val(defectJson.dangerType);
 $("#dangerous").val(dangerous);
@@ -171,10 +175,10 @@ function saveFormData() {
         checkedVal = checkedVal.substring(0, checkedVal.length - 1);
         defectPositionVal = defectPosition + checkedVal;
     }
-    if ($(".fileInput") && $(".fileInput").length == 0) {
+/*    if ($(".fileInput") && $(".fileInput").length == 0) {
         $.toast("请上传现场照！");
         return;
-    }
+    }*/
     var params = new FormData($('#form1')[0]);
     params.append("fTimelimit", deadline);
     params.append("fProblemlocation", defectPositionVal);

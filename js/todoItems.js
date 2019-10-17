@@ -6,8 +6,38 @@ jQuery(document).ready(function () {
   var itemsPerLoad = 10;
   var pageNum = 1;
   var tasktypeid = "";
+  var tasktypeName = "";
   var tabName = 1;
   var taskstatus = 0;
+  var clickTaskTypeId = localStorage.getItem("taskTypeId");
+  var clickTasktypeName = localStorage.getItem("taskTypeName");
+  var thisClickItem = localStorage.getItem("thisItem");
+  if(clickTaskTypeId!=null){
+    tasktypeid = clickTaskTypeId;
+  }
+  if(clickTasktypeName!=null&&clickTasktypeName!=""){
+    $(".clickrightbtn").text(clickTasktypeName);
+  }
+  if(thisClickItem!=""&&thisClickItem!=null){
+    $("#"+thisClickItem).click();
+    var num = $("#"+thisClickItem).attr("name");
+    tabName=num;
+    $("#titleContent").text("");
+    if(num==1){
+        $("#titleContent").text("待办事项");
+    }else if(num==2){
+        $("#titleContent").text("在办事项");
+    }else if(num==3){
+        $("#titleContent").text("办毕事项");
+    }
+    getFirstPage(num);
+  }else{
+    $("#daiban").click();
+    var num = $("#daiban").attr("name");
+    tabName=num;
+    $("#titleContent").text("待办事项");
+    getFirstPage(num);
+  }
 
   $(".buttons-tab .tab-link").click(function () {
     var i = $(this).index();
@@ -97,6 +127,9 @@ jQuery(document).ready(function () {
           onClick: function () {
             $(".clickrightbtn").text("全部");
             tasktypeid = "";
+            tasktypeName = "全部";
+            localStorage.setItem("taskTypeId",tasktypeid);
+            localStorage.setItem("taskTypeName",tasktypeName);
             pageNum = 1;
             getFirstPage(tabName);
           }
@@ -133,6 +166,9 @@ jQuery(document).ready(function () {
           onClick: function () {
             $(".clickrightbtn").text("巡检");
             tasktypeid = 1;
+            tasktypeName = "巡检";
+            localStorage.setItem("taskTypeId",tasktypeid);
+            localStorage.setItem("taskTypeName",tasktypeName);
             pageNum = 1;
             getFirstPage(tabName);
           }
@@ -142,6 +178,9 @@ jQuery(document).ready(function () {
           onClick: function () {
             $(".clickrightbtn").text("消缺");
             tasktypeid = 3;
+            tasktypeName = "消缺";
+            localStorage.setItem("taskTypeId",tasktypeid);
+            localStorage.setItem("taskTypeName",tasktypeName);
             pageNum = 1;
             getFirstPage(tabName);
           }
@@ -160,13 +199,6 @@ jQuery(document).ready(function () {
         // },
       ]
     });
-  });
-
-  //点击tab
-  $(".tab-link.button").click(function () {
-    tabName = Number(this.name);
-    pageNum = 1;
-    getFirstPage(tabName);
   });
 
   function getFirstPage(clickNum) {
@@ -292,17 +324,10 @@ jQuery(document).ready(function () {
             text +=
               '                                        <div class="col-70">';
             text +=
-              '                                            <p class="subName limit-length">['+this.fTaskid+']' +
-              this.fTaskname;
+              '                                            <p class="subName limit-length">' +
+              this.fSubName;
             text += "                                            </p>";
-            text +=
-              "                                            <p><span>" +
-              username +
-              "</span>";
-            text +=
-              "                                                <span>" +
-              this.fTaskcreatedate.substring(0,11) +
-              "</span></p>";
+            text +="<p>任务编号："+this.fTaskid+"</p><p>实际完成时间："+(this.fTaskfinishdate==undefined?"":this.fTaskfinishdate)+"</p>";
             text += "                                        </div>";
             text +=
               '                                        <div class="col-10">';
@@ -373,17 +398,11 @@ jQuery(document).ready(function () {
             text +=
               '                                        <div class="col-75'+showCommitClass+'">';
             text +=
-              '                                            <p class="subName limit-length">['+this.fTaskid+']' +
-              this.fTaskname;
+              '                                            <p class="subName limit-length">'+
+              this.fSubName;
             text += "                                            </p>";
             text +=
-              "                                            <p><span>" +
-              username +
-              "</span>";
-            text +=
-              "                                                <span>" +
-              this.fTaskcreatedate.substring(0,11) +
-              "</span>"+showHasCommit+"</p>";
+              "<p>任务编号："+this.fTaskid+"</p><p>计划完成时间："+this.fDeadlinedate.substring(0,11)+showHasCommit+"</p>";
             text += "                                        </div>";
             text +=
               '                                        <div class="col-15">';
@@ -461,8 +480,7 @@ jQuery(document).ready(function () {
     getFirstPage(tabName);
   });
 
-  $("#tab1").click();
-  getFirstPage(tabName);
+//  getFirstPage(tabName);
 
   var lastIndex = 10;
   //上拉加载
@@ -486,6 +504,15 @@ jQuery(document).ready(function () {
       lastIndex = $(".list-container .card").length;
       // $.pullToRefreshDone(".pull-to-refresh-content");
     }, 1000);
+  });
+
+  //记住状态
+  $(".tab-link.button").click(function(){
+    var thisId = $(this).attr("id");
+    localStorage.setItem("thisItem",thisId);
+    tabName = Number(this.name);
+    pageNum = 1;
+    getFirstPage(tabName);
   });
 
   $.init();
