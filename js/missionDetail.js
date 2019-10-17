@@ -25,7 +25,7 @@ jQuery(document).ready(function () {
         localStorage.setItem("canClick", false);
         $("#clickManager").css("display", "none");
         var showstr =
-            '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
+            '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行明细</a> </div> </div>';
         $("#addVarContain126").append(showstr);
         $("#carryOut").attr("name", "false");
     } else {
@@ -78,7 +78,7 @@ jQuery(document).ready(function () {
                     $("#chargerName").html(taskInfo.fTaskchargername);
                     $("#createTime").html(taskInfo.fStartdate.substring(0, 11));
                     $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 11));
-                    var missionContent =taskInfo.fTaskcontent;
+                    var missionContent = taskInfo.fTaskcontent;
                     $("#missionCont").html(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
                     taskchargerid = taskInfo.fTaskchargerid;
@@ -93,19 +93,26 @@ jQuery(document).ready(function () {
                     });
                     if (taskchargerid != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
+                    } else {
+                        $("#addVarContain124").css("display", "none");
                     }
-/*                    if (missionTypeid != 1) {
+                    /*                    if (missionTypeid != 1) {
                         $("#addVarContain125").css("display", "none");
                     }*/
                     if (showmissionBtn != "missionFinish") {
                         if (!temp) {
                             var showstr = "";
-//                            if (missionTypeid == 1) {
-                                showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看任务</a> </div> </div>';
+                            if (taskchargerid != Substation.loginUserid) {
+                                showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行明细</a> </div> </div>';
                                 $("#addVarContain126").html(showstr);
                                 $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick", false);
-//                            }
+                            } else {
+                                showstr = '<div class="row buttonsEvent"> <div class = "col-50" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行明细</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交任务</a> </div>';
+                                $("#addVarContain126").html(showstr);
+                                $("#carryOut").attr("name", "false");
+                                localStorage.setItem("canClick", false);
+                            }
                             /*                        else{
                                                         showstr = '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看缺陷项</a> </div> </div>';
                                                     }*/
@@ -125,14 +132,21 @@ jQuery(document).ready(function () {
                                 $("#carryOut").attr("name", "false");
                             }
                         }
-/*                        if (missionTypeid != 1) {
-                            var showStr =
-                                '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
-                            $("#addVarContain126").html(showStr);
-                            $("#carryOut").attr("name", "false");
-                            $("#submitTo").attr("name", "false");
-                            localStorage.setItem("canClick", true);
-                        }*/
+                        /*                        if (missionTypeid != 1) {
+                                                    var showStr =
+                                                        '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+                                                    $("#addVarContain126").html(showStr);
+                                                    $("#carryOut").attr("name", "false");
+                                                    $("#submitTo").attr("name", "false");
+                                                    localStorage.setItem("canClick", true);
+                                                }*/
+                    }
+
+                    if (taskchargerid != Substation.loginUserid) {
+                        $("#clickManager").css("display", "none");
+                    } else {
+                        $("#addVarContain124").css("display", "none");
+
                     }
                     //现场签到按钮事件
                     $("#checkIn").click(function () {
@@ -187,28 +201,44 @@ jQuery(document).ready(function () {
 
                     //提交按钮事件
                     $("#submitTo").click(function () {
-                        if (this.name == "true") {
-                            $.toast("提交任务前，请先签到。");
-                        } else {
-                            $.confirm('确定要提交任务吗？',
-                                function () {
-                                    var textDetail = $("#textareaDetail").val();
-                                    if (!textDetail) {
-                                        textDetail = "";
+                        if (taskchargerid != Substation.loginUserid) {
+                            if (this.name == "true") {
+                                $.toast("提交任务前，请先签到。");
+                            } else {
+                                $.confirm('确定要提交任务吗？',
+                                    function () {
+                                        var textDetail = $("#textareaDetail").val();
+                                        if (!textDetail) {
+                                            textDetail = "";
+                                        }
+                                        var param = {
+                                            fTaskid: taskID,
+                                            fExplain: textDetail
+                                        };
+                                        // fExplain 执行情况
+                                        Substation.getDataByAjax("/submitUserTask", param, function (data) {
+                                            /*localStorage.setItem("need-refresh", true);
+                                            window.history.back();*/
+                                            window.location.href = "todoItems.html";
+                                        });
                                     }
-                                    var param = {
-                                        fTaskid: taskID,
-                                        fExplain: textDetail
-                                    };
-                                    // fExplain 执行情况
-                                    Substation.getDataByAjax("/submitUserTask", param, function (data) {
-                                        /*localStorage.setItem("need-refresh", true);
-                                        window.history.back();*/
-                                        window.location.href = "todoItems.html";
-                                    });
-                                }
-                            );
+                                );
+                            }
+                        } else {
+                            $.confirm("确定要提交并结束任务吗？", function () {
+                                var param;
+                                param = {
+                                    "fTaskid": taskID
+                                };
+                                Substation.getDataByAjax("/submitTask", param, function (
+                                    data
+                                ) {
+
+                                    window.location.href = "todoItems.html";
+                                });
+                            });
                         }
+
                     });
 
                     //执行任务按钮事件
@@ -222,7 +252,7 @@ jQuery(document).ready(function () {
                             if (missionTypeid == 1) {
                                 //巡检任务
                                 localStorage.setItem("fSubname", "执行情况");
-                                if ($("#carryOut").text() == "查看任务") {
+                                if ($("#carryOut").text() == "执行明细") {
                                     window.location.href = "patrolContent.html";
                                 } else {
                                     $.confirm('单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。', '注意！', function () {
