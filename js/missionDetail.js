@@ -78,6 +78,35 @@ jQuery(document).ready(function () {
                     $("#chargerName").html(taskInfo.fTaskchargername);
                     $("#createTime").html(taskInfo.fStartdate.substring(0, 11));
                     $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 11));
+
+                    //任务开始时间
+                    $("#ActStartTime").html(taskInfo.fTaskstartdate);
+                    //任务提交时间
+                    $("#ActFinishTime").html(taskInfo.fTaskfinishdate);
+                    //缺陷总数
+                    $("#TotalDefectNum").html(taskInfo.deviceProblemSum);
+                    if (taskInfo.deviceProblemSum > 0) {
+                        $("#TotalDefectNum").css("color", "red");
+                    }
+                    //缺陷未处理数
+                    $("#Unprocessednumber").html(taskInfo.deviceProblemUnresolved);
+                    if (taskInfo.deviceProblemUnresolved > 0) {
+                        $("#Unprocessednumber").css("color", "red");
+                    }
+                    //任务执行结果
+                    if (taskInfo.taskResult == 3) {
+                        $("#TotalDefect").html("按时完成");
+                        $("#TotalDefect").css("color", "springgreen");
+                    } else if (taskInfo.taskResult == 4) {
+                        $("#TotalDefect").html("超时完成");
+                        $("#TotalDefect").css("color", "red");
+                    } else if (taskInfo.taskResult == 5) {
+                        $("#TotalDefect").html("未完成");
+                        $("#TotalDefect").css("color", "red");
+                    } else {
+                        $("#TotalDefect").html("-");
+                    }
+
                     var missionContent = taskInfo.fTaskcontent;
                     $("#missionCont").html(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
