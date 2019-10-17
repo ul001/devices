@@ -329,30 +329,30 @@ jQuery(document).ready(function () {
                     text += "                            </li>";
                     text +=
                         "                            <!-- 除自己外 且状态在执行中的任务 -->";
-                    text += "                            <li>";
-                    text +=
-                        '                                <div class="showDiv item-content">';
-                    text +=
-                        '                                    <div class="item-inner">';
-                    text +=
-                        '                                        <div class="item-title label getUserid">';
-                    text += "                                            代提交任务:";
-                    text += "                                        </div>";
-                    text +=
-                        '                                        <div class="item-input">';
-                    text +=
-                        '                                            <label class="label-switch">';
-                    text +=
-                        '                                                <input type="checkbox" id="check' + this.fUserid + '" value="no" name="' +
-                        this.fUserid +
-                        '">';
-                    text +=
-                        '                                                <div class="checkbox"></div>';
-                    text += "                                            </label>";
-                    text += "                                        </div>";
-                    text += "                                    </div>";
-                    text += "                                </div>";
-                    text += "                            </li>";
+                    // text += "                            <li>";
+                    // text +=
+                    //     '                                <div class="showDiv item-content">';
+                    // text +=
+                    //     '                                    <div class="item-inner">';
+                    // text +=
+                    //     '                                        <div class="item-title label getUserid">';
+                    // text += "                                            代提交任务:";
+                    // text += "                                        </div>";
+                    // text +=
+                    //     '                                        <div class="item-input">';
+                    // text +=
+                    //     '                                            <label class="label-switch">';
+                    // text +=
+                    //     '                                                <input type="checkbox" id="check' + this.fUserid + '" value="no" name="' +
+                    //     this.fUserid +
+                    //     '">';
+                    // text +=
+                    //     '                                                <div class="checkbox"></div>';
+                    // text += "                                            </label>";
+                    // text += "                                        </div>";
+                    // text += "                                    </div>";
+                    // text += "                                </div>";
+                    // text += "                            </li>";
                     text += "                        </ul>";
                     $("#missionDetail").append(text);
 
@@ -438,7 +438,7 @@ jQuery(document).ready(function () {
     //46.总任务提交按钮事件
     // userIds 1,2,3
     $("#submitTo").click(function () {
-        $.confirm("确定要结束该任务吗？",function(){
+        $.confirm("确定要提交并结束任务吗？", function () {
             var param;
             if (taskTobeSubmitArr.length > 0) {
                 var arrStr = taskTobeSubmitArr.join(',');
@@ -455,7 +455,7 @@ jQuery(document).ready(function () {
                 data
             ) {
                 localStorage.removeItem("selectPersons");
-                window.location.href="todoItems.html";
+                window.location.href = "todoItems.html";
             });
         });
     });
