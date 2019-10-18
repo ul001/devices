@@ -56,6 +56,14 @@ Substation.getDataByAjax(url,problemParam,function(data){
     if(canClick=="false"){
         $("#fClientadvice").val(defectJson.fClientadvice);
         $("#fState").val(defectJson.fState);
+        if(defectJson.fSolvedUserName!=undefined){
+            $(".showSolveUser").css("display","block");
+            $("#fSolveUser").val(defectJson.fSolvedUserName);
+        }
+        if(defectJson.fUpdateDate!=undefined){
+            $(".showSolveTime").css("display","block");
+            $("#fSolveTime").val(defectJson.fUpdateDate);
+        }
     }else{
         if(defectJson.fClientadvice!=""&&defectJson.fClientadvice!=null&&defectJson.hasOwnProperty("fClientadvice")){
             $("#fClientadvice").val(defectJson.fClientadvice);

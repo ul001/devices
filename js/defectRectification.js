@@ -11,7 +11,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
     $(".card-content").empty();
     $(".card-footer").empty();
     $("#subName").text(data.subName);
-    $(".title_color").text(data.subName);
+//    $(".title_color").text(data.subName);
     if(data.tDevDeviceproblemList.hasOwnProperty("list")){
         if(data.tDevDeviceproblemList.list.length>0){
             $(data.tDevDeviceproblemList.list).each(function(){
@@ -39,6 +39,17 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
                     case "1":
                     stateStr="<span class=\"button-success\">已处理</span>";
                     break;
+                    default:
+                    stateStr="<span class=\"redColor\">未处理</span>";
+                    break;
+                }
+                var solveUser = "";
+                if(this.fSolvedUserName!=undefined){
+                    solveUser="<p>处理人员："+this.fSolvedUserName+"</p>";
+                }
+                var solveTime = "";
+                if(this.fUpdateDate!=undefined){
+                    solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
                 }
                 $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\""+this.treePathName+"\" id=\""+this.fDeviceproblemid+"\">\n" +
                       "                        <div class=\"col-10\">\n" +
@@ -54,6 +65,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
                       "                            <p>消缺期限："+this.fTimelimit+"</p>\n" +
                       "                            <p>处理状态："+stateStr+"</p>\n" +
                       "                            <p>发现时间："+this.fCreatetime+"</p>\n" +
+                      solveUser+solveTime+
                       "                        </div>\n" +
                       "                        <div class=\"col-5\">\n" +
                       "                            <i class=\"icon icon-right\"></i>\n" +

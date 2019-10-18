@@ -1,5 +1,5 @@
-var selectSubid = localStorage.getItem("fSubid");
-
+//var selectSubid = localStorage.getItem("fSubid");
+var selectSubid="";
 var loading = false;
 var itemsPerLoad = 5;
 var pageNum = 1;
@@ -26,18 +26,26 @@ function addItems(number, lastIndex) {
     var html = '';
     var url = "/getDeviceProblemList";
     var params = {
-        fSubid:selectSubid,
         pageNum:pageNum,
         pageSize:number};
+    if(selectSubid!=""){
+        params['fSubid']=selectSubid;
+    }
     var dateStartVal = $("#dateStart").val();
     var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
-    if(dateStartVal!=""&&dateEndVal!=""){
+    var dangerVal = $("#dangerType").val();
+    if(dateStartVal!=""){
         params['ftimeStart']=dateStartVal+" 00:00:00";
+    }
+    if(dateEndVal!=""){
         params['ftimeEnd']=dateEndVal+" 23:59:59";
     }
     if(stateVal!=""){
         params['fState']=stateVal;
+    }
+    if(dangerVal!=""){
+        params['fProblemLevel']=dangerVal;
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         if (data.tDevDeviceproblemList.list.length > 0) {
@@ -69,6 +77,17 @@ function addItems(number, lastIndex) {
                     case "1":
                     stateStr="已处理";
                     break;
+                    default:
+                    stateStr="<span class=\"redColor\">未处理</span>";
+                    break;
+                }
+                var solveUser = "";
+                if(this.fSolvedUserName!=undefined){
+                    solveUser="<p>处理人员："+this.fSolvedUserName+"</p>";
+                }
+                var solveTime = "";
+                if(this.fUpdateDate!=undefined){
+                    solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
                 }
                 html += "<div class=\"card\" id=\""+this.fDeviceproblemid+"\" value=\""+this.treePathName+"\">\n" +
                         "                    <div class=\"card-content\">\n" +
@@ -89,6 +108,7 @@ function addItems(number, lastIndex) {
                         "                                <p>客户意见:"+this.fClientadvice+"</p>\n" +
                         "                                <p>处理状态:"+stateStr+"</p>\n" +
                         "                                <p>发现时间:"+this.fCreatetime+"</p>\n" +
+                        solveUser+solveTime+
                         "                            </div>\n" +
                         "                            <div class=\"col-5\">\n" +
                         "                                <i class=\"icon icon-right\"></i>\n" +
@@ -141,6 +161,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
 });
 
 $('#searchBtn').click(function () {
+    $(".close-panel").click();
     getFirstPage();
 });
 
