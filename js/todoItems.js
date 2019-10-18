@@ -12,29 +12,29 @@ jQuery(document).ready(function () {
   var clickTaskTypeId = localStorage.getItem("taskTypeId");
   var clickTasktypeName = localStorage.getItem("taskTypeName");
   var thisClickItem = localStorage.getItem("thisItem");
-  if(clickTaskTypeId!=null){
+  if (clickTaskTypeId != null) {
     tasktypeid = clickTaskTypeId;
   }
-  if(clickTasktypeName!=null&&clickTasktypeName!=""){
+  if (clickTasktypeName != null && clickTasktypeName != "") {
     $(".clickrightbtn").text(clickTasktypeName);
   }
-  if(thisClickItem!=""&&thisClickItem!=null){
-    $("#"+thisClickItem).click();
-    var num = $("#"+thisClickItem).attr("name");
-    tabName=num;
+  if (thisClickItem != "" && thisClickItem != null) {
+    $("#" + thisClickItem).click();
+    var num = $("#" + thisClickItem).attr("name");
+    tabName = num;
     $("#titleContent").text("");
-    if(num==1){
-        $("#titleContent").text("待办事项");
-    }else if(num==2){
-        $("#titleContent").text("在办事项");
-    }else if(num==3){
-        $("#titleContent").text("办毕事项");
+    if (num == 1) {
+      $("#titleContent").text("待办事项");
+    } else if (num == 2) {
+      $("#titleContent").text("在办事项");
+    } else if (num == 3) {
+      $("#titleContent").text("办毕事项");
     }
     getFirstPage(num);
-  }else{
+  } else {
     $("#daiban").click();
     var num = $("#daiban").attr("name");
-    tabName=num;
+    tabName = num;
     $("#titleContent").text("待办事项");
     getFirstPage(num);
   }
@@ -128,8 +128,8 @@ jQuery(document).ready(function () {
             $(".clickrightbtn").text("全部");
             tasktypeid = "";
             tasktypeName = "全部";
-            localStorage.setItem("taskTypeId",tasktypeid);
-            localStorage.setItem("taskTypeName",tasktypeName);
+            localStorage.setItem("taskTypeId", tasktypeid);
+            localStorage.setItem("taskTypeName", tasktypeName);
             pageNum = 1;
             getFirstPage(tabName);
           }
@@ -167,8 +167,8 @@ jQuery(document).ready(function () {
             $(".clickrightbtn").text("巡检");
             tasktypeid = 1;
             tasktypeName = "巡检";
-            localStorage.setItem("taskTypeId",tasktypeid);
-            localStorage.setItem("taskTypeName",tasktypeName);
+            localStorage.setItem("taskTypeId", tasktypeid);
+            localStorage.setItem("taskTypeName", tasktypeName);
             pageNum = 1;
             getFirstPage(tabName);
           }
@@ -179,8 +179,8 @@ jQuery(document).ready(function () {
             $(".clickrightbtn").text("消缺");
             tasktypeid = 3;
             tasktypeName = "消缺";
-            localStorage.setItem("taskTypeId",tasktypeid);
-            localStorage.setItem("taskTypeName",tasktypeName);
+            localStorage.setItem("taskTypeId", tasktypeid);
+            localStorage.setItem("taskTypeName", tasktypeName);
             pageNum = 1;
             getFirstPage(tabName);
           }
@@ -327,7 +327,7 @@ jQuery(document).ready(function () {
               '                                            <p class="subName limit-length">' +
               this.fSubName;
             text += "                                            </p>";
-            text +="<p>任务编号："+this.fTaskid+"</p><p>实际完成时间："+(this.fTaskfinishdate==undefined?"":this.fTaskfinishdate)+"</p>";
+            text += "<p>任务编号：" + (this.fTasknumber == undefined ? "" : this.fTasknumber) + "</p><p>实际完成时间：" + (this.fTaskfinishdate == undefined ? "" : this.fTaskfinishdate) + "</p>";
             text += "                                        </div>";
             text +=
               '                                        <div class="col-10">';
@@ -354,26 +354,27 @@ jQuery(document).ready(function () {
             var showHasCommit = "";
             var showCommitClass = "";
             if (clickNum == 2) {
-                var doNum =this.taskUserNum;
-                var finishNum = this.taskUserFinishNum;
-                if(doNum>0){
-                    if(doNum==finishNum){
-                        showHasCommit = "<span class='greenColor'>("+finishNum+"/"+doNum+")</span>";
-                        showCommitClass=" hasBoom";
-                    }else if(finishNum==0){
-                        showHasCommit = "<span class='grayColor'>("+finishNum+"/"+doNum+")</span>";
-    //                        showCommitClass=" hasBoom";
-                    }else{
-                        showHasCommit = "<span class='redColor'>("+finishNum+"/"+doNum+")</span>";
-                        showCommitClass=" hasBoom";
-                    }
+              var doNum = this.taskUserNum;
+              var finishNum = this.taskUserFinishNum;
+              if (doNum > 0) {
+                if (doNum == finishNum) {
+                  showHasCommit = "<span class='greenColor'>(" + finishNum + "/" + doNum + ")</span>";
+                  showCommitClass = " hasBoom";
+                } else if (finishNum == 0) {
+                  showHasCommit = "<span class='grayColor'>(" + finishNum + "/" + doNum + ")</span>";
+                  //                        showCommitClass=" hasBoom";
+                } else {
+                  showHasCommit = "<span class='redColor'>(" + finishNum + "/" + doNum + ")</span>";
+                  showCommitClass = " hasBoom";
                 }
+              }
             }
             var user = this.fTaskcreateusername;
             var username = "";
             if (user != undefined) {
               username = user;
             }
+
             text += '                            <div class="card" >';
             text +=
               '                                <div class="card-content">';
@@ -398,13 +399,13 @@ jQuery(document).ready(function () {
             }
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-75'+showCommitClass+'">';
+              '                                        <div class="col-75' + showCommitClass + '">';
             text +=
-              '                                            <p class="subName limit-length">'+
+              '                                            <p class="subName limit-length">' +
               this.fSubName;
             text += "                                            </p>";
             text +=
-              "<p>任务编号："+this.fTaskid+"</p><p>计划完成时间："+this.fDeadlinedate.substring(0,11)+showHasCommit+"</p>";
+              "<p>任务编号：" + (this.fTasknumber == undefined ? "" : this.fTasknumber) + "</p><p>计划完成时间：" + this.fDeadlinedate.substring(0, 11) + showHasCommit + "</p>";
             text += "                                        </div>";
             text +=
               '                                        <div class="col-15">';
@@ -482,7 +483,7 @@ jQuery(document).ready(function () {
     getFirstPage(tabName);
   });
 
-//  getFirstPage(tabName);
+  //  getFirstPage(tabName);
 
   var lastIndex = 10;
   //上拉加载
@@ -509,9 +510,9 @@ jQuery(document).ready(function () {
   });
 
   //记住状态
-  $(".tab-link.button").click(function(){
+  $(".tab-link.button").click(function () {
     var thisId = $(this).attr("id");
-    localStorage.setItem("thisItem",thisId);
+    localStorage.setItem("thisItem", thisId);
     tabName = Number(this.name);
     pageNum = 1;
     getFirstPage(tabName);
