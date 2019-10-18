@@ -23,9 +23,13 @@
                 <span class="icon icon-left"></span>
                 返回
             </a>
-            <h1 class="title title_color">变电所所有缺陷</h1>
+            <a class="button button-link button-nav pull-right open-panel">
+                <span class="icon icon-menu"></span>
+            </a>
+            <h1 class="title title_color">
+                <p class="limit-length" id="titleContent"><span id="subName">所有变电所</span>缺陷记录</p></h1>
         </header>
-        <div class="bar bar-header-secondary row no-gutter" style="">
+        <!--<div class="bar bar-header-secondary row no-gutter" style="">
             <div class="col-50">
                 <label>日期:</label><input type="text" style="width:67%;" id="dateSelect" placeholder="选择日期" readonly/>
             </div>
@@ -39,7 +43,7 @@
             </div>
             <a id="searchBtn" class="button button-fill button-primary col-10" style="margin-bottom:0.6rem;padding-top:0.1rem;"><span
                     class="icon icon-search"></span></a>
-        </div>
+        </div>-->
         <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
              data-distance="100">
             <div class="pull-to-refresh-layer">
@@ -71,6 +75,66 @@
             <div class="infinite-scroll-preloader">
                 <div class="preloader"></div>
             </div>
+        </div>
+    </div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+<!--        <div class="content-block">
+            <a href="#" class="close-panel" style="display:none;">关闭</a>
+            &lt;!&ndash;            <button id="showOrHide" type="button" class="button">仅显示有设备分类</button>&ndash;&gt;
+        </div>-->
+        <div>
+            <label>起始日期：</label><input type="text" id="dateStart"
+                                     placeholder="选择日期" readonly/>
+        </div>
+        <div>
+            <label>起始日期：</label><input type="text" id="dateEnd"
+                                       placeholder="选择日期" readonly/>
+        </div>
+        <div>
+            <label>缺陷状态：</label>
+            <select id="fState">
+                <option value="">全部</option>
+                <option value="0">未处理</option>
+                <option value="1">已处理</option>
+            </select>
+        </div>
+        <div>
+            <label>缺陷类型：</label>
+            <select name="fProblemlevel" id="dangerType">
+                <option value="一般">一般</option>
+                <option value="重大">重大</option>
+                <option value="紧急">紧急</option>
+            </select>
+        </div>
+        <div>
+            <label>变电所名称：</label>
+            <div class="searchbar">
+                <div class="search-input">
+                    <label class="icon icon-search" for="search"></label>
+                    <input type="search" id='search' placeholder=''/>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="list-block">
+                <ul class="list-container">
+                    <li class="item-content item-link">
+                        <div class="item-inner">
+                            <div class="item-title">型号</div>
+                        </div>
+                    </li>
+                    <li class="item-content item-dis">
+                        <div class="item-inner">
+                            <div class="item-title">型号</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#" class="button button-big button-fill button-danger close-panel">取消</a></div>
+            <div class="col-50"><a href="#" class="button button-big button-fill button-success">查询</a></div>
         </div>
     </div>
 </div>

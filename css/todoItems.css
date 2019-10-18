@@ -4,13 +4,13 @@
 }
 
 .sub_card p {
-    margin: 0.5rem 0.5rem 0.5rem 0.7rem;
+    margin: 0 0.5rem 0 0.7rem;
 }
 
 .sub_card .subName {
     font-weight: bold;
     left: 5%;
-    margin: 0.5rem 0.5rem 0.5rem 0.7rem;
+    margin: 0.2rem 0.5rem 0.1rem 0.7rem;
 }
 
 .sub_card button {

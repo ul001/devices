@@ -9,13 +9,13 @@ var clickDeviceInfoId = -1;
 var itemCode = "";
 var tempNum = -1;
 var imgNum = 0;
+var pids = [{pid:-1,pname:""}];
+var clickGroupTree = "";
 
 function loadPage(){
-    var pids = [{pid:-1,pname:""}];
     var clickNum = 0;
     var showState = 1;
     var thisGroupid = -1;
-
     //主页内容
     function fillRightData(){
         Substation.getDataByAjax("/getDeviceInspectionTemplate",{fSubdevicegroupid:thisGroupid,fSubid:selectSubid,fPlacecheckformid:fPlacecheckformid},function(data){
@@ -28,7 +28,9 @@ function loadPage(){
                 tempNum = tempJson.checkInfo.length;
             }
             if(data.list.length>0){
+                var itemNum = 0;
                 $(data.list).each(function(index,obj){
+                            itemNum++;
                             var thisValueJson=[];
                             if(this.hasOwnProperty("fInspectionslipjson")){
                                 if(this.fInspectionslipjson!=""&&this.fInspectionslipjson!=null){
@@ -86,7 +88,7 @@ function loadPage(){
                     });
                             if(canClick=="false"){
                                 if(thisValueJson.length>0){
-                                    $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
+                                    $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" id=\""+itemNum+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
                                     $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
                                                                         "<div class=\"pull-to-refresh-layer\"></div>\n"+
                                                                         "<div class=\"content-block\">\n"+tempStr+
@@ -94,7 +96,7 @@ function loadPage(){
                                                                      "</div>");
                                 }
                             }else{
-                                $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
+                                $(".buttons-tab").append("<a href=\"#"+obj.fSubdeviceinfoid+"\" id=\""+itemNum+"\" class=\"tab-link button\">"+obj.fDevicename+"</a>");
                                                 $(".content-block .tabs").append("<div id=\""+obj.fSubdeviceinfoid+"\" class=\"tab pull-to-refresh-content\">\n" +
                                                                                     "<div class=\"pull-to-refresh-layer\"></div>\n"+
                                                                                     "<div class=\"content-block\">\n"+tempStr+
@@ -111,6 +113,12 @@ function loadPage(){
                                     }
                                 });
                             }
+                            $(".tab-link.button").click(function(){
+                                var clickItemNum = $(this).attr("id");
+                                clickGroupTree+="-"+$(this).text();
+                                localStorage.setItem("itemNum",clickItemNum);
+                                localStorage.setItem("clickTree",clickGroupTree);
+                            });
                         });
             }else{
                 $("#saveBtn").css("display","none");
@@ -253,12 +261,15 @@ function loadPage(){
                  pids[clickNum+1] = {pid:thisId,pname:clickName};
                 }
                 var titleTree="";
+                clickGroupTree = "";
                 $(pids).each(function(){
                  titleTree+=this.pname+">";
+                 clickGroupTree+=this.pname+"-";
                 });
+                clickGroupTree = clickGroupTree.substring(1,clickGroupTree.length-1);
                 var titleTreeName=titleTree.substring(1,titleTree.length-1);
                 $("#subName").text(titleTreeName);
-                $(".close-panel").click();
+                $(".content-block .close-panel").click();
                 fillRightData();
             });
             event.stopPropagation();
@@ -298,7 +309,32 @@ function loadPage(){
 
     fillData(-1);
 
-    $(".open-panel").click();
+//    $(".open-panel").click();
+
+    //保存状态
+    var savePids = JSON.parse(localStorage.getItem("clickPids"));
+    localStorage.removeItem("clickPids")
+    if(savePids==null){
+        $(".open-panel").click();
+    }
+    var clickItemNum = localStorage.getItem("itemNum");
+    localStorage.removeItem("itemNum");
+    if(savePids!=""&&savePids!=null){
+        pids = savePids;
+        thisGroupid = pids[pids.length-1].pid;
+        var titleTree="";
+        clickGroupTree = "";
+        $(pids).each(function(){
+         titleTree+=this.pname+">";
+         clickGroupTree+=this.pname+"-";
+        });
+        clickGroupTree = clickGroupTree.substring(1,clickGroupTree.length-1);
+        var titleTreeName=titleTree.substring(1,titleTree.length-1);
+        $("#subName").text(titleTreeName);
+        fillRightData();
+//        $(".close-panel").click();
+        $("#"+clickItemNum).click();
+    }
 }
 
 function loadPage2(){
@@ -312,10 +348,13 @@ function loadPage2(){
     $("#defectDiscribe").val(name);
     $("#defectPosition").empty();
     if(defectPosition!=""&&defectPosition!=null){
+        $(".redColor").show();
         var defectPositionArray = defectPosition.split(";");
         $(defectPositionArray).each(function(index,obj){
             $("#defectPosition").append('<input type="checkbox" value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
         });
+    }else{
+        $(".redColor").hide();
     }
     $("#dangerCategory").val(defectJson.dangerCategory);
     $("#dangerType").val(defectJson.dangerType);
@@ -522,10 +561,10 @@ function saveFormData() {
             defectPositionVal=defectPosition+checkedVal;
         }
     }
-    if($(".fileInput")&&$(".fileInput").length==0){
+/*    if($(".fileInput")&&$(".fileInput").length==0){
         $.toast("请上传现场照！");
         return;
-    }
+    }*/
     var params = new FormData($('#form1')[0]);
     params.append("fTimelimit", deadline);
     params.append("fProblemlocation", defectPositionVal);
@@ -552,6 +591,7 @@ function goToInfo(){
                 var params = {fPlacecheckformid:fPlacecheckformid,fSubdeviceinfoid:clickDeviceId,fDeviceitem:deviceItemCode};
                 Substation.getDataByAjax("/getDeviceProblemIDOnClickingYes",params,function(data){
                     if(data!=""&&data!=null){
+                        localStorage.setItem("clickPids",JSON.stringify(pids));
                         window.location.href="defectInfo.html?fDeviceproblemid="+data;
                     }else{
                         $.toast("没有该缺陷详情记录！");
