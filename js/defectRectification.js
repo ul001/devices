@@ -1,5 +1,5 @@
 var selectSubid = localStorage.getItem("fSubid");
-var taskId = localStorage.getItem("missiontaskID");
+var taskId = localStorage.getItem("taskID");
 var needUpdate = localStorage.getItem("need-update");
 if(needUpdate){
     localStorage.removeItem("need-update");

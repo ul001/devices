@@ -13,19 +13,16 @@ i.icon.icon-alarm{
     height: 1.3rem;
     background-image: url(../img/i-alarm.png);
 }
-#dateSelect,#fState{
+#dateStart,#dateEnd,#fState{
     border-radius:0.25rem;
-    border:0.05rem solid #D7D7D7;
+    border:0.05rem solid #CCCCCC;
     height:1.5rem;
 }
-#dateSelect{
+#dateStart,#dateEnd{
     padding-left:0.25rem;
 }
-#dateSelect::placeholder{
-    color:#AAAAAA;
-}
 #panel-right-demo{
-    background-color:#eee;
+    background-color:#fff;
     color:#3d4145;
 }
 .list-block{
