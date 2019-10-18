@@ -60,22 +60,22 @@ function addItems(number, lastIndex) {
                 var stateStr = "";
                 switch(this.fState){
                     case "0":
-                    stateStr="未处理";
+                    stateStr="<span class=\"redColor\">未处理</span>";
                     break;
                     case "2":
-                    stateStr="待处理";
+                    stateStr="<span class=\"redColor\">待处理</span>";
                     break;
                     case "3":
-                    stateStr="待客户停电处理";
+                    stateStr="<span class=\"redColor\">待客户停电处理</span>";
                     break;
                     case "4":
-                    stateStr="待线路停电处理";
+                    stateStr="<span class=\"redColor\">待线路停电处理</span>";
                     break;
                     case "5":
-                    stateStr="其他";
+                    stateStr="<span class=\"redColor\">其他</span>";
                     break;
                     case "1":
-                    stateStr="已处理";
+                    stateStr="<span class=\"button-success\">已处理</span>";
                     break;
                     default:
                     stateStr="<span class=\"redColor\">未处理</span>";
@@ -96,6 +96,7 @@ function addItems(number, lastIndex) {
                         "                                <i class=\"icon icon-alarm\"></i>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"col-85\">\n" +
+                        "<p class=\"subName limit-length\">"+this.fSubname+"</p>"+
                         "                                <p><span\n" +
                         "                                        class=\"redColor\">(设备名称:"+this.treePathName+")"+this.fDeviceproblemdes+"</span>\n" +
                         "                                </p>\n" +
@@ -167,5 +168,14 @@ $('#searchBtn').click(function () {
 
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
+
+//解决键盘遮挡问题
+window.addEventListener("resize", function () {
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
+});
 
 $.init();

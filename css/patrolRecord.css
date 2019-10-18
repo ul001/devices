@@ -65,3 +65,59 @@ i.icon.icon-alarm{
 .card.noClick:active{
     background:#fff;
 }
+#dateStart,#dateEnd,#fState,#dangerType,#search{
+    border-radius:0.25rem;
+    border:0.05rem solid #CCCCCC;
+    height:1.5rem;
+    margin:0.1rem 0 0.5rem 0;
+}
+#dateStart,#dateEnd{
+    padding-left:0.25rem;
+    width:46%;
+}
+#fState,#dangerType,#search{
+    width:100%;
+}
+.searchbar{
+    height:initial;
+    padding:0;
+}
+#panel-right-demo{
+    background-color:#eee;
+    color:#3d4145;
+    overflow:hidden;
+}
+.list-block{
+    margin:0;
+}
+.list-block .item-title.label {
+    width:initial;
+}
+.btnBar{
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+}
+.pull-right.open-panel{
+    color:#fff;
+}
+.content-block{
+    color:#3d4145;
+}
+.content-block label{
+    font-size:0.9rem;
+    color:black;
+}
+#search{
+    margin:0;
+}
+.listContainer{
+    max-height:11rem;
+    overflow:auto;
+}
+.item-content:active{
+    background-color: #d9d9d9;
+}
+.subName{
+    font-weight:bold;
+}

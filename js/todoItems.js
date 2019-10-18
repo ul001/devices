@@ -356,15 +356,17 @@ jQuery(document).ready(function () {
             if (clickNum == 2) {
                 var doNum =this.taskUserNum;
                 var finishNum = this.taskUserFinishNum;
-                if(doNum==finishNum){
-                    showHasCommit = "<span class='greenColor'>("+finishNum+"/"+doNum+")</span>";
-                    showCommitClass=" hasBoom";
-                }else if(finishNum==0){
-                    showHasCommit = "<span class='grayColor'>("+finishNum+"/"+doNum+")</span>";
-//                        showCommitClass=" hasBoom";
-                }else{
-                    showHasCommit = "<span class='redColor'>("+finishNum+"/"+doNum+")</span>";
-                    showCommitClass=" hasBoom";
+                if(doNum>0){
+                    if(doNum==finishNum){
+                        showHasCommit = "<span class='greenColor'>("+finishNum+"/"+doNum+")</span>";
+                        showCommitClass=" hasBoom";
+                    }else if(finishNum==0){
+                        showHasCommit = "<span class='grayColor'>("+finishNum+"/"+doNum+")</span>";
+    //                        showCommitClass=" hasBoom";
+                    }else{
+                        showHasCommit = "<span class='redColor'>("+finishNum+"/"+doNum+")</span>";
+                        showCommitClass=" hasBoom";
+                    }
                 }
             }
             var user = this.fTaskcreateusername;

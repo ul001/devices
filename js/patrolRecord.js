@@ -9,14 +9,12 @@ if(needUpdate){
 $("#subName").text(selectSubname);
 
 Substation.getDataByAjax("/getLatestThreePlaceCheckForm",{fSubid:selectSubid},function(data){
-    var inspectionTotal = data.inspectionTotal;
+    var InspectionNum = data.InspectionNum;
     var threeList = data.ThreeList;
     $(".subName").text(selectSubname);
     $("#address").text(subAddress);
-    if(inspectionTotal!=null){
-        $("#daily").text("("+(inspectionTotal.normalSum)+")项");
-        $("#monthly").text("("+inspectionTotal.periodSum+")项");
-        $("#total").text("("+(inspectionTotal.total)+")项");
+    if(InspectionNum!=undefined){
+        $("#total").text("("+(InspectionNum)+")项");
     }
     $(".list-container").empty();
     if(threeList.length>0){

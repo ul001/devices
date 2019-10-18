@@ -1,6 +1,4 @@
-var selectSubid = localStorage.getItem("fSubid");
-var selectSubname = localStorage.getItem("fSubname");
-$("#subName").text(selectSubname);
+var selectSubid = "";
 //分页
 var loading = false;
 var maxItems = 1000;
@@ -29,9 +27,11 @@ function addItems(number) {
     var url = "/getPlaceCheckFormList";
     var params = {
         pageNum: pageNum,
-        pageSize: number,
-        fSubid:selectSubid
+        pageSize: number
     };
+    if(selectSubid!=""&&selectSubid!=null){
+        params['fSubid']=selectSubid;
+    }
     Substation.getDataByAjaxNoLoading("/getPlaceCheckFormList",params,function(data){
             if(data.placecheckformAllList.list.length>0){
                 if (pageNum == 1) {
@@ -60,9 +60,9 @@ function addItems(number) {
                                                 iconStr +
                                                "                            </div>\n" +*/
                                                "                            <div class=\"col-95\">\n" +
-                                               "                                <p class=\"subName\">"+this.fCreatetime.substring(0,11)+"<span class=\"blueColor\">("+this.fStateExplain+")</span></p>\n" +
+                                               "                                <p class=\"subName limit-length\">"+this.fTaskName+"<span class=\"blueColor\">("+this.fStateExplain+")</span></p>\n" +
 //                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
-                                               "                                <p>最新一次巡检时间：<span class=\"blueColor\">"+this.fCreatetime+"</span></p>\n" +
+                                               "                                <p>巡检开始时间：<span class=\"blueColor\">"+this.fCreatetime+"</span></p>\n" +
                                                "                                <p>本次已发现缺陷：<span class=\"redColor\">"+this.fproblemTotal+" </span>个  未处理：<span class=\"redColor\">"+this.funsolvedTotal+" </span>个</p>\n" +
                                                "                            </div>\n" +
                                                "                            <div class=\"col-5\">\n" +
@@ -111,6 +111,15 @@ $(document).on('infinite', '.infinite-scroll', function () {
         addItems(itemsPerLoad);
         lastIndex = $('#listContainer .card').length;
     }, 1000);
+});
+
+//解决键盘遮挡问题
+window.addEventListener("resize", function () {
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
 });
 
 $.init();

@@ -33,6 +33,7 @@ i.icon.icon-alarm{
 #panel-right-demo{
     background-color:#eee;
     color:#3d4145;
+    overflow:hidden;
 }
 .list-block{
     margin:0;
@@ -64,4 +65,7 @@ i.icon.icon-alarm{
 }
 .item-content:active{
     background-color: #d9d9d9;
+}
+.subName{
+    font-weight:bold;
 }
