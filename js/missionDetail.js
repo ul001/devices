@@ -102,7 +102,8 @@ jQuery(document).ready(function () {
                             //缺陷整改
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
-                            window.location.href = "defectRectification.html";
+
+                            window.location.href = encodeURI("defectRectification.html" + "?value=0");;
                         });
                     }
                     //任务执行结果
