@@ -83,6 +83,14 @@ jQuery(document).ready(function () {
                     $("#ActStartTime").html(taskInfo.fTaskstartdate);
                     //任务提交时间
                     $("#ActFinishTime").html(taskInfo.fTaskfinishdate);
+
+                    var missionContent = taskInfo.fTaskcontent;
+                    $("#missionCont").html(missionContent);
+                    missionTypeid = taskInfo.fTasktypeid;
+                    taskchargerid = taskInfo.fTaskchargerid;
+                    var temp = false;
+                    var thisTempState = 0;
+
                     //缺陷总数
                     $("#TotalDefectNum").html(taskInfo.deviceProblemSum);
                     if (taskInfo.deviceProblemSum > 0) {
@@ -91,6 +99,7 @@ jQuery(document).ready(function () {
                             //缺陷整改
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
+                            localStorage.setItem("missionTypeid", missionTypeid);
                             window.location.href = "defectRectification.html";
                         });
                     }
@@ -102,7 +111,7 @@ jQuery(document).ready(function () {
                             //缺陷整改
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
-
+                            localStorage.setItem("missionTypeid", missionTypeid);
                             window.location.href = encodeURI("defectRectification.html" + "?value=0");;
                         });
                     }
@@ -119,13 +128,7 @@ jQuery(document).ready(function () {
                     } else {
                         $("#TotalDefect").html("-");
                     }
-
-                    var missionContent = taskInfo.fTaskcontent;
-                    $("#missionCont").html(missionContent);
-                    missionTypeid = taskInfo.fTasktypeid;
-                    taskchargerid = taskInfo.fTaskchargerid;
-                    var temp = false;
-                    var thisTempState = 0;
+                    //判断后续
                     $(userList).each(function () {
                         if (this.fUserid == Substation.loginUserid) {
                             temp = true;

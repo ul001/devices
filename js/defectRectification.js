@@ -94,11 +94,15 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 localStorage.setItem("clickTree", dataTree);
                 window.location.href = "defectInfo.html?fDeviceproblemid=" + proId + "&taskProblem=1";
             });
-            if (data.imgName == null || data.imgName == "") {
+            var missionTypeId = localStorage.getItem("missionTypeid");
+
+            if ((data.imgName == null || data.imgName == "") && missionTypeId == 3) {
                 $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
                 $("#goToWrite").click(function () {
                     window.location.href = "draw.html";
                 });
+            } else if (missionTypeId == 1) {
+
             } else {
                 $(".card-footer").html('<img src="' + (Substation.ipAddressFromAPP + imgUrl + "/" + data.imgName) + '" style="width:100%;">');
             }
