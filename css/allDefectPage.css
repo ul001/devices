@@ -59,7 +59,7 @@ i.icon.icon-alarm{
 #search{
     margin:0;
 }
-.list-container{
+#listContainer{
     max-height:11rem;
     overflow:auto;
 }

@@ -42,7 +42,7 @@ function addItems(number) {
         params['ftimeEnd']=dateEndVal+" 23:59:59";
     }
     if(stateVal!=""){
-        params['fState']=stateVal;
+        params['fTaskstateid']=stateVal;
     }
     Substation.getDataByAjaxNoLoading("/getPlaceCheckFormList",params,function(data){
             if(data.placecheckformAllList.list.length>0){

@@ -111,7 +111,7 @@ i.icon.icon-alarm{
 #search{
     margin:0;
 }
-.listContainer{
+#listContainer{
     max-height:11rem;
     overflow:auto;
 }
