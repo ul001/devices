@@ -126,3 +126,16 @@ i.icon.icon-alarm{
     height: 1rem;
     background-image: url(../img/i-selectSome.png);
 }
+.searchbar .search-input i.icon.icon-clear{
+    width: .9rem;
+    height: .9rem;
+    z-index:100;
+    cursor: pointer;
+    left:initial;
+    display:none;
+    right:.3rem;
+    background-image: url(../img/i-clear.png);
+}
+#listContainer .item-inner{
+    font-size: .7rem;
+}

@@ -82,6 +82,12 @@
     <div class="panel panel-right panel-reveal" id='panel-right-demo'>
         <div class="content-block">
             <div>
+                <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
+                    <a href="#" class="button" id="yestoday">昨日</a>
+                    <a href="#" class="button" id="thisMonth">当月</a>
+                    <a href="#" class="button" id="lastMonth">上月</a></p>
+            </div>
+            <div>
                 <label>时间选择</label><br>
                 <input type="text" id="dateStart" placeholder="开始日期" readonly/> -
                 <input type="text" id="dateEnd" placeholder="截止日期" readonly/>
@@ -108,7 +114,7 @@
                 <div class="searchbar">
                     <div class="search-input">
                         <label class="icon icon-search" for="search"></label>
-                        <input type="search" id='search' placeholder=''/>
+                        <input type="search" id='search' placeholder='请输入关键字'/><i class="icon icon-clear"></i>
                     </div>
                 </div>
             </div>

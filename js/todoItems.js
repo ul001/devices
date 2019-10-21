@@ -333,7 +333,7 @@ jQuery(document).ready(function () {
               "<p>任务编号：" +
               (this.fTasknumber == undefined ? "" : this.fTasknumber) +
               "</p><p>实际完成时间：" +
-              (this.fTaskfinishdate == undefined ? "" : this.fTaskfinishdate) +
+              (this.sortDate == undefined ? "" : this.sortDate) +
               "</p>";
             text += "                                        </div>";
             text +=

@@ -10,8 +10,8 @@ jQuery(document).ready(function () {
         var missionType = localStorage.getItem("missionType");
         if (missionType == 0) {
             var showStr =
-                '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
-            $("#addVarContain126").append(showStr);
+                '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
+            $("#addVarContain126").html(showStr);
             $("#carryOut").attr("name", "true");
             $("#submitTo").attr("name", "true");
         } else {
@@ -71,7 +71,7 @@ jQuery(document).ready(function () {
                 var userList = data.taskUserList;
                 if (taskInfo) {
                     missionsubid = taskInfo.fSubid;
-                    $("#missionId").html(taskInfo.fTaskid);
+                    $("#missionId").html(taskInfo.fTasknumber);
                     $("#missionType").html(taskInfo.fTasktypeexplain);
                     $("#missionName").html(taskInfo.fTaskname);
                     $("#createName").html(taskInfo.fTaskcreateusername);
@@ -167,7 +167,7 @@ jQuery(document).ready(function () {
                             if (thisTempState == 1) {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
-                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
+                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "true");
                                 $("#submitTo").attr("name", "true");
@@ -195,7 +195,7 @@ jQuery(document).ready(function () {
                         $("#addVarContain124").css("display", "none");
                     }
                     //现场签到按钮事件
-                    $("#checkIn").click(function () {
+                    $("#checkIn2").click(function () {
                         //iOS安卓基础传参
                         var u = navigator.userAgent,
                             app = navigator.appVersion;
