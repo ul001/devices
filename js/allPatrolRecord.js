@@ -113,6 +113,16 @@ $(document).on('infinite', '.infinite-scroll', function () {
     }, 1000);
 });
 
+$("#dateStart").calendar();
+$("#dateEnd").calendar();
+
+$('#search').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+        $.toast("你好");
+        document.activeElement.blur();
+    }
+});
+
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {
     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {

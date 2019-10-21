@@ -56,7 +56,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid",{fTaskid:taskId},function(d
                       "                            <i class=\"icon icon-alarm\"></i>\n" +
                       "                        </div>\n" +
                       "                        <div class=\"col-85\">\n" +
-                      "                            <p class=\"boldText\">设备路径："+this.treePathName+"</p>\n" +
+                      "                            <p class=\"boldText\">设备名称："+this.treePathName+"</p>\n" +
                       "                            <p>描述："+this.fDeviceproblemdes+"</p>\n" +
                       "                            <p>危害："+this.fProblemharm+"</p>\n" +
                       "                            <p>具体位置："+problemStr+"</p>\n" +

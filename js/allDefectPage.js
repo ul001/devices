@@ -47,7 +47,7 @@ function addItems(number, lastIndex) {
     if(dangerVal!=""){
         params['fProblemLevel']=dangerVal;
     }
-    Substation.getDataByAjaxNoLoading(url, params, function (data) {
+    Substation.postDataByAjax(url, params, function (data) {
         if (data.tDevDeviceproblemList.list.length > 0) {
             if (pageNum == 1) {
                 $("#list-container").empty();
@@ -96,7 +96,7 @@ function addItems(number, lastIndex) {
                         "                                <i class=\"icon icon-alarm\"></i>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"col-85\">\n" +
-                        "<p class=\"subName limit-length\">"+this.fSubname+"</p>"+
+                        "<p class=\"subName limit-length\">"+this.fSubName+"</p>"+
                         "                                <p><span\n" +
                         "                                        class=\"redColor\">(设备名称:"+this.treePathName+")"+this.fDeviceproblemdes+"</span>\n" +
                         "                                </p>\n" +
@@ -168,6 +168,13 @@ $('#searchBtn').click(function () {
 
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
+
+$('#search').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+        $.toast("你好");
+        document.activeElement.blur();
+    }
+});
 
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {

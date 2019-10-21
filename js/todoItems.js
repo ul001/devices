@@ -503,6 +503,7 @@ jQuery(document).ready(function() {
   $("#searchDaiban").bind("keydown", function(event) {
     if (event.keyCode == 13) {
       getFirstPage(tabName);
+      document.activeElement.blur();
     }
   });
 

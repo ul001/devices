@@ -142,6 +142,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
 $('#search').bind('keydown', function (event) {
     if (event.keyCode == 13) {
         getFirstPage();
+        document.activeElement.blur();
     }
 });
 
