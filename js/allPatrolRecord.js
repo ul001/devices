@@ -6,7 +6,7 @@ var itemsPerLoad = 10;
 var pageNum = 1;
 
 function getFirstPage() {
-    $("#listContainer").empty();
+    $("#list-container").empty();
     pageNum = 1;
     addItems(itemsPerLoad);
     lastIndex = 10;
@@ -32,10 +32,22 @@ function addItems(number) {
     if(selectSubid!=""&&selectSubid!=null){
         params['fSubid']=selectSubid;
     }
+    var dateStartVal = $("#dateStart").val();
+    var dateEndVal = $("#dateEnd").val();
+    var stateVal = $("#fState").val();
+    if(dateStartVal!=""){
+        params['ftimeStart']=dateStartVal+" 00:00:00";
+    }
+    if(dateEndVal!=""){
+        params['ftimeEnd']=dateEndVal+" 23:59:59";
+    }
+    if(stateVal!=""){
+        params['fState']=stateVal;
+    }
     Substation.getDataByAjaxNoLoading("/getPlaceCheckFormList",params,function(data){
             if(data.placecheckformAllList.list.length>0){
                 if (pageNum == 1) {
-                    $("#listContainer").empty();
+                    $("#list-container").empty();
                 }
                 $(data.placecheckformAllList.list).each(function(){
                     var iconStr = "";
@@ -53,7 +65,7 @@ function addItems(number) {
                             iconStr="<i class=\"icon icon-day\"></i>\n";
                             break;
                     }
-                    $("#listContainer").append("<div class=\"card\" id=\""+this.fPlacecheckformid+"\">\n" +
+                    $("#list-container").append("<div class=\"card\" id=\""+this.fPlacecheckformid+"\">\n" +
                                                "                    <div class=\"card-content\">\n" +
                                                "                        <div class=\"card-content-inner row no-gutter\">\n" +
 /*                                               "                            <div class=\"col-10\">\n" +
@@ -91,7 +103,7 @@ function addItems(number) {
             }
         });
 }
-$("#listContainer").empty();
+$("#list-container").empty();
 addItems(itemsPerLoad);
 
 var lastIndex = 10;
@@ -109,16 +121,55 @@ $(document).on('infinite', '.infinite-scroll', function () {
             return;
         }
         addItems(itemsPerLoad);
-        lastIndex = $('#listContainer .card').length;
+        lastIndex = $('#list-container .card').length;
     }, 1000);
+});
+
+$('#searchBtn').click(function () {
+    $(".close-panel").click();
+    if($("#search").val()==""){
+        $("#subname").text("所有变电所");
+        selectSubid="";
+    }
+    getFirstPage();
 });
 
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
 
+function getSomeSubstation(){
+    var url = "/getSubstationListByUser";
+    var searchKey = $("#search").val();
+    var params = {
+        pageNo: 1,
+        pageSize: 5,
+        key: searchKey
+    }
+    $("#listContainer").html('<li class="item-content" data-id="">'+
+                                 '<div class="item-inner">'+
+                                     '<div class="item-title">所有变电所</div>'+
+                                 '</div>'+
+                             '</li>');
+    Substation.getDataByAjaxNoLoading(url,params,function(data){
+        $(data.list).each(function(){
+            $("#listContainer").append('<li class="item-content" data-id="'+this.fSubid+'">'+
+                                                                '<div class="item-inner">'+
+                                                                    '<div class="item-title">'+this.fSubname+'</div>'+
+                                                                '</div>'+
+                                                            '</li>');
+        });
+        $("#listContainer .item-content").click(function(){
+            selectSubid = $(this).attr("data-id");
+            var clickName = $(this).find(".item-title").text();
+            $("#search").val(clickName);
+            $("#subname").text(clickName);
+        });
+    });
+}
+
 $('#search').bind('keydown', function (event) {
     if (event.keyCode == 13) {
-        $.toast("你好");
+        getSomeSubstation();
         document.activeElement.blur();
     }
 });

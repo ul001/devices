@@ -1,7 +1,7 @@
 //var selectSubid = localStorage.getItem("fSubid");
 var selectSubid="";
 var loading = false;
-var itemsPerLoad = 5;
+var itemsPerLoad = 1000;
 var pageNum = 1;
 
 function getFirstPage() {
@@ -45,9 +45,9 @@ function addItems(number, lastIndex) {
         params['fState']=stateVal;
     }
     if(dangerVal!=""){
-        params['fProblemLevel']=dangerVal;
+        params['fProblemlevel']=dangerVal;
     }
-    Substation.postDataByAjax(url, params, function (data) {
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
         if (data.tDevDeviceproblemList.list.length > 0) {
             if (pageNum == 1) {
                 $("#list-container").empty();
@@ -163,15 +163,49 @@ $(document).on('infinite', '.infinite-scroll', function () {
 
 $('#searchBtn').click(function () {
     $(".close-panel").click();
+    if($("#search").val()==""){
+        $("#subName").text("所有变电所");
+        selectSubid="";
+    }
     getFirstPage();
 });
 
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
 
+function getSomeSubstation(){
+    var url = "/getSubstationListByUser";
+    var searchKey = $("#search").val();
+    var params = {
+        pageNo: 1,
+        pageSize: 5,
+        key: searchKey
+    }
+    $("#listContainer").html('<li class="item-content" data-id="">'+
+                                 '<div class="item-inner">'+
+                                     '<div class="item-title">所有变电所</div>'+
+                                 '</div>'+
+                             '</li>');
+    Substation.getDataByAjaxNoLoading(url,params,function(data){
+        $(data.list).each(function(){
+            $("#listContainer").append('<li class="item-content" data-id="'+this.fSubid+'">'+
+                                                                '<div class="item-inner">'+
+                                                                    '<div class="item-title">'+this.fSubname+'</div>'+
+                                                                '</div>'+
+                                                            '</li>');
+        });
+        $("#listContainer .item-content").click(function(){
+            selectSubid = $(this).attr("data-id");
+            var clickName = $(this).find(".item-title").text();
+            $("#search").val(clickName);
+            $("#subName").text(clickName);
+        });
+    });
+}
+
 $('#search').bind('keydown', function (event) {
     if (event.keyCode == 13) {
-        $.toast("你好");
+        getSomeSubstation();
         document.activeElement.blur();
     }
 });
