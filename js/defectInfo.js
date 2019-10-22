@@ -19,14 +19,16 @@ var selectSubid = localStorage.getItem("fSubid");
 var clickTree = localStorage.getItem("clickTree");
 var canClick = localStorage.getItem("canClick");
 var url = "/getDeviceProblemDetail";
-var problemParam={fDeviceproblemid:fDeviceproblemid};
-if(taskProblem==1){
+var problemParam = {
+    fDeviceproblemid: fDeviceproblemid
+};
+if (taskProblem == 1) {
     var taskId = localStorage.getItem("taskID");
     url = "/getDeviceProblemDetailByfTaskid";
-    problemParam['fTaskid']=taskId;
+    problemParam['fTaskid'] = taskId;
 }
 
-Substation.getDataByAjax(url,problemParam,function(data){
+Substation.getDataByAjax(url, problemParam, function (data) {
     var imgUrl = data.imgUrl;
     var defectJson = data.tDevDeviceproblem;
     var beforeimg = data.beforeimg;
@@ -35,16 +37,16 @@ Substation.getDataByAjax(url,problemParam,function(data){
     $("#fDeviceproblemdes").val(defectJson.fDeviceproblemdes);
     var fProblemlocation = defectJson.fProblemlocation;
     $("#defectPosition").empty();
-    if(fProblemlocation.indexOf(",")!=-1){
+    if (fProblemlocation.indexOf(",") != -1) {
         var defectPosition = fProblemlocation.split(",")[0];
         var defectPositionVal = fProblemlocation.split(",")[1];
         var defectPositionArray = defectPosition.split(";");
         var defectPositionValArray = defectPositionVal.split(";");
-        $(defectPositionArray).each(function(index,obj){
-            $("#defectPosition").append('<input type="checkbox" disabled value="'+obj+'" id="'+index+'"><label for="'+index+'">'+obj+'</label><br>');
+        $(defectPositionArray).each(function (index, obj) {
+            $("#defectPosition").append('<input type="checkbox" disabled value="' + obj + '" id="' + index + '"><label for="' + index + '">' + obj + '</label><br>');
         });
-        $(defectPositionValArray).each(function(){
-            $("input[type='checkbox'][value='"+this+"']").attr("checked",true);
+        $(defectPositionValArray).each(function () {
+            $("input[type='checkbox'][value='" + this + "']").attr("checked", true);
         });
     }
     $("#fProblemtype").val(defectJson.fProblemtype);
@@ -53,55 +55,55 @@ Substation.getDataByAjax(url,problemParam,function(data){
     $("#fProblemharm").val(defectJson.fProblemharm);
     $("#fCreatetime").val(defectJson.fCreatetime);
     $("#fResolution").val(defectJson.fResolution);
-    if(canClick=="false"){
+    if (canClick == "false") {
         $("#fClientadvice").val(defectJson.fClientadvice);
         $("#fState").val(defectJson.fState);
-        if(defectJson.fSolvedUserName!=undefined){
-            $(".showSolveUser").css("display","block");
+        if (defectJson.fSolvedUserName != undefined) {
+            $(".showSolveUser").css("display", "block");
             $("#fSolveUser").val(defectJson.fSolvedUserName);
         }
-        if(defectJson.fUpdateDate!=undefined){
-            $(".showSolveTime").css("display","block");
+        if (defectJson.fUpdateDate != undefined) {
+            $(".showSolveTime").css("display", "block");
             $("#fSolveTime").val(defectJson.fUpdateDate);
         }
-    }else{
-        if(defectJson.fClientadvice!=""&&defectJson.fClientadvice!=null&&defectJson.hasOwnProperty("fClientadvice")){
+    } else {
+        if (defectJson.fClientadvice != "" && defectJson.fClientadvice != null && defectJson.hasOwnProperty("fClientadvice")) {
             $("#fClientadvice").val(defectJson.fClientadvice);
         }
-        if(defectJson.fState!=""&&defectJson.hasOwnProperty("fState")&&defectJson.fState!=null){
+        if (defectJson.fState != "" && defectJson.hasOwnProperty("fState") && defectJson.fState != null) {
             $("#fState").val(defectJson.fState);
         }
     }
-    if(beforeimg.length>0){
+    if (beforeimg.length > 0) {
         $.each(beforeimg, function (i, value) {
             imgNum1++;
             var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
             $("#imgBox1").append(imgDiv);
         });
     }
-    if(afterimg.length>0){
+    if (afterimg.length > 0) {
         $.each(afterimg, function (i, value) {
             imgNum++;
             var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
             $("#imgBox").append(imgDiv);
         });
     }
-    if(canClick=="false"){
-        $($("input")).each(function(){
-            $(this).attr("readonly",true);
+    if (canClick == "false") {
+        $($("input")).each(function () {
+            $(this).attr("readonly", true);
         });
-        $($("select")).each(function(){
+        $($("select")).each(function () {
             var thisInput = $(this).parent();
-            var thisValue="";
-            if(this.selectedIndex!=-1){
+            var thisValue = "";
+            if (this.selectedIndex != -1) {
                 thisValue = (this.options[this.selectedIndex]).innerText;
             }
-            thisInput.html('<input type="text" readonly value="'+thisValue+'">');
+            thisInput.html('<input type="text" readonly value="' + thisValue + '">');
         });
         $(".upload_img_wrap .upload_img").unbind();
-        $(".upload_img_wrap .upload_img").css("display","none");
+        $(".upload_img_wrap .upload_img").css("display", "none");
         $(".blueColor").removeClass("blueColor");
-        $("#saveData").css("display","none");
+        $("#saveData").css("display", "none");
     }
 });
 
@@ -226,7 +228,7 @@ function saveFormData() {
             $(this).remove();
         }
     });
-    if($(".fileInput").length>6){
+    if ($(".fileInput").length > 6) {
         $.toast("最多上传6张图片");
         return;
     }
@@ -237,7 +239,7 @@ function saveFormData() {
     Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
-            localStorage.setItem("need-update",true);
+            localStorage.setItem("need-update", true);
             window.history.back();
         }
     });
