@@ -379,6 +379,7 @@ jQuery(document).ready(function () {
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("missiontaskID", taskID);
+        localStorage.setItem("hiddenBtn", "NO");
         window.location.href = "missionManager.html";
     });
 

@@ -19,6 +19,13 @@ jQuery(document).ready(function () {
     // }
     var taskTobeSubmitArr = [];
 
+    var hiddenBtn = localStorage.getItem("hiddenBtn");
+    if (hiddenBtn == "YES") {
+        $("#addVarContain126").css('display', 'none');
+    } else {
+        $("#addVarContain126").css('display', 'block');
+    }
+
     window.addEventListener(
         "pageshow",
         function (event) {
@@ -254,10 +261,10 @@ jQuery(document).ready(function () {
                         userName = this.userName;
                     }
                     if (this.hasOwnProperty("fSignintime")) {
-                        signTime = date('Y-m-d H:i:s', this.fSignintime);
+                        signTime = this.fSignintime;
                     }
                     if (this.hasOwnProperty("fLocation")) {
-                        location = date('Y-m-d H:i:s', this.fLocation);
+                        location = this.fLocation;
                     }
 
                     var text = "";
@@ -536,12 +543,6 @@ jQuery(document).ready(function () {
         window.history.back();
     });
     //管理页面
-    // $("#clickManager").click(function () {
-    //     localStorage.setItem("fSubname", "执行情况");
-    //     localStorage.setItem("missionSubid", missionsubid);
-    //     localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
-    //     localStorage.setItem("missiontaskID", taskID);
-    //     window.location.href = "missionManager.html";
-    // });
+
 
 });

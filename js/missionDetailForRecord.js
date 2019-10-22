@@ -209,7 +209,7 @@ jQuery(document).ready(function () {
     $(".pull-left.click_btn").click(function () {
         //localStorage.setItem("need-refresh", true);
         /*window.history.back();*/
-        window.location.href = "todoItems.html";
+        window.location.href = "allPatrolRecord.html";
     });
 
     //管理页面
@@ -218,6 +218,7 @@ jQuery(document).ready(function () {
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("missiontaskID", taskID);
+        localStorage.setItem("hiddenBtn", "YES");
         window.location.href = "missionManager.html";
     });
 
