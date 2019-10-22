@@ -239,9 +239,11 @@ jQuery(document).ready(function () {
         ) {
             if (data.hasOwnProperty("taskUserList") && data.taskUserList.length > 0) {
                 $(data.taskUserList).each(function () {
-                    var creatTime = "";
-                    var explain = "";
-                    var userName = "";
+                    var creatTime = "-";
+                    var explain = "-";
+                    var userName = "-";
+                    var signTime = "-";
+                    var location = "-";
                     if (this.hasOwnProperty("fCreatetime")) {
                         creatTime = date('Y-m-d H:i:s', this.fCreateTime);
                     }
@@ -251,6 +253,13 @@ jQuery(document).ready(function () {
                     if (this.hasOwnProperty("userName")) {
                         userName = this.userName;
                     }
+                    if (this.hasOwnProperty("fSignintime")) {
+                        signTime = date('Y-m-d H:i:s', this.fSignintime);
+                    }
+                    if (this.hasOwnProperty("fLocation")) {
+                        location = date('Y-m-d H:i:s', this.fLocation);
+                    }
+
                     var text = "";
                     text += "<ul>";
                     text += "                            <li>";
@@ -289,6 +298,40 @@ jQuery(document).ready(function () {
                         '" name="sender" validator="required"';
                     text +=
                         '                                                style="color:red">';
+                    text += "                                        </div>";
+                    text += "                                    </div>";
+                    text += "                                </div>";
+                    text += "                            </li>";
+                    text += "                            <li>";
+                    text +=
+                        '                                <div class="showDiv item-content">';
+                    text +=
+                        '                                    <div class="item-inner">';
+                    text +=
+                        '                                        <div class="item-title label">签到时间:</div>';
+                    text +=
+                        '                                        <div class="item-input"><input type="text" readonly="readonly"';
+                    text +=
+                        '                                                class="valueInput" value="' +
+                        signTime +
+                        '" name="number" validator="required">';
+                    text += "                                        </div>";
+                    text += "                                    </div>";
+                    text += "                                </div>";
+                    text += "                            </li>";
+                    text += "                            <li>";
+                    text +=
+                        '                                <div class="showDiv item-content">';
+                    text +=
+                        '                                    <div class="item-inner">';
+                    text +=
+                        '                                        <div class="item-title label">签到地点:</div>';
+                    text +=
+                        '                                        <div class="item-input"><input type="text" readonly="readonly"';
+                    text +=
+                        '                                                class="valueInput" value="' +
+                        location +
+                        '" name="number" validator="required">';
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
