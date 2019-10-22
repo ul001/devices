@@ -61,11 +61,11 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 }
                 var solveUser = "";
                 if (this.fSolvedUserName != undefined) {
-                    solveUser = "<p>处理人员：" + this.fSolvedUserName + "</p>";
+                    solveUser = "<p>消缺人员：" + this.fSolvedUserName + "</p>";
                 }
                 var solveTime = "";
                 if (this.fUpdateDate != undefined) {
-                    solveTime = "<p>处理时间：" + this.fUpdateDate + "</p>";
+                    solveTime = "<p>消缺时间：" + this.fUpdateDate + "</p>";
                 }
                 $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\"" + this.treePathName + "\" id=\"" + this.fDeviceproblemid + "\">\n" +
                     "                        <div class=\"col-10\">\n" +

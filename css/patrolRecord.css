@@ -215,3 +215,6 @@ i.icon.icon-alarm {
     background: #ccc;
     color: #3d4145;
 }
+#list-container .card{
+    margin:0.3rem;
+}
