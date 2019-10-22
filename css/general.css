@@ -61,3 +61,6 @@
 .boldText{
     font-weight:bold;
 }
+select{
+    background:#fff;
+}

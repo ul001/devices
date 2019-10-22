@@ -83,7 +83,7 @@ i.icon.icon-alarm{
     padding:0;
 }
 #panel-right-demo{
-    background-color:#eee;
+    background-color:#FFFFFF;
     color:#3d4145;
     overflow:hidden;
 }
@@ -138,4 +138,32 @@ i.icon.icon-alarm{
 }
 #listContainer .item-inner{
     font-size: .7rem;
+}
+.content-block .buttons-row .button{
+    font-size: .75rem;
+    border-color:#02A8A6;
+    color:#02A8A6;
+}
+.content-block .buttons-row .button.active{
+    font-size: .75rem;
+    border-color:#02A8A6;
+    color:#fff;
+    background-color:#02A8A6;
+}
+.btnBar .button{
+    border-radius:initial;
+}
+#searchBtn{
+    background:#02A8A6;
+}
+#listContainer{
+    border:1px solid #CCCCCC;
+}
+#listContainer .item-content:active{
+    background:#02A8A6;
+    color:#fff;
+}
+.button.button-fill.button-cancel{
+    background:#ccc;
+    color:#3d4145;
 }

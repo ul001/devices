@@ -176,6 +176,7 @@ $('#searchBtn').click(function () {
 
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
+$("#listContainer").hide();
 
 function getSomeSubstation(){
     var url = "/getSubListByLetter";
@@ -192,11 +193,13 @@ function getSomeSubstation(){
                                                                 '</div>'+
                                                             '</li>');
         });
+        $("#listContainer").show();
         $("#listContainer .item-content").click(function(){
             clickSubid = $(this).attr("data-id");
             var clickName = $(this).find(".item-title").text();
             $("#search").val(clickName);
             $("#listContainer").empty();
+            $("#listContainer").hide();
 //            $("#subName").text(clickName);
         });
     });
