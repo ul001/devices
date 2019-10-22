@@ -33,6 +33,7 @@ Substation.getDataByAjax(url, problemParam, function (data) {
     var defectJson = data.tDevDeviceproblem;
     var beforeimg = data.beforeimg;
     var afterimg = data.afterimg;
+    $("#taskNumber").val(defectJson.fTasknumber);
     $("#treePathName").val(clickTree);
     $("#fDeviceproblemdes").val(defectJson.fDeviceproblemdes);
     var fProblemlocation = defectJson.fProblemlocation;

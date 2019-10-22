@@ -1,5 +1,6 @@
 var selectSubid = localStorage.getItem("fSubid");
 var taskId = localStorage.getItem("taskID");
+var goTemp = localStorage.getItem("goBackToList");
 var needUpdate = localStorage.getItem("need-update");
 if (needUpdate) {
     localStorage.removeItem("need-update");
@@ -20,6 +21,14 @@ if (urlArray.length > 1) {
         fTaskid: taskId
     };
 };
+
+$(".back_btn").click(function(){
+    if(goTemp=="1"){
+        window.history.back();
+    }else{
+        window.location.href="missionDetail.html";
+    }
+});
 
 var loginUserid = Substation.loginUserid;
 Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
@@ -95,18 +104,21 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 window.location.href = "defectInfo.html?fDeviceproblemid=" + proId + "&taskProblem=1";
             });
             var missionTypeId = localStorage.getItem("missionTypeid");
-
-            if ((data.imgName == null || data.imgName == "") && missionTypeId == 3) {
-                //消缺任务 无签名
-                $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
-                $("#goToWrite").click(function () {
-                    window.location.href = "draw.html";
-                });
-            } else if (missionTypeId == 1) {
-                //巡视任务 点击红色数字
+            if(goTemp=="1"){
                 $(".card-footer").remove();
-            } else {
-                $(".card-footer").html('<img src="' + (Substation.ipAddressFromAPP + imgUrl + "/" + data.imgName) + '" style="width:100%;">');
+            }else{
+                if ((data.imgName == null || data.imgName == "") && missionTypeId == 3) {
+                    //消缺任务 无签名
+                    $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
+                    $("#goToWrite").click(function () {
+                        window.location.href = "draw.html";
+                    });
+                } else if (missionTypeId == 1) {
+                    //巡视任务 点击红色数字
+                    $(".card-footer").remove();
+                } else {
+                    $(".card-footer").html('<img src="' + (Substation.ipAddressFromAPP + imgUrl + "/" + data.imgName) + '" style="width:100%;">');
+                }
             }
         } else {
             $(".content").html("无匹配数据");

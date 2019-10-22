@@ -10,3 +10,6 @@
 .button-fill.bottom-btn {
     background-color: #5CC54B;
 }
+.list-block .item-title.label {
+    width:30%;
+}

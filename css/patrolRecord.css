@@ -218,3 +218,6 @@ i.icon.icon-alarm {
 #list-container .card{
     margin:0.3rem;
 }
+.bar .button-nav.pull-right {
+    margin-right: 0;
+}

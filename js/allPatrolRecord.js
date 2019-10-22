@@ -51,7 +51,7 @@ function addItems(number) {
                     $("#list-container").empty();
                 }
                 $(data.placecheckformAllList.list).each(function(){
-                    var iconStr = "";
+                    /*var iconStr = "";
                     switch(this.fPeriodType){
                         case "周巡":
                             iconStr="<i class=\"icon icon-week\"></i>\n";
@@ -65,7 +65,7 @@ function addItems(number) {
                         default:
                             iconStr="<i class=\"icon icon-day\"></i>\n";
                             break;
-                    }
+                    }*/
                     /*$("#list-container").append("<div class=\"card\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
                                                "                    <div class=\"card-content\">\n" +
                                                "                        <div class=\"card-content-inner row no-gutter\">\n" +
@@ -100,8 +100,7 @@ function addItems(number) {
                             stateStr="待办";
                             break;
                     }
-
-                    $("#list-container").append("<div class=\"card\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
+                    $("#list-container").append("<div class=\"card noClick\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
                                               "                    <div class=\"card-content\">\n" +
                                               "                        <div class=\"card-content-inner\">\n" +
 /*                                               "                            <div class=\"col-10\">\n" +
@@ -116,7 +115,7 @@ function addItems(number) {
                                               "                            </div>\n" +
                                               "                            <div class=\"col-25\">\n" +
                                                                                '<a href="#" class="button button-fill goTask" data-task="'+this.fTaskid+'">执行情况</a>' +
-                                                                               '<a href="#" class="button button-fill goPlace" style="margin-top:0.2rem;">执行明细</a>' +
+                                                                               '<a href="#" class="button button-fill goPlace" style="margin-top:0.2rem;">巡检明细</a>' +
                                               "                            </div>\n" +
                                               "                        </div>\n" +
                                               "                    </div>\n" +

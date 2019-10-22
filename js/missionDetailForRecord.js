@@ -100,6 +100,7 @@ jQuery(document).ready(function () {
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
+                            localStorage.setItem("goBackToList", "1");
                             window.location.href = "defectRectification.html";
                         });
                     }
@@ -112,6 +113,7 @@ jQuery(document).ready(function () {
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
+                            localStorage.setItem("goBackToList", "1");
                             window.location.href = encodeURI("defectRectification.html" + "?value=0");;
                         });
                     }
