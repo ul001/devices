@@ -66,7 +66,7 @@ function addItems(number) {
                             iconStr="<i class=\"icon icon-day\"></i>\n";
                             break;
                     }
-                    $("#list-container").append("<div class=\"card\" id=\""+this.fPlacecheckformid+"\">\n" +
+                    $("#list-container").append("<div class=\"card\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
                                                "                    <div class=\"card-content\">\n" +
                                                "                        <div class=\"card-content-inner row no-gutter\">\n" +
 /*                                               "                            <div class=\"col-10\">\n" +
@@ -87,7 +87,9 @@ function addItems(number) {
                 });
                 $(".card").unbind().click(function(){
                     var fPlacecheckformid = $(this).attr("id");
+                    var clickSub = $(this).attr("data-id");
                     localStorage.setItem("fPlacecheckformid",fPlacecheckformid);
+                    localStorage.setItem("fSubid",clickSub);
                     localStorage.setItem("canClick",false);
                     window.location.href="patrolContent.html";
                 });
