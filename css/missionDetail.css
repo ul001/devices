@@ -19,12 +19,12 @@
 
 #addVarContain126 {
     width: 100%;
-    bottom: 0;
+    bottom: -1.1rem;
     position: fixed;
 }
 
 #hiddenBtn {
-    height: 3rem;
+    height: 2.2rem;
     background: transparent;
     opacity: 0;
 }
