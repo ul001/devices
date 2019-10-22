@@ -42,8 +42,7 @@ i.icon.icon-alarm{
     width:initial;
 }
 .btnBar{
-    position:absolute;
-    left:0;
+    /*position:absolute;*/
     right:0;
     bottom:0;
     width: 100%;

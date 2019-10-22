@@ -131,9 +131,10 @@ $('#searchBtn').click(function () {
     if($("#search").val()==""){
         $("#subname").text("所有变电所");
         selectSubid="";
-    }else{
+    }else if(clickSubid!=""){
         $("#subname").text($("#search").val());
         selectSubid=clickSubid;
+        clickSubid="";
     }
     getFirstPage();
 });
@@ -142,16 +143,14 @@ $("#dateStart").calendar();
 $("#dateEnd").calendar();
 
 function getSomeSubstation(){
-    var url = "/getSubstationListByUser";
+    var url = "/getSubListByLetter";
     var searchKey = $("#search").val();
     var params = {
-        pageNo: 1,
-        pageSize: 5,
         key: searchKey
     }
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url,params,function(data){
-        $(data.list).each(function(){
+        $(data).each(function(){
             $("#listContainer").append('<li class="item-content" data-id="'+this.fSubid+'">'+
                                                                 '<div class="item-inner">'+
                                                                     '<div class="item-title">'+this.fSubname+'</div>'+
@@ -260,7 +259,10 @@ $("#dateStart,#dateEnd").click(function(){
 });
 
 //解决键盘遮挡问题
+var h=$(window).height();
 window.addEventListener("resize", function () {
+    if($(window).height()<h){ $('.btnBar').hide(); }
+    if($(window).height()>=h){ $('.btnBar').show(); }
     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();

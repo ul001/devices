@@ -2,7 +2,7 @@
 var selectSubid="";
 var clickSubid="";
 var loading = false;
-var itemsPerLoad = 1000;
+var itemsPerLoad = 5;
 var pageNum = 1;
 
 function getFirstPage() {
@@ -103,7 +103,7 @@ function addItems(number, lastIndex) {
                         "                                <p>缺陷描述:<span class=\"redColor\">"+this.fDeviceproblemdes+"</span></p>\n" +
 //                        "                                <p>危害:"+this.fProblemharm+"</p>\n" +
                         "                                <p>具体位置:"+problemStr+"</p>\n" +
-                        "                                <p>缺陷类别:"+this.fProblemtype+" 紧急程度:"+this.fProblemlevel+"</p>\n" +
+                        "                                <p class=\"row\"><span class=\"col-50\">缺陷类别:"+this.fProblemtype+"</span><span class=\"col-50\">紧急程度:"+this.fProblemlevel+"</span></p>\n" +
 //                        "                                <p>消缺期限:"+this.fTimelimit+"</p>\n" +
 //                        "                                <p>处理建议:"+this.fResolution+"</p>\n" +
 //                        "                                <p>客户意见:"+this.fClientadvice+"</p>\n" +
@@ -166,9 +166,10 @@ $('#searchBtn').click(function () {
     if($("#search").val()==""){
         $("#subName").text("所有变电所");
         selectSubid="";
-    }else{
+    }else if(clickSubid!=""){
         $("#subName").text($("#search").val());
         selectSubid=clickSubid;
+        clickSubid="";
     }
     getFirstPage();
 });
@@ -177,16 +178,14 @@ $("#dateStart").calendar();
 $("#dateEnd").calendar();
 
 function getSomeSubstation(){
-    var url = "/getSubstationListByUser";
+    var url = "/getSubListByLetter";
     var searchKey = $("#search").val();
     var params = {
-        pageNo: 1,
-        pageSize: 5,
         key: searchKey
     }
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url,params,function(data){
-        $(data.list).each(function(){
+        $(data).each(function(){
             $("#listContainer").append('<li class="item-content" data-id="'+this.fSubid+'">'+
                                                                 '<div class="item-inner">'+
                                                                     '<div class="item-title">'+this.fSubname+'</div>'+
@@ -295,7 +294,10 @@ $("#dateStart,#dateEnd").click(function(){
 });
 
 //解决键盘遮挡问题
+var h=$(window).height();
 window.addEventListener("resize", function () {
+    if($(window).height()<h){ $('.btnBar').hide(); }
+    if($(window).height()>=h){ $('.btnBar').show(); }
     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
