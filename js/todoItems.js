@@ -330,7 +330,7 @@ jQuery(document).ready(function () {
               this.fSubName;
             text += "                                            </p>";
             text +=
-              "<p>任务编号：" +
+              "<p>任务单号：" +
               (this.fTasknumber == undefined ? "" : this.fTasknumber) +
               "</p><p>实际完成时间：" +
               (this.sortDate == undefined ? "" : this.sortDate) +
@@ -429,7 +429,7 @@ jQuery(document).ready(function () {
               this.fSubName;
             text += "                                            </p>";
             text +=
-              "<p>任务编号：" +
+              "<p>任务单号：" +
               (this.fTasknumber == undefined ? "" : this.fTasknumber) +
               "</p><p>计划完成时间：" +
               this.fDeadlinedate.substring(0, 11) +
