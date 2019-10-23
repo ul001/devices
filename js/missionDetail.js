@@ -47,6 +47,8 @@ jQuery(document).ready(function () {
     //任务负责人 fTaskchargerid
     var taskchargerid;
 
+    var taskCreatId;
+
     var missionDetail = "";
 
     function getNetData() {
@@ -88,6 +90,7 @@ jQuery(document).ready(function () {
                     $("#missionCont").html(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
                     taskchargerid = taskInfo.fTaskchargerid;
+                    taskCreatId = taskInfo.fTaskcreateuserid;
                     var temp = false;
                     var thisTempState = 0;
 
@@ -136,7 +139,7 @@ jQuery(document).ready(function () {
                             return false;
                         }
                     });
-                    if (taskchargerid != Substation.loginUserid) {
+                    if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
                     } else {
                         $("#addVarContain124").css("display", "none");
@@ -189,7 +192,7 @@ jQuery(document).ready(function () {
                                                             }*/
                     }
 
-                    if (taskchargerid != Substation.loginUserid) {
+                    if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
                     } else {
                         $("#addVarContain124").css("display", "none");
@@ -379,7 +382,11 @@ jQuery(document).ready(function () {
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("missiontaskID", taskID);
-        localStorage.setItem("hiddenBtn", "NO");
+        if (taskCreatId != Substation.loginUserid) {
+            localStorage.setItem("hiddenBtn", "NO");
+        } else {
+            localStorage.setItem("hiddenBtn", "YES");
+        }
         window.location.href = "missionManager.html";
     });
 
