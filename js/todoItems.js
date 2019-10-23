@@ -352,7 +352,7 @@ jQuery(document).ready(function () {
             var tasktypeid = $(this).attr("name");
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missionFinish");
-            localStorage.setItem("missionType", "patrol");
+            localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             window.location.href = "missionDetail.html";
           });
@@ -468,21 +468,21 @@ jQuery(document).ready(function () {
             //巡视任务
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missionDoing");
-            localStorage.setItem("missionType", taskstatus);
+            localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             window.location.href = "missionDetail.html";
           } else if (tasktypeid == 3) {
             //缺陷登记
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missiondefect");
-            localStorage.setItem("missionType", "patrol");
+            localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             window.location.href = "missionDetail.html";
           } else {
             //现场交接
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missiondefect");
-            localStorage.setItem("missionType", "patrol");
+            localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             window.location.href = "missionDetail.html";
           }

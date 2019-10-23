@@ -154,6 +154,7 @@ jQuery(document).ready(function () {
 
                     if (taskchargerid != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
+                        $("#addVarContain124").css("display", "none");
                     } else {
                         $("#addVarContain124").css("display", "none");
                     }

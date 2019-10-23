@@ -4,10 +4,9 @@ jQuery(document).ready(function () {
     $("#titleContent").text(titlename);
 
     var showmissionBtn = localStorage.getItem("showType");
-
+    var missionType = localStorage.getItem("missionType");
     if (showmissionBtn == "missionDoing") {
         localStorage.setItem("canClick", true);
-        var missionType = localStorage.getItem("missionType");
         if (missionType == 0) {
             var showStr =
                 '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2">现场签到</a> </div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> </div>';
@@ -144,6 +143,8 @@ jQuery(document).ready(function () {
                     } else {
                         $("#addVarContain124").css("display", "none");
                     }
+
+
                     /*                    if (missionTypeid != 1) {
                                   $("#addVarContain125").css("display", "none");
                               }*/
@@ -196,6 +197,19 @@ jQuery(document).ready(function () {
                         $("#clickManager").css("display", "none");
                     } else {
                         $("#addVarContain124").css("display", "none");
+                    }
+                    if (missionType == 3) {
+                        //办毕处理
+                        $(data.taskUserList).each(function () {
+                            if (Substation.loginUserid == this.fUserid) {
+                                var explain = this.fExplain;
+                                if (explain.length > 0) {
+                                    $("#textareaDetail").html(explain);
+                                }
+                            }
+                        });
+                        $("#textareaDetail").attr("readonly", true);
+                        // $("#addVarContain124").css("display", "none");
                     }
                     //现场签到按钮事件
                     $("#checkIn2").click(function () {
