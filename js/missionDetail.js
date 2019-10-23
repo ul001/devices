@@ -22,7 +22,9 @@ jQuery(document).ready(function () {
         }
     } else if (showmissionBtn == "missionFinish") {
         localStorage.setItem("canClick", false);
-        $("#clickManager").css("display", "none");
+        // if (missionType != 3) {
+        //     $("#clickManager").css("display", "none");
+        // }
         var showstr =
             '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行明细</a> </div> </div>';
         $("#addVarContain126").append(showstr);
@@ -396,7 +398,7 @@ jQuery(document).ready(function () {
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("missiontaskID", taskID);
-        if (taskCreatId != Substation.loginUserid) {
+        if (taskCreatId != Substation.loginUserid && missionType != 3) {
             localStorage.setItem("hiddenBtn", "NO");
         } else {
             localStorage.setItem("hiddenBtn", "YES");

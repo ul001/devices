@@ -140,6 +140,19 @@ jQuery(document).ready(function () {
                             return false;
                         }
                     });
+                    if (missionType == 3) {
+                        //办毕处理
+                        $(data.taskUserList).each(function () {
+                            if (Substation.loginUserid == this.fUserid) {
+                                var explain = this.fExplain;
+                                if (explain.length > 0) {
+                                    $("#textareaDetail").html(explain);
+                                }
+                            }
+                        });
+                        $("#textareaDetail").attr("readonly", true);
+                        // $("#addVarContain124").css("display", "none");
+                    }
                     if (taskchargerid != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
                     } else {
