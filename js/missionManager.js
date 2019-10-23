@@ -317,11 +317,11 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">签到时间:</div>';
                     text +=
-                        '                                        <div class="item-input"><input type="text" readonly="readonly"';
+                        '                                        <div class="item-label" readonly="readonly"';
                     text +=
-                        '                                                class="valueInput" value="' +
+                        '                                                class="valueInput" name="number" validator="required">' +
                         signTime +
-                        '" name="number" validator="required">';
+                        '';
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -334,11 +334,11 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">签到地点:</div>';
                     text +=
-                        '                                        <div class="item-input"><input type="text" readonly="readonly"';
+                        '                                        <div class="item-label" ';
                     text +=
-                        '                                                class="valueInput" value="' +
+                        '                                                class="valueInput" name="number" validator="required"> ' +
                         location +
-                        '" name="number" validator="required">';
+                        '';
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -351,11 +351,11 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">提交时间:</div>';
                     text +=
-                        '                                        <div class="item-input"><input type="text" readonly="readonly"';
+                        '                                        <div class="item-label" readonly="readonly"';
                     text +=
-                        '                                                class="valueInput" value="' +
+                        '                                                class="valueInput" name="number" validator="required">' +
                         creatTime +
-                        '" name="number" validator="required">';
+                        '';
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -368,11 +368,11 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">执行情况:</div>';
                     text +=
-                        '                                        <div class="item-input"><input type="text" readonly="readonly"';
+                        '                                        <div class="item-label" readonly="readonly"';
                     text +=
-                        '                                                class="valueInput" value="' +
+                        '                                                class="valueInput"  name="number" validator="required">' +
                         explain +
-                        '" name="number" validator="required">';
+                        '';
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -544,5 +544,30 @@ jQuery(document).ready(function () {
     });
     //管理页面
 
+    // function setTextareaPointerEvents(value) {
+    //     var nodes = document.getElementsByTagName('input');
+    //     for (var i = 0; i < nodes.length; i++) {
+    //         nodes[i].style.pointerEvents = value;
+    //     }
+    // }
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     setTextareaPointerEvents('none');
+    // });
+
+    // document.addEventListener('touchstart', function () {
+    //     setTextareaPointerEvents('auto');
+    // });
+
+    // document.addEventListener('touchmove', function (e) {
+    //     e.preventDefault();
+    //     setTextareaPointerEvents('none');
+    // });
+
+    // document.addEventListener('touchend', function () {
+    //     setTimeout(function () {
+    //         setTextareaPointerEvents('none');
+    //     }, 0);
+    // });
 
 });
