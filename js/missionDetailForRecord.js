@@ -101,6 +101,7 @@ jQuery(document).ready(function () {
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             localStorage.setItem("goBackToList", "1");
+                            localStorage.setItem("canClick", false);
                             window.location.href = "defectRectification.html";
                         });
                     }
@@ -114,7 +115,8 @@ jQuery(document).ready(function () {
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             localStorage.setItem("goBackToList", "1");
-                            window.location.href = encodeURI("defectRectification.html" + "?value=0");;
+                            localStorage.setItem("canClick", false);
+                            window.location.href = encodeURI("defectRectification.html" + "?value=0");
                         });
                     }
                     //任务执行结果
