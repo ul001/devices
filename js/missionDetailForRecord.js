@@ -24,10 +24,10 @@ jQuery(document).ready(function () {
     // } else if (showmissionBtn == "missionFinish") {
     //     localStorage.setItem("canClick", false);
     //     $("#clickManager").css("display", "none");
-    //     var showstr =
-    //         '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行明细</a> </div> </div>';
-    //     $("#addVarContain126").append(showstr);
-    //     $("#carryOut").attr("name", "false");
+    var showstr =
+        '<div class="row buttonsEvent"> <div class = "col-100" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >执行明细</a> </div> </div>';
+    $("#addVarContain126").append(showstr);
+    $("#carryOut").attr("name", "false");
     // } else {
     //     localStorage.setItem("canClick", true);
     //     var showStr =
@@ -172,7 +172,40 @@ jQuery(document).ready(function () {
                         $("#addVarContain124").css("display", "none");
                     }
 
+                    //执行任务按钮事件
+                    $("#carryOut").click(function () {
 
+                        localStorage.setItem("fSubid", missionsubid);
+                        localStorage.setItem("fPlacecheckformid", placeCheckFormId);
+                        localStorage.setItem("missiontaskID", taskID);
+                        if (missionTypeid == 1) {
+                            //巡检任务
+                            localStorage.setItem("fSubname", "执行情况");
+                            if ($("#carryOut").text() == "执行明细") {
+                                window.location.href = "patrolContent.html";
+                            } else {
+                                $.confirm(
+                                    "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
+                                    "注意！",
+                                    function () {
+                                        window.location.href = "patrolContent.html";
+                                    }
+                                );
+                            }
+                        } else if (missionTypeid == 2) {
+                            //现场交接任务
+                            localStorage.setItem("fSubname", "执行情况");
+                            window.location.href = "missionScene.html";
+                        } else if (missionTypeid == 3) {
+                            //缺陷整改
+                            localStorage.setItem("missionTypeid", missionTypeid);
+                            localStorage.setItem("fSubname", "执行情况");
+                            window.location.href = "defectRectification.html";
+                        } else {
+                            $.toast("fTasktypeid=null，未知任务类型");
+                        }
+
+                    });
                 }
 
 
