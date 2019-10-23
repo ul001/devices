@@ -66,25 +66,6 @@ function addItems(number) {
                             iconStr="<i class=\"icon icon-day\"></i>\n";
                             break;
                     }*/
-                    /*$("#list-container").append("<div class=\"card\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
-                                               "                    <div class=\"card-content\">\n" +
-                                               "                        <div class=\"card-content-inner row no-gutter\">\n" +
-*//*                                               "                            <div class=\"col-10\">\n" +
-                                                iconStr +
-                                               "                            </div>\n" +*//*
-                                               "                            <div class=\"col-75\">\n" +
-                                               "                                <p class=\"subName limit-length\">"+this.fTaskName+"<span class=\"blueColor\">("+this.fStateExplain+")</span></p>\n" +
-//                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
-                                               "                                <p>开始时间:<span class=\"blueColor\">"+this.fCreatetime+"</span></p>\n" +
-                                               "                                <p>发现缺陷:<span class=\"redColor\">"+this.fproblemTotal+" </span>个  未处理:<span class=\"redColor\">"+this.funsolvedTotal+" </span>个</p>\n" +
-                                               "                            </div>\n" +
-                                               "                            <div class=\"col-25\">\n" +
-                    '<a href="#" class="button button-fill">执行情况</a>' +
-                    '<a href="#" class="button button-fill" style="margin-top:0.2rem;">执行明细</a>' +
-                                               "                            </div>\n" +
-                                               "                        </div>\n" +
-                                               "                    </div>\n" +
-                                               "                </div>");*/
                     var stateStr = "";
                     switch(this.fTaststateid){
                         case 1:
@@ -100,12 +81,31 @@ function addItems(number) {
                             stateStr="待办";
                             break;
                     }
-                    $("#list-container").append("<div class=\"card noClick\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
+                    $("#list-container").append("<div class=\"card\" data-task=\""+this.fTaskid+"\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
+                                               "                    <div class=\"card-content\">\n" +
+                                               "                        <div class=\"card-content-inner row no-gutter\">\n" +
+//                                               "                            <div class=\"col-10\">\n" +
+//                                                iconStr +
+//                                               "                            </div>\n" +
+                                               "                            <div class=\"col-95\">\n" +
+                                               "                                <p class=\"subName\">"+this.fTaskName+"<span class=\"blueColor\">("+stateStr+")</span></p>\n" +
+//                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
+                                               "                                <p>巡检任务单号：<span class=\"blueColor\">"+this.fTasknumber+"</span></p>\n" +
+                                               "                                <p>巡检开始时间：<span class=\"blueColor\">"+this.fCreatetime+"</span></p>\n" +
+                                               "                                <p>本次发现缺陷：<span class=\"redColor\">"+this.fproblemTotal+" </span>个  未处理：<span class=\"redColor\">"+this.funsolvedTotal+" </span>个</p>\n" +
+                                               "                            </div>\n" +
+                                               "                            <div class=\"col-5\">\n" +
+                                               "                                <i class=\"icon icon-right\"></i>\n" +
+                                               "                            </div>\n" +
+                                               "                        </div>\n" +
+                                               "                    </div>\n" +
+                                               "                </div>");
+                    /*$("#list-container").append("<div class=\"card noClick\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
                                               "                    <div class=\"card-content\">\n" +
                                               "                        <div class=\"card-content-inner\">\n" +
-/*                                               "                            <div class=\"col-10\">\n" +
+*//*                                               "                            <div class=\"col-10\">\n" +
                                                iconStr +
-                                              "                            </div>\n" +*/
+                                              "                            </div>\n" +*//*
                                               "                                <p class=\"subName limit-length\">"+this.fTaskName+"<span class=\"blueColor\">("+stateStr+")</span></p>\n" +
 //                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
                                                                        '<div class=\"row no-gutter\">'+
@@ -119,9 +119,9 @@ function addItems(number) {
                                               "                            </div>\n" +
                                               "                        </div>\n" +
                                               "                    </div>\n" +
-                                              "                </div>");
+                                              "                </div>");*/
                 });
-                $(".goPlace").unbind().click(function(){
+                /*$(".goPlace").unbind().click(function(){
                     var fPlacecheckformid = $(this).parents(".card").attr("id");
                     var clickSub = $(this).parents(".card").attr("data-id");
                     localStorage.setItem("fPlacecheckformid",fPlacecheckformid);
@@ -132,6 +132,16 @@ function addItems(number) {
                 $(".goTask").unbind().click(function(){
                     var clickTaskId = $(this).attr("data-task");
                     localStorage.setItem("taskID",clickTaskId);
+                    window.location.href="missionDetailForRecord.html";
+                });*/
+                $(".card").unbind().click(function(){
+                    var fPlacecheckformid = $(this).attr("id");
+                    var clickSub = $(this).attr("data-id");
+                    var clickTaskId = $(this).attr("data-task");
+                    localStorage.setItem("fPlacecheckformid",fPlacecheckformid);
+                    localStorage.setItem("fSubid",clickSub);
+                    localStorage.setItem("taskID",clickTaskId);
+                    localStorage.setItem("canClick",false);
                     window.location.href="missionDetailForRecord.html";
                 });
                 pageNum++;
