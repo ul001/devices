@@ -13,3 +13,6 @@
 .list-block .item-title.label {
     width:30%;
 }
+.item-input .valueInput{
+    overflow:auto;
+}
