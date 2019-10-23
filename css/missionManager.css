@@ -10,9 +10,25 @@
 .button-fill.bottom-btn {
     background-color: #5CC54B;
 }
+
 .list-block .item-title.label {
-    width:30%;
+    width: 30%;
 }
-.item-input .valueInput{
-    overflow:auto;
+
+/* .item-input {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    -webkit-transform: translateZ(20px);
+}
+*/
+
+html {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
+
+.item-inner .item-label {
+    color: #3E4145;
+    width: 100%;
+    text-align: left;
 }
