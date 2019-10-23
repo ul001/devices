@@ -437,7 +437,7 @@ jQuery(document).ready(function () {
               "</p>";
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-15">';
+              '                                        <div class="col-20">';
             text +=
               '                                            <button class="button button-fill button-success" id="dealMission' +
               this.fTaskid +

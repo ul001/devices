@@ -55,8 +55,10 @@ function addItems(number, lastIndex) {
             }
             $(data.tDevDeviceproblemList.list).each(function () {
                 var problemStr = "";
-                if(this.fProblemlocation.indexOf(",")!=-1){
-                    problemStr=this.fProblemlocation.split(",")[1]
+                if(this.hasOwnProperty("fProblemlocation")){
+                    if(this.fProblemlocation.indexOf(",")!=-1){
+                        problemStr=this.fProblemlocation.split(",")[1]
+                    }
                 }
                 var stateStr = "";
                 switch(this.fState){
