@@ -693,6 +693,7 @@ jQuery(document).ready(function () {
 
         var formdata = new FormData();
         formdata.append("fSubid", subid);
+        formdata.append("fDevicenamepath", clickGroupTree);
         formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fDevicename", encodeURIComponent(fDevicename));
         // formdata.append("fPagejson", json);
