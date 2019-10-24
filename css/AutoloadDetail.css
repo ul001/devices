@@ -1,8 +1,8 @@
-.bar-header-secondary .button{
+.bar-header-secondary .button {
     color: white;
-    border:none;
-    height:1.8rem;
-    line-height:1.8rem;
+    border: none;
+    height: 1.8rem;
+    line-height: 1.8rem;
     margin-top: -0.2rem;
     font-size: 0.85rem;
 }
@@ -11,33 +11,43 @@
     top: 4.4rem;
 }
 
-.icon.icon-add{
+.icon.icon-add {
     width: 0.85rem;
     height: 0.85rem;
-    margin-bottom:0.2rem;
+    margin-bottom: 0.2rem;
     background-image: url(../img/i-add.png);
 }
-.icon.icon-delete{
+
+.icon.icon-delete {
     width: 0.85rem;
     height: 0.85rem;
-    margin-bottom:0.2rem;
+    margin-bottom: 0.2rem;
     background-image: url(../img/i-delete.png);
 }
-.icon.icon-clone{
+
+.icon.icon-clone {
     width: 0.85rem;
     height: 0.85rem;
-    margin-bottom:0.2rem;
+    margin-bottom: 0.2rem;
     background-image: url(../img/i-clone.png);
 }
-.icon.icon-save{
+
+.icon.icon-save {
     width: 0.85rem;
     height: 0.85rem;
-    margin-bottom:0.2rem;
+    margin-bottom: 0.2rem;
     background-image: url(../img/i-save.png);
 }
-.bar-header-secondary .button i.icon:first-child:last-child{
-    margin-right:0.2rem;
+
+.bar-header-secondary .button i.icon:first-child:last-child {
+    margin-right: 0.2rem;
 }
+
 /*.button i.icon.icon-edit:first-child:last-child{
     margin-left:0.2rem;
 }*/
+
+#checkInCss {
+    margin-left: 2.5rem;
+    margin: 0 auto;
+}

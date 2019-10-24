@@ -38,7 +38,7 @@ var CustomerDevice = (function () {
         };
 
         // 新增一个设备
-        this.addModal = function (data) {
+        newFunction().addModal = function (data) {
             // 取消选中tabpanel
             $(".active[role='presentation']").removeClass("active");
             $(".tab.active").removeClass("active");
@@ -91,6 +91,10 @@ var CustomerDevice = (function () {
             }
             addEdit();
         };
+
+        function newFunction() {
+            return this;
+        }
 
         //添加编辑按钮事件
         function addEdit() {
