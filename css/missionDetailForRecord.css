@@ -4,7 +4,7 @@
 }
 
 .button-fill.bottom-btn {
-    background-color: #5CC54B;
+    background-color: #02AB93;
 }
 
 .item-label {
@@ -15,4 +15,20 @@
 
 .list-block .item-title.label {
     width: 40%;
+}
+
+.icon-missionDetail {
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-bottom: 0.2rem;
+    background-image: url(../img/i-missionDetail.jpg);
+}
+
+.button i.icon:first-child:last-child {
+    margin-right: 0.2rem;
+}
+
+#checkFinishInCss {
+    margin-left: 2.5rem;
+
 }
