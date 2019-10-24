@@ -611,7 +611,7 @@ var CustomerDevice = (function () {
 jQuery(document).ready(function () {
     // $(function () {
     var deviceGroupId = Substation.GetQueryString("fDeviceGroupId");
-
+    var clickGroupTree = localStorage.getItem("clickGroupTree");
     var subid = localStorage.getItem("fSubid");
     var jumpPid = Substation.GetQueryString("pid");
     var lastClickNum = Substation.GetQueryString("clickNum");

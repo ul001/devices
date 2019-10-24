@@ -160,6 +160,7 @@ function linkClick(parentId) {
         var fField = $(this).attr("value");
         thisTempid = fField;
         var clickId = $(this).attr("id");
+        var clickName = $(this).find(".item-title").text();
         Substation.getDataByAjax("/selectSubDeviceGroupListByPid", {
             fSubid: selectSubid,
             fParentId: clickId
@@ -182,6 +183,15 @@ function linkClick(parentId) {
                     return;
                 }
             }
+            var clickTree = [];
+            $(pids).each(function(){
+                if(this.pName!=""){
+                    clickTree.push(this.pName);
+                }
+            });
+            clickTree.push(clickName);
+            var clickTreeStr = clickTree.join("-");
+            localStorage.setItem("clickGroupTree",clickTreeStr);
             localStorage.setItem("pids", JSON.stringify(pids));
             window.location.href = "AutoloadDetail.html?pid=" + thisPid + "&clickNum=" + clickNum + "&fDeviceGroupId=" + clickId + "&fTempid=" + thisTempid;
             /* if (fField != "" && fField != null) {

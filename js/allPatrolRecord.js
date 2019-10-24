@@ -5,6 +5,8 @@ var loading = false;
 var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
+var saveParam= JSON.parse(localStorage.getItem("saveParam"));
+localStorage.removeItem("saveParam");
 
 function getFirstPage() {
     $("#list-container").empty();
@@ -26,24 +28,41 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number) {
     var url = "/getPlaceCheckFormList";
-    var params = {
-        pageNum: pageNum,
-        pageSize: number
-    };
-    if(selectSubid!=""&&selectSubid!=null){
-        params['fSubid']=selectSubid;
-    }
-    var dateStartVal = $("#dateStart").val();
-    var dateEndVal = $("#dateEnd").val();
-    var stateVal = $("#fState").val();
-    if(dateStartVal!=""){
-        params['ftimeStart']=dateStartVal+" 00:00:00";
-    }
-    if(dateEndVal!=""){
-        params['ftimeEnd']=dateEndVal+" 23:59:59";
-    }
-    if(stateVal!=""){
-        params['fTaskstateid']=stateVal;
+    var params={};
+    if(saveParam!=null&&saveParam!=""){
+        params=saveParam;
+        var startTime = params['ftimeStart'];
+        var endTime = params['ftimeEnd'];
+        if(startTime!=""&&startTime!=null){
+            $("#dateStart").val(startTime.substring(0,10));
+        }
+        if(endTime!=""&&endTime!=null){
+            $("#dateEnd").val(endTime.substring(0,10));
+        }
+        if(params['fTaskstateid']!=undefined){
+            $("#fState").val(params['fTaskstateid']);
+        }
+        $("#search").val(params['subName']);
+    }else{
+        params = {
+            pageNum: pageNum,
+            pageSize: number
+        };
+        if(selectSubid!=""&&selectSubid!=null){
+            params['fSubid']=selectSubid;
+        }
+        var dateStartVal = $("#dateStart").val();
+        var dateEndVal = $("#dateEnd").val();
+        var stateVal = $("#fState").val();
+        if(dateStartVal!=""){
+            params['ftimeStart']=dateStartVal+" 00:00:00";
+        }
+        if(dateEndVal!=""){
+            params['ftimeEnd']=dateEndVal+" 23:59:59";
+        }
+        if(stateVal!=""){
+            params['fTaskstateid']=stateVal;
+        }
     }
     Substation.getDataByAjaxNoLoading("/getPlaceCheckFormList",params,function(data){
             if(data.placecheckformAllList.list.length>0){
@@ -141,6 +160,8 @@ function addItems(number) {
                     localStorage.setItem("fPlacecheckformid",fPlacecheckformid);
                     localStorage.setItem("fSubid",clickSub);
                     localStorage.setItem("taskID",clickTaskId);
+                    params['subName']=$("#search").val();
+                    localStorage.setItem("saveParam",JSON.stringify(params));
                     localStorage.setItem("canClick",false);
                     window.location.href="missionDetailForRecord.html";
                 });
@@ -181,6 +202,10 @@ $(document).on('infinite', '.infinite-scroll', function () {
 
 $('#searchBtn').click(function () {
     $(".close-panel").click();
+    if(saveParam!=null){
+        clickSubid = saveParam['fSubid'];
+        saveParam=null;
+    }
     if($("#search").val()==""){
         $("#subname").text("所有变电所");
         selectSubid="";
