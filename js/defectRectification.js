@@ -1,6 +1,7 @@
 var selectSubid = localStorage.getItem("fSubid");
 var taskId = localStorage.getItem("taskID");
 var goTemp = localStorage.getItem("goBackToList");
+localStorage.removeItem("goBackToList");
 var needUpdate = localStorage.getItem("need-update");
 if (needUpdate == "true") {
     location.reload();
@@ -113,6 +114,9 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                     $("#goToWrite").click(function () {
                         window.location.href = "draw.html";
                     });
+                    if(localStorage.getItem("canClick")=="false"){
+                        $(".card-footer").remove();
+                    }
                 } else if (missionTypeId == 1) {
                     //巡视任务 点击红色数字
                     $(".card-footer").remove();
