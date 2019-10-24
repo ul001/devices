@@ -296,7 +296,7 @@ jQuery(document).ready(function () {
               username = user;
             }
             text +=
-              '                            <div class="card"  id="' +
+              '                            <div class="card card1"  id="' +
               this.fTaskid +
               '" name="' +
               this.fTasktypeid +
@@ -324,7 +324,7 @@ jQuery(document).ready(function () {
             }
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-70">';
+              '                                        <div class="col-85">';
             text +=
               '                                            <p class="subName limit-length">' +
               this.fSubName;
@@ -337,8 +337,8 @@ jQuery(document).ready(function () {
               "</p>";
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-10">';
-            text += "                                        </div>";
+              '                                        <div class="col-5">';
+            text += "<i class=\"icon icon-right\"></i></div>";
             text += "                                    </div>";
             text += "                                </div>";
             text += "                            </div>";
@@ -347,7 +347,7 @@ jQuery(document).ready(function () {
           $(list).append(text);
           // $(".list-container").append(text);
           //我要处理 巡视
-          $(".card").click(function () {
+          $(".card1").click(function () {
             var taskID = $(this).attr("id");
             var tasktypeid = $(this).attr("name");
             localStorage.setItem("fSubname", "任务详情");
@@ -397,7 +397,13 @@ jQuery(document).ready(function () {
               username = user;
             }
 
-            text += '                            <div class="card" >';
+            text += '                            <div class="card card2" id="dealMission' +
+                                                                                 this.fTaskid +
+                                                                                 '"  name="' +
+                                                                                 this.fTaskid +
+                                                                                 '" data-taskid="' +
+                                                                                 this.fTasktypeid +
+                                                                                 '">';
             text +=
               '                                <div class="card-content">';
             text +=
@@ -421,7 +427,7 @@ jQuery(document).ready(function () {
             }
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-75' +
+              '                                        <div class="col-85' +
               showCommitClass +
               '">';
             text +=
@@ -437,8 +443,8 @@ jQuery(document).ready(function () {
               "</p>";
             text += "                                        </div>";
             text +=
-              '                                        <div class="col-20">';
-            text +=
+              '                                        <div class="col-5">';
+            /*text +=
               '                                            <button class="button button-fill button-success" id="dealMission' +
               this.fTaskid +
               '"  name="' +
@@ -450,7 +456,8 @@ jQuery(document).ready(function () {
               '                                                type="button" name=' +
               this.fTaskid +
               " >处理";
-            text += "                                            </button>";
+            text += "                                            </button>";*/
+            text += "<i class=\"icon icon-right\"></i>";
             text += "                                        </div>";
             text += "                                    </div>";
             text += "                                </div>";
@@ -461,7 +468,7 @@ jQuery(document).ready(function () {
           $(list).append(text);
         }
         //addClick();
-        $(".button.button-fill").click(function () {
+        $(".card2").click(function () {
           var taskID = $(this).attr("name");
           var tasktypeid = $(this).attr("data-taskid");
           if (tasktypeid == 1) {
