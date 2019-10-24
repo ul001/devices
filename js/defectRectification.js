@@ -2,9 +2,9 @@ var selectSubid = localStorage.getItem("fSubid");
 var taskId = localStorage.getItem("taskID");
 var goTemp = localStorage.getItem("goBackToList");
 var needUpdate = localStorage.getItem("need-update");
-if (needUpdate) {
-    localStorage.removeItem("need-update");
+if (needUpdate == "true") {
     location.reload();
+    localStorage.removeItem("need-update");
 }
 
 var param;
@@ -22,11 +22,11 @@ if (urlArray.length > 1) {
     };
 };
 
-$(".back_btn").click(function(){
-    if(goTemp=="1"){
+$(".back_btn").click(function () {
+    if (goTemp == "1") {
         window.history.back();
-    }else{
-        window.location.href="missionDetail.html";
+    } else {
+        window.location.href = "missionDetail.html";
     }
 });
 
@@ -104,9 +104,9 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 window.location.href = "defectInfo.html?fDeviceproblemid=" + proId + "&taskProblem=1";
             });
             var missionTypeId = localStorage.getItem("missionTypeid");
-            if(goTemp=="1"){
+            if (goTemp == "1") {
                 $(".card-footer").remove();
-            }else{
+            } else {
                 if ((data.imgName == null || data.imgName == "") && missionTypeId == 3) {
                     //消缺任务 无签名
                     $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
