@@ -2,11 +2,22 @@ var selectSubid = localStorage.getItem("fSubid");
 var taskId = localStorage.getItem("taskID");
 var goTemp = localStorage.getItem("goBackToList");
 localStorage.removeItem("goBackToList");
-var needUpdate = localStorage.getItem("need-update");
-if (needUpdate == "true") {
-    location.reload();
-    localStorage.removeItem("need-update");
-}
+
+window.addEventListener('pageshow', function (e) {
+    //ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+    if (e.persisted && isIOS) {
+        // var needUpdate = localStorage.getItem("need-update");
+        // if (needUpdate) {
+        //     localStorage.removeItem("need-update");
+        window.location.reload();
+        // }
+    }
+})
+
+
 
 var param;
 var urlinfo = window.location.href; //获取url 
@@ -114,7 +125,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                     $("#goToWrite").click(function () {
                         window.location.href = "draw.html";
                     });
-                    if(localStorage.getItem("canClick")=="false"){
+                    if (localStorage.getItem("canClick") == "false") {
                         $(".card-footer").remove();
                     }
                 } else if (missionTypeId == 1) {
