@@ -88,12 +88,12 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 if (this.fUpdateDate != undefined) {
                     solveTime = "<p>消缺时间：" + this.fUpdateDate + "</p>";
                 }
-                $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\"" + this.treePathName + "\" id=\"" + this.fDeviceproblemid + "\">\n" +
+                $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\"" + (this.treePathName==undefined?"":this.treePathName) + "\" id=\"" + this.fDeviceproblemid + "\">\n" +
                     "                        <div class=\"col-10\">\n" +
                     "                            <i class=\"icon icon-alarm\"></i>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"col-85\">\n" +
-                    "                            <p class=\"boldText\">设备名称：" + this.treePathName + "</p>\n" +
+                    "                            <p class=\"boldText\">设备名称：" + (this.treePathName==undefined?"":this.treePathName) + "</p>\n" +
                     "                            <p>描述：" + this.fDeviceproblemdes + "</p>\n" +
                     "                            <p>危害：" + this.fProblemharm + "</p>\n" +
                     "                            <p>具体位置：" + problemStr + "</p>\n" +

@@ -114,7 +114,7 @@ function addItems(number, lastIndex) {
                 if(this.fUpdateDate!=undefined){
                     solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
                 }*/
-                html += "<div class=\"card\" id=\""+this.fDeviceproblemid+"\" value=\""+this.treePathName+"\">\n" +
+                html += "<div class=\"card\" id=\""+this.fDeviceproblemid+"\" value=\""+(this.treePathName==undefined?"":this.treePathName)+"\">\n" +
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"card-content-inner row no-gutter\">\n" +
                         /*"                            <div class=\"col-10\">\n" +
@@ -122,7 +122,7 @@ function addItems(number, lastIndex) {
                         "                            </div>\n" +*/
                         "                            <div class=\"col-95\">\n" +
                         "<p class=\"subName limit-length\">"+this.fSubName+"</p>"+
-                        "                                <p>设备名称:<span class=\"redColor\">"+this.treePathName+"</span>\n" +
+                        "                                <p>设备名称:<span class=\"redColor\">"+(this.treePathName==undefined?"":this.treePathName)+"</span>\n" +
                         "                                </p>\n" +
                         "                                <p>缺陷描述:<span class=\"redColor\">"+this.fDeviceproblemdes+"</span></p>\n" +
 //                        "                                <p>危害:"+this.fProblemharm+"</p>\n" +
