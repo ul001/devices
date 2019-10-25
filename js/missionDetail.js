@@ -232,11 +232,11 @@ jQuery(document).ready(function () {
                         var lat = "";
                         var lon = "";
                         var addr = "";
-                        if (!loc.length) {
+                        if (loc == undefined || !loc.length) {
                             $.hidePreloader();
                             $.toast("无法获取位置，请确保定位授权后重试。");
                             return;
-                        }else if(loc=="-1"){
+                        } else if (loc == "-1") {
                             $.hidePreloader();
                             $.toast("请求超时。");
                             return;
@@ -254,10 +254,11 @@ jQuery(document).ready(function () {
                             fLatitude: lat,
                             fLocation: addr
                         };
-                        //                                                alert(""+taskID+","+lon+","+lat+","+addr);
+                        //    alert(""+taskID+","+lon+","+lat+","+addr);
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
-                            $.toast("签到成功！");
+
                             location.reload();
+                            $.toast("签到成功！");
                             localStorage.removeItem("locationStrJS");
                             //                            $("#checkIn").removeClass("col-33");
                             //                            $("#checkIn").hide();
@@ -349,6 +350,17 @@ jQuery(document).ready(function () {
                     data.taskUserList.length > 0
                 ) {
                     $(data.taskUserList).each(function () {
+                        var taskStateName = "";
+                        if (this.fTaskstateid == 1) {
+                            taskStateName = "待办";
+                        } else if (this.fTaskstateid == 2) {
+                            taskStateName = "在办";
+                        } else if (this.fTaskstateid == 3) {
+                            taskStateName = "办毕";
+                        } else {
+
+                        }
+
                         var text = "";
                         text += "<li>";
                         text +=
@@ -367,7 +379,7 @@ jQuery(document).ready(function () {
                             '" ';
                         text +=
                             '                                                name="number" >' +
-                            this.taskState +
+                            taskStateName +
                             "</div>";
                         text += "                                        </div>";
                         text += "                                    </div>";
