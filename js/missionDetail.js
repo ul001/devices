@@ -215,6 +215,7 @@ jQuery(document).ready(function () {
                     }
                     //现场签到按钮事件
                     $("#checkIn2").click(function () {
+                        $.showPreloader();
                         //iOS安卓基础传参
                         var u = navigator.userAgent,
                             app = navigator.appVersion;
@@ -232,10 +233,14 @@ jQuery(document).ready(function () {
                         var lon = "";
                         var addr = "";
                         if (!loc.length) {
+                            $.hidePreloader();
                             $.toast("无法获取位置，请确保定位授权后重试。");
                             return;
+                        }else if(loc=="-1"){
+                            $.hidePreloader();
+                            $.toast("请求超时。");
+                            return;
                         }
-
                         if (loc != "" && loc != null) {
                             var array = loc.split(";");
                             lat = array[0];
