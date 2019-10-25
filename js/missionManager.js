@@ -266,6 +266,16 @@ jQuery(document).ready(function () {
                     if (this.hasOwnProperty("fLocation")) {
                         location = this.fLocation;
                     }
+                    var taskStateName = "";
+                    if (this.fExesituation == 7) {
+                        taskStateName = "未签到";
+                    } else if (this.fExesituation == 8) {
+                        taskStateName = "已签到";
+                    } else if (this.fExesituation == 9) {
+                        taskStateName = "已提交";
+                    } else {
+
+                    }
 
                     var text = "";
                     text += "<ul>";
@@ -301,7 +311,7 @@ jQuery(document).ready(function () {
                         '                                                class="valueInput" id="input' +
                         this.fUserid +
                         '" value="' +
-                        this.taskState +
+                        taskStateName +
                         '" name="sender" validator="required"';
                     text +=
                         '                                                style="color:red">';
@@ -411,7 +421,15 @@ jQuery(document).ready(function () {
                     } else if (this.fTaskstateid == 2) {
                         $("#input" + this.fUserid).css("color", "blue");
                     } else if (this.fTaskstateid == 3 || this.fTaskstateid == 4) {
-                        $("#input" + this.fUserid).css("color", "springgreen");
+                        if (this.fExesituation == 7) {
+                            $("#input" + this.fUserid).css("color", "gray");
+                        } else if (this.fExesituation == 8) {
+                            $("#input" + this.fUserid).css("color", "blue");
+                        } else if (this.fExesituation == 9) {
+                            $("#input" + this.fUserid).css("color", "springgreen");
+                        } else {
+                            $("#input" + this.fUserid).css("color", "red");
+                        }
                     } else {
                         $("#input" + this.fUserid).css("color", "red");
                     }

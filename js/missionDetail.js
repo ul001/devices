@@ -351,12 +351,12 @@ jQuery(document).ready(function () {
                 ) {
                     $(data.taskUserList).each(function () {
                         var taskStateName = "";
-                        if (this.fTaskstateid == 1) {
-                            taskStateName = "待办";
-                        } else if (this.fTaskstateid == 2) {
-                            taskStateName = "在办";
-                        } else if (this.fTaskstateid == 3) {
-                            taskStateName = "办毕";
+                        if (this.fExesituation == 7) {
+                            taskStateName = "未签到";
+                        } else if (this.fExesituation == 8) {
+                            taskStateName = "已签到";
+                        } else if (this.fExesituation == 9) {
+                            taskStateName = "已提交";
                         } else {
 
                         }
@@ -391,7 +391,15 @@ jQuery(document).ready(function () {
                         } else if (this.fTaskstateid == 2) {
                             $("#input" + this.fUserid).css("color", "blue");
                         } else if (this.fTaskstateid == 3 || this.fTaskstateid == 4) {
-                            $("#input" + this.fUserid).css("color", "springgreen");
+                            if (this.fExesituation == 7) {
+                                $("#input" + this.fUserid).css("color", "gray");
+                            } else if (this.fExesituation == 8) {
+                                $("#input" + this.fUserid).css("color", "blue");
+                            } else if (this.fExesituation == 9) {
+                                $("#input" + this.fUserid).css("color", "springgreen");
+                            } else {
+                                $("#input" + this.fUserid).css("color", "red");
+                            }
                         } else {
                             $("#input" + this.fUserid).css("color", "red");
                         }
