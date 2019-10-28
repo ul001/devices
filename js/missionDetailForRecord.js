@@ -258,9 +258,9 @@ jQuery(document).ready(function () {
     getNetData();
 
     $(".pull-left.click_btn").click(function () {
-        //localStorage.setItem("need-refresh", true);
-        /*window.history.back();*/
-        window.location.href = "allPatrolRecord.html";
+        localStorage.setItem("need-refresh", "true");
+        window.history.back();
+//        window.location.href = "allPatrolRecord.html";
     });
 
     //管理页面

@@ -10,20 +10,23 @@ var clickNum = 0;
 var thisPid = -1;
 var editID = -1;
 var changeTemp = false;
-var getClickNum = Substation.GetQueryString("clickNum");
-var getUrlPid = Substation.GetQueryString("pid");
-var getUrlState = Substation.GetQueryString("editState");
+var getClickNum = localStorage.getItem("clickNum");
+var getUrlPid = localStorage.getItem("pid");
+var getUrlState = localStorage.getItem("editState");
 var thisTempid = -1;
 if (getUrlPid != "" && getUrlPid != null) {
     thisPid = getUrlPid;
+    localStorage.removeItem("pid");
 }
 if (getUrlState != "" && getUrlState != null) {
     editState = getUrlState;
+    localStorage.removeItem("editState");
 }
 if (getClickNum != "" && getClickNum != null) {
     clickNum = getClickNum;
     pids = JSON.parse(localStorage.getItem("pids"));
     thisTempid = pids[clickNum].tempId;
+    localStorage.removeItem("clickNum");
 }
 var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");

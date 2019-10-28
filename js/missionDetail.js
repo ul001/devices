@@ -412,9 +412,9 @@ jQuery(document).ready(function () {
     getNetData();
 
     $(".pull-left.click_btn").click(function () {
-        //localStorage.setItem("need-refresh", true);
-        /*window.history.back();*/
-        window.location.href = "todoItems.html";
+        localStorage.setItem("need-refresh", "true");
+        window.history.back();
+//        window.location.href = "todoItems.html";
     });
 
     //管理页面
@@ -430,6 +430,17 @@ jQuery(document).ready(function () {
         }
         window.location.href = "missionManager.html";
     });
+
+    window.addEventListener(
+        "pageshow",
+        function (event) {
+          if (localStorage.getItem("need-refresh")=="true") {
+            location.reload();
+            localStorage.removeItem("need-refresh");
+          }
+        },
+        false
+      );
 
     $.init();
 });

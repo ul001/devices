@@ -114,7 +114,11 @@ function addDevice(){
 }
 
 function goBackLastPid(){
-        window.location.href = "deviceClass.html?pid="+jumpPid+"&editState=1&clickNum="+lastClickNum+"&tempId="+tempId;
+//        window.location.href = "deviceClass.html?pid="+jumpPid+"&editState=1&clickNum="+lastClickNum+"&tempId="+tempId;
+    localStorage.setItem("pid",jumpPid);
+    localStorage.setItem("clickNum",lastClickNum);
+    localStorage.setItem("editState",1);
+    window.history.back();
 }
 
 //Substation.getDataByAjax("/selectTemplateList",{},function(data){

@@ -363,4 +363,15 @@ $(".back_btn").click(function () {
     }
 });
 
+window.addEventListener(
+"pageshow",
+function (event) {
+  if (localStorage.getItem("need-refresh")=="true") {
+    location.reload();
+    localStorage.removeItem("need-refresh");
+  }
+},
+false
+);
+
 $.init();

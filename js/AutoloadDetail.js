@@ -616,8 +616,11 @@ jQuery(document).ready(function () {
     var jumpPid = Substation.GetQueryString("pid");
     var lastClickNum = Substation.GetQueryString("clickNum");
     $("#goBackLastPid").click(function () {
-        window.location.href =
-            "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;
+        /*window.location.href =
+            "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
+        localStorage.setItem("pid",jumpPid);
+        localStorage.setItem("clickNum",lastClickNum);
+        window.history.back();
     });
 
     //解决键盘遮挡问题

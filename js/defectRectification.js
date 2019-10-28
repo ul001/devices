@@ -38,7 +38,9 @@ $(".back_btn").click(function () {
     if (goTemp == "1") {
         window.history.back();
     } else {
-        window.location.href = "missionDetail.html";
+//        window.location.href = "missionDetail.html";
+        localStorage.setItem("need-refresh", "true");
+        window.history.back();
     }
 });
 
