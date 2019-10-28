@@ -602,6 +602,12 @@ function goToInfo(){
     }
 }
 
+//返回按钮
+$("#backBtn").click(function(){
+    localStorage.setItem("need-refresh","true");
+    window.history.back();
+});
+
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {
     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
