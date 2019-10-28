@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.162:8090/SubstationWEBV2/v3";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzE2NjE4MDYsInVzZXJuYW1lIjoibWlzc2lvbjEifQ.vYD-UuN9AnL85GepTLxhky7g_RWJZbszrAhNMCf9O0I";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzI1NDc3MzksInVzZXJuYW1lIjoibWlzc2lvbjEifQ.8GPsEVFwjZNOCqAfJAUwofNWFkUUBIyXi052Muveveg";
 var ipAddress = "http://116.236.149.162:8090";
 var userId = "261";
 //iOS安卓基础传参
@@ -209,6 +209,27 @@ var Substation = {
             break;
           case "318":
             $.toast($.i18n.prop('code_318'));
+            break;
+          case "319":
+            $.toast($.i18n.prop('code_319'));
+            break;
+          case "320":
+            $.toast($.i18n.prop('code_320'));
+            break;
+          case "321":
+            $.toast($.i18n.prop('code_321'));
+            break;
+          case "322":
+            $.toast($.i18n.prop('code_322'));
+            break;
+          case "323":
+            $.toast($.i18n.prop('code_323'));
+            break;
+          case "324":
+            $.toast($.i18n.prop('code_324'));
+            break;
+          case "325":
+            $.toast($.i18n.prop('code_325'));
             break;
           default:
             $.toast("操作失败");
