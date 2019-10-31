@@ -1,3 +1,14 @@
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+$(".pull-left.click_btn").click(function(){
+    if(isIOS){
+        window.history.back();
+    }else{
+        android.goBack();
+    }
+});
 var showDisItem = 1;
 var editState = 0;
 var pids = [{
@@ -32,6 +43,16 @@ var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 $("#titleContent").text(selectSubname);
 var thisMenuList = [];
+
+if(localStorage.getItem("need-refresh")=="true"){
+    localStorage.removeItem("need-refresh");
+    if(isIOS){
+        location.reload();
+//        return;
+    }else{
+        android.refresh();
+    }
+}
 
 function addBack() {
     $(".back-parent").unbind().click(function () {
@@ -196,7 +217,15 @@ function linkClick(parentId) {
             var clickTreeStr = clickTree.join("-");
             localStorage.setItem("clickGroupTree",clickTreeStr);
             localStorage.setItem("pids", JSON.stringify(pids));
-            window.location.href = "AutoloadDetail.html?pid=" + thisPid + "&clickNum=" + clickNum + "&fDeviceGroupId=" + clickId + "&fTempid=" + thisTempid;
+            localStorage.setItem("pid", thisPid);
+            localStorage.setItem("clickNum", clickNum);
+            localStorage.setItem("fDeviceGroupId", clickId);
+            localStorage.setItem("fTempid", thisTempid);
+            if(isIOS){
+                window.location.href = "AutoloadDetail.html";
+            }else{
+                android.goToIn();
+            }
             /* if (fField != "" && fField != null) {
 //            localStorage.setItem("fDeviceGroupId", clickId);
             //localStorage.setItem("fFunctionfield",fField);
@@ -330,7 +359,14 @@ function confirmSort() {
 
 function addDeviceClass() {
     localStorage.setItem("pids", JSON.stringify(pids));
-    window.location.href = "addDeviceClass.html?pid=" + thisPid + "&clickNum=" + clickNum + "&tempId=" + thisTempid;
+    localStorage.setItem("pid", thisPid);
+    localStorage.setItem("clickNum", clickNum);
+    localStorage.setItem("tempId", thisTempid);
+    if(isIOS){
+        window.location.href = "addDeviceClass.html";
+    }else{
+        android.goToIn2();
+    }
 }
 
 function getChangeArr(arr, firstId, secordId) {

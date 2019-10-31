@@ -14,6 +14,17 @@
 var imgNum1 = 0;
 var imgNum = 0;
 var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
+var androidProblemid = localStorage.getItem("fDeviceproblemid");
+if(androidProblemid!=null&&androidProblemid!=undefined){
+    fDeviceproblemid = androidProblemid;
+    $(".back_btn").click(function(){
+        android.goBack();
+    });
+}else{
+    $(".back_btn").click(function(){
+        window.history.back();
+    });
+}
 var taskProblem = Substation.GetQueryString("taskProblem");
 var selectSubid = localStorage.getItem("fSubid");
 var clickTree = localStorage.getItem("clickTree");

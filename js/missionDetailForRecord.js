@@ -259,7 +259,15 @@ jQuery(document).ready(function () {
 
     $(".pull-left.click_btn").click(function () {
         localStorage.setItem("need-refresh", "true");
-        window.history.back();
+        var u = navigator.userAgent,
+          app = navigator.appVersion;
+        var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+        if(isIOS){
+            window.history.back();
+        }else{
+            android.goBack();
+        }
 //        window.location.href = "allPatrolRecord.html";
     });
 

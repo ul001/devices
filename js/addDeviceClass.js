@@ -1,9 +1,9 @@
 var pids = [{
     pId: -1
 }];
-var jumpPid = Substation.GetQueryString("pid");
-var lastClickNum = Substation.GetQueryString("clickNum");
-var tempId = Substation.GetQueryString("tempId");
+var jumpPid = localStorage.getItem("pid");
+var lastClickNum = localStorage.getItem("clickNum");
+var tempId = localStorage.getItem("tempId");
 var selectSubid = localStorage.getItem("fSubid");
 var clickNum = 0;
 
@@ -20,6 +20,11 @@ var clickNum = 0;
 //        fillData(lastPId);
 //    });
 //}
+
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 function fillData(parentId) {
     var ul;
@@ -108,6 +113,11 @@ function addDevice(){
     if($(".selectLi").length>0){
         var idVal = $(".selectLi").attr("id");
         Substation.postDataByAjax("/addSubDeviceGroup",{parentId:jumpPid,templateId:idVal,fSubid:selectSubid},function(data){
+            if(isIOS){
+                localStorage.setItem("need-refresh","true");
+            }else{
+                android.refresh();
+            }
             goBackLastPid();
         });
     }
@@ -118,7 +128,11 @@ function goBackLastPid(){
     localStorage.setItem("pid",jumpPid);
     localStorage.setItem("clickNum",lastClickNum);
     localStorage.setItem("editState",1);
-    window.history.back();
+    if(isIOS){
+        window.history.back();
+    }else{
+        android.goBack();
+    }
 }
 
 //Substation.getDataByAjax("/selectTemplateList",{},function(data){

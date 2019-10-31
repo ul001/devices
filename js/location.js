@@ -37,11 +37,31 @@
         console.log(data.message);
     }*/
 
-    var locationItem = JSON.parse(localStorage.getItem("locationItem"));
-    var selectSubid = locationItem.fSubid;
-    var lng = locationItem.fLon;
-    var lat = locationItem.fLat;
-    var dizhi;
+    var u = navigator.userAgent,
+      app = navigator.appVersion;
+    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    $(".click_btn").click(function(){
+        if(isIOS){
+            window.history.back();
+        }else{
+            android.goBack();
+        }
+    });
+
+    var selectSubid = localStorage.getItem("fSubid");
+    var subName="";
+    var lng=0;
+    var lat=0;
+    var dizhi="";
+    Substation.getDataByAjax("/getSubInfoByfSubid",{fSubid:selectSubid},function(data){
+        if(data.subInfo!=undefined){
+            subName = data.subInfo.fSubname;
+            lng = data.subInfo.fLongitude;
+            lat = data.subInfo.fLatitude;
+            loadScript();
+        }
+    });
 
     function initialize() {
       var map = new BMap.Map("container");
@@ -50,7 +70,7 @@
       map.centerAndZoom(point, 15);
       map.addControl(new BMap.NavigationControl());
       var marker = new BMap.Marker(point); // 创建标注
-      var lable = new BMap.Label(locationItem.fSubName, { offset: new BMap.Size(0, -32) });
+      var lable = new BMap.Label(subName, { offset: new BMap.Size(0, -32) });
       lable.setStyle({
           maxWidth: 'none',
           fontSize: '15px',
@@ -97,7 +117,5 @@
         });
         //alert(selectSubid + "\n" + "lng:" + lng + "\nlat:" + lat);
     }
-
-    window.onload = loadScript;
 
     $.init();

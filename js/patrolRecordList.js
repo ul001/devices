@@ -1,3 +1,4 @@
+//巡检记录js
 var selectSubid = "";
 var clickSubid="";
 //分页
@@ -165,15 +166,7 @@ function addItems(number) {
                     params['subName']=$("#search").val();
                     localStorage.setItem("saveParam",JSON.stringify(params));
                     localStorage.setItem("canClick",false);
-                    var u = navigator.userAgent,
-                      app = navigator.appVersion;
-                    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-                    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-                    if(isIOS){
-                        window.location.href="missionDetailForRecord.html";
-                    }else{
-                        android.goToIn();
-                    }
+                    window.location.href="missionDetailForRecord.html";
                 });
                 pageNum++;
             } else {
@@ -247,7 +240,7 @@ function getSomeSubstation(){
                                                             '</li>');
         });
         $("#listContainer").show();
-        $("#listContainer .item-content").unbind().click(function(){
+        $("#listContainer .item-content").click(function(){
             clickSubid = $(this).attr("data-id");
             var clickName = $(this).find(".item-title").text();
             $("#search").val(clickName);
@@ -373,15 +366,25 @@ $(".back_btn").click(function () {
     }
 });
 
-window.addEventListener(
-"pageshow",
-function (event) {
-  if (localStorage.getItem("need-refresh")=="true") {
-    location.reload();
-    localStorage.removeItem("need-refresh");
-  }
-},
-false
-);
+//任务详情js
+function loadPage2(){
+    var showstr =
+            '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> </div>';
+    $("#addVarContain126").html(showstr);
+    $("#carryOut").attr("name", "false");
+}
+    // } else {
+    //     localStorage.setItem("canClick", true);
+    //     var showStr =
+    //         '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+    //     $("#addVarContain126").append(showStr);
+    //     $("#carryOut").attr("name", "false");
+    // }
 
-$.init();
+
+//消缺单js
+
+//管理js
+
+//缺陷信息js
+

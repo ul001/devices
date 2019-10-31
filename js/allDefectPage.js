@@ -4,8 +4,13 @@ var clickSubid="";
 var loading = false;
 var itemsPerLoad = 5;
 var pageNum = 1;
-var saveParam= JSON.parse(localStorage.getItem("saveParam"));
-localStorage.removeItem("saveParam");
+/*var saveParam= JSON.parse(localStorage.getItem("saveParam"));
+localStorage.removeItem("saveParam");*/
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//判断数组中是否包含某字符串
 
 function getFirstPage() {
     $("#list-container").empty();
@@ -29,8 +34,10 @@ function addItems(number, lastIndex) {
     var html = '';
     var url = "/getDeviceProblemList";
     var params={};
-    if(saveParam!=null&&saveParam!=""){
+    /*if(saveParam!=null&&saveParam!=""){
         params=saveParam;
+        params['pageNum']=pageNum;
+        params['pageSize']=number;
         var startTime = params['ftimeStart'];
         var endTime = params['ftimeEnd'];
         if(startTime!=""&&startTime!=null){
@@ -46,7 +53,7 @@ function addItems(number, lastIndex) {
             $("#dangerType").val(params['fProblemlevel']);
         }
         $("#search").val(params['subName']);
-    }else{
+    }else{*/
         params = {
             pageNum:pageNum,
             pageSize:number};
@@ -69,7 +76,7 @@ function addItems(number, lastIndex) {
         if(dangerVal!=""){
             params['fProblemlevel']=dangerVal;
         }
-    }
+//    }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         if (data.tDevDeviceproblemList.list.length > 0) {
             if (pageNum == 1) {
@@ -147,10 +154,15 @@ function addItems(number, lastIndex) {
                 var clickId = $(this).attr("id");
                 var clickTree = $(this).attr("value");
                 localStorage.setItem("clickTree",clickTree);
-                params['subName']=$("#search").val();
-                localStorage.setItem("saveParam",JSON.stringify(params));
+                /*params['subName']=$("#search").val();
+                localStorage.setItem("saveParam",JSON.stringify(params));*/
                 localStorage.setItem("canClick",false);
-                window.location.href="defectInfo.html?fDeviceproblemid="+clickId;
+                if (isIOS) {
+                    window.location.href="defectInfo.html?fDeviceproblemid="+clickId;
+                } else {
+                    localStorage.setItem("fDeviceproblemid",clickId);
+                    android.goToIn();
+                }
             });
             pageNum++;
         } else {
@@ -189,15 +201,15 @@ $(document).on('infinite', '.infinite-scroll', function () {
 
 $('#searchBtn').click(function () {
     $(".close-panel").click();
-    if(saveParam!=null){
+/*    if(saveParam!=null){
         clickSubid = saveParam['fSubid'];
         saveParam=null;
-    }
+    }*/
     if($("#search").val()==""){
-        $("#subName").text("所有变电所");
+//        $("#subName").text("所有变电所");
         selectSubid="";
     }else if(clickSubid!=""){
-        $("#subName").text($("#search").val());
+//        $("#subName").text($("#search").val());
         selectSubid=clickSubid;
         clickSubid="";
     }
@@ -224,7 +236,7 @@ function getSomeSubstation(){
                                                             '</li>');
         });
         $("#listContainer").show();
-        $("#listContainer .item-content").click(function(){
+        $("#listContainer .item-content").unbind().click(function(){
             clickSubid = $(this).attr("data-id");
             var clickName = $(this).find(".item-title").text();
             $("#search").val(clickName);
@@ -348,6 +360,22 @@ $(".back_btn").click(function () {
     } else {
         android.goBack();
     }
+});
+
+var height=localStorage.getItem("Ltop");
+
+if(height){     //如果有高度就说明以前存储到。获取到给滚动条
+    if (document.documentElement.scrollTop!=undefined) {
+      document.documentElement.scrollTop=height;
+    }
+    else{
+       document.body.scrollTop=height;
+    }
+}
+
+window.addEventListener("scroll",function(){  //监听滚动条
+     var top=document.body.scrollTop || document.documentElement.scrollTop;    //document.body是获取的body滚动高度，document.documentElement是根节点html的     
+     localStorage.setItem("Ltop", top);
 });
 
 $.init();

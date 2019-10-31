@@ -1,6 +1,11 @@
 jQuery(document).ready(function () {
   $("#titleContent").text("待办事项");
 
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+
   var loading = false;
   var maxItems = 1000;
   var itemsPerLoad = 10;
@@ -63,11 +68,6 @@ jQuery(document).ready(function () {
   });
 
   $(".back_btn").click(function () {
-
-    var u = navigator.userAgent,
-      app = navigator.appVersion;
-    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     if (isIOS) {
       localStorage.clear();
       window.webkit.messageHandlers.goBackiOS.postMessage("");
@@ -347,14 +347,18 @@ jQuery(document).ready(function () {
           $(list).append(text);
           // $(".list-container").append(text);
           //我要处理 巡视
-          $(".card1").click(function () {
+          $(".card1").unbind().click(function () {
             var taskID = $(this).attr("id");
             var tasktypeid = $(this).attr("name");
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missionFinish");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            window.location.href = "missionDetail.html";
+            if(isIOS){
+                window.location.href="missionDetail.html";
+            }else{
+                android.goToIn();
+            }
           });
         } else {
           $(taskList.list).each(function () {
@@ -468,7 +472,7 @@ jQuery(document).ready(function () {
           $(list).append(text);
         }
         //addClick();
-        $(".card2").click(function () {
+        $(".card2").unbind().click(function () {
           var taskID = $(this).attr("name");
           var tasktypeid = $(this).attr("data-taskid");
           if (tasktypeid == 1) {
@@ -477,21 +481,33 @@ jQuery(document).ready(function () {
             localStorage.setItem("showType", "missionDoing");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            window.location.href = "missionDetail.html";
+            if(isIOS){
+                window.location.href="missionDetail.html";
+            }else{
+                android.goToIn();
+            }
           } else if (tasktypeid == 3) {
             //缺陷登记
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missiondefect");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            window.location.href = "missionDetail.html";
+            if(isIOS){
+                window.location.href="missionDetail.html";
+            }else{
+                android.goToIn();
+            }
           } else {
             //现场交接
             localStorage.setItem("fSubname", "任务详情");
             localStorage.setItem("showType", "missiondefect");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            window.location.href = "missionDetail.html";
+            if(isIOS){
+                window.location.href="missionDetail.html";
+            }else{
+                android.goToIn();
+            }
           }
         });
         pageNum++;

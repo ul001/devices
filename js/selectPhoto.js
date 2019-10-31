@@ -11,6 +11,17 @@
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);*/
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+$(".click_btn").click(function(){
+    if(isIOS){
+        window.history.back();
+    }else{
+        android.goBack();
+    }
+});
 var imgNum = 0;
 var selectSubid = localStorage.getItem("fSubid");
 

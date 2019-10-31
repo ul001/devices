@@ -2,6 +2,11 @@ jQuery(document).ready(function () {
     // $(function () {
     var titlename = localStorage.getItem("fSubname");
     $("#titleContent").text(titlename);
+//alert("1");
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
     var showmissionBtn = localStorage.getItem("showType");
     var missionType = localStorage.getItem("missionType");
@@ -72,6 +77,8 @@ jQuery(document).ready(function () {
                                         }*/
                 var taskInfo = data.taskInfo;
                 var userList = data.taskUserList;
+                var subLon = taskInfo.fLongitude;
+                var subLat = taskInfo.fLatitude;
                 if (taskInfo) {
                     missionsubid = taskInfo.fSubid;
                     $("#missionId").html(taskInfo.fTasknumber);
@@ -216,12 +223,6 @@ jQuery(document).ready(function () {
                     //现场签到按钮事件
                     $("#checkIn2").click(function () {
                         $.showPreloader();
-                        //iOS安卓基础传参
-                        var u = navigator.userAgent,
-                            app = navigator.appVersion;
-                        var isAndroid =
-                            u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-                        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                         var loc = "";
                         if (isIOS) {
                             window.webkit.messageHandlers.getLocation.postMessage("");
@@ -248,15 +249,30 @@ jQuery(document).ready(function () {
                             addr = array[2];
                             //                            alert(lat+"\n"+lon+"\n"+addr);
                         }
+                        var fDistance = -1;
+                        if(subLat!=undefined&&subLon!=undefined){
+                            var map = new BMap.Map("allmap");
+                            var point1 = new BMap.Point(subLon,subLat);
+                            var point2 = new BMap.Point(lon,lat);
+                            fDistance = map.getDistance(point1,point2);
+                        }
                         var param = {
                             taskId: taskID,
                             fLongitude: lon,
                             fLatitude: lat,
                             fLocation: addr
                         };
+                        fDistance = parseInt(fDistance);
+                        if(fDistance>0&&fDistance<2147483647){
+                            param['fDistance'] = fDistance;
+                        }
                         //    alert(""+taskID+","+lon+","+lat+","+addr);
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
-
+                            if(isIOS){
+                                localStorage.setItem("need-refresh","true");
+                            }else{
+                                android.refresh();
+                            }
                             location.reload();
                             $.toast("签到成功！");
                             localStorage.removeItem("locationStrJS");
@@ -286,12 +302,14 @@ jQuery(document).ready(function () {
                                         fExplain: textDetail
                                     };
                                     // fExplain 执行情况
-                                    Substation.getDataByAjax("/submitUserTask", param, function (
-                                        data
-                                    ) {
-                                        /*localStorage.setItem("need-refresh", true);
-                                                                window.history.back();*/
-                                        window.location.href = "todoItems.html";
+                                    Substation.getDataByAjax("/submitUserTask", param, function (data){
+                                        if(isIOS){
+                                            localStorage.setItem("need-refresh", "true");
+                                            window.history.back();
+                                        }else{
+                                            android.refresh();
+                                            android.goBack();
+                                        }
                                     });
                                 });
                             }
@@ -302,7 +320,13 @@ jQuery(document).ready(function () {
                                     fTaskid: taskID
                                 };
                                 Substation.getDataByAjax("/submitTask", param, function (data) {
-                                    window.location.href = "todoItems.html";
+                                    if(isIOS){
+                                        localStorage.setItem("need-refresh", "true");
+                                        window.history.back();
+                                    }else{
+                                        android.refresh();
+                                        android.goBack();
+                                    }
                                 });
                             });
                         }
@@ -412,8 +436,12 @@ jQuery(document).ready(function () {
     getNetData();
 
     $(".pull-left.click_btn").click(function () {
-        localStorage.setItem("need-refresh", "true");
-        window.history.back();
+//        localStorage.setItem("need-refresh", "true");
+        if (isIOS) {
+            window.history.back();
+        } else {
+            android.goBack();
+        }
 //        window.location.href = "todoItems.html";
     });
 

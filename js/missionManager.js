@@ -251,6 +251,7 @@ jQuery(document).ready(function () {
                     var userName = "-";
                     var signTime = "-";
                     var location = "-";
+                    var distance = "-";
                     if (this.hasOwnProperty("fCreatetime")) {
                         creatTime = date('Y-m-d H:i:s', this.fCreateTime);
                     }
@@ -266,13 +267,20 @@ jQuery(document).ready(function () {
                     if (this.hasOwnProperty("fLocation")) {
                         location = this.fLocation;
                     }
+                    if (this.hasOwnProperty("fDistance")) {
+                        if(this.fDistance>300){
+                            distance = "<span class='redColor'>"+this.fDistance+"</span>米";
+                        }else{
+                            distance = this.fDistance+"米";
+                        }
+                    }
                     var taskStateName = "";
                     if (this.fExesituation == 7) {
-                        taskStateName = "未签到";
+                        taskStateName = "<span class='button-light'>未签到</span>";
                     } else if (this.fExesituation == 8) {
-                        taskStateName = "已签到";
+                        taskStateName = "<span class='blueColor'>已签到</span>";
                     } else if (this.fExesituation == 9) {
-                        taskStateName = "已提交";
+                        taskStateName = "<span class='button-success'>已提交</span>";
                     } else {
 
                     }
@@ -286,14 +294,9 @@ jQuery(document).ready(function () {
                         '                                    <div class="item-inner">';
                     text +=
                         '                                        <div class="item-title label">执行人:</div>';
-                    text +=
-                        '                                        <div class="item-input">';
-                    text +=
-                        '                                            <input type="text" readonly="readonly" class="valueInput" value="' +
-                        userName +
-                        '"';
-                    text +=
-                        '                                                name="number" validator="required">';
+                    text += '                                        <div class="item-label">';
+                    text += userName + '';
+                    text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -305,16 +308,9 @@ jQuery(document).ready(function () {
                         '                                    <div class="item-inner">';
                     text +=
                         '                                        <div class="item-title label">状态:</div>';
-                    text +=
-                        '                                        <div class="item-input"><input type="text" readonly="readonly"';
-                    text +=
-                        '                                                class="valueInput" id="input' +
-                        this.fUserid +
-                        '" value="' +
-                        taskStateName +
-                        '" name="sender" validator="required"';
-                    text +=
-                        '                                                style="color:red">';
+                    text +='                                        <div class="item-label">';
+                    text += taskStateName+'';
+                    text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -327,11 +323,9 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">签到时间:</div>';
                     text +=
-                        '                                        <div class="item-label" readonly="readonly"';
-                    text +=
-                        '                                                class="valueInput" name="number" validator="required">' +
-                        signTime +
-                        '';
+                        '                                        <div class="item-label">';
+                    text += signTime + '';
+                    text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -344,11 +338,25 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">签到地点:</div>';
                     text +=
-                        '                                        <div class="item-label" ';
-                    text +=
-                        '                                                class="valueInput" name="number" validator="required"> ' +
-                        location +
+                        '                                        <div class="item-label"> ';
+                    text +=location +
                         '';
+                    text += "                                        </div>";
+                    text += "                                        </div>";
+                    text += "                                    </div>";
+                    text += "                                </div>";
+                    text += "                            </li>";
+                    text += "                            <li>";
+                    text +=
+                        '                                <div class="showDiv item-content">';
+                    text +=
+                        '                                    <div class="item-inner">';
+                    text +=
+                        '                                        <div class="item-title label">偏差距离:</div>';
+                    text +=
+                        '                                        <div class="item-label">';
+                    text +=  distance + '';
+                    text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -361,11 +369,9 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">提交时间:</div>';
                     text +=
-                        '                                        <div class="item-label" readonly="readonly"';
-                    text +=
-                        '                                                class="valueInput" name="number" validator="required">' +
-                        creatTime +
-                        '';
+                        '                                        <div class="item-label">';
+                    text += creatTime + '';
+                    text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";
@@ -378,11 +384,9 @@ jQuery(document).ready(function () {
                     text +=
                         '                                        <div class="item-title label">执行情况:</div>';
                     text +=
-                        '                                        <div class="item-label" readonly="readonly"';
-                    text +=
-                        '                                                class="valueInput"  name="number" validator="required">' +
-                        explain +
-                        '';
+                        '                                        <div class="item-label">';
+                    text += explain + '';
+                    text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
                     text += "                                </div>";

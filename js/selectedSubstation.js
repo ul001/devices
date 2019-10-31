@@ -14,26 +14,36 @@
             window.location.href = "location.html";
         });
     }*/
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
-function goToLocation(lat, lon, subid, subname) {
-    var locationItem = {
-        fLat: lat,
-        fLon: lon,
-        fSubid: subid,
-        fSubName: subname
-    };
-    localStorage.setItem("locationItem", JSON.stringify(locationItem));
+function goToLocation(subid) {
+    localStorage.setItem("fSubid", subid);
+    if(!isIOS){
+        android.goToIn3();
+        return;
+    }
     window.location.href = "location.html";
 }
 
 function goToDevice(subId, subname) {
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
+    if(!isIOS){
+        android.goToIn();
+        return;
+    }
     window.location.href = "deviceClass.html";
 }
 
 function goToPhoto(subId) {
     localStorage.setItem("fSubid", subId);
+    if(!isIOS){
+        android.goToIn2();
+        return;
+    }
     window.location.href = "selectPhoto.html";
 }
 
@@ -88,7 +98,7 @@ function addItems(number, lastIndex) {
                     "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">照片\n" +
                     "                                    </button>\n" +
                     "                                    <br>\n" +
-                    "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fLatitude + "," + this.fLongitude + "," + this.fSubid + ",'" + this.fSubname + "')\" type=\"button\">位置\n" +
+                    "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation("+this.fSubid+")\" type=\"button\">位置\n" +
                     "                                    </button>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
@@ -151,10 +161,6 @@ $(".searchbar-cancel").click(function () {
 });
 
 $(".back_btn").click(function () {
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     if (isIOS) {
         window.webkit.messageHandlers.goBackiOS.postMessage("");
     } else {

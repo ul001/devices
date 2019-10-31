@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/defectRecord.css">
+</head>
+
+<body>
+<div class="page-group">
+    <div class="page" id="listPage">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back_btn">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <a class="button button-link button-nav pull-right open-panel">
+                <i class="icon icon-selectSome"></i>
+            </a>
+            <h1 class="title title_color">
+                <p class="limit-length" id="titleContent"><!--<span id="subName">所有变电所</span>-->缺陷记录</p>
+            </h1>
+        </header>
+        <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div id="list-container">
+                <div class="card">
+                </div>
+            </div>
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+        </div>
+    </div >
+    <div class="page" id="defectInfo">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back" href="#listPage">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <h1 class="title title_color">缺陷信息</h1>
+            <a class="button button-link button-nav pull-right click_btn" id="saveData" onclick="saveFormData()">
+                保存
+            </a>
+        </header>
+        <div class="content">
+            <div class="list-block">
+                <form id="form1" method="post" enctype="multipart/form-data">
+                    <ul>
+                        <!-- Text inputs -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">任务单号：</div>
+                                    <div class="item-input">
+                                        <!--                                            <input type="text" id="taskNumber" value="" readonly>-->
+                                        <div class="item-label" id="taskNumber"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">设备名称：</div>
+                                    <div class="item-input">
+                                        <!--                                            <input type="text" id="treePathName" value="" readonly>-->
+                                        <div class="item-label" id="treePathName"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷描述：</div>
+                                    <div class="item-input">
+                                        <!--                                            <input type="text" id="fDeviceproblemdes" value="">-->
+                                        <div class="item-label" id="fDeviceproblemdes"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷位置：</div>
+                                    <div class="item-input" id="defectPosition">
+                                        <input type="checkbox" value="A相" id="checkA" checked disabled><label
+                                            for="checkA">A相</label>
+                                        <input type="checkbox" value="B相" id="checkB" disabled><label
+                                            for="checkB">B相</label>
+                                        <input type="checkbox" value="C相" id="checkC" disabled><label
+                                            for="checkC">C相</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷类别：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fProblemtype" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">严重等级：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fProblemlevel" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">消缺期限：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fTimelimit" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- Date -->
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">缺陷危害：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fProblemharm" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">发现时间：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fCreatetime" value="">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">现场照片：</div>
+                                    <div class="item-input">
+                                        <div class="custom_img">
+                                            <!--点击上传图片 触发下面的div 点击事件-->
+                                            <div class="upload_img_wrap">
+                                                <div id="imgBox1">
+
+                                                </div>
+                                                <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="align-top">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span class="blueColor">整改照片：</span></div>
+                                    <div class="item-input">
+                                        <div class="custom_img">
+                                            <!--点击上传图片 触发下面的div 点击事件-->
+                                            <div class="upload_img_wrap">
+                                                <div id="imgBox"><img class="upload_img" src="img/upload_img.png" />
+                                                </div>
+                                                <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
+                                            </div>
+                                            <div
+                                                    style="display: none;width: 100%;height: 100vh;position: relative;">
+                                                <div style="display: none;" id="inputBox">
+                                                    <input type="file" name="myFiles" data-id="1" title="请选择图片"
+                                                           id="file1"
+                                                           accept="image/png,image/jpg,image/gif,image/JPEG" />
+                                                    <!--
+                                        <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
+                                        <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
+                                                </div>
+                                                <input style="display:none" type="submit" id="sub" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">处理建议：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fResolution" name="fResolution" value="更换">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">客户意见：</div>
+                                    <div class="item-input">
+                                        <select id="fClientadvice" name="fClientadvice">
+                                            <option value="待客户答复">待客户答复</option>
+                                            <option value="同意处理">同意处理</option>
+                                            <option value="其他">其他</option>
+                                            <option value="不同意处理">不同意处理</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">处理情况：</div>
+                                    <div class="item-input">
+                                        <select id="fState" name="fState">
+                                            <option value="0">未处理</option>
+                                            <option value="2">待处理</option>
+                                            <option value="3">待客户停电处理</option>
+                                            <option value="4">待线路停电处理</option>
+                                            <option value="5">其他</option>
+                                            <option value="1">已处理</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="showSolveUser" style="display:none;">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">消缺人员：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fSolveUser">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="showSolveTime" style="display:none;">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label blueColor">消缺时间：</div>
+                                    <div class="item-input">
+                                        <input type="text" id="fSolveTime">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+        <div class="content-block">
+            <div>
+                <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
+                    <a href="#" class="button" id="yestoday">昨日</a>
+                    <a href="#" class="button" id="thisMonth">当月</a>
+                    <a href="#" class="button" id="lastMonth">上月</a></p>
+            </div>
+            <div>
+                <label>时间选择</label><br>
+                <input type="text" id="dateStart" placeholder="开始日期" readonly/> -
+                <input type="text" id="dateEnd" placeholder="截止日期" readonly/>
+            </div>
+            <div>
+                <label>缺陷状态</label><br>
+                <select id="fState2">
+                    <option value="">全部</option>
+                    <option value="0">未处理</option>
+                    <option value="1">已处理</option>
+                </select>
+            </div>
+            <div>
+                <label>严重等级</label><br>
+                <select id="dangerType">
+                    <option value="">全部</option>
+                    <option value="一般">一般</option>
+                    <option value="重大">重大</option>
+                    <option value="紧急">紧急</option>
+                </select>
+            </div>
+            <div>
+                <label>变电所名称</label><br>
+                <div class="searchbar">
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='请输入关键字'/><i class="icon icon-clear"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="list-block">
+                <ul id="listContainer">
+
+                </ul>
+            </div>
+        </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#"
+                                   class="button button-big button-fill button-cancel close-panel">取消</a>
+            </div>
+            <div class="col-50"><a href="#"
+                                   class="button button-big button-fill button-success" id="searchBtn">查询</a></div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+<script src='libs/cn.min.js'></script>
+<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<script src="libs/tools.js"></script>
+<script type='text/javascript' src='js/defectRecord.js' charset='utf-8'></script>
+</body>
+
+</html>

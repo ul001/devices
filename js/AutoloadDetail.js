@@ -1,3 +1,8 @@
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+
 var CustomerDevice = (function () {
     function _customerDevice() {
         var selectInfo;
@@ -6,10 +11,10 @@ var CustomerDevice = (function () {
         var subid = localStorage.getItem("fSubid");
         //查询模板fPagedesigntemplateid 用父级的fParentid查模板
         // 用父级的fParentid查模板
-        var parentId = Substation.GetQueryString("pid");
-        var tempId = Substation.GetQueryString("fTempid");
+        var parentId = localStorage.getItem("pid");
+        var tempId = localStorage.getItem("fTempid");
         //用fSubdeviceinfoid组id查真实数据
-        var deviceGroupId = Substation.GetQueryString("fDeviceGroupId");
+        var deviceGroupId = localStorage.getItem("fDeviceGroupId");
 
         // deviceGroupId = 41;
 
@@ -610,17 +615,23 @@ var CustomerDevice = (function () {
 
 jQuery(document).ready(function () {
     // $(function () {
-    var deviceGroupId = Substation.GetQueryString("fDeviceGroupId");
+    var deviceGroupId = localStorage.getItem("fDeviceGroupId");
     var clickGroupTree = localStorage.getItem("clickGroupTree");
     var subid = localStorage.getItem("fSubid");
-    var jumpPid = Substation.GetQueryString("pid");
-    var lastClickNum = Substation.GetQueryString("clickNum");
+    var jumpPid = localStorage.getItem("pid");
+    var lastClickNum = localStorage.getItem("clickNum");
     $("#goBackLastPid").click(function () {
         /*window.location.href =
             "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
         localStorage.setItem("pid",jumpPid);
         localStorage.setItem("clickNum",lastClickNum);
-        window.history.back();
+        if(isIOS){
+            localStorage.setItem("need-refresh","true");
+            window.history.back();
+        }else{
+            android.refresh();
+            android.goBack();
+        }
     });
 
     //解决键盘遮挡问题
