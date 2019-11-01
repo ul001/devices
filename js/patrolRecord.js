@@ -2,9 +2,9 @@ var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 var subAddress = localStorage.getItem("subAddress");
 var needUpdate = localStorage.getItem("need-update");
-if(needUpdate){
-    location.reload();
+if(needUpdate=="true"){
     localStorage.removeItem("need-update");
+    location.reload();
 }
 $("#subName").text(selectSubname);
 

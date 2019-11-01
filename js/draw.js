@@ -196,7 +196,8 @@ save.onclick = function () {
     Substation.postFormDataByAjax("/saveClientSignImg", param, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
-            window.location.href='defectRectification.html';
+            localStorage.setItem("need-update", "true");
+            window.history.back();
         }
     });
 

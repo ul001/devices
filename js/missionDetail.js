@@ -112,6 +112,8 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             if(missionTypeid==3){
+                                localStorage.setItem("canClick", true);
+                            }else{
                                 localStorage.setItem("canClick", false);
                             }
                             window.location.href = "defectRectification.html";
@@ -127,6 +129,8 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             if(missionTypeid==3){
+                                localStorage.setItem("canClick", true);
+                            }else{
                                 localStorage.setItem("canClick", false);
                             }
                             window.location.href = encodeURI("defectRectification.html" + "?value=0");;
@@ -469,8 +473,8 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
         "pageshow",
         function (event) {
           if (localStorage.getItem("need-refresh")=="true") {
-            location.reload();
             localStorage.removeItem("need-refresh");
+            location.reload();
           }
         },
         false
