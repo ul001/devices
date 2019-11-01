@@ -269,18 +269,18 @@ jQuery(document).ready(function () {
                     }
                     if (this.hasOwnProperty("fDistance")) {
                         if(this.fDistance>300){
-                            distance = "<span class='redColor'>"+this.fDistance+"</span>米";
+                            distance = "<span style=\"color:red;\">"+this.fDistance+"</span>米";
                         }else{
                             distance = this.fDistance+"米";
                         }
                     }
                     var taskStateName = "";
                     if (this.fExesituation == 7) {
-                        taskStateName = "<span class='button-light'>未签到</span>";
+                        taskStateName = "<span style=\"color:gray;\">未签到</span>";
                     } else if (this.fExesituation == 8) {
-                        taskStateName = "<span class='blueColor'>已签到</span>";
+                        taskStateName = "<span style=\"color:blue;\">已签到</span>";
                     } else if (this.fExesituation == 9) {
-                        taskStateName = "<span class='button-success'>已提交</span>";
+                        taskStateName = "<span style=\"color:springgreen;\">已提交</span>";
                     } else {
 
                     }

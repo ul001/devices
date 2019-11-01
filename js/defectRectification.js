@@ -15,9 +15,7 @@ window.addEventListener('pageshow', function (e) {
         window.location.reload();
         // }
     }
-})
-
-
+});
 
 var param;
 var urlinfo = window.location.href; //获取url 

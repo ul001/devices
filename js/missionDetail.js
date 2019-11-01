@@ -14,14 +14,14 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
         localStorage.setItem("canClick", true);
         if (missionType == 0) {
             var showStr =
-                '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>现场签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
+                '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
             $("#addVarContain126").html(showStr);
             $("#carryOut").attr("name", "true");
             $("#submitTo").attr("name", "true");
         } else {
             localStorage.setItem("canClick", true);
             var showStr =
-                '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
+                '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
             $("#addVarContain126").append(showStr);
             $("#carryOut").attr("name", "false");
         }
@@ -37,7 +37,7 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     } else {
         localStorage.setItem("canClick", true);
         var showStr =
-            '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
+            '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
         $("#addVarContain126").append(showStr);
         $("#carryOut").attr("name", "false");
     }
@@ -86,8 +86,8 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                     $("#missionName").html(taskInfo.fTaskname);
                     $("#createName").html(taskInfo.fTaskcreateusername);
                     $("#chargerName").html(taskInfo.fTaskchargername);
-                    $("#createTime").html(taskInfo.fStartdate.substring(0, 11));
-                    $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 11));
+                    $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
+                    $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
 
                     //任务开始时间
                     $("#ActStartTime").html(taskInfo.fTaskstartdate);
@@ -111,6 +111,9 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
+                            if(missionTypeid==3){
+                                localStorage.setItem("canClick", false);
+                            }
                             window.location.href = "defectRectification.html";
                         });
                     }
@@ -123,6 +126,9 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
+                            if(missionTypeid==3){
+                                localStorage.setItem("canClick", false);
+                            }
                             window.location.href = encodeURI("defectRectification.html" + "?value=0");;
                         });
                     }
@@ -180,14 +186,14 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             if (thisTempState == 1) {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
-                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>现场签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行任务</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
+                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "true");
                                 $("#submitTo").attr("name", "true");
                             } else {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
-                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
+                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "false");
                             }
@@ -471,6 +477,18 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
       );
 
     $.init();
+});
+
+//解决键盘遮挡问题
+var h=$(window).height();
+window.addEventListener("resize", function () {
+    if($(window).height()<h){ $('.buttonsEvent').hide(); }
+    if($(window).height()>=h){ $('.buttonsEvent').show(); }
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
 });
 
 //  function alinkClick() {

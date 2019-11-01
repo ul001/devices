@@ -362,20 +362,4 @@ $(".back_btn").click(function () {
     }
 });
 
-var height=localStorage.getItem("Ltop");
-
-if(height){     //如果有高度就说明以前存储到。获取到给滚动条
-    if (document.documentElement.scrollTop!=undefined) {
-      document.documentElement.scrollTop=height;
-    }
-    else{
-       document.body.scrollTop=height;
-    }
-}
-
-window.addEventListener("scroll",function(){  //监听滚动条
-     var top=document.body.scrollTop || document.documentElement.scrollTop;    //document.body是获取的body滚动高度，document.documentElement是根节点html的     
-     localStorage.setItem("Ltop", top);
-});
-
 $.init();
