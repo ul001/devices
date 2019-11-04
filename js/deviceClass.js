@@ -347,6 +347,7 @@ function changeDown() {
 function confirmSort() {
     if (changeTemp) {
         var jsonStr = JSON.stringify(changeArr);
+        changeTemp = false;
         Substation.postDataByAjax("/updateBatchDeviceGroup", {
             groupList: jsonStr
         }, function (data) {
