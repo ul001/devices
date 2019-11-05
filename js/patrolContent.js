@@ -113,7 +113,7 @@ function loadPage(){
                                     }
                                 });
                             }
-                            $(".tab-link.button").click(function(){
+                            $(".tab-link.button").unbind().click(function(){
                                 var clickItemNum = $(this).attr("id");
                                 clickGroupTree+="-"+$(this).text();
                                 localStorage.setItem("itemNum",clickItemNum);

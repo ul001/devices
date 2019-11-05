@@ -217,10 +217,10 @@ $('#searchBtn').click(function () {
         saveParam=null;
     }
     if($("#search").val()==""){
-        $("#subname").text("所有变电所");
+//        $("#subname").text("所有变电所");
         selectSubid="";
     }else if(clickSubid!=""){
-        $("#subname").text($("#search").val());
+//        $("#subname").text($("#search").val());
         selectSubid=clickSubid;
         clickSubid="";
     }

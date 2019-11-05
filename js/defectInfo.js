@@ -27,7 +27,7 @@ if(androidProblemid!=null&&androidProblemid!=undefined){
 }
 var taskProblem = Substation.GetQueryString("taskProblem");
 var selectSubid = localStorage.getItem("fSubid");
-var clickTree = localStorage.getItem("clickTree");
+//var clickTree = localStorage.getItem("clickTree");
 var canClick = localStorage.getItem("canClick");
 var url = "/getDeviceProblemDetail";
 var problemParam = {
@@ -45,7 +45,7 @@ Substation.getDataByAjax(url, problemParam, function (data) {
     var beforeimg = data.beforeimg;
     var afterimg = data.afterimg;
     $("#taskNumber").text(defectJson.fTasknumber);
-    $("#treePathName").text(clickTree);
+    $("#treePathName").text(defectJson.treePathName);
     $("#fDeviceproblemdes").text(defectJson.fDeviceproblemdes);
     var fProblemlocation = defectJson.fProblemlocation;
     $("#defectPosition").empty();
