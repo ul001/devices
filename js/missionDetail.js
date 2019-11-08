@@ -112,7 +112,12 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             if(missionTypeid==3){
-                                localStorage.setItem("canClick", true);
+                                if ($("#carryOut").attr("name") == "true") {
+                                    $.toast("请先签到。");
+                                    return;
+                                }else{
+                                    localStorage.setItem("canClick", true);
+                                }
                             }else{
                                 localStorage.setItem("canClick", false);
                             }
@@ -129,7 +134,12 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             if(missionTypeid==3){
-                                localStorage.setItem("canClick", true);
+                                if ($("#carryOut").attr("name") == "true") {
+                                    $.toast("请先签到。");
+                                    return;
+                                }else{
+                                    localStorage.setItem("canClick", true);
+                                }
                             }else{
                                 localStorage.setItem("canClick", false);
                             }
