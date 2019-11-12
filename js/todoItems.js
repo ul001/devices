@@ -354,10 +354,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missionFinish");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isIOS){
-                window.location.href="missionDetail.html";
-            }else{
+            if(isAndroid){
                 android.goToIn();
+            }else{
+                window.location.href="missionDetail.html";
             }
           });
         } else {
@@ -481,10 +481,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missionDoing");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isIOS){
-                window.location.href="missionDetail.html";
-            }else{
+            if(isAndroid){
                 android.goToIn();
+            }else{
+                window.location.href="missionDetail.html";
             }
           } else if (tasktypeid == 3) {
             //缺陷登记
@@ -492,10 +492,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missiondefect");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isIOS){
-                window.location.href="missionDetail.html";
-            }else{
+            if(isAndroid){
                 android.goToIn();
+            }else{
+                window.location.href="missionDetail.html";
             }
           } else {
             //现场交接
@@ -503,10 +503,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missiondefect");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isIOS){
-                window.location.href="missionDetail.html";
-            }else{
+            if(isAndroid){
                 android.goToIn();
+            }else{
+                window.location.href="missionDetail.html";
             }
           }
         });
