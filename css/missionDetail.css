@@ -63,11 +63,12 @@
     margin-right: 0.2rem;
 }
 
-/* #checkFinishInCss {
-    margin-left: 2.5rem;
-} */
+#checkFinishInCss {
 
-#addVarContain126 .buttonsEvent {
+    margin-left: 2.5rem;
+}
+
+/* #addVarContan126 .row {
     justify-content: center;
     display: flex;
-}
+} */
