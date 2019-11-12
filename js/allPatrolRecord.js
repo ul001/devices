@@ -169,10 +169,10 @@ function addItems(number) {
                       app = navigator.appVersion;
                     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
                     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-                    if(isIOS){
-                        window.location.href="missionDetailForRecord.html";
-                    }else{
+                    if(isAndroid){
                         android.goToIn();
+                    }else{
+                        window.location.href="missionDetailForRecord.html";
                     }
                 });
                 pageNum++;

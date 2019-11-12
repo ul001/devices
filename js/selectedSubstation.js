@@ -21,7 +21,7 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 function goToLocation(subid) {
     localStorage.setItem("fSubid", subid);
-    if(!isIOS){
+    if(isAndroid){
         android.goToIn3();
         return;
     }
@@ -31,7 +31,7 @@ function goToLocation(subid) {
 function goToDevice(subId, subname) {
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
-    if(!isIOS){
+    if(isAndroid){
         android.goToIn();
         return;
     }
@@ -40,7 +40,7 @@ function goToDevice(subId, subname) {
 
 function goToPhoto(subId) {
     localStorage.setItem("fSubid", subId);
-    if(!isIOS){
+    if(isAndroid){
         android.goToIn2();
         return;
     }

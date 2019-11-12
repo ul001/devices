@@ -625,12 +625,12 @@ jQuery(document).ready(function () {
             "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
         localStorage.setItem("pid",jumpPid);
         localStorage.setItem("clickNum",lastClickNum);
-        if(isIOS){
-            localStorage.setItem("need-refresh","true");
-            window.history.back();
-        }else{
+        if(isAndroid){
             android.refresh();
             android.goBack();
+        }else{
+            localStorage.setItem("need-refresh","true");
+            window.history.back();
         }
     });
 

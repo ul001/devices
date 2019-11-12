@@ -113,10 +113,10 @@ function addDevice(){
     if($(".selectLi").length>0){
         var idVal = $(".selectLi").attr("id");
         Substation.postDataByAjax("/addSubDeviceGroup",{parentId:jumpPid,templateId:idVal,fSubid:selectSubid},function(data){
-            if(isIOS){
-                localStorage.setItem("need-refresh","true");
-            }else{
+            if(isAndroid){
                 android.refresh();
+            }else{
+                localStorage.setItem("need-refresh","true");
             }
             goBackLastPid();
         });

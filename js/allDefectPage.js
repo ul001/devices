@@ -157,11 +157,11 @@ function addItems(number, lastIndex) {
                 /*params['subName']=$("#search").val();
                 localStorage.setItem("saveParam",JSON.stringify(params));*/
                 localStorage.setItem("canClick",false);
-                if (isIOS) {
-                    window.location.href="defectInfo.html?fDeviceproblemid="+clickId;
-                } else {
+                if (isAndroid) {
                     localStorage.setItem("fDeviceproblemid",clickId);
                     android.goToIn();
+                } else {
+                    window.location.href="defectInfo.html?fDeviceproblemid="+clickId;
                 }
             });
             pageNum++;

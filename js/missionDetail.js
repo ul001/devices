@@ -288,10 +288,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                         }
                         //    alert(""+taskID+","+lon+","+lat+","+addr);
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
-                            if(isIOS){
-                                localStorage.setItem("need-refresh","true");
-                            }else{
+                            if(isAndroid){
                                 android.refresh();
+                            }else{
+                                localStorage.setItem("need-refresh","true");
                             }
                             location.reload();
                             $.toast("签到成功！");
@@ -323,12 +323,12 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                                     };
                                     // fExplain 执行情况
                                     Substation.getDataByAjax("/submitUserTask", param, function (data){
-                                        if(isIOS){
-                                            localStorage.setItem("need-refresh", "true");
-                                            window.history.back();
-                                        }else{
+                                        if(isAndroid){
                                             android.refresh();
                                             android.goBack();
+                                        }else{
+                                            localStorage.setItem("need-refresh", "true");
+                                            window.history.back();
                                         }
                                     });
                                 });
@@ -340,12 +340,12 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                                     fTaskid: taskID
                                 };
                                 Substation.getDataByAjax("/submitTask", param, function (data) {
-                                    if(isIOS){
-                                        localStorage.setItem("need-refresh", "true");
-                                        window.history.back();
-                                    }else{
+                                    if(isAndroid){
                                         android.refresh();
                                         android.goBack();
+                                    }else{
+                                        localStorage.setItem("need-refresh", "true");
+                                        window.history.back();
                                     }
                                 });
                             });

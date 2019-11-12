@@ -46,11 +46,11 @@ var thisMenuList = [];
 
 if(localStorage.getItem("need-refresh")=="true"){
     localStorage.removeItem("need-refresh");
-    if(isIOS){
-        location.reload();
+    if(isAndroid){
+        android.refresh();
 //        return;
     }else{
-        android.refresh();
+        location.reload();
     }
 }
 
@@ -221,10 +221,10 @@ function linkClick(parentId) {
             localStorage.setItem("clickNum", clickNum);
             localStorage.setItem("fDeviceGroupId", clickId);
             localStorage.setItem("fTempid", thisTempid);
-            if(isIOS){
-                window.location.href = "AutoloadDetail.html";
-            }else{
+            if(isAndroid){
                 android.goToIn();
+            }else{
+                window.location.href = "AutoloadDetail.html";
             }
             /* if (fField != "" && fField != null) {
 //            localStorage.setItem("fDeviceGroupId", clickId);
@@ -363,10 +363,10 @@ function addDeviceClass() {
     localStorage.setItem("pid", thisPid);
     localStorage.setItem("clickNum", clickNum);
     localStorage.setItem("tempId", thisTempid);
-    if(isIOS){
-        window.location.href = "addDeviceClass.html";
-    }else{
+    if(isAndroid){
         android.goToIn2();
+    }else{
+        window.location.href = "addDeviceClass.html";
     }
 }
 
