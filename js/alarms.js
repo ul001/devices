@@ -80,14 +80,18 @@ function fillData(parentId) {
         $(".item-link").unbind().click(function () {
             var clickId = $(this).attr("value");
             var titleName = $(this).find($(".item-title")).text();
+            localStorage.setItem("titleName",titleName);
             if (clickId != "" && clickId != null) {
-                if (isIOS) {
-                    window.webkit.messageHandlers.pushNewWebView.postMessage({
-                        "title": titleName,
-                        "url": "?clickID=" + clickId
-                    });
-                } else {
+//                if (isIOS) {
+//                    window.webkit.messageHandlers.pushNewWebView.postMessage({
+//                        "title": titleName,
+//                        "url": "?clickID=" + clickId
+//                    });
+//                } else {
+                if(isAndroid){
                     android.goToWebActivity(titleName, "alarmsDetail.html?clickID=" + clickId);
+                }else{
+                    window.location.href = "alarmsDetail.html?clickID=" + clickId;
                 }
             }
         });

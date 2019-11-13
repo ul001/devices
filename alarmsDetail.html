@@ -10,19 +10,23 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/alarmsDetail.css">
 </head>
 
 <body>
     <div class="page-group">
         <div class="page">
-            <!--            <header class="bar bar-nav bar_color">
-                        <a class="button button-link button-nav pull-left click_btn back_btn" onclick=" window.history.back()">
-                            <span class="icon icon-left"></span>
-                            返回
-                        </a>
-                        <h1 class="title title_color">报警</h1>
-                    </header>-->
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <h1 class="title title_color">报警</h1>
+            </header>
             <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
                 <div class="pull-to-refresh-layer">
                     <div class="preloader"></div>
@@ -51,6 +55,99 @@
                 <div class="infinite-scroll-preloader">
                     <div class="preloader"></div>
                 </div>
+            </div>
+        </div>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <div>
+                    <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
+                        <a href="#" class="button" id="yestoday">昨日</a>
+                        <a href="#" class="button" id="thisMonth">当月</a>
+                        <a href="#" class="button" id="lastMonth">上月</a></p>
+                </div>
+                <div>
+                    <label>时间选择</label><br>
+                    <input type="text" id="dateStart" placeholder="开始日期" readonly/> -
+                    <input type="text" id="dateEnd" placeholder="截止日期" readonly/>
+                </div>
+                <div>
+                    <label>缺陷状态</label><br>
+                    <select id="fState">
+                        <option value="">全部</option>
+                        <option value="0">未处理</option>
+                        <option value="1">已处理</option>
+                    </select>
+                </div>
+                <div>
+                    <label>严重等级</label><br>
+                    <select id="dangerType">
+                        <option value="">全部</option>
+                        <option value="一般">一般</option>
+                        <option value="重大">重大</option>
+                        <option value="紧急">紧急</option>
+                    </select>
+                </div>
+                <div>
+                    <label>变电所名称</label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='请输入关键字'/><i class="icon icon-clear"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-block">
+                    <ul id="listContainer">
+                        <!--<li class="item-content" data-id="">
+                            <div class="item-inner">
+                                <div class="item-title">所有变电所</div>
+                            </div>
+                        </li>
+                        <li class="item-content" data-id="10100001">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
+                            </div>
+                        </li>-->
+                        <!--<li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
+                            </div>
+                        </li>
+                        <li class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
+                            </div>
+                        </li>-->
+                    </ul>
+                </div>
+            </div>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#"
+                                       class="button button-big button-fill button-cancel close-panel">取消</a>
+                </div>
+                <div class="col-50"><a href="#"
+                                       class="button button-big button-fill button-success" id="searchBtn">查询</a></div>
             </div>
         </div>
     </div>
