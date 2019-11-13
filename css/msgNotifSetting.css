@@ -1,3 +1,12 @@
 .label-switch {
     float: right;
 }
+.list-block{
+    margin:0;
+}
+.content .list-block .item-content{
+    line-height:1.6rem;
+}
+.content{
+    background-color:#fafafa;
+}
