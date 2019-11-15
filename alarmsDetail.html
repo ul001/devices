@@ -27,6 +27,9 @@
                 </a>
                 <h1 class="title title_color">报警</h1>
             </header>
+            <div class="bar bar-header-secondary">
+                <a href="#" class="button">一键已读</a>
+            </div>
             <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
                 <div class="pull-to-refresh-layer">
                     <div class="preloader"></div>
@@ -56,8 +59,16 @@
                     <div class="preloader"></div>
                 </div>
             </div>
+
         </div>
         <div class="panel-overlay"></div>
+        <!-- About Popup -->
+        <div class="popup popup-about">
+            <div class="content-block">
+                <h2>选择节点</h2>
+                <div id="treeview-checkable"></div>
+            </div>
+        </div>
         <div class="panel panel-right panel-reveal" id='panel-right-demo'>
             <div class="content-block">
                 <div>
@@ -72,21 +83,8 @@
                     <input type="text" id="dateEnd" placeholder="截止日期" readonly/>
                 </div>
                 <div>
-                    <label>缺陷状态</label><br>
-                    <select id="fState">
-                        <option value="">全部</option>
-                        <option value="0">未处理</option>
-                        <option value="1">已处理</option>
-                    </select>
-                </div>
-                <div>
-                    <label>严重等级</label><br>
-                    <select id="dangerType">
-                        <option value="">全部</option>
-                        <option value="一般">一般</option>
-                        <option value="重大">重大</option>
-                        <option value="紧急">紧急</option>
-                    </select>
+                    <label>报警类型</label><br>
+                    <a href="#" class="open-popup open-about" data-popup=".popup-about">筛选报警类型</a>
                 </div>
                 <div>
                     <label>变电所名称</label><br>

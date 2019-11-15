@@ -2,7 +2,8 @@ var loading = false;
 var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
-var clickID = Substation.GetQueryString("clickID");
+//var clickID = Substation.GetQueryString("clickID");
+var clickID = "bianwei";
 var titleName = localStorage.getItem("titleName");
 $(".title.title_color").text(titleName);
 var u = navigator.userAgent,
@@ -56,18 +57,41 @@ function addItems(number, lastIndex) {
                 $(".list-container").empty();
             }
             $(datadic.list).each(function () {
+//                html += "<div class=\"card\">\n" +
+//                    "                    <div class=\"card-content\">\n" +
+//                    "                        <div class=\"content-padded\">\n" +
+//                    "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
+//                    "                                <div class=\"col-75\">\n" +
+//                    "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
+//                    "                                    <P>仪表名称：" + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
+//                    "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
+//                    "                                </div>\n" +
+//                    "                                <div class=\"col-25\">\n" +
+//                    "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
+//                    "                                    <p><span class=\"cardtime\">" + this.fStarttime + "</span></p>" +
+//                    "                                </div>\n" +
+//                    "                            </div>\n" +
+//                    "                        </div>\n" +
+//                    "                    </div>\n" +
+//                    "                </div>";
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
                     "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
-                    "                                <div class=\"col-75\">\n" +
+                    "                                <div class=\"col-80\">\n" +
                     "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
+//                    "                                   <div class=\"row no-gutter icon_center\">\n" +
+//                    "                                   <div class=\"col-15\"><i class=\"icon icon-alarm\"></i></div>\n" +
+//                    "                                   <div class=\"col-85\">\n" +
                     "                                    <P>仪表名称：" + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
                     "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
+                    "                                    <p>报警时间：" + this.fStarttime + "</p>\n" +
+//                    "                                   </div>\n" +
+//                    "                                   </div>\n" +
                     "                                </div>\n" +
-                    "                                <div class=\"col-25\">\n" +
-                    "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
-                    "                                    <p><span class=\"cardtime\">" + this.fStarttime + "</span></p>" +
+                    "                                <div class=\"col-20\">\n" +
+                    "                                    <a href='#' class='bg-dark button' style='margin-bottom:.3rem;'>已读</a>\n" +
+                    "                                    <a href='#' class='bg-dark button'>处理</a>\n" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     "                        </div>\n" +
@@ -269,5 +293,59 @@ window.addEventListener("resize", function () {
         }, 0);
     }
 });
+
+var defaultData = [
+          {
+            text: '一般',
+            href: '#parent1',
+            tags: ['4'],
+            nodes: [
+              {
+                text: '平台运行报警',
+                href: '#child1',
+                tags: ['2'],
+                nodes: [
+                  {
+                    text: '网管离线报警',
+                    href: '#grandchild1',
+                    tags: ['0']
+                  },
+                  {
+                    text: '仪表离线报警',
+                    href: '#grandchild2',
+                    tags: ['0']
+                  }
+                ]
+              },
+/*              {
+                text: 'Child 2',
+                href: '#child2',
+                tags: ['0']
+              }*/
+            ]
+          },
+          {
+            text: '重要',
+            href: '#parent2',
+            tags: ['0']
+          },
+          {
+            text: '紧急',
+            href: '#parent3',
+             tags: ['0']
+          },
+/*          {
+            text: 'Parent 4',
+            href: '#parent4',
+            tags: ['0']
+          },
+          {
+            text: 'Parent 5',
+            href: '#parent5'  ,
+            tags: ['0']
+          }*/
+        ];
+
+
 
 $.init();

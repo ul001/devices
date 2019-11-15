@@ -3,13 +3,26 @@
     align-items: center;
 }
 
+.icon_center {
+    display: flex;
+    align-items: center;
+}
+
+.list-container .card{
+    margin:0.3rem;
+}
+
+/*.card .content-padded{
+    margin:.3rem;
+}*/
+
 .sub_card p {
     margin: 0 0;
 }
 
 .sub_card .subName {
     font-weight: bold;
-    margin: 0.4rem 0;
+    margin: .2rem 0;
 }
 
 .sub_card button {
@@ -24,15 +37,14 @@ i.icon.icon-subIcon {
     width: 0.85rem;
     height: 0.85rem;
     background-image: url(../img/i-jiancedian.png);
-    margin-bottom:0.2rem;
-    margin-right:0.1rem;
+    margin-bottom:.1rem;
+    margin-right:.1rem;
 }
 
 i.icon.icon-alarm {
-    width: 1.8rem;
-    height: 1.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
     background-image: url(../img/i-alarmp.png);
-    margin-top: 0.2rem;
 }
 
 .card .col-25 p {
