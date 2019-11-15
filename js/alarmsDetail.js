@@ -2,8 +2,8 @@ var loading = false;
 var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
-//var clickID = Substation.GetQueryString("clickID");
-var clickID = "bianwei";
+var clickID = Substation.GetQueryString("clickID");
+//var clickID = "bianwei";
 var titleName = localStorage.getItem("titleName");
 $(".title.title_color").text(titleName);
 var u = navigator.userAgent,
@@ -294,58 +294,75 @@ window.addEventListener("resize", function () {
     }
 });
 
-var defaultData = [
-          {
-            text: '一般',
-            href: '#parent1',
-            tags: ['4'],
-            nodes: [
-              {
-                text: '平台运行报警',
-                href: '#child1',
-                tags: ['2'],
-                nodes: [
-                  {
-                    text: '网管离线报警',
-                    href: '#grandchild1',
-                    tags: ['0']
-                  },
-                  {
-                    text: '仪表离线报警',
-                    href: '#grandchild2',
-                    tags: ['0']
-                  }
-                ]
-              },
-/*              {
-                text: 'Child 2',
-                href: '#child2',
-                tags: ['0']
-              }*/
-            ]
-          },
-          {
-            text: '重要',
-            href: '#parent2',
-            tags: ['0']
-          },
-          {
-            text: '紧急',
-            href: '#parent3',
-             tags: ['0']
-          },
-/*          {
-            text: 'Parent 4',
-            href: '#parent4',
-            tags: ['0']
-          },
-          {
-            text: 'Parent 5',
-            href: '#parent5'  ,
-            tags: ['0']
-          }*/
-        ];
+Substation.getDataByAjax("/getfCircuitidsList",{fSubid:10100001},function(data){
+    if(data!=null&&data!=undefined){
+        var showlist = $("<ul></ul>");
+        showAll(data,showlist);
+        $(".media-list").html(showlist);
+        addClick();
+    }
+});
 
+function showAll(treeList,parent){
+    $(treeList).each(function(index,obj){
+        if(obj.hasOwnProperty("nodes")&&obj.nodes.length>0){
+            var li = $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>");
+            $(li).append("                                            <label class=\"label-checkbox item-content\">\n" +
+                      "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
+                      "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                      "                                                <div class=\"item-inner\">\n" +
+                      "                                                    <div class=\"item-title-row\">\n" +
+                      "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
+                      "                                                    </div>\n" +
+                      "                                                </div>\n" +
+                      "                                            </label>\n").append("<ul></ul>").appendTo(parent);
+            showAll(obj.nodes,$(li).children().eq(1));
+        }else{
+            $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>").append(
+                        "                                            <label class=\"label-checkbox item-content\">\n" +
+                        "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
+                        "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                        "                                                <div class=\"item-inner\">\n" +
+                        "                                                    <div class=\"item-title-row\">\n" +
+                        "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
+                        "                                                    </div>\n" +
+                        "                                                </div>\n" +
+                        "                                            </label>\n").appendTo(parent);
+        }
+    });
+}
 
+function addClick(){
+    $(".media-list input[name='checkbox']").change(function(){
+        var thisValue = $(this).prop("checked");
+        var thisVal = $(this).val();
+        if(thisValue==true){
+            $(this).parents("li").each(function(index,obj){
+                $($(obj).find('input[name="checkbox"]')[0]).prop("checked",true);
+            });
+            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
+                $(obj).prop("checked",true)
+            });
+        }else{
+/*            $(this).parents("li").each(function(index,obj){
+                if($(obj).find($("input[name='checkbox']:checked").val()!="").length==0){
+                    $($(obj).find('input[name="checkbox"]')[0]).prop("checked",false);
+                }
+            });*/
+            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
+                $(obj).prop("checked",false)
+            });
+            var parentLi = $("#"+thisVal).parent().parent("li");
+            while(parentLi){
+                if(parentLi.find("input[name='checkbox']:checked").length==1){
+                    $(parentLi.find("input[name='checkbox']")[0]).prop("checked",false);
+                    parentLi = parentLi.parent().parent("li");
+                }else{
+                    break;
+                }
+            }
+        }
+    });
+}
 
 $.init();

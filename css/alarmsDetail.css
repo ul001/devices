@@ -190,7 +190,7 @@ i.icon.icon-selectSome {
     border-radius: initial;
 }
 
-#searchBtn {
+#searchBtn,#commitBtn {
     background: #02A8A6;
 }
 
@@ -212,4 +212,15 @@ i.icon.icon-selectSome {
 }
 .bar .button-nav.pull-right {
     margin-right: 0;
+}
+.list-block .item-title{
+    white-space: initial;
+}
+.content-block{
+    max-height:90%;
+    overflow:auto;
+    margin:0;
+}
+.popup-btn{
+    min-height:2.4rem;
 }
