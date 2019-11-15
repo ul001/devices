@@ -2,11 +2,11 @@ jQuery(document).ready(function () {
     // $(function () {
     var titlename = localStorage.getItem("fSubname");
     $("#titleContent").text(titlename);
-//alert("1");
-var u = navigator.userAgent,
-  app = navigator.appVersion;
-var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    //alert("1");
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
     var showmissionBtn = localStorage.getItem("showType");
     var missionType = localStorage.getItem("missionType");
@@ -111,14 +111,14 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
-                            if(missionTypeid==3){
+                            if (missionTypeid == 3) {
                                 if ($("#carryOut").attr("name") == "true") {
                                     $.toast("请先签到。");
                                     return;
-                                }else{
+                                } else {
                                     localStorage.setItem("canClick", true);
                                 }
-                            }else{
+                            } else {
                                 localStorage.setItem("canClick", false);
                             }
                             window.location.href = "defectRectification.html";
@@ -133,14 +133,14 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
-                            if(missionTypeid==3){
+                            if (missionTypeid == 3) {
                                 if ($("#carryOut").attr("name") == "true") {
                                     $.toast("请先签到。");
                                     return;
-                                }else{
+                                } else {
                                     localStorage.setItem("canClick", true);
                                 }
-                            }else{
+                            } else {
                                 localStorage.setItem("canClick", false);
                             }
                             window.location.href = encodeURI("defectRectification.html" + "?value=0");;
@@ -270,11 +270,11 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             //                            alert(lat+"\n"+lon+"\n"+addr);
                         }
                         var fDistance = -1;
-                        if(subLat!=undefined&&subLon!=undefined){
+                        if (subLat != undefined && subLon != undefined) {
                             var map = new BMap.Map("allmap");
-                            var point1 = new BMap.Point(subLon,subLat);
-                            var point2 = new BMap.Point(lon,lat);
-                            fDistance = map.getDistance(point1,point2);
+                            var point1 = new BMap.Point(subLon, subLat);
+                            var point2 = new BMap.Point(lon, lat);
+                            fDistance = map.getDistance(point1, point2);
                         }
                         var param = {
                             taskId: taskID,
@@ -283,15 +283,15 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                             fLocation: addr
                         };
                         fDistance = parseInt(fDistance);
-                        if(fDistance>0&&fDistance<2147483647){
+                        if (fDistance > 0 && fDistance < 2147483647) {
                             param['fDistance'] = fDistance;
                         }
                         //    alert(""+taskID+","+lon+","+lat+","+addr);
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
-                            if(isAndroid){
+                            if (isAndroid) {
                                 android.refresh();
-                            }else{
-                                localStorage.setItem("need-refresh","true");
+                            } else {
+                                localStorage.setItem("need-refresh", "true");
                             }
                             location.reload();
                             $.toast("签到成功！");
@@ -322,11 +322,11 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                                         fExplain: textDetail
                                     };
                                     // fExplain 执行情况
-                                    Substation.getDataByAjax("/submitUserTask", param, function (data){
-                                        if(isAndroid){
+                                    Substation.getDataByAjax("/submitUserTask", param, function (data) {
+                                        if (isAndroid) {
                                             android.refresh();
                                             android.goBack();
-                                        }else{
+                                        } else {
                                             localStorage.setItem("need-refresh", "true");
                                             window.history.back();
                                         }
@@ -340,10 +340,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
                                     fTaskid: taskID
                                 };
                                 Substation.getDataByAjax("/submitTask", param, function (data) {
-                                    if(isAndroid){
+                                    if (isAndroid) {
                                         android.refresh();
                                         android.goBack();
-                                    }else{
+                                    } else {
                                         localStorage.setItem("need-refresh", "true");
                                         window.history.back();
                                     }
@@ -456,13 +456,13 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     getNetData();
 
     $(".pull-left.click_btn").click(function () {
-//        localStorage.setItem("need-refresh", "true");
+        //        localStorage.setItem("need-refresh", "true");
         if (isIOS) {
             window.history.back();
         } else {
             android.goBack();
         }
-//        window.location.href = "todoItems.html";
+        //        window.location.href = "todoItems.html";
     });
 
     //管理页面
@@ -482,22 +482,26 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     window.addEventListener(
         "pageshow",
         function (event) {
-          if (localStorage.getItem("need-refresh")=="true") {
-            localStorage.removeItem("need-refresh");
-            location.reload();
-          }
+            if (localStorage.getItem("need-refresh") == "true") {
+                localStorage.removeItem("need-refresh");
+                location.reload();
+            }
         },
         false
-      );
+    );
 
     $.init();
 });
 
 //解决键盘遮挡问题
-var h=$(window).height();
+var h = $(window).height();
 window.addEventListener("resize", function () {
-    if($(window).height()<h){ $('.buttonsEvent').hide(); }
-    if($(window).height()>=h){ $('.buttonsEvent').show(); }
+    if ($(window).height() < h) {
+        $('.buttonsEvent').hide();
+    }
+    if ($(window).height() >= h) {
+        $('.buttonsEvent').show();
+    }
     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
