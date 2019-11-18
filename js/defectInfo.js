@@ -15,13 +15,13 @@ var imgNum1 = 0;
 var imgNum = 0;
 var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
 var androidProblemid = localStorage.getItem("fDeviceproblemid");
-if(androidProblemid!=null&&androidProblemid!=undefined){
+if (androidProblemid != null && androidProblemid != undefined) {
     fDeviceproblemid = androidProblemid;
-    $(".back_btn").click(function(){
+    $(".back_btn").click(function () {
         android.goBack();
     });
-}else{
-    $(".back_btn").click(function(){
+} else {
+    $(".back_btn").click(function () {
         window.history.back();
     });
 }
@@ -89,14 +89,14 @@ Substation.getDataByAjax(url, problemParam, function (data) {
     if (beforeimg.length > 0) {
         $.each(beforeimg, function (i, value) {
             imgNum1++;
-            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
             $("#imgBox1").append(imgDiv);
         });
     }
     if (afterimg.length > 0) {
         $.each(afterimg, function (i, value) {
             imgNum++;
-            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + '  onclick="imgDisplay(this)"></div>';
             $("#imgBox").append(imgDiv);
         });
     }
@@ -208,7 +208,7 @@ function removeImg(obj, index) {
 
 
 function imgDisplay(obj) {
-    var src = $(obj).attr("src");
+    var src = $(obj).attr("name");
     var imgHtml = '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img src=' + src + ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>'
     $('body').append(imgHtml);
 }
