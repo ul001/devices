@@ -89,14 +89,24 @@ Substation.getDataByAjax(url, problemParam, function (data) {
     if (beforeimg.length > 0) {
         $.each(beforeimg, function (i, value) {
             imgNum1++;
-            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+            if (value.fDeviceproblemimgmin == undefined) {
+                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+            } else {
+                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+            }
+
             $("#imgBox1").append(imgDiv);
         });
     }
     if (afterimg.length > 0) {
         $.each(afterimg, function (i, value) {
             imgNum++;
-            var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + '  onclick="imgDisplay(this)"></div>';
+            if (value.fDeviceproblemimgmin == undefined) {
+                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + '  onclick="imgDisplay(this)"></div>';
+            } else {
+                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + '  onclick="imgDisplay(this)"></div>';
+            }
+
             $("#imgBox").append(imgDiv);
         });
     }
