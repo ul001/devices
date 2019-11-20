@@ -57,46 +57,51 @@ function addItems(number, lastIndex) {
                 $(".list-container").empty();
             }
             $(datadic.list).each(function () {
-//                html += "<div class=\"card\">\n" +
-//                    "                    <div class=\"card-content\">\n" +
-//                    "                        <div class=\"content-padded\">\n" +
-//                    "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
-//                    "                                <div class=\"col-75\">\n" +
-//                    "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
-//                    "                                    <P>仪表名称：" + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
-//                    "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
-//                    "                                </div>\n" +
-//                    "                                <div class=\"col-25\">\n" +
-//                    "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
-//                    "                                    <p><span class=\"cardtime\">" + this.fStarttime + "</span></p>" +
-//                    "                                </div>\n" +
-//                    "                            </div>\n" +
-//                    "                        </div>\n" +
-//                    "                    </div>\n" +
-//                    "                </div>";
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
                     "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
-                    "                                <div class=\"col-80\">\n" +
+                    "                                <div class=\"col-75\">\n" +
                     "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
-//                    "                                   <div class=\"row no-gutter icon_center\">\n" +
-//                    "                                   <div class=\"col-15\"><i class=\"icon icon-alarm\"></i></div>\n" +
-//                    "                                   <div class=\"col-85\">\n" +
                     "                                    <P>仪表名称：" + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
                     "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
-                    "                                    <p>报警时间：" + this.fStarttime + "</p>\n" +
-//                    "                                   </div>\n" +
-//                    "                                   </div>\n" +
                     "                                </div>\n" +
-                    "                                <div class=\"col-20\">\n" +
-                    "                                    <a href='#' class='bg-dark button' style='margin-bottom:.3rem;'>已读</a>\n" +
-                    "                                    <a href='#' class='bg-dark button'>处理</a>\n" +
+                    "                                <div class=\"col-25\">\n" +
+                    "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
+                    "                                    <p><span class=\"cardtime\">" + this.fStarttime + "</span></p>" +
                     "                                </div>\n" +
                     "                            </div>\n" +
                     "                        </div>\n" +
                     "                    </div>\n" +
                     "                </div>";
+//                var btnStr = ""
+//                if(this.fIsread==true){
+//                    btnStr="                                    <a href='#' class='disabled button-fill button'>已读</a>\n";
+//                }else{
+//                    btnStr="                                    <a href='#' class='button-fill button'>已读</a>\n";
+//                }
+//                html += "<div class=\"card\">\n" +
+//                    "                    <div class=\"card-content\">\n" +
+//                    "                        <div class=\"content-padded\">\n" +
+//                    "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
+//                    "                                <div class=\"col-80\">\n" +
+//                    "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
+////                    "                                   <div class=\"row no-gutter icon_center\">\n" +
+////                    "                                   <div class=\"col-15\"><i class=\"icon icon-alarm\"></i></div>\n" +
+////                    "                                   <div class=\"col-85\">\n" +
+//                    "                                    <P>仪表名称：" + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
+//                    "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
+//                    "                                    <p>报警时间：" + this.fStarttime + "</p>\n" +
+////                    "                                   </div>\n" +
+////                    "                                   </div>\n" +
+//                    "                                </div>\n" +
+//                    "                                <div class=\"col-20\">\n" +
+//                                                     btnStr+
+//                    "                                </div>\n" +
+//                    "                            </div>\n" +
+//                    "                        </div>\n" +
+//                    "                    </div>\n" +
+//                    "                </div>";
             });
             $('.list-container').append(html);
             //addClick();
@@ -152,12 +157,12 @@ $(".back_btn").click(function () {
     }
 });
 
-$('#searchBtn').click(function () {
+/*$('#searchBtn').click(function () {
     $(".close-panel").click();
-    /*    if(saveParam!=null){
+    *//*    if(saveParam!=null){
             clickSubid = saveParam['fSubid'];
             saveParam=null;
-        }*/
+        }*//*
     if ($("#search").val() == "") {
         //        $("#subName").text("所有变电所");
         selectSubid = "";
@@ -344,11 +349,11 @@ function addClick(){
                 $(obj).prop("checked",true)
             });
         }else{
-/*            $(this).parents("li").each(function(index,obj){
+*//*            $(this).parents("li").each(function(index,obj){
                 if($(obj).find($("input[name='checkbox']:checked").val()!="").length==0){
                     $($(obj).find('input[name="checkbox"]')[0]).prop("checked",false);
                 }
-            });*/
+            });*//*
             $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
                 $(obj).prop("checked",false)
             });
@@ -363,6 +368,6 @@ function addClick(){
             }
         }
     });
-}
+}*/
 
 $.init();
