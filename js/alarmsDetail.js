@@ -74,12 +74,6 @@ function addItems(number, lastIndex) {
                     "                        </div>\n" +
                     "                    </div>\n" +
                     "                </div>";
-//                var btnStr = ""
-//                if(this.fIsread==true){
-//                    btnStr="                                    <a href='#' class='disabled button-fill button'>已读</a>\n";
-//                }else{
-//                    btnStr="                                    <a href='#' class='button-fill button'>已读</a>\n";
-//                }
 //                html += "<div class=\"card\">\n" +
 //                    "                    <div class=\"card-content\">\n" +
 //                    "                        <div class=\"content-padded\">\n" +
@@ -96,7 +90,8 @@ function addItems(number, lastIndex) {
 ////                    "                                   </div>\n" +
 //                    "                                </div>\n" +
 //                    "                                <div class=\"col-20\">\n" +
-//                                                     btnStr+
+//                    "                                    <a href='#' class='bg-dark button' style='margin-bottom:.3rem;'>已读</a>\n" +
+//                    "                                    <a href='#' class='bg-dark button'>处理</a>\n" +
 //                    "                                </div>\n" +
 //                    "                            </div>\n" +
 //                    "                        </div>\n" +
@@ -157,12 +152,12 @@ $(".back_btn").click(function () {
     }
 });
 
-/*$('#searchBtn').click(function () {
+$('#searchBtn').click(function () {
     $(".close-panel").click();
-    *//*    if(saveParam!=null){
+    /*    if(saveParam!=null){
             clickSubid = saveParam['fSubid'];
             saveParam=null;
-        }*//*
+        }*/
     if ($("#search").val() == "") {
         //        $("#subName").text("所有变电所");
         selectSubid = "";
@@ -299,75 +294,75 @@ window.addEventListener("resize", function () {
     }
 });
 
-Substation.getDataByAjax("/getfCircuitidsList",{fSubid:10100001},function(data){
-    if(data!=null&&data!=undefined){
-        var showlist = $("<ul></ul>");
-        showAll(data,showlist);
-        $(".media-list").html(showlist);
-        addClick();
-    }
-});
-
-function showAll(treeList,parent){
-    $(treeList).each(function(index,obj){
-        if(obj.hasOwnProperty("nodes")&&obj.nodes.length>0){
-            var li = $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>");
-            $(li).append("                                            <label class=\"label-checkbox item-content\">\n" +
-                      "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
-                      "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                      "                                                <div class=\"item-inner\">\n" +
-                      "                                                    <div class=\"item-title-row\">\n" +
-                      "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
-                      "                                                    </div>\n" +
-                      "                                                </div>\n" +
-                      "                                            </label>\n").append("<ul></ul>").appendTo(parent);
-            showAll(obj.nodes,$(li).children().eq(1));
-        }else{
-            $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>").append(
-                        "                                            <label class=\"label-checkbox item-content\">\n" +
-                        "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
-                        "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                        "                                                <div class=\"item-inner\">\n" +
-                        "                                                    <div class=\"item-title-row\">\n" +
-                        "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
-                        "                                                    </div>\n" +
-                        "                                                </div>\n" +
-                        "                                            </label>\n").appendTo(parent);
-        }
-    });
-}
-
-function addClick(){
-    $(".media-list input[name='checkbox']").change(function(){
-        var thisValue = $(this).prop("checked");
-        var thisVal = $(this).val();
-        if(thisValue==true){
-            $(this).parents("li").each(function(index,obj){
-                $($(obj).find('input[name="checkbox"]')[0]).prop("checked",true);
-            });
-            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
-                $(obj).prop("checked",true)
-            });
-        }else{
-*//*            $(this).parents("li").each(function(index,obj){
-                if($(obj).find($("input[name='checkbox']:checked").val()!="").length==0){
-                    $($(obj).find('input[name="checkbox"]')[0]).prop("checked",false);
-                }
-            });*//*
-            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
-                $(obj).prop("checked",false)
-            });
-            var parentLi = $("#"+thisVal).parent().parent("li");
-            while(parentLi){
-                if(parentLi.find("input[name='checkbox']:checked").length==1){
-                    $(parentLi.find("input[name='checkbox']")[0]).prop("checked",false);
-                    parentLi = parentLi.parent().parent("li");
-                }else{
-                    break;
-                }
-            }
-        }
-    });
-}*/
+//Substation.getDataByAjax("/getfCircuitidsList",{fSubid:10100001},function(data){
+//    if(data!=null&&data!=undefined){
+//        var showlist = $("<ul></ul>");
+//        showAll(data,showlist);
+//        $(".media-list").html(showlist);
+//        addClick();
+//    }
+//});
+//
+//function showAll(treeList,parent){
+//    $(treeList).each(function(index,obj){
+//        if(obj.hasOwnProperty("nodes")&&obj.nodes.length>0){
+//            var li = $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>");
+//            $(li).append("                                            <label class=\"label-checkbox item-content\">\n" +
+//                      "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
+//                      "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+//                      "                                                <div class=\"item-inner\">\n" +
+//                      "                                                    <div class=\"item-title-row\">\n" +
+//                      "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
+//                      "                                                    </div>\n" +
+//                      "                                                </div>\n" +
+//                      "                                            </label>\n").append("<ul></ul>").appendTo(parent);
+//            showAll(obj.nodes,$(li).children().eq(1));
+//        }else{
+//            $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>").append(
+//                        "                                            <label class=\"label-checkbox item-content\">\n" +
+//                        "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
+//                        "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+//                        "                                                <div class=\"item-inner\">\n" +
+//                        "                                                    <div class=\"item-title-row\">\n" +
+//                        "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
+//                        "                                                    </div>\n" +
+//                        "                                                </div>\n" +
+//                        "                                            </label>\n").appendTo(parent);
+//        }
+//    });
+//}
+//
+//function addClick(){
+//    $(".media-list input[name='checkbox']").change(function(){
+//        var thisValue = $(this).prop("checked");
+//        var thisVal = $(this).val();
+//        if(thisValue==true){
+//            $(this).parents("li").each(function(index,obj){
+//                $($(obj).find('input[name="checkbox"]')[0]).prop("checked",true);
+//            });
+//            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
+//                $(obj).prop("checked",true)
+//            });
+//        }else{
+///*            $(this).parents("li").each(function(index,obj){
+//                if($(obj).find($("input[name='checkbox']:checked").val()!="").length==0){
+//                    $($(obj).find('input[name="checkbox"]')[0]).prop("checked",false);
+//                }
+//            });*/
+//            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
+//                $(obj).prop("checked",false)
+//            });
+//            var parentLi = $("#"+thisVal).parent().parent("li");
+//            while(parentLi){
+//                if(parentLi.find("input[name='checkbox']:checked").length==1){
+//                    $(parentLi.find("input[name='checkbox']")[0]).prop("checked",false);
+//                    parentLi = parentLi.parent().parent("li");
+//                }else{
+//                    break;
+//                }
+//            }
+//        }
+//    });
+//}
 
 $.init();
