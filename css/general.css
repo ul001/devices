@@ -34,33 +34,38 @@
     margin: 0 auto;
 }
 
-.blueColor{
-    color:#4682B4;
+.blueColor {
+    color: #4682B4;
 }
 
-.redColor{
-    color:#DC143C;
+.redColor {
+    color: #DC143C;
 }
 
-.greenColor{
-    color:#7CFC00;
+.greenColor {
+    color: #7CFC00;
 }
 
-.grayColor{
-    color:#778899;
+.grayColor {
+    color: #778899;
 }
-.item-input select{
+
+.item-input select {
     background: url('../img/right.png') no-repeat right center;
 }
-.card:active,.item-footer:active {
+
+.card:active,
+.item-footer:active {
     background-color: #d9d9d9;
     -webkit-transition-duration: 0s;
     -o-transition-duration: 0s;
     transition-duration: 0s;
 }
-.boldText{
-    font-weight:bold;
+
+.boldText {
+    font-weight: bold;
 }
-select{
-    background:#fff;
+
+select {
+    background: #fff;
 }

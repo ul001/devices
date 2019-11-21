@@ -230,3 +230,21 @@ i.icon.icon-selectSome {
 .popup-btn {
     min-height: 2.4rem;
 }
+
+i.icon.icon-fileSubname {
+    width: 0.6rem;
+    height: 0.6rem;
+    background-image: url(../img/i-fileSubname.png);
+}
+
+i.icon.icon-fileTime {
+    width: 0.6rem;
+    height: 0.6rem;
+    background-image: url(../img/i-filetime.png);
+}
+
+i.icon.icon-fileSize {
+    width: 0.6rem;
+    height: 0.6rem;
+    background-image: url(../img/i-fileSize.png);
+}

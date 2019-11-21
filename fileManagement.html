@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/fileManagement.css">
+
 </head>
 
 <body>
@@ -25,7 +26,7 @@
                 <a class="button button-link button-nav pull-right open-panel">
                     <i class="icon icon-selectSome"></i>
                 </a>
-                <h1 class="title title_color">报警</h1>
+                <h1 class="title title_color">文档</h1>
             </header>
             <!--            <div class="bar bar-header-secondary">
                 <a href="#" class="button">一键已读</a>
@@ -36,23 +37,30 @@
                     <div class="pull-to-refresh-arrow"></div>
                 </div>
                 <div class="list-container">
-                    <!--<div class="card">-->
-                    <!--<div class="card-content">-->
-                    <!--<div class="content-padded">-->
-                    <!--<div class="row  no-gutter sub_card unRead">-->
-                    <!--<div class="col-75">-->
-                    <!--<p class="subName"><i class="icon icon-subIcon"></i>那科瑞</p>-->
-                    <!--<P>仪表名称：ahfadslh</P>-->
-                    <!--<p>事件类型：fadfhlk</p>-->
-                    <!--</div>-->
-                    <!--<div class="col-25">-->
-                    <!--<p><span>fdatet</span></p>-->
-                    <!--<p><i class="icon icon-alarm"></i></p>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="content-padded">
+                                <div class="row no-gutter sub_card">
+                                    <div class="col-10">
+                                        <img src="img/soft_word.png">
+                                    </div>
+                                    <div class=" col-75" onclick="downloadFile()">
+                                        <p class="subName limit-length">文件名</p>
+                                        <p class="limit-length" style="font-size:12px"><i
+                                                class="icon icon-fileSubname"></i>安电所
+                                            <i class="icon icon-fileTime"></i>2019-11-20
+                                            <i class="icon
+                                                icon-fileSize"></i>13.5MB
+                                        </p>
+                                    </div>
+                                    <div class="col-15">
+                                        <button class="bg-primary external" type="button" onclick="downloadFile()">下载
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- preloader -->
                 <div class="infinite-scroll-preloader">
@@ -122,7 +130,7 @@
     <script src='libs/cn.min.js'></script>
     <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
     <script src="libs/tools.js"></script>
-    <script src="js/fileManagement.js"></script>
+    <!-- <script src="js/fileManagement.js"></script> -->
 </body>
 
 </html>

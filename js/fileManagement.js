@@ -12,6 +12,7 @@ var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓�
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 var selectSubid = "";
 var clickSubid = "";
+var fileUrlBasePath = "";
 
 function getFirstPage() {
     $(".list-container").empty();
@@ -33,29 +34,33 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number, lastIndex) {
     var html = '';
-    var url = "";
-    if (clickID == "bianwei") {
-        url = "/getWarningMessageSignalEvents";
-        //$(".title").html("遥信变位报警");
-    } else if (clickID == "yuexian") {
-        url = "/getWarningMessageOverLimitEvents";
-        //$(".title").html("遥测越限报警");
-    } else if (clickID == "platform") {
-        url = "/getWarningMessagePlatformRunEvents";
-        //$(".title").html("平台运行报警");
-    }
+    var url = "/selectDocument";
+    // if (clickID == "bianwei") {
+    //     url = "/getWarningMessageSignalEvents";
+    //     //$(".title").html("遥信变位报警");
+    // } else if (clickID == "yuexian") {
+    //     url = "/getWarningMessageOverLimitEvents";
+    //     //$(".title").html("遥测越限报警");
+    // } else if (clickID == "platform") {
+    //     url = "/getWarningMessagePlatformRunEvents";
+    //     //$(".title").html("平台运行报警");
+    // }
     // var searchKey = $("#search").val();
     var params = {
-        pageNo: pageNum,
-        pageSize: number
-        // key: searchKey
+        category: clickID, //类别id
+        subId: subId, //变电所id
+        startTime: "",
+        endTime: "",
+        // pageNo: pageNum,
+        // pageSize: number
     };
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        var datadic = data.WarningMessage;
-        if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
-            if (pageNum == 1) {
-                $(".list-container").empty();
-            }
+        //文件拼接基础路径
+        fileUrlBasePath = data.fileUrl;
+        if (data.hasOwnProperty("tDtDocumentsManages") && data.tDtDocumentsManages.length > 0) {
+            // if (pageNum == 1) {
+            //     $(".list-container").empty();
+            // }
             $(datadic.list).each(function () {
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
@@ -74,29 +79,7 @@ function addItems(number, lastIndex) {
                     "                        </div>\n" +
                     "                    </div>\n" +
                     "                </div>";
-                //                html += "<div class=\"card\">\n" +
-                //                    "                    <div class=\"card-content\">\n" +
-                //                    "                        <div class=\"content-padded\">\n" +
-                //                    "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
-                //                    "                                <div class=\"col-80\">\n" +
-                //                    "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
-                ////                    "                                   <div class=\"row no-gutter icon_center\">\n" +
-                ////                    "                                   <div class=\"col-15\"><i class=\"icon icon-alarm\"></i></div>\n" +
-                ////                    "                                   <div class=\"col-85\">\n" +
-                //                    "                                    <P>仪表名称：" + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
-                //                    "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
-                //                    "                                    <p>报警时间：" + this.fStarttime + "</p>\n" +
-                ////                    "                                   </div>\n" +
-                ////                    "                                   </div>\n" +
-                //                    "                                </div>\n" +
-                //                    "                                <div class=\"col-20\">\n" +
-                //                    "                                    <a href='#' class='bg-dark button' style='margin-bottom:.3rem;'>已读</a>\n" +
-                //                    "                                    <a href='#' class='bg-dark button'>处理</a>\n" +
-                //                    "                                </div>\n" +
-                //                    "                            </div>\n" +
-                //                    "                        </div>\n" +
-                //                    "                    </div>\n" +
-                //                    "                </div>";
+
             });
             $('.list-container').append(html);
             //addClick();
