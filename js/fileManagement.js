@@ -32,6 +32,16 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
     }, 2000);
 });
 
+function downloadFile(filecode) {
+    if (filecode != undefined && fileUrlBasePath != undefined) {
+        var url = fileUrlBasePath + filecode;
+        var message = {
+            'url': url
+        };
+        window.webkit.messageHandlers.goBackiOS.postMessage("");
+    }
+}
+
 function addItems(number, lastIndex) {
     var html = '';
     var url = "/selectDocument";
@@ -48,9 +58,9 @@ function addItems(number, lastIndex) {
     // var searchKey = $("#search").val();
     var params = {
         category: clickID, //类别id
-        subId: subId, //变电所id
-        startTime: "",
-        endTime: "",
+        // subId: subId, //变电所id
+        // startTime: "",
+        // endTime: "",
         // pageNo: pageNum,
         // pageSize: number
     };
@@ -61,21 +71,39 @@ function addItems(number, lastIndex) {
             // if (pageNum == 1) {
             //     $(".list-container").empty();
             // }
-            $(datadic.list).each(function () {
+            $(data.tDtDocumentsManages).each(function () {
+                var pushTime = '';
+                if (this.fFilepublishtime != undefined) {
+                    pushTime = this.fFilepublishtime;
+                    pushTime = pushTime.slice(0, 10);
+                }
+                var fileSize = '';
+                if (this.fFilesize != undefined) {
+                    fileSize = bytesToSize(this.fFilesize);
+                }
+                //waring暂时屏蔽 
+
                 html += "<div class=\"card\">\n" +
                     "                    <div class=\"card-content\">\n" +
                     "                        <div class=\"content-padded\">\n" +
-                    "                            <div class=\"row  no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
-                    "                                <div class=\"col-75\">\n" +
-                    "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
-                    "                                    <P>仪表名称：" + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
-                    "                                    <p>事件类型：" + this.fAlarmtype + "</p>\n" +
-                    "                                </div>\n" +
-                    "                                <div class=\"col-25\">\n" +
-                    "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
-                    "                                    <p><span class=\"cardtime\">" + this.fStarttime + "</span></p>" +
-                    "                                </div>\n" +
-                    "                            </div>\n" +
+                    "  <div class=\"row no-gutter sub_card\">";
+                html += "                                    <div class=\"col-10\">";
+                html += "                                        <img src=\"img\/soft_word.png\">";
+                html += "                                    <\/div>";
+                html += "                                    <div class=\" col-75\" onclick=\"downloadFile(" + this.fFilecode + ")\">";
+                html += "                                        <p class=\"subName limit-length\"> " + this.fFilename + this.fFiletype + "<\/p>";
+                html += "                                        <p class=\"limit-length\" style=\"font-size:12px\"><i";
+                html += "                                                class=\"icon icon-fileSubname\"><\/i>" + this.subName + "";
+                html += "                                            <i class=\"icon icon-fileTime\"><\/i>" + pushTime + "";
+                html += "                                            <i class=\"icon";
+                html += "                                                icon-fileSize\"><\/i>" + fileSize + "";
+                html += "                                        <\/p>";
+                html += "                                    <\/div>";
+                html += "                                    <div class=\"col-15\">";
+                html += '                                        <button class=\"bg-primary external\" type=\"button\" onclick=\"downloadFile(' + this.fFilecode + ')\">下载';
+                html += "                                        <\/button>";
+                html += "                                    <\/div>";
+                html += "                                <\/div>" +
                     "                        </div>\n" +
                     "                    </div>\n" +
                     "                </div>";
@@ -83,20 +111,29 @@ function addItems(number, lastIndex) {
             });
             $('.list-container').append(html);
             //addClick();
-            Substation.getDataByAjaxNoLoading("/close");
+            // Substation.getDataByAjaxNoLoading("/close");
             pageNum++;
         } else {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
-        if (datadic.list.length < itemsPerLoad) {
+        if (data.tDtDocumentsManages.length < itemsPerLoad) {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("--end--");
             return;
         }
     });
 }
+
+function bytesToSize(bytes) {
+    if (bytes === 0) return '0 B';
+    let k = 1024,
+        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        i = Math.floor(Math.log(bytes) / Math.log(k));
+    return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+}
+
 
 addItems(itemsPerLoad, 0);
 

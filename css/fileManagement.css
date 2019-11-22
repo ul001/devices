@@ -1,6 +1,7 @@
 .sub_card {
     display: flex;
     align-items: center;
+    height: 3rem;
 }
 
 .icon_center {
