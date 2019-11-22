@@ -8,7 +8,7 @@ var titleName = localStorage.getItem("titleName");
 $(".title.title_color").text(titleName);
 var u = navigator.userAgent,
     app = navigator.appVersion;
-var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 var selectSubid = "";
 var clickSubid = "";
@@ -19,35 +19,38 @@ function getFirstPage() {
     pageNum = 1;
     addItems(itemsPerLoad, 0);
     lastIndex = 10;
-    $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
+    $(".infinite-scroll-preloader").html('<div class="preloader"></div>');
     loading = false;
-    $.attachInfiniteScroll($('.infinite-scroll'));
+    $.attachInfiniteScroll($(".infinite-scroll"));
 }
 
-$(document).on('refresh', '.pull-to-refresh-content', function (e) {
+$(document).on("refresh", ".pull-to-refresh-content", function (e) {
     setTimeout(function () {
         getFirstPage();
         // done
-        $.pullToRefreshDone('.pull-to-refresh-content');
+        $.pullToRefreshDone(".pull-to-refresh-content");
     }, 2000);
 });
 
-function downloadFile(filecode) {
-    if(isAndroid){
-        android.openFile(Substation.ipAddressFromAPP+"/"+fileUrlBasePath+"/"+filecode);
-    }else{
+function downloadFile(filecode, filepath) {
+    if (isAndroid) {
+        android.openFile(
+            Substation.ipAddressFromAPP + "/" + fileUrlBasePath + "/" + filecode
+        );
+    } else {
         if (filecode != undefined && fileUrlBasePath != undefined) {
             var url = fileUrlBasePath + filecode;
-            var message = {
-                'url': url
+            var dic = {
+                'fFilepath': fileUrlBasePath,
+                'fFilecode': filecode
             };
-            window.webkit.messageHandlers.goBackiOS.postMessage("");
+            window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
         }
     }
 }
 
 function addItems(number, lastIndex) {
-    var html = '';
+    var html = "";
     var url = "/selectDocument";
     // if (clickID == "bianwei") {
     //     url = "/getWarningMessageSignalEvents";
@@ -61,7 +64,7 @@ function addItems(number, lastIndex) {
     // }
     // var searchKey = $("#search").val();
     var params = {
-        category: clickID, //类别id
+        category: clickID //类别id
         // subId: subId, //变电所id
         // startTime: "",
         // endTime: "",
@@ -71,80 +74,103 @@ function addItems(number, lastIndex) {
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         //文件拼接基础路径
         fileUrlBasePath = data.fileUrl;
-        if (data.hasOwnProperty("tDtDocumentsManages") && data.tDtDocumentsManages.length > 0) {
+        if (
+            data.hasOwnProperty("tDtDocumentsManages") &&
+            data.tDtDocumentsManages.length > 0
+        ) {
             // if (pageNum == 1) {
             //     $(".list-container").empty();
             // }
             $(data.tDtDocumentsManages).each(function () {
-                var pushTime = '';
+                var pushTime = "";
                 if (this.fFilepublishtime != undefined) {
                     pushTime = this.fFilepublishtime;
                     pushTime = pushTime.slice(0, 10);
                 }
-                var fileSize = '';
+                var fileSize = "";
                 if (this.fFilesize != undefined) {
                     fileSize = bytesToSize(this.fFilesize);
                 }
-                //waring暂时屏蔽 
+                //waring暂时屏蔽
 
-                html += "<div class=\"card\">\n" +
-                    "                    <div class=\"card-content\">\n" +
-                    "                        <div class=\"content-padded\">\n" +
-                    "  <div class=\"row no-gutter sub_card\">";
-                html += "                                    <div class=\"col-10\">";
-                html += "                                        <img src=\"img\/soft_word.png\">";
-                html += "                                    <\/div>";
-                html += "                                    <div class=\" col-75\" onclick=\"downloadFile(" + this.fFilecode + ")\">";
-                html += "                                        <p class=\"subName limit-length\"> " + this.fFilename + this.fFiletype + "<\/p>";
-                html += "                                        <p class=\"limit-length\" style=\"font-size:12px\"><i";
-                html += "                                                class=\"icon icon-fileSubname\"><\/i>" + this.subName + "";
-                html += "                                            <i class=\"icon icon-fileTime\"><\/i>" + pushTime + "";
-                html += "                                            <i class=\"icon";
-                html += "                                                icon-fileSize\"><\/i>" + fileSize + "";
-                html += "                                        <\/p>";
-                html += "                                    <\/div>";
-                html += "                                    <div class=\"col-15\">";
-                html += "                                        <button class=\"bg-primary external\" type=\"button\" onclick=\"downloadFile('" + this.fFilecode + "')\">下载";
-                html += "                                        <\/button>";
-                html += "                                    <\/div>";
-                html += "                                <\/div>" +
+                html +=
+                    '<div class="card">\n' +
+                    '                    <div class="card-content">\n' +
+                    '                        <div class="content-padded">\n' +
+                    '  <div class="row no-gutter sub_card">';
+                html += '                                    <div class="col-10">';
+                html +=
+                    '                                        <img src="img/soft_word.png">';
+                html += "                                    </div>";
+                html +=
+                    '                                    <div class=" col-75" onclick="downloadFile(' +
+                    this.fFilecode + "','" + this.fFilepath +
+                    ')">';
+                html +=
+                    '                                        <p class="subName limit-length"> ' +
+                    this.fFilename +
+                    this.fFiletype +
+                    "</p>";
+                html +=
+                    '                                        <p class="limit-length" style="font-size:12px"><i';
+                html +=
+                    '                                                class="icon icon-fileSubname"></i>' +
+                    this.subName +
+                    "";
+                html +=
+                    '                                            <i class="icon icon-fileTime"></i>' +
+                    pushTime +
+                    "";
+                html += '                                            <i class="icon';
+                html +=
+                    '                                                icon-fileSize"></i>' +
+                    fileSize +
+                    "";
+                html += "                                        </p>";
+                html += "                                    </div>";
+                html += '                                    <div class="col-15">';
+                html +=
+                    '                                        <button class="bg-primary external" type="button" onclick="downloadFile(\'' +
+                    this.fFilecode + "','" + this.fFilepath +
+                    "')\">下载";
+                html += "                                        </button>";
+                html += "                                    </div>";
+                html +=
+                    "                                </div>" +
                     "                        </div>\n" +
                     "                    </div>\n" +
                     "                </div>";
-
             });
-            $('.list-container').append(html);
+            $(".list-container").append(html);
             //addClick();
             // Substation.getDataByAjaxNoLoading("/close");
             pageNum++;
         } else {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
+            $.detachInfiniteScroll($(".infinite-scroll"));
+            $(".infinite-scroll-preloader").html("--end--");
             return;
         }
         if (data.tDtDocumentsManages.length < itemsPerLoad) {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
+            $.detachInfiniteScroll($(".infinite-scroll"));
+            $(".infinite-scroll-preloader").html("--end--");
             return;
         }
     });
 }
 
 function bytesToSize(bytes) {
-    if (bytes === 0) return '0 B';
+    if (bytes === 0) return "0 B";
     let k = 1024,
-        sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'],
+        sizes = ["B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
         i = Math.floor(Math.log(bytes) / Math.log(k));
-    return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + sizes[i];
+    return (bytes / Math.pow(k, i)).toFixed(2) + " " + sizes[i];
 }
-
 
 addItems(itemsPerLoad, 0);
 
 var lastIndex = 10;
 
-$(document).on('infinite', '.infinite-scroll', function () {
-
+$(document).on("infinite", ".infinite-scroll", function () {
     // 如果正在加载，则退出
     if (loading) return;
 
@@ -155,13 +181,13 @@ $(document).on('infinite', '.infinite-scroll', function () {
         loading = false;
 
         if (lastIndex >= maxItems) {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
+            $.detachInfiniteScroll($(".infinite-scroll"));
+            $(".infinite-scroll-preloader").html("--end--");
             return;
         }
 
         addItems(itemsPerLoad, lastIndex);
-        lastIndex = $('.list-container .card').length;
+        lastIndex = $(".list-container .card").length;
     }, 1000);
 });
 
@@ -176,12 +202,12 @@ $(".back_btn").click(function () {
     }
 });
 
-$('#searchBtn').click(function () {
+$("#searchBtn").click(function () {
     $(".close-panel").click();
     /*    if(saveParam!=null){
-            clickSubid = saveParam['fSubid'];
-            saveParam=null;
-        }*/
+              clickSubid = saveParam['fSubid'];
+              saveParam=null;
+          }*/
     if ($("#search").val() == "") {
         //        $("#subName").text("所有变电所");
         selectSubid = "";
@@ -202,36 +228,46 @@ function getSomeSubstation() {
     var searchKey = $("#search").val();
     var params = {
         key: searchKey
-    }
+    };
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         $(data).each(function () {
-            $("#listContainer").append('<li class="item-content" data-id="' + this.fSubid + '">' +
+            $("#listContainer").append(
+                '<li class="item-content" data-id="' +
+                this.fSubid +
+                '">' +
                 '<div class="item-inner">' +
-                '<div class="item-title">' + this.fSubname + '</div>' +
-                '</div>' +
-                '</li>');
+                '<div class="item-title">' +
+                this.fSubname +
+                "</div>" +
+                "</div>" +
+                "</li>"
+            );
         });
         $("#listContainer").show();
-        $("#listContainer .item-content").unbind().click(function () {
-            clickSubid = $(this).attr("data-id");
-            var clickName = $(this).find(".item-title").text();
-            $("#search").val(clickName);
-            $("#listContainer").empty();
-            $("#listContainer").hide();
-            //            $("#subName").text(clickName);
-        });
+        $("#listContainer .item-content")
+            .unbind()
+            .click(function () {
+                clickSubid = $(this).attr("data-id");
+                var clickName = $(this)
+                    .find(".item-title")
+                    .text();
+                $("#search").val(clickName);
+                $("#listContainer").empty();
+                $("#listContainer").hide();
+                //            $("#subName").text(clickName);
+            });
     });
 }
 
-$('#search').bind('keydown', function (event) {
+$("#search").bind("keydown", function (event) {
     if (event.keyCode == 13) {
         getSomeSubstation();
         document.activeElement.blur();
     }
 });
 
-$('#search').on("input", function () {
+$("#search").on("input", function () {
     if ($("#search").val().length > 0) {
         $(".icon.icon-clear").show();
     } else {
@@ -246,7 +282,10 @@ $(".icon.icon-clear").click(function () {
 
 //时间快捷按钮
 $(".buttons-row .button").click(function () {
-    $(this).addClass("active").siblings().removeClass("active");
+    $(this)
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
 });
 $("#today").click(function () {
     var myDate = new Date();
@@ -280,7 +319,8 @@ $("#lastMonth").click(function () {
     $("#dateEnd").val(lastDayVal);
 });
 
-Date.prototype.format = function (fmt) { //author: meizz
+Date.prototype.format = function (fmt) {
+    //author: meizz
     var o = {
         "M+": this.getMonth() + 1, //月份
         "d+": this.getDate(), //日
@@ -288,30 +328,41 @@ Date.prototype.format = function (fmt) { //author: meizz
         "m+": this.getMinutes(), //分
         "s+": this.getSeconds(), //秒
         "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-        "S": this.getMilliseconds() //毫秒
+        S: this.getMilliseconds() //毫秒
     };
     if (/(y+)/.test(fmt))
-        fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        fmt = fmt.replace(
+            RegExp.$1,
+            (this.getFullYear() + "").substr(4 - RegExp.$1.length)
+        );
     for (var k in o)
         if (new RegExp("(" + k + ")").test(fmt))
-            fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            fmt = fmt.replace(
+                RegExp.$1,
+                RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+            );
     return fmt;
-}
+};
 
 $("#dateStart,#dateEnd").click(function () {
-    $(".buttons-row").find($(".active")).removeClass("active");
+    $(".buttons-row")
+        .find($(".active"))
+        .removeClass("active");
 });
 
 //解决键盘遮挡问题
 var h = $(window).height();
 window.addEventListener("resize", function () {
     if ($(window).height() < h) {
-        $('.btnBar').hide();
+        $(".btnBar").hide();
     }
     if ($(window).height() >= h) {
-        $('.btnBar').show();
+        $(".btnBar").show();
     }
-    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+    if (
+        document.activeElement.tagName == "INPUT" ||
+        document.activeElement.tagName == "TEXTAREA"
+    ) {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
         }, 0);
