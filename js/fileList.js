@@ -110,7 +110,8 @@ function fillData(parentId) {
             //                    });
             //                } else {
             if (isAndroid) {
-                android.goToWebActivity(titleName, "fileManagement.html?clickID=" + clickId);
+//                android.goToWebActivity(titleName, "fileManagement.html?clickID=" + clickId);
+                window.location.href = "fileManagement.html?clickID=" + clickId;
             } else if (isIOS) {
                 window.location.href = "fileManagement.html?clickID=" + clickId;
                 window.webkit.messageHandlers.needHiddenTabbar.postMessage("YES");

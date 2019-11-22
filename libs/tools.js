@@ -3,9 +3,9 @@
  * @date 2017-04-26 09:46
  * @description 存放常用工具类
  */
-var baseUrlFromAPP = "http://116.236.149.163:8090/SubstationWEBV2/v3";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzQyOTk4NDcsInVzZXJuYW1lIjoibWlzc2lvbjEifQ.-_Z_RhrRc4H2l-jnL0RZFYO0jYeETu--AtByz06MrRY";
-var ipAddress = "http://116.236.149.163:8090";
+var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v3";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzQ5OTY2NTYsInVzZXJuYW1lIjoibWlzc2lvbjEifQ.ljNslv_bxJHz05VhW2IsZwa3tLPB_8nnLwIZE-bli7I";
+var ipAddress = "http://116.236.149.165:8090";
 var userId = "261";
 //iOS安卓基础传参
 var u = navigator.userAgent,

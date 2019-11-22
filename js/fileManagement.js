@@ -33,12 +33,16 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 });
 
 function downloadFile(filecode) {
-    if (filecode != undefined && fileUrlBasePath != undefined) {
-        var url = fileUrlBasePath + filecode;
-        var message = {
-            'url': url
-        };
-        window.webkit.messageHandlers.goBackiOS.postMessage("");
+    if(isAndroid){
+        android.openFile(Substation.ipAddressFromAPP+"/"+fileUrlBasePath+"/"+filecode);
+    }else{
+        if (filecode != undefined && fileUrlBasePath != undefined) {
+            var url = fileUrlBasePath + filecode;
+            var message = {
+                'url': url
+            };
+            window.webkit.messageHandlers.goBackiOS.postMessage("");
+        }
     }
 }
 
@@ -100,7 +104,7 @@ function addItems(number, lastIndex) {
                 html += "                                        <\/p>";
                 html += "                                    <\/div>";
                 html += "                                    <div class=\"col-15\">";
-                html += '                                        <button class=\"bg-primary external\" type=\"button\" onclick=\"downloadFile(' + this.fFilecode + ')\">下载';
+                html += "                                        <button class=\"bg-primary external\" type=\"button\" onclick=\"downloadFile('" + this.fFilecode + "')\">下载";
                 html += "                                        <\/button>";
                 html += "                                    <\/div>";
                 html += "                                <\/div>" +
