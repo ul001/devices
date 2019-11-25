@@ -12,7 +12,7 @@ var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓�
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 var selectSubid = "";
 var clickSubid = "";
-var fileUrlBasePath = "";
+//var fileUrlBasePath = "";
 
 function getFirstPage() {
     $(".list-container").empty();
@@ -35,7 +35,7 @@ $(document).on("refresh", ".pull-to-refresh-content", function (e) {
 function downloadFile(filecode, filepath) {
     if (isAndroid) {
         android.openFile(
-            Substation.ipAddressFromAPP + "/" + fileUrlBasePath + "/" + filecode
+            Substation.ipAddressFromAPP + "/" + filepath + "/" + filecode
         );
     } else {
         if (filecode != undefined && fileUrlBasePath != undefined) {
@@ -73,7 +73,7 @@ function addItems(number, lastIndex) {
     };
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         //文件拼接基础路径
-        fileUrlBasePath = data.fileUrl;
+//        fileUrlBasePath = data.fileUrl;
         if (
             data.hasOwnProperty("tDtDocumentsManages") &&
             data.tDtDocumentsManages.length > 0
@@ -92,49 +92,64 @@ function addItems(number, lastIndex) {
                     fileSize = bytesToSize(this.fFilesize);
                 }
                 //waring暂时屏蔽
+                var fileIcon = "";
+                switch(this.fFiletype){
+                    case ".docx":
+                    fileIcon = "<i class='icon icon-file icon-doc'></i>";
+                    break;
+                    case ".doc":
+                    fileIcon = "<i class='icon icon-file icon-doc'></i>";
+                    break;
+                    case ".txt":
+                    fileIcon = "<i class='icon icon-file icon-txt'></i>";
+                    break;
+                    case ".pptx":
+                    fileIcon = "<i class='icon icon-file icon-ppt'></i>";
+                    break;
+                    case ".ppt":
+                    fileIcon = "<i class='icon icon-file icon-ppt'></i>";
+                    break;
+                    case ".pdf":
+                    fileIcon = "<i class='icon icon-file icon-pdf'></i>";
+                    break;
+                    case ".xlsx":
+                    fileIcon = "<i class='icon icon-file icon-xls'></i>";
+                    break;
+                    case ".xls":
+                    fileIcon = "<i class='icon icon-file icon-xls'></i>";
+                    break;
+                    default:
+                    fileIcon = "<i class='icon icon-file icon-default'></i>";
+                    break;
+                }
 
                 html +=
-                    '<div class="card">\n' +
+                    "<div class=\"card\"  onclick=\"downloadFile('"+this.fFilecode + "','" + this.fFilepath +"')\">\n" +
                     '                    <div class="card-content">\n' +
                     '                        <div class="content-padded">\n' +
                     '  <div class="row no-gutter sub_card">';
                 html += '                                    <div class="col-10">';
-                html +=
-                    '                                        <img src="img/soft_word.png">';
+                html += fileIcon;
                 html += "                                    </div>";
                 html +=
-                    '                                    <div class=" col-75" onclick="downloadFile(' +
-                    this.fFilecode + "','" + this.fFilepath +
-                    ')">';
+                    '                                    <div class="col-90">';
                 html +=
                     '                                        <p class="subName limit-length"> ' +
                     this.fFilename +
                     this.fFiletype +
                     "</p>";
-                html +=
-                    '                                        <p class="limit-length" style="font-size:12px"><i';
-                html +=
-                    '                                                class="icon icon-fileSubname"></i>' +
-                    this.subName +
-                    "";
-                html +=
-                    '                                            <i class="icon icon-fileTime"></i>' +
-                    pushTime +
-                    "";
-                html += '                                            <i class="icon';
-                html +=
-                    '                                                icon-fileSize"></i>' +
-                    fileSize +
-                    "";
-                html += "                                        </p>";
+                html += '<div class="row no-gutter" style="font-size:12px"><div class="col-33 limit-length"><i class="icon icon-fileSubname"></i>&nbsp;' +
+                    this.subName +'</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileTime"></i>&nbsp;' +
+                    pushTime +'</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileSize"></i>&nbsp;' +
+                    fileSize +"</div></div>";
                 html += "                                    </div>";
-                html += '                                    <div class="col-15">';
+/*                html += '                                    <div class="col-15">';
                 html +=
                     '                                        <button class="bg-primary external" type="button" onclick="downloadFile(\'' +
                     this.fFilecode + "','" + this.fFilepath +
                     "')\">下载";
                 html += "                                        </button>";
-                html += "                                    </div>";
+                html += "                                    </div>";*/
                 html +=
                     "                                </div>" +
                     "                        </div>\n" +
