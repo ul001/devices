@@ -38,10 +38,9 @@ function downloadFile(filecode, filepath) {
             Substation.ipAddressFromAPP + "/" + filepath + "/" + filecode
         );
     } else {
-        if (filecode != undefined && fileUrlBasePath != undefined) {
-            var url = fileUrlBasePath + filecode;
+        if (filecode != undefined && filepath != undefined) {
             var dic = {
-                'fFilepath': fileUrlBasePath,
+                'fFilepath': filepath,
                 'fFilecode': filecode
             };
             window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
@@ -71,20 +70,20 @@ function addItems(number, lastIndex) {
         // pageNo: pageNum,
         // pageSize: number
     };
-    if(selectSubid!=""){
-        params['subId']=selectSubid;
+    if (selectSubid != "") {
+        params['subId'] = selectSubid;
     }
     var dateStartVal = $("#dateStart").val();
     var dateEndVal = $("#dateEnd").val();
-    if(dateStartVal!=""){
-        params['startTime']=dateStartVal+" 00:00:00";
+    if (dateStartVal != "") {
+        params['startTime'] = dateStartVal + " 00:00:00";
     }
-    if(dateEndVal!=""){
-        params['endTime']=dateEndVal+" 23:59:59";
+    if (dateEndVal != "") {
+        params['endTime'] = dateEndVal + " 23:59:59";
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         //文件拼接基础路径
-//        fileUrlBasePath = data.fileUrl;
+        //        fileUrlBasePath = data.fileUrl;
         if (
             data.hasOwnProperty("tDtDocumentsManages") &&
             data.tDtDocumentsManages.length > 0
@@ -104,38 +103,38 @@ function addItems(number, lastIndex) {
                 }
                 //waring暂时屏蔽
                 var fileIcon = "";
-                switch(this.fFiletype){
+                switch (this.fFiletype) {
                     case ".docx":
-                    fileIcon = "<i class='icon icon-file icon-doc'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-doc'></i>";
+                        break;
                     case ".doc":
-                    fileIcon = "<i class='icon icon-file icon-doc'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-doc'></i>";
+                        break;
                     case ".txt":
-                    fileIcon = "<i class='icon icon-file icon-txt'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-txt'></i>";
+                        break;
                     case ".pptx":
-                    fileIcon = "<i class='icon icon-file icon-ppt'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-ppt'></i>";
+                        break;
                     case ".ppt":
-                    fileIcon = "<i class='icon icon-file icon-ppt'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-ppt'></i>";
+                        break;
                     case ".pdf":
-                    fileIcon = "<i class='icon icon-file icon-pdf'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-pdf'></i>";
+                        break;
                     case ".xlsx":
-                    fileIcon = "<i class='icon icon-file icon-xls'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-xls'></i>";
+                        break;
                     case ".xls":
-                    fileIcon = "<i class='icon icon-file icon-xls'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-xls'></i>";
+                        break;
                     default:
-                    fileIcon = "<i class='icon icon-file icon-default'></i>";
-                    break;
+                        fileIcon = "<i class='icon icon-file icon-default'></i>";
+                        break;
                 }
 
                 html +=
-                    "<div class=\"card\"  onclick=\"downloadFile('"+this.fFilecode + "','" + this.fFilepath +"')\">\n" +
+                    "<div class=\"card\"  onclick=\"downloadFile('" + this.fFilecode + "','" + this.fFilepath + "')\">\n" +
                     '                    <div class="card-content">\n' +
                     '                        <div class="content-padded">\n' +
                     '  <div class="row no-gutter sub_card">';
@@ -150,17 +149,17 @@ function addItems(number, lastIndex) {
                     this.fFiletype +
                     "</p>";
                 html += '<div class="row no-gutter" style="font-size:12px"><div class="col-33 limit-length"><i class="icon icon-fileSubname"></i>&nbsp;' +
-                    this.subName +'</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileTime"></i>&nbsp;' +
-                    pushTime +'</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileSize"></i>&nbsp;' +
-                    fileSize +"</div></div>";
+                    this.subName + '</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileTime"></i>&nbsp;' +
+                    pushTime + '</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileSize"></i>&nbsp;' +
+                    fileSize + "</div></div>";
                 html += "                                    </div>";
-/*                html += '                                    <div class="col-15">';
-                html +=
-                    '                                        <button class="bg-primary external" type="button" onclick="downloadFile(\'' +
-                    this.fFilecode + "','" + this.fFilepath +
-                    "')\">下载";
-                html += "                                        </button>";
-                html += "                                    </div>";*/
+                /*                html += '                                    <div class="col-15">';
+                                html +=
+                                    '                                        <button class="bg-primary external" type="button" onclick="downloadFile(\'' +
+                                    this.fFilecode + "','" + this.fFilepath +
+                                    "')\">下载";
+                                html += "                                        </button>";
+                                html += "                                    </div>";*/
                 html +=
                     "                                </div>" +
                     "                        </div>\n" +
