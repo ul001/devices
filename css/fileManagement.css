@@ -233,19 +233,42 @@ i.icon.icon-selectSome {
 }
 
 i.icon.icon-fileSubname {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.55rem;
+    height: 0.65rem;
     background-image: url(../img/i-fileSubname.png);
 }
 
 i.icon.icon-fileTime {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.65rem;
+    height: 0.65rem;
     background-image: url(../img/i-filetime.png);
 }
 
 i.icon.icon-fileSize {
-    width: 0.6rem;
-    height: 0.6rem;
+    width: 0.55rem;
+    height: 0.65rem;
     background-image: url(../img/i-fileSize.png);
+}
+
+i.icon.icon-file{
+    width: 1.5rem;
+    height: 1.5rem;
+}
+i.icon.icon-doc{
+    background-image: url(../img/i-word.png);
+}
+i.icon.icon-txt{
+    background-image: url(../img/i-txt.png);
+}
+i.icon.icon-xls{
+    background-image: url(../img/i-excel.png);
+}
+i.icon.icon-ppt{
+    background-image: url(../img/i-ppt.png);
+}
+i.icon.icon-pdf{
+    background-image: url(../img/i-pdf.png);
+}
+i.icon.icon-default{
+    background-image: url(../img/i-file.png);
 }
