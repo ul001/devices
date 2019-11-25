@@ -152,12 +152,12 @@ $(".back_btn").click(function () {
     }
 });
 
-$('#searchBtn').click(function () {
+/*$('#searchBtn').click(function () {
     $(".close-panel").click();
-    /*    if(saveParam!=null){
+    *//*    if(saveParam!=null){
             clickSubid = saveParam['fSubid'];
             saveParam=null;
-        }*/
+        }*//*
     if ($("#search").val() == "") {
         //        $("#subName").text("所有变电所");
         selectSubid = "";
@@ -292,7 +292,7 @@ window.addEventListener("resize", function () {
             document.activeElement.scrollIntoViewIfNeeded();
         }, 0);
     }
-});
+});*/
 
 //Substation.getDataByAjax("/getfCircuitidsList",{fSubid:10100001},function(data){
 //    if(data!=null&&data!=undefined){
