@@ -71,6 +71,17 @@ function addItems(number, lastIndex) {
         // pageNo: pageNum,
         // pageSize: number
     };
+    if(selectSubid!=""){
+        params['subId']=selectSubid;
+    }
+    var dateStartVal = $("#dateStart").val();
+    var dateEndVal = $("#dateEnd").val();
+    if(dateStartVal!=""){
+        params['startTime']=dateStartVal+" 00:00:00";
+    }
+    if(dateEndVal!=""){
+        params['endTime']=dateEndVal+" 23:59:59";
+    }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
         //文件拼接基础路径
 //        fileUrlBasePath = data.fileUrl;
@@ -207,9 +218,7 @@ $(document).on("infinite", ".infinite-scroll", function () {
 });
 
 $(".back_btn").click(function () {
-    if (isAndroid) {
-        android.goBack();
-    } else if (isIOS) {
+    if (isIOS) {
         window.history.back();
         window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
     } else {
