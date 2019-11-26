@@ -8,7 +8,6 @@ jQuery(document).ready(function () {
     var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
-
     function loadMenu() {
         $(".showlist").empty();
         $.showPreloader();
@@ -31,26 +30,92 @@ jQuery(document).ready(function () {
             if (data.hasOwnProperty("messageType") && data.messageType.length > 0) {
                 var strVar = "";
                 $(data.messageType).each(function () {
-                    strVar += " <li>";
-                    strVar += "                            <div class=\"item-content\">";
-                    strVar += "                                <div class=\"item-inner\">";
-                    strVar += "                                    <div class=\"item-title label\">" + this.fMessinfotypeexplain + "<\/div>";
-                    strVar += "                                    <div class=\"item-input\">";
-                    strVar += "                                        <label class=\"label-switch\">";
-                    strVar += "                                            <input type=\"checkbox\" id=\"" + this.fMessinfotypeid + "\"  checked=\"" + this.flag + "\">";
-                    strVar += "                                            <div class=\"checkbox\"><\/div>";
-                    strVar += "                                        <\/label>";
-                    strVar += "                                    <\/div>";
-                    strVar += "                                <\/div>";
-                    strVar += "                            <\/div>";
-                    strVar += "                        <\/li>";
+                    if (this.flag == true) {
+                        strVar += " <li>";
+                        strVar += '                            <div class="item-content">';
+                        strVar += '                                <div class="item-inner">';
+                        strVar +=
+                            '                                    <div class="item-title label">' +
+                            this.fMessinfotypeexplain +
+                            "</div>";
+                        strVar +=
+                            '                                    <div class="item-input">';
+                        strVar +=
+                            '                                        <label class="label-switch">';
+                        strVar +=
+                            '                                            <input class="cbselect" type="checkbox" name="' + this.fMessinfotypeexplain + '" id="' +
+                            this.fMessinfotypeid +
+                            '"  checked="' +
+                            this.flag +
+                            '">';
+                        strVar +=
+                            '                                            <div class="checkbox"></div>';
+                        strVar += "                                        </label>";
+                        strVar += "                                    </div>";
+                        strVar += "                                </div>";
+                        strVar += "                            </div>";
+                        strVar += "                        </li>";
+                    } else {
+                        strVar += " <li>";
+                        strVar += '                            <div class="item-content">';
+                        strVar += '                                <div class="item-inner">';
+                        strVar +=
+                            '                                    <div class="item-title label">' +
+                            this.fMessinfotypeexplain +
+                            "</div>";
+                        strVar +=
+                            '                                    <div class="item-input">';
+                        strVar +=
+                            '                                        <label class="label-switch">';
+                        strVar +=
+                            '                                            <input class="cbselect" type="checkbox"  id="' +
+                            this.fMessinfotypeid +
+                            '"  >';
+                        strVar +=
+                            '                                            <div class="checkbox"></div>';
+                        strVar += "                                        </label>";
+                        strVar += "                                    </div>";
+                        strVar += "                                </div>";
+                        strVar += "                            </div>";
+                        strVar += "                        </li>";
+                    }
                 });
                 $(".showlist").append(strVar);
             }
+
+            $(".cbselect").unbind().click(function () {
+                var fMessinfotypeid = $(this).attr("id");
+                var checkValue = $(this).prop("checked");
+                // if ($("input[type='checkbox']").prop("checked")) {
+                var showStr = '订阅' + $(this).attr("name") + '成功';
+                if (checkValue == true) {
+                    param = {
+                        "fMessinfotypeid": fMessinfotypeid,
+                        "flag": true
+                    };
+                    Substation.getDataByAjaxNoLoading("/subscribeMessage", param, function (data) {
+                        alert(showStr);
+                        $(this).prop("checked", true);
+                    });
+                } else {
+                    param = {
+                        "fMessinfotypeid": fMessinfotypeid,
+                        "flag": false
+                    };
+                    Substation.getDataByAjaxNoLoading("/subscribeMessage", param, function (data) {
+                        // alert("已取消");
+                        $(this).removeAttr("checked");
+                    });
+                }
+            });
+
+            //隐藏转圈
             $.hidePreloader();
         });
     }
     loadMenu();
+
+
 
     // $("#check1").click(function () {
     //     var showli = ' <li id="sli1"> <div class = "item-content"><div class = "item-inner" ><div class = "item-title label" style="text-indent:1rem;">烟雾 </div><';
