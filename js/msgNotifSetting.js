@@ -68,7 +68,7 @@ jQuery(document).ready(function () {
                         strVar +=
                             '                                        <label class="label-switch">';
                         strVar +=
-                            '                                            <input class="cbselect" type="checkbox"  id="' +
+                            '                                            <input class="cbselect" type="checkbox" name="' + this.fMessinfotypeexplain + '" id="' +
                             this.fMessinfotypeid +
                             '"  >';
                         strVar +=
