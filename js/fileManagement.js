@@ -35,7 +35,7 @@ $(document).on("refresh", ".pull-to-refresh-content", function (e) {
 function downloadFile(filecode, filepath) {
     if (isAndroid) {
         android.openFile(
-            Substation.ipAddressFromAPP + "/" + filepath + "/" + filecode
+            Substation.ipAddressFromAPP + filepath + "/" + filecode
         );
     } else {
         if (filecode != undefined && filepath != undefined) {
