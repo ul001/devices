@@ -255,7 +255,7 @@ jQuery(document).ready(function () {
                         var addr = "";
                         if (loc == undefined || !loc.length) {
                             $.hidePreloader();
-                            $.toast("无法获取位置，请检查网络并确保定位授权后重试。");
+                            $.toast("无法获取位置，请检查网络并确保定位授权");
                             return;
                         } else if (loc == "-1") {
                             $.hidePreloader();
