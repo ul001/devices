@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+    {
+      "appID": "JLG36R4UAW.com.acrel.substationplatform.operation",
+      "paths": ["/*"]
+    }
+    ]
+  }
+}
