@@ -11,6 +11,7 @@ if (isIOS) {
     menuId = storage.fmenuId;
 } else {
     menuId = android.getMenuId();
+//menuId = 350;
 }
 
 // window.addEventListener('pageshow', function (e) {

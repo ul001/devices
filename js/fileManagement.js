@@ -63,12 +63,12 @@ function addItems(number, lastIndex) {
     // }
     // var searchKey = $("#search").val();
     var params = {
-        category: clickID //类别id
+        category: clickID, //类别id
         // subId: subId, //变电所id
         // startTime: "",
         // endTime: "",
-        // pageNo: pageNum,
-        // pageSize: number
+         pageNo: pageNum,
+         pageSize: number
     };
     if (selectSubid != "") {
         params['subId'] = selectSubid;
@@ -86,12 +86,12 @@ function addItems(number, lastIndex) {
         //        fileUrlBasePath = data.fileUrl;
         if (
             data.hasOwnProperty("tDtDocumentsManages") &&
-            data.tDtDocumentsManages.length > 0
+            data.tDtDocumentsManages.list.length > 0
         ) {
             // if (pageNum == 1) {
             //     $(".list-container").empty();
             // }
-            $(data.tDtDocumentsManages).each(function () {
+            $(data.tDtDocumentsManages.list).each(function () {
                 var pushTime = "";
                 if (this.fFilepublishtime != undefined) {
                     pushTime = this.fFilepublishtime;
