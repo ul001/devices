@@ -32,7 +32,7 @@ $(document).on("refresh", ".pull-to-refresh-content", function (e) {
     }, 2000);
 });
 
-function downloadFile(filecode, filepath) {
+function downloadFile(filecode, filepath, filename) {
     if (isAndroid) {
         android.openFile(
             Substation.ipAddressFromAPP + filepath + "/" + filecode
@@ -41,7 +41,8 @@ function downloadFile(filecode, filepath) {
         if (filecode != undefined && filepath != undefined) {
             var dic = {
                 'fFilepath': filepath,
-                'fFilecode': filecode
+                'fFilecode': filecode,
+                'fFilename': filename
             };
             window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
         }
@@ -67,8 +68,8 @@ function addItems(number, lastIndex) {
         // subId: subId, //变电所id
         // startTime: "",
         // endTime: "",
-         pageNo: pageNum,
-         pageSize: number
+        pageNo: pageNum,
+        pageSize: number
     };
     if (selectSubid != "") {
         params['subId'] = selectSubid;
@@ -134,7 +135,7 @@ function addItems(number, lastIndex) {
                 }
 
                 html +=
-                    "<div class=\"card\"  onclick=\"downloadFile('" + this.fFilecode + "','" + this.fFilepath + "')\">\n" +
+                    "<div class=\"card\"  onclick=\"downloadFile('" + this.fFilecode + "','" + this.fFilepath + "','" + this.fFilename + "')\">\n" +
                     '                    <div class="card-content">\n' +
                     '                        <div class="content-padded">\n' +
                     '  <div class="row no-gutter sub_card">';
