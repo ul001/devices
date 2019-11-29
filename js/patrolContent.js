@@ -14,7 +14,7 @@ var clickGroupTree = "";
 
 function loadPage(){
     var clickNum = 0;
-    var showState = 1;
+    var showState = 0;
     var thisGroupid = -1;
     //主页内容
     function fillRightData(){
@@ -207,8 +207,10 @@ function loadPage(){
             ul.append(li);
         });
         if (showState == 0) {
+            $("#showOrHide").text("显示全部分类");
             $(".item-dis").css("display", "none");
         } else {
+            $("#showOrHide").text("仅显示有设备分类");
             $(".item-dis").css("display", "flex");
         }
         $("#showOrHide").unbind().click(function () {
@@ -513,7 +515,7 @@ function removeImg(obj, index) {
 
 function imgDisplay(obj) {
     var src = $(obj).attr("src");
-    var imgHtml = '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img src=' + src + ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>'
+    var imgHtml = '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img onclick="closePicture(this)" src=' + src + ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>'
     $('body').append(imgHtml);
 }
 
