@@ -579,6 +579,7 @@ function saveFormData() {
             $.toast("保存成功");
             $(":radio[name='"+clickRadioName+"'][value='yes']").prop("checked",true);
             saveThisPage();
+            localStorage.setItem("need-refresh","true");
             $.router.back();
         }
     });
@@ -608,7 +609,6 @@ function goToInfo(){
 
 //返回按钮
 $("#backBtn").click(function(){
-    localStorage.setItem("need-refresh","true");
     window.history.back();
 });
 
