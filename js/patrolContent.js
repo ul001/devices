@@ -289,6 +289,7 @@ function loadPage(){
                 clickDeviceInfoId=clickDeviceId;
                 clickRadioName=radioName;
                 itemCode = deviceItemCode;
+                $(":radio[name='"+clickRadioName+"'][value='no']").prop("checked",true);
                 $.router.loadPage("#page2");
                 loadPage2();
             }else{
@@ -456,9 +457,9 @@ function saveThisPage(){
 
     }
 
-function returnClick(){
-    $(":radio[name='"+clickRadioName+"'][value='no']").prop("checked",true);
-}
+//function returnClick(){
+//    $(":radio[name='"+clickRadioName+"'][value='no']").prop("checked",true);
+//}
 
 function changeImg(e, filePath, index) {
     fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
@@ -576,6 +577,7 @@ function saveFormData() {
     Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
+            $(":radio[name='"+clickRadioName+"'][value='yes']").prop("checked",true);
             saveThisPage();
             $.router.back();
         }
