@@ -43,3 +43,113 @@ data = {
 	};
 	msg = "Login success";
 }
+
+//照片新格式
+<__NSDictionaryM 0x282660be0> {
+	UIImagePickerControllerCropRect = NSRect: {{0, 116}, {3025, 3025}};
+	UIImagePickerControllerEditedImage = <UIImage:0x281ef9a70 anonymous {828, 828}>, scale = 1;
+	UIImagePickerControllerMediaMetadata = {
+		DPIHeight = 72
+		DPIWidth = 72;
+		Orientation = 6;
+		kCGImageDestinationICCProfile = {length = 548, bytes = 0x00000224 6170706c 04000000 6d6e7472 ... 000003dc 0000c06e };
+		{Exif} = {
+			ApertureValue = 1.6959938131099;
+			BrightnessValue = 2.40210794022583;
+			ColorSpace = 65535;
+			DateTimeDigitized = "2019:12:02 13:51:42";
+			DateTimeOriginal = "2019:12:02 13:51:42";
+			ExifVersion = "0232";
+			ExposureBiasValue = 0;
+			ExposureMode = 0;
+			ExposureProgram = 2;
+			ExposureTime = 0.01666666666666667;
+			FNumber = 1.8;
+			Flash = 24;
+			FocalLenIn35mmFilm = 26;
+			FocalLength = 4.25;
+			ISOSpeedRatings = [
+				200
+			];
+			LensMake = "Apple";
+			LensModel = "iPhone 11 back dual wide camera 4.25mm f/1.8";
+			LensSpecification = [
+				1.539999961853027,
+				4.25,
+				1.8,
+				2.400000095367432
+			];
+			MeteringMode = 5
+			OffsetTime = "+08:00";
+			OffsetTimeDigitized = "+08:00";
+			OffsetTimeOriginal = "+08:00";
+			PixelXDimension = 4032;
+			PixelYDimension = 3024;
+			SceneType = 1;
+			SensingMethod = 2;
+			ShutterSpeedValue = 5.915717986355797;
+			SubjectArea = [
+				2003,
+				1505,
+				2112,
+				1264
+			];
+			SubsecTimeDigitized = "570";
+			SubsecTimeOriginal = "570";
+			WhiteBalance = 0;
+		};
+		{MakerApple} = {
+			1 = 11;
+			12 = [
+				2.6015625,
+				25.7734375
+			];
+			13 = 3;
+			14 = 0;
+			15 = 2;
+			16 = 1;
+			2 = {length = 512, bytes = 0x6a006f00 62006000 d4001501 fe00e400 ... a600a600 a600a700 };
+			20 = 10;
+			23 = 38797312;
+			25 = 2;
+			3 = {
+				epoch = 0;
+				flags = 1;
+				timescale = 1000000000
+				value = 16037997685500;
+			};
+			31 = 0;
+			32 = "9384D65C-6BB7-403A-AC59-1E57DCD93F16";
+			33 = 0;
+			35 = [
+				8,
+				268435497
+			];
+			37 = 4234;
+			38 = 3;
+			39 = 35.69021987915039;
+			4 = 1;
+			40 = 1;
+			43 = "2EA2B2A8-0F3E-41A0-8CD3-6B6F6E5B245B";
+			5 = 203;
+			6 = 199;
+			7 = 1;
+			8 = [
+				-0.1186364218592644,
+				-0.4139962792396545,
+				-0.888681948184967
+			]
+		};
+		{TIFF} = {
+			DateTime = "2019:12:02 13:51:42";
+			Make = "Apple"
+			Model = "iPhone 11";
+			ResolutionUnit = 2;
+			Software = "13.2.2";
+			XResolution = 72;
+			YResolution = 72;
+		};
+	};
+	UIImagePickerControllerMediaType = "public.image";
+	UIImagePickerControllerOriginalImage = <UIImage:0x281ef99e0 anonymous {3024, 4032}>, scale = 1
+}
