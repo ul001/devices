@@ -11,6 +11,11 @@ var tempNum = -1;
 var imgNum = 0;
 var pids = [{pid:-1,pname:""}];
 var clickGroupTree = "";
+//iOS安卓基础传参
+var u = navigator.userAgent,
+  app = navigator.appVersion;
+var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 function loadPage(){
     var clickNum = 0;
@@ -471,14 +476,39 @@ function changeImg(e, filePath, index) {
     //获取并记录图片的base64编码
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
+    var timeStr = e.target.files[0].lastModified;
     reader.onloadend = function () {
         // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
         var dataURL = reader.result;
+        if(isAndroid){
+            // 显示图片
+            $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img   src=' + dataURL + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
+        }else{
+            shuiyin(dataURL,timeStr,index);
+        }
         // console.log(dataURL)
-        // 显示图片
-        $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img   src=' + dataURL + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
     };
+}
 
+function shuiyin(imgurl, addtext, index) {
+    var img = new Image();
+    img.src = imgurl;
+    var url = "";
+    img.onload = function () {
+        // 创建 canvas 用来绘制图片和水印
+        let canvas = document.createElement('canvas')
+        // var canvas = document.getElementById(canvasid);
+        // 在 canvas 上绘制原图
+        canvas.width = img.width;
+        canvas.height = img.height;
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+        ctx.font = "14px 微软雅黑";
+        ctx.fillStyle = "rgba(252,255,255,0.8)";
+        ctx.fillText(addtext, img.width - 100-20, img.height -20,100); //选择位置
+        url = canvas.toDataURL("image/png", 0.5);
+        $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img src=' + url + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
+    }
 }
 
 function removeImg(obj, index) {
