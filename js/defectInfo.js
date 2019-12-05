@@ -11,7 +11,6 @@
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);*/
-var imgArrayWithBase64 = [];
 var imgNum1 = 0;
 var imgNum = 0;
 var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
@@ -141,7 +140,7 @@ $(".upload_img_wrap .upload_img").on("click", function () {
         //            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
         //            // $("input:file").removeAttr("capture");
         //        }else{
-        $("#inputBox").append("<input type=\"file\" class=\"fileInput\"  capture=\"camera\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        $("#inputBox").append("<input type=\"file\" class=\"fileInput\" capture=\"camera\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
         //        }
     }
     $("#file" + index).click();
@@ -175,57 +174,14 @@ function changeImg(e, filePath, index) {
     //获取并记录图片的base64编码
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
-    var timeStr = format(e.target.files[0].lastModified);
     reader.onloadend = function () {
         // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
         var dataURL = reader.result;
-        shuiyin(dataURL, timeStr, index);
         // console.log(dataURL)
+        // 显示图片
+        $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img   src=' + dataURL + ' name=' + dataURL + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
     };
 
-}
-
-function add0(m) {
-    return m < 10 ? '0' + m : m
-}
-
-function format(timestamp) {
-    //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
-
-    var time = new Date(timestamp);
-    var year = time.getFullYear();
-    var month = time.getMonth() + 1;
-    var date = time.getDate();
-    var hours = time.getHours();
-    var minutes = time.getMinutes();
-    var seconds = time.getSeconds();
-    return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
-
-}
-
-function shuiyin(imgurl, addtext, index) {
-
-    var img = new Image;
-    img.src = imgurl;
-    img.onload = function () {
-        // 创建 canvas 用来绘制图片和水印
-        let canvas = document.createElement('canvas')
-        // var canvas = document.getElementById(canvasid);
-        var ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0);
-        ctx.font = "14px 微软雅黑";
-        ctx.fillStyle = "rgba(252,255,255,0.8)";
-        ctx.fillText(addtext, 10, 50); //选择位置
-        var url = canvas.toDataURL("image/png", 1);
-        var newImg = new Image();
-        newImg.src = url;
-        newImg.onload = function () {
-            // 显示图片
-            $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img   src=' + newImg.src + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
-            var url = newImg.src.replace("data:image/png;base64,", "");
-            imgArrayWithBase64.push(url);
-        };
-    }
 }
 
 function removeImg(obj, index) {
@@ -302,15 +258,7 @@ function saveFormData() {
     var taskId = localStorage.getItem("missiontaskID");
     params.append("fDeviceproblemid", fDeviceproblemid);
     params.append("fTaskId", taskId);
-    // Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
-    //     if (data.code == 200) {
-    //         $.toast("保存成功");
-    //         localStorage.setItem("need-update", "true");
-    //         window.history.back();
-    //     }
-    // });
-    params.append("base64SrcList", imgArrayWithBase64);
-    Substation.postFormDataByAjax("/updateDeviceProblemDetailByBase64", params, function (data) {
+    Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
             localStorage.setItem("need-update", "true");
