@@ -259,7 +259,7 @@ jQuery(document).ready(function () {
                             return;
                         } else if (loc == "-1") {
                             $.hidePreloader();
-                            $.toast("请求超时。");
+                            $.toast("获取位置超时。");
                             return;
                         }
                         if (loc != "" && loc != null) {
