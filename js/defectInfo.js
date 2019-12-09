@@ -36,7 +36,7 @@ var problemParam = {
 if (taskProblem == 1) {
     var taskId = localStorage.getItem("taskID");
     url = "/getDeviceProblemDetailByfTaskid";
-    problemParam['fTaskid'] = taskId;
+    problemParam["fTaskid"] = taskId;
 }
 
 Substation.getDataByAjax(url, problemParam, function (data) {
@@ -55,7 +55,17 @@ Substation.getDataByAjax(url, problemParam, function (data) {
         var defectPositionArray = defectPosition.split(";");
         var defectPositionValArray = defectPositionVal.split(";");
         $(defectPositionArray).each(function (index, obj) {
-            $("#defectPosition").append('<input type="checkbox" disabled value="' + obj + '" id="' + index + '"><label for="' + index + '">' + obj + '</label><br>');
+            $("#defectPosition").append(
+                '<input type="checkbox" disabled value="' +
+                obj +
+                '" id="' +
+                index +
+                '"><label for="' +
+                index +
+                '">' +
+                obj +
+                "</label><br>"
+            );
         });
         $(defectPositionValArray).each(function () {
             $("input[type='checkbox'][value='" + this + "']").attr("checked", true);
@@ -79,10 +89,18 @@ Substation.getDataByAjax(url, problemParam, function (data) {
             $("#fSolveTime").val(defectJson.fUpdateDate);
         }
     } else {
-        if (defectJson.fClientadvice != "" && defectJson.fClientadvice != null && defectJson.hasOwnProperty("fClientadvice")) {
+        if (
+            defectJson.fClientadvice != "" &&
+            defectJson.fClientadvice != null &&
+            defectJson.hasOwnProperty("fClientadvice")
+        ) {
             $("#fClientadvice").val(defectJson.fClientadvice);
         }
-        if (defectJson.fState != "" && defectJson.hasOwnProperty("fState") && defectJson.fState != null) {
+        if (
+            defectJson.fState != "" &&
+            defectJson.hasOwnProperty("fState") &&
+            defectJson.fState != null
+        ) {
             $("#fState").val(defectJson.fState);
         }
     }
@@ -90,9 +108,35 @@ Substation.getDataByAjax(url, problemParam, function (data) {
         $.each(beforeimg, function (i, value) {
             imgNum1++;
             if (value.fDeviceproblemimgmin == undefined) {
-                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+                var imgDiv =
+                    '<div class="imgContainer" id=' +
+                    value.fDeviceproblemimgid +
+                    "><img src=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgurl) +
+                    " name=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgurl) +
+                    ' onclick="imgDisplay(this)"></div>';
             } else {
-                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
+                var imgDiv =
+                    '<div class="imgContainer" id=' +
+                    value.fDeviceproblemimgid +
+                    "><img src=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgmin) +
+                    " name=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgurl) +
+                    ' onclick="imgDisplay(this)"></div>';
             }
 
             $("#imgBox1").append(imgDiv);
@@ -102,9 +146,39 @@ Substation.getDataByAjax(url, problemParam, function (data) {
         $.each(afterimg, function (i, value) {
             imgNum++;
             if (value.fDeviceproblemimgmin == undefined) {
-                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + '  onclick="imgDisplay(this)"></div>';
+                var imgDiv =
+                    '<div class="imgContainer" id=' +
+                    value.fDeviceproblemimgid +
+                    " data-index=" +
+                    (i + 1) +
+                    "><img   src=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgurl) +
+                    " name=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgurl) +
+                    '  onclick="imgDisplay(this)"></div>';
             } else {
-                var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgmin) + ' name=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + '  onclick="imgDisplay(this)"></div>';
+                var imgDiv =
+                    '<div class="imgContainer" id=' +
+                    value.fDeviceproblemimgid +
+                    " data-index=" +
+                    (i + 1) +
+                    "><img   src=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgmin) +
+                    " name=" +
+                    (Substation.ipAddressFromAPP +
+                        imgUrl +
+                        "/" +
+                        value.fDeviceproblemimgurl) +
+                    '  onclick="imgDisplay(this)"></div>';
             }
 
             $("#imgBox").append(imgDiv);
@@ -118,7 +192,7 @@ Substation.getDataByAjax(url, problemParam, function (data) {
             var thisInput = $(this).parent();
             var thisValue = "";
             if (this.selectedIndex != -1) {
-                thisValue = (this.options[this.selectedIndex]).innerText;
+                thisValue = this.options[this.selectedIndex].innerText;
             }
             thisInput.html('<input type="text" readonly value="' + thisValue + '">');
         });
@@ -140,7 +214,13 @@ $(".upload_img_wrap .upload_img").on("click", function () {
         //            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
         //            // $("input:file").removeAttr("capture");
         //        }else{
-        $("#inputBox").append("<input type=\"file\" class=\"fileInput\" capture=\"camera\" name=\"myFiles\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
+        $("#inputBox").append(
+            '<input type="file" class="fileInput" capture="camera" name="myFiles" data-id="' +
+            index +
+            '" title="请选择图片" id="file' +
+            index +
+            '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
+        );
         //        }
     }
     $("#file" + index).click();
@@ -150,25 +230,29 @@ $(".upload_img_wrap .upload_img").on("click", function () {
     if (isIOS) {
         $("#file" + index).click();
     }
-    $("#file" + index).unbind().change(function (e) {
-        var index = e.currentTarget.dataset.id;
-        if ($('#file' + index).val() == '') {
-            $("#inputBox input").eq(index - 1).remove();
-            return false;
-        }
-        var filePath = $(this).val();
-        changeImg(e, filePath, index);
-        imgNum++;
-        //$(".upload_img_length").html(imgNum);
-        return;
-    });
+    $("#file" + index)
+        .unbind()
+        .change(function (e) {
+            var index = e.currentTarget.dataset.id;
+            if ($("#file" + index).val() == "") {
+                $("#inputBox input")
+                    .eq(index - 1)
+                    .remove();
+                return false;
+            }
+            var filePath = $(this).val();
+            changeImg(e, filePath, index);
+            imgNum++;
+            //$(".upload_img_length").html(imgNum);
+            return;
+        });
 });
 
 function changeImg(e, filePath, index) {
     fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
     //检查后缀名
     if (!fileFormat.match(/.png|.jpg|.jpeg/)) {
-        showError('文件格式必须为：png/jpg/jpeg');
+        showError("文件格式必须为：png/jpg/jpeg");
         return;
     }
     //获取并记录图片的base64编码
@@ -179,34 +263,51 @@ function changeImg(e, filePath, index) {
         var dataURL = reader.result;
         // console.log(dataURL)
         // 显示图片
-        $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img   src=' + dataURL + ' name=' + dataURL + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
+        $("#imgBox").append(
+            '<div class="imgContainer" data-index=' +
+            index +
+            "><img   src=" +
+            dataURL +
+            " name=" +
+            dataURL +
+            ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
+            index +
+            ')"  class="imgDelete" src="img/del_img.png" /></div>'
+        );
     };
-
 }
 
 function removeImg(obj, index) {
     for (var i = 0; i < $(".imgContainer").length; i++) {
-        if ($(".imgContainer").eq(i).attr("data-index") == index) {
-            var imgId = $(".imgContainer").eq(i).attr("id");
+        if (
+            $(".imgContainer")
+            .eq(i)
+            .attr("data-index") == index
+        ) {
+            var imgId = $(".imgContainer")
+                .eq(i)
+                .attr("id");
             if (imgId == undefined) {
-                $(".imgContainer").eq(i).remove();
+                $(".imgContainer")
+                    .eq(i)
+                    .remove();
                 $("#file" + (i + 1)).remove();
             } else {
                 //                if(confirm("确定要删除已保存的图片？")){
                 /*$.confirm("确定要删除已保存的图片？", function () {
-                    $(".imgContainer").eq(i).remove();
-                    Substation.getDataByAjax("/deleteSubstationImg", {
-                        fId: imgId
-                    }, function () {
+                            $(".imgContainer").eq(i).remove();
+                            Substation.getDataByAjax("/deleteSubstationImg", {
+                                fId: imgId
+                            }, function () {
 
-                    });
-                });*/
+                            });
+                        });*/
                 /*$(".imgContainer").eq(i).remove();
-                Substation.getDataByAjax("/deleteSubstationImg", {
-                    fId: imgId
-                }, function () {
+                        Substation.getDataByAjax("/deleteSubstationImg", {
+                            fId: imgId
+                        }, function () {
 
-                });*/
+                        });*/
                 //                }
             }
             imgNum--;
@@ -216,15 +317,19 @@ function removeImg(obj, index) {
     //$(".upload_img_length").html(imgNum);
 }
 
-
 function imgDisplay(obj) {
     var src = $(obj).attr("name");
-    var imgHtml = '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img onclick="closePicture(this)" src=' + src + ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>'
-    $('body').append(imgHtml);
+    var imgHtml =
+        '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img onclick="closePicture(this)" src=' +
+        src +
+        ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>';
+    $("body").append(imgHtml);
 }
 
 function closePicture(obj) {
-    $(obj).parent("div").remove();
+    $(obj)
+        .parent("div")
+        .remove();
 }
 
 /*function loadSavedPic() {
@@ -254,11 +359,17 @@ function saveFormData() {
         $.toast("最多上传6张图片");
         return;
     }
-    var params = new FormData($('#form1')[0]);
+    if ($(".imgContainer").length - 1 + $(".fileInput").length > 6) {
+        $.toast("最多上传6张图片");
+        return;
+    }
+    var params = new FormData($("#form1")[0]);
     var taskId = localStorage.getItem("missiontaskID");
     params.append("fDeviceproblemid", fDeviceproblemid);
     params.append("fTaskId", taskId);
-    Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (data) {
+    Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (
+        data
+    ) {
         if (data.code == 200) {
             $.toast("保存成功");
             localStorage.setItem("need-update", "true");
@@ -269,7 +380,10 @@ function saveFormData() {
 
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {
-    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+    if (
+        document.activeElement.tagName == "INPUT" ||
+        document.activeElement.tagName == "TEXTAREA"
+    ) {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
         }, 0);
