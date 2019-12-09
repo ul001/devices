@@ -176,7 +176,7 @@ function addItems(number, lastIndex) {
             $(".infinite-scroll-preloader").html("--end--");
             return;
         }
-        if (data.tDtDocumentsManages.length < itemsPerLoad) {
+        if (data.tDtDocumentsManages.list.length < itemsPerLoad) {
             $.detachInfiniteScroll($(".infinite-scroll"));
             $(".infinite-scroll-preloader").html("--end--");
             return;

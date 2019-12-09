@@ -259,7 +259,7 @@ jQuery(document).ready(function () {
                             return;
                         } else if (loc == "-1") {
                             $.hidePreloader();
-                            $.toast("获取位置超时。");
+                            $.toast("获取位置超时,建议打开GPS定位服务。");
                             return;
                         }
                         if (loc != "" && loc != null) {
