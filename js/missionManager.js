@@ -268,10 +268,10 @@ jQuery(document).ready(function () {
                         location = this.fLocation;
                     }
                     if (this.hasOwnProperty("fDistance")) {
-                        if(this.fDistance>300){
-                            distance = "<span style=\"color:red;\">"+this.fDistance+"</span>米";
-                        }else{
-                            distance = this.fDistance+"米";
+                        if (this.fDistance > 300) {
+                            distance = "<span style=\"color:red;\">" + this.fDistance + "</span>米";
+                        } else {
+                            distance = this.fDistance + "米";
                         }
                     }
                     var taskStateName = "";
@@ -307,9 +307,9 @@ jQuery(document).ready(function () {
                     text +=
                         '                                    <div class="item-inner">';
                     text +=
-                        '                                        <div class="item-title label">状态:</div>';
-                    text +='                                        <div class="item-label">';
-                    text += taskStateName+'';
+                        '                                        <div class="item-title label">执行情况:</div>';
+                    text += '                                        <div class="item-label">';
+                    text += taskStateName + '';
                     text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
@@ -339,7 +339,7 @@ jQuery(document).ready(function () {
                         '                                        <div class="item-title label">签到地点:</div>';
                     text +=
                         '                                        <div class="item-label"> ';
-                    text +=location +
+                    text += location +
                         '';
                     text += "                                        </div>";
                     text += "                                        </div>";
@@ -355,7 +355,7 @@ jQuery(document).ready(function () {
                         '                                        <div class="item-title label">偏差距离:</div>';
                     text +=
                         '                                        <div class="item-label">';
-                    text +=  distance + '';
+                    text += distance + '';
                     text += "                                        </div>";
                     text += "                                        </div>";
                     text += "                                    </div>";
@@ -382,7 +382,7 @@ jQuery(document).ready(function () {
                     text +=
                         '                                    <div class="item-inner">';
                     text +=
-                        '                                        <div class="item-title label">执行情况:</div>';
+                        '                                        <div class="item-title label">任务备注:</div>';
                     text +=
                         '                                        <div class="item-label">';
                     text += explain + '';
