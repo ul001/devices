@@ -167,11 +167,11 @@ jQuery(document).ready(function () {
                             return false;
                         }
                     });
-                    if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
-                        $("#clickManager").css("display", "none");
-                    } else {
-                        $("#addVarContain124").css("display", "none");
-                    }
+//                    if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
+//                        $("#clickManager").css("display", "none");
+//                    } else {
+//                        $("#addVarContain124").css("display", "none");
+//                    }
 
 
                     /*                    if (missionTypeid != 1) {

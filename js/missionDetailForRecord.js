@@ -47,6 +47,8 @@ jQuery(document).ready(function () {
     //任务负责人 fTaskchargerid
     var taskchargerid;
 
+    var taskCreatId;
+
     var missionDetail = "";
 
     function getNetData() {
@@ -88,6 +90,7 @@ jQuery(document).ready(function () {
                     $("#missionCont").html(missionContent);
                     missionTypeid = taskInfo.fTasktypeid;
                     taskchargerid = taskInfo.fTaskchargerid;
+                    taskCreatId = taskInfo.fTaskcreateuserid;
                     var temp = false;
                     var thisTempState = 0;
 
@@ -153,11 +156,11 @@ jQuery(document).ready(function () {
                         $("#textareaDetail").attr("readonly", true);
                         // $("#addVarContain124").css("display", "none");
                     }
-                    if (taskchargerid != Substation.loginUserid) {
-                        $("#clickManager").css("display", "none");
-                    } else {
-                        $("#addVarContain124").css("display", "none");
-                    }
+//                    if (taskchargerid != Substation.loginUserid) {
+//                        $("#clickManager").css("display", "none");
+//                    } else {
+//                        $("#addVarContain124").css("display", "none");
+//                    }
                     /*                    if (missionTypeid != 1) {
                                   $("#addVarContain125").css("display", "none");
                               }*/
@@ -165,9 +168,9 @@ jQuery(document).ready(function () {
 
                     }
 
-                    if (taskchargerid != Substation.loginUserid) {
+                    //管理页面
+                    if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
-                        $("#addVarContain124").css("display", "none");
                     } else {
                         $("#addVarContain124").css("display", "none");
                     }
@@ -215,6 +218,16 @@ jQuery(document).ready(function () {
                     data.taskUserList.length > 0
                 ) {
                     $(data.taskUserList).each(function () {
+                        var taskStateName = "";
+                        if (this.fExesituation == 7) {
+                            taskStateName = "未签到";
+                        } else if (this.fExesituation == 8) {
+                            taskStateName = "已签到";
+                        } else if (this.fExesituation == 9) {
+                            taskStateName = "已提交";
+                        } else {
+
+                        }
                         var text = "";
                         text += "<li>";
                         text +=
@@ -233,7 +246,7 @@ jQuery(document).ready(function () {
                             '" ';
                         text +=
                             '                                                name="number" >' +
-                            this.taskState +
+                            taskStateName +
                             "</div>";
                         text += "                                        </div>";
                         text += "                                    </div>";
@@ -277,7 +290,11 @@ jQuery(document).ready(function () {
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("missiontaskID", taskID);
-        localStorage.setItem("hiddenBtn", "YES");
+        if (taskCreatId != Substation.loginUserid && missionType != 3) {
+            localStorage.setItem("hiddenBtn", "NO");
+        } else {
+            localStorage.setItem("hiddenBtn", "YES");
+        }
         window.location.href = "missionManager.html";
     });
 
