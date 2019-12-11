@@ -282,6 +282,60 @@ var Substation = {
           case "341":
             $.toast($.i18n.prop('code_341'));
             break;
+          case "342":
+            $.toast($.i18n.prop('code_342'));
+            break;
+          case "343":
+            $.toast($.i18n.prop('code_343'));
+            break;
+          case "344":
+            $.toast($.i18n.prop('code_344'));
+            break;
+          case "345":
+            $.toast($.i18n.prop('code_345'));
+            break;
+          case "346":
+            $.toast($.i18n.prop('code_346'));
+            break;
+          case "347":
+            $.toast($.i18n.prop('code_347'));
+            break;
+          case "600":
+            $.toast($.i18n.prop('code_600'));
+            break;
+          case "348":
+            $.toast($.i18n.prop('code_348'));
+            break;
+          case "349":
+            $.toast($.i18n.prop('code_349'));
+            break;
+          case "350":
+            $.toast($.i18n.prop('code_350'));
+            break;
+          case "351":
+            $.toast($.i18n.prop('code_351'));
+            break;
+          case "352":
+            $.toast($.i18n.prop('code_352'));
+            break;
+          case "353":
+            $.toast($.i18n.prop('code_353'));
+            break;
+          case "354":
+            $.toast($.i18n.prop('code_354'));
+            break;
+          case "355":
+            $.toast($.i18n.prop('code_355'));
+            break;
+          case "356":
+            $.toast($.i18n.prop('code_356'));
+            break;
+          case "357":
+            $.toast($.i18n.prop('code_357'));
+            break;
+          case "358":
+            $.toast($.i18n.prop('code_358'));
+            break;
           default:
             $.toast("操作失败");
             break;
