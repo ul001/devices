@@ -171,6 +171,7 @@ jQuery(document).ready(function () {
                     //管理页面
                     if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
                         $("#clickManager").css("display", "none");
+                        $("#addVarContain124").css("display", "none");
                     } else {
                         $("#addVarContain124").css("display", "none");
                     }
