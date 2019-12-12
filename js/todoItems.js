@@ -268,7 +268,7 @@ jQuery(document).ready(function () {
   //初始化页面接口
   function addItems(number, lastIndex, clickNum) {
     var text = "";
-    var url = "/selectByStateAndTyp";
+    var url = "/selectByStateAndType";
     var searchStr = $("#searchDaiban").val();
     if (!searchStr) {
       searchStr = "";
@@ -521,6 +521,15 @@ jQuery(document).ready(function () {
         $(".infinite-scroll-preloader").html("--end--");
         return;
       }
+    }, function (errorCode) {
+      if (errorCode == 0) {
+        $.detachInfiniteScroll($(".infinite-scroll"));
+        $(".infinite-scroll-preloader").html("--网络异常--");
+      } else {
+        $.detachInfiniteScroll($(".infinite-scroll"));
+        $(".infinite-scroll-preloader").html("");
+      }
+      return;
     });
   }
 

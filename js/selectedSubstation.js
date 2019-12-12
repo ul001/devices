@@ -15,13 +15,13 @@
         });
     }*/
 var u = navigator.userAgent,
-  app = navigator.appVersion;
+    app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 function goToLocation(subid) {
     localStorage.setItem("fSubid", subid);
-    if(isAndroid){
+    if (isAndroid) {
         android.goToIn3();
         return;
     }
@@ -31,7 +31,7 @@ function goToLocation(subid) {
 function goToDevice(subId, subname) {
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
-    if(isAndroid){
+    if (isAndroid) {
         android.goToIn();
         return;
     }
@@ -40,7 +40,7 @@ function goToDevice(subId, subname) {
 
 function goToPhoto(subId) {
     localStorage.setItem("fSubid", subId);
-    if(isAndroid){
+    if (isAndroid) {
         android.goToIn2();
         return;
     }
@@ -80,46 +80,56 @@ function addItems(number, lastIndex) {
         key: searchKey
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        if (data.hasOwnProperty("list") && data.list.length > 0) {
-            if (pageNum == 1) {
-                $(".list-container").empty();
+            if (data.hasOwnProperty("list") && data.list.length > 0) {
+                if (pageNum == 1) {
+                    $(".list-container").empty();
+                }
+                $(data.list).each(function () {
+                    html += "<div class=\"card\">\n" +
+                        "                    <div class=\"card-content\">\n" +
+                        "                        <div class=\"content-padded\">\n" +
+                        "                            <div class=\"row  no-gutter sub_card\">\n" +
+                        "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
+                        "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
+                        //                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
+                        "                                    <p class=\"limit-length\">地址：" + Substation.removeUndefined(this.fAddress) + "</p>\n" +
+                        "                                </div>\n" +
+                        "                                <div class=\"col-20\">\n" +
+                        "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">照片\n" +
+                        "                                    </button>\n" +
+                        "                                    <br>\n" +
+                        "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fSubid + ")\" type=\"button\">位置\n" +
+                        "                                    </button>\n" +
+                        "                                </div>\n" +
+                        "                            </div>\n" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                </div>";
+                });
+                $('.list-container').append(html);
+                //addClick();
+                pageNum++;
+            } else {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
             }
-            $(data.list).each(function () {
-                html += "<div class=\"card\">\n" +
-                    "                    <div class=\"card-content\">\n" +
-                    "                        <div class=\"content-padded\">\n" +
-                    "                            <div class=\"row  no-gutter sub_card\">\n" +
-                    "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
-                    "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
-//                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
-                    "                                    <p class=\"limit-length\">地址：" + Substation.removeUndefined(this.fAddress) + "</p>\n" +
-                    "                                </div>\n" +
-                    "                                <div class=\"col-20\">\n" +
-                    "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">照片\n" +
-                    "                                    </button>\n" +
-                    "                                    <br>\n" +
-                    "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation("+this.fSubid+")\" type=\"button\">位置\n" +
-                    "                                    </button>\n" +
-                    "                                </div>\n" +
-                    "                            </div>\n" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>";
-            });
-            $('.list-container').append(html);
-            //addClick();
-            pageNum++;
-        } else {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
+            if (data.list.length < itemsPerLoad) {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
+        },
+        function (errorCode) {
+            if (errorCode == 0) {
+                $.detachInfiniteScroll($(".infinite-scroll"));
+                $(".infinite-scroll-preloader").html("--网络异常--");
+            } else {
+                $.detachInfiniteScroll($(".infinite-scroll"));
+                $(".infinite-scroll-preloader").html("");
+            }
             return;
-        }
-        if (data.list.length < itemsPerLoad) {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
-            return;
-        }
-    });
+        });
 }
 addItems(itemsPerLoad, 0);
 

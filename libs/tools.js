@@ -514,7 +514,7 @@ var Substation = {
     });
   },
 
-  getDataByAjaxNoLoading: function (url, params, successCallback) {
+  getDataByAjaxNoLoading: function (url, params, successCallback, errorCallback) {
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -536,6 +536,7 @@ var Substation = {
         }
       },
       error: function (data) {
+        errorCallback(data.status);
         if (data.status == 0) {
           $.toast("无法连接到网络，请检查网络设置。");
         } else {
