@@ -1,10 +1,10 @@
 jQuery(document).ready(function () {
   $("#titleContent").text("待办事项");
 
-var u = navigator.userAgent,
-  app = navigator.appVersion;
-var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+  var u = navigator.userAgent,
+    app = navigator.appVersion;
+  var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+  var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
   var loading = false;
   var maxItems = 1000;
@@ -79,7 +79,7 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
   window.addEventListener(
     "pageshow",
     function (event) {
-      if (localStorage.getItem("need-refresh")=="true") {
+      if (localStorage.getItem("need-refresh") == "true") {
         location.reload();
         localStorage.removeItem("need-refresh");
       }
@@ -268,7 +268,7 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
   //初始化页面接口
   function addItems(number, lastIndex, clickNum) {
     var text = "";
-    var url = "/selectByStateAndType";
+    var url = "/selectByStateAndTyp";
     var searchStr = $("#searchDaiban").val();
     if (!searchStr) {
       searchStr = "";
@@ -354,10 +354,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missionFinish");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isAndroid){
-                android.goToIn();
-            }else{
-                window.location.href="missionDetail.html";
+            if (isAndroid) {
+              android.goToIn();
+            } else {
+              window.location.href = "missionDetail.html";
             }
           });
         } else {
@@ -402,12 +402,12 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             }
 
             text += '                            <div class="card card2" id="dealMission' +
-                                                                                 this.fTaskid +
-                                                                                 '"  name="' +
-                                                                                 this.fTaskid +
-                                                                                 '" data-taskid="' +
-                                                                                 this.fTasktypeid +
-                                                                                 '">';
+              this.fTaskid +
+              '"  name="' +
+              this.fTaskid +
+              '" data-taskid="' +
+              this.fTasktypeid +
+              '">';
             text +=
               '                                <div class="card-content">';
             text +=
@@ -481,10 +481,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missionDoing");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isAndroid){
-                android.goToIn();
-            }else{
-                window.location.href="missionDetail.html";
+            if (isAndroid) {
+              android.goToIn();
+            } else {
+              window.location.href = "missionDetail.html";
             }
           } else if (tasktypeid == 3) {
             //缺陷登记
@@ -492,10 +492,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missiondefect");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isAndroid){
-                android.goToIn();
-            }else{
-                window.location.href="missionDetail.html";
+            if (isAndroid) {
+              android.goToIn();
+            } else {
+              window.location.href = "missionDetail.html";
             }
           } else {
             //现场交接
@@ -503,10 +503,10 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
             localStorage.setItem("showType", "missiondefect");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
-            if(isAndroid){
-                android.goToIn();
-            }else{
-                window.location.href="missionDetail.html";
+            if (isAndroid) {
+              android.goToIn();
+            } else {
+              window.location.href = "missionDetail.html";
             }
           }
         });

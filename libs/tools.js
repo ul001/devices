@@ -467,9 +467,13 @@ var Substation = {
           }
         }
       },
-      error: function () {
+      error: function (data) {
         $.hidePreloader();
-        $.toast("数据请求失败");
+        if (data.status == 0) {
+          $.toast("无法连接到网络，请检查网络设置。");
+        } else {
+          $.toast("数据请求失败");
+        }
       }
     });
   },
@@ -499,9 +503,13 @@ var Substation = {
           }
         }
       },
-      error: function () {
+      error: function (data) {
         $.hidePreloader();
-        $.toast("数据请求失败");
+        if (data.status == 0) {
+          $.toast("无法连接到网络，请检查网络设置。");
+        } else {
+          $.toast("数据请求失败");
+        }
       }
     });
   },
@@ -527,8 +535,12 @@ var Substation = {
           }
         }
       },
-      error: function () {
-        $.toast("数据请求失败");
+      error: function (data) {
+        if (data.status == 0) {
+          $.toast("无法连接到网络，请检查网络设置。");
+        } else {
+          $.toast("数据请求失败");
+        }
       }
     });
   },
@@ -557,9 +569,13 @@ var Substation = {
           }
         }
       },
-      error: function () {
+      error: function (data) {
         $.hidePreloader();
-        $.toast("数据请求失败");
+        if (data.status == 0) {
+          $.toast("无法连接到网络，请检查网络设置。");
+        } else {
+          $.toast("数据请求失败");
+        }
       }
     });
   },
@@ -588,9 +604,13 @@ var Substation = {
           Substation.showCodeTips("zh", data.code);
         }
       })
-      .fail(function () {
+      .fail(function (data) {
         $.hidePreloader();
-        $.toast("数据请求失败");
+        if (data.status == 0) {
+          $.toast("无法连接到网络，请检查网络设置。");
+        } else {
+          $.toast("数据请求失败");
+        }
       });
   },
 
@@ -728,6 +748,7 @@ var Substation = {
         }
       }
 
+
       function detailData(fCircuitids, fCircuitname) {
         var circuitData;
         $("#fCircuitname").html(fCircuitname);
@@ -748,6 +769,7 @@ var Substation = {
           .click(function () {
             var select = $(this)[0].id;
             showDetailTable(fCircuitids, circuitData, select);
+
           });
 
         $("#myModaldetail").on("hide.bs.modal", function () {
@@ -2444,5 +2466,12 @@ var Substation = {
       return pass;
     }
   }
+
+
 };
+
+function showToast(str) {
+  $.toast(str);
+}
+
 window.onload = Substation.loadLanguageJS();
