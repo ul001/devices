@@ -83,105 +83,115 @@ function addItems(number, lastIndex) {
         params['endTime'] = dateEndVal + " 23:59:59";
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        //文件拼接基础路径
-        //        fileUrlBasePath = data.fileUrl;
-        if (
-            data.hasOwnProperty("tDtDocumentsManages") &&
-            data.tDtDocumentsManages.list.length > 0
-        ) {
-            // if (pageNum == 1) {
-            //     $(".list-container").empty();
-            // }
-            $(data.tDtDocumentsManages.list).each(function () {
-                var pushTime = "";
-                if (this.fFilepublishtime != undefined) {
-                    pushTime = this.fFilepublishtime;
-                    pushTime = pushTime.slice(0, 10);
-                }
-                var fileSize = "";
-                if (this.fFilesize != undefined) {
-                    fileSize = bytesToSize(this.fFilesize);
-                }
-                //waring暂时屏蔽
-                var fileIcon = "";
-                switch (this.fFiletype) {
-                    case ".docx":
-                        fileIcon = "<i class='icon icon-file icon-doc'></i>";
-                        break;
-                    case ".doc":
-                        fileIcon = "<i class='icon icon-file icon-doc'></i>";
-                        break;
-                    case ".txt":
-                        fileIcon = "<i class='icon icon-file icon-txt'></i>";
-                        break;
-                    case ".pptx":
-                        fileIcon = "<i class='icon icon-file icon-ppt'></i>";
-                        break;
-                    case ".ppt":
-                        fileIcon = "<i class='icon icon-file icon-ppt'></i>";
-                        break;
-                    case ".pdf":
-                        fileIcon = "<i class='icon icon-file icon-pdf'></i>";
-                        break;
-                    case ".xlsx":
-                        fileIcon = "<i class='icon icon-file icon-xls'></i>";
-                        break;
-                    case ".xls":
-                        fileIcon = "<i class='icon icon-file icon-xls'></i>";
-                        break;
-                    default:
-                        fileIcon = "<i class='icon icon-file icon-default'></i>";
-                        break;
-                }
+            //文件拼接基础路径
+            //        fileUrlBasePath = data.fileUrl;
+            if (
+                data.hasOwnProperty("tDtDocumentsManages") &&
+                data.tDtDocumentsManages.list.length > 0
+            ) {
+                // if (pageNum == 1) {
+                //     $(".list-container").empty();
+                // }
+                $(data.tDtDocumentsManages.list).each(function () {
+                    var pushTime = "";
+                    if (this.fFilepublishtime != undefined) {
+                        pushTime = this.fFilepublishtime;
+                        pushTime = pushTime.slice(0, 10);
+                    }
+                    var fileSize = "";
+                    if (this.fFilesize != undefined) {
+                        fileSize = bytesToSize(this.fFilesize);
+                    }
+                    //waring暂时屏蔽
+                    var fileIcon = "";
+                    switch (this.fFiletype) {
+                        case ".docx":
+                            fileIcon = "<i class='icon icon-file icon-doc'></i>";
+                            break;
+                        case ".doc":
+                            fileIcon = "<i class='icon icon-file icon-doc'></i>";
+                            break;
+                        case ".txt":
+                            fileIcon = "<i class='icon icon-file icon-txt'></i>";
+                            break;
+                        case ".pptx":
+                            fileIcon = "<i class='icon icon-file icon-ppt'></i>";
+                            break;
+                        case ".ppt":
+                            fileIcon = "<i class='icon icon-file icon-ppt'></i>";
+                            break;
+                        case ".pdf":
+                            fileIcon = "<i class='icon icon-file icon-pdf'></i>";
+                            break;
+                        case ".xlsx":
+                            fileIcon = "<i class='icon icon-file icon-xls'></i>";
+                            break;
+                        case ".xls":
+                            fileIcon = "<i class='icon icon-file icon-xls'></i>";
+                            break;
+                        default:
+                            fileIcon = "<i class='icon icon-file icon-default'></i>";
+                            break;
+                    }
 
-                html +=
-                    "<div class=\"card\"  onclick=\"downloadFile('" + this.fFilecode + "','" + this.fFilepath + "','" + this.fFilename + "')\">\n" +
-                    '                    <div class="card-content">\n' +
-                    '                        <div class="content-padded">\n' +
-                    '  <div class="row no-gutter sub_card">';
-                html += '                                    <div class="col-10">';
-                html += fileIcon;
-                html += "                                    </div>";
-                html +=
-                    '                                    <div class="col-90">';
-                html +=
-                    '                                        <p class="subName limit-length"> ' +
-                    this.fFilename +
-                    this.fFiletype +
-                    "</p>";
-                html += '<div class="row no-gutter" style="font-size:12px"><div class="col-33 limit-length"><i class="icon icon-fileSubname"></i>&nbsp;' +
-                    this.subName + '</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileTime"></i>&nbsp;' +
-                    pushTime + '</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileSize"></i>&nbsp;' +
-                    fileSize + "</div></div>";
-                html += "                                    </div>";
-                /*                html += '                                    <div class="col-15">';
-                                html +=
-                                    '                                        <button class="bg-primary external" type="button" onclick="downloadFile(\'' +
-                                    this.fFilecode + "','" + this.fFilepath +
-                                    "')\">下载";
-                                html += "                                        </button>";
-                                html += "                                    </div>";*/
-                html +=
-                    "                                </div>" +
-                    "                        </div>\n" +
-                    "                    </div>\n" +
-                    "                </div>";
-            });
-            $(".list-container").append(html);
-            //addClick();
-            // Substation.getDataByAjaxNoLoading("/close");
-            pageNum++;
-        } else {
-            $.detachInfiniteScroll($(".infinite-scroll"));
-            $(".infinite-scroll-preloader").html("--end--");
+                    html +=
+                        "<div class=\"card\"  onclick=\"downloadFile('" + this.fFilecode + "','" + this.fFilepath + "','" + this.fFilename + "')\">\n" +
+                        '                    <div class="card-content">\n' +
+                        '                        <div class="content-padded">\n' +
+                        '  <div class="row no-gutter sub_card">';
+                    html += '                                    <div class="col-10">';
+                    html += fileIcon;
+                    html += "                                    </div>";
+                    html +=
+                        '                                    <div class="col-90">';
+                    html +=
+                        '                                        <p class="subName limit-length"> ' +
+                        this.fFilename +
+                        this.fFiletype +
+                        "</p>";
+                    html += '<div class="row no-gutter" style="font-size:12px"><div class="col-33 limit-length"><i class="icon icon-fileSubname"></i>&nbsp;' +
+                        this.subName + '</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileTime"></i>&nbsp;' +
+                        pushTime + '</div><div class="col-33 limit-length">&nbsp;<i class="icon icon-fileSize"></i>&nbsp;' +
+                        fileSize + "</div></div>";
+                    html += "                                    </div>";
+                    /*                html += '                                    <div class="col-15">';
+                                    html +=
+                                        '                                        <button class="bg-primary external" type="button" onclick="downloadFile(\'' +
+                                        this.fFilecode + "','" + this.fFilepath +
+                                        "')\">下载";
+                                    html += "                                        </button>";
+                                    html += "                                    </div>";*/
+                    html +=
+                        "                                </div>" +
+                        "                        </div>\n" +
+                        "                    </div>\n" +
+                        "                </div>";
+                });
+                $(".list-container").append(html);
+                //addClick();
+                // Substation.getDataByAjaxNoLoading("/close");
+                pageNum++;
+            } else {
+                $.detachInfiniteScroll($(".infinite-scroll"));
+                $(".infinite-scroll-preloader").html("--end--");
+                return;
+            }
+            if (data.tDtDocumentsManages.list.length < itemsPerLoad) {
+                $.detachInfiniteScroll($(".infinite-scroll"));
+                $(".infinite-scroll-preloader").html("--end--");
+                return;
+            }
+        },
+        function (errorCode) {
+            if (errorCode == 0) {
+                $.detachInfiniteScroll($(".infinite-scroll"));
+                $(".infinite-scroll-preloader").html("--网络异常--");
+            } else {
+                $.detachInfiniteScroll($(".infinite-scroll"));
+                $(".infinite-scroll-preloader").html("");
+            }
             return;
-        }
-        if (data.tDtDocumentsManages.list.length < itemsPerLoad) {
-            $.detachInfiniteScroll($(".infinite-scroll"));
-            $(".infinite-scroll-preloader").html("--end--");
-            return;
-        }
-    });
+        });
 }
 
 function bytesToSize(bytes) {

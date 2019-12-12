@@ -1,8 +1,8 @@
 var selectSubid = "";
 var clickSubid = "";
-$(function() {
+$(function () {
     'use strict';
-    $(document).on("pageInit", "#listPage", function(e, id, page) {
+    $(document).on("pageInit", "#listPage", function (e, id, page) {
         var loading = false;
         var itemsPerLoad = 5;
         var pageNum = 1;
@@ -17,8 +17,8 @@ $(function() {
             $.attachInfiniteScroll($('.infinite-scroll'));
         }
 
-        $(document).on('refresh', '.pull-to-refresh-content', function(e) {
-            setTimeout(function() {
+        $(document).on('refresh', '.pull-to-refresh-content', function (e) {
+            setTimeout(function () {
                 getFirstPage();
                 // done
                 $.pullToRefreshDone('.pull-to-refresh-content');
@@ -51,98 +51,108 @@ $(function() {
             if (dangerVal != "") {
                 params['fProblemlevel'] = dangerVal;
             }
-            Substation.getDataByAjaxNoLoading(url, params, function(data) {
-                if (data.tDevDeviceproblemList.list.length > 0) {
-                    if (pageNum == 1) {
-                        $("#list-container").empty();
-                    }
-                    $(data.tDevDeviceproblemList.list).each(function() {
-                        var problemStr = "";
-                        if (this.hasOwnProperty("fProblemlocation")) {
-                            if (this.fProblemlocation.indexOf(",") != -1) {
-                                problemStr = this.fProblemlocation.split(",")[1]
+            Substation.getDataByAjaxNoLoading(url, params, function (data) {
+                    if (data.tDevDeviceproblemList.list.length > 0) {
+                        if (pageNum == 1) {
+                            $("#list-container").empty();
+                        }
+                        $(data.tDevDeviceproblemList.list).each(function () {
+                            var problemStr = "";
+                            if (this.hasOwnProperty("fProblemlocation")) {
+                                if (this.fProblemlocation.indexOf(",") != -1) {
+                                    problemStr = this.fProblemlocation.split(",")[1]
+                                }
                             }
-                        }
-                        var stateStr = "";
-                        switch (this.fState) {
-                            case "0":
-                                stateStr = "<span class=\"redColor\">未处理</span>";
-                                break;
-                            case "2":
-                                stateStr = "<span class=\"redColor\">待处理</span>";
-                                break;
-                            case "3":
-                                stateStr = "<span class=\"redColor\">待客户停电处理</span>";
-                                break;
-                            case "4":
-                                stateStr = "<span class=\"redColor\">待线路停电处理</span>";
-                                break;
-                            case "5":
-                                stateStr = "<span class=\"redColor\">其他</span>";
-                                break;
-                            case "1":
-                                stateStr = "<span class=\"button-success\">已处理</span>";
-                                break;
-                            default:
-                                stateStr = "<span class=\"redColor\">未处理</span>";
-                                break;
-                        }
-                        /*var solveUser = "";
-                        if(this.fSolvedUserName!=undefined){
-                            solveUser="<p>处理人员："+this.fSolvedUserName+"</p>";
-                        }
-                        var solveTime = "";
-                        if(this.fUpdateDate!=undefined){
-                            solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
-                        }*/
-                        html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" value=\"" + (this.treePathName == undefined ? "" : this.treePathName) + "\">\n" +
-                            "                    <div class=\"card-content\">\n" +
-                            "                        <div class=\"card-content-inner row no-gutter\">\n" +
-                            /*"                            <div class=\"col-10\">\n" +
-                            "                                <i class=\"icon icon-alarm\"></i>\n" +
-                            "                            </div>\n" +*/
-                            "                            <div class=\"col-95\">\n" +
-                            "<p class=\"subName limit-length\">" + this.fSubName + "</p>" +
-                            "                                <p>设备名称:<span class=\"redColor\">" + (this.treePathName == undefined ? "" : this.treePathName) + "</span>\n" +
-                            "                                </p>\n" +
-                            "                                <p>缺陷描述:<span class=\"redColor\">" + this.fDeviceproblemdes + "</span></p>\n" +
-                            //                        "                                <p>危害:"+this.fProblemharm+"</p>\n" +
-                            "                                <p>具体位置:" + problemStr + "</p>\n" +
-                            "                                <p class=\"row\"><span class=\"col-50\">缺陷类别:" + this.fProblemtype + "</span><span class=\"col-50\">紧急程度:" + this.fProblemlevel + "</span></p>\n" +
-                            //                        "                                <p>消缺期限:"+this.fTimelimit+"</p>\n" +
-                            //                        "                                <p>处理建议:"+this.fResolution+"</p>\n" +
-                            //                        "                                <p>客户意见:"+this.fClientadvice+"</p>\n" +
-                            "                                <p>处理状态:" + stateStr + "</p>\n" +
-                            "                                <p>发现时间:" + this.fCreatetime + "</p>\n" +
-                            //                        solveUser+solveTime+
-                            "                            </div>\n" +
-                            "                            <div class=\"col-5\">\n" +
-                            "                                <i class=\"icon icon-right\"></i>\n" +
-                            "                            </div>\n" +
-                            "                        </div>\n" +
-                            "                    </div>\n" +
-                            "                </div>";
-                    });
-                    $('#list-container').append(html);
-                    $(".card").unbind().click(function() {
-                        var clickId = $(this).attr("id");
-                        var clickTree = $(this).attr("value");
-                        $.router.loadPage("#defectInfo");
-                        $("#defectInfo .content").scrollTop(0,0);
-                        getDefectInfo(clickId, clickTree, "false");
-                    });
-                    pageNum++;
-                } else {
-                    $.detachInfiniteScroll($('.infinite-scroll'));
-                    $('.infinite-scroll-preloader').html("--end--");
+                            var stateStr = "";
+                            switch (this.fState) {
+                                case "0":
+                                    stateStr = "<span class=\"redColor\">未处理</span>";
+                                    break;
+                                case "2":
+                                    stateStr = "<span class=\"redColor\">待处理</span>";
+                                    break;
+                                case "3":
+                                    stateStr = "<span class=\"redColor\">待客户停电处理</span>";
+                                    break;
+                                case "4":
+                                    stateStr = "<span class=\"redColor\">待线路停电处理</span>";
+                                    break;
+                                case "5":
+                                    stateStr = "<span class=\"redColor\">其他</span>";
+                                    break;
+                                case "1":
+                                    stateStr = "<span class=\"button-success\">已处理</span>";
+                                    break;
+                                default:
+                                    stateStr = "<span class=\"redColor\">未处理</span>";
+                                    break;
+                            }
+                            /*var solveUser = "";
+                            if(this.fSolvedUserName!=undefined){
+                                solveUser="<p>处理人员："+this.fSolvedUserName+"</p>";
+                            }
+                            var solveTime = "";
+                            if(this.fUpdateDate!=undefined){
+                                solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
+                            }*/
+                            html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" value=\"" + (this.treePathName == undefined ? "" : this.treePathName) + "\">\n" +
+                                "                    <div class=\"card-content\">\n" +
+                                "                        <div class=\"card-content-inner row no-gutter\">\n" +
+                                /*"                            <div class=\"col-10\">\n" +
+                                "                                <i class=\"icon icon-alarm\"></i>\n" +
+                                "                            </div>\n" +*/
+                                "                            <div class=\"col-95\">\n" +
+                                "<p class=\"subName limit-length\">" + this.fSubName + "</p>" +
+                                "                                <p>设备名称:<span class=\"redColor\">" + (this.treePathName == undefined ? "" : this.treePathName) + "</span>\n" +
+                                "                                </p>\n" +
+                                "                                <p>缺陷描述:<span class=\"redColor\">" + this.fDeviceproblemdes + "</span></p>\n" +
+                                //                        "                                <p>危害:"+this.fProblemharm+"</p>\n" +
+                                "                                <p>具体位置:" + problemStr + "</p>\n" +
+                                "                                <p class=\"row\"><span class=\"col-50\">缺陷类别:" + this.fProblemtype + "</span><span class=\"col-50\">紧急程度:" + this.fProblemlevel + "</span></p>\n" +
+                                //                        "                                <p>消缺期限:"+this.fTimelimit+"</p>\n" +
+                                //                        "                                <p>处理建议:"+this.fResolution+"</p>\n" +
+                                //                        "                                <p>客户意见:"+this.fClientadvice+"</p>\n" +
+                                "                                <p>处理状态:" + stateStr + "</p>\n" +
+                                "                                <p>发现时间:" + this.fCreatetime + "</p>\n" +
+                                //                        solveUser+solveTime+
+                                "                            </div>\n" +
+                                "                            <div class=\"col-5\">\n" +
+                                "                                <i class=\"icon icon-right\"></i>\n" +
+                                "                            </div>\n" +
+                                "                        </div>\n" +
+                                "                    </div>\n" +
+                                "                </div>";
+                        });
+                        $('#list-container').append(html);
+                        $(".card").unbind().click(function () {
+                            var clickId = $(this).attr("id");
+                            var clickTree = $(this).attr("value");
+                            $.router.loadPage("#defectInfo");
+                            $("#defectInfo .content").scrollTop(0, 0);
+                            getDefectInfo(clickId, clickTree, "false");
+                        });
+                        pageNum++;
+                    } else {
+                        $.detachInfiniteScroll($('.infinite-scroll'));
+                        $('.infinite-scroll-preloader').html("--end--");
+                        return;
+                    }
+                    if (data.tDevDeviceproblemList.list.length < itemsPerLoad) {
+                        $.detachInfiniteScroll($('.infinite-scroll'));
+                        $('.infinite-scroll-preloader').html("--end--");
+                        return;
+                    }
+                },
+                function (errorCode) {
+                    if (errorCode == 0) {
+                        $.detachInfiniteScroll($(".infinite-scroll"));
+                        $(".infinite-scroll-preloader").html("--网络异常--");
+                    } else {
+                        $.detachInfiniteScroll($(".infinite-scroll"));
+                        $(".infinite-scroll-preloader").html("");
+                    }
                     return;
-                }
-                if (data.tDevDeviceproblemList.list.length < itemsPerLoad) {
-                    $.detachInfiniteScroll($('.infinite-scroll'));
-                    $('.infinite-scroll-preloader').html("--end--");
-                    return;
-                }
-            });
+                });
         }
 
         $("#list-container").empty();
@@ -151,7 +161,7 @@ $(function() {
 
         var lastIndex = 5;
 
-        $(document).on('infinite', '.infinite-scroll', function() {
+        $(document).on('infinite', '.infinite-scroll', function () {
 
             // 如果正在加载，则退出
             if (loading) return;
@@ -159,20 +169,20 @@ $(function() {
             // 设置flag
             loading = true;
 
-            setTimeout(function() {
+            setTimeout(function () {
                 loading = false;
                 addItems(itemsPerLoad, lastIndex);
                 lastIndex = $('#list-container .card').length;
             }, 1000);
         });
 
-        $('#searchBtn').click(function() {
+        $('#searchBtn').click(function () {
             $(".close-panel").click();
             if ($("#search").val() == "") {
-//                $("#subName").text("所有变电所");
+                //                $("#subName").text("所有变电所");
                 selectSubid = "";
             } else if (clickSubid != "") {
-//                $("#subName").text($("#search").val());
+                //                $("#subName").text($("#search").val());
                 selectSubid = clickSubid;
                 clickSubid = "";
             }
@@ -196,23 +206,23 @@ $(function() {
         });*/
 
         //时间快捷按钮
-        $(".buttons-row .button").click(function() {
+        $(".buttons-row .button").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
         });
-        $("#today").click(function() {
+        $("#today").click(function () {
             var myDate = new Date();
             var todayVal = myDate.format("yyyy-MM-dd");
             $("#dateStart").val(todayVal);
             $("#dateEnd").val(todayVal);
         });
-        $("#yestoday").click(function() {
+        $("#yestoday").click(function () {
             var myDate = new Date();
             myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
             var yestodayVal = myDate.format("yyyy-MM-dd");
             $("#dateStart").val(yestodayVal);
             $("#dateEnd").val(yestodayVal);
         });
-        $("#thisMonth").click(function() {
+        $("#thisMonth").click(function () {
             var myDate = new Date();
             var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
             var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
@@ -221,7 +231,7 @@ $(function() {
             $("#dateStart").val(firstDayVal);
             $("#dateEnd").val(lastDayVal);
         });
-        $("#lastMonth").click(function() {
+        $("#lastMonth").click(function () {
             var myDate = new Date();
             var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
             var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
@@ -231,7 +241,7 @@ $(function() {
             $("#dateEnd").val(lastDayVal);
         });
 
-        Date.prototype.format = function(fmt) { //author: meizz
+        Date.prototype.format = function (fmt) { //author: meizz
             var o = {
                 "M+": this.getMonth() + 1, //月份
                 "d+": this.getDate(), //日
@@ -249,23 +259,27 @@ $(function() {
             return fmt;
         }
 
-        $("#dateStart,#dateEnd").click(function() {
+        $("#dateStart,#dateEnd").click(function () {
             $(".buttons-row").find($(".active")).removeClass("active");
         });
 
         //解决键盘遮挡问题
         var h = $(window).height();
-        window.addEventListener("resize", function() {
-            if ($(window).height() < h) { $('.btnBar').hide(); }
-            if ($(window).height() >= h) { $('.btnBar').show(); }
+        window.addEventListener("resize", function () {
+            if ($(window).height() < h) {
+                $('.btnBar').hide();
+            }
+            if ($(window).height() >= h) {
+                $('.btnBar').show();
+            }
             if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
-                window.setTimeout(function() {
+                window.setTimeout(function () {
                     document.activeElement.scrollIntoViewIfNeeded();
                 }, 0);
             }
         });
 
-        $(".back_btn").click(function() {
+        $(".back_btn").click(function () {
             var u = navigator.userAgent,
                 app = navigator.appVersion;
             var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
@@ -278,7 +292,7 @@ $(function() {
         });
     });
 
-    $(document).on("pageInit", "#defectInfo", function(e, id, page) {
+    $(document).on("pageInit", "#defectInfo", function (e, id, page) {
         $("#inputBox").html("");
     });
 
@@ -291,7 +305,7 @@ $(function() {
         var problemParam = {
             fDeviceproblemid: problemid
         };
-        Substation.getDataByAjax(url, problemParam, function(data) {
+        Substation.getDataByAjax(url, problemParam, function (data) {
             var imgUrl = data.imgUrl;
             var defectJson = data.tDevDeviceproblem;
             var beforeimg = data.beforeimg;
@@ -306,10 +320,10 @@ $(function() {
                 var defectPositionVal = fProblemlocation.split(",")[1];
                 var defectPositionArray = defectPosition.split(";");
                 var defectPositionValArray = defectPositionVal.split(";");
-                $(defectPositionArray).each(function(index, obj) {
+                $(defectPositionArray).each(function (index, obj) {
                     $("#defectPosition").append('<input type="checkbox" disabled value="' + obj + '" id="' + index + '"><label for="' + index + '">' + obj + '</label><br>');
                 });
-                $(defectPositionValArray).each(function() {
+                $(defectPositionValArray).each(function () {
                     $("input[type='checkbox'][value='" + this + "']").attr("checked", true);
                 });
             }
@@ -339,24 +353,24 @@ $(function() {
                 }
             }
             if (beforeimg.length > 0) {
-                $.each(beforeimg, function(i, value) {
+                $.each(beforeimg, function (i, value) {
                     imgNum1++;
                     var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
                     $("#imgBox1").append(imgDiv);
                 });
             }
             if (afterimg.length > 0) {
-                $.each(afterimg, function(i, value) {
+                $.each(afterimg, function (i, value) {
                     imgNum++;
                     var imgDiv = '<div class="imgContainer" id=' + value.fDeviceproblemimgid + ' data-index=' + (i + 1) + '><img   src=' + (Substation.ipAddressFromAPP + imgUrl + "/" + value.fDeviceproblemimgurl) + ' onclick="imgDisplay(this)"></div>';
                     $("#imgBox").append(imgDiv);
                 });
             }
             if (canClick == "false") {
-                $($("#defectInfo input")).each(function() {
+                $($("#defectInfo input")).each(function () {
                     $(this).attr("readonly", true);
                 });
-                $($("#defectInfo select")).each(function() {
+                $($("#defectInfo select")).each(function () {
                     var thisInput = $(this).parent();
                     var thisValue = "";
                     if (this.selectedIndex != -1) {
@@ -377,14 +391,14 @@ $(function() {
 
 });
 
-$('#search').bind('keydown', function(event) {
+$('#search').bind('keydown', function (event) {
     if (event.keyCode == 13) {
         getSomeSubstation();
         document.activeElement.blur();
     }
 });
 
-$('#search').on("input", function() {
+$('#search').on("input", function () {
     if ($("#search").val().length > 0) {
         $(".icon.icon-clear").show();
     } else {
@@ -392,7 +406,7 @@ $('#search').on("input", function() {
     }
 });
 
-$(".icon.icon-clear").click(function() {
+$(".icon.icon-clear").click(function () {
     $("#search").val("");
     $(this).hide();
 });
@@ -404,8 +418,8 @@ function getSomeSubstation() {
         key: searchKey
     }
     $("#listContainer").empty();
-    Substation.getDataByAjaxNoLoading(url, params, function(data) {
-        $(data).each(function() {
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
+        $(data).each(function () {
             $("#listContainer").append('<li class="item-content" data-id="' + this.fSubid + '">' +
                 '<div class="item-inner">' +
                 '<div class="item-title">' + this.fSubname + '</div>' +
@@ -413,7 +427,7 @@ function getSomeSubstation() {
                 '</li>');
         });
         $("#listContainer").show();
-        $("#listContainer .item-content").click(function() {
+        $("#listContainer .item-content").click(function () {
             clickSubid = $(this).attr("data-id");
             var clickName = $(this).find(".item-title").text();
             $("#search").val(clickName);
@@ -434,7 +448,7 @@ function changeImg(e, filePath, index) {
     //获取并记录图片的base64编码
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
-    reader.onloadend = function() {
+    reader.onloadend = function () {
         // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
         var dataURL = reader.result;
         // console.log(dataURL)
