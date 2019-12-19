@@ -3,7 +3,7 @@
  * @date 2017-04-26 09:46
  * @description 存放常用工具类
  */
-var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v3";
+var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU1MDgyMDgsInVzZXJuYW1lIjoiYWRtaW4ifQ.qiKgWSZ-f5TLhv4iZlWBtaWYLo4vD0tmpXZxEZyBIP0";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "261";
@@ -338,6 +338,21 @@ var Substation = {
             break;
           case "359":
             $.toast($.i18n.prop('code_359'));
+            break;
+          case "360":
+            $.toast($.i18n.prop('code_360'));
+            break;
+          case "361":
+            $.toast($.i18n.prop('code_361'));
+            break;
+          case "362":
+            $.toast($.i18n.prop('code_362'));
+            break;
+          case "363":
+            $.toast($.i18n.prop('code_363'));
+            break;
+          case "364":
+            $.toast($.i18n.prop('code_364'));
             break;
           default:
             $.toast("操作失败");
