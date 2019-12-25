@@ -76,6 +76,7 @@ function loadPage() {
                                 "                                                    否\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\""+decodeURIComponent(this.identification)+"\"></i>\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
@@ -91,6 +92,7 @@ function loadPage() {
                                 "                                        " + thisInputName + "\n" +
                                 "                                        <div class=\"pull-right\">\n" +
                                 "                                            <input type=\"text\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" data-state=\"" + this.value + "\">\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\""+decodeURIComponent(this.identification)+"\"></i>\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
@@ -130,6 +132,11 @@ function loadPage() {
                         clickGroupTree += "-" + $(this).text();
                         localStorage.setItem("itemNum", clickItemNum);
                         localStorage.setItem("clickTree", clickGroupTree);
+                    });
+                    $(".icon-tips").unbind().click(function(){
+                        var tipStr = $(this).attr("data-value");
+                        $("#popShow").text(tipStr);
+//                        $(".open-popover").click();
                     });
                 });
             } else {
