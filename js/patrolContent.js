@@ -135,7 +135,7 @@ function loadPage() {
                     });
                     $(".icon-tips").unbind().click(function(){
                         var tipStr = $(this).attr("data-value");
-                        $("#popShow").text(tipStr);
+                        $("#popShow").text("辨识标准："+tipStr);
 //                        $(".open-popover").click();
                     });
                 });
