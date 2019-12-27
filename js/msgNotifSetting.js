@@ -105,7 +105,7 @@ jQuery(document).ready(function() {
               "/subscribeMessage",
               param,
               function(data) {
-                alert(showStr);
+                $.alert(showStr);
                 $(this).prop("checked", true);
               }
             );
