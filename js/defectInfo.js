@@ -107,7 +107,7 @@ Substation.getDataByAjax(url, problemParam, function(data) {
   if (beforeimg.length > 0) {
     $.each(beforeimg, function(i, value) {
       imgNum1++;
-      if (value.fDeviceproblemimgmin == undefined) {
+      if (value.fDeviceproblemimgurlMin == undefined) {
         var imgDiv =
           '<div class="imgContainer" id=' +
           value.fDeviceproblemimgid +
@@ -130,7 +130,7 @@ Substation.getDataByAjax(url, problemParam, function(data) {
           (Substation.ipAddressFromAPP +
             imgUrl +
             "/" +
-            value.fDeviceproblemimgmin) +
+            value.fDeviceproblemimgurlMin) +
           " name=" +
           (Substation.ipAddressFromAPP +
             imgUrl +
@@ -145,7 +145,7 @@ Substation.getDataByAjax(url, problemParam, function(data) {
   if (afterimg.length > 0) {
     $.each(afterimg, function(i, value) {
       imgNum++;
-      if (value.fDeviceproblemimgmin == undefined) {
+      if (value.fDeviceproblemimgurlMin == undefined) {
         var imgDiv =
           '<div class="imgContainer RectificationPIC" id=' +
           value.fDeviceproblemimgid +
@@ -172,7 +172,7 @@ Substation.getDataByAjax(url, problemParam, function(data) {
           (Substation.ipAddressFromAPP +
             imgUrl +
             "/" +
-            value.fDeviceproblemimgmin) +
+            value.fDeviceproblemimgurlMin) +
           " name=" +
           (Substation.ipAddressFromAPP +
             imgUrl +
