@@ -232,11 +232,12 @@ jQuery(document).ready(function () {
                         $(data.taskUserList).each(function () {
                             if (Substation.loginUserid == this.fUserid) {
                                 var explain = this.fExplain;
-                                if (explain.length > 0) {
+                                if (explain!=undefined) {
                                     $("#textareaDetail").html(explain);
                                 }
                             }
                         });
+                        $("#textareaDetail").attr("placeholder", "");
                         $("#textareaDetail").attr("readonly", true);
                         // $("#addVarContain124").css("display", "none");
                     }

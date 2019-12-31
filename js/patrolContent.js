@@ -109,6 +109,7 @@ function loadPage() {
                                 "</div>\n" +
                                 "</div>");
                         }
+                        $(".icon.icon-tips").hide();
                     } else {
                         $(".buttons-tab").append("<a href=\"#" + obj.fSubdeviceinfoid + "\" id=\"" + itemNum + "\" class=\"tab-link button\">" + obj.fDevicename + "</a>");
                         $(".content-block .tabs").append("<div id=\"" + obj.fSubdeviceinfoid + "\" class=\"tab pull-to-refresh-content\">\n" +

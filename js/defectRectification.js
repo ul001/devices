@@ -7,6 +7,7 @@ if(needUpdate=="true"){
     localStorage.removeItem("need-update");
     location.reload();
 }
+localStorage.setItem("need-refresh", "true");
 
 /*window.addEventListener('pageshow', function (e) {
     //ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
