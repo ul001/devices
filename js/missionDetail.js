@@ -167,11 +167,11 @@ jQuery(document).ready(function () {
                             return false;
                         }
                     });
-//                    if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
-//                        $("#clickManager").css("display", "none");
-//                    } else {
-//                        $("#addVarContain124").css("display", "none");
-//                    }
+                    //                    if (taskchargerid != Substation.loginUserid && taskCreatId != Substation.loginUserid) {
+                    //                        $("#clickManager").css("display", "none");
+                    //                    } else {
+                    //                        $("#addVarContain124").css("display", "none");
+                    //                    }
 
 
                     /*                    if (missionTypeid != 1) {
@@ -232,7 +232,7 @@ jQuery(document).ready(function () {
                         $(data.taskUserList).each(function () {
                             if (Substation.loginUserid == this.fUserid) {
                                 var explain = this.fExplain;
-                                if (explain!=undefined) {
+                                if (explain != undefined) {
                                     $("#textareaDetail").html(explain);
                                 }
                             }
