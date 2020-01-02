@@ -262,6 +262,8 @@ jQuery(document).ready(function () {
                             $.hidePreloader();
                             $.toast("获取位置超时,建议打开GPS定位服务。");
                             return;
+                        }else{
+                            $.hidePreloader();
                         }
                         if (loc != "" && loc != null) {
                             var array = loc.split(";");
@@ -287,7 +289,7 @@ jQuery(document).ready(function () {
                         if (fDistance > 0 && fDistance < 2147483647) {
                             param['fDistance'] = fDistance;
                         }
-                        //    alert(""+taskID+","+lon+","+lat+","+addr);
+//                            alert(""+taskID+","+lon+","+lat+","+addr);
                         Substation.postDataByAjax("/taskSingIn", param, function (data) {
                             if (isAndroid) {
                                 android.refresh();
