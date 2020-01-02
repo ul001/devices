@@ -186,7 +186,13 @@ Substation.getDataByAjax(url, problemParam, function(data) {
   }
   if (canClick == "false") {
     $($("input")).each(function() {
-      $(this).attr("readonly", true);
+      if($(this).attr("id")=="fProblemharm"||$(this).attr("id")=="fResolution"){
+        var thisValue = $(this).val();
+        var thisInput = $(this).parent();
+        thisInput.html('<div class="item-label">'+thisValue+'</div>');
+      }else{
+        $(this).attr("readonly", true);
+      }
     });
     $($("select")).each(function() {
       var thisInput = $(this).parent();
