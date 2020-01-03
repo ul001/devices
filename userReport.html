@@ -12,27 +12,75 @@
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="libs/light7-swipeout.css" />
     <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/userReport.css">
 
 </head>
 
 <body>
 <div class="page-group">
-
     <div class="page">
         <header class="bar bar-nav bar_color">
-            <h1 class="title title_color">用户报告</h1>
+            <a class="button button-link button-nav pull-left click_btn back_btn">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <a class="button button-link button-nav pull-right open-panel">
+                <i class="icon icon-selectSome"></i>
+            </a>
+            <h1 class="title title_color">
+                用户报告
+            </h1>
         </header>
         <div class="content">
             <div class="list-block">
-
+                <img src="img/jietu.png" style="width:100%;">
             </div>
+        </div>
+    </div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+        <div class="content-block">
+            <div>
+                <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
+                    <a href="#" class="button" id="yestoday">昨日</a>
+                    <a href="#" class="button" id="thisMonth">当月</a>
+                    <a href="#" class="button" id="lastMonth">上月</a></p>
+            </div>
+            <div>
+                <label>时间选择</label><br>
+                <input type="text" id="dateStart" placeholder="开始日期" readonly/> -
+                <input type="text" id="dateEnd" placeholder="截止日期" readonly/>
+            </div>
+            <div>
+                <label>变电所名称</label><br>
+                <div class="searchbar">
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='请输入关键字'/><i class="icon icon-clear"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="list-block">
+                <ul id="listContainer">
+                </ul>
+            </div>
+        </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#"
+                                   class="button button-big button-fill button-cancel close-panel">取消</a>
+            </div>
+            <div class="col-50"><a href="#"
+                                   class="button button-big button-fill button-success" id="searchBtn">查询</a></div>
         </div>
     </div>
 </div>
 <script src="libs/jquery-1.12.4.min.js"></script>
+<script src="js/lib/jquery.fullpage.js"></script>
 <script src="libs/light7.min.js"></script>
 <script src='libs/cn.min.js'></script>
 <script src="libs/light7-swiper.min.js"></script>
+<script src="libs/tools.js"></script>
+<script src='js/userReport.js'></script>
 </body>
 
 </html>
