@@ -1,0 +1,867 @@
+.ReportImg {
+  border-bottom: 1px solid #ccc;
+  float: left;
+  width: 100%;
+  /*background-color:#d7f5f5;*/
+}
+
+.ReportImg input[type="checkbox"] {
+  display: inline-block;
+  vertical-align: middle;
+  width: 18px;
+  margin: 0 5px 0 10px;
+}
+
+.ListImg {
+  width: 406px;
+  float: right;
+  border: 1px solid #eee;
+  /*height:70px;*/
+  height: 58px;
+  /*min-height:10px;*/
+}
+
+.List2 img {
+  height: 45px;
+  /*width:60px;*/
+  margin: 5px 0 2px 2px;
+}
+
+.Print .right-main {
+  padding-top: 0;
+  padding-right: 0;
+}
+
+.search,
+.export {
+  border: 0;
+  color: #FFF;
+  padding: 0 0 1px 28px;
+  margin-right: 10px;
+}
+
+.search-area {
+  width: 160px;
+  height: 35px;
+  margin: 6px 0 0 7px;
+  position: relative;
+  float: left;
+}
+
+.search-area .search-input {
+  color: #71777d;
+  padding: 0 35px 0 10px;
+  outline: none;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #D9DDE1;
+  background-color: #FFF;
+  border-radius: 15px;
+}
+
+.SAall {
+  width: 256px;
+}
+
+.search-input::-webkit-input-placeholder {
+  color: #bbb;
+}
+
+.row .energy-chart:hover,
+.Gold-pic:hover,
+.enter:hover,
+.search:hover,
+.export:hover,
+#BigDom:hover,
+#SimDom:hover,
+.before:hover,
+.after:hover,
+.energy-chart:hover {
+  background-color: #018f9b;
+}
+
+.showhide-search {
+  width: 30px;
+  height: 25px;
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  /* border: 1px solid red; */
+  cursor: pointer;
+  background: url(../image/search-input.png) no-repeat 7px 4px;
+}
+
+.showhide-search:hover {
+  background: url(../image/search-input2.png) no-repeat 7px 4px;
+  background-color: #BBE4F9;
+  border-radius: 15px;
+}
+
+.report-p3 #event {
+  text-align: left;
+}
+
+.report-p5 .daycurve-p1,
+.report-p5 .daycurve-p2 {
+  text-indent: 30px;
+}
+
+.report-p6 .bootstrap-table {
+  overflow: hidden;
+}
+
+.report-p6 .fixed-table-body,
+.report-p6 .fixed-table-body #liveDiv {
+  overflow: hidden;
+}
+
+.CustomReport .report-p6 #operation {
+  text-indent: 20px;
+  font-size: 15px;
+}
+
+.CustomReport .reportcollect-search {
+  background: #3db3ff;
+  padding-left: 5px;
+}
+
+.modal-custom .fixed-table-container thead th:first-child {
+  width: 50px;
+}
+
+.modal-custom .bootstrap-table .table:not(.table-condensed)>tbody>tr>td:first-child {
+  width: 50px !important;
+}
+
+.modal-custom .basicdata .bootstrap-table input {
+  width: 50px;
+}
+
+.daycurve-h4 {
+  margin-top: 25px;
+}
+
+.CustomReport .daycurve,
+.CustomReport .daycurve2 {
+  width: 530px;
+  height: 250px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+}
+
+.green .report-p6 .fixed-table-body #liveDiv thead tr th,
+.green .report-p4 .transformer thead tr th,
+.green .report-p3 #eventTable thead tr th,
+.green .report-p4 #monitorTable thead tr th {
+  background-color: #01ada8;
+  color: #FFF;
+  text-align: center;
+}
+
+.blue .report-p6 .fixed-table-body #liveDiv thead tr th,
+.blue .report-p4 .transformer thead tr th,
+.blue .report-p3 #eventTable thead tr th,
+.blue .report-p4 #monitorTable thead tr th {
+  background-color: #3DB3FF;
+  color: #FFF;
+  text-align: center;
+}
+
+#refresh .report-p3 {
+  margin-bottom: 10px;
+}
+
+.CustomReport .report-p4,
+.CustomReport .report-p5 {
+  margin-bottom: 10px;
+  padding: 30px;
+}
+
+.report-p5 h4:first-child {
+  font-size: 22px;
+}
+
+.report-p4 .ranking {
+  width: 530px;
+  height: 280px;
+  margin-bottom: 10px;
+  border: solid 1px #eee;
+}
+
+.ranking-p {
+  text-align: center;
+}
+
+.calculatelist .fixed-table-body {
+  height: 88%;
+}
+
+.signalscroll .basicdata .fixed-table-body {
+  height: auto;
+}
+
+.expireDiv {
+  width: 800px;
+  height: 300px;
+  padding-top: 15%;
+  margin: 0 auto;
+}
+
+.expireDiv .number {
+  display: block;
+  float: left;
+  font-size: 20px;
+}
+
+.expireDiv .row {
+  margin: 0 auto;
+  width: 700px;
+  height: 100px;
+}
+
+.expireDiv #acrelKey {
+  width: 450px;
+  height: 35px;
+  float: left;
+  margin-right: 25px;
+}
+
+.expireDiv h1 {
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: 45px;
+}
+
+/*用户报告*/
+.powerContain {
+  width: 500px;
+  height: 350px;
+  margin: 0 auto;
+}
+
+#eveDiv,
+#sigeveDiv {
+  text-align: center;
+}
+
+.green #eveDiv thead th,
+.green #sigeveDiv thead th {
+  text-align: center;
+  background-color: #01ada8;
+  color: #FFF;
+}
+
+.blue #eveDiv thead th,
+.blue #sigeveDiv thead th {
+  text-align: center;
+  background-color: #3DB3FF;
+  color: #FFF;
+}
+
+.CustomPrint {
+  position: fixed;
+  right: 50px;
+  top: 100px;
+  width: 95px;
+  height: 68px;
+  padding: 0;
+  border-radius: 5px;
+  border: 0;
+  color: #FFF;
+  background-image: url(../image/print.png);
+  background-size: 40px 30px;
+  background-position: 27px 10px;
+  background-repeat: no-repeat;
+  padding-top: 34px;
+}
+
+.blue .CustomPrint {
+  background-color: #3DB3FF;
+}
+
+.green .CustomPrint {
+  background-color: #01ada8;
+}
+
+.report-p6 table {
+  font-size: 7px !important;
+}
+
+.report-p6 table td {
+  padding: 5px 5px !important;
+}
+
+.page1-bg {
+  position: absolute;
+  bottom: 0;
+  left: -5px;
+}
+
+.CustomReport .typeList {
+  float: left;
+  width: 477px;
+  color: #898989;
+}
+
+.CustomReport .typeList label {
+  width: 407px;
+  color: #000000;
+  float: right;
+  padding: 0;
+  margin-bottom: 0;
+}
+
+.CustomReport .typeListLast {
+  margin-bottom: 0;
+}
+
+.CustomReport .messageContent {
+  text-indent: 2em;
+}
+
+.CustomReport .MessageBox {
+  border: 1px solid #EEE;
+  overflow: hidden;
+}
+
+.CustomReport .liveMessage {
+  border-bottom: 1px dotted #C9CACA;
+  height: auto;
+  overflow: hidden;
+  padding: 2px 0;
+  clear: both;
+}
+
+.CustomReport .liveMessage .Num {
+  width: 55px;
+  height: 100px;
+}
+
+.CustomReport .liveMessage .Num .NumList {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin-left: 5px;
+  text-align: center;
+  background: linear-gradient(to right, #ffd052, #fcd645);
+  border-radius: 25px;
+  margin-top: 10px;
+  color: #FFFFFF;
+}
+
+.CustomReport .liveMessage .Num,
+.CustomReport .liveMessage .ListMessageR,
+.CustomReport .liveMessage .List2 {
+  float: left;
+}
+
+.CustomReport .liveMessage .ListMessageR {
+  width: 476px;
+}
+
+.CustomReport .liveMessage .ListMessageR p {
+  color: #898989;
+  margin-bottom: 0;
+}
+
+.CustomReport .liveMessage .ListMessageR p label {
+  color: #000000;
+}
+
+.CustomReport .liveMessage .List2 {
+  color: #898989;
+  width: 50%;
+  height: 30px;
+  line-height: 7px;
+}
+
+.CustomReport .liveMessage .ListTime {
+  color: #898989;
+  width: 50%;
+  height: 30px;
+  line-height: 23px;
+}
+
+.CustomReport .liveMessage .List2 label {
+  color: #000000;
+}
+
+.CustomReport #StationName {
+  width: 250px;
+}
+
+.CustomReport label {
+  padding-top: 8px;
+  font-weight: normal;
+}
+
+.containDiv {
+  margin-top: 10px;
+  padding-left: 200px;
+}
+
+.CustomReport .search {
+  width: 150px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.CustomReport {
+  color: #000;
+}
+
+.CustomReport #StationName,
+.CustomReport .form-ib,
+.CustomReport .search,
+.CustomReport .energy-date {
+  float: left;
+}
+
+.CustomReportMenu {
+  padding: 10px;
+  width: 300px;
+  height: calc(100% - 50px);
+  border: 1px solid #b4b4b5;
+  position: fixed;
+  left: 170px;
+  top: 20px;
+  z-index: 23;
+}
+
+.CustomReport .liveMessage .imgHideDiv {
+  width: 100%;
+  /*height:120px;*/
+  height: auto;
+  clear: both;
+  /*overflow:hidden;*/
+  margin-bottom: 5px;
+}
+
+.CustomReportMenu .SAall {
+  width: 272px;
+}
+
+.CustomReportMenu .search-area,
+.CustomReportMenu .search-area .search-input {
+  height: 35px;
+}
+
+.CustomReportMenu .search-area {
+  margin: 6px 0 10px 5px;
+}
+
+.CustomReportMenu .showhide-search {
+  top: 5px;
+}
+
+.green .CustomReportMenu p {
+  background-color: #01ada8;
+  color: #FFF;
+  padding: 10px 10px 10px 10px;
+  margin: -10px -10px 10px -10px;
+}
+
+.blue .CustomReportMenu p {
+  background-color: #3DB3FF;
+  color: #FFF;
+  padding: 10px 10px 10px 10px;
+  margin: -10px -10px 10px -10px;
+}
+
+.CustomReportMenu .signal-date,
+.CustomReportMenu .collection-date {
+  padding-top: 5px;
+}
+
+.CustomReportMenu input {
+  width: 214px;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding-left: 10px;
+}
+
+.green .CustomReportMenu .CMsearch {
+  width: 55px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #01ada8;
+  color: #FFF;
+  border: 0;
+  margin-left: 5px;
+}
+
+.blue .CustomReportMenu .CMsearch {
+  width: 55px;
+  height: 35px;
+  border-radius: 5px;
+  background-color: #3DB3FF;
+  color: #FFF;
+  border: 0;
+  margin-left: 5px;
+}
+
+.CustomReportMenu .reportList {
+  width: 100%;
+  height: calc(100% - 210px);
+  margin: 10px 0 5px 0;
+}
+
+.CustomReportMenu .pagination {
+  margin: 0 0 5px 0;
+}
+
+.CustomReportMenu nav {
+  float: right;
+  margin-right: 20px;
+}
+
+.CustomReportMenu .reportList2 {
+  width: 100%;
+  height: calc(100% - 84px);
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 8px;
+  padding: 5px 5px 5px 10px;
+  overflow: auto;
+}
+
+.CustomReportMenu .reportList2 li span {
+  display: block;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.double {
+  position: fixed;
+  top: 170px;
+  right: 59px;
+}
+
+.double input {
+  width: 17px;
+  height: 17px;
+  vertical-align: -4px;
+}
+
+.double span {
+  padding-left: 2px;
+}
+
+.CustomReportMenu .input-group .form-control:first-child {
+  width: 169px;
+}
+
+/*.CustomReportMenu .search {*/
+/*float: left;*/
+/*width: 80px;*/
+/*height: 35px;*/
+/*border: 0;*/
+/*border-radius: 5px;*/
+/*color: #FFFFFF;*/
+/*}*/
+/*.blue .CustomReportMenu .search {*/
+/*background-color: #389bfc;*/
+/*}*/
+/*.green .CustomReportMenu .search {*/
+/*background-color: #01ada8;*/
+/*}*/
+.CustomReportMenu .select {
+  margin-left: 88px;
+  padding-left: 1px;
+}
+
+.CustomReportMenu .reportcollect-search {
+  padding-left: 2px;
+  margin-right: 0;
+}
+
+.green .CustomReportMenu .CMsearch:hover,
+.green .CustomPrint:hover {
+  background-color: #01ada8;
+}
+
+.blue .CustomReportMenu .CMsearch:hover,
+.blue .CustomPrint:hover {
+  background-color: #389bfc;
+}
+
+.CustomReportMenu #startDate,
+.CustomReportMenu #endDate {
+  margin-bottom: 8px;
+  margin-right: 0;
+}
+
+.CustomReport .select {
+  padding-left: 300px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  height: 52px;
+  width: calc(100% - 189px);
+  clear: both;
+  top: 82px;
+  padding-top: 10px;
+  background-color: #FFF;
+  position: fixed;
+  z-index: 22;
+}
+
+.CustomReport #myModal .search {
+  width: 90px;
+}
+
+.CustomReport #myModal .substationlist {
+  float: left;
+}
+
+.report-p1 {
+  width: 595px;
+  height: 820px;
+  clear: both;
+  margin: 0 auto;
+  padding: 30px;
+  position: relative;
+  border: 1px solid #000;
+  margin-bottom: 10px;
+}
+
+.report-p1 h1 {
+  text-align: center;
+  margin-top: 140px;
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 80px;
+}
+
+.report-p1 .message {
+  margin: 0 auto;
+  width: 400px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  background-color: #eee;
+  clear: both;
+}
+
+#powerString,
+.daycurve-p1,
+.daycurve-p2 {
+  font-size: 15px;
+  text-indent: 25px;
+  line-height: 27px;
+}
+
+.report-p2 {
+  position: relative;
+  width: 595px;
+  height: 820px;
+  padding: 30px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  margin-bottom: 10px;
+}
+
+.report-p2 h3 {
+  margin-bottom: 20px;
+}
+
+.report-p2 .power {
+  width: 529px;
+  height: 320px;
+  border: 1px solid #aaa;
+}
+
+.report-p2 table {
+  text-align: center;
+}
+
+.page2-bg,
+.page3-bg {
+  width: 532px;
+  height: 90px;
+  z-index: -5;
+  margin-left: 32px;
+  position: absolute;
+  bottom: 0;
+}
+
+#inspection1 .report-p6 {
+  margin-bottom: 10px;
+}
+
+.CustomReport .report-p3 {
+  position: relative;
+  width: 595px;
+  height: 820px;
+  padding: 30px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border: 1px solid #000;
+}
+
+.CustomReport .report-p3 h3 {
+  margin-bottom: 20px;
+}
+
+.CustomReport .report-p3 p {
+  font-size: 15px;
+}
+
+.CustomReport .report-p3 .change {
+  margin-top: 30px;
+}
+
+.report-p6 .live {
+  width: 545px;
+  height: 500px;
+  border: 1px solid #eee;
+}
+
+.report-p4,
+.report-p5,
+.report-p6 {
+  position: relative;
+  width: 595px;
+  height: 820px;
+  padding: 30px;
+  margin: 0 auto;
+  margin-bottom: 10px !important;
+  border: 1px solid #000;
+}
+
+.CustomReport #down,
+.CustomReport #up {
+  cursor: pointer;
+}
+
+.CustomReport #down:hover,
+.CustomReport #up:hover {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.CustomReport #down {
+  padding: 8px 0 0 35px;
+  background-image: url(../image/before.png);
+  background-repeat: no-repeat;
+  background-position: 10px 8px;
+}
+
+.CustomReport #up {
+  padding: 8px 12px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-image: url(../image/after.png);
+  background-repeat: no-repeat;
+  background-position: 67px 8px;
+}
+
+.report-table {
+  width: 500px;
+  height: 300px;
+  border: 1px solid #000;
+}
+
+.report-p1 .message tr td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.report-p1 .message tr td:first-child {
+  width: 95px;
+}
+
+#sublist li input {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: -4px;
+  float: left;
+  clear: left;
+}
+
+#startDate,
+#endDate {
+  width: 150px;
+  float: left;
+}
+
+#sublist li {
+  margin-bottom: 3px;
+  list-style: none;
+}
+
+#sublist li input {
+  width: 18px;
+  height: 18px;
+  margin-right: 5px;
+  vertical-align: -4px;
+  float: left;
+  clear: left;
+}
+
+.energy-date {
+  float: left;
+  font-weight: normal;
+}
+
+.search-area .search-input {
+  color: #71777d;
+  padding: 0 35px 0 10px;
+  outline: none;
+  width: 100%;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #D9DDE1;
+  background-color: #FFF;
+  border-radius: 15px;
+}
+
+.blue .pagination>.active>a {
+  background: #318ef5 !important;
+}
+
+.green .pagination>.active>a {
+  background: #08909e !important;
+}
+
+.blue table th {
+  background-color: #3db3ff;
+  color: #FFF;
+}
+
+.green table th {
+  background-color: #01ada8;
+  color: #FFF;
+}
+
+
+@media (max-width: 1440px) {
+  .CustomReportMenu {
+    top: 20px;
+    left: 45px;
+    height: calc(100% - 35px);
+  }
+
+  .CustomPrint {
+    top: 50px;
+  }
+
+  .double {
+    position: fixed;
+    top: 125px;
+    right: 59px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .CustomReportMenu {
+    left: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .CustomReportMenu {
+    left: 0;
+  }
+}

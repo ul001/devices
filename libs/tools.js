@@ -57,7 +57,7 @@ var Substation = {
   loadLanguageJS: function () {
     var script = document.createElement("script");
     script.src = "libs/jquery.i18n.properties.js";
-    document.body.appendChild(script);
+    // document.body.appendChild(script);
   },
 
   showCodeTips: function (type, code) {
@@ -642,7 +642,8 @@ var Substation = {
   Common: {
     addHead: function () {
       // return "http://192.168.255.20:8080/SubstationWEBV2/";
-      return "http://116.236.149.162:8090/SubstationWEBV2/v1/";
+      // return "http://116.236.149.165:8090/SubstationWEBV2/v4/";
+      return "http://116.236.149.165:8090/SubstationWEBV2/";
     },
 
     requestData: function (url, params, successCallback) {
