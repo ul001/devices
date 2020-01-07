@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/mainPrint.css" />
+    <!-- <link rel="stylesheet" href="app/css/print-main2.css" media="print"> -->
+    <!-- <script type="text/javascript" src="app/lib/jquery/jquery-1.11.0.js"></script> -->
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <!--bootstrap-->
+    <!-- <script type="text/javascript" src="app/lib/bootstrap/master/js/bootstrap.min.js"></script> -->
+    <!-- <link rel="stylesheet" type="text/css" href="app/css/bootstrap.min.css" /> -->
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap-table.min.css" />
+    <script src="libs/bootstrap-table.min.js"></script>
+    <!--bootstrap-table表格-->
+    <!-- <link rel="stylesheet" type="text/css" href="app/lib/bootstrap/bootstrap-table/bootstrap-table.min.css">
+    <script type="text/javascript" src="app/lib/bootstrap/bootstrap-table/bootstrap-table.min.js"></script> -->
+    <!--表格分页-->
+    <script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
+    <!--时间插件-->
+    <!-- <link rel="stylesheet" type="text/css"
+        href="app/lib/bootstrap/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript"
+        src="app/lib/bootstrap/bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript"
+        src="app/lib/bootstrap/bootstrap-datetimepicker-master/js/locales/bootstrap-datetimepicker.zh-CN.js"></script> -->
+    <!--提示框-->
+    <!--<link rel="stylesheet" type="text/css" href="app/lib/messagebox/css/style.css">-->
+    <!--<script type="text/javascript" src="app/lib/messagebox/script/messagebox.js"></script>-->
+    <!--echarts图表插件-->
+    <!--<script type="text/javascript" src="app/lib/echarts3/echarts.min.js"></script>-->
+    <!--<script type="text/javascript" src="app/lib/echarts3/macarons.js"></script>-->
+    <!--ztree-->
+    <!--<link rel="stylesheet" type="text/css" href="app/lib/zTree/demo.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="app/lib/zTree/zTreeStyle.css">-->
+    <!--<script type="text/javascript" src="app/lib/zTree/fuzzysearch.js"></script>-->
+    <!--<script type="text/javascript" src="app/lib/zTree/jquery.ztree.core.js"></script>-->
+    <!--<script type="text/javascript" src="app/lib/zTree/jquery.ztree.excheck.js"></script>-->
+    <!--<script type="text/javascript" src="app/lib/zTree/jquery.ztree.exhide.min.js"></script>-->
+    <!--<script type="text/javascript" src="app/lib/zTree/jquery.ztree.exedit.js"></script>-->
+    <!--中英文切换-->
+    <!-- <script type="text/javascript" src="app/lib/jquery/jquery.i18n.properties.js"></script> -->
+
+    <!--cookie-->
+    <!-- <script type="text/javascript" src="app/lib/jquery/jquery-cookie/jquery.cookie.js"></script> -->
+    <!--下拉框多选-->
+    <!--<link rel="stylesheet" type="text/css" href="app/lib/jquery/jquery-multiselect/multiple-select.css">-->
+    <!--<script type="text/javascript" src="app/lib/jquery/jquery-multiselect/multiple-select.js"></script>-->
+    <!--Excel表格导出-->
+    <!--<script type="text/javascript" src="app/lib/jquery/jquery-export/jquery.base64.js"></script>-->
+    <!--<script type="text/javascript" src="app/lib/jquery/jquery-export/xlsx.core.min.js"></script>-->
+    <!--<script type="text/javascript" src="app/lib/jquery/jquery-export/tableExport.min.js"></script>-->
+    <!--treeView-->
+    <script type="text/javascript" src="libs/bootstrap-treeview.js"></script>
+    <!--转圈加载-->
+    <!-- <link rel="stylesheet" type="text/css" href="app/lib/jquery/jquery-loading/dist/showLoading.css"> -->
+    <script type="text/javascript" src="libs/jquery.showLoading.min.js"></script>
+    <!--配置项-->
+    <script type="text/javascript" src="libs/config.js"></script>
+    <!--搜索插件-->
+    <!-- <script type="text/javascript" src="app/JS/search.js"></script> -->
+    <!--模态框-->
+    <!--<script type="text/javascript" src="app/JS/dblmodal.js"></script>-->
+    <!--提示码-->
+    <!-- <script type="text/javascript" src="app/JS/code.js"></script> -->
+    <!--多选标签-->
+    <!--<link rel="stylesheet" type="text/css" href="app/lib/input_tags/input_tags.css">-->
+    <!--<script type="text/javascript" src="app/lib/input_tags/input_tags.js"></script>-->
+    <!-- <script type="text/javascript" src="app/lib/bootstrap/bootstrap-table/bootstrap-table-zh-CN.min.js"></script> -->
+    <script type="text/javascript" src="libs/highcharts.js"></script>
+    <script type="text/javascript" src="libs/echarts.min.js"></script>
+    <script type="text/javascript" src="libs/imgLazy.js"></script>
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <!-- <script src='libs/cn.min.js'></script> -->
+    <!--常用功能封装插件-->
+    <script type="text/javascript" src="libs/tools.js"></script>
+    <script type="text/javascript" src="js/CustomReport.js"></script>
+    <!--页面引用Js-->
+    <!-- <script type="text/javascript" id="script_1"></script>
+    <script>
+        document.getElementById("script_1").src = "app/JS/CustomReport.js?abv=" + Math.random();
+    </script> -->
+    <style>
+        #outterdiv .add-a {
+            position: absolute;
+            width: 500%;
+            height: 600%;
+            background: #000000;
+            opacity: .5;
+            left: -800px;
+            top: -500px;
+            z-index: -999;
+        }
+
+        .img {
+            cursor: pointer;
+        }
+
+        .CustomReportMenu .search {
+            float: left;
+            width: 80px;
+            height: 35px;
+            border: 0;
+            border-radius: 5px;
+            color: #FFFFFF;
+        }
+
+        .blue .CustomReportMenu .search {
+            background-color: #389bfc;
+        }
+
+        .green .CustomReportMenu .search {
+            background-color: #01ada8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="right-main" style="overflow: auto">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <a class="button button-link button-nav pull-right open-panel">
+                <i class="icon icon-selectSome"></i>
+            </a>
+            <h1 class="title title_color">
+                用户报告
+            </h1>
+        </header>
+        <div class="select CustomReportMenu">
+            <p>用户报告信息</p>
+            <label class="energy-date signal-date">起始日期：</label>
+            <div id="startDate" class="input-group date form_date count-data signal-date-sel" data-date=""
+                data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input id="startDateBox" class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+            <label class="energy-date collection-date">截止日期：</label>
+            <div id="endDate" class="input-group date form_date count-data signal-date-sel" data-date=""
+                data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                <input id="endDateBox" class="form-control" size="16" type="text" value="" readonly>
+                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+            </div>
+
+            <div class="search-area SAall" data-search="top-banner" id="searchDiv">
+                <input type="text" class="search-input" id="TSContent" placeholder="请输入检索内容" />
+                <div class="showhide-search" data-show="no" id="triangleSearch"></div>
+                <a href="javascript:;" class="clear clearlistAll" id="clearMeter"></a>
+            </div>
+            <div class="ReportImg">
+                <input type="checkbox" id="printImg" checked>显示缺陷图片/整改图片
+            </div>
+            <div class="reportList">
+                <div class="reportList2" id="sublist"></div>
+                <nav>
+                    <ul class="pagination" id="pagination"></ul>
+                </nav>
+            </div>
+            <button class="search select" type="button" id="checkAllList">全选当页</button>
+            <button class="search reportcollect-search" type="button" id="addConfirm">确 定</button>
+        </div>
+        <!-- <button type="button" class="CustomPrint" id="print">打 印</button>
+        <div class="double"><input type="checkbox" id="double" /><span>双面打印</span></div> -->
+        <div class="CustomReport" id="CustomReport"></div>
+
+        <div id="outterdiv" style="position: fixed;z-index: 1999;display: none">
+            <div id="innerdiv">
+                <img id="bigimg" style="border: 5px solid #fff;" src="" />
+            </div>
+            <div class="add-a" style="position: fixed;"></div>
+        </div>
+
+    </div>
+</body>
+
+</html>
