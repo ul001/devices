@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="libs/fullpage.css" />
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/userReport.css">
 
@@ -32,8 +33,16 @@
             </h1>
         </header>
         <div class="content">
-            <div class="list-block">
-                <img src="img/jietu.png" style="width:100%;">
+            <div id="fullpage">
+                <div id="firstPage" class="section">
+                    <img src="img/jietu.png" style="width:100%;">
+                </div>
+                <div id="secondPage" class="section">
+                    <img src="img/jietu.png" style="width:100%;">
+                </div>
+                <div id="thirdPage" class="section">
+                    <img src="img/jietu.png" style="width:100%;">
+                </div>
             </div>
         </div>
     </div>
@@ -75,12 +84,17 @@
     </div>
 </div>
 <script src="libs/jquery-1.12.4.min.js"></script>
-<script src="js/lib/jquery.fullpage.js"></script>
+<script src="libs/fullpage.js"></script>
 <script src="libs/light7.min.js"></script>
 <script src='libs/cn.min.js'></script>
 <script src="libs/light7-swiper.min.js"></script>
 <script src="libs/tools.js"></script>
 <script src='js/userReport.js'></script>
+<ul id="myMenu">
+    <li data-menuanchor="firstPage" class="active"><a href="#firstPage">First section</a></li>
+    <li data-menuanchor="secondPage"><a href="#secondPage">Second section</a></li>
+    <li data-menuanchor="thirdPage"><a href="#thirdPage">Third section</a></li>
+</ul>
 </body>
 
 </html>
