@@ -1,7 +1,7 @@
-/*$('#fullpage').fullpage({
+$('#fullpage').fullpage({
 		sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
-		'navigation': true
-});*/
+//		'navigation': true
+});
 $(".contacts-block").indexList();
 var selectSubid = "";
 var clickSubid = "";
