@@ -4,20 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <title>用户报告</title>
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" type="text/css" href="css/mainPrint.css" />
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="css/CustomReport.css">
     <!-- <link rel="stylesheet" href="app/css/print-main2.css" media="print"> -->
     <!-- <script type="text/javascript" src="app/lib/jquery/jquery-1.11.0.js"></script> -->
-    <script src="libs/jquery-1.12.4.min.js"></script>
     <!--bootstrap-->
     <!-- <script type="text/javascript" src="app/lib/bootstrap/master/js/bootstrap.min.js"></script> -->
     <!-- <link rel="stylesheet" type="text/css" href="app/css/bootstrap.min.css" /> -->
-    <link rel="stylesheet" type="text/css" href="libs/bootstrap-table.min.css" />
-    <script src="libs/bootstrap-table.min.js"></script>
     <!--bootstrap-table表格-->
     <!-- <link rel="stylesheet" type="text/css" href="app/lib/bootstrap/bootstrap-table/bootstrap-table.min.css">
     <script type="text/javascript" src="app/lib/bootstrap/bootstrap-table/bootstrap-table.min.js"></script> -->
     <!--表格分页-->
-    <script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
     <!--时间插件-->
     <!-- <link rel="stylesheet" type="text/css"
         href="app/lib/bootstrap/bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
@@ -52,12 +54,12 @@
     <!--<script type="text/javascript" src="app/lib/jquery/jquery-export/xlsx.core.min.js"></script>-->
     <!--<script type="text/javascript" src="app/lib/jquery/jquery-export/tableExport.min.js"></script>-->
     <!--treeView-->
-    <script type="text/javascript" src="libs/bootstrap-treeview.js"></script>
+<!--    <script type="text/javascript" src="libs/bootstrap-treeview.js"></script>-->
     <!--转圈加载-->
     <!-- <link rel="stylesheet" type="text/css" href="app/lib/jquery/jquery-loading/dist/showLoading.css"> -->
-    <script type="text/javascript" src="libs/jquery.showLoading.min.js"></script>
+<!--    <script type="text/javascript" src="libs/jquery.showLoading.min.js"></script>-->
     <!--配置项-->
-    <script type="text/javascript" src="libs/config.js"></script>
+
     <!--搜索插件-->
     <!-- <script type="text/javascript" src="app/JS/search.js"></script> -->
     <!--模态框-->
@@ -68,16 +70,10 @@
     <!--<link rel="stylesheet" type="text/css" href="app/lib/input_tags/input_tags.css">-->
     <!--<script type="text/javascript" src="app/lib/input_tags/input_tags.js"></script>-->
     <!-- <script type="text/javascript" src="app/lib/bootstrap/bootstrap-table/bootstrap-table-zh-CN.min.js"></script> -->
-    <script type="text/javascript" src="libs/highcharts.js"></script>
-    <script type="text/javascript" src="libs/echarts.min.js"></script>
-    <script type="text/javascript" src="libs/imgLazy.js"></script>
-    <link rel="stylesheet" href="libs/light7.min.css">
-    <link rel="stylesheet" href="libs/light7-swiper.min.css">
-    <link rel="stylesheet" href="css/CustomReport.css">
     <!-- <script src='libs/cn.min.js'></script> -->
     <!--常用功能封装插件-->
-    <script type="text/javascript" src="libs/tools.js"></script>
-    <script type="text/javascript" src="js/CustomReport.js"></script>
+<!--    <script type="text/javascript" src="libs/tools.js"></script>-->
+
     <!--页面引用Js-->
     <!-- <script type="text/javascript" id="script_1"></script>
     <script>
@@ -120,8 +116,8 @@
 
 <body>
 
-    <div class="page-group">
-        <div class="right-main" style="overflow: auto">
+    <div class="page-current">
+<!--        <div class="right-main" style="overflow: auto">-->
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
                     <span class="icon icon-left"></span>
@@ -232,7 +228,18 @@
                 <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn">查询</a></div>
             </div>
         </div>
-    </div>
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src='libs/cn.min.js'></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
+    <script type="text/javascript" src="libs/config.js"></script>
+    <script type="text/javascript" src="libs/highcharts.js"></script>
+    <script type="text/javascript" src="libs/echarts.min.js"></script>
+    <script type="text/javascript" src="libs/imgLazy.js"></script>
+    <script type="text/javascript" src="libs/tool.js"></script>
+    <script type="text/javascript" src="js/CustomReport.js"></script>
 </body>
 
 </html>
