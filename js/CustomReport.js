@@ -1758,17 +1758,22 @@ jQuery(document).ready(function () {
     //   });
 
     //添加右上角事件
+    var selectSubid = "";
+    var clickSubid = "";
+    if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
+        $.toast("点击右上角按钮筛选！");
+    }
     $('#searchBtn').click(function () {
         $(".close-panel").click();
-        if (saveParam != null) {
-            clickSubid = saveParam['fSubid'];
-            saveParam = null;
-        }
+        /*    if(saveParam!=null){
+                clickSubid = saveParam['fSubid'];
+                saveParam=null;
+            }*/
         if ($("#search").val() == "") {
-            //        $("#subname").text("所有变电所");
+            //        $("#subName").text("所有变电所");
             selectSubid = "";
         } else if (clickSubid != "") {
-            //        $("#subname").text($("#search").val());
+            //        $("#subName").text($("#search").val());
             selectSubid = clickSubid;
             clickSubid = "";
         }
@@ -1801,7 +1806,7 @@ jQuery(document).ready(function () {
                 $("#search").val(clickName);
                 $("#listContainer").empty();
                 $("#listContainer").hide();
-                //            $("#subname").text(clickName);
+                //            $("#subName").text(clickName);
             });
         });
     }
