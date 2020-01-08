@@ -15,31 +15,31 @@
 </head>
 
 <body>
-<div class="page-group">
-    <div class="page" id="router1">
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
-                <span class="icon icon-left"></span>
-                返回
-            </a>
-            <a class="button button-link button-nav pull-right open-panel">
-                <i class="icon icon-selectSome"></i>
-            </a>
-            <h1 class="title title_color">
-<!--                <p class="limit-length" id="titleContent"><span id="subname">所有变电所</span>巡检记录</p>-->
-                巡检记录
-            </h1>
-        </header>
-<!--        <div class="bar bar-header-secondary" style="line-height:2.2rem">
+    <div class="page-group">
+        <div class="page" id="router1">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <h1 class="title title_color">
+                    <!--                <p class="limit-length" id="titleContent"><span id="subname">所有变电所</span>巡检记录</p>-->
+                    巡检记录
+                </h1>
+            </header>
+            <!--        <div class="bar bar-header-secondary" style="line-height:2.2rem">
             <p class="limit-length"><i class="icon icon-sub"></i><span id="subName"></span></p>
         </div>-->
-        <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
-            <div class="pull-to-refresh-layer">
-                <div class="preloader"></div>
-                <div class="pull-to-refresh-arrow"></div>
-            </div>
-            <div id="list-container">
-<!--                <div class="card">
+            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div id="list-container">
+                    <!--                <div class="card">
                     <div class="card-content">
                         <div class="card-content-inner row no-gutter">
                             <div class="col-10">
@@ -75,36 +75,36 @@
                         </div>
                     </div>
                 </div>-->
-            </div>
-            <div class="infinite-scroll-preloader">
-                <div class="preloader"></div>
+                </div>
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="panel-overlay"></div>
-    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-        <div class="content-block">
-            <div>
-                <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
-                    <a href="#" class="button" id="yestoday">昨日</a>
-                    <a href="#" class="button" id="thisMonth">当月</a>
-                    <a href="#" class="button" id="lastMonth">上月</a></p>
-            </div>
-            <div>
-                <label>时间选择</label><br>
-                <input type="text" id="dateStart" placeholder="开始日期" readonly/> -
-                <input type="text" id="dateEnd" placeholder="截止日期" readonly/>
-            </div>
-            <div>
-                <label>任务状态</label><br>
-                <select id="fState">
-                    <option value="">全部</option>
-                    <option value="1">待办</option>
-                    <option value="2">在办</option>
-                    <option value="3">办毕</option>
-                </select>
-            </div>
-<!--            <div>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <div>
+                    <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
+                        <a href="#" class="button" id="yestoday">昨日</a>
+                        <a href="#" class="button" id="thisMonth">当月</a>
+                        <a href="#" class="button" id="lastMonth">上月</a></p>
+                </div>
+                <div>
+                    <label>时间选择</label><br>
+                    <input type="text" id="dateStart" placeholder="开始日期" readonly /> -
+                    <input type="text" id="dateEnd" placeholder="截止日期" readonly />
+                </div>
+                <div>
+                    <label>任务状态</label><br>
+                    <select id="fState">
+                        <option value="">全部</option>
+                        <option value="1">待办</option>
+                        <option value="2">在办</option>
+                        <option value="3">办毕</option>
+                    </select>
+                </div>
+                <!--            <div>
                 <label>紧急程度</label><br>
                 <select id="dangerType">
                     <option value="">全部</option>
@@ -113,18 +113,18 @@
                     <option value="紧急">紧急</option>
                 </select>
             </div>-->
-            <div>
-                <label>变电所名称</label><br>
-                <div class="searchbar">
-                    <div class="search-input">
-                        <label class="icon icon-search" for="search"></label>
-                        <input type="search" id='search' placeholder='请输入关键字'/><i class="icon icon-clear"></i>
+                <div>
+                    <label>变电所名称</label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='请输入关键字' /><i class="icon icon-clear"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="list-block">
-                <ul id="listContainer">
-                    <!--<li class="item-content" data-id="">
+                <div class="list-block">
+                    <ul id="listContainer">
+                        <!--<li class="item-content" data-id="">
                         <div class="item-inner">
                             <div class="item-title">所有变电所</div>
                         </div>
@@ -139,7 +139,7 @@
                             <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
                         </div>
                     </li>-->
-                    <!--<li class="item-content">
+                        <!--<li class="item-content">
                         <div class="item-inner">
                             <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
                         </div>
@@ -164,18 +164,16 @@
                             <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
                         </div>
                     </li>-->
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="btnBar row no-gutter">
-            <div class="col-50"><a href="#"
-                                   class="button button-big button-fill button-cancel close-panel">取消</a>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel">取消</a>
+                </div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn">查询</a></div>
             </div>
-            <div class="col-50"><a href="#"
-                                   class="button button-big button-fill" id="searchBtn">查询</a></div>
         </div>
     </div>
-</div>
     <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
     <script src='libs/cn.min.js'></script>
