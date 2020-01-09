@@ -34,10 +34,8 @@ var CustomReport = (function () {
         // };
 
         function getData(url, params) {
-            $("body").showLoading();
-            Substation.Common.requestData(url, params, function (data) {
+            Substation.getDataByAjaxMain(url, params, function (data) {
                 eachData(data);
-                $("body").hideLoading();
             });
         }
 
@@ -123,7 +121,7 @@ var CustomReport = (function () {
                     '<div class="powerContain" id="powerContain' +
                     i +
                     '"></div>' +
-                    '<img src="app/image/report-bg-02.png" class="page2-bg"/>' +
+                    '<img src="img/report-bg-02.png" class="page2-bg"/>' +
                     "</div>" +
                     '<div class="report-p4">' +
                     "<h4>2.2、线路能耗排名</h4>" +
@@ -135,7 +133,7 @@ var CustomReport = (function () {
                     '<div class="monitorTable" id="monitorTable' +
                     i +
                     '"></div>' +
-                    '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                    '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                     "</div>" +
                     '<div class="monitor" id="monitor' +
                     i +
@@ -161,7 +159,7 @@ var CustomReport = (function () {
                     '<div id="sigeventTable' +
                     i +
                     '"></div>' +
-                    '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                    '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                     "</div>" +
                     '<div id="inspection' +
                     i +
@@ -263,7 +261,7 @@ var CustomReport = (function () {
                 "<h4>2.1、日耗电量分析</h4>" +
                 '<p class="powerString" id="powerString"></p>' +
                 '<div class="powerContain" id="powerContain"></div>' +
-                '<img src="app/image/report-bg-02.png" class="page2-bg"/>' +
+                '<img src="img/report-bg-02.png" class="page2-bg"/>' +
                 "</div>" +
                 '<div class="report-p4">' +
                 "<h4>2.2、线路能耗排名</h4>" +
@@ -271,7 +269,7 @@ var CustomReport = (function () {
                 '<p class="ranking-p"></p>' +
                 "<h3>3、变压器运行情况</h3>" +
                 '<div class="monitorTable" id="monitorTable"></div>' +
-                '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
                 '<div class="monitor" id="monitor">' +
                 '<div class="report-p5">' +
@@ -281,7 +279,7 @@ var CustomReport = (function () {
                 '<h4 class="daycurve-h4">3.2、日功率因数曲线</h4>' +
                 '<div class="daycurve2"></div>' +
                 '<p id="pfDiv"></p>' +
-                '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
                 "</div>" +
                 '<div class="report-p3" style="page-break-before: always">' +
@@ -296,12 +294,12 @@ var CustomReport = (function () {
                 '<div id="sigeventTable">' +
                 '<div class="daycurve"></div>' +
                 "</div>" +
-                '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
                 '<div class="report-p6" style="page-break-before: always">' +
                 '<h3 class="message">5、现场运维情况</h3>' +
                 '<div class="daycurve"></div>' +
-                // '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                // '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>";
 
             $("#CustomReport").append('<div class="containDiv" id="div"></div>');
@@ -316,7 +314,7 @@ var CustomReport = (function () {
             $("#subName" + num).html(data.fSubname);
             $("#subAddress" + num).html(data.fAddress);
             $("#subDate" + num).html(
-                $("#startDateBox").val() + "至" + $("#endDateBox").val()
+                $("#dateStart").val() + "至" + $("#dateEnd").val()
             );
             $("#name" + num).html(data.fSubname);
             $("#address" + num).html(data.fAddress);
@@ -462,7 +460,7 @@ var CustomReport = (function () {
                         "。</p>";
 
                     monitorString +=
-                        '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                        '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                         "</div>";
                 } else {
                     monitorString +=
@@ -496,7 +494,7 @@ var CustomReport = (function () {
                         '<p class="daycurve-p2">本监测周期内暂无数据记录。</p>';
 
                     monitorString +=
-                        '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                        '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                         "</div>";
                 }
             }
@@ -877,7 +875,7 @@ var CustomReport = (function () {
                     '<div id="sigeventTable' +
                     num +
                     '"></div>' +
-                    '<img src="app/image/report-bg-02.png" class="page3-bg"/>' +
+                    '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                     "</div>";
                 $(addsigStr).insertAfter($("#showEvent" + num));
             }
@@ -1684,45 +1682,45 @@ jQuery(document).ready(function () {
     //     }
     //   });
 
-    var checkedList = [];
-
-    $("#addConfirm").click(function () {
-        // if (!Substation.DOMOperator.timeCompare()) {
-        //     alert("请选择正确的开始截止时间！！！");
-        //     return;
-        // }
-
-        checkedList = [];
-        checkedList.push("10100001");
-        // $.each($("#sublist input"), function (index, val) {
-        //     if ($(val)[0].checked) {
-        // checkedList.push($(val).val());
-
-        //     }
-        // });
-
-        if (checkedList.length == 0) {
-            alert("请至少选择一个变配电站！！！");
-            return;
-        }
-
-        customReport.getData(
-            "main/getSubstationInfoReportByfSubId",
-            //   "fSubids=" +
-            //     checkedList.join(",") +
-            //     "&startTime=" +
-            //     $.cookie("newDate") +
-            //     "&endTime=" +
-            //     $.cookie("lastDate")
-            // );
-            "fSubids=" +
-            checkedList.join(",") +
-            "&startTime=" +
-            "2019-12-01" +
-            "&endTime=" +
-            "2019-12-31"
-        );
-    });
+//    var checkedList = [];
+//
+//    $("#addConfirm").click(function () {
+//        // if (!Substation.DOMOperator.timeCompare()) {
+//        //     alert("请选择正确的开始截止时间！！！");
+//        //     return;
+//        // }
+//
+//        checkedList = [];
+//        checkedList.push("10100001");
+//        // $.each($("#sublist input"), function (index, val) {
+//        //     if ($(val)[0].checked) {
+//        // checkedList.push($(val).val());
+//
+//        //     }
+//        // });
+//
+//        if (checkedList.length == 0) {
+//            alert("请至少选择一个变配电站！！！");
+//            return;
+//        }
+//
+//        customReport.getData(
+//            "main/getSubstationInfoReportByfSubId",
+//            //   "fSubids=" +
+//            //     checkedList.join(",") +
+//            //     "&startTime=" +
+//            //     $.cookie("newDate") +
+//            //     "&endTime=" +
+//            //     $.cookie("lastDate")
+//            // );
+//            "fSubids=" +
+//            checkedList.join(",") +
+//            "&startTime=" +
+//            "2019-12-01" +
+//            "&endTime=" +
+//            "2019-12-31"
+//        );
+//    });
 
     //打印
     //   $("#print").click(function() {
@@ -1777,7 +1775,22 @@ jQuery(document).ready(function () {
             selectSubid = clickSubid;
             clickSubid = "";
         }
-        getFirstPage();
+//        getFirstPage();
+        customReport.getData(
+            "/main/getSubstationInfoReportByfSubId",
+            //   "fSubids=" +
+            //     checkedList.join(",") +
+            //     "&startTime=" +
+            //     $.cookie("newDate") +
+            //     "&endTime=" +
+            //     $.cookie("lastDate")
+            // );
+            "fSubids=" +selectSubid+
+            "&startTime=" +
+            $("#dateStart").val() +
+            "&endTime=" +
+            $("#dateEnd").val()
+        );
     });
 
     $("#dateStart").calendar();
@@ -1928,4 +1941,6 @@ jQuery(document).ready(function () {
             android.goBack();
         }
     });
+
+    $("#thisMonth").click();
 });

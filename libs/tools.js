@@ -4,9 +4,9 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU1MDgyMDgsInVzZXJuYW1lIjoiYWRtaW4ifQ.qiKgWSZ-f5TLhv4iZlWBtaWYLo4vD0tmpXZxEZyBIP0";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzkxMzg2NzMsInVzZXJuYW1lIjoiaGFoYWhhIn0.CT_5QF1mz0gVFkkDA_QhniuAEmMwGrwl2qt6L4CLW6c";
 var ipAddress = "http://116.236.149.165:8090";
-var userId = "261";
+var userId = "315";
 //iOS安卓基础传参
 var u = navigator.userAgent,
   app = navigator.appVersion;
@@ -501,6 +501,41 @@ var Substation = {
       }
     });
   },
+
+    getDataByAjaxMain: function (url, params, successCallback) {
+      $.showPreloader();
+      $.ajax({
+        type: "GET",
+        url: ipAddress + "/SubstationWEBV2" + url,
+        data: params,
+        beforeSend: function (request) {
+          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+          request.setRequestHeader("Authorization", tokenFromAPP);
+        },
+        success: function (data) {
+          if (data == undefined) {
+            $.toast("信息错误");
+            return;
+          } else {
+            if (data.code == "200") {
+              $.hidePreloader();
+              successCallback(data.data);
+            } else {
+              $.hidePreloader();
+              Substation.showCodeTips("zh", data.code);
+            }
+          }
+        },
+        error: function (data) {
+          $.hidePreloader();
+          if (data.status == 0) {
+            $.toast("无法连接到网络，请检查网络设置。");
+          } else {
+            $.toast("数据请求失败");
+          }
+        }
+      });
+    },
 
   //部分接口无Data但返回code码
   getDataByAjaxAllData: function (url, params, successCallback) {

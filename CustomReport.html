@@ -119,8 +119,8 @@
 </head>
 
 <body>
-
-    <div class="page-current">
+<div class="page-group">
+    <div class="page">
 <!--        <div class="right-main" style="overflow: auto">-->
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
@@ -194,24 +194,6 @@
                     <input type="text" id="dateEnd" placeholder="截止日期" readonly />
                 </div>
                 <div>
-                    <label>任务状态</label><br>
-                    <select id="fState">
-                        <option value="">全部</option>
-                        <option value="1">待办</option>
-                        <option value="2">在办</option>
-                        <option value="3">办毕</option>
-                    </select>
-                </div>
-                <!--            <div>
-                <label>紧急程度</label><br>
-                <select id="dangerType">
-                    <option value="">全部</option>
-                    <option value="一般">一般</option>
-                    <option value="重大">重大</option>
-                    <option value="紧急">紧急</option>
-                </select>
-            </div>-->
-                <div>
                     <label>变电所名称</label><br>
                     <div class="searchbar">
                         <div class="search-input">
@@ -232,6 +214,7 @@
                 <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn">查询</a></div>
             </div>
         </div>
+</div>
     <script src="libs/jquery-1.12.4.min.js"></script>
     <script src="libs/light7.min.js"></script>
     <script src='libs/cn.min.js'></script>
@@ -242,7 +225,7 @@
     <script type="text/javascript" src="libs/highcharts.js"></script>
     <script type="text/javascript" src="libs/echarts.min.js"></script>
     <script type="text/javascript" src="libs/imgLazy.js"></script>
-    <script type="text/javascript" src="libs/tool.js"></script>
+    <script type="text/javascript" src="libs/tools.js"></script>
     <script type="text/javascript" src="js/CustomReport.js"></script>
 </body>
 
