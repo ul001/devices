@@ -35,7 +35,7 @@
 .search,
 .export {
   border: 0;
-  color: #FFF;
+  color: #fff;
   padding: 0 0 1px 28px;
   margin-right: 10px;
 }
@@ -55,8 +55,8 @@
   width: 100%;
   height: 30px;
   line-height: 30px;
-  border: 1px solid #D9DDE1;
-  background-color: #FFF;
+  border: 1px solid #d9dde1;
+  background-color: #fff;
   border-radius: 15px;
 }
 
@@ -94,7 +94,7 @@
 
 .showhide-search:hover {
   background: url(../image/search-input2.png) no-repeat 7px 4px;
-  background-color: #BBE4F9;
+  background-color: #bbe4f9;
   border-radius: 15px;
 }
 
@@ -130,7 +130,12 @@
   width: 50px;
 }
 
-.modal-custom .bootstrap-table .table:not(.table-condensed)>tbody>tr>td:first-child {
+.modal-custom
+  .bootstrap-table
+  .table:not(.table-condensed)
+  > tbody
+  > tr
+  > td:first-child {
   width: 50px !important;
 }
 
@@ -144,8 +149,10 @@
 
 .CustomReport .daycurve,
 .CustomReport .daycurve2 {
-  width: 530px;
-  height: 250px;
+  /* width: 530px;
+  height: 250px; */
+  width: 100%;
+  height: 7.5rem;
   margin-bottom: 10px;
   border: 1px solid #eee;
 }
@@ -155,7 +162,7 @@
 .green .report-p3 #eventTable thead tr th,
 .green .report-p4 #monitorTable thead tr th {
   background-color: #01ada8;
-  color: #FFF;
+  color: #fff;
   text-align: center;
 }
 
@@ -163,8 +170,8 @@
 .blue .report-p4 .transformer thead tr th,
 .blue .report-p3 #eventTable thead tr th,
 .blue .report-p4 #monitorTable thead tr th {
-  background-color: #3DB3FF;
-  color: #FFF;
+  background-color: #3db3ff;
+  color: #fff;
   text-align: center;
 }
 
@@ -175,7 +182,7 @@
 .CustomReport .report-p4,
 .CustomReport .report-p5 {
   margin-bottom: 10px;
-  padding: 30px;
+  padding: 3px;
 }
 
 .report-p5 h4:first-child {
@@ -183,8 +190,10 @@
 }
 
 .report-p4 .ranking {
-  width: 530px;
-  height: 280px;
+  /* width: 530px;
+  height: 280px; */
+  width: 100%;
+  height: 10rem;
   margin-bottom: 10px;
   border: solid 1px #eee;
 }
@@ -236,8 +245,8 @@
 
 /*用户报告*/
 .powerContain {
-  width: 500px;
-  height: 350px;
+  width: 100%;
+  height: 13rem;
   margin: 0 auto;
 }
 
@@ -250,14 +259,14 @@
 .green #sigeveDiv thead th {
   text-align: center;
   background-color: #01ada8;
-  color: #FFF;
+  color: #fff;
 }
 
 .blue #eveDiv thead th,
 .blue #sigeveDiv thead th {
   text-align: center;
-  background-color: #3DB3FF;
-  color: #FFF;
+  background-color: #3db3ff;
+  color: #fff;
 }
 
 .CustomPrint {
@@ -269,7 +278,7 @@
   padding: 0;
   border-radius: 5px;
   border: 0;
-  color: #FFF;
+  color: #fff;
   background-image: url(../image/print.png);
   background-size: 40px 30px;
   background-position: 27px 10px;
@@ -278,7 +287,7 @@
 }
 
 .blue .CustomPrint {
-  background-color: #3DB3FF;
+  background-color: #3db3ff;
 }
 
 .green .CustomPrint {
@@ -323,12 +332,12 @@
 }
 
 .CustomReport .MessageBox {
-  border: 1px solid #EEE;
+  border: 1px solid #eee;
   overflow: hidden;
 }
 
 .CustomReport .liveMessage {
-  border-bottom: 1px dotted #C9CACA;
+  border-bottom: 1px dotted #c9caca;
   height: auto;
   overflow: hidden;
   padding: 2px 0;
@@ -349,7 +358,7 @@
   background: linear-gradient(to right, #ffd052, #fcd645);
   border-radius: 25px;
   margin-top: 10px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
 
 .CustomReport .liveMessage .Num,
@@ -459,14 +468,14 @@
 
 .green .CustomReportMenu p {
   background-color: #01ada8;
-  color: #FFF;
+  color: #fff;
   padding: 10px 10px 10px 10px;
   margin: -10px -10px 10px -10px;
 }
 
 .blue .CustomReportMenu p {
-  background-color: #3DB3FF;
-  color: #FFF;
+  background-color: #3db3ff;
+  color: #fff;
   padding: 10px 10px 10px 10px;
   margin: -10px -10px 10px -10px;
 }
@@ -489,7 +498,7 @@
   height: 35px;
   border-radius: 5px;
   background-color: #01ada8;
-  color: #FFF;
+  color: #fff;
   border: 0;
   margin-left: 5px;
 }
@@ -498,8 +507,8 @@
   width: 55px;
   height: 35px;
   border-radius: 5px;
-  background-color: #3DB3FF;
-  color: #FFF;
+  background-color: #3db3ff;
+  color: #fff;
   border: 0;
   margin-left: 5px;
 }
@@ -603,7 +612,7 @@
   clear: both;
   top: 82px;
   padding-top: 10px;
-  background-color: #FFF;
+  background-color: #fff;
   position: fixed;
   z-index: 22;
 }
@@ -680,10 +689,11 @@
 
 .page2-bg,
 .page3-bg {
-  width: 532px;
+  /* width: 532px; */
   height: 90px;
+  width: 17.5rem;
   z-index: -5;
-  margin-left: 32px;
+  margin-left: 0px;
   position: absolute;
   bottom: 0;
 }
@@ -742,7 +752,7 @@
 
 .CustomReport #down:hover,
 .CustomReport #up:hover {
-  color: #FFF;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -818,29 +828,28 @@
   width: 100%;
   height: 30px;
   line-height: 30px;
-  border: 1px solid #D9DDE1;
-  background-color: #FFF;
+  border: 1px solid #d9dde1;
+  background-color: #fff;
   border-radius: 15px;
 }
 
-.blue .pagination>.active>a {
+.blue .pagination > .active > a {
   background: #318ef5 !important;
 }
 
-.green .pagination>.active>a {
+.green .pagination > .active > a {
   background: #08909e !important;
 }
 
 .blue table th {
   background-color: #3db3ff;
-  color: #FFF;
+  color: #fff;
 }
 
 .green table th {
   background-color: #01ada8;
-  color: #FFF;
+  color: #fff;
 }
-
 
 @media (max-width: 1440px) {
   .CustomReportMenu {
@@ -870,4 +879,8 @@
   .CustomReportMenu {
     left: 0;
   }
+}
+
+body {
+  font-size: 0.65rem;
 }
