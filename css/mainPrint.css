@@ -690,12 +690,26 @@
 .page2-bg,
 .page3-bg {
   /* width: 532px; */
-  height: 90px;
-  width: 17.5rem;
-  z-index: -5;
-  margin-left: 0px;
+  width: 100%;
   position: absolute;
   bottom: 0;
+  right: 0;
+}
+
+tbody>tr>td{
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+    border-top: 1px solid #ddd;
+}
+
+th{
+    border-left: 1px solid #ddd;
+}
+
+.list-group{
+    background:#fff;
+    font-size:.7rem;
 }
 
 #inspection1 .report-p6 {

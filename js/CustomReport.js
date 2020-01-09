@@ -52,7 +52,8 @@ var CustomReport = (function () {
 
             for (var i = 1; i <= leng; i++) {
                 var string =
-                    '<div class="report-p1 split" style="page-break-before: always">' +
+                    '<div class="report-p1 split list-group" style="page-break-before: always">' +
+                    '<h5 class="list-group-title" style="display:none;">0</h5>'+
                     '<label class="R-advert">电力运维  我们是您的管家</label>' +
                     "<h1>用电分析报告</h1>" +
                     '<table class="message">' +
@@ -77,7 +78,8 @@ var CustomReport = (function () {
                     "</table>" +
                     '<img src="img/report-bg-01.png" class="page1-bg" />' +
                     "</div>" +
-                    '<div class="report-p2" style="page-break-before: always">' +
+                    '<div class="report-p2 list-group" style="page-break-before: always">' +
+                    '<h5 class="list-group-title" style="display:none;">1</h5>'+
                     "<h3>1、变配电站概况</h3>" +
                     '<table class="table table-bordered substation">' +
                     "<tr>" +
@@ -123,7 +125,8 @@ var CustomReport = (function () {
                     '"></div>' +
                     '<img src="img/report-bg-02.png" class="page2-bg"/>' +
                     "</div>" +
-                    '<div class="report-p4">' +
+                    '<div class="report-p4 list-group">' +
+                    '<h5 class="list-group-title" style="display:none;">2.2</h5>'+
                     "<h4>2.2、线路能耗排名</h4>" +
                     '<div class="ranking" id="ranking' +
                     i +
@@ -139,9 +142,10 @@ var CustomReport = (function () {
                     i +
                     '">' +
                     "</div>" +
-                    '<div class="report-p3" id="showEvent' +
+                    '<div class="report-p3 list-group" id="showEvent' +
                     i +
                     '" style="page-break-before: always">' +
+                    '<h5 class="list-group-title" style="display:none;">4</h5>'+
                     "<h3>4、事件统计</h3>" +
                     "<h4>4.1、遥测越限事件</h4>" +
                     '<p id="event' +
@@ -164,9 +168,10 @@ var CustomReport = (function () {
                     '<div id="inspection' +
                     i +
                     '" class="print_img">' +
-                    '<div class="report-p6" id="report6' +
+                    '<div class="report-p6 list-group" id="report6' +
                     i +
                     '">' +
+                    '<h5 class="list-group-title" style="display:none;">5</h5>'+
                     '<h3 class="message">5、现场运维情况</h3>' +
                     '<p id="operation' +
                     i +
@@ -195,7 +200,7 @@ var CustomReport = (function () {
                 var newData = [];
                 newData = data[i - 1];
                 $("#CustomReport").append(
-                    '<div class="containDiv" id="div' + i + '"></div>'
+                    '<div class="containDiv list-block contacts-block" id="div' + i + '"></div>'
                 );
                 $("#div" + i).html(string);
                 showData(newData.substation, i);
@@ -209,12 +214,14 @@ var CustomReport = (function () {
                     showoperation(newData.SceneRunningReport, i);
                     showoperationHide(newData.SceneRunningReport, i);
                 }
+                $(".contacts-block").indexList();
             }
         }
 
         function initHtml() {
             var string =
-                '<div class="report-p1 split" style="page-break-before: always">' +
+                '<div class="report-p1 split list-group" style="page-break-before: always">' +
+                '<h5 class="list-group-title" style="display:none;">0</h5>'+
                 '<label class="R-advert">电力运维  我们是您的管家</label>' +
                 "<h1>用电分析报告</h1>" +
                 '<table class="message">' +
@@ -233,7 +240,8 @@ var CustomReport = (function () {
                 "</table>" +
                 '<img src="img/report-bg-01.png" class="page1-bg" />' +
                 "</div>" +
-                '<div class="report-p2" style="page-break-before: always">' +
+                '<div class="report-p2 list-group" style="page-break-before: always">' +
+                '<h5 class="list-group-title" style="display:none;">1</h5>'+
                 "<h3>1、变配电站概况</h3>" +
                 '<table class="table table-bordered substation">' +
                 "<tr>" +
@@ -263,7 +271,8 @@ var CustomReport = (function () {
                 '<div class="powerContain" id="powerContain"></div>' +
                 '<img src="img/report-bg-02.png" class="page2-bg"/>' +
                 "</div>" +
-                '<div class="report-p4">' +
+                '<div class="report-p4 list-group">' +
+                '<h5 class="list-group-title" style="display:none;">2.2</h5>'+
                 "<h4>2.2、线路能耗排名</h4>" +
                 '<div class="ranking" id="ranking"></div>' +
                 '<p class="ranking-p"></p>' +
@@ -271,7 +280,8 @@ var CustomReport = (function () {
                 '<div class="monitorTable" id="monitorTable"></div>' +
                 '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
-                '<div class="monitor" id="monitor">' +
+                '<div class="monitor list-group" id="monitor">' +
+                '<h5 class="list-group-title" style="display:none;">3.1</h5>'+
                 '<div class="report-p5">' +
                 "<h4>3.1、日负荷曲线</h4>" +
                 '<div class="daycurve"></div>' +
@@ -282,7 +292,8 @@ var CustomReport = (function () {
                 '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
                 "</div>" +
-                '<div class="report-p3" style="page-break-before: always">' +
+                '<div class="report-p3 list-group" style="page-break-before: always">' +
+                '<h5 class="list-group-title" style="display:none;">4</h5>'+
                 "<h3>4、事件统计</h3>" +
                 "<h4>4.1、遥测越限事件</h4>" +
                 '<p id="event"></p>' +
@@ -296,13 +307,14 @@ var CustomReport = (function () {
                 "</div>" +
                 '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
-                '<div class="report-p6" style="page-break-before: always">' +
+                '<div class="report-p6 list-group" style="page-break-before: always">' +
+                '<h5 class="list-group-title" style="display:none;">5</h5>'+
                 '<h3 class="message">5、现场运维情况</h3>' +
                 '<div class="daycurve"></div>' +
                 // '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>";
 
-            $("#CustomReport").append('<div class="containDiv" id="div"></div>');
+            $("#CustomReport").append('<div class="containDiv list-block contacts-block" id="div"></div>');
             $("#div").append(string);
         }
 
@@ -342,12 +354,12 @@ var CustomReport = (function () {
                     "&nbsp;&nbsp;" +
                     "该变配电站监测周期内总耗电量" +
                     JSON.parse(data.totalEnergyDayResult).toFixed(1) +
-                    "kW.h，" +
+                    "kW·h，" +
                     "日平均耗电量" +
                     JSON.parse(data.average).toFixed(1) +
-                    "kW.h，单日最大耗电量" +
+                    "kW·h，单日最大耗电量" +
                     JSON.parse(data.maxEnergyValue).toFixed(1) +
-                    "kW.h，日耗电情况详见下图：";
+                    "kW·h，日耗电情况详见下图：";
             } else {
                 powerstring += "&nbsp;&nbsp;该配电站暂无耗电量数据。";
             }
@@ -367,7 +379,7 @@ var CustomReport = (function () {
                 "日耗电量",
                 false,
                 time,
-                "用电量 (kW.h)",
+                "用电量 (kW·h)",
                 seriesA,
                 $("#powerContain" + num)
             );
@@ -395,7 +407,7 @@ var CustomReport = (function () {
                 "能耗排名前10的线路",
                 false,
                 xArr,
-                "用电量 (kW.h)",
+                "用电量 (kW·h)",
                 seriesB,
                 $("#ranking" + num)
             );
@@ -408,9 +420,10 @@ var CustomReport = (function () {
             for (var i = 1; i <= length; i++) {
                 if (data[i - 1].hasOwnProperty("maxValue1")) {
                     monitorString +=
-                        '<div class="report-p5" id="report' +
+                        '<div class="report-p5 list-group" id="report' +
                         i +
                         '">' +
+                        '<h5 class="list-group-title" style="display:none;">3.'+i+'</h5>'+
                         "<h4>3." +
                         i +
                         "、" +
@@ -464,9 +477,10 @@ var CustomReport = (function () {
                         "</div>";
                 } else {
                     monitorString +=
-                        '<div class="report-p5" id="report' +
+                        '<div class="report-p5 list-group" id="report' +
                         i +
                         '">' +
+                        '<h5 class="list-group-title" style="display:none;">3.'+i+'</h5>'+
                         "<h4>3." +
                         i +
                         "、" +
@@ -863,9 +877,10 @@ var CustomReport = (function () {
                 $("#sigevent" + num).remove();
                 $("#sigeventTable" + num).remove();
                 var addsigStr =
-                    '<div class="report-p3" id="addshowEvent' +
+                    '<div class="report-p3 list-group" id="addshowEvent' +
                     num +
                     '" style="page-break-before: always">' +
+                    '<h5 class="list-group-title" style="display:none;">4.2</h5>'+
                     '<h4 class="change" id="changeDiv' +
                     num +
                     '">4.2、遥信变位事件</h4>' +
