@@ -296,7 +296,8 @@
 .page1-bg {
   position: absolute;
   bottom: 0;
-  left: -5px;
+  left: 0px;
+  width: 100%;
 }
 
 .CustomReport .typeList {
@@ -398,7 +399,7 @@
 }
 
 .containDiv {
-  margin-top: 2.2rem;
+  /* margin-top: 2.2rem; */
   /* padding-left: 200px; */
 }
 
@@ -616,11 +617,12 @@
 }
 
 .report-p1 {
-  width: 595px;
-  height: 820px;
+  width: 100%;
+  /* height: 820px; */
+  height: 35rem;
   clear: both;
   margin: 0 auto;
-  padding: 30px;
+  padding: 1rem;
   position: relative;
   border: 1px solid #000;
   margin-bottom: 10px;
@@ -628,7 +630,7 @@
 
 .report-p1 h1 {
   text-align: center;
-  margin-top: 140px;
+  margin-top: 4rem;
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 80px;
@@ -636,7 +638,7 @@
 
 .report-p1 .message {
   margin: 0 auto;
-  width: 400px;
+  width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
   background-color: #eee;
@@ -653,9 +655,10 @@
 
 .report-p2 {
   position: relative;
-  width: 595px;
-  height: 820px;
-  padding: 30px;
+  width: 100%;
+  /* height: 820px; */
+  height: 35rem;
+  padding: 1rem;
   margin: 0 auto;
   border: 1px solid #000;
   margin-bottom: 10px;
@@ -691,9 +694,11 @@
 
 .CustomReport .report-p3 {
   position: relative;
-  width: 595px;
-  height: 820px;
-  padding: 30px;
+  /* width: 595px;
+  height: 820px; */
+  width: 100%;
+  height: 35rem;
+  padding: 1rem;
   margin: 0 auto;
   margin-bottom: 10px;
   border: 1px solid #000;
@@ -721,9 +726,10 @@
 .report-p5,
 .report-p6 {
   position: relative;
-  width: 595px;
-  height: 820px;
-  padding: 30px;
+  width: 100%;
+  /* height: 820px; */
+  height: 35rem;
+  padding: 1rem;
   margin: 0 auto;
   margin-bottom: 10px !important;
   border: 1px solid #000;
