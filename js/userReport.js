@@ -25,6 +25,10 @@ $('#searchBtn').click(function () {
     getFirstPage();
 });
 
+Substation.getDataByAjaxMain("/main/testGlobalException?num=0",{},function(){
+
+});
+
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
 $("#listContainer").hide();
