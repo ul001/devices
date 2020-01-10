@@ -56,7 +56,7 @@ var CustomReport = (function () {
                     '<h5 class="list-group-title" style="display:none;">0</h5>'+
                     '<label class="R-advert">电力运维  我们是您的管家</label>' +
                     "<h1>用电分析报告</h1>" +
-                    '<table class="message">' +
+                    '<div class="firstTable"><table class="message">' +
                     "<tr>" +
                     "<td>站点名称：</td>" +
                     '<td id="subName' +
@@ -75,7 +75,7 @@ var CustomReport = (function () {
                     i +
                     '"></td>' +
                     "</tr>" +
-                    "</table>" +
+                    "</table></div>" +
                     '<img src="img/report-bg-01.png" class="page1-bg" />' +
                     "</div>" +
                     '<div class="report-p2 list-group" style="page-break-before: always">' +
@@ -214,6 +214,7 @@ var CustomReport = (function () {
                     showoperation(newData.SceneRunningReport, i);
                     showoperationHide(newData.SceneRunningReport, i);
                 }
+                $(".index-list-bar").remove();
                 $(".contacts-block").indexList();
             }
         }
@@ -926,10 +927,10 @@ var CustomReport = (function () {
                 $("#operation" + num).html(operationstring);
 
                 var itemlength = data.tDevDeviceproblemList.length;
-                var parentNum = Math.ceil((itemlength - 2) / 3);
+                var parentNum = Math.ceil((itemlength - 1) / 2);
 
                 var firstStr = "";
-                for (var i = 0; i < 2; i++) {
+                for (var i = 0; i < 1; i++) {
                     var select = data.tDevDeviceproblemList[i];
 
                     if (select === undefined) {
@@ -979,7 +980,7 @@ var CustomReport = (function () {
                         $.each(select.beforeimg, function (key, value) {
                             imgstrun +=
                                 '<img class="img lazy" src="' +
-                                config.testConfig.ImagePath +
+                                Substation.ipAddressFromAPP +
                                 select.imgUrl +
                                 "/" +
                                 value.fDeviceproblemimgurl +
@@ -990,7 +991,7 @@ var CustomReport = (function () {
                         $.each(select.afterimg, function (key, value) {
                             imgstr +=
                                 '<img class="img lazy" src="' +
-                                config.testConfig.ImagePath +
+                                Substation.ipAddressFromAPP +
                                 select.imgUrl +
                                 "/" +
                                 value.fDeviceproblemimgurl +
@@ -1006,27 +1007,26 @@ var CustomReport = (function () {
                         "</div>" +
                         "</div>" +
                         '<div class="ListMessageR">' +
-                        '<div class="List2 ListTime">发现时间：<label>' +
-                        fDiscovertime +
-                        "</label></div>" +
-                        '<div class="List2 ListTime">严重等级：<label>' +
-                        fProblemlevel +
-                        "</label></div>" +
-                        '<div class="typeList">设备名称：<label>' +
+                        '<p>发现时间：<label>' +
+                        fDiscovertime + '</p>' +
+                        '<p>设备名称：<label>' +
                         treePathName +
-                        "</label></div>" +
-                        '<div class="typeList">缺陷类别：<label>' +
+                        "</label></p>" +
+                        '<p class="List2">缺陷类别：<label>' +
                         fProblemtype +
-                        "</label></div>" +
-                        '<div class="typeList typeListLast">缺陷描述：<label>' +
+                        "</label></p>" +
+                        '<p class="List2">严重等级：<label>' +
+                        fProblemlevel +
+                        "</label></p>" +
+                        '<p>缺陷描述：<label>' +
                         fDeviceproblemdes +
-                        "</label></div>" +
-                        '<div class="List2">缺陷状态：<label>' +
+                        "</label></p>" +
+                        '<p>缺陷状态：<label>' +
                         fstate +
-                        "</label></div>" +
-                        '<div class="List2">消缺时间：<label>' +
+                        "</label></p>" +
+                        '<p>消缺时间：<label>' +
                         updataTime +
-                        "</label></div>" +
+                        "</label></p>" +
                         '<div class="List2 imgHideDiv">缺陷图片：' +
                         '<div class="ListImg">' +
                         imgstrun +
@@ -1046,8 +1046,8 @@ var CustomReport = (function () {
                 if (parentNum > 0) {
                     for (var k = 0; k < parentNum; k++) {
                         var Str = "";
-                        for (var i = 0; i < 3; i++) {
-                            var index = k * 3 + i + 2;
+                        for (var i = 0; i < 2; i++) {
+                            var index = k * 2 + i + 1;
 
                             var select = data.tDevDeviceproblemList[index];
 
@@ -1098,12 +1098,12 @@ var CustomReport = (function () {
                             if (select.beforeimg != undefined) {
                                 $.each(select.beforeimg, function (key, value) {
                                     var beforeimgurl_min =
-                                        config.testConfig.ImagePath +
+                                Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgmin;
                                     var beforeimgurl =
-                                        config.testConfig.ImagePath +
+                                Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgurl;
@@ -1118,12 +1118,12 @@ var CustomReport = (function () {
                             if (select.afterimg != undefined) {
                                 $.each(select.afterimg, function (key, value) {
                                     var afterimgurl_min =
-                                        config.testConfig.ImagePath +
+                                Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgmin;
                                     var afterimgurl =
-                                        config.testConfig.ImagePath +
+                                Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgurl;
@@ -1137,6 +1137,47 @@ var CustomReport = (function () {
                             }
 
                             Str +=
+                                '<div class="liveMessage">' +
+                                '<div class="Num">' +
+                                '<div class="NumList">' +
+                                Substation.Common.addZero(numList) +
+                                "</div>" +
+                                "</div>" +
+                                '<div class="ListMessageR">' +
+                                '<p>发现时间：<label>' +
+                                fDiscovertime + '</p>' +
+                                '<p>设备名称：<label>' +
+                                treePathName +
+                                "</label></p>" +
+                                '<p class="List2">缺陷类别：<label>' +
+                                fProblemtype +
+                                "</label></p>" +
+                                '<p class="List2">严重等级：<label>' +
+                                fProblemlevel +
+                                "</label></p>" +
+                                '<p>缺陷描述：<label>' +
+                                fDeviceproblemdes +
+                                "</label></p>" +
+                                '<p>缺陷状态：<label>' +
+                                fstate +
+                                "</label></p>" +
+                                '<p>消缺时间：<label>' +
+                                updataTime +
+                                "</label></p>" +
+                                '<div class="List2 imgHideDiv imgHideDiv2">缺陷图片：' +
+                                '<div class="ListImg">' +
+                                imgstrun2 +
+                                "</div>" +
+                                "</div>" +
+                                '<div class="List2 imgHideDiv imgHideDiv2">整改图片：' +
+                                '<div class="ListImg">' +
+                                imgstr2 +
+                                "</div>" +
+                                "</div>" +
+                                "</div>" +
+                                "</div>";
+
+/*                            Str +=
                                 '<div class="liveMessage">' +
                                 '<div class="Num">' +
                                 '<div class="NumList">' +
@@ -1176,7 +1217,7 @@ var CustomReport = (function () {
                                 "</div>" +
                                 "</div>" +
                                 "</div>" +
-                                "</div>";
+                                "</div>";*/
                         }
                         var itemNum = k + 1;
                         var reportStr =
@@ -1207,6 +1248,9 @@ var CustomReport = (function () {
         function imgshow(_this, bigimg, innerdiv, outterdiv) {
             outterdiv[0].style.display = "block";
             var src = _this.attr("data-url");
+            if(src==undefined||src==""){
+                src = _this.attr("src");
+            }
             bigimg.attr("src", src);
             $("<img/>")
                 .attr("src", src)
@@ -1319,27 +1363,26 @@ var CustomReport = (function () {
                         "</div>" +
                         "</div>" +
                         '<div class="ListMessageR">' +
-                        '<div class="List2 ListTime">发现时间：<label>' +
-                        fDiscovertime +
-                        "</label></div>" +
-                        '<div class="List2 ListTime">严重等级：<label>' +
-                        fProblemlevel +
-                        "</label></div>" +
-                        '<div class="typeList">设备名称：<label>' +
+                        '<p>发现时间：<label>' +
+                        fDiscovertime + '</p>' +
+                        '<p>设备名称：<label>' +
                         treePathName +
-                        "</label></div>" +
-                        '<div class="typeList">缺陷类别：<label>' +
+                        "</label></p>" +
+                        '<p class="List2">缺陷类别：<label>' +
                         fProblemtype +
-                        "</label></div>" +
-                        '<div class="typeList typeListLast">缺陷描述：<label>' +
+                        "</label></p>" +
+                        '<p class="List2">严重等级：<label>' +
+                        fProblemlevel +
+                        "</label></p>" +
+                        '<p>缺陷描述：<label>' +
                         fDeviceproblemdes +
-                        "</label></div>" +
-                        '<div class="List2">缺陷状态：<label>' +
+                        "</label></p>" +
+                        '<p>缺陷状态：<label>' +
                         fstate +
-                        "</label></div>" +
-                        '<div class="List2">消缺时间：<label>' +
+                        "</label></p>" +
+                        '<p>消缺时间：<label>' +
                         updataTime +
-                        "</label></div>" +
+                        "</label></p>" +
                         "</div>" +
                         "</div>";
                 }
@@ -1400,27 +1443,26 @@ var CustomReport = (function () {
                                 "</div>" +
                                 "</div>" +
                                 '<div class="ListMessageR">' +
-                                '<div class="List2 ListTime">发现时间：<label>' +
-                                fDiscovertime +
-                                "</label></div>" +
-                                '<div class="List2 ListTime">严重等级：<label>' +
-                                fProblemlevel +
-                                "</label></div>" +
-                                '<p class="typeList">设备名称：<label>' +
+                                '<p>发现时间：<label>' +
+                                fDiscovertime + '</p>' +
+                                '<p>设备名称：<label>' +
                                 treePathName +
                                 "</label></p>" +
-                                '<p class="typeList">缺陷类别：<label>' +
+                                '<p class="List2">缺陷类别：<label>' +
                                 fProblemtype +
                                 "</label></p>" +
-                                '<p class="typeList typeListLast">缺陷描述：<label>' +
+                                '<p class="List2">严重等级：<label>' +
+                                fProblemlevel +
+                                "</label></p>" +
+                                '<p>缺陷描述：<label>' +
                                 fDeviceproblemdes +
                                 "</label></p>" +
-                                '<div class="List2">缺陷状态：<label>' +
+                                '<p>缺陷状态：<label>' +
                                 fstate +
-                                "</label></div>" +
-                                '<div class="List2">消缺时间：<label>' +
+                                "</label></p>" +
+                                '<p>消缺时间：<label>' +
                                 updataTime +
-                                "</label></div>" +
+                                "</label></p>" +
                                 "</div>" +
                                 "</div>";
                         }
