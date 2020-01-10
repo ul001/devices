@@ -15,7 +15,7 @@
 .ListImg {
   width: 100%;
   float: right;
-  overflow:auto;
+  overflow: auto;
   border: 1px solid #eee;
   /*height:70px;*/
   height: 3rem;
@@ -24,7 +24,7 @@
 
 .List2 img {
   height: 2.2rem;
-  width:1.5rem;
+  width: 1.5rem;
   margin: 0.2rem 0 0.1rem 0.1rem;
 }
 
@@ -131,12 +131,7 @@
   width: 50px;
 }
 
-.modal-custom
-  .bootstrap-table
-  .table:not(.table-condensed)
-  > tbody
-  > tr
-  > td:first-child {
+.modal-custom .bootstrap-table .table:not(.table-condensed)>tbody>tr>td:first-child {
   width: 50px !important;
 }
 
@@ -331,7 +326,7 @@
 .CustomReport .messageContent {
   text-indent: 2em;
   max-height: 14rem;
-  overflow:auto;
+  overflow: auto;
 }
 
 .CustomReport .MessageBox {
@@ -355,7 +350,7 @@
   width: 1rem;
   height: 1rem;
   line-height: 1rem;
-/*  margin-left: 5px;*/
+  /*  margin-left: 5px;*/
   text-align: center;
   background: linear-gradient(to right, #ffd052, #fcd645);
   border-radius: 0.5rem;
@@ -371,7 +366,7 @@
 
 .CustomReport .liveMessage .ListMessageR p {
   color: #898989;
-  margin:0;
+  margin: 0;
 }
 
 .CustomReport .liveMessage .ListMessageR p label {
@@ -642,17 +637,17 @@
 }
 
 .report-p1 .message {
-  width:100%;
+  width: 100%;
   padding: .5rem;
   border: 1px solid #ccc;
   background-color: #eee;
   clear: both;
 }
 
-.firstTable{
+.firstTable {
   margin: 0 auto;
   width: 100%;
-  overflow:auto;
+  overflow: auto;
 }
 
 #powerString,
@@ -697,41 +692,42 @@
   right: 0;
 }
 
-.eventDiv{
-    max-height:10rem;
-    overflow:auto;
+.eventDiv {
+  max-height: 10rem;
+  overflow: auto;
 }
 
-tbody>tr>td{
-    border: 1px solid #ddd;
-    padding: 8px;
-    border-top: 1px solid #ddd;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
+tbody>tr>td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-th{
-    border-left: 1px solid #ddd;
+th {
+  border-left: 1px solid #ddd;
 }
 
-.list-group,.report-p6 {
-    background:#fff;
-    font-size:.7rem;
+.list-group,
+.report-p6 {
+  background: #fff;
+  font-size: .7rem;
 }
 
-.liveMessage{
-    max-height:50%;
+.liveMessage {
+  max-height: 50%;
 }
 
 .CustomReport .liveMessage .ListMessageR {
-    width:90%;
-    max-height:16rem;
-    overflow:auto;
+  width: 90%;
+  max-height: 16rem;
+  overflow: auto;
 }
 
-.CustomReport .Num{
-    width:10%;
+.CustomReport .Num {
+  width: 10%;
 }
 
 #inspection1 .report-p6 {
@@ -869,11 +865,11 @@ th{
   border-radius: 15px;
 }
 
-.blue .pagination > .active > a {
+.blue .pagination>.active>a {
   background: #318ef5 !important;
 }
 
-.green .pagination > .active > a {
+.green .pagination>.active>a {
   background: #08909e !important;
 }
 
