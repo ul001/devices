@@ -57,7 +57,7 @@ var Substation = {
   loadLanguageJS: function () {
     var script = document.createElement("script");
     script.src = "libs/jquery.i18n.properties.js";
-    // document.body.appendChild(script);
+    document.body.appendChild(script);
   },
 
   showCodeTips: function (type, code) {
@@ -363,6 +363,36 @@ var Substation = {
           case "367":
             $.toast($.i18n.prop('code_367'));
             break;
+          case "368":
+            $.toast($.i18n.prop('code_368'));
+            break;
+          case "369":
+            $.toast($.i18n.prop('code_369'));
+            break;
+          case "370":
+            $.toast($.i18n.prop('code_370'));
+            break;
+          case "371":
+            $.toast($.i18n.prop('code_371'));
+            break;
+          case "372":
+            $.toast($.i18n.prop('code_372'));
+            break;
+          case "373":
+            $.toast($.i18n.prop('code_373'));
+            break;
+          case "374":
+            $.toast($.i18n.prop('code_374'));
+            break;
+          case "375":
+            $.toast($.i18n.prop('code_375'));
+            break;
+          case "376":
+            $.toast($.i18n.prop('code_376'));
+            break;
+          case "5000":
+            $.toast($.i18n.prop('code_5000'));
+            break;
           default:
             $.toast("操作失败");
             break;
@@ -467,6 +497,17 @@ var Substation = {
     }
   },
 
+  reportError:function(jsonStr){
+    $.ajax({
+          url: ipAddress+ "/SubstationWEBV2/main/uploadExceptionLog",
+          type: "POST",
+          data: {ip:ipAddress,exceptionMessage:jsonStr},
+          success: function (data) {
+
+          }
+    });
+  },
+
   getDataByAjax: function (url, params, successCallback) {
     $.showPreloader();
     $.ajax({
@@ -485,7 +526,11 @@ var Substation = {
           if (data.code == "200") {
             $.hidePreloader();
             successCallback(data.data);
-          } else {
+          } else if(data.code=="5000"){
+            $.hidePreloader();
+            Substation.showCodeTips("zh", data.code);
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
+          }else{
             $.hidePreloader();
             Substation.showCodeTips("zh", data.code);
           }
@@ -520,6 +565,10 @@ var Substation = {
             if (data.code == "200") {
               $.hidePreloader();
               successCallback(data.data);
+            }else if(data.code=="5000"){
+              $.hidePreloader();
+              Substation.showCodeTips("zh", "5000");
+              Substation.reportError(JSON.stringify(data.data.stackTrace));
             } else {
               $.hidePreloader();
               Substation.showCodeTips("zh", data.code);
@@ -556,6 +605,10 @@ var Substation = {
           if (data.code == "200") {
             $.hidePreloader();
             successCallback(data);
+          }else if(data.code=="5000"){
+            $.hidePreloader();
+            Substation.showCodeTips("zh", data.code);
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
             $.hidePreloader();
             Substation.showCodeTips("zh", data.code);
@@ -589,7 +642,11 @@ var Substation = {
         } else {
           if (data.code == "200") {
             successCallback(data.data);
-          } else {
+          }else if(data.code=="5000"){
+            $.hidePreloader();
+            Substation.showCodeTips("zh", data.code);
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
+          }else {
             Substation.showCodeTips("zh", data.code);
           }
         }
@@ -623,7 +680,11 @@ var Substation = {
           if (data.code == 200) {
             $.hidePreloader();
             successCallback(data);
-          } else {
+          }else if(data.code=="5000"){
+            $.hidePreloader();
+            Substation.showCodeTips("zh", data.code);
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
+          }else {
             $.hidePreloader();
             Substation.showCodeTips("zh", data.code);
           }
@@ -659,7 +720,11 @@ var Substation = {
         if (data.code == 200) {
           $.hidePreloader();
           successCallback(data);
-        } else {
+        }else if(data.code=="5000"){
+          $.hidePreloader();
+          Substation.showCodeTips("zh", data.code);
+          Substation.reportError(JSON.stringify(data.data.stackTrace));
+        }else {
           $.hidePreloader();
           Substation.showCodeTips("zh", data.code);
         }
