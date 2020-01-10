@@ -13,18 +13,19 @@
 }
 
 .ListImg {
-  width: 406px;
+  width: 100%;
   float: right;
+  overflow:auto;
   border: 1px solid #eee;
   /*height:70px;*/
-  height: 58px;
+  height: 3rem;
   /*min-height:10px;*/
 }
 
 .List2 img {
-  height: 45px;
-  /*width:60px;*/
-  margin: 5px 0 2px 2px;
+  height: 2.2rem;
+  width:1.5rem;
+  margin: 0.2rem 0 0.1rem 0.1rem;
 }
 
 .Print .right-main {
@@ -329,6 +330,8 @@
 
 .CustomReport .messageContent {
   text-indent: 2em;
+  max-height: 14rem;
+  overflow:auto;
 }
 
 .CustomReport .MessageBox {
@@ -340,24 +343,23 @@
   border-bottom: 1px dotted #c9caca;
   height: auto;
   overflow: hidden;
-  padding: 2px 0;
   clear: both;
 }
 
-.CustomReport .liveMessage .Num {
+/*.CustomReport .liveMessage .Num {
   width: 55px;
   height: 100px;
-}
+}*/
 
 .CustomReport .liveMessage .Num .NumList {
-  width: 40px;
-  height: 40px;
-  line-height: 40px;
-  margin-left: 5px;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
+/*  margin-left: 5px;*/
   text-align: center;
   background: linear-gradient(to right, #ffd052, #fcd645);
-  border-radius: 25px;
-  margin-top: 10px;
+  border-radius: 0.5rem;
+  margin-top: .5rem;
   color: #ffffff;
 }
 
@@ -367,13 +369,9 @@
   float: left;
 }
 
-.CustomReport .liveMessage .ListMessageR {
-  width: 476px;
-}
-
 .CustomReport .liveMessage .ListMessageR p {
   color: #898989;
-  margin-bottom: 0;
+  margin:0;
 }
 
 .CustomReport .liveMessage .ListMessageR p label {
@@ -383,8 +381,6 @@
 .CustomReport .liveMessage .List2 {
   color: #898989;
   width: 50%;
-  height: 30px;
-  line-height: 7px;
 }
 
 .CustomReport .liveMessage .ListTime {
@@ -446,7 +442,7 @@
   height: auto;
   clear: both;
   /*overflow:hidden;*/
-  margin-bottom: 5px;
+  /*margin-bottom: 5px;*/
 }
 
 .CustomReportMenu .SAall {
@@ -646,12 +642,17 @@
 }
 
 .report-p1 .message {
-  margin: 0 auto;
-  width: 100%;
-  padding: 10px;
+  width:100%;
+  padding: .5rem;
   border: 1px solid #ccc;
   background-color: #eee;
   clear: both;
+}
+
+.firstTable{
+  margin: 0 auto;
+  width: 100%;
+  overflow:auto;
 }
 
 #powerString,
@@ -696,20 +697,41 @@
   right: 0;
 }
 
+.eventDiv{
+    max-height:10rem;
+    overflow:auto;
+}
+
 tbody>tr>td{
     border: 1px solid #ddd;
     padding: 8px;
-    vertical-align: top;
     border-top: 1px solid #ddd;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
 }
 
 th{
     border-left: 1px solid #ddd;
 }
 
-.list-group{
+.list-group,.report-p6 {
     background:#fff;
     font-size:.7rem;
+}
+
+.liveMessage{
+    max-height:50%;
+}
+
+.CustomReport .liveMessage .ListMessageR {
+    width:90%;
+    max-height:16rem;
+    overflow:auto;
+}
+
+.CustomReport .Num{
+    width:10%;
 }
 
 #inspection1 .report-p6 {
