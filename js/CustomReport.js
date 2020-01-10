@@ -1818,6 +1818,9 @@ jQuery(document).ready(function () {
     if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
         $.toast("点击右上角按钮筛选！");
     }
+    $("#outTip").click(function(){
+        $("#outTip").hide();
+    });
     $('#searchBtn').click(function () {
         $(".close-panel").click();
         /*    if(saveParam!=null){
@@ -1832,6 +1835,7 @@ jQuery(document).ready(function () {
             selectSubid = clickSubid;
             clickSubid = "";
         }
+        $("#outTip").hide();
 //        getFirstPage();
         customReport.getData(
             "/main/getSubstationInfoReportByfSubId",
