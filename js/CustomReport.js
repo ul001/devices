@@ -54,6 +54,7 @@ var CustomReport = (function () {
                 var string =
                     '<div class="report-p1 split list-group" style="page-break-before: always">' +
                     '<h5 class="list-group-title" style="display:none;">0</h5>'+
+                    '<h5 class="this_title" data-index="0" style="display:none;">首页</h5>'+
                     '<label class="R-advert">电力运维  我们是您的管家</label>' +
                     "<h1>用电分析报告</h1>" +
                     '<div class="firstTable"><table class="message">' +
@@ -80,6 +81,8 @@ var CustomReport = (function () {
                     "</div>" +
                     '<div class="report-p2 list-group" style="page-break-before: always">' +
                     '<h5 class="list-group-title" style="display:none;">1</h5>'+
+                    '<h5 class="this_title" data-index="1" style="display:none;">变配电站概况</h5>'+
+                    '<h5 class="this_title" data-index="1" style="display:none;">用电量分析</h5>'+
                     "<h3>1、变配电站概况</h3>" +
                     '<table class="table table-bordered substation">' +
                     "<tr>" +
@@ -127,6 +130,7 @@ var CustomReport = (function () {
                     "</div>" +
                     '<div class="report-p4 list-group">' +
                     '<h5 class="list-group-title" style="display:none;">2.2</h5>'+
+                    '<h5 class="this_title" data-index="2.2" style="display:none;">变压器运行情况</h5>'+
                     "<h4>2.2、线路能耗排名</h4>" +
                     '<div class="ranking" id="ranking' +
                     i +
@@ -146,6 +150,7 @@ var CustomReport = (function () {
                     i +
                     '" style="page-break-before: always">' +
                     '<h5 class="list-group-title" style="display:none;">4</h5>'+
+                    '<h5 class="this_title" data-index="4" style="display:none;">事件统计</h5>'+
                     "<h3>4、事件统计</h3>" +
                     "<h4>4.1、遥测越限事件</h4>" +
                     '<p id="event' +
@@ -172,6 +177,7 @@ var CustomReport = (function () {
                     i +
                     '">' +
                     '<h5 class="list-group-title" style="display:none;">5</h5>'+
+                    '<h5 class="this_title" data-index="5" style="display:none;">现场运维情况</h5>'+
                     '<h3 class="message">5、现场运维情况</h3>' +
                     '<p id="operation' +
                     i +
@@ -216,6 +222,27 @@ var CustomReport = (function () {
                 }
                 $(".index-list-bar").remove();
                 $(".contacts-block").indexList();
+                $("#cd-main-nav ul").empty();
+                $(".index-list-bar").hide();
+                $(".this_title").each(function(){
+                    var thisStr = $(this).text();
+                    var thisIndex = $(this).attr("data-index");
+                    $("#cd-main-nav ul").append('<li data-index="'+thisIndex+'"><a href="#">'+thisStr+'</a></li>');
+                });
+                $(".cd-nav-trigger").show();
+                $("#cd-main-nav ul li").click(function(){
+                    $(".menu-is-open").removeClass("menu-is-open");
+                    $("#cd-main-nav ul").removeClass("is-visible");
+                    var thisIndex = $(this).attr("data-index");
+                    var target_roll_height = $('.this_title[data-index="'+thisIndex+'"]').eq(0).parent().offset().top-$(".content").offset().top+$(".content").scrollTop();
+                    $(".content").animate({scrollTop: target_roll_height}, 500);
+/*                    $(".index-list-bar li").each(function(){
+                        if($(this).children("strong").html().indexOf(thisIndex)!=-1){
+                            $(this).trigger("click");;
+                            return false;
+                        }
+                    });*/
+                });
             }
         }
 
@@ -1642,6 +1669,18 @@ jQuery(document).ready(function () {
 
     customReport.getData("", "", "0");
 
+    $(".cd-nav-trigger").click(function(){
+        if($(this).hasClass("menu-is-open")){
+            $(this).removeClass("menu-is-open");
+            $("#cd-main-nav ul").removeClass("is-visible");
+        }else{
+            $("#cd-main-nav ul").addClass("is-visible");
+            $(this).addClass("menu-is-open");
+        }
+    });
+
+    $(".cd-nav-trigger").hide();
+
     //   $("#startDateBox").change(function() {
     //     $.cookie("newDate", $("#startDateBox").val());
     //   });
@@ -1836,6 +1875,7 @@ jQuery(document).ready(function () {
             clickSubid = "";
         }
         $("#outTip").hide();
+        $(".content").scrollTop(0);
 //        getFirstPage();
         customReport.getData(
             "/main/getSubstationInfoReportByfSubId",
