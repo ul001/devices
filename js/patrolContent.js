@@ -693,8 +693,10 @@ window.addEventListener("resize", function () {
 });
 
 $(window).bind('beforeunload', function () {
-    if(!hasSave){
-        return '您输入的内容尚未保存，确定离开此页面吗？';
+    if(canClick!="false"){
+        if(!hasSave){
+            return '您输入的内容尚未保存，确定离开此页面吗？';
+        }
     }
 });
 
