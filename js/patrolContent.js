@@ -14,6 +14,7 @@ var pids = [{
     pname: ""
 }];
 var clickGroupTree = "";
+var hasSave = false;
 //iOS安卓基础传参
 var u = navigator.userAgent,
     app = navigator.appVersion;
@@ -340,6 +341,7 @@ function loadPage() {
     }
 
     $("#saveBtn").click(function () {
+        hasSave = true;
         saveThisPage();
     });
 
@@ -687,6 +689,12 @@ window.addEventListener("resize", function () {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
         }, 0);
+    }
+});
+
+$(window).bind('beforeunload', function () {
+    if(!hasSave){
+        return '您输入的内容尚未保存，确定离开此页面吗？';
     }
 });
 
