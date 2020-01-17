@@ -21,6 +21,10 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
+if(canClick=="false"){
+    $("#saveBtn").css("display", "none");
+}
+
 function loadPage() {
     var clickNum = 0;
     var showState = 0;
@@ -159,7 +163,6 @@ function loadPage() {
                     $(this).attr("disabled", true);
                 });
                 $(".upload_img_wrap .upload_img").unbind();
-                $("#saveBtn").css("display", "none");
             }
         });
     }

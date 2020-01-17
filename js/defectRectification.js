@@ -58,11 +58,13 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
     if (data.tDevDeviceproblemList.hasOwnProperty("list")) {
         if (data.tDevDeviceproblemList.list.length > 0) {
             $(data.tDevDeviceproblemList.list).each(function () {
-                var problemStr = "";
-                if (this.fProblemlocation.indexOf(",") != -1) {
-                    problemStr = this.fProblemlocation.split(",")[1]
+                var problemStr = "-";
+                if(this.fProblemlocation!=undefined){
+                    if (this.fProblemlocation.indexOf(",") != -1) {
+                        problemStr = this.fProblemlocation.split(",")[1]
+                    }
                 }
-                var stateStr = "";
+                var stateStr = "-";
                 switch (this.fState) {
                     case "0":
                         stateStr = "<span class=\"redColor\">未处理</span>";
@@ -99,15 +101,15 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                     "                            <i class=\"icon icon-alarm\"></i>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"col-85\">\n" +
-                    "                            <p class=\"boldText\">设备名称：" + (this.treePathName==undefined?"":this.treePathName) + "</p>\n" +
-                    "                            <p>描述：" + this.fDeviceproblemdes + "</p>\n" +
-                    "                            <p>危害：" + this.fProblemharm + "</p>\n" +
+                    "                            <p class=\"boldText\">设备名称：" + (this.treePathName==undefined?"-":this.treePathName) + "</p>\n" +
+                    "                            <p>描述：" + (this.fDeviceproblemdes==undefined?"-":this.fDeviceproblemdes) + "</p>\n" +
+                    "                            <p>危害：" + (this.fProblemharm==undefined?"-":this.fProblemharm) + "</p>\n" +
                     "                            <p>具体位置：" + problemStr + "</p>\n" +
-                    "                            <p>缺陷类别：" + this.fProblemtype + "</p>\n" +
-                    "                            <p>紧急程度：" + this.fProblemlevel + "</p>\n" +
-                    "                            <p>消缺期限：" + this.fTimelimit + "</p>\n" +
+                    "                            <p>缺陷类别：" + (this.fProblemtype==undefined?"-":this.fProblemtype) + "</p>\n" +
+                    "                            <p>紧急程度：" + (this.fProblemlevel==undefined?"-":this.fProblemlevel) + "</p>\n" +
+                    "                            <p>消缺期限：" + (this.fTimelimit==undefined?"-":this.fTimelimit) + "</p>\n" +
                     "                            <p>处理状态：" + stateStr + "</p>\n" +
-                    "                            <p>发现时间：" + this.fCreatetime + "</p>\n" +
+                    "                            <p>发现时间：" + (this.fCreatetime==undefined?"-":this.fCreatetime) + "</p>\n" +
                     solveUser + solveTime +
                     "                        </div>\n" +
                     "                        <div class=\"col-5\">\n" +
