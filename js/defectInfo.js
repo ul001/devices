@@ -15,6 +15,7 @@ var imgNum1 = 0;
 var imgNum = 0;
 var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
 var androidProblemid = localStorage.getItem("fDeviceproblemid");
+localStorage.removeItem("fDeviceproblemid");
 if (androidProblemid != null && androidProblemid != undefined) {
   fDeviceproblemid = androidProblemid;
   $(".back_btn").click(function() {
