@@ -80,8 +80,8 @@ jQuery(document).ready(function () {
     "pageshow",
     function (event) {
       if (localStorage.getItem("need-refresh") == "true") {
-        location.reload();
         localStorage.removeItem("need-refresh");
+        location.reload();
       }
     },
     false
