@@ -27,222 +27,141 @@ function loadPage() {
     var thisGroupid = -1;
     //主页内容
     function fillRightData() {
-        Substation.getDataByAjax(
-            "/getDeviceInspectionTemplate", {
-                fSubdevicegroupid: thisGroupid,
-                fSubid: selectSubid,
-                fPlacecheckformid: fPlacecheckformid
-            },
-            function (data) {
-                $(".content-block .tabs").empty();
-                $(".buttons-tab").empty();
-                var tempJson = "";
-                if (data.hasOwnProperty("template")) {
-                    tempJson = data.template;
-                    tempJson = JSON.parse(tempJson);
-                    tempNum = tempJson.checkInfo.length;
-                }
-                if (data.list.length > 0) {
-                    var itemNum = 0;
-                    $(data.list).each(function (index, obj) {
-                        itemNum++;
-                        var thisValueJson = [];
-                        if (this.hasOwnProperty("fInspectionslipjson")) {
-                            if (
-                                this.fInspectionslipjson != "" &&
-                                this.fInspectionslipjson != null
-                            ) {
-                                thisValueJson = JSON.parse(this.fInspectionslipjson);
-                            }
-                        }
-                        var tempStr = "";
-                        var num = 0;
-                        $(tempJson.checkInfo).each(function () {
-                            num++;
-                            if (this.type == "radio") {
-                                inputStr =
-                                    '<div class="card">\n' +
-                                    '                                <div class="card-content">\n' +
-                                    '                                    <div class="card-content-inner">\n' +
-                                    "                                        " +
-                                    decodeURIComponent(this.name) +
-                                    "\n" +
-                                    '                                        <div class="pull-right">\n' +
-                                    '                                            <label class="label-checkbox item-content">\n' +
-                                    '                                                <input type="radio" data-name="' +
-                                    decodeURIComponent(this.name) +
-                                    '" data-code="' +
-                                    this.code +
-                                    "\" data-json='" +
-                                    JSON.stringify(this) +
-                                    "' name=\"" +
-                                    (obj.fSubdeviceinfoid + "" + this.code) +
-                                    '" value="yes">\n' +
-                                    '                                                <div class="item-media"><i\n' +
-                                    '                                                        class="icon icon-form-checkbox"></i></div>\n' +
-                                    '                                                <div class="item-inner">\n' +
-                                    "                                                    是\n" +
-                                    "                                                </div>\n" +
-                                    "                                            </label>\n" +
-                                    "                                            &nbsp;\n" +
-                                    '                                            <label class="label-checkbox item-content">\n' +
-                                    '                                                <input type="radio" data-name="' +
-                                    decodeURIComponent(this.name) +
-                                    '" data-code="' +
-                                    this.code +
-                                    '" name="' +
-                                    (obj.fSubdeviceinfoid + "" + this.code) +
-                                    '" value="no" checked>\n' +
-                                    '                                                <div class="item-media"><i\n' +
-                                    '                                                        class="icon icon-form-checkbox"></i></div>\n' +
-                                    '                                                <div class="item-inner">\n' +
-                                    "                                                    否\n" +
-                                    "                                                </div>\n" +
-                                    "                                            </label>\n" +
-                                    "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" +
-                                    decodeURIComponent(this.identification) +
-                                    '"></i>\n' +
-                                    "                                        </div>\n" +
-                                    "                                    </div>\n" +
-                                    "                                </div>\n" +
-                                    "                            </div>\n";
-                            } else if (this.type == "input") {
-                                var thisInputName = decodeURIComponent(this.name);
-                                if (this.value == "true") {
-                                    thisInputName =
-                                        '<span class="redColor">*</span>' + thisInputName;
-                                }
-                                inputStr =
-                                    '<div class="card">\n' +
-                                    '                                <div class="card-content">\n' +
-                                    '                                    <div class="card-content-inner">\n' +
-                                    "                                        " +
-                                    thisInputName +
-                                    "\n" +
-                                    '                                        <div class="pull-right">\n' +
-                                    '                                            <input type="text" data-name="' +
-                                    decodeURIComponent(this.name) +
-                                    '" data-code="' +
-                                    this.code +
-                                    '" data-state="' +
-                                    this.value +
-                                    '">\n' +
-                                    "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" +
-                                    decodeURIComponent(this.identification) +
-                                    '"></i>\n' +
-                                    "                                        </div>\n" +
-                                    "                                    </div>\n" +
-                                    "                                </div>\n" +
-                                    "                            </div>";
-                            }
-                            tempStr += inputStr;
-                        });
-                        if (canClick == "false") {
-                            if (thisValueJson.length > 0) {
-                                $(".buttons-tab").append(
-                                    '<a href="#' +
-                                    obj.fSubdeviceinfoid +
-                                    '" id="' +
-                                    itemNum +
-                                    '" class="tab-link button">' +
-                                    obj.fDevicename +
-                                    "</a>"
-                                );
-                                $(".content-block .tabs").append(
-                                    '<div id="' +
-                                    obj.fSubdeviceinfoid +
-                                    '" class="tab pull-to-refresh-content">\n' +
-                                    '<div class="pull-to-refresh-layer"></div>\n' +
-                                    '<div class="content-block">\n' +
-                                    tempStr +
-                                    "</div>\n" +
-                                    "</div>"
-                                );
-                            }
-                            $(".icon.icon-tips").hide();
-                        } else {
-                            $(".buttons-tab").append(
-                                '<a href="#' +
-                                obj.fSubdeviceinfoid +
-                                '" id="' +
-                                itemNum +
-                                '" class="tab-link button">' +
-                                obj.fDevicename +
-                                "</a>"
-                            );
-                            $(".content-block .tabs").append(
-                                '<div id="' +
-                                obj.fSubdeviceinfoid +
-                                '" class="tab pull-to-refresh-content">\n' +
-                                '<div class="pull-to-refresh-layer"></div>\n' +
-                                '<div class="content-block">\n' +
-                                tempStr +
-                                "</div>\n" +
-                                "</div>"
-                            );
-                        }
-                        //给模板赋值
-                        if (thisValueJson.length > 0) {
-                            $(thisValueJson).each(function () {
-                                if (this.type == "radio") {
-                                    $(
-                                        "input[name='" +
-                                        (obj.fSubdeviceinfoid + "" + this.code) +
-                                        "'][value='" +
-                                        this.value +
-                                        "']"
-                                    ).attr("checked", true);
-                                } else {
-                                    $(
-                                        "#" +
-                                        obj.fSubdeviceinfoid +
-                                        " input[data-code='" +
-                                        this.code +
-                                        "']"
-                                    ).val(this.value);
-                                }
-                            });
-                        }
-                        $(".tab-link.button")
-                            .unbind()
-                            .click(function () {
-                                var clickItemNum = $(this).attr("id");
-                                clickGroupTree += "-" + $(this).text();
-                                localStorage.setItem("itemNum", clickItemNum);
-                                localStorage.setItem("clickTree", clickGroupTree);
-                            });
-                        $(".icon-tips")
-                            .unbind()
-                            .click(function () {
-                                var tipStr = $(this).attr("data-value");
-                                $("#popShow").text("辨识标准：" + tipStr);
-                                //                        $(".open-popover").click();
-                            });
-                    });
-                } else {
-                    $("#saveBtn").css("display", "none");
-                }
-                addRadioClick();
-                goToInfo();
-                getGroupidContent();
-                $(".tab-link")
-                    .eq(0)
-                    .click();
-                if (canClick == "false") {
-                    $($("input")).each(function () {
-                        $(this).attr("readonly", true);
-                    });
-                    $($(":radio")).each(function () {
-                        $(this).attr("disabled", true);
-                    });
-                    $($("select")).each(function () {
-                        $(this).attr("disabled", true);
-                    });
-                    $(".upload_img_wrap .upload_img").unbind();
-                    $("#saveBtn").css("display", "none");
-                }
+        Substation.getDataByAjax("/getDeviceInspectionTemplate", {
+            fSubdevicegroupid: thisGroupid,
+            fSubid: selectSubid,
+            fPlacecheckformid: fPlacecheckformid
+        }, function (data) {
+            $(".content-block .tabs").empty();
+            $(".buttons-tab").empty();
+            var tempJson = "";
+            if (data.hasOwnProperty("template")) {
+                tempJson = data.template;
+                tempJson = JSON.parse(tempJson);
+                tempNum = tempJson.checkInfo.length;
             }
-        );
+            if (data.list.length > 0) {
+                var itemNum = 0;
+                $(data.list).each(function (index, obj) {
+                    itemNum++;
+                    var thisValueJson = [];
+                    if (this.hasOwnProperty("fInspectionslipjson")) {
+                        if (this.fInspectionslipjson != "" && this.fInspectionslipjson != null) {
+                            thisValueJson = JSON.parse(this.fInspectionslipjson);
+                        }
+                    }
+                    var tempStr = "";
+                    var num = 0;
+                    $(tempJson.checkInfo).each(function () {
+                        num++;
+                        if (this.type == "radio") {
+                            inputStr = "<div class=\"card\">\n" +
+                                "                                <div class=\"card-content\">\n" +
+                                "                                    <div class=\"card-content-inner\">\n" +
+                                "                                        " + decodeURIComponent(this.name) + "\n" +
+                                "                                        <div class=\"pull-right\">\n" +
+                                "                                            <label class=\"label-checkbox item-content\">\n" +
+                                "                                                <input type=\"radio\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" data-json='" + JSON.stringify(this) + "' name=\"" + (obj.fSubdeviceinfoid + "" + this.code) + "\" value=\"yes\">\n" +
+                                "                                                <div class=\"item-media\"><i\n" +
+                                "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
+                                "                                                <div class=\"item-inner\">\n" +
+                                "                                                    是\n" +
+                                "                                                </div>\n" +
+                                "                                            </label>\n" +
+                                "                                            &nbsp;\n" +
+                                "                                            <label class=\"label-checkbox item-content\">\n" +
+                                "                                                <input type=\"radio\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" name=\"" + (obj.fSubdeviceinfoid + "" + this.code) + "\" value=\"no\" checked>\n" +
+                                "                                                <div class=\"item-media\"><i\n" +
+                                "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
+                                "                                                <div class=\"item-inner\">\n" +
+                                "                                                    否\n" +
+                                "                                                </div>\n" +
+                                "                                            </label>\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\""+decodeURIComponent(this.identification)+"\"></i>\n" +
+                                "                                        </div>\n" +
+                                "                                    </div>\n" +
+                                "                                </div>\n" +
+                                "                            </div>\n";
+                        } else if (this.type == "input") {
+                            var thisInputName = decodeURIComponent(this.name);
+                            if (this.value == "true") {
+                                thisInputName = "<span class=\"redColor\">*</span>" + thisInputName;
+                            }
+                            inputStr = "<div class=\"card\">\n" +
+                                "                                <div class=\"card-content\">\n" +
+                                "                                    <div class=\"card-content-inner\">\n" +
+                                "                                        " + thisInputName + "\n" +
+                                "                                        <div class=\"pull-right\">\n" +
+                                "                                            <input type=\"text\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" data-state=\"" + this.value + "\">\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\""+decodeURIComponent(this.identification)+"\"></i>\n" +
+                                "                                        </div>\n" +
+                                "                                    </div>\n" +
+                                "                                </div>\n" +
+                                "                            </div>";
+                        }
+                        tempStr += inputStr;
+                    });
+                    if (canClick == "false") {
+                        if (thisValueJson.length > 0) {
+                            $(".buttons-tab").append("<a href=\"#" + obj.fSubdeviceinfoid + "\" id=\"" + itemNum + "\" class=\"tab-link button\">" + obj.fDevicename + "</a>");
+                            $(".content-block .tabs").append("<div id=\"" + obj.fSubdeviceinfoid + "\" class=\"tab pull-to-refresh-content\">\n" +
+                                "<div class=\"pull-to-refresh-layer\"></div>\n" +
+                                "<div class=\"content-block\">\n" + tempStr +
+                                "</div>\n" +
+                                "</div>");
+                        }
+                        $(".icon.icon-tips").hide();
+                    } else {
+                        $(".buttons-tab").append("<a href=\"#" + obj.fSubdeviceinfoid + "\" id=\"" + itemNum + "\" class=\"tab-link button\">" + obj.fDevicename + "</a>");
+                        $(".content-block .tabs").append("<div id=\"" + obj.fSubdeviceinfoid + "\" class=\"tab pull-to-refresh-content\">\n" +
+                            "<div class=\"pull-to-refresh-layer\"></div>\n" +
+                            "<div class=\"content-block\">\n" + tempStr +
+                            "</div>\n" +
+                            "</div>");
+                    }
+                    //给模板赋值
+                    if (thisValueJson.length > 0) {
+                        $(thisValueJson).each(function () {
+                            if (this.type == "radio") {
+                                $("input[name='" + (obj.fSubdeviceinfoid + "" + this.code) + "'][value='" + this.value + "']").attr("checked", true);
+                            } else {
+                                $("#" + obj.fSubdeviceinfoid + " input[data-code='" + this.code + "']").val(this.value);
+                            }
+                        });
+                    }
+                    $(".tab-link.button").unbind().click(function () {
+                        var clickItemNum = $(this).attr("id");
+                        clickGroupTree += "-" + $(this).text();
+                        localStorage.setItem("itemNum", clickItemNum);
+                        localStorage.setItem("clickTree", clickGroupTree);
+                    });
+                    $(".icon-tips").unbind().click(function(){
+                        var tipStr = $(this).attr("data-value");
+                        $("#popShow").text("辨识标准："+tipStr);
+//                        $(".open-popover").click();
+                    });
+                });
+            } else {
+                $("#saveBtn").css("display", "none");
+            }
+            addRadioClick();
+            goToInfo();
+            getGroupidContent();
+            $(".tab-link").eq(0).click();
+            if (canClick == "false") {
+                $($("input")).each(function () {
+                    $(this).attr("readonly", true);
+                });
+                $($(":radio")).each(function () {
+                    $(this).attr("disabled", true);
+                });
+                $($("select")).each(function () {
+                    $(this).attr("disabled", true);
+                });
+                $(".upload_img_wrap .upload_img").unbind();
+                $("#saveBtn").css("display", "none");
+            }
+        });
     }
 
     function getGroupidContent() {
@@ -257,27 +176,23 @@ function loadPage() {
 
     //左侧菜单
     function addBackClick() {
-        $(".back-parent")
-            .unbind()
-            .click(function () {
-                if (pids[clickNum + 1] != null) {
-                    pids.splice(-1, 1);
-                }
-                clickNum--;
-                var lastPId = pids[clickNum];
+        $(".back-parent").unbind().click(function () {
+            if (pids[clickNum + 1] != null) {
                 pids.splice(-1, 1);
-                fillData(lastPId.pid);
-            });
+            }
+            clickNum--;
+            var lastPId = pids[clickNum];
+            pids.splice(-1, 1);
+            fillData(lastPId.pid);
+        });
     }
 
     function fillData(parentId) {
         var params = {
             fSubid: selectSubid,
             fParentId: parentId
-        };
-        Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (
-            data
-        ) {
+        }
+        Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
             if (data.hasOwnProperty("menuList")) {
                 if (data.menuList.length > 0) {
                     fillH5(parentId, data.menuList);
@@ -293,29 +208,21 @@ function loadPage() {
             ul.empty();
         } else {
             ul = $(".list-block .list-container");
-            ul.html(
-                '<li class="item-content back-parent">\n' +
-                '                        <div class="item-inner">\n' +
-                '                            <div class="item-title"><i class="icon icon-goprev"></i>上一级</div>\n' +
+            ul.html("<li class=\"item-content back-parent\">\n" +
+                "                        <div class=\"item-inner\">\n" +
+                "                            <div class=\"item-title\"><i class=\"icon icon-goprev\"></i>上一级</div>\n" +
                 "                        </div>\n" +
-                "                    </li>"
-            );
+                "                    </li>");
         }
         $(thisList).each(function () {
             var li = "";
-            var linkStr = '<li class="item-content item-link';
+            var linkStr = "<li class=\"item-content item-link";
             if (this.displayOrHideState == false) {
-                linkStr = '<li class="item-content item-link item-dis';
+                linkStr = "<li class=\"item-content item-link item-dis";
             }
-            li =
-                linkStr +
-                '" id="' +
-                this.fSubdevicegroupid +
-                '">\n' +
-                '                        <div class="item-inner">\n' +
-                '                            <div class="item-title">' +
-                this.fSubdevicegroupname +
-                "</div>\n" +
+            li = linkStr + "\" id=\"" + this.fSubdevicegroupid + "\">\n" +
+                "                        <div class=\"item-inner\">\n" +
+                "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
                 "                        </div>\n" +
                 "                    </li>";
             ul.append(li);
@@ -327,93 +234,79 @@ function loadPage() {
             $("#showOrHide").text("仅显示有设备分类");
             $(".item-dis").css("display", "flex");
         }
-        $("#showOrHide")
-            .unbind()
-            .click(function () {
-                if (showState == 0) {
-                    showState = 1;
-                    $("#showOrHide").text("仅显示有设备分类");
-                    $(".item-dis").css("display", "flex");
-                } else {
-                    showState = 0;
-                    $("#showOrHide").text("显示全部分类");
-                    $(".item-dis").css("display", "none");
-                }
-            });
+        $("#showOrHide").unbind().click(function () {
+            if (showState == 0) {
+                showState = 1;
+                $("#showOrHide").text("仅显示有设备分类");
+                $(".item-dis").css("display", "flex");
+            } else {
+                showState = 0;
+                $("#showOrHide").text("显示全部分类");
+                $(".item-dis").css("display", "none");
+            }
+        });
         linkClick(parentId);
         addBackClick();
     }
 
     function linkClick(parentId) {
-        $(".list-block .item-link")
-            .unbind()
-            .click(function (event) {
-                var clickId = $(this).attr("id");
-                var params = {
-                    fSubid: selectSubid,
-                    fParentId: clickId
-                };
-                Substation.getDataByAjax(
-                    "/selectSubDeviceGroupListByPid",
-                    params,
-                    function (data) {
-                        if (data.hasOwnProperty("menuList")) {
-                            if (data.menuList.length > 0) {
-                                $(".selectLi").removeClass("selectLi");
-                                var clickName = $("#" + clickId + " .item-title").text();
-                                if (clickNum == 0) {
-                                    if (pids[clickNum + 1] != null) {
-                                        pids.splice(-1, 1);
-                                    }
-                                }
-                                clickNum++;
-                                pids.push({
-                                    pid: clickId,
-                                    pname: clickName
-                                });
-                                $(".parent-page").css("display", "none");
-                                $(".child-page").css("display", "block");
-                                fillH5(clickId, data.menuList);
-                                return;
+        $(".list-block .item-link").unbind().click(function (event) {
+            var clickId = $(this).attr("id");
+            var params = {
+                fSubid: selectSubid,
+                fParentId: clickId
+            }
+            Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+                if (data.hasOwnProperty("menuList")) {
+                    if (data.menuList.length > 0) {
+                        $(".selectLi").removeClass("selectLi");
+                        var clickName = $("#" + clickId + " .item-title").text();
+                        if (clickNum == 0) {
+                            if (pids[clickNum + 1] != null) {
+                                pids.splice(-1, 1);
                             }
                         }
-                        thisGroupid = clickId;
-                        $("#" + clickId)
-                            .addClass("selectLi")
-                            .siblings()
-                            .removeClass("selectLi");
-                        var thisId = clickId;
-                        var clickName = $("#" + thisId + " .item-title").text();
-                        if (pids[clickNum + 1] == null) {
-                            pids.push({
-                                pid: thisId,
-                                pname: clickName
-                            });
-                        } else {
-                            pids[clickNum + 1] = {
-                                pid: thisId,
-                                pname: clickName
-                            };
-                        }
-                        var titleTree = "";
-                        clickGroupTree = "";
-                        $(pids).each(function () {
-                            titleTree += this.pname + ">";
-                            clickGroupTree += this.pname + "-";
+                        clickNum++;
+                        pids.push({
+                            pid: clickId,
+                            pname: clickName
                         });
-                        clickGroupTree = clickGroupTree.substring(
-                            1,
-                            clickGroupTree.length - 1
-                        );
-                        var titleTreeName = titleTree.substring(1, titleTree.length - 1);
-                        $("#subName").text(titleTreeName);
-                        $(".content-block .close-panel").click();
-                        fillRightData();
+                        $(".parent-page").css("display", "none");
+                        $(".child-page").css("display", "block");
+                        fillH5(clickId, data.menuList);
+                        return;
                     }
-                );
-                event.stopPropagation();
+                }
+                thisGroupid = clickId;
+                $("#" + clickId).addClass("selectLi").siblings().removeClass("selectLi");
+                var thisId = clickId;
+                var clickName = $("#" + thisId + " .item-title").text();
+                if (pids[clickNum + 1] == null) {
+                    pids.push({
+                        pid: thisId,
+                        pname: clickName
+                    });
+                } else {
+                    pids[clickNum + 1] = {
+                        pid: thisId,
+                        pname: clickName
+                    };
+                }
+                var titleTree = "";
+                clickGroupTree = "";
+                $(pids).each(function () {
+                    titleTree += this.pname + ">";
+                    clickGroupTree += this.pname + "-";
+                });
+                clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
+                var titleTreeName = titleTree.substring(1, titleTree.length - 1);
+                $("#subName").text(titleTreeName);
+                $(".content-block .close-panel").click();
+                fillRightData();
             });
-    }
+            event.stopPropagation();
+        });
+    };
 
     function addRadioClick() {
         $(":radio").change(function () {
@@ -426,37 +319,23 @@ function loadPage() {
                 clickDeviceInfoId = clickDeviceId;
                 clickRadioName = radioName;
                 itemCode = deviceItemCode;
-                $(":radio[name='" + clickRadioName + "'][value='no']").prop(
-                    "checked",
-                    true
-                );
+                $(":radio[name='" + clickRadioName + "'][value='no']").prop("checked", true);
                 $.router.loadPage("#page2");
                 loadPage2();
             } else {
-                $.confirm(
-                    "确定要删除已登记的缺陷？",
-                    function () {
-                        var params = {
-                            fSubdeviceinfoid: clickDeviceId,
-                            fPlacecheckformid: fPlacecheckformid,
-                            fDeviceitem: deviceItemCode
-                        };
-                        Substation.getDataByAjax(
-                            "/deleteCheckItemProblems",
-                            params,
-                            function () {
-                                $.toast("删除成功");
-                                saveThisPage();
-                            }
-                        );
-                    },
-                    function () {
-                        $(":radio[name='" + radioName + "'][value='yes']").prop(
-                            "checked",
-                            true
-                        );
-                    }
-                );
+                $.confirm("确定要删除已登记的缺陷？", function () {
+                    var params = {
+                        fSubdeviceinfoid: clickDeviceId,
+                        fPlacecheckformid: fPlacecheckformid,
+                        fDeviceitem: deviceItemCode
+                    };
+                    Substation.getDataByAjax("/deleteCheckItemProblems", params, function () {
+                        $.toast("删除成功");
+                        saveThisPage();
+                    });
+                }, function () {
+                    $(":radio[name='" + radioName + "'][value='yes']").prop("checked", true);
+                });
             }
         });
     }
@@ -472,7 +351,7 @@ function loadPage() {
 
     //保存状态
     var savePids = JSON.parse(localStorage.getItem("clickPids"));
-    localStorage.removeItem("clickPids");
+    localStorage.removeItem("clickPids")
     if (savePids == null) {
         $(".open-panel").click();
     }
@@ -510,17 +389,7 @@ function loadPage2() {
         $(".redColor").show();
         var defectPositionArray = defectPosition.split(";");
         $(defectPositionArray).each(function (index, obj) {
-            $("#defectPosition").append(
-                '<input type="checkbox" value="' +
-                obj +
-                '" id="' +
-                index +
-                '"><label for="' +
-                index +
-                '">' +
-                obj +
-                "</label><br>"
-            );
+            $("#defectPosition").append('<input type="checkbox" value="' + obj + '" id="' + index + '"><label for="' + index + '">' + obj + '</label><br>');
         });
     } else {
         $(".redColor").hide();
@@ -545,13 +414,7 @@ function loadPage2() {
             //            $("#inputBox").append("<input type=\"file\" name=\"cover\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
             //            // $("input:file").removeAttr("capture");
             //        }else{
-            $("#inputBox").append(
-                '<input type="file" class="fileInput"  capture="camera" name="file" data-id="' +
-                index +
-                '" title="请选择图片" id="file' +
-                index +
-                '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
-            );
+            $("#inputBox").append("<input type=\"file\" class=\"fileInput\"  capture=\"camera\" name=\"file\" data-id=\"" + index + "\" title=\"请选择图片\" id=\"file" + index + "\" accept=\"image/png,image/jpg,image/gif,image/JPEG\" />");
             //        }
         }
         $("#file" + index).click();
@@ -561,23 +424,20 @@ function loadPage2() {
         if (isIOS) {
             $("#file" + index).click();
         }
-        $("#file" + index)
-            .unbind()
-            .change(function (e) {
-                var index = e.currentTarget.dataset.id;
-                if ($("#file" + index).val() == "") {
-                    $("#inputBox input")
-                        .eq(index - 1)
-                        .remove();
-                    return false;
-                }
-                var filePath = $(this).val();
-                changeImg(e, filePath, index);
-                imgNum++;
-                //$(".upload_img_length").html(imgNum);
-                return;
-            });
+        $("#file" + index).unbind().change(function (e) {
+            var index = e.currentTarget.dataset.id;
+            if ($('#file' + index).val() == '') {
+                $("#inputBox input").eq(index - 1).remove();
+                return false;
+            }
+            var filePath = $(this).val();
+            changeImg(e, filePath, index);
+            imgNum++;
+            //$(".upload_img_length").html(imgNum);
+            return;
+        });
     });
+
 }
 loadPage();
 
@@ -604,43 +464,35 @@ function saveThisPage() {
             var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
             var thisObj = {};
             if (thisInput) {
-                thisObj["code"] = $(thisInput).attr("data-code");
-                thisObj["name"] = $(thisInput).attr("data-name");
-                thisObj["value"] = $(thisInput).attr("value");
-                thisObj["type"] = "radio";
+                thisObj['code'] = $(thisInput).attr("data-code");
+                thisObj['name'] = $(thisInput).attr("data-name");
+                thisObj['value'] = $(thisInput).attr("value");
+                thisObj['type'] = "radio";
             } else {
-                thisObj["code"] = $(obj)
-                    .find($("input"))
-                    .attr("data-code");
-                thisObj["name"] = $(obj)
-                    .find($("input"))
-                    .attr("data-name");
-                thisObj["value"] = $(obj)
-                    .find($("input"))
-                    .val();
-                thisObj["type"] = "input";
+                thisObj['code'] = $(obj).find($("input")).attr("data-code");
+                thisObj['name'] = $(obj).find($("input")).attr("data-name");
+                thisObj['value'] = $(obj).find($("input")).val();
+                thisObj['type'] = "input";
             }
             inputArray.push(thisObj);
         });
-        deviceJson["fInspectionslipjson"] = inputArray;
-        deviceJson["fSubdeviceinfoid"] = deviceId;
-        deviceJson["fPlacecheckformid"] = fPlacecheckformid;
-        deviceJson["fItemnum"] = tempNum;
+        deviceJson['fInspectionslipjson'] = inputArray;
+        deviceJson['fSubdeviceinfoid'] = deviceId;
+        deviceJson['fPlacecheckformid'] = fPlacecheckformid;
+        deviceJson['fItemnum'] = tempNum;
         changeJson.push(deviceJson);
     });
     var jsonStr = JSON.stringify(changeJson);
-    Substation.postDataByAjax(
-        "/updateInspectionDetail", {
-            fPlacecheckformid: fPlacecheckformid,
-            deviceList: jsonStr
-        },
-        function (data) {
-            if (data.code == 200) {
-                $.toast("保存成功");
-                localStorage.setItem("need-update", "true");
-            }
+    Substation.postDataByAjax("/updateInspectionDetail", {
+        fPlacecheckformid: fPlacecheckformid,
+        deviceList: jsonStr
+    }, function (data) {
+        if (data.code == 200) {
+            $.toast("保存成功");
+            localStorage.setItem("need-update", "true");
         }
-    );
+    });
+
 }
 
 //function returnClick(){
@@ -651,7 +503,7 @@ function changeImg(e, filePath, index) {
     fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
     //检查后缀名
     if (!fileFormat.match(/.png|.jpg|.jpeg/)) {
-        showError("文件格式必须为：png/jpg/jpeg");
+        showError('文件格式必须为：png/jpg/jpeg');
         return;
     }
     //获取并记录图片的base64编码
@@ -663,15 +515,7 @@ function changeImg(e, filePath, index) {
         var dataURL = reader.result;
         //        if(isAndroid){
         // 显示图片
-        $("#imgBox").append(
-            '<div class="imgContainer" data-index=' +
-            index +
-            "><img   src=" +
-            dataURL +
-            ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
-            index +
-            ')"  class="imgDelete" src="img/del_img.png" /></div>'
-        );
+        $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img   src=' + dataURL + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
         //        }else{
         //            shuiyin(dataURL,timeStr,index);
         //        }
@@ -702,38 +546,27 @@ function changeImg(e, filePath, index) {
 
 function removeImg(obj, index) {
     for (var i = 0; i < $(".imgContainer").length; i++) {
-        if (
-            $(".imgContainer")
-            .eq(i)
-            .attr("data-index") == index
-        ) {
-            var imgId = $(".imgContainer")
-                .eq(i)
-                .attr("id");
+        if ($(".imgContainer").eq(i).attr("data-index") == index) {
+            var imgId = $(".imgContainer").eq(i).attr("id");
             if (imgId == undefined) {
-                $(".imgContainer")
-                    .eq(i)
-                    .remove();
+                $(".imgContainer").eq(i).remove();
                 $("#file" + (i + 1)).remove();
             } else {
                 //                if(confirm("确定要删除已保存的图片？")){
                 $.confirm("确定要删除已保存的图片？", function () {
-                    $(".imgContainer")
-                        .eq(i)
-                        .remove();
-                    Substation.getDataByAjax(
-                        "/deleteSubstationImg", {
-                            fId: imgId
-                        },
-                        function () {}
-                    );
+                    $(".imgContainer").eq(i).remove();
+                    Substation.getDataByAjax("/deleteSubstationImg", {
+                        fId: imgId
+                    }, function () {
+
+                    });
                 });
                 /*$(".imgContainer").eq(i).remove();
-                        Substation.getDataByAjax("/deleteSubstationImg", {
-                            fId: imgId
-                        }, function () {
+                Substation.getDataByAjax("/deleteSubstationImg", {
+                    fId: imgId
+                }, function () {
 
-                        });*/
+                });*/
                 //                }
             }
             imgNum--;
@@ -743,19 +576,15 @@ function removeImg(obj, index) {
     //$(".upload_img_length").html(imgNum);
 }
 
+
 function imgDisplay(obj) {
     var src = $(obj).attr("src");
-    var imgHtml =
-        '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img onclick="closePicture(this)" src=' +
-        src +
-        ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>';
-    $("body").append(imgHtml);
+    var imgHtml = '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img onclick="closePicture(this)" src=' + src + ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>'
+    $('body').append(imgHtml);
 }
 
 function closePicture(obj) {
-    $(obj)
-        .parent("div")
-        .remove();
+    $(obj).parent("div").remove();
 }
 
 /*function loadSavedPic() {
@@ -803,24 +632,19 @@ function saveFormData() {
         }
     }
     /*    if($(".fileInput")&&$(".fileInput").length==0){
-              $.toast("请上传现场照！");
-              return;
-          }*/
-    var params = new FormData($("#form1")[0]);
+            $.toast("请上传现场照！");
+            return;
+        }*/
+    var params = new FormData($('#form1')[0]);
     params.append("fTimelimit", deadline);
     params.append("fProblemlocation", defectPositionVal);
     params.append("fPlacecheckformid", fPlacecheckformid);
     params.append("fSubdeviceinfoid", clickDeviceInfoId);
     params.append("fDeviceitem", itemCode);
-    Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (
-        data
-    ) {
+    Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
-            $(":radio[name='" + clickRadioName + "'][value='yes']").prop(
-                "checked",
-                true
-            );
+            $(":radio[name='" + clickRadioName + "'][value='yes']").prop("checked", true);
             saveThisPage();
             localStorage.setItem("need-refresh", "true");
             $.router.back();
@@ -831,68 +655,47 @@ function saveFormData() {
 //巡检记录点击是跳转
 function goToInfo() {
     if (canClick == "false") {
-        $(".card-content")
-            .unbind()
-            .click(function () {
-                var thisRadio = $(this).find(":radio:checked");
-                if (thisRadio.val() == "yes") {
-                    var clickDeviceId = $(".tab.active").attr("id");
-                    var deviceItemCode = thisRadio.attr("data-code");
-                    var params = {
-                        fPlacecheckformid: fPlacecheckformid,
-                        fSubdeviceinfoid: clickDeviceId,
-                        fDeviceitem: deviceItemCode
-                    };
-                    Substation.getDataByAjax(
-                        "/getDeviceProblemIDOnClickingYes",
-                        params,
-                        function (data) {
-                            if (data != "" && data != null) {
-                                localStorage.setItem("clickPids", JSON.stringify(pids));
-                                window.location.href =
-                                    "defectInfo.html?fDeviceproblemid=" + data;
-                            } else {
-                                $.toast("没有该缺陷详情记录！");
-                            }
-                        }
-                    );
-                }
-            });
+        $(".card-content").unbind().click(function () {
+            var thisRadio = $(this).find(":radio:checked");
+            if (thisRadio.val() == "yes") {
+                var clickDeviceId = $(".tab.active").attr("id");
+                var deviceItemCode = thisRadio.attr("data-code");
+                var params = {
+                    fPlacecheckformid: fPlacecheckformid,
+                    fSubdeviceinfoid: clickDeviceId,
+                    fDeviceitem: deviceItemCode
+                };
+                Substation.getDataByAjax("/getDeviceProblemIDOnClickingYes", params, function (data) {
+                    if (data != "" && data != null) {
+                        localStorage.setItem("clickPids", JSON.stringify(pids));
+                        window.location.href = "defectInfo.html?fDeviceproblemid=" + data;
+                    } else {
+                        $.toast("没有该缺陷详情记录！");
+                    }
+                });
+            }
+        });
     }
 }
 
 //返回按钮
 $("#backBtn").click(function () {
-    //返回提示是否退出
-    if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) && !hasSave) {
-        //ios
-        var r = confirm("消息尚未保存，确定退出吗？")
-        if (r == true) {
-            window.history.back();
-        } else {
-            return;
-        }
-    } else {
-        window.history.back();
-    }
+    window.history.back();
 });
 
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {
-    if (
-        document.activeElement.tagName == "INPUT" ||
-        document.activeElement.tagName == "TEXTAREA"
-    ) {
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
         }, 0);
     }
 });
 
-$(window).bind("beforeunload", function () {
-    if (canClick != "false") {
-        if (!hasSave) {
-            return "您输入的内容尚未保存，确定离开此页面吗？";
+$(window).bind('beforeunload', function () {
+    if(canClick!="false"){
+        if(!hasSave){
+            return '您输入的内容尚未保存，确定离开此页面吗？';
         }
     }
 });
