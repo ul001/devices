@@ -21,7 +21,7 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
-if(canClick=="false"){
+if (canClick == "false") {
     $("#saveBtn").css("display", "none");
 }
 
@@ -81,7 +81,7 @@ function loadPage() {
                                 "                                                    否\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
-                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\""+decodeURIComponent(this.identification)+"\"></i>\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + decodeURIComponent(this.identification) + "\"></i>\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
@@ -97,7 +97,7 @@ function loadPage() {
                                 "                                        " + thisInputName + "\n" +
                                 "                                        <div class=\"pull-right\">\n" +
                                 "                                            <input type=\"text\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" data-state=\"" + this.value + "\">\n" +
-                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\""+decodeURIComponent(this.identification)+"\"></i>\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + decodeURIComponent(this.identification) + "\"></i>\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
@@ -139,10 +139,10 @@ function loadPage() {
                         localStorage.setItem("itemNum", clickItemNum);
                         localStorage.setItem("clickTree", clickGroupTree);
                     });
-                    $(".icon-tips").unbind().click(function(){
+                    $(".icon-tips").unbind().click(function () {
                         var tipStr = $(this).attr("data-value");
-                        $("#popShow").text("辨识标准："+tipStr);
-//                        $(".open-popover").click();
+                        $("#popShow").text("辨识标准：" + tipStr);
+                        //                        $(".open-popover").click();
                     });
                 });
             } else {
@@ -683,7 +683,17 @@ function goToInfo() {
 
 //返回按钮
 $("#backBtn").click(function () {
-    window.history.back();
+    if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) && !hasSave) {
+        //ios
+        var r = confirm("消息尚未保存，确定退出吗？")
+        if (r == true) {
+            window.history.back();
+        } else {
+            return;
+        }
+    } else {
+        window.history.back();
+    }
 });
 
 //解决键盘遮挡问题
@@ -696,8 +706,8 @@ window.addEventListener("resize", function () {
 });
 
 $(window).bind('beforeunload', function () {
-    if(canClick!="false"){
-        if(!hasSave){
+    if (canClick != "false") {
+        if (!hasSave) {
             return '您输入的内容尚未保存，确定离开此页面吗？';
         }
     }
