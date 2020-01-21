@@ -646,7 +646,7 @@ function saveFormData() {
     params.append("fDeviceitem", itemCode);
     Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (data) {
         if (data.code == 200) {
-            $.toast("保存成功");
+            $.toast("上传成功");
             $(":radio[name='" + clickRadioName + "'][value='yes']").prop("checked", true);
             saveThisPage();
             localStorage.setItem("need-refresh", "true");
