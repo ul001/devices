@@ -499,10 +499,13 @@ var Substation = {
 
   reportError:function(jsonStr){
     $.ajax({
-          url: ipAddress+ "/SubstationWEBV2/main/uploadExceptionLog",
+          url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
           type: "POST",
           data: {ip:ipAddress,exceptionMessage:jsonStr},
           success: function (data) {
+
+          },
+          error:function(){
 
           }
     });
