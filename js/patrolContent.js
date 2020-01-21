@@ -683,7 +683,7 @@ function goToInfo() {
 
 //返回按钮
 $("#backBtn").click(function () {
-    if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) && !hasSave) {
+    if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) && canClick != "false" && !hasSave) {
         //ios
         var r = confirm("消息尚未保存，确定退出吗？")
         if (r == true) {
