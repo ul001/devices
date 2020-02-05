@@ -218,7 +218,7 @@ i.icon.icon-tips {
 #popShow {
   text-align: center;
   display: block;
-  padding: 0 0.75rem;
+  padding: 0.3rem 0.65rem;
   font-size: 0.75rem;
-  line-height: 2rem;
+  line-height: 1.2rem;
 }
