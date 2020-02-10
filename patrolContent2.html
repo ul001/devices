@@ -10,6 +10,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="libs/zTreeStyle.css" type="text/css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/patrolContent.css">
 </head>
@@ -395,12 +396,12 @@
                                             class="redColor">*</span><span
                                             class="blueColor">缺陷位置：</span></div>
                                     <div class="item-input" id="defectPosition">
-<!--                                        <input type="checkbox" value="A" id="checkA"><label
-                                            for="checkA">A相</label>
-                                        <input type="checkbox" value="B" id="checkB"><label
-                                            for="checkB">B相</label>
-                                        <input type="checkbox" value="C" id="checkC"><label
-                                            for="checkC">C相</label>-->
+                                        <!--                                        <input type="checkbox" value="A" id="checkA"><label
+                                                                                    for="checkA">A相</label>
+                                                                                <input type="checkbox" value="B" id="checkB"><label
+                                                                                    for="checkB">B相</label>
+                                                                                <input type="checkbox" value="C" id="checkC"><label
+                                                                                    for="checkC">C相</label>-->
                                     </div>
                                 </div>
                             </div>
@@ -605,24 +606,15 @@
             <a href="#" class="close-panel" style="display:none;">关闭</a>
             <button id="showOrHide" type="button" class="button">仅显示有设备分类</button>
         </div>
-        <div class="list-block">
-            <ul class="list-container">
-                <!--<li class="item-content item-link">
-                    <div class="item-inner">
-                        <div class="item-title">型号</div>
-                    </div>
-                </li>
-                <li class="item-content item-dis">
-                    <div class="item-inner">
-                        <div class="item-title">型号</div>
-                    </div>
-                </li>-->
-            </ul>
+        <div id="treeDemo" class="ztree">
+
         </div>
     </div>
 </div>
 
 <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type="text/javascript" src="libs/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="libs/jquery.ztree.excheck.js"></script>
 <script>
     $.config={
         swipePanelOnlyClose:true
@@ -632,8 +624,9 @@
 <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
 <script src='libs/cn.min.js'></script>
 <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<!--<script src="libs/bootstrap-treeview.js"></script>-->
 <script src="libs/tools.js"></script>
-<script src="js/patrolContent.js"></script>
+<script src="js/patrolContent2.js"></script>
 <div class="popover popover-links">
     <!-- Popover's angle arrow -->
     <div class="popover-angle"></div>

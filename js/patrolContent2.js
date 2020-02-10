@@ -176,9 +176,43 @@ function loadPage() {
     }
 
     getGroupidContent();
-
+fillLeftPage();
+    $(".open-panel").click();
     //左侧菜单
-    function addBackClick() {
+    function fillLeftPage(){
+   var setting = {check:{
+/*   autoCheckTrigger:false,
+   chkboxType:{"Y":"ps","N":"ps"},*/
+   chkStyle:"checkbox",
+   enable:true,
+/*   nochekcInherit:false,
+   chkDidsabledInherit:false,*/
+//   radioType:"level"
+   },
+   data:{
+   simpleData:{enable:true,
+   idKey:"id",pIdKey:"pId",rootPId:null},/*key:{
+   name:"name",
+   children:"children"}*/}};
+   // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+   var zNodes = [
+   {name:"test1",
+   open:true,
+   children:[
+      {name:"test1_1"},
+      {name:"test1_2"}]
+      },
+   {name:"test2", open:true, children:[
+      {name:"test2_1"}, {name:"test2_2"}]}
+   ];
+   Substation.getDataByAjax("/subDeviceTreeSelectHideOrShow",{fSubid:selectSubid},function(data){
+      $(document).ready(function(){
+         zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, data.subDeviceGroupList);
+      });
+   });
+
+    }
+/*    function addBackClick() {
         $(".back-parent").unbind().click(function () {
             if (pids[clickNum + 1] != null) {
                 pids.splice(-1, 1);
@@ -362,7 +396,7 @@ function loadPage() {
         saveThisPage();
     });
 
-    fillData(-1);
+    fillData(-1);*/
 
     //    $(".open-panel").click();
 
