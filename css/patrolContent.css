@@ -222,3 +222,23 @@ i.icon.icon-tips {
   font-size: 0.75rem;
   line-height: 1.2rem;
 }
+
+.list-block .item-link .item-inner.finished{
+    padding-right: 1.5rem;
+    background-image: url(../img/i-list-chevron-right.png),url(../img/check2.png);
+    background-repeat: no-repeat;
+    background-position: 97% center,92% center;
+    background-position: -webkit-calc(100% - .5rem) center,-webkit-calc(100% - 1.7rem) center;
+    background-position: calc(100% - .5rem) center,calc(100% - 1.7rem) center;
+    background-size: .7rem;
+}
+
+.list-block .item-link .item-inner.halfFinished{
+    padding-right: 1.5rem;
+    background-image: url(../img/i-list-chevron-right.png),url(../img/check1.png);
+    background-repeat: no-repeat;
+    background-position: 97% center,92% center;
+    background-position: -webkit-calc(100% - .5rem) center,-webkit-calc(100% - 1.7rem) center;
+    background-position: calc(100% - .5rem) center,calc(100% - 1.7rem) center;
+    background-size: .7rem;
+}

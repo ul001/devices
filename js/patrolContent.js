@@ -1,6 +1,7 @@
 var clickRadioName = "";
 var selectSubid = localStorage.getItem("fSubid");
 var fPlacecheckformid = localStorage.getItem("fPlacecheckformid");
+var missiontaskID = localStorage.getItem("missiontaskID");
 var canClick = localStorage.getItem("canClick");
 var defectPosition = "";
 var defectPositionVal = "";
@@ -13,6 +14,7 @@ var pids = [{
     pid: -1,
     pname: ""
 }];
+var thisGroupid = -1;
 var clickGroupTree = "";
 var hasSave = false;
 //iOS安卓基础传参
@@ -24,11 +26,28 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 if (canClick == "false") {
     $("#saveBtn").css("display", "none");
 }
+var getSaveList = localStorage.getItem(missiontaskID);
+//android持久化储存
+/*if(isAndroid){
+    getSaveList = android.getSPItem(missiontaskID);
+}*/
+var allGroupList = [];
+if(getSaveList!=null&&getSaveList!=""){
+    allGroupList = JSON.parse(getSaveList);
+}
+if(allGroupList!=null&&allGroupList!=""&&allGroupList.length>0){
+    loadPage();
+}else{
+    Substation.getDataByAjax("/subDeviceTreeSelectHideOrShow",{fSubid:selectSubid},function(data){
+     allGroupList = data.subDeviceGroupList;
+     loadPage();
+    });
+}
+
 
 function loadPage() {
     var clickNum = 0;
     var showState = 0;
-    var thisGroupid = -1;
     //主页内容
     function fillRightData() {
         Substation.getDataByAjax("/getDeviceInspectionTemplate", {
@@ -191,7 +210,7 @@ function loadPage() {
     }
 
     function fillData(parentId) {
-        var params = {
+/*        var params = {
             fSubid: selectSubid,
             fParentId: parentId
         }
@@ -201,6 +220,15 @@ function loadPage() {
                     fillH5(parentId, data.menuList);
                 }
             }
+        });*/
+        var someList = getSubDeviceListByPid(allGroupList,parentId);
+        fillH5(parentId,someList);
+    }
+
+    //根据pid获取分组
+    function getSubDeviceListByPid(allList,pid){
+        return allList.filter(function(obj) {
+            return obj.pId==pid;
         });
     }
 
@@ -223,13 +251,53 @@ function loadPage() {
             if (this.displayOrHideState == false) {
                 linkStr = "<li class=\"item-content item-link item-dis";
             }
+            var thisCList = selectChildrenList(allGroupList,this.fSubdevicegroupid);
+            var num = thisCList.length;
+            if(num>0){
+                getChildNum(thisCList);
+            }
+            function getChildNum(allList){
+                $.each(allList,function(i,obj){
+                    var thisCList = selectChildrenList(allList,obj.id);
+                    if(thisCList.length>0){
+                        num+=thisCList.length;
+                        getChildNum(thisCList);
+                    }else{
+                        return false;
+                    }
+                });
+            }
+            var classCss = "";
+            if(num==0){
+                if(this.taskFinishFlag=="0"){
+
+                }else{
+                    classCss = " finished";
+                }
+            }else{
+                var finishRadio = (Number(this.taskFinishFlag))/num;
+                if(finishRadio<1&&finishRadio>0){
+                    classCss = " halfFinished";
+                }else if(finishRadio==1){
+                    classCss = " finished";
+                }else{
+//                    classCss = " halfFinished";
+                }
+            }
             li = linkStr + "\" id=\"" + this.fSubdevicegroupid + "\">\n" +
-                "                        <div class=\"item-inner\">\n" +
+                "                        <div class=\"item-inner"+classCss+"\">\n" +
                 "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
                 "                        </div>\n" +
                 "                    </li>";
             ul.append(li);
         });
+
+        function selectChildrenList(allList,thisid){
+            var thisList = allList.filter(function(obj){
+                return obj.pId == thisid&&obj.displayOrHideState;
+            });
+            return thisList;
+        }
         if (showState == 0) {
             $("#showOrHide").text("显示全部分类");
             $(".item-dis").css("display", "none");
@@ -255,13 +323,14 @@ function loadPage() {
     function linkClick(parentId) {
         $(".list-block .item-link").unbind().click(function (event) {
             var clickId = $(this).attr("id");
-            var params = {
-                fSubid: selectSubid,
-                fParentId: clickId
-            }
-            Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
-                if (data.hasOwnProperty("menuList")) {
-                    if (data.menuList.length > 0) {
+//            var params = {
+//                fSubid: selectSubid,
+//                fParentId: clickId
+//            }
+//            Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+                var someList = getSubDeviceListByPid(allGroupList,clickId);
+                if (someList.length>0) {
+//                    if (data.menuList.length > 0) {
                         $(".selectLi").removeClass("selectLi");
                         var clickName = $("#" + clickId + " .item-title").text();
                         if (clickNum == 0) {
@@ -276,9 +345,9 @@ function loadPage() {
                         });
                         $(".parent-page").css("display", "none");
                         $(".child-page").css("display", "block");
-                        fillH5(clickId, data.menuList);
+                        fillData(clickId);
                         return;
-                    }
+//                    }
                 }
                 thisGroupid = clickId;
                 $("#" + clickId).addClass("selectLi").siblings().removeClass("selectLi");
@@ -307,7 +376,7 @@ function loadPage() {
                 $("#subName").text(titleTreeName);
                 $(".content-block .close-panel").click();
                 fillRightData();
-            });
+//            });
             event.stopPropagation();
         });
     };
@@ -456,7 +525,6 @@ function loadPage2() {
     });
 
 }
-loadPage();
 
 function saveThisPage() {
     var changeJson = [];
@@ -506,10 +574,44 @@ function saveThisPage() {
     }, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
+            var thisGroupid = pids[pids.length-1].pid;
+            var needChange = true;
+            $.each(allGroupList,function(i,obj){
+                if(thisGroupid == obj.id){
+                    if(obj.taskFinishFlag=="0"){
+                        needChange = true;
+                    }else{
+                        needChange = false;
+                    }
+                    return false;
+                }
+            });
+            if(needChange){
+                $(pids).each(function () {
+                    changeListVal(this.pid);
+                });
+//                fillData(thisGroupid);
+//android持久化储存
+//                if(isAndroid){
+//                    android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
+//                }else{
+                    localStorage.setItem(missiontaskID,JSON.stringify(allGroupList));
+//                }
+                $("#"+thisGroupid+" .item-inner").addClass("finished");
+            }
             localStorage.setItem("need-update", "true");
         }
     });
 
+}
+
+function changeListVal(thisId){
+    $.each(allGroupList,function(i,obj){
+        if(obj.id==thisId){
+            allGroupList[i].taskFinishFlag = (Number(obj.taskFinishFlag)+1)+"";
+            return false;
+        }
+    });
 }
 
 //function returnClick(){
@@ -662,9 +764,8 @@ function saveFormData() {
         if (data.code == 200) {
             $.toast("上传成功");
             $(":radio[name='" + clickRadioName + "'][value='yes']").prop("checked", true);
-            saveThisPage();
             localStorage.setItem("need-refresh", "true");
-            $.router.back();
+            setTimeout($.router.back(), 1000);
         }
     });
 }
