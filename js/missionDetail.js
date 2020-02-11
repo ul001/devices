@@ -326,7 +326,9 @@ jQuery(document).ready(function () {
                                     };
                                     // fExplain 执行情况
                                     Substation.getDataByAjax("/submitUserTask", param, function (data) {
+                                        localStorage.removeItem(taskID);
                                         if (isAndroid) {
+//                                            android.removeSPItem(taskID);
                                             android.refresh();
                                             android.goBack();
                                         } else {
@@ -343,7 +345,9 @@ jQuery(document).ready(function () {
                                     fTaskid: taskID
                                 };
                                 Substation.getDataByAjax("/submitTask", param, function (data) {
+                                    localStorage.removeItem(taskID);
                                     if (isAndroid) {
+//                                        android.removeSPItem(taskID);
                                         android.refresh();
                                         android.goBack();
                                     } else {
