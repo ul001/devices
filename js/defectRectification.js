@@ -7,6 +7,7 @@ if(needUpdate=="true"){
     localStorage.removeItem("need-update");
     location.reload();
 }
+var scrollYM = localStorage.getItem("scrollY");
 localStorage.setItem("need-refresh", "true");
 
 /*window.addEventListener('pageshow', function (e) {
@@ -120,6 +121,10 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
             $(".card-content-inner").click(function () {
                 var proId = $(this).attr("id");
                 var dataTree = $(this).attr("data-tree");
+//                var target_roll_height = $(this).offset().top-$(".content").offset().top+$(".content").scrollTop();
+                var target_roll_height = $(".content").scrollTop();
+//记录滚动位置
+                localStorage.setItem("scrollY",target_roll_height);
                 localStorage.setItem("clickTree", dataTree);
                 window.location.href = "defectInfo.html?fDeviceproblemid=" + proId + "&taskProblem=1";
             });
@@ -149,4 +154,6 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
     } else {
         $(".content").html("无匹配数据");
     }
+    $(".content").scrollTop(Number(scrollYM));
+    localStorage.removeItem("scrollY");
 });

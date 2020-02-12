@@ -55,3 +55,7 @@
 .baseInfoDiv {
     font-size: 0.75rem;
 }
+
+.list-block .item-title.label{
+    white-space: initial;
+}

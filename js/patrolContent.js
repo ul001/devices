@@ -416,7 +416,7 @@ function loadPage() {
     function addLeftClick(){
         $(".icon-select").click(function(){
           if(canClick!="false"&&!hasSave){
-            $.confirm('当前分组巡检信息是否已保存？', function () {
+            $.confirm('当前巡检信息尚未保存，确定要离开吗？', function () {
                 $(".open-panel").click();
             });
           }else{
