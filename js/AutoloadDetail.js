@@ -1,5 +1,5 @@
 var u = navigator.userAgent,
-  app = navigator.appVersion;
+    app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
@@ -623,13 +623,13 @@ jQuery(document).ready(function () {
     $("#goBackLastPid").click(function () {
         /*window.location.href =
             "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
-        localStorage.setItem("pid",jumpPid);
-        localStorage.setItem("clickNum",lastClickNum);
-        if(isAndroid){
+        localStorage.setItem("pid", jumpPid);
+        localStorage.setItem("clickNum", lastClickNum);
+        if (isAndroid) {
             android.refresh();
             android.goBack();
-        }else{
-            localStorage.setItem("need-refresh","true");
+        } else {
+            localStorage.setItem("need-refresh", "true");
             window.history.back();
         }
     });
@@ -731,6 +731,11 @@ jQuery(document).ready(function () {
 
     // 复制按钮
     $("#copy").on("click", function () {
+        var canCopy = $(".tab-link").hasClass("button");
+        if (!canCopy) {
+            alert("当前无可复制的设备。");
+            return;
+        }
         var info = customerDevice.getselectInfo();
 
         var infoid = info.id;
