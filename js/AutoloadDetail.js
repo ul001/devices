@@ -733,7 +733,7 @@ jQuery(document).ready(function () {
     $("#copy").on("click", function () {
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            alert("当前无可复制的设备。");
+            $.toast("当前无可复制的设备。");
             return;
         }
         var info = customerDevice.getselectInfo();
@@ -772,6 +772,11 @@ jQuery(document).ready(function () {
 
     // 删除按钮
     $("#delete").on("click", function () {
+        var canCopy = $(".tab-link").hasClass("button");
+        if (!canCopy) {
+            $.toast("当前无可删除的设备。");
+            return;
+        }
         var selectId = $(".active[role='presentation']").attr("name");
         var name = $(".active[role='presentation']").text();
         $.confirm("确认删除" + name + "吗？", function () {
@@ -802,6 +807,11 @@ jQuery(document).ready(function () {
 
     // 保存按钮点击
     $("#save").on("click", function () {
+        var canCopy = $(".tab-link").hasClass("button");
+        if (!canCopy) {
+            $.toast("当前无可保存的设备。");
+            return;
+        }
         var isTrue = true;
         // var input = $(".tab.active").find(".valueInput[name='true']");
         var input = $(".tab.active").find(".valueInput[name='true']");
