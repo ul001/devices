@@ -1,5 +1,9 @@
-jQuery(document).ready(function () {
-    // $(function () {
+// $(function () {
+//iOS安卓基础传参
+    var u = navigator.userAgent,
+      app = navigator.appVersion;
+    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
     var titlename = localStorage.getItem("fSubname");
     $("#titleContent").text(titlename);
 
@@ -252,6 +256,7 @@ jQuery(document).ready(function () {
                     var signTime = "-";
                     var location = "-";
                     var distance = "-";
+                    var thisUserId = "";
                     if (this.hasOwnProperty("fCreatetime")) {
                         creatTime = date('Y-m-d H:i:s', this.fCreateTime);
                     }
@@ -266,6 +271,9 @@ jQuery(document).ready(function () {
                     }
                     if (this.hasOwnProperty("fLocation")) {
                         location = this.fLocation;
+                    }
+                    if (this.hasOwnProperty("fUserid")) {
+                        thisUserId = this.fUserid;
                     }
                     if (this.hasOwnProperty("fDistance")) {
                         if (this.fDistance > 300) {
@@ -391,6 +399,21 @@ jQuery(document).ready(function () {
                     text += "                                    </div>";
                     text += "                                </div>";
                     text += "                            </li>";
+                    text += "                            <li>";
+                    text +=
+                        '                                <div class="showDiv item-content">';
+                    text +=
+                        '                                    <div class="item-inner">';
+                    text +=
+                        '                                        <div class="item-title label">轨迹追踪:</div>';
+                    text +=
+                        '                                        <div class="item-label">';
+                    text += '<a href="#" class="button" onClick=selectTrace("'+thisUserId+'")>轨迹查询</a>';
+                    text += "                                        </div>";
+                    text += "                                        </div>";
+                    text += "                                    </div>";
+                    text += "                                </div>";
+                    text += "                            </li>";
                     text +=
                         "                            <!-- 除自己外 且状态在执行中的任务 -->";
                     // text += "                            <li>";
@@ -438,6 +461,7 @@ jQuery(document).ready(function () {
                         $("#input" + this.fUserid).css("color", "red");
                     }
                 });
+
                 if (selectPersons && selectPersons.length > 0) {
                     var selectp = JSON.parse(selectPersons);
                     if (selectp && selectp.length > 0) {
@@ -592,4 +616,10 @@ jQuery(document).ready(function () {
     //     }, 0);
     // });
 
-});
+function selectTrace(getUserid){
+    if(isAndroid){
+        android.showThisTrace(getUserid);
+    }else if(isIOS){
+
+    }
+}
