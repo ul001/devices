@@ -45,10 +45,10 @@ Substation.getDataByAjax(url, problemParam, function(data) {
   var defectJson = data.tDevDeviceproblem;
   var beforeimg = data.beforeimg;
   var afterimg = data.afterimg;
-  $("#taskNumber").text(defectJson.fTasknumber);
-  $("#treePathName").text(defectJson.treePathName);
-  $("#fDeviceproblemdes").text(defectJson.fDeviceproblemdes);
-  var fProblemlocation = defectJson.fProblemlocation;
+  $("#taskNumber").text(Substation.removeUnDefinedStr(defectJson.fTasknumber));
+  $("#treePathName").text(Substation.removeUnDefinedStr(defectJson.treePathName));
+  $("#fDeviceproblemdes").text(Substation.removeUnDefinedStr(defectJson.fDeviceproblemdes));
+  var fProblemlocation = Substation.removeUnDefinedStr(defectJson.fProblemlocation);
   $("#defectPosition").empty();
   if (fProblemlocation.indexOf(",") != -1) {
     var defectPosition = fProblemlocation.split(",")[0];
@@ -72,15 +72,15 @@ Substation.getDataByAjax(url, problemParam, function(data) {
       $("input[type='checkbox'][value='" + this + "']").attr("checked", true);
     });
   }
-  $("#fProblemtype").val(defectJson.fProblemtype);
-  $("#fProblemlevel").val(defectJson.fProblemlevel);
-  $("#fTimelimit").val(defectJson.fTimelimit);
-  $("#fProblemharm").val(defectJson.fProblemharm);
-  $("#fCreatetime").val(defectJson.fCreatetime);
-  $("#fResolution").val(defectJson.fResolution);
+  $("#fProblemtype").val(Substation.removeUnDefinedStr(defectJson.fProblemtype));
+  $("#fProblemlevel").val(Substation.removeUnDefinedStr(defectJson.fProblemlevel));
+  $("#fTimelimit").val(Substation.removeUnDefinedStr(defectJson.fTimelimit));
+  $("#fProblemharm").val(Substation.removeUnDefinedStr(defectJson.fProblemharm));
+  $("#fCreatetime").val(Substation.removeUnDefinedStr(defectJson.fCreatetime));
+  $("#fResolution").val(Substation.removeUnDefinedStr(defectJson.fResolution));
   if (canClick == "false") {
-    $("#fClientadvice").val(defectJson.fClientadvice);
-    $("#fState").val(defectJson.fState);
+    $("#fClientadvice").val(Substation.removeUnDefinedStr(defectJson.fClientadvice));
+    $("#fState").val(Substation.removeUnDefinedStr(defectJson.fState));
     if (defectJson.fSolvedUserName != undefined) {
       $(".showSolveUser").css("display", "block");
       $("#fSolveUser").val(defectJson.fSolvedUserName);
@@ -90,21 +90,9 @@ Substation.getDataByAjax(url, problemParam, function(data) {
       $("#fSolveTime").val(defectJson.fUpdateDate);
     }
   } else {
-    if (
-      defectJson.fClientadvice != "" &&
-      defectJson.fClientadvice != null &&
-      defectJson.hasOwnProperty("fClientadvice")
-    ) {
-      $("#fClientadvice").val(defectJson.fClientadvice);
+      $("#fClientadvice").val(Substation.removeUnDefinedStr(defectJson.fClientadvice));
+      $("#fState").val(Substation.removeUnDefinedStr(defectJson.fState));
     }
-    if (
-      defectJson.fState != "" &&
-      defectJson.hasOwnProperty("fState") &&
-      defectJson.fState != null
-    ) {
-      $("#fState").val(defectJson.fState);
-    }
-  }
   if (beforeimg.length > 0) {
     $.each(beforeimg, function(i, value) {
       imgNum1++;

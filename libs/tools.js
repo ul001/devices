@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODE1ODMyMDMsInVzZXJuYW1lIjoiaGFoYWhhIn0.Q4ZBNn5eITvJlSSMJ-XI4OGW0ILMsz14mq4uoqQGsYM";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODI1MDc3NjgsInVzZXJuYW1lIjoiaGFoYWhhIn0.ARe8U7TGl5M4cdJ5fPhIIkuPVFGz33JH51e20Vc-XB4";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
 //iOS安卓基础传参
@@ -45,6 +45,11 @@ var Substation = {
   removeUndefined: function (data) {
     var dataStr = data == undefined ? "无" : data;
     return dataStr;
+  },
+
+  removeUnDefinedStr:function(data){
+    var dataStr = data == undefined ? "-" : data;
+     return dataStr;
   },
 
   GetQueryString: function (name) {

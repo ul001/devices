@@ -84,13 +84,13 @@ function addItems(number, lastIndex) {
                     $("#list-container").empty();
                 }
                 $(data.tDevDeviceproblemList.list).each(function () {
-                    var problemStr = "";
+                    var problemStr = "-";
                     if (this.hasOwnProperty("fProblemlocation")) {
                         if (this.fProblemlocation.indexOf(",") != -1) {
                             problemStr = this.fProblemlocation.split(",")[1]
                         }
                     }
-                    var stateStr = "";
+                    var stateStr = "-";
                     switch (this.fState) {
                         case "0":
                             stateStr = "<span class=\"redColor\">未处理</span>";
@@ -122,25 +122,25 @@ function addItems(number, lastIndex) {
                     if(this.fUpdateDate!=undefined){
                         solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
                     }*/
-                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" value=\"" + (this.treePathName == undefined ? "" : this.treePathName) + "\">\n" +
+                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" value=\"" + Substation.removeUnDefinedStr(this.treePathName) + "\">\n" +
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"card-content-inner row no-gutter\">\n" +
                         /*"                            <div class=\"col-10\">\n" +
                         "                                <i class=\"icon icon-alarm\"></i>\n" +
                         "                            </div>\n" +*/
                         "                            <div class=\"col-95\">\n" +
-                        "<p class=\"subName limit-length\">" + this.fSubName + "</p>" +
-                        "                                <p>设备名称:<span class=\"redColor\">" + (this.treePathName == undefined ? "" : this.treePathName) + "</span>\n" +
+                        "<p class=\"subName limit-length\">" + Substation.removeUnDefinedStr(this.fSubName) + "</p>" +
+                        "                                <p>设备名称:<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.treePathName) + "</span>\n" +
                         "                                </p>\n" +
-                        "                                <p>缺陷描述:<span class=\"redColor\">" + this.fDeviceproblemdes + "</span></p>\n" +
+                        "                                <p>缺陷描述:<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.fDeviceproblemdes) + "</span></p>\n" +
                         //                        "                                <p>危害:"+this.fProblemharm+"</p>\n" +
                         "                                <p>具体位置:" + problemStr + "</p>\n" +
-                        "                                <p class=\"row\"><span class=\"col-50\">缺陷类别:" + this.fProblemtype + "</span><span class=\"col-50\">紧急程度:" + this.fProblemlevel + "</span></p>\n" +
+                        "                                <p class=\"row\"><span class=\"col-50\">缺陷类别:" + Substation.removeUnDefinedStr(this.fProblemtype) + "</span><span class=\"col-50\">紧急程度:" + Substation.removeUnDefinedStr(this.fProblemlevel) + "</span></p>\n" +
                         //                        "                                <p>消缺期限:"+this.fTimelimit+"</p>\n" +
                         //                        "                                <p>处理建议:"+this.fResolution+"</p>\n" +
                         //                        "                                <p>客户意见:"+this.fClientadvice+"</p>\n" +
                         "                                <p>处理状态:" + stateStr + "</p>\n" +
-                        "                                <p>发现时间:" + this.fCreatetime + "</p>\n" +
+                        "                                <p>发现时间:" + Substation.removeUnDefinedStr(this.fCreatetime) + "</p>\n" +
                         //                        solveUser+solveTime+
                         "                            </div>\n" +
                         "                            <div class=\"col-5\">\n" +
@@ -189,6 +189,14 @@ function addItems(number, lastIndex) {
         });
 }
 $("#list-container").empty();
+
+function getUnDefined(str){
+    if(str==undefined||str==null){
+        return "-";
+    }else{
+        return str;
+    }
+}
 
 addItems(itemsPerLoad, 0);
 
