@@ -63,6 +63,11 @@ function loadPage() {
                 tempJson = JSON.parse(tempJson);
                 tempNum = tempJson.checkInfo.length;
             }
+            if(tempNum==0){
+                $.alert("可前往网页端设备管理->设备定义->选择("+$('#subName').text()+")分组->巡检信息添加巡检项");
+                $("#saveBtn").hide();
+                hasSave=true;
+            }
             if (data.list.length > 0) {
                 var itemNum = 0;
                 $(data.list).each(function (index, obj) {
@@ -141,6 +146,9 @@ function loadPage() {
                             "<div class=\"content-block\">\n" + tempStr +
                             "</div>\n" +
                             "</div>");
+                        if(tempStr!=""){
+                            $("#saveBtn").show();
+                        }
                     }
                     //给模板赋值
                     if (thisValueJson.length > 0) {
@@ -166,6 +174,8 @@ function loadPage() {
                 });
             } else {
                 $("#saveBtn").css("display", "none");
+                $.alert("此分组下无设备！");
+                hasSave=true;
             }
             addRadioClick();
             goToInfo();
