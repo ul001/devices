@@ -715,18 +715,19 @@ jQuery(document).ready(function () {
         }
         var url = "/addDevice";
 
-        Substation.postFormDataByAjax(url, formdata, function (data) {
-            if (data.msg != "ok") {
-                $.toast("新增失败！");
-            } else {
-                customerDevice.addModal();
-                $(".active[role='presentation']").attr(
-                    "name",
-                    data.data.fSubdeviceinfoid
-                );
-                $("#save").removeAttr("disabled");
-            }
-        });
+        // Substation.postFormDataByAjax(url, formdata, function (data) {
+        //     if (data.msg != "ok") {
+        //         $.toast("新增失败！");
+        //     } else {
+        customerDevice.addModal();
+        // $(".active[role='presentation']").attr(
+        //     "name",
+        //     data.data.fSubdeviceinfoid
+        // );
+        $("#save").removeAttr("disabled");
+        $("#addDataUL").scrollLeft(10000);
+        //     }
+        // });
     });
 
     // 复制按钮
@@ -766,6 +767,7 @@ jQuery(document).ready(function () {
                 customerDevice.addModal(json);
                 $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
                 $.toast("复制成功！");
+                $("#addDataUL").scrollLeft(10000);
             }
         });
     });
@@ -778,6 +780,10 @@ jQuery(document).ready(function () {
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
+        if (selectId === undefined) {
+            $.toast("当前设备暂未保存！");
+            return;
+        }
         var name = $(".active[role='presentation']").text();
         $.confirm("确认删除" + name + "吗？", function () {
             Substation.getDataByAjaxAllData(
@@ -824,68 +830,7 @@ jQuery(document).ready(function () {
         });
 
         if (isTrue) {
-            // var fPagejson = [];
-            // var divList = $(".tab.active").find(".baseInfoDiv");
-            // $.each(divList, function (key, val) {
-            //     var text = $(val).attr("name");
-            //     fPagejson.push({
-            //         name: encodeURIComponent(text),
-            //         value: []
-            //     });
-            //     var infoList = $(val)
-            //         .children()
-            //         .children()
-            //         .children(".showDiv");
-            //     $.each(infoList, function (index, val) {
-            //         var row = {};
-            //         var select = $(val)
-            //             .children()
-            //             .children(".item-title");
-            //         var name = $(select).text();
-            //         var type = $(select).attr("name");
-            //         var value;
-            //         switch (type) {
-            //             case "input":
-            //                 var row = {};
-            //                 row.inpName = $(val)
-            //                     .find($(".valueInput"))
-            //                     .val();
-            //                 row.inpType = JSON.parse(
-            //                     $(val)
-            //                     .find($(".valueInput"))
-            //                     .attr("name")
-            //                 );
-            //                 value = JSON.stringify(row);
-            //                 break;
-            //             case "radio":
-            //                 value = $(val)
-            //                     .find($("input:checked"))
-            //                     .val();
-            //                 break;
-            //             case "select":
-            //                 var list = [];
-            //                 var options = $(val)
-            //                     .find("select")
-            //                     .children("option");
-            //                 $.each(options, function (opkey, opval) {
-            //                     var row = {};
-            //                     row.opName = $(opval).val();
-            //                     row.opType = $(opval).is(":checked");
-            //                     list.push(row);
-            //                 });
-            //                 value = JSON.stringify(list);
-            //                 break;
-            //             case "date":
-            //                 value = $(val)
-            //                     .find($(".dateTime"))
-            //                     .val();
-            //                 break;
-            //         }
-            //         row.type = type;
-            //         row.name = encodeURIComponent(name);
-            //         row.value = encodeURIComponent(value);
-            //         fPagejson[key].value.push(row);
-            //     });
+
             var fPagejson = [];
             var divList = $(".tab.active").find(".baseInfoDiv");
             $.each(divList, function (key, val) {
@@ -931,9 +876,78 @@ jQuery(document).ready(function () {
                     fPagejson[key].value.push(row);
                 });
             });
-            upData(fPagejson);
+            var deviceinfoid = $(".active[role='presentation']").attr("name");
+            if (deviceinfoid === undefined) {
+                insertDevice(fPagejson);
+            } else {
+                upData(fPagejson);
+            }
+            // upData(fPagejson);
         }
     });
+
+    function insertDevice(fDevicejson) {
+        // var info = customerDevice.getselectInfo();
+
+        // var formdata = new FormData();
+        // formdata.append("fSubid", $.cookie("stationId"));
+        // formdata.append("fSubdevicegroupid", info.id);
+        // formdata.append("fDevicename", info.name);
+        // formdata.append("fDevicejson", fDevicejson);
+        // formdata.append("fDevicenamepath", info.treePathName);
+
+        // Substation.Common.requestDataByPOST("authority/addDevice", formdata, function (data) {
+        //     if (data.code === 200) {
+        //         $(".active[role='presentation']").attr("name", data.data.Subdeviceinfoid);
+        //         code.codeConfig.context(2004);
+        //     } else {
+        //         alert("保存失败！");
+        //     }
+        // })
+
+        var info = customerDevice.getselectInfo();
+
+        if (info.fFunctionfield == undefined) {
+            $.toast("暂无设备信息，请增加相关信息！");
+            return;
+        }
+
+        var fSubdevicegroupid = info.id;
+        var fDevicename = info.name;
+        // var json = info.fFunctionfield;
+        var json = JSON.parse(info.fFunctionfield);
+        var newJson = JSON.stringify(json.deviceInfo);
+
+        var formdata = new FormData();
+        formdata.append("fSubid", subid);
+        formdata.append("fDevicenamepath", clickGroupTree);
+        formdata.append("fSubdevicegroupid", deviceGroupId);
+        formdata.append("fDevicename", encodeURIComponent(fDevicename));
+        // formdata.append("fPagejson", json);
+        if (newJson != undefined) {
+            formdata.append("fPagejson", newJson);
+        } else {
+            console.log("信息错误！");
+            return;
+        }
+        var url = "/addDevice";
+
+        Substation.postFormDataByAjax(url, formdata, function (data) {
+            if (data.msg != "ok") {
+                $.toast("新增失败！");
+            } else {
+                // customerDevice.addModal();
+                $(".active[role='presentation']").attr(
+                    "name",
+                    data.data.fSubdeviceinfoid
+                );
+                $("#save").removeAttr("disabled");
+                $("#addDataUL").scrollLeft(10000);
+            }
+        });
+
+    }
+
 
     function upData(fPagejson) {
         // var json = JSON.stringify(fPagejson);
@@ -945,7 +959,6 @@ jQuery(document).ready(function () {
         // formdata.append("fPagejson", json);
         // var url = "/updateDevice";
         var json = JSON.stringify(fPagejson);
-
         var fId = $(".active[role='presentation']").attr("name");
         var info = customerDevice.getselectInfo();
         var formdata = new FormData();
@@ -953,7 +966,7 @@ jQuery(document).ready(function () {
         formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fSubdeviceinfoid", fId);
         formdata.append("fDevicejson", json);
-        var url = "/updateDevice";;
+        var url = "/updateDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.code == 200) {
                 $.toast("保存成功！");
