@@ -408,7 +408,7 @@ function getNetData() {
                     '                                        <div class="item-title label">轨迹追踪:</div>';
                 text +=
                     '                                        <div class="item-label">';
-                text += '<a href="#" class="button" onClick=selectTrace("' + thisUserId + '")>轨迹查询</a>';
+                text += '<a href="#" class="button" style="width:70%;" onClick=selectTrace("' + thisUserId + '")>轨迹查询</a>';
                 text += "                                        </div>";
                 text += "                                        </div>";
                 text += "                                    </div>";
