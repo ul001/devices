@@ -29,6 +29,7 @@ if (isIOS) {
   ipAddress = android.getIpAddress();
   userId = android.getUserid();
 }
+var languageOption = "zh";
 
 //取消回车事件
 $(document).keydown(function (event) {
@@ -554,11 +555,11 @@ var Substation = {
             successCallback(data.data);
           } else if(data.code=="5000"){
             $.hidePreloader();
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           }else{
             $.hidePreloader();
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
           }
         }
       },
@@ -593,11 +594,11 @@ var Substation = {
               successCallback(data.data);
             }else if(data.code=="5000"){
               $.hidePreloader();
-              Substation.showCodeTips("zh", "5000");
+              Substation.showCodeTips(languageOption, "5000");
               Substation.reportError(JSON.stringify(data.data.stackTrace));
             } else {
               $.hidePreloader();
-              Substation.showCodeTips("zh", data.code);
+              Substation.showCodeTips(languageOption, data.code);
             }
           }
         },
@@ -633,11 +634,11 @@ var Substation = {
             successCallback(data);
           }else if(data.code=="5000"){
             $.hidePreloader();
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
             $.hidePreloader();
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
           }
         }
       },
@@ -670,10 +671,10 @@ var Substation = {
             successCallback(data.data);
           }else if(data.code=="5000"){
             $.hidePreloader();
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           }else {
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
           }
         }
       },
@@ -708,11 +709,11 @@ var Substation = {
             successCallback(data);
           }else if(data.code=="5000"){
             $.hidePreloader();
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           }else {
             $.hidePreloader();
-            Substation.showCodeTips("zh", data.code);
+            Substation.showCodeTips(languageOption, data.code);
           }
         }
       },
@@ -748,11 +749,11 @@ var Substation = {
           successCallback(data);
         }else if(data.code=="5000"){
           $.hidePreloader();
-          Substation.showCodeTips("zh", data.code);
+          Substation.showCodeTips(languageOption, data.code);
           Substation.reportError(JSON.stringify(data.data.stackTrace));
         }else {
           $.hidePreloader();
-          Substation.showCodeTips("zh", data.code);
+          Substation.showCodeTips(languageOption, data.code);
         }
       })
       .fail(function (data) {
