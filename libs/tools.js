@@ -398,6 +398,24 @@ var Substation = {
           case "5000":
             $.toast($.i18n.prop('code_5000'));
             break;
+          case "377":
+            $.toast($.i18n.prop('code_377'));
+            break;
+          case "378":
+            $.toast($.i18n.prop('code_378'));
+            break;
+          case "379":
+            $.toast($.i18n.prop('code_379'));
+            break;
+          case "380":
+            $.toast($.i18n.prop('code_380'));
+            break;
+          case "381":
+            $.toast($.i18n.prop('code_381'));
+            break;
+          case "382":
+            $.toast($.i18n.prop('code_382'));
+            break;
           default:
             $.toast("操作失败");
             break;
