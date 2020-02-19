@@ -14,14 +14,14 @@ jQuery(document).ready(function () {
         localStorage.setItem("canClick", true);
         if (missionType == 0) {
             var showStr =
-                '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
+                '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
             $("#addVarContain126").html(showStr);
             $("#carryOut").attr("name", "true");
             $("#submitTo").attr("name", "true");
         } else {
             localStorage.setItem("canClick", true);
             var showStr =
-                '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
+                '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
             $("#addVarContain126").append(showStr);
             $("#carryOut").attr("name", "false");
         }
@@ -31,13 +31,13 @@ jQuery(document).ready(function () {
         //     $("#clickManager").css("display", "none");
         // }
         var showstr =
-            '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> </div>';
+            '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> </div>';
         $("#addVarContain126").append(showstr);
         $("#carryOut").attr("name", "false");
     } else {
         localStorage.setItem("canClick", true);
         var showStr =
-            '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
+            '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
         $("#addVarContain126").append(showStr);
         $("#carryOut").attr("name", "false");
     }
@@ -182,39 +182,39 @@ jQuery(document).ready(function () {
                             var showstr = "";
                             if (taskchargerid != Substation.loginUserid) {
                                 showstr =
-                                    '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> </div>';
+                                    '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> </div>';
                                 $("#addVarContain126").html(showstr);
                                 $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick", false);
                             } else {
                                 showstr =
-                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "checkInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交任务</a> </div>';
+                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "checkInCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交任务</a> </div>';
                                 $("#addVarContain126").html(showstr);
                                 $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick", false);
                             }
                             /*                        else{
-                                                                      showstr = '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" >查看缺陷项</a> </div> </div>';
+                                                                      showstr = '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut" >查看缺陷项</a> </div> </div>';
                                                                   }*/
                         } else {
                             if (thisTempState == 1) {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
-                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
+                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>签到</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div></div>';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "true");
                                 $("#submitTo").attr("name", "true");
                             } else {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
-                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
+                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>执行</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交</a> </div>  ';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "false");
                             }
                         }
                         /*                        if (missionTypeid != 1) {
                                                                 var showStr =
-                                                                    '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "# " class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
+                                                                    '<div class="row buttonsEvent">  <div class = "col-50" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut">执行任务</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo">提交</a> </div> ';
                                                                 $("#addVarContain126").html(showStr);
                                                                 $("#carryOut").attr("name", "false");
                                                                 $("#submitTo").attr("name", "false");
