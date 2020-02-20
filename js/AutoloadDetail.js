@@ -102,20 +102,24 @@ var CustomerDevice = (function () {
             $(".icon-edit").unbind().click(function (e) {
                 var thisSpan = $(this).prev();
                 var thisDeviceId = $(this).parent().attr("name");
-                console.log(thisDeviceId);
                 $.prompt('重命名', function (value) {
-                    Substation.postDataByAjax("/updateDevice", {
-                        fSubdeviceinfoid: thisDeviceId,
-                        fDevicename: value
-                    }, function (data) {
-                        $.toast("重命名成功！");
+                    if (thisDeviceId == undefined) {
                         thisSpan.text(value);
-                    });
+                    } else {
+                        Substation.postDataByAjax("/updateDevice", {
+                            fSubdeviceinfoid: thisDeviceId,
+                            fDevicename: value
+                        }, function (data) {
+                            $.toast("重命名成功！");
+                            thisSpan.text(value);
+                        });
+                    }
                 });
                 $(".modal-text-input").val(thisSpan.text());
-                $(".modal-text-input").select();
+                //                $(".modal-text-input").select();
                 e.stopPropagation();
             });
+
         }
 
         // 初始化获取信息
@@ -713,7 +717,7 @@ jQuery(document).ready(function () {
             console.log("信息错误！");
             return;
         }
-        var url = "/addDevice";
+        // var url = "/addDevice";
 
         // Substation.postFormDataByAjax(url, formdata, function (data) {
         //     if (data.msg != "ok") {
@@ -726,6 +730,9 @@ jQuery(document).ready(function () {
         // );
         $("#save").removeAttr("disabled");
         $("#addDataUL").scrollLeft(10000);
+        $.prompt('设备命名', function (value) {
+            $(".tab-link.active span").text(value);
+        });
         //     }
         // });
     });
@@ -755,7 +762,8 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fDevicenamepath", clickGroupTree);
-        formdata.append("fDevicename", encodeURIComponent(fPagename));
+        var deviceName = $(".tab-link.active span").text();
+        formdata.append("fDevicename", deviceName);
         if (json != undefined) {
             formdata.append("fDevicejson", json);
         }
@@ -830,7 +838,6 @@ jQuery(document).ready(function () {
         });
 
         if (isTrue) {
-
             var fPagejson = [];
             var divList = $(".tab.active").find(".baseInfoDiv");
             $.each(divList, function (key, val) {
@@ -922,10 +929,13 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fDevicenamepath", clickGroupTree);
         formdata.append("fSubdevicegroupid", deviceGroupId);
-        formdata.append("fDevicename", encodeURIComponent(fDevicename));
+        var deviceName = $(".tab-link.active span").text();
+        formdata.append("fDevicename", deviceName);
+        // formdata.append("fDevicename", encodeURIComponent(fDevicename));
         // formdata.append("fPagejson", json);
         if (newJson != undefined) {
-            formdata.append("fPagejson", newJson);
+            var json = JSON.stringify(fDevicejson);
+            formdata.append("fDevicejson", json);
         } else {
             console.log("信息错误！");
             return;
@@ -942,7 +952,8 @@ jQuery(document).ready(function () {
                     data.data.fSubdeviceinfoid
                 );
                 $("#save").removeAttr("disabled");
-                $("#addDataUL").scrollLeft(10000);
+                // $("#addDataUL").scrollLeft(10000);
+                // upData(fDevicejson);
             }
         });
 
