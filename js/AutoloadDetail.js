@@ -43,13 +43,16 @@ var CustomerDevice = (function () {
         };
 
         // 新增一个设备
-        this.addModal = function (data) {
+        this.addModal = function (data,tabName) {
             // 取消选中tabpanel
             $(".active[role='presentation']").removeClass("active");
             $(".tab.active").removeClass("active");
             count++;
             var name = "addModal" + count;
             var text = selectInfo.name;
+            if(tabName!=null){
+                text = tabName;
+            }
             var string =
                 ' <a role="presentation" href="#' +
                 name +
@@ -693,7 +696,6 @@ jQuery(document).ready(function () {
     // 新增按钮
     $("#Add").on("click", function () {
         var info = customerDevice.getselectInfo();
-
         if (info.fFunctionfield == undefined) {
             $.toast("暂无设备信息，请增加相关信息！");
             return;
@@ -709,7 +711,7 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fDevicenamepath", clickGroupTree);
         formdata.append("fSubdevicegroupid", deviceGroupId);
-        formdata.append("fDevicename", encodeURIComponent(fDevicename));
+        formdata.append("fDevicename", /*encodeURIComponent*/(fDevicename));
         // formdata.append("fPagejson", json);
         if (newJson != undefined) {
             formdata.append("fPagejson", newJson);
@@ -728,10 +730,11 @@ jQuery(document).ready(function () {
         //     "name",
         //     data.data.fSubdeviceinfoid
         // );
-        $("#save").removeAttr("disabled");
         $("#addDataUL").scrollLeft(10000);
+        $("#save").removeAttr("disabled");
         $.prompt('设备命名', function (value) {
             $(".tab-link.active span").text(value);
+            $("#addDataUL").scrollLeft(10000);
         });
         //     }
         // });
@@ -742,6 +745,11 @@ jQuery(document).ready(function () {
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
             $.toast("当前无可复制的设备。");
+            return;
+        }
+        var selectId = $(".active[role='presentation']").attr("name");
+        if (selectId === undefined) {
+            $.toast("当前设备暂未保存！");
             return;
         }
         var info = customerDevice.getselectInfo();
@@ -755,6 +763,7 @@ jQuery(document).ready(function () {
         $.each(nodeInfo, function (key, val) {
             if (selectDevice == (val.fSubdeviceinfoid).toString()) {
                 json = val.fDevicejson;
+                return false;
             }
         });
 
@@ -762,7 +771,7 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fDevicenamepath", clickGroupTree);
-        var deviceName = $(".tab-link.active span").text();
+        var deviceName = $(".tab-link.active span").text()+"copy";
         formdata.append("fDevicename", deviceName);
         if (json != undefined) {
             formdata.append("fDevicejson", json);
@@ -772,7 +781,7 @@ jQuery(document).ready(function () {
             if (data.msg != "ok") {
                 $.toast("复制失败！");
             } else {
-                customerDevice.addModal(json);
+                customerDevice.addModal(json,deviceName);
                 $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
                 $.toast("复制成功！");
                 $("#addDataUL").scrollLeft(10000);
@@ -789,7 +798,21 @@ jQuery(document).ready(function () {
         }
         var selectId = $(".active[role='presentation']").attr("name");
         if (selectId === undefined) {
-            $.toast("当前设备暂未保存！");
+//            $.toast("当前设备暂未保存！");
+            var id = $(".active[role='presentation']").attr("href");
+            var prevLi = $(".active[role='presentation']").prev();
+            var nextLi = $(".active[role='presentation']").next();
+            // var prevLi = $(".active[role='presentation']");
+            $(".active[role='presentation']").remove();
+            $(id).remove();
+            if (prevLi != undefined && prevLi.length>0) {
+                //TODO: 如有其它tab则选中它
+                prevLi.click();
+                // $(prevLi).tab("show");
+                // $("a", $(prevLi)).tab("show");
+            }else{
+                nextLi.click();
+            }
             return;
         }
         var name = $(".active[role='presentation']").text();
@@ -802,14 +825,17 @@ jQuery(document).ready(function () {
                         $.toast("删除成功！");
                         var id = $(".active[role='presentation']").attr("href");
                         var prevLi = $(".active[role='presentation']").prev();
+                        var nextLi = $(".active[role='presentation']").next();
                         // var prevLi = $(".active[role='presentation']");
                         $(".active[role='presentation']").remove();
                         $(id).remove();
-                        if (prevLi != undefined) {
+                        if (prevLi != undefined && prevLi.length>0) {
                             //TODO: 如有其它tab则选中它
                             prevLi.click();
                             // $(prevLi).tab("show");
                             // $("a", $(prevLi)).tab("show");
+                        }else{
+                            nextLi.click();
                         }
                     } else {
                         $.toast("删除失败！");
@@ -843,7 +869,7 @@ jQuery(document).ready(function () {
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
                 fPagejson.push({
-                    name: encodeURIComponent(text),
+                    name: /*encodeURIComponent*/(text),
                     value: []
                 });
                 var infoList = $(val).children().children().children('.showDiv');
@@ -878,8 +904,8 @@ jQuery(document).ready(function () {
                             break;
                     }
                     row.type = type;
-                    row.name = encodeURIComponent(name);
-                    row.value = encodeURIComponent(value);
+                    row.name = /*encodeURIComponent*/(name);
+                    row.value = /*encodeURIComponent*/(value);
                     fPagejson[key].value.push(row);
                 });
             });
@@ -952,6 +978,10 @@ jQuery(document).ready(function () {
                     data.data.fSubdeviceinfoid
                 );
                 $("#save").removeAttr("disabled");
+                $.toast("保存成功！");
+                setTimeout(function () {
+                    customerDevice.reNewCurNodeInfo();
+                }, 2000);
                 // $("#addDataUL").scrollLeft(10000);
                 // upData(fDevicejson);
             }
@@ -983,7 +1013,7 @@ jQuery(document).ready(function () {
                 $.toast("保存成功！");
                 setTimeout(function () {
                     customerDevice.reNewCurNodeInfo();
-                }, 3000);
+                }, 2000);
             }
         });
     }
