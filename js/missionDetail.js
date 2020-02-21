@@ -243,7 +243,7 @@ jQuery(document).ready(function () {
                     }
                     //现场签到按钮事件
                     $("#checkIn2").click(function () {
-                        $.showPreloader();
+                        $.showPreloader($.i18n.prop('ui_loading'));
                         var loc = "";
                         if (isIOS) {
                             window.webkit.messageHandlers.getLocation.postMessage("");

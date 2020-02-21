@@ -10,7 +10,7 @@ jQuery(document).ready(function() {
 
   function loadMenu() {
     $(".showlist").empty();
-    $.showPreloader();
+    $.showPreloader($.i18n.prop('ui_loading'));
     Substation.getDataByAjaxNoLoading("/selectMessageType", {}, function(data) {
       // {
       //     messageType: [{

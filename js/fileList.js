@@ -31,7 +31,7 @@ if (isIOS) {
 
 function loadMenu() {
     $(".list-container").empty();
-    $.showPreloader();
+    $.showPreloader($.i18n.prop('ui_loading'));
     Substation.getDataByAjaxNoLoading("/selectDocumentCategory", {
         pid: menuId
     }, function (data) {
