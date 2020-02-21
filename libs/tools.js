@@ -29,6 +29,8 @@ if (isIOS) {
   ipAddress = android.getIpAddress();
   userId = android.getUserid();
 }
+
+//语言字段传参
 var languageOption = "zh";
 
 //取消回车事件
@@ -60,369 +62,46 @@ var Substation = {
     return null;
   },
 
+    loadL7LanguageJS: function () {
+      if(languageOption=="zh"){
+        var script = document.createElement("script");
+        script.src = "libs/cn.min.js";
+        document.body.appendChild(script);
+      }
+    },
+
   loadLanguageJS: function () {
     var script = document.createElement("script");
     script.src = "libs/jquery.i18n.properties.js";
     document.body.appendChild(script);
   },
 
-  showCodeTips: function (type, code) {
-    jQuery.i18n.properties({
-      name: 'strings', //资源文件名称
-      path: 'i18n/', //资源文件路径
-      mode: 'both', //用Map的方式使用资源文件中的值
-      language: type,
-      async: true,
-      callback: function () {
-        switch ("" + code) {
-          case "200":
-            $.toast($.i18n.prop('code_200'));
-            break;
-          case "201":
-            $.toast($.i18n.prop('code_201'));
-            break;
-          case "401":
-            $.toast($.i18n.prop('code_401'));
-            break;
-          case "105":
-            $.toast($.i18n.prop('code_105'));
-            break;
-          case "101":
-            $.toast($.i18n.prop('code_101'));
-            break;
-          case "500":
-            $.toast($.i18n.prop('code_500'));
-            break;
-          case "1000":
-            $.toast($.i18n.prop('code_1000'));
-            break;
-          case "10001":
-            $.toast($.i18n.prop('code_10001'));
-            break;
-          case "300":
-            $.toast($.i18n.prop('code_300'));
-            break;
-          case "301":
-            $.toast($.i18n.prop('code_301'));
-            break;
-          case "302":
-            $.toast($.i18n.prop('code_302'));
-            break;
-          case "303":
-            $.toast($.i18n.prop('code_303'));
-            break;
-          case "107":
-            $.toast($.i18n.prop('code_107'));
-            break;
-          case "108":
-            $.toast($.i18n.prop('code_108'));
-            break;
-          case "109":
-            $.toast($.i18n.prop('code_109'));
-            break;
-          case "120":
-            $.toast($.i18n.prop('code_120'));
-            break;
-          case "125":
-            $.toast($.i18n.prop('code_125'));
-            break;
-          case "126":
-            $.toast($.i18n.prop('code_126'));
-            break;
-          case "127":
-            $.toast($.i18n.prop('code_127'));
-            break;
-          case "128":
-            $.toast($.i18n.prop('code_128'));
-            break;
-          case "129":
-            $.toast($.i18n.prop('code_129'));
-            break;
-          case "130":
-            $.toast($.i18n.prop('code_130'));
-            break;
-          case "140":
-            $.toast($.i18n.prop('code_140'));
-            break;
-          case "141":
-            $.toast($.i18n.prop('code_141'));
-            break;
-          case "142":
-            $.toast($.i18n.prop('code_142'));
-            break;
-          case "143":
-            $.toast($.i18n.prop('code_143'));
-            break;
-          case "0":
-            $.toast($.i18n.prop('code_0'));
-            break;
-          case "1":
-            $.toast($.i18n.prop('code_1'));
-            break;
-          case "145":
-            $.toast($.i18n.prop('code_145'));
-            break;
-          case "146":
-            $.toast($.i18n.prop('code_146'));
-            break;
-          case "147":
-            $.toast($.i18n.prop('code_147'));
-            break;
-          case "304":
-            $.toast($.i18n.prop('code_304'));
-            break;
-          case "305":
-            $.toast($.i18n.prop('code_305'));
-            break;
-          case "306":
-            $.toast($.i18n.prop('code_306'));
-            break;
-          case "307":
-            $.toast($.i18n.prop('code_307'));
-            break;
-          case "308":
-            $.toast($.i18n.prop('code_308'));
-            break;
-          case "309":
-            $.toast($.i18n.prop('code_309'));
-            break;
-          case "310":
-            $.toast($.i18n.prop('code_310'));
-            break;
-          case "144":
-            $.toast($.i18n.prop('code_144'));
-            break;
-          case "311":
-            $.toast($.i18n.prop('code_311'));
-            break;
-          case "312":
-            $.toast($.i18n.prop('code_312'));
-            break;
-          case "313":
-            $.toast($.i18n.prop('code_313'));
-            break;
-          case "314":
-            $.toast($.i18n.prop('code_314'));
-            break;
-          case "315":
-            $.toast($.i18n.prop('code_315'));
-            break;
-          case "316":
-            $.toast($.i18n.prop('code_316'));
-            break;
-          case "317":
-            $.toast($.i18n.prop('code_317'));
-            break;
-          case "318":
-            $.toast($.i18n.prop('code_318'));
-            break;
-          case "319":
-            $.toast($.i18n.prop('code_319'));
-            break;
-          case "320":
-            $.toast($.i18n.prop('code_320'));
-            break;
-          case "321":
-            $.toast($.i18n.prop('code_321'));
-            break;
-          case "322":
-            $.toast($.i18n.prop('code_322'));
-            break;
-          case "323":
-            $.toast($.i18n.prop('code_323'));
-            break;
-          case "324":
-            $.toast($.i18n.prop('code_324'));
-            break;
-          case "325":
-            $.toast($.i18n.prop('code_325'));
-            break;
-          case "326":
-            $.toast($.i18n.prop('code_326'));
-            break;
-          case "327":
-            $.toast($.i18n.prop('code_327'));
-            break;
-          case "328":
-            $.toast($.i18n.prop('code_328'));
-            break;
-          case "329":
-            $.toast($.i18n.prop('code_329'));
-            break;
-          case "330":
-            $.toast($.i18n.prop('code_330'));
-            break;
-          case "331":
-            $.toast($.i18n.prop('code_331'));
-            break;
-          case "332":
-            $.toast($.i18n.prop('code_332'));
-            break;
-          case "333":
-            $.toast($.i18n.prop('code_333'));
-            break;
-          case "334":
-            $.toast($.i18n.prop('code_334'));
-            break;
-          case "335":
-            $.toast($.i18n.prop('code_335'));
-            break;
-          case "336":
-            $.toast($.i18n.prop('code_336'));
-            break;
-          case "700":
-            $.toast($.i18n.prop('code_700'));
-            break;
-          case "205":
-            $.toast($.i18n.prop('code_205'));
-            break;
-          case "338":
-            $.toast($.i18n.prop('code_338'));
-            break;
-          case "339":
-            $.toast($.i18n.prop('code_339'));
-            break;
-          case "340":
-            $.toast($.i18n.prop('code_340'));
-            break;
-          case "341":
-            $.toast($.i18n.prop('code_341'));
-            break;
-          case "342":
-            $.toast($.i18n.prop('code_342'));
-            break;
-          case "343":
-            $.toast($.i18n.prop('code_343'));
-            break;
-          case "344":
-            $.toast($.i18n.prop('code_344'));
-            break;
-          case "345":
-            $.toast($.i18n.prop('code_345'));
-            break;
-          case "346":
-            $.toast($.i18n.prop('code_346'));
-            break;
-          case "347":
-            $.toast($.i18n.prop('code_347'));
-            break;
-          case "600":
-            $.toast($.i18n.prop('code_600'));
-            break;
-          case "348":
-            $.toast($.i18n.prop('code_348'));
-            break;
-          case "349":
-            $.toast($.i18n.prop('code_349'));
-            break;
-          case "350":
-            $.toast($.i18n.prop('code_350'));
-            break;
-          case "351":
-            $.toast($.i18n.prop('code_351'));
-            break;
-          case "352":
-            $.toast($.i18n.prop('code_352'));
-            break;
-          case "353":
-            $.toast($.i18n.prop('code_353'));
-            break;
-          case "354":
-            $.toast($.i18n.prop('code_354'));
-            break;
-          case "355":
-            $.toast($.i18n.prop('code_355'));
-            break;
-          case "356":
-            $.toast($.i18n.prop('code_356'));
-            break;
-          case "357":
-            $.toast($.i18n.prop('code_357'));
-            break;
-          case "358":
-            $.toast($.i18n.prop('code_358'));
-            break;
-          case "359":
-            $.toast($.i18n.prop('code_359'));
-            break;
-          case "360":
-            $.toast($.i18n.prop('code_360'));
-            break;
-          case "361":
-            $.toast($.i18n.prop('code_361'));
-            break;
-          case "362":
-            $.toast($.i18n.prop('code_362'));
-            break;
-          case "363":
-            $.toast($.i18n.prop('code_363'));
-            break;
-          case "364":
-            $.toast($.i18n.prop('code_364'));
-            break;
-          case "365":
-            $.toast($.i18n.prop('code_365'));
-            break;
-          case "366":
-            $.toast($.i18n.prop('code_366'));
-            break;
-          case "367":
-            $.toast($.i18n.prop('code_367'));
-            break;
-          case "368":
-            $.toast($.i18n.prop('code_368'));
-            break;
-          case "369":
-            $.toast($.i18n.prop('code_369'));
-            break;
-          case "370":
-            $.toast($.i18n.prop('code_370'));
-            break;
-          case "371":
-            $.toast($.i18n.prop('code_371'));
-            break;
-          case "372":
-            $.toast($.i18n.prop('code_372'));
-            break;
-          case "373":
-            $.toast($.i18n.prop('code_373'));
-            break;
-          case "374":
-            $.toast($.i18n.prop('code_374'));
-            break;
-          case "375":
-            $.toast($.i18n.prop('code_375'));
-            break;
-          case "376":
-            $.toast($.i18n.prop('code_376'));
-            break;
-          case "5000":
-            $.toast($.i18n.prop('code_5000'));
-            break;
-          case "377":
-            $.toast($.i18n.prop('code_377'));
-            break;
-          case "378":
-            $.toast($.i18n.prop('code_378'));
-            break;
-          case "379":
-            $.toast($.i18n.prop('code_379'));
-            break;
-          case "380":
-            $.toast($.i18n.prop('code_380'));
-            break;
-          case "381":
-            $.toast($.i18n.prop('code_381'));
-            break;
-          case "382":
-            $.toast($.i18n.prop('code_382'));
-            break;
-          default:
-            $.toast("操作失败");
-            break;
-        }
-      }
+  loadLanguagePro:function(){
+    $.i18n.properties({
+       name: 'strings', //资源文件名称
+       path: 'i18n/', //资源文件路径
+       mode: 'both', //用Map的方式使用资源文件中的值
+       language: languageOption,
+//       async: true,
+       cache: false,
+       encoding: 'UTF-8',
+       callback: function () {
+        $("[data-i18n]").each(function(){
+            $(this).html($.i18n.prop($(this).data("i18n")));
+        });
+        $("[data-placeholder]").each(function(){
+            $(this).attr('placeholder',$.i18n.prop($(this).data("placeholder")));
+        });
+       }
     });
+  },
+
+  showCodeTips: function (code) {
+    try{
+        $.toast($.i18n.prop('code_'+code));
+    }catch(e){
+        $.toast($.i18n.prop('code_other'));
+    }
   },
 
   loadGroupList: function (successCallback) {
@@ -536,7 +215,7 @@ var Substation = {
   },
 
   getDataByAjax: function (url, params, successCallback) {
-    $.showPreloader();
+    $.showPreloader($.i18n.prop('ui_loading'));
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -546,20 +225,18 @@ var Substation = {
         request.setRequestHeader("Authorization", tokenFromAPP);
       },
       success: function (data) {
+        $.hidePreloader();
         if (data == undefined) {
           $.toast("信息错误");
           return;
         } else {
           if (data.code == "200") {
-            $.hidePreloader();
             successCallback(data.data);
           } else if(data.code=="5000"){
-            $.hidePreloader();
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           }else{
-            $.hidePreloader();
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
           }
         }
       },
@@ -575,7 +252,7 @@ var Substation = {
   },
 
     getDataByAjaxMain: function (url, params, successCallback) {
-      $.showPreloader();
+      $.showPreloader($.i18n.prop('ui_loading'));
       $.ajax({
         type: "GET",
         url: ipAddress + "/SubstationWEBV2" + url,
@@ -585,20 +262,18 @@ var Substation = {
           request.setRequestHeader("Authorization", tokenFromAPP);
         },
         success: function (data) {
+          $.hidePreloader();
           if (data == undefined) {
             $.toast("信息错误");
             return;
           } else {
             if (data.code == "200") {
-              $.hidePreloader();
               successCallback(data.data);
             }else if(data.code=="5000"){
-              $.hidePreloader();
-              Substation.showCodeTips(languageOption, "5000");
+              Substation.showCodeTips("5000");
               Substation.reportError(JSON.stringify(data.data.stackTrace));
             } else {
-              $.hidePreloader();
-              Substation.showCodeTips(languageOption, data.code);
+              Substation.showCodeTips(data.code);
             }
           }
         },
@@ -615,7 +290,7 @@ var Substation = {
 
   //部分接口无Data但返回code码
   getDataByAjaxAllData: function (url, params, successCallback) {
-    $.showPreloader();
+    $.showPreloader($.i18n.prop('ui_loading'));
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -625,20 +300,18 @@ var Substation = {
         request.setRequestHeader("Authorization", tokenFromAPP);
       },
       success: function (data) {
+        $.hidePreloader();
         if (data == undefined) {
           $.toast("信息错误");
           return;
         } else {
           if (data.code == "200") {
-            $.hidePreloader();
             successCallback(data);
           }else if(data.code=="5000"){
-            $.hidePreloader();
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
-            $.hidePreloader();
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
           }
         }
       },
@@ -670,11 +343,10 @@ var Substation = {
           if (data.code == "200") {
             successCallback(data.data);
           }else if(data.code=="5000"){
-            $.hidePreloader();
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           }else {
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
           }
         }
       },
@@ -690,7 +362,7 @@ var Substation = {
   },
 
   postDataByAjax: function (url, params, successCallback) {
-    $.showPreloader();
+    $.showPreloader($.i18n.prop('ui_loading'));
     $.ajax({
       url: baseUrlFromAPP + url,
       type: "POST",
@@ -700,20 +372,18 @@ var Substation = {
         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
       },
       success: function (data) {
+        $.hidePreloader();
         if (data == undefined) {
           $.toast("信息错误");
           return;
         } else {
           if (data.code == 200) {
-            $.hidePreloader();
             successCallback(data);
           }else if(data.code=="5000"){
-            $.hidePreloader();
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           }else {
-            $.hidePreloader();
-            Substation.showCodeTips(languageOption, data.code);
+            Substation.showCodeTips(data.code);
           }
         }
       },
@@ -729,7 +399,7 @@ var Substation = {
   },
 
   postFormDataByAjax: function (url, params, successCallback) {
-    $.showPreloader();
+    $.showPreloader($.i18n.prop('ui_loading'));
     $.ajax({
         url: baseUrlFromAPP + url,
         type: "POST",
@@ -744,16 +414,14 @@ var Substation = {
         }
       })
       .done(function (data) {
+        $.hidePreloader();
         if (data.code == 200) {
-          $.hidePreloader();
           successCallback(data);
         }else if(data.code=="5000"){
-          $.hidePreloader();
-          Substation.showCodeTips(languageOption, data.code);
+          Substation.showCodeTips(data.code);
           Substation.reportError(JSON.stringify(data.data.stackTrace));
         }else {
-          $.hidePreloader();
-          Substation.showCodeTips(languageOption, data.code);
+          Substation.showCodeTips(data.code);
         }
       })
       .fail(function (data) {
@@ -2627,4 +2295,17 @@ function showToast(str) {
   $.toast(str);
 }
 
-window.onload = Substation.loadLanguageJS();
+window.onload = Substation.loadL7LanguageJS();
+window.onload = Substation.loadLanguagePro();
+//$(function(){
+//    jQuery.i18n.properties({
+//        name: 'strings', //资源文件名称
+//        path: 'i18n/', //资源文件路径
+//        mode: 'both', //用Map的方式使用资源文件中的值
+//        language: languageOption,
+//    //    async: true,
+//        cache: false,
+//        encoding: 'UTF-8',
+//        callback: function () {}
+//    });
+//});

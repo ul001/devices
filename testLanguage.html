@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <!-- <link rel="stylesheet" href="css/allDefectPage.css"> -->
+</head>
+
+<body>
+<div class="page-group">
+    <div class="page">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <a class="button button-link button-nav pull-right open-panel">
+                <i class="icon icon-selectSome"></i>
+            </a>
+            <h1 class="title title_color">
+                <p class="limit-length" id="titleContent"><span id="subName">页面无响应</span></p>
+            </h1>
+        </header>
+
+        <div class="content">
+            <div style="height:100%;text-align:center;line-height:100%;">
+                <img src="img/404notfound.png" style="vertical-align:middle;width: 50%;margin-top: 45%" />
+                <h2 data-i18n="code_200"></h2>
+                <input type="search" id='search' placeholder='' data-placeholder="ui_subHolder"/>
+            </div>
+        </div>
+
+    </div>
+</div>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/jquery.i18n.properties.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/showError.js"></script>
+    <!-- <script type='text/javascript' src='js/allDefectPage.js' charset='utf-8'></script> -->
+<script type='text/javascript'>
+setTimeout(function(){$.alert($.i18n.prop('code_200'));},1000);
+</script>
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 jQuery(document).ready(function () {
-  $("#titleContent").text("待办事项");
+  $("#titleContent").text($.i18n.prop('data_todogoods'));
 
   var u = navigator.userAgent,
     app = navigator.appVersion;
@@ -29,7 +29,7 @@ jQuery(document).ready(function () {
     tabName = num;
     $("#titleContent").text("");
     if (num == 1) {
-      $("#titleContent").text("待办事项");
+      $("#titleContent").text($.i18n.prop('data_todogoods'));
     } else if (num == 2) {
       $("#titleContent").text("在办事项");
     } else if (num == 3) {
@@ -40,7 +40,7 @@ jQuery(document).ready(function () {
     $("#daiban").click();
     var num = $("#daiban").attr("name");
     tabName = num;
-    $("#titleContent").text("待办事项");
+    $("#titleContent").text($.i18n.prop('data_todogoods'));
     getFirstPage(num);
   }
 
@@ -51,7 +51,7 @@ jQuery(document).ready(function () {
       // $(".list-container").empty();
       // url = "/getWarningMessageSignalEvents";
       taskstatus = 0;
-      $("#titleContent").text("待办事项");
+      $("#titleContent").text($.i18n.prop('data_todogoods'));
     } else if (i == 1) {
       // pageNum = 1;
       // $(".list-container").empty();

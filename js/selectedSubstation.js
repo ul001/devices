@@ -92,13 +92,13 @@ function addItems(number, lastIndex) {
                         "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
                         "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
                         //                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
-                        "                                    <p class=\"limit-length\">地址：" + Substation.removeUndefined(this.fAddress) + "</p>\n" +
+                        "                                    <p class=\"limit-length\">" +$.i18n.prop('ui_address')+"："+ Substation.removeUnDefinedStr(this.fAddress) + "</p>\n" +
                         "                                </div>\n" +
                         "                                <div class=\"col-20\">\n" +
-                        "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">照片\n" +
+                        "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">"+$.i18n.prop('ui_photo')+"\n" +
                         "                                    </button>\n" +
                         "                                    <br>\n" +
-                        "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fSubid + ")\" type=\"button\">位置\n" +
+                        "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fSubid + ")\" type=\"button\">"+$.i18n.prop('ui_location')+"\n" +
                         "                                    </button>\n" +
                         "                                </div>\n" +
                         "                            </div>\n" +
