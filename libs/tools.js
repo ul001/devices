@@ -2295,5 +2295,4 @@ function showToast(str) {
   $.toast(str);
 }
 
-window.onload = Substation.loadL7LanguageJS();
-window.onload = Substation.loadLanguagePro();
+window.onload = Substation.loadL7LanguageJS(),Substation.loadLanguagePro();
