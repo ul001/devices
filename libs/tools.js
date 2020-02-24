@@ -7,6 +7,9 @@ var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
+//语言字段传参
+var languageOption = "zh";
+
 //iOS安卓基础传参
 var u = navigator.userAgent,
   app = navigator.appVersion;
@@ -29,9 +32,6 @@ if (isIOS) {
   ipAddress = android.getIpAddress();
   userId = android.getUserid();
 }
-
-//语言字段传参
-var languageOption = "zh";
 
 //取消回车事件
 $(document).keydown(function (event) {
