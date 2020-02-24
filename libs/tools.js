@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODI1MDc3NjgsInVzZXJuYW1lIjoiaGFoYWhhIn0.ARe8U7TGl5M4cdJ5fPhIIkuPVFGz33JH51e20Vc-XB4";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
 //iOS安卓基础传参
@@ -2297,15 +2297,3 @@ function showToast(str) {
 
 window.onload = Substation.loadL7LanguageJS();
 window.onload = Substation.loadLanguagePro();
-//$(function(){
-//    jQuery.i18n.properties({
-//        name: 'strings', //资源文件名称
-//        path: 'i18n/', //资源文件路径
-//        mode: 'both', //用Map的方式使用资源文件中的值
-//        language: languageOption,
-//    //    async: true,
-//        cache: false,
-//        encoding: 'UTF-8',
-//        callback: function () {}
-//    });
-//});
