@@ -20,21 +20,22 @@
             <header class="bar bar-nav bar_color">
                 <button class="button button-link button-nav pull-left click_btn">
                     <span class="icon icon-left"></span>
-                    返回
+                    <span data-i18n="ui_back"></span>
                 </button>
                 <button class="button button-link button-nav pull-right click_btn" id="editBtn" onclick="editContent()">
-                    编辑
+                    <span data-i18n="ui_edit"></span>
                 </button>
                 <h1 class="title title_color">
                     <p class="limit-length" id="titleContent"></p>
                 </h1>
             </header>
             <div class="bar bar-header-secondary">
-                <button id="show-class" type="button" class="button bg-primary">隐藏无设备分类</button>
-                <button id="add-class" type="button" class="button bg-primary"
-                    onclick="addDeviceClass()">新增额外设备分类</button>
+                <button id="show-class" type="button" class="button bg-primary"><span
+                        data-i18n="ui_hidenodevice"></span></button>
+                <button id="add-class" type="button" class="button bg-primary" onclick="addDeviceClass()"><span
+                        data-i18n="ui_addnewdevice"></span></button>
             </div>
-<!--            <nav class="bar bar-footer row">
+            <!--            <nav class="bar bar-footer row">
                 <a href="#" class="button bg-primary col-33" onclick="changeUp()"><i
                         class="icon icon-upChange"></i>上移</a>
                 <a href="#" class="button bg-primary col-33" onclick="confirmSort()"><i

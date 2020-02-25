@@ -8,7 +8,7 @@ var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDU
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
 //语言字段传参
-var languageOption = "zh";
+var languageOption = "en";
 
 //iOS安卓基础传参
 //var u = navigator.userAgent,
@@ -50,9 +50,9 @@ var Substation = {
     return dataStr;
   },
 
-  removeUnDefinedStr:function(data){
+  removeUnDefinedStr: function (data) {
     var dataStr = data == undefined ? "-" : data;
-     return dataStr;
+    return dataStr;
   },
 
   GetQueryString: function (name) {
@@ -62,63 +62,63 @@ var Substation = {
     return null;
   },
 
-    loadL7LanguageJS: function () {
-      if(languageOption=="zh"){
-        var script = document.createElement("script");
-        script.src = "libs/cn.min.js";
-        document.body.appendChild(script);
-      }
-    },
+  loadL7LanguageJS: function () {
+    if (languageOption == "zh") {
+      var script = document.createElement("script");
+      script.src = "libs/cn.min.js";
+      document.body.appendChild(script);
+    }
+  },
 
   loadLanguageJS: function () {
-//    var script = document.createElement("script");
-    if(languageOption=="en"){
-//        script.src = "libs/language_en.js";
-        getEnLanguage();
-    }else{
-//        script.src = "libs/language_zh.js";
-        getZhLanguage();
-        var script = document.createElement("script");
-        script.src = "libs/cn.min.js";
-        document.body.appendChild(script);
+    //    var script = document.createElement("script");
+    if (languageOption == "en") {
+      //        script.src = "libs/language_en.js";
+      getEnLanguage();
+    } else {
+      //        script.src = "libs/language_zh.js";
+      getZhLanguage();
+      var script = document.createElement("script");
+      script.src = "libs/cn.min.js";
+      document.body.appendChild(script);
     }
-//    document.body.appendChild(script);
+    //    document.body.appendChild(script);
   },
 
-  loadLanguagePro:function(){
+  loadLanguagePro: function () {
     $.i18n.properties({
-       name: 'strings', //资源文件名称
-       path: 'i18n/', //资源文件路径
-       mode: 'both', //用Map的方式使用资源文件中的值
-       language: languageOption,
-//       async: true,
-       cache: false,
-       encoding: 'UTF-8',
-       callback: function () {
-        $("[data-i18n]").each(function(){
-            $(this).html($.i18n.prop($(this).data("i18n")));
+      name: 'strings', //资源文件名称
+      path: 'i18n/', //资源文件路径
+      mode: 'both', //用Map的方式使用资源文件中的值
+      language: languageOption,
+      //       async: true,
+      cache: false,
+      encoding: 'UTF-8',
+      callback: function () {
+        $("[data-i18n]").each(function () {
+          $(this).html($.i18n.prop($(this).data("i18n")));
         });
-        $("[data-placeholder]").each(function(){
-            $(this).attr('placeholder',$.i18n.prop($(this).data("placeholder")));
+        $("[data-placeholder]").each(function () {
+          $(this).attr('placeholder', $.i18n.prop($(this).data("placeholder")));
         });
-       }
+      }
     });
   },
 
-  loadLanguageData:function(){
-    $("[data-i18n]").each(function(){
+  loadLanguageData: function () {
+    $("[data-i18n]").each(function () {
       $(this).html(Operation[$(this).data("i18n")]);
     });
-    $("[data-placeholder]").each(function(){
-      $(this).attr('placeholder',Operation[$(this).data("placeholder")]);
+    $("[data-placeholder]").each(function () {
+      $(this).attr('placeholder', Operation[$(this).data("placeholder")]);
     });
   },
 
   showCodeTips: function (code) {
-    if(Operation['code_'+code]==undefined||Operation['code_'+code]==null){
-        $.toast(Operation['code_other']);
-    }else{
-        $.toast(Operation['code_'+code]);
+    if (Operation['code_' + code] == undefined || Operation['code_' + code] == null) {
+      $.toast(Operation['code_other']);
+    } else {
+      $.toast(Operation['code_' + code]);
     }
   },
 
@@ -218,17 +218,20 @@ var Substation = {
     }
   },
 
-  reportError:function(jsonStr){
+  reportError: function (jsonStr) {
     $.ajax({
-          url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
-          type: "POST",
-          data: {ip:ipAddress,exceptionMessage:jsonStr},
-          success: function (data) {
+      url: "http://www.acrelcloud.cn/SubstationWEBV2/main/uploadExceptionLog",
+      type: "POST",
+      data: {
+        ip: ipAddress,
+        exceptionMessage: jsonStr
+      },
+      success: function (data) {
 
-          },
-          error:function(){
+      },
+      error: function () {
 
-          }
+      }
     });
   },
 
@@ -250,10 +253,10 @@ var Substation = {
         } else {
           if (data.code == "200") {
             successCallback(data.data);
-          } else if(data.code=="5000"){
+          } else if (data.code == "5000") {
             Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
-          }else{
+          } else {
             Substation.showCodeTips(data.code);
           }
         }
@@ -269,42 +272,42 @@ var Substation = {
     });
   },
 
-    getDataByAjaxMain: function (url, params, successCallback) {
-      $.showPreloader(Operation['ui_loading']);
-      $.ajax({
-        type: "GET",
-        url: ipAddress + "/SubstationWEBV2" + url,
-        data: params,
-        beforeSend: function (request) {
-          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-          request.setRequestHeader("Authorization", tokenFromAPP);
-        },
-        success: function (data) {
-          $.hidePreloader();
-          if (data == undefined) {
-            $.toast("信息错误");
-            return;
+  getDataByAjaxMain: function (url, params, successCallback) {
+    $.showPreloader(Operation['ui_loading']);
+    $.ajax({
+      type: "GET",
+      url: ipAddress + "/SubstationWEBV2" + url,
+      data: params,
+      beforeSend: function (request) {
+        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+        request.setRequestHeader("Authorization", tokenFromAPP);
+      },
+      success: function (data) {
+        $.hidePreloader();
+        if (data == undefined) {
+          $.toast("信息错误");
+          return;
+        } else {
+          if (data.code == "200") {
+            successCallback(data.data);
+          } else if (data.code == "5000") {
+            Substation.showCodeTips("5000");
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
-            if (data.code == "200") {
-              successCallback(data.data);
-            }else if(data.code=="5000"){
-              Substation.showCodeTips("5000");
-              Substation.reportError(JSON.stringify(data.data.stackTrace));
-            } else {
-              Substation.showCodeTips(data.code);
-            }
-          }
-        },
-        error: function (data) {
-          $.hidePreloader();
-          if (data.status == 0) {
-            $.toast("无法连接到网络，请检查网络设置。");
-          } else {
-            $.toast("数据请求失败");
+            Substation.showCodeTips(data.code);
           }
         }
-      });
-    },
+      },
+      error: function (data) {
+        $.hidePreloader();
+        if (data.status == 0) {
+          $.toast("无法连接到网络，请检查网络设置。");
+        } else {
+          $.toast("数据请求失败");
+        }
+      }
+    });
+  },
 
   //部分接口无Data但返回code码
   getDataByAjaxAllData: function (url, params, successCallback) {
@@ -325,7 +328,7 @@ var Substation = {
         } else {
           if (data.code == "200") {
             successCallback(data);
-          }else if(data.code=="5000"){
+          } else if (data.code == "5000") {
             Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
@@ -360,10 +363,10 @@ var Substation = {
         } else {
           if (data.code == "200") {
             successCallback(data.data);
-          }else if(data.code=="5000"){
+          } else if (data.code == "5000") {
             Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
-          }else {
+          } else {
             Substation.showCodeTips(data.code);
           }
         }
@@ -397,10 +400,10 @@ var Substation = {
         } else {
           if (data.code == 200) {
             successCallback(data);
-          }else if(data.code=="5000"){
+          } else if (data.code == "5000") {
             Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
-          }else {
+          } else {
             Substation.showCodeTips(data.code);
           }
         }
@@ -435,10 +438,10 @@ var Substation = {
         $.hidePreloader();
         if (data.code == 200) {
           successCallback(data);
-        }else if(data.code=="5000"){
+        } else if (data.code == "5000") {
           Substation.showCodeTips(data.code);
           Substation.reportError(JSON.stringify(data.data.stackTrace));
-        }else {
+        } else {
           Substation.showCodeTips(data.code);
         }
       })
@@ -2314,6 +2317,6 @@ function showToast(str) {
 }
 
 //$(document).ready(function(){Substation.loadLanguageJS();Substation.loadLanguageData();});
-window.onload = Substation.loadLanguageJS(),Substation.loadLanguageData();
+window.onload = Substation.loadLanguageJS(), Substation.loadLanguageData();
 
 //window.onload = Substation.loadL7LanguageJS(),Substation.loadLanguagePro();
