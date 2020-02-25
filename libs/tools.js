@@ -11,27 +11,27 @@ var userId = "315";
 var languageOption = "zh";
 
 //iOS安卓基础传参
-var u = navigator.userAgent,
-  app = navigator.appVersion;
-var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-//判断数组中是否包含某字符串
-if (isIOS) {
-  //ios系统的处理
-  window.webkit.messageHandlers.iOS.postMessage(null);
-  var storage = localStorage.getItem("accessToken");
-  // storage = storage ? JSON.parse(storage):[];
-  storage = JSON.parse(storage);
-  baseUrlFromAPP = storage.baseurl;
-  tokenFromAPP = storage.token;
-  ipAddress = storage.ipAddress;
-  userId = storage.userID;
-} else {
-  baseUrlFromAPP = android.getBaseUrl();
-  tokenFromAPP = android.getToken();
-  ipAddress = android.getIpAddress();
-  userId = android.getUserid();
-}
+//var u = navigator.userAgent,
+//  app = navigator.appVersion;
+//var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
+//var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+////判断数组中是否包含某字符串
+//if (isIOS) {
+//  //ios系统的处理
+//  window.webkit.messageHandlers.iOS.postMessage(null);
+//  var storage = localStorage.getItem("accessToken");
+//  // storage = storage ? JSON.parse(storage):[];
+//  storage = JSON.parse(storage);
+//  baseUrlFromAPP = storage.baseurl;
+//  tokenFromAPP = storage.token;
+//  ipAddress = storage.ipAddress;
+//  userId = storage.userID;
+//} else {
+//  baseUrlFromAPP = android.getBaseUrl();
+//  tokenFromAPP = android.getToken();
+//  ipAddress = android.getIpAddress();
+//  userId = android.getUserid();
+//}
 
 //取消回车事件
 $(document).keydown(function (event) {
@@ -78,6 +78,9 @@ var Substation = {
     }else{
 //        script.src = "libs/language_zh.js";
         getZhLanguage();
+        var script = document.createElement("script");
+        script.src = "libs/cn.min.js";
+        document.body.appendChild(script);
     }
 //    document.body.appendChild(script);
   },
@@ -112,10 +115,10 @@ var Substation = {
   },
 
   showCodeTips: function (code) {
-    try{
-        $.toast($.i18n.prop('code_'+code));
-    }catch(e){
-        $.toast($.i18n.prop('code_other'));
+    if(Operation['code_'+code]==undefined||Operation['code_'+code]==null){
+        $.toast(Operation['code_other']);
+    }else{
+        $.toast(Operation['code_'+code]);
     }
   },
 
@@ -230,7 +233,7 @@ var Substation = {
   },
 
   getDataByAjax: function (url, params, successCallback) {
-    $.showPreloader($.i18n.prop('ui_loading'));
+    $.showPreloader(Operation['ui_loading']);
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -267,7 +270,7 @@ var Substation = {
   },
 
     getDataByAjaxMain: function (url, params, successCallback) {
-      $.showPreloader($.i18n.prop('ui_loading'));
+      $.showPreloader(Operation['ui_loading']);
       $.ajax({
         type: "GET",
         url: ipAddress + "/SubstationWEBV2" + url,
@@ -305,7 +308,7 @@ var Substation = {
 
   //部分接口无Data但返回code码
   getDataByAjaxAllData: function (url, params, successCallback) {
-    $.showPreloader($.i18n.prop('ui_loading'));
+    $.showPreloader(Operation['ui_loading']);
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -377,7 +380,7 @@ var Substation = {
   },
 
   postDataByAjax: function (url, params, successCallback) {
-    $.showPreloader($.i18n.prop('ui_loading'));
+    $.showPreloader(Operation['ui_loading']);
     $.ajax({
       url: baseUrlFromAPP + url,
       type: "POST",
@@ -414,7 +417,7 @@ var Substation = {
   },
 
   postFormDataByAjax: function (url, params, successCallback) {
-    $.showPreloader($.i18n.prop('ui_loading'));
+    $.showPreloader(Operation['ui_loading']);
     $.ajax({
         url: baseUrlFromAPP + url,
         type: "POST",
