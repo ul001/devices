@@ -1,11 +1,11 @@
 var u = navigator.userAgent,
-  app = navigator.appVersion;
+    app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-$(".pull-left.click_btn").click(function(){
-    if(isIOS){
+$(".pull-left.click_btn").click(function () {
+    if (isIOS) {
         window.history.back();
-    }else{
+    } else {
         android.goBack();
     }
 });
@@ -44,12 +44,12 @@ var selectSubname = localStorage.getItem("fSubname");
 $("#titleContent").text(selectSubname);
 var thisMenuList = [];
 
-if(localStorage.getItem("need-refresh")=="true"){
+if (localStorage.getItem("need-refresh") == "true") {
     localStorage.removeItem("need-refresh");
-    if(isAndroid){
+    if (isAndroid) {
         android.refresh();
-//        return;
-    }else{
+        //        return;
+    } else {
         location.reload();
     }
 }
@@ -122,9 +122,9 @@ function fillH5(parentId) {
             linkIcon +
             "                        <div class=\"item-inner row no-gutter\">\n" +
             "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
-            "                                <div class=\"col-58\"><button class='button bg-primary' type=\"button\" onclick=\"renameLi()\">重命名</button>\n" +
-            "                                <button class='button bg-primary' type=\"button\" onclick=\"cloneLi()\">复制</button>\n" +
-            "                                <button class='button bg-primary' type=\"button\" onclick=\"deleteLi()\">删除</button></div>\n" +
+            "                                <div class=\"col-58\"><button class='button bg-primary' type=\"button\" onclick=\"renameLi()\">" + Operation['ui_rename'] + "</button>\n" +
+            "                                <button class='button bg-primary' type=\"button\" onclick=\"cloneLi()\">" + Operation['ui_copy'] + "</button>\n" +
+            "                                <button class='button bg-primary' type=\"button\" onclick=\"deleteLi()\">" + Operation['ui_delete'] + "</button></div>\n" +
             "                        </div>\n" +
             "                    </li>";
         ul.append(li);
@@ -138,25 +138,25 @@ function fillH5(parentId) {
     $("#show-class").unbind().click(function () {
         if (showDisItem == 0) {
             showDisItem = 1;
-            $("#show-class").text("隐藏无设备分类");
+            $("#show-class").text(Operation['ui_hidenodevice']);
             $(".item-dis").css("display", "flex");
         } else {
             showDisItem = 0;
-            $("#show-class").text("显示无设备分类");
+            $("#show-class").text(Operation['ui_showalldevice']);
             $(".item-dis").css("display", "none");
         }
     });
     if (editState == 1) {
         $(".back-parent").unbind();
-        $("#editBtn").text("退出");
+        $("#editBtn").text(Operation['ui_quit']);
         $("#add-class").css("display", "inline-block");
         $(".bar-header-secondary").after("            <nav class=\"bar bar-footer row\">\n" +
             "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeUp()\"><i\n" +
-            "                        class=\"icon icon-upChange\"></i>上移</a>\n" +
+            "                        class=\"icon icon-upChange\"></i>" + Operation['ui_up'] + "</a>\n" +
             "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"confirmSort()\"><i\n" +
-            "                        class=\"icon icon-yes\"></i>确定排序</a>\n" +
+            "                        class=\"icon icon-yes\"></i>" + Operation['ui_suresort'] + "</a>\n" +
             "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeDown()\"><i\n" +
-            "                        class=\"icon icon-downChange\"></i>下移</a>\n" +
+            "                        class=\"icon icon-downChange\"></i> " + Operation['ui_down'] + "</a>\n" +
             "            </nav>");
         $(".item-content").unbind().click(function () {
             $(".item-edit").removeClass("item-edit");
@@ -208,22 +208,22 @@ function linkClick(parentId) {
                 }
             }
             var clickTree = [];
-            $(pids).each(function(){
-                if(this.pName!=""){
+            $(pids).each(function () {
+                if (this.pName != "") {
                     clickTree.push(this.pName);
                 }
             });
             clickTree.push(clickName);
             var clickTreeStr = clickTree.join("-");
-            localStorage.setItem("clickGroupTree",clickTreeStr);
+            localStorage.setItem("clickGroupTree", clickTreeStr);
             localStorage.setItem("pids", JSON.stringify(pids));
             localStorage.setItem("pid", thisPid);
             localStorage.setItem("clickNum", clickNum);
             localStorage.setItem("fDeviceGroupId", clickId);
             localStorage.setItem("fTempid", thisTempid);
-            if(isAndroid){
+            if (isAndroid) {
                 android.goToIn();
-            }else{
+            } else {
                 window.location.href = "AutoloadDetail.html";
             }
             /* if (fField != "" && fField != null) {
@@ -241,15 +241,15 @@ function editContent() {
     if (editState == 0) {
         editState = 1;
         $(".back-parent").unbind();
-        $("#editBtn").text("退出");
+        $("#editBtn").text(Operation['ui_quit']);
         $("#add-class").css("display", "inline-block");
         $(".bar-header-secondary").after("            <nav class=\"bar bar-footer row\">\n" +
             "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeUp()\"><i\n" +
-            "                        class=\"icon icon-upChange\"></i>上移</a>\n" +
+            "                        class=\"icon icon-upChange\"></i>" + Operation['ui_up'] + "</a>\n" +
             "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"confirmSort()\"><i\n" +
-            "                        class=\"icon icon-yes\"></i>确定排序</a>\n" +
+            "                        class=\"icon icon-yes\"></i>" + Operation['ui_suresort'] + "</a>\n" +
             "                <a href=\"#\" class=\"button bg-primary col-33\" onclick=\"changeDown()\"><i\n" +
-            "                        class=\"icon icon-downChange\"></i>下移</a>\n" +
+            "                        class=\"icon icon-downChange\"></i>" + Operation['ui_down'] + "</a>\n" +
             "            </nav>");
         $(".item-content").unbind().click(function () {
             $(".item-edit").removeClass("item-edit");
@@ -262,7 +262,7 @@ function editContent() {
         editState = 0;
         editID = -1;
         addBack();
-        $("#editBtn").text("编辑");
+        $("#editBtn").text(Operation['ui_edit']);
         $(".bar-footer").remove();
         $(".col-40").removeClass("col-40");
         $("#add-class").css("display", "none");
@@ -278,13 +278,13 @@ function editContent() {
 
 function renameLi() {
     var idVal = $(".item-edit").attr("id");
-    $.prompt('重命名', function (value) {
+    $.prompt(Operation['ui_rename'], function (value) {
         Substation.postDataByAjax("/updateSubDeviceGroup", {
             fSubdevicegroupname: value,
             fSubdevicegroupid: idVal
         }, function (data) {
             if (data.code == 200) {
-                $.toast("重命名成功");
+                $.toast(Operation['ui_renamesuccess']);
                 $("#" + idVal).find(".item-title").text(value);
             }
         });
@@ -307,7 +307,7 @@ function cloneLi() {
 
 function deleteLi() {
     var idVal = $(".item-edit").attr("id");
-    $.confirm('确定要删除吗?', function () {
+    $.confirm(Operation['ui_suretodel'], function () {
         Substation.getDataByAjax("/deleteSubDeviceGroup", {
             deleteId: idVal,
             fSubid: selectSubid
@@ -352,7 +352,7 @@ function confirmSort() {
             groupList: jsonStr
         }, function (data) {
             if (data.code == 200) {
-                $.toast("排序成功");
+                $.toast(Operation['ui_sortsuccess']);
             }
         });
     }
@@ -363,9 +363,9 @@ function addDeviceClass() {
     localStorage.setItem("pid", thisPid);
     localStorage.setItem("clickNum", clickNum);
     localStorage.setItem("tempId", thisTempid);
-    if(isAndroid){
+    if (isAndroid) {
         android.goToIn2();
-    }else{
+    } else {
         window.location.href = "addDeviceClass.html";
     }
 }
