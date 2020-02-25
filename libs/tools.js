@@ -71,9 +71,15 @@ var Substation = {
     },
 
   loadLanguageJS: function () {
-    var script = document.createElement("script");
-    script.src = "libs/jquery.i18n.properties.js";
-    document.body.appendChild(script);
+//    var script = document.createElement("script");
+    if(languageOption=="en"){
+//        script.src = "libs/language_en.js";
+        getEnLanguage();
+    }else{
+//        script.src = "libs/language_zh.js";
+        getZhLanguage();
+    }
+//    document.body.appendChild(script);
   },
 
   loadLanguagePro:function(){
@@ -93,6 +99,15 @@ var Substation = {
             $(this).attr('placeholder',$.i18n.prop($(this).data("placeholder")));
         });
        }
+    });
+  },
+
+  loadLanguageData:function(){
+    $("[data-i18n]").each(function(){
+      $(this).html(Operation[$(this).data("i18n")]);
+    });
+    $("[data-placeholder]").each(function(){
+      $(this).attr('placeholder',Operation[$(this).data("placeholder")]);
     });
   },
 
@@ -2295,4 +2310,7 @@ function showToast(str) {
   $.toast(str);
 }
 
-window.onload = Substation.loadL7LanguageJS(),Substation.loadLanguagePro();
+//$(document).ready(function(){Substation.loadLanguageJS();Substation.loadLanguageData();});
+window.onload = Substation.loadLanguageJS(),Substation.loadLanguageData();
+
+//window.onload = Substation.loadL7LanguageJS(),Substation.loadLanguagePro();
