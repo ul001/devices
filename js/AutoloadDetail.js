@@ -43,14 +43,14 @@ var CustomerDevice = (function () {
         };
 
         // 新增一个设备
-        this.addModal = function (data,tabName) {
+        this.addModal = function (data, tabName) {
             // 取消选中tabpanel
             $(".active[role='presentation']").removeClass("active");
             $(".tab.active").removeClass("active");
             count++;
             var name = "addModal" + count;
             var text = selectInfo.name;
-            if(tabName!=null){
+            if (tabName != null) {
                 text = tabName;
             }
             var string =
@@ -105,7 +105,7 @@ var CustomerDevice = (function () {
             $(".icon-edit").unbind().click(function (e) {
                 var thisSpan = $(this).prev();
                 var thisDeviceId = $(this).parent().attr("name");
-                $.prompt('重命名', function (value) {
+                $.prompt(Operation['ui_rename'], function (value) {
                     if (thisDeviceId == undefined) {
                         thisSpan.text(value);
                     } else {
@@ -113,7 +113,7 @@ var CustomerDevice = (function () {
                             fSubdeviceinfoid: thisDeviceId,
                             fDevicename: value
                         }, function (data) {
-                            $.toast("重命名成功！");
+                            $.toast(Operation['ui_renamesuccess']);
                             thisSpan.text(value);
                         });
                     }
@@ -697,7 +697,7 @@ jQuery(document).ready(function () {
     $("#Add").on("click", function () {
         var info = customerDevice.getselectInfo();
         if (info.fFunctionfield == undefined) {
-            $.toast("暂无设备信息，请增加相关信息！");
+            $.toast(Operation['ui_nodevice']);
             return;
         }
 
@@ -711,7 +711,7 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fDevicenamepath", clickGroupTree);
         formdata.append("fSubdevicegroupid", deviceGroupId);
-        formdata.append("fDevicename", /*encodeURIComponent*/(fDevicename));
+        formdata.append("fDevicename", /*encodeURIComponent*/ (fDevicename));
         // formdata.append("fPagejson", json);
         if (newJson != undefined) {
             formdata.append("fPagejson", newJson);
@@ -732,7 +732,7 @@ jQuery(document).ready(function () {
         // );
         $("#addDataUL").scrollLeft(10000);
         $("#save").removeAttr("disabled");
-        $.prompt('设备命名', function (value) {
+        $.prompt(Operation['ui_deviceName'], function (value) {
             $(".tab-link.active span").text(value);
             $("#addDataUL").scrollLeft(10000);
         });
@@ -749,7 +749,7 @@ jQuery(document).ready(function () {
         }
         var selectId = $(".active[role='presentation']").attr("name");
         if (selectId === undefined) {
-            $.toast("当前设备暂未保存！");
+            $.toast(Operation['ui_nosave']);
             return;
         }
         var info = customerDevice.getselectInfo();
@@ -771,7 +771,7 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fDevicenamepath", clickGroupTree);
-        var deviceName = $(".tab-link.active span").text()+"copy";
+        var deviceName = $(".tab-link.active span").text() + "copy";
         formdata.append("fDevicename", deviceName);
         if (json != undefined) {
             formdata.append("fDevicejson", json);
@@ -779,11 +779,11 @@ jQuery(document).ready(function () {
         var url = "/addDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                $.toast("复制失败！");
+                $.toast(Operation['ui_copyFail']);
             } else {
-                customerDevice.addModal(json,deviceName);
+                customerDevice.addModal(json, deviceName);
                 $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
-                $.toast("复制成功！");
+                $.toast(Operation['ui_copySuccess']);
                 $("#addDataUL").scrollLeft(10000);
             }
         });
@@ -798,19 +798,19 @@ jQuery(document).ready(function () {
         }
         var selectId = $(".active[role='presentation']").attr("name");
         if (selectId === undefined) {
-//            $.toast("当前设备暂未保存！");
+            //            $.toast("当前设备暂未保存！");
             var id = $(".active[role='presentation']").attr("href");
             var prevLi = $(".active[role='presentation']").prev();
             var nextLi = $(".active[role='presentation']").next();
             // var prevLi = $(".active[role='presentation']");
             $(".active[role='presentation']").remove();
             $(id).remove();
-            if (prevLi != undefined && prevLi.length>0) {
+            if (prevLi != undefined && prevLi.length > 0) {
                 //TODO: 如有其它tab则选中它
                 prevLi.click();
                 // $(prevLi).tab("show");
                 // $("a", $(prevLi)).tab("show");
-            }else{
+            } else {
                 nextLi.click();
             }
             return;
@@ -822,23 +822,23 @@ jQuery(document).ready(function () {
                 "deleteId=" + selectId,
                 function (data) {
                     if (data.code == 200) {
-                        $.toast("删除成功！");
+                        $.toast(Operation['ui_delsuccess']);
                         var id = $(".active[role='presentation']").attr("href");
                         var prevLi = $(".active[role='presentation']").prev();
                         var nextLi = $(".active[role='presentation']").next();
                         // var prevLi = $(".active[role='presentation']");
                         $(".active[role='presentation']").remove();
                         $(id).remove();
-                        if (prevLi != undefined && prevLi.length>0) {
+                        if (prevLi != undefined && prevLi.length > 0) {
                             //TODO: 如有其它tab则选中它
                             prevLi.click();
                             // $(prevLi).tab("show");
                             // $("a", $(prevLi)).tab("show");
-                        }else{
+                        } else {
                             nextLi.click();
                         }
                     } else {
-                        $.toast("删除失败！");
+                        $.toast(Operation['ui_delFail']);
                     }
                 }
             );
@@ -849,7 +849,7 @@ jQuery(document).ready(function () {
     $("#save").on("click", function () {
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast("当前无可保存的设备。");
+            $.toast(Operation['ui_nosave']);
             return;
         }
         var isTrue = true;
@@ -869,7 +869,7 @@ jQuery(document).ready(function () {
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
                 fPagejson.push({
-                    name: /*encodeURIComponent*/(text),
+                    name: /*encodeURIComponent*/ (text),
                     value: []
                 });
                 var infoList = $(val).children().children().children('.showDiv');
@@ -904,8 +904,8 @@ jQuery(document).ready(function () {
                             break;
                     }
                     row.type = type;
-                    row.name = /*encodeURIComponent*/(name);
-                    row.value = /*encodeURIComponent*/(value);
+                    row.name = /*encodeURIComponent*/ (name);
+                    row.value = /*encodeURIComponent*/ (value);
                     fPagejson[key].value.push(row);
                 });
             });
@@ -970,7 +970,7 @@ jQuery(document).ready(function () {
 
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                $.toast("新增失败！");
+                $.toast(Operation['ui_addFail']);
             } else {
                 // customerDevice.addModal();
                 $(".active[role='presentation']").attr(
@@ -978,7 +978,7 @@ jQuery(document).ready(function () {
                     data.data.fSubdeviceinfoid
                 );
                 $("#save").removeAttr("disabled");
-                $.toast("保存成功！");
+                $.toast(Operation['ui_savesuccess']);
                 setTimeout(function () {
                     customerDevice.reNewCurNodeInfo();
                 }, 2000);
@@ -1010,7 +1010,7 @@ jQuery(document).ready(function () {
         var url = "/updateDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.code == 200) {
-                $.toast("保存成功！");
+                $.toast(Operation['ui_savesuccess']);
                 setTimeout(function () {
                     customerDevice.reNewCurNodeInfo();
                 }, 2000);

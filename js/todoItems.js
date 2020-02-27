@@ -1,5 +1,5 @@
 jQuery(document).ready(function () {
-  $("#titleContent").text($.i18n.prop('data_todogoods'));
+  // $("#titleContent").text($.i18n.prop('data_todogoods'));
 
   var u = navigator.userAgent,
     app = navigator.appVersion;
@@ -123,7 +123,7 @@ jQuery(document).ready(function () {
   //右上角按钮事件
   $(".clickrightbtn").click(function () {
     $.modal({
-      title: "任务类型筛选",
+      title: Operation['ui_taskTypeSelect'],
       text: "",
       verticalButtons: true,
       buttons: [{
