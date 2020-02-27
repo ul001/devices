@@ -44,23 +44,27 @@
             <header class="bar bar-nav bar_color">
                 <a href="#" class="button button-link button-nav pull-left click_btn" id="goBackLastPid">
                     <span class="icon icon-left"></span>
-                    返回
+                    <span data-i18n="ui_back"></span>
                 </a>
                 <h1 class="title title_color">
                     <p class="limit-length" id="titleContent"></p>
                 </h1>
                 <div class="bar bar-header-secondary row" style="line-height:2.2rem;">
                     <div class="col-25">
-                        <a href="#" class="button button-fill button-success" id="Add"><i class="icon icon-add"></i>新增</a>
+                        <a href="#" class="button button-fill button-success" id="Add"><i
+                                class="icon icon-add"></i><span data-i18n="ui_add"></span></a>
                     </div>
                     <div class="col-25">
-                        <a href="#" class="button button-fill button-success" id="delete"><i class="icon icon-delete"></i>删除</a>
+                        <a href="#" class="button button-fill button-success" id="delete"><i
+                                class="icon icon-delete"></i><span data-i18n="ui_delete"></span></a>
                     </div>
                     <div class="col-25">
-                        <a href="#" class="button button-fill button-success" id="copy"><i class="icon icon-clone"></i>复制</a>
+                        <a href="#" class="button button-fill button-success" id="copy"><i
+                                class="icon icon-clone"></i><span data-i18n="ui_copy"></span></a>
                     </div>
                     <div class="col-25">
-                        <a href="#" class="button button-fill button-success" id="save"><i class="icon icon-save"></i>保存</a>
+                        <a href="#" class="button button-fill button-success" id="save"><i
+                                class="icon icon-save"></i><span data-i18n="ui_save"></span></a>
                     </div>
                 </div>
             </header>
@@ -76,134 +80,134 @@
 
                     </div>
                 </div>
-<!--                <div class="tabs tab-content" style="overflow:auto;overflow-x: hidden;">-->
-<!--                    <div></div>-->
-<!--                    &lt;!&ndash; <div class="tabs tab-content"-->
-<!--                style="overflow:auto;position: absolute;bottom: 0;top: 7rem;left: 0;right: 0;"> &ndash;&gt;-->
-<!--                    &lt;!&ndash; <div id="tab1" role="tabpanel" class="tab active">-->
-<!--                    <div class="content-block" id="addVarContain123">-->
-<!--                        <div class="content-block-title">信息一</div>-->
-<!--                        <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">-->
-<!--                            <ul>-->
-<!--                                <li>-->
-<!--                                    <div class="item-content showDiv">-->
-<!--                                        <div class="item-inner">-->
-<!--                                            <div class="item-title label">显示名字</div>-->
-<!--                                            <div class="item-input"><input type="text" id="input1234" class="valueInput"-->
-<!--                                                    value="有些什么值" name="类型名字" validator="required">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="showDiv item-content">-->
-<!--                                        <div class="item-inner">' +-->
-<!--                                            '<label class="item-title label nameInputInfo" name="radio">-->
-<!--                                                测试选项 </label>' +-->
-<!--                                            '<input type="radio" id="operation' + count + '"-->
-<!--                                                name="operation' + count + '" value="yes" style="margin-left: 10px"-->
-<!--                                                checked><label style="margin-right: 10px"-->
-<!--                                                for="operation' + count + '">是</label>' +-->
-<!--                                            '<input type="radio" id="operationNo' + count + '"-->
-<!--                                                name="operation' + count + '" value="no"><label-->
-<!--                                                style="margin-right: 10px" for="operationNo' + count + '">否</label>'-->
-<!--                                            +-->
-<!--                                            '</div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="showDiv item-content">-->
-<!--                                        <div class="item-inner">-->
-<!--                                            <label class="nameInputInfo item-title label" name="select">列表</label>-->
-<!--                                            <select>-->
-<!--                                                <option selected>' + opval.opName + '</option>-->
-<!--                                                <option>' + opval.opName + '</option>-->
-<!--                                                <option>' + opval.opName + '</option>-->
-<!--                                            </select>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="showDiv item-content">-->
-<!--                                        <div class="item-inner">-->
-<!--                                            <div class="item-title label nameInputInfo" name="date">日期</div>-->
-<!--                                            <div class="item-input">-->
-<!--                                                <input type="date" class="item-input daycalendarBox6 dateTime"-->
-<!--                                                    value="2012-02-12">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="content-block" id="addVarContain125">-->
-<!--                        <div class="content-block-title">信息一</div>-->
-<!--                        <div id="123" class="list-block baseInfoDiv" name="zhejiuduile">-->
-<!--                            <ul>-->
-<!--                                <li>-->
-<!--                                    <div class="item-content showDiv">-->
-<!--                                        <div class="item-inner">-->
-<!--                                            <div class="item-title label">显示名字</div>-->
-<!--                                            <div class="item-input"><input type="text" id="input12434"-->
-<!--                                                    class="valueInput" value="有些什么值" name="类型名字" validator="required">-->
-<!--                                            </div>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="showDiv item-content">-->
-<!--                                        <div class="item-inner">' +-->
-<!--                                            '<label class="item-title label nameInputInfo" name="radio">-->
-<!--                                                测试选项 </label>' +-->
-<!--                                            '<input type="radio" id="operation1' + count + '"-->
-<!--                                                name="operation' + count + '" value="yes" style="margin-left: 10px"-->
-<!--                                                checked><label style="margin-right: 10px"-->
-<!--                                                for="operation' + count + '">是</label>' +-->
-<!--                                            '<input type="radio" id="operationN2o' + count + '"-->
-<!--                                                name="operation' + count + '" value="no"><label-->
-<!--                                                style="margin-right: 10px" for="operationNo' + count + '">否</label>'-->
-<!--                                            +-->
-<!--                                            '</div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="showDiv item-content">-->
-<!--                                        <div class="item-inner">' +-->
-<!--                                            '<label class="nameInputInfo item-title label"-->
-<!--                                                name="select2">列表</label><select>-->
-<!--                                                <option selected>' + opval.opName + '</option>-->
-<!--                                                <option>' + opval.opName + '</option>-->
-<!--                                                <option>' + opval.opName + '</option>-->
-<!--                                            </select></div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                                <li>-->
-<!--                                    <div class="showDiv item-content">-->
-<!--                                        <div class="item-inner">-->
-<!--                                            <div class="item-title label nameInputInfo" name="date">日期</div>-->
-<!--                                            <input type="date" class="item-input daycalendarBox6 dateTime"-->
-<!--                                                value="2012-02-12">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!--                            </ul>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="tab2" class="tab">-->
-<!--                    <div class="content-block">-->
-<!--                        <p style="height:600px">This is tab 2 content start</p>-->
-<!--                        <p>This is tab 2 content end</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div id="tab3" class="tab">-->
-<!--                    <div class="content-block">-->
-<!--                        <p style="height:600px">This is tab 3 content start</p>-->
-<!--                        <p>This is tab 3 content end</p>-->
-<!--                    </div>-->
-<!--                </div> &ndash;&gt;-->
-<!--                </div>-->
+                <!--                <div class="tabs tab-content" style="overflow:auto;overflow-x: hidden;">-->
+                <!--                    <div></div>-->
+                <!--                    &lt;!&ndash; <div class="tabs tab-content"-->
+                <!--                style="overflow:auto;position: absolute;bottom: 0;top: 7rem;left: 0;right: 0;"> &ndash;&gt;-->
+                <!--                    &lt;!&ndash; <div id="tab1" role="tabpanel" class="tab active">-->
+                <!--                    <div class="content-block" id="addVarContain123">-->
+                <!--                        <div class="content-block-title">信息一</div>-->
+                <!--                        <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">-->
+                <!--                            <ul>-->
+                <!--                                <li>-->
+                <!--                                    <div class="item-content showDiv">-->
+                <!--                                        <div class="item-inner">-->
+                <!--                                            <div class="item-title label">显示名字</div>-->
+                <!--                                            <div class="item-input"><input type="text" id="input1234" class="valueInput"-->
+                <!--                                                    value="有些什么值" name="类型名字" validator="required">-->
+                <!--                                            </div>-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <div class="showDiv item-content">-->
+                <!--                                        <div class="item-inner">' +-->
+                <!--                                            '<label class="item-title label nameInputInfo" name="radio">-->
+                <!--                                                测试选项 </label>' +-->
+                <!--                                            '<input type="radio" id="operation' + count + '"-->
+                <!--                                                name="operation' + count + '" value="yes" style="margin-left: 10px"-->
+                <!--                                                checked><label style="margin-right: 10px"-->
+                <!--                                                for="operation' + count + '">是</label>' +-->
+                <!--                                            '<input type="radio" id="operationNo' + count + '"-->
+                <!--                                                name="operation' + count + '" value="no"><label-->
+                <!--                                                style="margin-right: 10px" for="operationNo' + count + '">否</label>'-->
+                <!--                                            +-->
+                <!--                                            '</div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <div class="showDiv item-content">-->
+                <!--                                        <div class="item-inner">-->
+                <!--                                            <label class="nameInputInfo item-title label" name="select">列表</label>-->
+                <!--                                            <select>-->
+                <!--                                                <option selected>' + opval.opName + '</option>-->
+                <!--                                                <option>' + opval.opName + '</option>-->
+                <!--                                                <option>' + opval.opName + '</option>-->
+                <!--                                            </select>-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <div class="showDiv item-content">-->
+                <!--                                        <div class="item-inner">-->
+                <!--                                            <div class="item-title label nameInputInfo" name="date">日期</div>-->
+                <!--                                            <div class="item-input">-->
+                <!--                                                <input type="date" class="item-input daycalendarBox6 dateTime"-->
+                <!--                                                    value="2012-02-12">-->
+                <!--                                            </div>-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                            </ul>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div class="content-block" id="addVarContain125">-->
+                <!--                        <div class="content-block-title">信息一</div>-->
+                <!--                        <div id="123" class="list-block baseInfoDiv" name="zhejiuduile">-->
+                <!--                            <ul>-->
+                <!--                                <li>-->
+                <!--                                    <div class="item-content showDiv">-->
+                <!--                                        <div class="item-inner">-->
+                <!--                                            <div class="item-title label">显示名字</div>-->
+                <!--                                            <div class="item-input"><input type="text" id="input12434"-->
+                <!--                                                    class="valueInput" value="有些什么值" name="类型名字" validator="required">-->
+                <!--                                            </div>-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <div class="showDiv item-content">-->
+                <!--                                        <div class="item-inner">' +-->
+                <!--                                            '<label class="item-title label nameInputInfo" name="radio">-->
+                <!--                                                测试选项 </label>' +-->
+                <!--                                            '<input type="radio" id="operation1' + count + '"-->
+                <!--                                                name="operation' + count + '" value="yes" style="margin-left: 10px"-->
+                <!--                                                checked><label style="margin-right: 10px"-->
+                <!--                                                for="operation' + count + '">是</label>' +-->
+                <!--                                            '<input type="radio" id="operationN2o' + count + '"-->
+                <!--                                                name="operation' + count + '" value="no"><label-->
+                <!--                                                style="margin-right: 10px" for="operationNo' + count + '">否</label>'-->
+                <!--                                            +-->
+                <!--                                            '</div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <div class="showDiv item-content">-->
+                <!--                                        <div class="item-inner">' +-->
+                <!--                                            '<label class="nameInputInfo item-title label"-->
+                <!--                                                name="select2">列表</label><select>-->
+                <!--                                                <option selected>' + opval.opName + '</option>-->
+                <!--                                                <option>' + opval.opName + '</option>-->
+                <!--                                                <option>' + opval.opName + '</option>-->
+                <!--                                            </select></div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                                <li>-->
+                <!--                                    <div class="showDiv item-content">-->
+                <!--                                        <div class="item-inner">-->
+                <!--                                            <div class="item-title label nameInputInfo" name="date">日期</div>-->
+                <!--                                            <input type="date" class="item-input daycalendarBox6 dateTime"-->
+                <!--                                                value="2012-02-12">-->
+                <!--                                        </div>-->
+                <!--                                    </div>-->
+                <!--                                </li>-->
+                <!--                            </ul>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div id="tab2" class="tab">-->
+                <!--                    <div class="content-block">-->
+                <!--                        <p style="height:600px">This is tab 2 content start</p>-->
+                <!--                        <p>This is tab 2 content end</p>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                <div id="tab3" class="tab">-->
+                <!--                    <div class="content-block">-->
+                <!--                        <p style="height:600px">This is tab 3 content start</p>-->
+                <!--                        <p>This is tab 3 content end</p>-->
+                <!--                    </div>-->
+                <!--                </div> &ndash;&gt;-->
+                <!--                </div>-->
             </div>
         </div>
     </div>
