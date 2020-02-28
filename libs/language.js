@@ -62,6 +62,18 @@ function getZhLanguage() {
     ui_taskstate: "任务状态",
     ui_Substationname: "变电所名称",
     ui_enterkeywords: "请输入关键字",
+    // allDefectPage
+    ui_DefectPage: "缺陷记录",
+    ui_Defectstate: "缺陷状态",
+    ui_Severitygrade: "严重等级",
+    ui_Devname: "设备名称:",
+    ui_DefectExplain: "缺陷描述:",
+    ui_SpecificLoc: "具体位置:",
+    ui_categories: "缺陷类别:",
+    ui_Emergenylevel: "紧急程度",
+    ui_dealState: "处理状态",
+    ui_findTime: "发现时间",
+
     // selectPhoto
     ui_photo: "照片",
     ui_location: "位置",
@@ -113,7 +125,8 @@ function getZhLanguage() {
     ui_Remark: "任务备注:",
     ui_trajectory: "轨迹追踪:",
     ui_Trackquery: "轨迹查询",
-
+    //文档分类
+    ui_FileList: "File List",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -295,6 +308,17 @@ function getEnLanguage() {
     ui_taskstate: "Task State",
     ui_Substationname: "Substation Name",
     ui_enterkeywords: "Please enter keywords",
+    // allDefectPage
+    ui_DefectPage: "Defect Page",
+    ui_Defectstate: "Defect state",
+    ui_Severitygrade: "Severity grade",
+    ui_Devname: "DeviceName:",
+    ui_DefectExplain: "Explain:",
+    ui_SpecificLoc: "Location:",
+    ui_categories: "Categories:",
+    ui_Emergenylevel: "level:",
+    ui_dealState: "State:",
+    ui_findTime: "FindTime:",
     // selectPhoto
     ui_photo: "Photo",
     ui_location: "Location",
@@ -345,6 +369,8 @@ function getEnLanguage() {
     ui_Remark: "Remarks",
     ui_trajectory: "Trajectory",
     ui_Trackquery: "Track Query",
+    //文档分类
+    ui_FileList: "File List",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",

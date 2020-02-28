@@ -130,17 +130,17 @@ function addItems(number, lastIndex) {
                         "                            </div>\n" +*/
                         "                            <div class=\"col-95\">\n" +
                         "<p class=\"subName limit-length\">" + Substation.removeUnDefinedStr(this.fSubName) + "</p>" +
-                        "                                <p>设备名称:<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.treePathName) + "</span>\n" +
+                        "                                <p>" + Operation['ui_Devname'] + "<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.treePathName) + "</span>\n" +
                         "                                </p>\n" +
-                        "                                <p>缺陷描述:<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.fDeviceproblemdes) + "</span></p>\n" +
+                        "                                <p>" + Operation['ui_DefectExplain'] + "<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.fDeviceproblemdes) + "</span></p>\n" +
                         //                        "                                <p>危害:"+this.fProblemharm+"</p>\n" +
-                        "                                <p>具体位置:" + problemStr + "</p>\n" +
-                        "                                <p class=\"row\"><span class=\"col-50\">缺陷类别:" + Substation.removeUnDefinedStr(this.fProblemtype) + "</span><span class=\"col-50\">紧急程度:" + Substation.removeUnDefinedStr(this.fProblemlevel) + "</span></p>\n" +
+                        "                                <p>" + Operation['ui_SpecificLoc'] + problemStr + "</p>\n" +
+                        "                                <p class=\"row\"><span class=\"col-50\">" + Operation['ui_categories'] + Substation.removeUnDefinedStr(this.fProblemtype) + "</span><span class=\"col-50\">" + Operation['ui_Emergenylevel'] + Substation.removeUnDefinedStr(this.fProblemlevel) + "</span></p>\n" +
                         //                        "                                <p>消缺期限:"+this.fTimelimit+"</p>\n" +
                         //                        "                                <p>处理建议:"+this.fResolution+"</p>\n" +
                         //                        "                                <p>客户意见:"+this.fClientadvice+"</p>\n" +
-                        "                                <p>处理状态:" + stateStr + "</p>\n" +
-                        "                                <p>发现时间:" + Substation.removeUnDefinedStr(this.fCreatetime) + "</p>\n" +
+                        "                                <p>" + Operation['ui_dealState'] + stateStr + "</p>\n" +
+                        "                                <p>" + Operation['ui_findTime'] + Substation.removeUnDefinedStr(this.fCreatetime) + "</p>\n" +
                         //                        solveUser+solveTime+
                         "                            </div>\n" +
                         "                            <div class=\"col-5\">\n" +
@@ -190,10 +190,10 @@ function addItems(number, lastIndex) {
 }
 $("#list-container").empty();
 
-function getUnDefined(str){
-    if(str==undefined||str==null){
+function getUnDefined(str) {
+    if (str == undefined || str == null) {
         return "-";
-    }else{
+    } else {
         return str;
     }
 }

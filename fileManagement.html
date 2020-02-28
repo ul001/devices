@@ -21,7 +21,7 @@
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left click_btn back_btn">
                     <span class="icon icon-left"></span>
-                    返回
+                    <span data-i18n="ui_back"></span>
                 </a>
                 <a class="button button-link button-nav pull-right open-panel">
                     <i class="icon icon-selectSome"></i>
@@ -88,26 +88,27 @@
         <div class="panel panel-right panel-reveal" id='panel-right-demo'>
             <div class="content-block">
                 <div>
-                    <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
-                        <a href="#" class="button" id="yestoday">昨日</a>
-                        <a href="#" class="button" id="thisMonth">当月</a>
-                        <a href="#" class="button" id="lastMonth">上月</a></p>
+                    <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a></p>
                 </div>
                 <div>
-                    <label>时间选择</label><br>
-                    <input type="text" id="dateStart" placeholder="开始日期" readonly /> -
-                    <input type="text" id="dateEnd" placeholder="截止日期" readonly />
+                    <label><span data-i18n="ui_timeSelect"></span></label><br>
+                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
                 </div>
                 <!--                <div>
                     <label>报警类型</label><br>
                     <a href="#" class="open-popup open-about" data-popup=".popup-about">筛选报警类型</a>
                 </div>-->
                 <div>
-                    <label>变电所名称</label><br>
+                    <label><span data-i18n="ui_Substationname"></span></label><br>
                     <div class="searchbar">
                         <div class="search-input">
                             <label class="icon icon-search" for="search"></label>
-                            <input type="search" id='search' placeholder='请输入关键字' /><i class="icon icon-clear"></i>
+                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
+                                class="icon icon-clear"></i>
                         </div>
                     </div>
                 </div>
@@ -118,10 +119,11 @@
                 </div>
             </div>
             <div class="btnBar row no-gutter">
-                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel">取消</a>
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
                 </div>
-                <div class="col-50"><a href="#" class="button button-big button-fill button-success"
-                        id="searchBtn">查询</a></div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a></div>
             </div>
         </div>
     </div>
