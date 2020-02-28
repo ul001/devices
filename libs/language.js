@@ -101,6 +101,19 @@ function getZhLanguage() {
     ui_showOnlydevice: "仅显示有设备分类",
     ui_DefectRegist: "缺陷登记",
     ui_hasnosave: "当前巡检信息尚未保存，确定要离开吗？",
+    ui_nodeviceInThis: "此分组下无设备！",
+    //missionManager
+    ui_submitTask: "提交任务",
+    ui_Executor: "执行人:",
+    ui_Executorsituation: "执行情况:",
+    ui_checkTime: "签到时间:",
+    ui_checkSite: "签到地点:",
+    ui_OffsetDistance: "偏差距离:",
+    ui_submitTime: "提交时间:",
+    ui_Remark: "任务备注:",
+    ui_trajectory: "轨迹追踪:",
+    ui_Trackquery: "轨迹查询",
+
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -320,6 +333,18 @@ function getEnLanguage() {
     ui_showOnlydevice: "Show only device",
     ui_DefectRegist: "Defect Regist",
     ui_hasnosave: "The current patrol information has not been saved. Are you sure you want to leave?",
+    ui_nodeviceInThis: "No devices under this group!",
+    //missionManager
+    ui_submitTask: "Submit Task",
+    ui_Executor: "Executor",
+    ui_Executorsituation: "Situation",
+    ui_checkTime: "CheckTime",
+    ui_checkSite: "CheckSite",
+    ui_OffsetDistance: "Offsetloc",
+    ui_submitTime: "SubmitTime",
+    ui_Remark: "Remarks",
+    ui_trajectory: "Trajectory",
+    ui_Trackquery: "Track Query",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
