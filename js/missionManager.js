@@ -301,7 +301,7 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">执行人:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_Executor'] + '</div>';
                 text += '                                        <div class="item-label">';
                 text += userName + '';
                 text += "                                        </div>";
@@ -315,7 +315,7 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">执行情况:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_Executorsituation'] + '</div>';
                 text += '                                        <div class="item-label">';
                 text += taskStateName + '';
                 text += "                                        </div>";
@@ -329,7 +329,7 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">签到时间:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_checkTime'] + '</div>';
                 text +=
                     '                                        <div class="item-label">';
                 text += signTime + '';
@@ -344,7 +344,7 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">签到地点:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_checkSite'] + '</div>';
                 text +=
                     '                                        <div class="item-label"> ';
                 text += location +
@@ -360,7 +360,7 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">偏差距离:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_OffsetDistance'] + '</div>';
                 text +=
                     '                                        <div class="item-label">';
                 text += distance + '';
@@ -375,7 +375,7 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">提交时间:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_submitTime'] + '</div>';
                 text +=
                     '                                        <div class="item-label">';
                 text += creatTime + '';
@@ -390,7 +390,7 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">任务备注:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_Remark'] + '</div>';
                 text +=
                     '                                        <div class="item-label">';
                 text += explain + '';
@@ -405,10 +405,10 @@ function getNetData() {
                 text +=
                     '                                    <div class="item-inner">';
                 text +=
-                    '                                        <div class="item-title label">轨迹追踪:</div>';
+                    '                                        <div class="item-title label">' + Operation['ui_trajectory'] + '</div>';
                 text +=
                     '                                        <div class="item-label">';
-                text += '<a href="#" class="button" style="width:70%;" onClick=selectTrace("' + thisUserId + '")>轨迹查询</a>';
+                text += '<a href="#" class="button" style="width:70%;" onClick=selectTrace("' + thisUserId + '")>' + Operation['ui_Trackquery'] + '</a>';
                 text += "                                        </div>";
                 text += "                                        </div>";
                 text += "                                    </div>";

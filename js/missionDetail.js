@@ -188,7 +188,7 @@ jQuery(document).ready(function () {
                                 localStorage.setItem("canClick", false);
                             } else {
                                 showstr =
-                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "checkInCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>' + Operation['ui_ImplementDetail'] + '</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>提交任务</a> </div>';
+                                    '<div class="row buttonsEvent"> <div class = "col-50" id = "checkInCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>' + Operation['ui_ImplementDetail'] + '</a> </div> <div class = "col-50" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>' + Operation['ui_submitTask'] + '</a> </div>';
                                 $("#addVarContain126").html(showstr);
                                 $("#carryOut").attr("name", "false");
                                 localStorage.setItem("canClick", false);

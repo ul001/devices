@@ -176,7 +176,7 @@ function loadPage() {
                 });
             } else {
                 $("#saveBtn").css("display", "none");
-                $.alert("此分组下无设备！");
+                $.alert(Operation['ui_nodeviceInThis']);
                 hasSave = true;
             }
             addRadioClick();
