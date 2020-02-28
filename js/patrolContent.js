@@ -32,15 +32,17 @@ var getSaveList = localStorage.getItem(missiontaskID);
     getSaveList = android.getSPItem(missiontaskID);
 }*/
 var allGroupList = [];
-if(getSaveList!=null&&getSaveList!=""){
+if (getSaveList != null && getSaveList != "") {
     allGroupList = JSON.parse(getSaveList);
 }
-if(allGroupList!=null&&allGroupList!=""&&allGroupList.length>0){
+if (allGroupList != null && allGroupList != "" && allGroupList.length > 0) {
     loadPage();
-}else{
-    Substation.getDataByAjax("/subDeviceTreeSelectHideOrShow",{fSubid:selectSubid},function(data){
-     allGroupList = data.subDeviceGroupList;
-     loadPage();
+} else {
+    Substation.getDataByAjax("/subDeviceTreeSelectHideOrShow", {
+        fSubid: selectSubid
+    }, function (data) {
+        allGroupList = data.subDeviceGroupList;
+        loadPage();
     });
 }
 
@@ -63,10 +65,10 @@ function loadPage() {
                 tempJson = JSON.parse(tempJson);
                 tempNum = tempJson.checkInfo.length;
             }
-            if(tempNum==0){
-                $.alert("可前往网页端设备管理->设备定义->选择("+$('#subName').text()+")分组->巡检信息添加巡检项");
+            if (tempNum == 0) {
+                $.alert("可前往网页端设备管理->设备定义->选择(" + $('#subName').text() + ")分组->巡检信息添加巡检项");
                 $("#saveBtn").hide();
-                hasSave=true;
+                hasSave = true;
             }
             if (data.list.length > 0) {
                 var itemNum = 0;
@@ -146,7 +148,7 @@ function loadPage() {
                             "<div class=\"content-block\">\n" + tempStr +
                             "</div>\n" +
                             "</div>");
-                        if(tempStr!=""){
+                        if (tempStr != "") {
                             $("#saveBtn").show();
                         }
                     }
@@ -175,7 +177,7 @@ function loadPage() {
             } else {
                 $("#saveBtn").css("display", "none");
                 $.alert("此分组下无设备！");
-                hasSave=true;
+                hasSave = true;
             }
             addRadioClick();
             goToInfo();
@@ -220,25 +222,25 @@ function loadPage() {
     }
 
     function fillData(parentId) {
-/*        var params = {
-            fSubid: selectSubid,
-            fParentId: parentId
-        }
-        Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
-            if (data.hasOwnProperty("menuList")) {
-                if (data.menuList.length > 0) {
-                    fillH5(parentId, data.menuList);
+        /*        var params = {
+                    fSubid: selectSubid,
+                    fParentId: parentId
                 }
-            }
-        });*/
-        var someList = getSubDeviceListByPid(allGroupList,parentId);
-        fillH5(parentId,someList);
+                Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+                    if (data.hasOwnProperty("menuList")) {
+                        if (data.menuList.length > 0) {
+                            fillH5(parentId, data.menuList);
+                        }
+                    }
+                });*/
+        var someList = getSubDeviceListByPid(allGroupList, parentId);
+        fillH5(parentId, someList);
     }
 
     //根据pid获取分组
-    function getSubDeviceListByPid(allList,pid){
-        return allList.filter(function(obj) {
-            return obj.pId==pid;
+    function getSubDeviceListByPid(allList, pid) {
+        return allList.filter(function (obj) {
+            return obj.pId == pid;
         });
     }
 
@@ -251,7 +253,7 @@ function loadPage() {
             ul = $(".list-block .list-container");
             ul.html("<li class=\"item-content back-parent\">\n" +
                 "                        <div class=\"item-inner\">\n" +
-                "                            <div class=\"item-title\"><i class=\"icon icon-goprev\"></i>上一级</div>\n" +
+                "                            <div class=\"item-title\"><i class=\"icon icon-goprev\"></i>" + Operation['ui_upperlevel'] + "</div>\n" +
                 "                        </div>\n" +
                 "                    </li>");
         }
@@ -261,68 +263,69 @@ function loadPage() {
             if (this.displayOrHideState == false) {
                 linkStr = "<li class=\"item-content item-link item-dis";
             }
-            var thisCList = selectChildrenList(allGroupList,this.fSubdevicegroupid);
+            var thisCList = selectChildrenList(allGroupList, this.fSubdevicegroupid);
             var num = thisCList.length;
-            if(num>0){
+            if (num > 0) {
                 getChildNum(thisCList);
             }
-            function getChildNum(allList){
-                $.each(allList,function(i,obj){
-                    var thisCList = selectChildrenList(allList,obj.id);
-                    if(thisCList.length>0){
-                        num+=thisCList.length;
+
+            function getChildNum(allList) {
+                $.each(allList, function (i, obj) {
+                    var thisCList = selectChildrenList(allList, obj.id);
+                    if (thisCList.length > 0) {
+                        num += thisCList.length;
                         getChildNum(thisCList);
-                    }else{
+                    } else {
                         return false;
                     }
                 });
             }
             var classCss = "";
-            if(num==0){
-                if(this.taskFinishFlag=="0"){
+            if (num == 0) {
+                if (this.taskFinishFlag == "0") {
 
-                }else{
+                } else {
                     classCss = " finished";
                 }
-            }else{
-                var finishRadio = (Number(this.taskFinishFlag))/num;
-                if(finishRadio<1&&finishRadio>0){
+            } else {
+                var finishRadio = (Number(this.taskFinishFlag)) / num;
+                if (finishRadio < 1 && finishRadio > 0) {
                     classCss = " halfFinished";
-                }else if(finishRadio==1){
+                } else if (finishRadio == 1) {
                     classCss = " finished";
-                }else{
-//                    classCss = " halfFinished";
+                } else {
+                    //                    classCss = " halfFinished";
                 }
             }
             li = linkStr + "\" id=\"" + this.fSubdevicegroupid + "\">\n" +
-                "                        <div class=\"item-inner"+classCss+"\">\n" +
+                "                        <div class=\"item-inner" + classCss + "\">\n" +
                 "                            <div class=\"item-title\">" + this.fSubdevicegroupname + "</div>\n" +
                 "                        </div>\n" +
                 "                    </li>";
             ul.append(li);
         });
 
-        function selectChildrenList(allList,thisid){
-            var thisList = allList.filter(function(obj){
-                return obj.pId == thisid&&obj.displayOrHideState;
+        function selectChildrenList(allList, thisid) {
+            var thisList = allList.filter(function (obj) {
+                return obj.pId == thisid && obj.displayOrHideState;
             });
             return thisList;
         }
         if (showState == 0) {
-            $("#showOrHide").text("显示全部分类");
+            $("#showOrHide").text(Operation['ui_showalldevice']);
             $(".item-dis").css("display", "none");
         } else {
-            $("#showOrHide").text("仅显示有设备分类");
+            $("#showOrHide").text(Operation['ui_showOnlydevice']);
             $(".item-dis").css("display", "flex");
         }
         $("#showOrHide").unbind().click(function () {
             if (showState == 0) {
                 showState = 1;
-                $("#showOrHide").text("仅显示有设备分类");
+                $("#showOrHide").text(Operation['ui_showOnlydevice']);
                 $(".item-dis").css("display", "flex");
             } else {
                 showState = 0;
-                $("#showOrHide").text("显示全部分类");
+                $("#showOrHide").text(Operation['ui_showalldevice']);
                 $(".item-dis").css("display", "none");
             }
         });
@@ -333,60 +336,60 @@ function loadPage() {
     function linkClick(parentId) {
         $(".list-block .item-link").unbind().click(function (event) {
             var clickId = $(this).attr("id");
-//            var params = {
-//                fSubid: selectSubid,
-//                fParentId: clickId
-//            }
-//            Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
-                var someList = getSubDeviceListByPid(allGroupList,clickId);
-                if (someList.length>0) {
-//                    if (data.menuList.length > 0) {
-                        $(".selectLi").removeClass("selectLi");
-                        var clickName = $("#" + clickId + " .item-title").text();
-                        if (clickNum == 0) {
-                            if (pids[clickNum + 1] != null) {
-                                pids.splice(-1, 1);
-                            }
-                        }
-                        clickNum++;
-                        pids.push({
-                            pid: clickId,
-                            pname: clickName
-                        });
-                        $(".parent-page").css("display", "none");
-                        $(".child-page").css("display", "block");
-                        fillData(clickId);
-                        return;
-//                    }
+            //            var params = {
+            //                fSubid: selectSubid,
+            //                fParentId: clickId
+            //            }
+            //            Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+            var someList = getSubDeviceListByPid(allGroupList, clickId);
+            if (someList.length > 0) {
+                //                    if (data.menuList.length > 0) {
+                $(".selectLi").removeClass("selectLi");
+                var clickName = $("#" + clickId + " .item-title").text();
+                if (clickNum == 0) {
+                    if (pids[clickNum + 1] != null) {
+                        pids.splice(-1, 1);
+                    }
                 }
-                thisGroupid = clickId;
-                $("#" + clickId).addClass("selectLi").siblings().removeClass("selectLi");
-                hasSave = false;
-                var thisId = clickId;
-                var clickName = $("#" + thisId + " .item-title").text();
-                if (pids[clickNum + 1] == null) {
-                    pids.push({
-                        pid: thisId,
-                        pname: clickName
-                    });
-                } else {
-                    pids[clickNum + 1] = {
-                        pid: thisId,
-                        pname: clickName
-                    };
-                }
-                var titleTree = "";
-                clickGroupTree = "";
-                $(pids).each(function () {
-                    titleTree += this.pname + ">";
-                    clickGroupTree += this.pname + "-";
+                clickNum++;
+                pids.push({
+                    pid: clickId,
+                    pname: clickName
                 });
-                clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
-                var titleTreeName = titleTree.substring(1, titleTree.length - 1);
-                $("#subName").text(titleTreeName);
-                $(".content-block .close-panel").click();
-                fillRightData();
-//            });
+                $(".parent-page").css("display", "none");
+                $(".child-page").css("display", "block");
+                fillData(clickId);
+                return;
+                //                    }
+            }
+            thisGroupid = clickId;
+            $("#" + clickId).addClass("selectLi").siblings().removeClass("selectLi");
+            hasSave = false;
+            var thisId = clickId;
+            var clickName = $("#" + thisId + " .item-title").text();
+            if (pids[clickNum + 1] == null) {
+                pids.push({
+                    pid: thisId,
+                    pname: clickName
+                });
+            } else {
+                pids[clickNum + 1] = {
+                    pid: thisId,
+                    pname: clickName
+                };
+            }
+            var titleTree = "";
+            clickGroupTree = "";
+            $(pids).each(function () {
+                titleTree += this.pname + ">";
+                clickGroupTree += this.pname + "-";
+            });
+            clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
+            var titleTreeName = titleTree.substring(1, titleTree.length - 1);
+            $("#subName").text(titleTreeName);
+            $(".content-block .close-panel").click();
+            fillRightData();
+            //            });
             event.stopPropagation();
         });
     };
@@ -423,15 +426,16 @@ function loadPage() {
         });
     }
 
-    function addLeftClick(){
-        $(".icon-select").click(function(){
-          if(canClick!="false"&&!hasSave){
-            $.confirm('当前巡检信息尚未保存，确定要离开吗？', function () {
+    function addLeftClick() {
+        $(".icon-select").click(function () {
+            if (canClick != "false" && !hasSave) {
+                var str = Operation['ui_hasnosave'];
+                $.confirm(str, function () {
+                    $(".open-panel").click();
+                });
+            } else {
                 $(".open-panel").click();
-            });
-          }else{
-            $(".open-panel").click();
-          }
+            }
         });
     }
     addLeftClick();
@@ -584,30 +588,30 @@ function saveThisPage() {
     }, function (data) {
         if (data.code == 200) {
             $.toast("保存成功");
-            var thisGroupid = pids[pids.length-1].pid;
+            var thisGroupid = pids[pids.length - 1].pid;
             var needChange = true;
-            $.each(allGroupList,function(i,obj){
-                if(thisGroupid == obj.id){
-                    if(obj.taskFinishFlag=="0"){
+            $.each(allGroupList, function (i, obj) {
+                if (thisGroupid == obj.id) {
+                    if (obj.taskFinishFlag == "0") {
                         needChange = true;
-                    }else{
+                    } else {
                         needChange = false;
                     }
                     return false;
                 }
             });
-            if(needChange){
+            if (needChange) {
                 $(pids).each(function () {
                     changeListVal(this.pid);
                 });
-//                fillData(thisGroupid);
-//android持久化储存
-//                if(isAndroid){
-//                    android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
-//                }else{
-                    localStorage.setItem(missiontaskID,JSON.stringify(allGroupList));
-//                }
-                $("#"+thisGroupid+" .item-inner").addClass("finished");
+                //                fillData(thisGroupid);
+                //android持久化储存
+                //                if(isAndroid){
+                //                    android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
+                //                }else{
+                localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+                //                }
+                $("#" + thisGroupid + " .item-inner").addClass("finished");
             }
             localStorage.setItem("need-update", "true");
         }
@@ -615,10 +619,10 @@ function saveThisPage() {
 
 }
 
-function changeListVal(thisId){
-    $.each(allGroupList,function(i,obj){
-        if(obj.id==thisId){
-            allGroupList[i].taskFinishFlag = (Number(obj.taskFinishFlag)+1)+"";
+function changeListVal(thisId) {
+    $.each(allGroupList, function (i, obj) {
+        if (obj.id == thisId) {
+            allGroupList[i].taskFinishFlag = (Number(obj.taskFinishFlag) + 1) + "";
             return false;
         }
     });

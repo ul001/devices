@@ -1,4 +1,4 @@
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
   // $(function () {
   var titlename = localStorage.getItem("fSubname");
   $("#titleContent").text(titlename);
@@ -10,8 +10,8 @@ jQuery(document).ready(function() {
 
   function loadMenu() {
     $(".showlist").empty();
-    $.showPreloader($.i18n.prop('ui_loading'));
-    Substation.getDataByAjaxNoLoading("/selectMessageType", {}, function(data) {
+    $.showPreloader(Operation['ui_loading']);
+    Substation.getDataByAjaxNoLoading("/selectMessageType", {}, function (data) {
       // {
       //     messageType: [{
       //         fMessinfotypeid: 1,
@@ -29,7 +29,7 @@ jQuery(document).ready(function() {
       // } = $1
       if (data.hasOwnProperty("messageType") && data.messageType.length > 0) {
         var strVar = "";
-        $(data.messageType).each(function() {
+        $(data.messageType).each(function () {
           if (this.flag == true) {
             strVar += " <li>";
             strVar += '                            <div class="item-content">';
@@ -91,7 +91,7 @@ jQuery(document).ready(function() {
 
       $(".cbselect")
         .unbind()
-        .click(function() {
+        .click(function () {
           var fMessinfotypeid = $(this).attr("id");
           var checkValue = $(this).prop("checked");
           // if ($("input[type='checkbox']").prop("checked")) {
@@ -104,7 +104,7 @@ jQuery(document).ready(function() {
             Substation.getDataByAjaxNoLoading(
               "/subscribeMessage",
               param,
-              function(data) {
+              function (data) {
                 $.alert(showStr);
                 $(this).prop("checked", true);
               }
@@ -117,7 +117,7 @@ jQuery(document).ready(function() {
             Substation.getDataByAjaxNoLoading(
               "/subscribeMessage",
               param,
-              function(data) {
+              function (data) {
                 // alert("已取消");
                 $(this).removeAttr("checked");
               }
@@ -182,7 +182,7 @@ jQuery(document).ready(function() {
 
   window.addEventListener(
     "pageshow",
-    function(event) {
+    function (event) {
       if (localStorage.getItem("need-refresh") == "true") {
         localStorage.removeItem("need-refresh");
         location.reload();
