@@ -30,7 +30,7 @@ window.addEventListener('pageshow', function (e) {
 
 function loadMenu() {
     $(".list-container").empty();
-    $.showPreloader($.i18n.prop('ui_loading'));
+    $.showPreloader(Operation['ui_loading']);
     Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
         pid: menuId
     }, function (data) {

@@ -19,6 +19,7 @@ function getZhLanguage() {
     ui_confirm: "确定",
     ui_All: "全部",
     ui_query: "查询",
+    ui_upload: "上传",
     //deviceClass
     ui_edit: "编辑",
     ui_hidenodevice: "隐藏无设备分类",
@@ -89,8 +90,17 @@ function getZhLanguage() {
     ui_submit: "提交",
     ui_register: "签到",
     ui_ImplementDetail: "执行明细",
-
-
+    ui_attention: "注意！",
+    ui_executionprompt: "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
+    //报警
+    ui_Alarm: "报警",
+    //patrolContent
+    ui_Subinspection: "变电所巡检",
+    ui_selectSub: "选择设备分组",
+    //patrolContent
+    ui_showOnlydevice: "仅显示有设备分类",
+    ui_DefectRegist: "缺陷登记",
+    ui_hasnosave: "当前巡检信息尚未保存，确定要离开吗？",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -229,6 +239,7 @@ function getEnLanguage() {
     ui_confirm: "confirm",
     ui_All: "ALL",
     ui_query: "Query",
+    ui_upload: "Upload",
     //deviceClass
     ui_edit: "Edit",
     ui_hidenodevice: "Hide No Device",
@@ -260,7 +271,7 @@ function getEnLanguage() {
     ui_copyFail: "Copy Fail！",
     ui_copySuccess: "Copy Success！",
     //allPatrolRecord
-    ui_Patrolrecord: "Patrol record",
+    ui_Patrolrecord: "Patrol Record",
     ui_today: "today",
     ui_yday: "yday",
     ui_curr: "curr.",
@@ -295,11 +306,20 @@ function getEnLanguage() {
     ui_TaskRemarks: "Task Remarks",
     ui_Entertexthere: "Enter text here...",
     ui_Implementationsituation: "Implementation situation",
-    ui_Implement: "Implement",
+    ui_Implement: "Execute",
     ui_submit: "Submit",
     ui_register: "Register",
-    ui_ImplementDetail: "Implement Detail",
-
+    ui_ImplementDetail: "Execute Detail",
+    ui_attention: "Attention",
+    ui_executionprompt: "There is only one patrol sheet for a single task, one patrol sheet can only be saved by one person, and multiple people may overwrite each other.",
+    //报警
+    ui_Alarm: "Alarm",
+    //patrolContent
+    ui_Subinspection: "Substation inspection",
+    //patrolContent
+    ui_showOnlydevice: "Show only device",
+    ui_DefectRegist: "Defect Regist",
+    ui_hasnosave: "The current patrol information has not been saved. Are you sure you want to leave?",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",

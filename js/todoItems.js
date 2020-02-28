@@ -29,7 +29,7 @@ jQuery(document).ready(function () {
     tabName = num;
     $("#titleContent").text("");
     if (num == 1) {
-      $("#titleContent").text($.i18n.prop('data_todogoods'));
+      $("#titleContent").text("待办事项");
     } else if (num == 2) {
       $("#titleContent").text("在办事项");
     } else if (num == 3) {
@@ -40,7 +40,7 @@ jQuery(document).ready(function () {
     $("#daiban").click();
     var num = $("#daiban").attr("name");
     tabName = num;
-    $("#titleContent").text($.i18n.prop('data_todogoods'));
+    $("#titleContent").text("待办事项");
     getFirstPage(num);
   }
 
@@ -51,7 +51,7 @@ jQuery(document).ready(function () {
       // $(".list-container").empty();
       // url = "/getWarningMessageSignalEvents";
       taskstatus = 0;
-      $("#titleContent").text($.i18n.prop('data_todogoods'));
+      $("#titleContent").text("待办事项");
     } else if (i == 1) {
       // pageNum = 1;
       // $(".list-container").empty();

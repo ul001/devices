@@ -200,7 +200,7 @@ jQuery(document).ready(function () {
                             if (thisTempState == 1) {
                                 localStorage.setItem("canClick", true);
                                 var showStr =
-                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>' + Operation['ui_register'] + '</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>' + Operation['ui_Implement'] + '</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>' + Operation['ui_submit'] + '< /a> </div > < /div>';
+                                    '<div class="row buttonsEvent"> <div class = "col-33" id = "checkInCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "checkIn2"><i class="icon icon-checkIn"></i>' + Operation['ui_register'] + '</a></div> <div class = "col-33" id = "carryOutCss"> <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut"><i class="icon icon-missionAction"></i>' + Operation['ui_Implement'] + '</a> </div> <div class = "col-33" id = "submitToCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "submitTo"><i class="icon icon-upload"></i>' + Operation['ui_submit'] + '</a></div></div>';
                                 $("#addVarContain126").html(showStr);
                                 $("#carryOut").attr("name", "true");
                                 $("#submitTo").attr("name", "true");
@@ -243,7 +243,7 @@ jQuery(document).ready(function () {
                     }
                     //现场签到按钮事件
                     $("#checkIn2").click(function () {
-                        $.showPreloader($.i18n.prop('ui_loading'));
+                        $.showPreloader(Operation['ui_loading']);
                         var loc = "";
                         if (isIOS) {
                             window.webkit.messageHandlers.getLocation.postMessage("");
@@ -373,9 +373,11 @@ jQuery(document).ready(function () {
                                 if ($("#carryOut").text() == "执行明细") {
                                     window.location.href = "patrolContent.html";
                                 } else {
+                                    var attion = Operation['ui_attention'];
+                                    var attiondetail = Operation['ui_executionprompt'];
                                     $.confirm(
-                                        "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
-                                        "注意！",
+                                        attiondetail,
+                                        attion,
                                         function () {
                                             window.location.href = "patrolContent.html";
                                         }
