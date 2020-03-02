@@ -5,14 +5,16 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 var isUseTrace = "0";
 //是否有轨迹功能传参
-if (isIOS) {
-    window.webkit.messageHandlers.iOS.postMessage("");
-    var storage = localStorage.getItem("accessToken");
-    storage = JSON.parse(storage);
-    isUseTrace = storage.isOpenTrack;
-} else if (isAndroid) {
-    isUseTrace = android.getTrackUse();
-}
+try{
+    if (isIOS) {
+        window.webkit.messageHandlers.iOS.postMessage("");
+        var storage = localStorage.getItem("accessToken");
+        storage = JSON.parse(storage);
+        isUseTrace = storage.isOpenTrack;
+    } else if (isAndroid) {
+        isUseTrace = android.getTrackUse();
+    }
+}catch(e){};
 
 //任务id
 var taskID = localStorage.getItem("taskID");
@@ -31,6 +33,11 @@ var missionType = localStorage.getItem("missionType");
 //当前帐号userid
 var loginUserid = Substation.loginUserid;
 
+var subLon;
+var subLat;
+//是否执行人
+var temp = false;
+
 function getNetData() {
     Substation.getDataByAjax(
         "/selectTaskByTaskId",
@@ -41,8 +48,8 @@ function getNetData() {
             }
             var taskInfo = data.taskInfo;
             var userList = data.taskUserList;
-            var subLon = taskInfo.fLongitude;
-            var subLat = taskInfo.fLatitude;
+            subLon = taskInfo.fLongitude;
+            subLat = taskInfo.fLatitude;
             if (taskInfo != null && taskInfo != undefined) {
                 missionsubid = taskInfo.fSubid;
                 $("#missionId").html(taskInfo.fTasknumber);
@@ -62,7 +69,6 @@ function getNetData() {
                 missionTypeid = taskInfo.fTasktypeid;
                 taskchargerid = taskInfo.fTaskchargerid;
                 taskCreatId = taskInfo.fTaskcreateuserid;
-                var temp = false;
                 var thisUser = {};
                 //判断后续
                 if (userList != undefined && userList.length > 0) {
@@ -160,6 +166,7 @@ function getNetData() {
                     $("#TotalDefectNum").css("color", "red");
                     $("#TotalDefectNum").click(function () {
                         //缺陷整改
+                        localStorage.setItem("missionTypeid", missionTypeid);
                         localStorage.setItem("taskID", taskID);
                         if (temp) {
                             if ($("#startTask").css("display") != "none") {
@@ -180,6 +187,7 @@ function getNetData() {
                     $("#Unprocessednumber").css("color", "red");
                     $("#Unprocessednumber").click(function () {
                         //缺陷整改
+                        localStorage.setItem("missionTypeid", missionTypeid);
                         localStorage.setItem("taskID", taskID);
                         if (temp) {
                             if ($("#startTask").css("display") != "none") {
@@ -194,65 +202,6 @@ function getNetData() {
                         window.location.href = "defectRectification.html?value=0";
                     });
                 }
-
-                //现场签到
-                $("#taskIn").click(function () {
-                    $.showPreloader(Operation['ui_loading']);
-                    var loc = "";
-                    if (isIOS) {
-                        window.webkit.messageHandlers.getLocation.postMessage("");
-                        loc = localStorage.getItem("locationStrJS");
-                    } else {
-                        loc = android.getLocation();
-                    }
-                    var lat = "";
-                    var lon = "";
-                    var addr = "";
-                    if (loc == undefined || !loc.length) {
-                        $.hidePreloader();
-                        $.toast("无法获取位置，请检查网络并确保定位授权");
-                        return;
-                    } else if (loc == "-1") {
-                        $.hidePreloader();
-                        $.toast("获取位置超时,建议打开GPS定位服务。");
-                        return;
-                    } else {
-                        $.hidePreloader();
-                    }
-                    if (loc != "" && loc != null) {
-                        var array = loc.split(";");
-                        lat = array[0];
-                        lon = array[1];
-                        addr = array[2];
-                        //                                    alert(lat+"\n"+lon+"\n"+addr);
-                    }
-                    var fDistance = -1;
-                    if (subLat != undefined && subLon != undefined) {
-                        var map = new BMap.Map("allmap");
-                        var point1 = new BMap.Point(subLon, subLat);
-                        var point2 = new BMap.Point(lon, lat);
-                        fDistance = map.getDistance(point1, point2);
-                    }
-                    var param = {
-                        taskId: taskID,
-                        fLongitude: lon,
-                        fLatitude: lat,
-                        fLocation: addr
-                    };
-                    fDistance = parseInt(fDistance);
-                    if (fDistance > 0 && fDistance < 2147483647) {
-                        param['fDistance'] = fDistance;
-                    }
-                    //                            alert(""+taskID+","+lon+","+lat+","+addr);
-                    Substation.postDataByAjax("/taskSingIn", param, function (data) {
-                        $.toast("签到成功！");
-                        localStorage.removeItem("locationStrJS");
-                        $("#taskIn").hide();
-                        $("#doTask").show();
-                        $("#submitTask").show();
-                    });
-                });
-
             }
         }
     );
@@ -269,7 +218,7 @@ $("#startTask").click(function () {
         } else {
             localStorage.setItem("need-refresh", "true");
         }
-        if (isUseTrace == "1") {
+        if (temp && isUseTrace == "1") {
             $.confirm("是否要开启轨迹记录功能？", function () {
                 //开启轨迹
                 if (isIOS) {
@@ -287,6 +236,61 @@ $("#startTask").click(function () {
     });
 });
 
+//现场签到
+$("#taskIn").click(function () {
+    $.showPreloader(Operation['ui_loading']);
+    var loc = "";
+    if (isIOS) {
+        window.webkit.messageHandlers.getLocation.postMessage("");
+        loc = localStorage.getItem("locationStrJS");
+    } else {
+        loc = android.getLocation();
+    }
+    var lat = "";
+    var lon = "";
+    var addr = "";
+    if (loc == undefined || !loc.length) {
+        $.hidePreloader();
+        $.toast("无法获取位置，请检查网络并确保定位授权");
+        return;
+    } else if (loc == "-1") {
+        $.hidePreloader();
+        $.toast("获取位置超时,建议打开GPS定位服务。");
+        return;
+    } else {
+        $.hidePreloader();
+    }
+    if (loc != "" && loc != null) {
+        var array = loc.split(";");
+        lat = array[0];
+        lon = array[1];
+        addr = array[2];
+        //                                    alert(lat+"\n"+lon+"\n"+addr);
+    }
+    var fDistance = -1;
+    if (subLat != undefined && subLon != undefined) {
+        var map = new BMap.Map("allmap");
+        var point1 = new BMap.Point(subLon, subLat);
+        var point2 = new BMap.Point(lon, lat);
+        fDistance = map.getDistance(point1, point2);
+    }
+    var param = {
+        taskId: taskID,
+        fLongitude: lon,
+        fLatitude: lat,
+        fLocation: addr
+    };
+    fDistance = parseInt(fDistance);
+    if (fDistance > 0 && fDistance < 2147483647) {
+        param['fDistance'] = fDistance;
+    }
+    //                            alert(""+taskID+","+lon+","+lat+","+addr);
+    Substation.postDataByAjax("/taskSingIn", param, function (data) {
+        $.toast("签到成功！");
+        localStorage.removeItem("locationStrJS");
+        location.reload();
+    });
+});
 
 //执行任务按钮事件
 $(".doDetail").click(function () {
@@ -340,11 +344,25 @@ $("#submitTask").click(function () {
             $("#doTask").hide();
             $("#submitTask").hide();
             $("#doDetail").show();
-            if (isAndroid) {
-                android.refresh();
-            } else {
-                localStorage.setItem("need-refresh", "true");
-            }
+            try{
+                if (isAndroid) {
+                    android.refresh();
+                    if(temp && isUseTrace == "1"){
+                //android关闭轨迹
+                        android.stopTrace();
+                    }
+                    android.removeSPItem(taskID);
+                }else if(isIOS){
+                    localStorage.removeItem(taskID);
+                    localStorage.setItem("need-refresh", "true");
+                    if(temp && isUseTrace == "1"){
+                        //ios关闭轨迹
+                        window.webkit.messageHandlers.closeTrackFunc.postMessage("");
+                    }
+                }
+            }catch(e){
+                localStorage.removeItem(taskID);
+            };
         });
     });
 });
@@ -359,8 +377,14 @@ $("#chargeSubmit").click(function () {
         Substation.getDataByAjax("/submitTask", param, function (data) {
             $.toast("提交成功，该任务已结束！");
             if (isAndroid) {
+                try{
+                    android.removeSPItem(taskID);
+                }catch(e){
+                    localStorage.removeItem(taskID);
+                };
                 android.refresh();
             } else {
+                localStorage.removeItem(taskID);
                 localStorage.setItem("need-refresh", "true");
             }
             location.reload();
