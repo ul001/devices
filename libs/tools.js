@@ -26,6 +26,7 @@ if (isIOS) {
   tokenFromAPP = storage.token;
   ipAddress = storage.ipAddress;
   userId = storage.userID;
+  languageOption = storage.languageType;
 } else {
   baseUrlFromAPP = android.getBaseUrl();
   tokenFromAPP = android.getToken();
