@@ -35,6 +35,8 @@ var loginUserid = Substation.loginUserid;
 
 var subLon;
 var subLat;
+//是否执行人
+var temp = false;
 
 function getNetData() {
     Substation.getDataByAjax(
@@ -67,7 +69,6 @@ function getNetData() {
                 missionTypeid = taskInfo.fTasktypeid;
                 taskchargerid = taskInfo.fTaskchargerid;
                 taskCreatId = taskInfo.fTaskcreateuserid;
-                var temp = false;
                 var thisUser = {};
                 //判断后续
                 if (userList != undefined && userList.length > 0) {
@@ -217,7 +218,7 @@ $("#startTask").click(function () {
         } else {
             localStorage.setItem("need-refresh", "true");
         }
-        if (isUseTrace == "1") {
+        if (temp && isUseTrace == "1") {
             $.confirm("是否要开启轨迹记录功能？", function () {
                 //开启轨迹
                 if (isIOS) {
@@ -343,17 +344,25 @@ $("#submitTask").click(function () {
             $("#doTask").hide();
             $("#submitTask").hide();
             $("#doDetail").show();
-            if (isAndroid) {
-                try{
+            try{
+                if (isAndroid) {
+                    android.refresh();
+                    if(temp && isUseTrace == "1"){
+                //android关闭轨迹
+                        android.stopTrace();
+                    }
                     android.removeSPItem(taskID);
-                }catch(e){
+                }else if(isIOS){
                     localStorage.removeItem(taskID);
-                };
-                android.refresh();
-            } else {
+                    localStorage.setItem("need-refresh", "true");
+                    if(temp && isUseTrace == "1"){
+                        //ios关闭轨迹
+                        window.webkit.messageHandlers.closeTrackFunc.postMessage("");
+                    }
+                }
+            }catch(e){
                 localStorage.removeItem(taskID);
-                localStorage.setItem("need-refresh", "true");
-            }
+            };
         });
     });
 });
