@@ -43,6 +43,14 @@
     background-image: url(../img/i-checkInPic.jpg);
 }
 
+.icon-starttask{
+    display: inline-block;
+    width: 0.85rem;
+    height: 0.85rem;
+    margin-bottom: 0.2rem;
+    background-image: url(../img/i-starttask.png);
+}
+
 .icon-upload {
     display: inline-block;
     width: 0.85rem;
@@ -72,6 +80,26 @@
 #checkFinishInCss {
 
     margin-left: 2.5rem;
+}
+
+.row.buttonsEvent{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 1rem;
+    width: 100%;
+}
+
+#addVarContain125{
+    margin-bottom:5rem;
+}
+
+.row.buttonsEvent .button{
+    display:none;
+}
+
+#submitTask{
+    margin-left:.75rem;
 }
 
 /* #addVarContan126 .row {

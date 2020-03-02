@@ -1,14 +1,14 @@
 /**
- * @author zhangben
+ * @author xuhang,panhong
  * @date 2017-04-26 09:46
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODMxMTc3MDUsInVzZXJuYW1lIjoiaGFoYWhhIn0.eBLPpUsNBliLuGWgRvdPwqbumKroYGUjNn7bTZIKSA4";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODM0ODE3MTksInVzZXJuYW1lIjoiaGFoYWhhIn0.EuiRhL61a1Q-ksC7Fw9LyeGsm3G-RYJm_h8-tW72mno";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
 //语言字段传参
-var languageOption = "en";
+var languageOption = "zh";
 
 //iOS安卓基础传参
 var u = navigator.userAgent,
@@ -26,11 +26,13 @@ if (isIOS) {
   tokenFromAPP = storage.token;
   ipAddress = storage.ipAddress;
   userId = storage.userID;
+  languageOption = storage.languageType;
 } else {
   baseUrlFromAPP = android.getBaseUrl();
   tokenFromAPP = android.getToken();
   ipAddress = android.getIpAddress();
   userId = android.getUserid();
+  languageOption = android.postLanguage();
 }
 
 //取消回车事件
@@ -82,6 +84,7 @@ var Substation = {
       script.src = "libs/cn.min.js";
       document.body.appendChild(script);
     }
+    this.loadLanguageData();
     //    document.body.appendChild(script);
   },
 
@@ -2316,7 +2319,5 @@ function showToast(str) {
   $.toast(str);
 }
 
-//$(document).ready(function(){Substation.loadLanguageJS();Substation.loadLanguageData();});
-window.onload = Substation.loadLanguageJS(), Substation.loadLanguageData();
-
-//window.onload = Substation.loadL7LanguageJS(),Substation.loadLanguagePro();
+$(document).ready(function(){Substation.loadLanguageJS()});
+//window.onload = Substation.loadLanguageJS();

@@ -351,9 +351,8 @@ jQuery(document).ready(function () {
           //我要处理 巡视
           $(".card1").unbind().click(function () {
             var taskID = $(this).attr("id");
-            var tasktypeid = $(this).attr("name");
-            localStorage.setItem("fSubname", "任务详情");
-            localStorage.setItem("showType", "missionFinish");
+//            var tasktypeid = $(this).attr("name");
+//            localStorage.setItem("showType", "missionFinish");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             if (isAndroid) {
@@ -476,11 +475,10 @@ jQuery(document).ready(function () {
         //addClick();
         $(".card2").unbind().click(function () {
           var taskID = $(this).attr("name");
-          var tasktypeid = $(this).attr("data-taskid");
-          if (tasktypeid == 1) {
+//          var tasktypeid = $(this).attr("data-taskid");
+//          if (tasktypeid == 1) {
             //巡视任务
-            localStorage.setItem("fSubname", "任务详情");
-            localStorage.setItem("showType", "missionDoing");
+//            localStorage.setItem("showType", "missionDoing");
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             if (isAndroid) {
@@ -488,29 +486,27 @@ jQuery(document).ready(function () {
             } else {
               window.location.href = "missionDetail.html";
             }
-          } else if (tasktypeid == 3) {
-            //缺陷登记
-            localStorage.setItem("fSubname", "任务详情");
-            localStorage.setItem("showType", "missiondefect");
-            localStorage.setItem("missionType", clickNum);
-            localStorage.setItem("taskID", taskID);
-            if (isAndroid) {
-              android.goToIn();
-            } else {
-              window.location.href = "missionDetail.html";
-            }
-          } else {
-            //现场交接
-            localStorage.setItem("fSubname", "任务详情");
-            localStorage.setItem("showType", "missiondefect");
-            localStorage.setItem("missionType", clickNum);
-            localStorage.setItem("taskID", taskID);
-            if (isAndroid) {
-              android.goToIn();
-            } else {
-              window.location.href = "missionDetail.html";
-            }
-          }
+//          } else if (tasktypeid == 3) {
+//            //缺陷登记
+////            localStorage.setItem("showType", "missiondefect");
+////            localStorage.setItem("missionType", clickNum);
+//            localStorage.setItem("taskID", taskID);
+//            if (isAndroid) {
+//              android.goToIn();
+//            } else {
+//              window.location.href = "missionDetail.html";
+//            }
+//          } else {
+//            //现场交接
+////            localStorage.setItem("showType", "missiondefect");
+////            localStorage.setItem("missionType", clickNum);
+//            localStorage.setItem("taskID", taskID);
+//            if (isAndroid) {
+//              android.goToIn();
+//            } else {
+//              window.location.href = "missionDetail.html";
+//            }
+//          }
         });
         pageNum++;
       } else {
