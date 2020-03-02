@@ -16,23 +16,27 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 //判断数组中是否包含某字符串
-if (isIOS) {
-  //ios系统的处理
-  window.webkit.messageHandlers.iOS.postMessage(null);
-  var storage = localStorage.getItem("accessToken");
-  // storage = storage ? JSON.parse(storage):[];
-  storage = JSON.parse(storage);
-  baseUrlFromAPP = storage.baseurl;
-  tokenFromAPP = storage.token;
-  ipAddress = storage.ipAddress;
-  userId = storage.userID;
-  languageOption = storage.languageType;
-} else {
-  baseUrlFromAPP = android.getBaseUrl();
-  tokenFromAPP = android.getToken();
-  ipAddress = android.getIpAddress();
-  userId = android.getUserid();
-  languageOption = android.postLanguage();
+try{
+    if (isIOS) {
+      //ios系统的处理
+      window.webkit.messageHandlers.iOS.postMessage(null);
+      var storage = localStorage.getItem("accessToken");
+      // storage = storage ? JSON.parse(storage):[];
+      storage = JSON.parse(storage);
+      baseUrlFromAPP = storage.baseurl;
+      tokenFromAPP = storage.token;
+      ipAddress = storage.ipAddress;
+      userId = storage.userID;
+      languageOption = storage.languageType;
+    } else {
+      baseUrlFromAPP = android.getBaseUrl();
+      tokenFromAPP = android.getToken();
+      ipAddress = android.getIpAddress();
+      userId = android.getUserid();
+      languageOption = android.postLanguage();
+    }
+}catch(e){
+
 }
 
 //取消回车事件

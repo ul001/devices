@@ -221,10 +221,14 @@ $("#startTask").click(function () {
         if (temp && isUseTrace == "1") {
             $.confirm("是否要开启轨迹记录功能？", function () {
                 //开启轨迹
-                if (isIOS) {
-                    window.webkit.messageHandlers.openTrackFunc.postMessage(null);
-                } else if (isAndroid) {
-                    android.startTrace();
+                try{
+                    if (isIOS) {
+                        window.webkit.messageHandlers.openTrackFunc.postMessage(null);
+                    } else if (isAndroid) {
+                        android.startTrace();
+                    }
+                }catch(e){
+
                 }
                 location.reload();
             }, function () {
