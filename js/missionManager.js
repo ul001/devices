@@ -408,7 +408,7 @@ function getNetData() {
                     '                                        <div class="item-title label">' + Operation['ui_trajectory'] + '</div>';
                 text +=
                     '                                        <div class="item-label">';
-                text += "<a href=\"#\" class=\"button\" style=\"width:70%;\" onClick=\"selectTrace(" + thisUserId +",'"+this.fTaskstarttime+"','"+this.fCreateTime+"')\">" + Operation['ui_Trackquery'] + '</a>';
+                text += "<a href=\"#\" class=\"button\" style=\"width:70%;\" onClick=\"selectTrace(" + thisUserId + ",'" + this.fTaskstarttime + "','" + this.fCreateTime + "')\">" + Operation['ui_Trackquery'] + '</a>';
                 text += "                                        </div>";
                 text += "                                        </div>";
                 text += "                                    </div>";
@@ -616,23 +616,31 @@ $(".pull-left.click_btn").click(function () {
 //     }, 0);
 // });
 
-function selectTrace(getUserid,startTime,endTime) {
-    if(startTime!="undefined"&&endTime!="undefined"&&startTime!=""&&endTime!=""){
-        startTime = startTime.replace(/-/g,'/');
-        startTime = new Date(startTime).getTime()/1000;
-        endTime = endTime.replace(/-/g,'/');
-        endTime = new Date(endTime).getTime()/1000;
-        if((endTime-startTime)>86400){
-            endTime = startTime+86400;
+function selectTrace(getUserid, startTime, endTime) {
+    if (startTime != "undefined" && startTime != "") {
+        startTime = startTime.replace(/-/g, '/');
+        startTime = new Date(startTime).getTime() / 1000;
+        if (endTime == "undefined" || endTime == "") {
+            endTime = startTime + 86400;
+        } else {
+            endTime = endTime.replace(/-/g, '/');
+            endTime = new Date(endTime).getTime() / 1000;
+            if ((endTime - startTime) > 86400) {
+                endTime = startTime + 86400;
+            }
         }
         //查询轨迹
         if (isAndroid) {
-            android.showThisTrace(getUserid,startTime,endTime);
+            android.showThisTrace(getUserid, startTime, endTime);
         } else if (isIOS) {
             var yydic = {
-                "entityName": getUserid
+                "entityName": getUserid,
+                "startTime": startTime,
+                "endTime": endTime
             };
             window.webkit.messageHandlers.pushYYGJView.postMessage(yydic);
         }
+    } else {
+        $.toast("当前任务尚未开始,无法查询");
     }
 }
