@@ -98,7 +98,7 @@
     display:none;
 }
 
-#submitTask{
+#submitTask,#chargeSubmit{
     margin-left:.75rem;
 }
 
