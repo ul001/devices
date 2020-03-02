@@ -119,136 +119,136 @@
 </head>
 
 <body>
-    <div class="page-group">
-        <div class="page">
-            <!--        <div class="right-main" style="overflow: auto">-->
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
-                    <span class="icon icon-left"></span>
-                    返回
-                </a>
-                <a class="button button-link button-nav pull-right open-panel">
-                    <i class="icon icon-selectSome"></i>
-                </a>
-                <h1 class="title title_color">
-                    用户报告
-                </h1>
-            </header>
-            <div class="content green">
-                <!-- <div class="select CustomReportMenu">
-                    <p>用户报告信息</p>
-                    <label class="energy-date signal-date">起始日期：</label>
-                    <div id="startDate" class="input-group date form_date count-data signal-date-sel" data-date=""
-                        data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input id="startDateBox" class="form-control" size="16" type="text" value="" readonly>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
-                    <label class="energy-date collection-date">截止日期：</label>
-                    <div id="endDate" class="input-group date form_date count-data signal-date-sel" data-date=""
-                        data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                        <input id="endDateBox" class="form-control" size="16" type="text" value="" readonly>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
+<div class="page-group">
+    <div class="page">
+        <!--        <div class="right-main" style="overflow: auto">-->
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                <span class="icon icon-left"></span>
+                返回
+            </a>
+            <a class="button button-link button-nav pull-right open-panel">
+                <i class="icon icon-selectSome"></i>
+            </a>
+            <h1 class="title title_color">
+                用户报告
+            </h1>
+        </header>
+        <div class="content green">
+            <!-- <div class="select CustomReportMenu">
+                <p>用户报告信息</p>
+                <label class="energy-date signal-date">起始日期：</label>
+                <div id="startDate" class="input-group date form_date count-data signal-date-sel" data-date=""
+                    data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input id="startDateBox" class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+                <label class="energy-date collection-date">截止日期：</label>
+                <div id="endDate" class="input-group date form_date count-data signal-date-sel" data-date=""
+                    data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input id="endDateBox" class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
 
-                    <div class="search-area SAall" data-search="top-banner" id="searchDiv">
-                        <input type="text" class="search-input" id="TSContent" placeholder="请输入检索内容" />
-                        <div class="showhide-search" data-show="no" id="triangleSearch"></div>
-                        <a href="javascript:;" class="clear clearlistAll" id="clearMeter"></a>
-                    </div>
-                    <div class="ReportImg">
-                        <input type="checkbox" id="printImg" checked>显示缺陷图片/整改图片
-                    </div>
-                    <div class="reportList">
-                        <div class="reportList2" id="sublist"></div>
-                        <nav>
-                            <ul class="pagination" id="pagination"></ul>
-                        </nav>
-                    </div>
-                    <button class="search select" type="button" id="checkAllList">全选当页</button>
-                    <button class="search reportcollect-search" type="button" id="addConfirm">确 定</button>
-                </div> -->
-                <div class="CustomReport" id="CustomReport"></div>
-                <div id="outterdiv" style="position: fixed;z-index: 1999;display: none">
-                    <div id="innerdiv">
-                        <img id="bigimg" style="border: 5px solid #fff;" src="" />
-                    </div>
-                    <div class="add-a" style="position: fixed;"></div>
+                <div class="search-area SAall" data-search="top-banner" id="searchDiv">
+                    <input type="text" class="search-input" id="TSContent" placeholder="请输入检索内容" />
+                    <div class="showhide-search" data-show="no" id="triangleSearch"></div>
+                    <a href="javascript:;" class="clear clearlistAll" id="clearMeter"></a>
                 </div>
-                <div id="outTip" style="width: 100%;height: 100%;position: fixed;top: 2.2rem;left: 0;z-index: 1999;background: #575757;">
-                    <img src="img/firstTip.png" style="width:100%;">
+                <div class="ReportImg">
+                    <input type="checkbox" id="printImg" checked>显示缺陷图片/整改图片
                 </div>
+                <div class="reportList">
+                    <div class="reportList2" id="sublist"></div>
+                    <nav>
+                        <ul class="pagination" id="pagination"></ul>
+                    </nav>
+                </div>
+                <button class="search select" type="button" id="checkAllList">全选当页</button>
+                <button class="search reportcollect-search" type="button" id="addConfirm">确 定</button>
+            </div> -->
+            <div class="CustomReport" id="CustomReport"></div>
+            <div id="outterdiv" style="position: fixed;z-index: 1999;display: none">
+                <div id="innerdiv">
+                    <img id="bigimg" style="border: 5px solid #fff;" src="" />
+                </div>
+                <div class="add-a" style="position: fixed;"></div>
             </div>
-            <!-- <button type="button" class="CustomPrint" id="print">打 印</button>
-        <div class="double"><input type="checkbox" id="double" /><span>双面打印</span></div> -->
-            <div id="cd-nav">
-                <a href="#" class="cd-nav-trigger">Menu<span></span></a>
-
-                <nav id="cd-main-nav">
-                    <ul class="">
-<!--                        <li><a href="#">Homepage</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Portfolio</a></li>
-                        <li><a href="#">Pricing</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">Contact</a></li>-->
-                    </ul>
-                </nav>
+            <div id="outTip" style="width: 100%;height: 100%;position: fixed;top: 2.2rem;left: 0;z-index: 1999;background: #575757;">
+                <img src="img/firstTip.png" style="width:100%;">
             </div>
         </div>
-        <div class="panel-overlay"></div>
-        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-            <div class="content-block">
-                <div>
-                    <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
-                        <a href="#" class="button" id="yestoday">昨日</a>
-                        <a href="#" class="button" id="thisMonth">当月</a>
-                        <a href="#" class="button" id="lastMonth">上月</a></p>
-                </div>
-                <div>
-                    <label>时间选择</label><br>
-                    <input type="text" id="dateStart" placeholder="开始日期" readonly /> -
-                    <input type="text" id="dateEnd" placeholder="截止日期" readonly />
-                </div>
-                <div>
-                    <label>变电所名称</label><br>
-                    <div class="searchbar">
-                        <div class="search-input">
-                            <label class="icon icon-search" for="search"></label>
-                            <input type="search" id='search' placeholder='请输入关键字' /><i class="icon icon-clear"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-block">
-                    <ul id="listContainer">
+        <!-- <button type="button" class="CustomPrint" id="print">打 印</button>
+    <div class="double"><input type="checkbox" id="double" /><span>双面打印</span></div> -->
+        <div id="cd-nav">
+            <a href="#" class="cd-nav-trigger">Menu<span></span></a>
 
-                    </ul>
-                </div>
-            </div>
-            <div class="btnBar row no-gutter">
-                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel">取消</a>
-                </div>
-                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn">查询</a></div>
-            </div>
+            <nav id="cd-main-nav">
+                <ul class="">
+                    <!--                        <li><a href="#">Homepage</a></li>
+                                            <li><a href="#">Services</a></li>
+                                            <li><a href="#">Portfolio</a></li>
+                                            <li><a href="#">Pricing</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>
+                                            <li><a href="#">Contact</a></li>-->
+                </ul>
+            </nav>
         </div>
     </div>
-    <script src="libs/jquery-1.12.4.min.js"></script>
-    <script src="libs/light7.min.js"></script>
-    <script src="libs/language.js"></script>
-    <script src="libs/light7-swiper.min.js"></script>
-    <script src="libs/bootstrap-table.min.js"></script>
-    <script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
-    <script type="text/javascript" src="libs/config.js"></script>
-    <script type="text/javascript" src="libs/highcharts.js"></script>
-    <script type="text/javascript" src="libs/echarts.min.js"></script>
-    <script type="text/javascript" src="libs/imgLazy.js"></script>
-    <script type="text/javascript" src="libs/tools.js"></script>
-    <script type="text/javascript" src="js/CustomReport.js"></script>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+        <div class="content-block">
+            <div>
+                <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
+                    <a href="#" class="button" id="yestoday">昨日</a>
+                    <a href="#" class="button" id="thisMonth">当月</a>
+                    <a href="#" class="button" id="lastMonth">上月</a></p>
+            </div>
+            <div>
+                <label>时间选择</label><br>
+                <input type="text" id="dateStart" placeholder="开始日期" readonly /> -
+                <input type="text" id="dateEnd" placeholder="截止日期" readonly />
+            </div>
+            <div>
+                <label>变电所名称</label><br>
+                <div class="searchbar">
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='请输入关键字' /><i class="icon icon-clear"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="list-block">
+                <ul id="listContainer">
+
+                </ul>
+            </div>
+        </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel">取消</a>
+            </div>
+            <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn">查询</a></div>
+        </div>
+    </div>
+</div>
+<script src="libs/jquery-1.12.4.min.js"></script>
+<script src="libs/light7.min.js"></script>
+<script src="libs/language.js"></script>
+<script src="libs/light7-swiper.min.js"></script>
+<script src="libs/bootstrap-table.min.js"></script>
+<script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
+<script type="text/javascript" src="libs/config.js"></script>
+<script type="text/javascript" src="libs/highcharts.js"></script>
+<script type="text/javascript" src="libs/echarts.min.js"></script>
+<script type="text/javascript" src="libs/imgLazy.js"></script>
+<script type="text/javascript" src="libs/tools.js"></script>
+<script type="text/javascript" src="js/CustomReport.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 var clickRadioName = "";
 var selectSubid = localStorage.getItem("fSubid");
 var fPlacecheckformid = localStorage.getItem("fPlacecheckformid");
-var missiontaskID = localStorage.getItem("missiontaskID");
+var missiontaskID = localStorage.getItem("taskID");
 var canClick = localStorage.getItem("canClick");
 var defectPosition = "";
 var defectPositionVal = "";
@@ -418,6 +418,7 @@ function loadPage() {
                     Substation.getDataByAjax("/deleteCheckItemProblems", params, function () {
                         $.toast("删除成功");
                         saveThisPage();
+                        localStorage.setItem("need-update", "true");
                     });
                 }, function () {
                     $(":radio[name='" + radioName + "'][value='yes']").prop("checked", true);

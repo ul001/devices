@@ -9,10 +9,10 @@ $("#titleContent").text(titlename);
 
 //任务id
 var taskID = localStorage.getItem("taskID");
-//巡检单id
+/*//巡检单id
 var placeCheckFormId = localStorage.getItem("missionPlaceCheckFormId");
 //巡检的变电所id
-var missionsubid = localStorage.getItem("missionSubid");
+var missionsubid = localStorage.getItem("missionSubid");*/
 //获得选取的重派任务人员
 var selectPersons = localStorage.getItem("selectPersons");
 // window.onpageshow = function (event) {
@@ -408,7 +408,7 @@ function getNetData() {
                     '                                        <div class="item-title label">' + Operation['ui_trajectory'] + '</div>';
                 text +=
                     '                                        <div class="item-label">';
-                text += '<a href="#" class="button" style="width:70%;" onClick=selectTrace("' + thisUserId + '")>' + Operation['ui_Trackquery'] + '</a>';
+                text += "<a href=\"#\" class=\"button\" style=\"width:70%;\" onClick=\"selectTrace(" + thisUserId +",'"+this.fTaskstarttime+"','"+this.fCreateTime+"')\">" + Operation['ui_Trackquery'] + '</a>';
                 text += "                                        </div>";
                 text += "                                        </div>";
                 text += "                                    </div>";
@@ -616,13 +616,23 @@ $(".pull-left.click_btn").click(function () {
 //     }, 0);
 // });
 
-function selectTrace(getUserid) {
-    if (isAndroid) {
-        android.showThisTrace(getUserid);
-    } else if (isIOS) {
-        var yydic = {
-            "entityName": getUserid
-        };
-        window.webkit.messageHandlers.pushYYGJView.postMessage(yydic);
+function selectTrace(getUserid,startTime,endTime) {
+    if(startTime!="undefined"&&endTime!="undefined"&&startTime!=""&&endTime!=""){
+        startTime = startTime.replace(/-/g,'/');
+        startTime = new Date(startTime).getTime()/1000;
+        endTime = endTime.replace(/-/g,'/');
+        endTime = new Date(endTime).getTime()/1000;
+        if((endTime-startTime)>86400){
+            endTime = startTime+86400;
+        }
+        //查询轨迹
+        if (isAndroid) {
+            android.showThisTrace(getUserid,startTime,endTime);
+        } else if (isIOS) {
+            var yydic = {
+                "entityName": getUserid
+            };
+            window.webkit.messageHandlers.pushYYGJView.postMessage(yydic);
+        }
     }
 }
