@@ -25,7 +25,7 @@ jQuery(document).ready(function () {
     //     localStorage.setItem("canClick", false);
     //     $("#clickManager").css("display", "none");
     var showstr =
-        '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "#" class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a> </div> </div>';
+        '<div class="row no-gutter buttonsEvent"><a href = "#" class = "col-66 button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>执行明细</a></div>';
     $("#addVarContain126").append(showstr);
     $("#carryOut").attr("name", "false");
     // } else {
