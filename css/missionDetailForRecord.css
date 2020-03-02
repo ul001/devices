@@ -34,7 +34,14 @@
     margin-right: 0.2rem;
 }
 
-#checkFinishInCss {
-    margin-left: 2.5rem;
+.row.no-gutter{
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 1rem;
+    width: 100%;
+}
 
+#addVarContain125{
+    margin-bottom:5rem;
 }
