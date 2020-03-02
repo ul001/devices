@@ -14,7 +14,9 @@ try{
     } else if (isAndroid) {
         isUseTrace = android.getTrackUse();
     }
-}catch(e){};
+}catch(e){
+    isUseTrace = "0";
+};
 
 //任务id
 var taskID = localStorage.getItem("taskID");

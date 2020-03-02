@@ -36,7 +36,7 @@ try{
       languageOption = android.postLanguage();
     }
 }catch(e){
-
+    languageOption = "zh"
 }
 
 //取消回车事件
