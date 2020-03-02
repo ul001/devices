@@ -2319,5 +2319,7 @@ function showToast(str) {
   $.toast(str);
 }
 
-$(document).ready(function(){Substation.loadLanguageJS()});
+$(document).ready(function () {
+  Substation.loadLanguageJS()
+});
 //window.onload = Substation.loadLanguageJS();
