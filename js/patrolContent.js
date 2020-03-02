@@ -28,9 +28,13 @@ if (canClick == "false") {
 }
 var getSaveList = localStorage.getItem(missiontaskID);
 //android持久化储存
-/*if(isAndroid){
-    getSaveList = android.getSPItem(missiontaskID);
-}*/
+if(isAndroid){
+    try{
+        getSaveList = android.getSPItem(missiontaskID);
+    }catch(e){
+        getSaveList = localStorage.getItem(missiontaskID);
+    }
+}
 var allGroupList = [];
 if (getSaveList != null && getSaveList != "") {
     allGroupList = JSON.parse(getSaveList);
@@ -606,12 +610,16 @@ function saveThisPage() {
                     changeListVal(this.pid);
                 });
                 //                fillData(thisGroupid);
-                //android持久化储存
-                //                if(isAndroid){
-                //                    android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
-                //                }else{
+            if(isAndroid){
+            //android持久化储存
+                try{
+                    android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
+                }catch(e){
+                    localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+                }
+            }else{
                 localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-                //                }
+            }
                 $("#" + thisGroupid + " .item-inner").addClass("finished");
             }
             localStorage.setItem("need-update", "true");

@@ -132,20 +132,18 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
             if (goTemp == "1") {
                 $(".card-footer").remove();
             } else {
-                if ((data.imgName == null || data.imgName == "") && missionTypeId == 3) {
+                if (data.imgName == null || data.imgName == "") {
                     //消缺任务 无签名
                     $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
                     $("#goToWrite").click(function () {
                         window.location.href = "draw.html";
                     });
-                    if (localStorage.getItem("canClick") == "false") {
-                        $(".card-footer").remove();
-                    }
-                } else if (missionTypeId == 1) {
-                    //巡视任务 点击红色数字
-                    $(".card-footer").remove();
-                } else {
+                }else {
                     $(".card-footer").html('<img src="' + (Substation.ipAddressFromAPP + imgUrl + "/" + data.imgName) + '" style="width:100%;">');
+                }
+                if(missionTypeId!="3"){
+                    $(".card-footer").remove();
+                    localStorage.setItem("canClick","false");
                 }
             }
         } else {
