@@ -49,7 +49,7 @@ html {
     /* margin-left: 10%; */
 }
 
-.content-block .buttonsEvent {
+.buttonsEvent {
     justify-content: center;
     display: flex;
 }
