@@ -41,6 +41,13 @@ var subLat;
 var temp = false;
 
 function getNetData() {
+    try {
+        if (isIOS) {
+            window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
+        }
+    } catch (e) {
+
+    };
     Substation.getDataByAjax(
         "/selectTaskByTaskId",
         "taskId=" + taskID,
@@ -216,33 +223,35 @@ $("#startTask").click(function () {
     $.showPreloader(Operation['ui_loading']);
     Substation.getDataByAjax("/taskStart", "taskId=" + taskID, function (data) {
         if (temp && isUseTrace == "1") {
-                //开启轨迹
-                try {
-                    if (isIOS) {
-                        localStorage.setItem("need-refresh", "true");
-                        var isOpen = localStorage.isOpenTrack;
-                        if (isOpen == "false") {
-                            $.confirm("是否要开启轨迹记录功能？", function () {
-                            window.webkit.messageHandlers.openTrackFunc.postMessage(null);},
-                            function(){});
-                        }
-                    } else if (isAndroid) {
-                        android.refresh();
-                        //android关闭轨迹
-                        var isOpen = android.getTrackOpen();
-                        if (isOpen == "false") {
-                            $.confirm("是否要开启轨迹记录功能？", function () {
-                                android.startTrace();},
-                                function(){});
-                        }
-                    }else{
-                        localStorage.setItem("need-refresh", "true");
+            //开启轨迹
+            try {
+                if (isIOS) {
+                    localStorage.setItem("need-refresh", "true");
+                    var isOpen = localStorage.isOpenTrack;
+                    if (isOpen == "false") {
+                        $.confirm("是否要开启轨迹记录功能？", function () {
+                                window.webkit.messageHandlers.openTrackFunc.postMessage(null);
+                            },
+                            function () {});
                     }
-                } catch (e) {
+                } else if (isAndroid) {
+                    android.refresh();
+                    //android关闭轨迹
+                    var isOpen = android.getTrackOpen();
+                    if (isOpen == "false") {
+                        $.confirm("是否要开启轨迹记录功能？", function () {
+                                android.startTrace();
+                            },
+                            function () {});
+                    }
+                } else {
+                    localStorage.setItem("need-refresh", "true");
+                }
+            } catch (e) {
 
-                }finally{
-                    location.reload();
-                };
+            } finally {
+                location.reload();
+            };
         } else {
             location.reload();
         }
@@ -351,9 +360,13 @@ $("#submitTask").click(function () {
         if (!textDetail) {
             textDetail = "";
         }
-        if (isIOS) {
-            window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
-        }
+        try {
+            if (isIOS) {
+                window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
+            }
+        } catch (e) {
+
+        };
         var param = {
             fTaskid: taskID,
             fExplain: textDetail

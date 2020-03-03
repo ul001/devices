@@ -18,11 +18,11 @@ var androidProblemid = localStorage.getItem("fDeviceproblemid");
 localStorage.removeItem("fDeviceproblemid");
 if (androidProblemid != null && androidProblemid != undefined) {
   fDeviceproblemid = androidProblemid;
-  $(".back_btn").click(function() {
+  $(".back_btn").click(function () {
     android.goBack();
   });
 } else {
-  $(".back_btn").click(function() {
+  $(".back_btn").click(function () {
     window.history.back();
   });
 }
@@ -40,7 +40,7 @@ if (taskProblem == 1) {
   problemParam["fTaskid"] = taskId;
 }
 
-Substation.getDataByAjax(url, problemParam, function(data) {
+Substation.getDataByAjax(url, problemParam, function (data) {
   var imgUrl = data.imgUrl;
   var defectJson = data.tDevDeviceproblem;
   var beforeimg = data.beforeimg;
@@ -55,20 +55,20 @@ Substation.getDataByAjax(url, problemParam, function(data) {
     var defectPositionVal = fProblemlocation.split(",")[1];
     var defectPositionArray = defectPosition.split(";");
     var defectPositionValArray = defectPositionVal.split(";");
-    $(defectPositionArray).each(function(index, obj) {
+    $(defectPositionArray).each(function (index, obj) {
       $("#defectPosition").append(
         '<input type="checkbox" disabled value="' +
-          obj +
-          '" id="' +
-          index +
-          '"><label for="' +
-          index +
-          '">' +
-          obj +
-          "</label><br>"
+        obj +
+        '" id="' +
+        index +
+        '"><label for="' +
+        index +
+        '">' +
+        obj +
+        "</label><br>"
       );
     });
-    $(defectPositionValArray).each(function() {
+    $(defectPositionValArray).each(function () {
       $("input[type='checkbox'][value='" + this + "']").attr("checked", true);
     });
   }
@@ -90,11 +90,11 @@ Substation.getDataByAjax(url, problemParam, function(data) {
       $("#fSolveTime").val(defectJson.fUpdateDate);
     }
   } else {
-      $("#fClientadvice").val(Substation.removeUnDefinedStr(defectJson.fClientadvice));
-      $("#fState").val(Substation.removeUnDefinedStr(defectJson.fState));
-    }
+    $("#fClientadvice").val(Substation.removeUnDefinedStr(defectJson.fClientadvice));
+    $("#fState").val(Substation.removeUnDefinedStr(defectJson.fState));
+  }
   if (beforeimg.length > 0) {
-    $.each(beforeimg, function(i, value) {
+    $.each(beforeimg, function (i, value) {
       imgNum1++;
       if (value.fDeviceproblemimgurlMin == undefined) {
         var imgDiv =
@@ -132,7 +132,7 @@ Substation.getDataByAjax(url, problemParam, function(data) {
     });
   }
   if (afterimg.length > 0) {
-    $.each(afterimg, function(i, value) {
+    $.each(afterimg, function (i, value) {
       imgNum++;
       if (value.fDeviceproblemimgurlMin == undefined) {
         var imgDiv =
@@ -174,16 +174,16 @@ Substation.getDataByAjax(url, problemParam, function(data) {
     });
   }
   if (canClick == "false") {
-    $($("input")).each(function() {
-      if($(this).attr("id")=="fProblemharm"||$(this).attr("id")=="fResolution"){
+    $($("input")).each(function () {
+      if ($(this).attr("id") == "fProblemharm" || $(this).attr("id") == "fResolution") {
         var thisValue = $(this).val();
         var thisInput = $(this).parent();
-        thisInput.html('<div class="item-label">'+thisValue+'</div>');
-      }else{
+        thisInput.html('<div class="item-label">' + thisValue + '</div>');
+      } else {
         $(this).attr("readonly", true);
       }
     });
-    $($("select")).each(function() {
+    $($("select")).each(function () {
       var thisInput = $(this).parent();
       var thisValue = "";
       if (this.selectedIndex != -1) {
@@ -199,7 +199,7 @@ Substation.getDataByAjax(url, problemParam, function(data) {
 });
 
 $("#inputBox").html("");
-$(".upload_img_wrap .upload_img").on("click", function() {
+$(".upload_img_wrap .upload_img").on("click", function () {
   //console.log(ev.currentTarget.dataset.id)
   var index = imgNum + 1;
   if ($("#file" + index).length < 1) {
@@ -211,10 +211,10 @@ $(".upload_img_wrap .upload_img").on("click", function() {
     //        }else{
     $("#inputBox").append(
       '<input type="file" class="fileInput" capture="camera" name="myFiles" data-id="' +
-        index +
-        '" title="请选择图片" id="file' +
-        index +
-        '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
+      index +
+      '" title="请选择图片" id="file' +
+      index +
+      '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
     );
     //        }
   }
@@ -227,7 +227,7 @@ $(".upload_img_wrap .upload_img").on("click", function() {
   }
   $("#file" + index)
     .unbind()
-    .change(function(e) {
+    .change(function (e) {
       var index = e.currentTarget.dataset.id;
       if ($("#file" + index).val() == "") {
         $("#inputBox input")
@@ -253,21 +253,21 @@ function changeImg(e, filePath, index) {
   //获取并记录图片的base64编码
   var reader = new FileReader();
   reader.readAsDataURL(e.target.files[0]);
-  reader.onloadend = function() {
+  reader.onloadend = function () {
     // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
     var dataURL = reader.result;
     // console.log(dataURL)
     // 显示图片
     $("#imgBox").append(
       '<div class="imgContainer" data-index=' +
-        index +
-        "><img   src=" +
-        dataURL +
-        " name=" +
-        dataURL +
-        ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
-        index +
-        ')"  class="imgDelete" src="img/del_img.png" /></div>'
+      index +
+      "><img   src=" +
+      dataURL +
+      " name=" +
+      dataURL +
+      ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
+      index +
+      ')"  class="imgDelete" src="img/del_img.png" /></div>'
     );
   };
 }
@@ -276,8 +276,8 @@ function removeImg(obj, index) {
   for (var i = 0; i < $(".imgContainer").length; i++) {
     if (
       $(".imgContainer")
-        .eq(i)
-        .attr("data-index") == index
+      .eq(i)
+      .attr("data-index") == index
     ) {
       var imgId = $(".imgContainer")
         .eq(i)
@@ -347,7 +347,7 @@ function closePicture(obj) {
 //loadSavedPic();
 
 function saveFormData() {
-  $(".fileInput").each(function() {
+  $(".fileInput").each(function () {
     if ($(this).val() == "" || $(this).val() == null) {
       $(this).remove();
     }
@@ -364,7 +364,7 @@ function saveFormData() {
   var taskId = localStorage.getItem("missiontaskID");
   params.append("fDeviceproblemid", fDeviceproblemid);
   params.append("fTaskId", taskId);
-  Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function(
+  Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (
     data
   ) {
     if (data.code == 200) {
@@ -376,12 +376,12 @@ function saveFormData() {
 }
 
 //解决键盘遮挡问题
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   if (
     document.activeElement.tagName == "INPUT" ||
     document.activeElement.tagName == "TEXTAREA"
   ) {
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       document.activeElement.scrollIntoViewIfNeeded();
     }, 0);
   }

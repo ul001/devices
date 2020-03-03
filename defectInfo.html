@@ -20,22 +20,22 @@
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left click_btn back_btn">
                     <span class="icon icon-left"></span>
-                    返回
+                    <span data-i18n="ui_back"></span>
                 </a>
-                <h1 class="title title_color">缺陷信息</h1>
+                <h1 class="title title_color"><span data-i18n="ui_DefectInfo"></span></h1>
                 <a class="button button-link button-nav pull-right click_btn" id="saveData" onclick="saveFormData()">
-                    保存
+                    <span data-i18n="ui_save"></span>
                 </a>
             </header>
             <div class="content">
                 <div class="list-block">
                     <form id="form1" method="post" enctype="multipart/form-data">
                         <ul>
-                            <!-- Text inputs -->
+                            <!-- Text inputs  -->
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">任务单号：</div>
+                                        <div class="item-title label"><span data-i18n="ui_taskNumber"></span></div>
                                         <div class="item-input">
                                             <!--                                            <input type="text" id="taskNumber" value="" readonly>-->
                                             <div class="item-label" id="taskNumber"></div>
@@ -46,7 +46,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">设备名称：</div>
+                                        <div class="item-title label"><span data-i18n="ui_Devname"></span></div>
                                         <div class="item-input">
                                             <!--                                            <input type="text" id="treePathName" value="" readonly>-->
                                             <div class="item-label" id="treePathName"></div>
@@ -57,7 +57,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">缺陷描述：</div>
+                                        <div class="item-title label"><span data-i18n="ui_DefectExplain"></span></div>
                                         <div class="item-input">
                                             <!--                                            <input type="text" id="fDeviceproblemdes" value="">-->
                                             <div class="item-label" id="fDeviceproblemdes"></div>
@@ -70,7 +70,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">缺陷位置：</div>
                                         <div class="item-input" id="defectPosition">
-<!--                                            <input type="checkbox" value="A相" id="checkA" checked disabled><label
+                                            <!--                                            <input type="checkbox" value="A相" id="checkA" checked disabled><label
                                                 for="checkA">A相</label>
                                             <input type="checkbox" value="B相" id="checkB" disabled><label
                                                 for="checkB">B相</label>
