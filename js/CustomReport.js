@@ -84,7 +84,7 @@ var CustomReport = (function () {
                     '<h5 class="this_title" data-index="1" style="display:none;">变配电站概况</h5>'+
                     '<h5 class="this_title" data-index="1" style="display:none;">用电量分析</h5>'+
                     "<h3>1、变配电站概况</h3>" +
-                    '<table class="table table-bordered substation">' +
+                    '<div class="subTable"><table class="table table-bordered substation">' +
                     "<tr>" +
                     "<td>站点名称</td>" +
                     '<td colspan="3" id="name' +
@@ -117,7 +117,7 @@ var CustomReport = (function () {
                     i +
                     '">-</td>' +
                     "</tr>" +
-                    "</table>" +
+                    "</table></div>" +
                     "<h3>2、用电量分析</h3>" +
                     "<h4>2.1、日耗电量分析</h4>" +
                     '<p class="powerString" id="powerString' +
@@ -944,15 +944,22 @@ var CustomReport = (function () {
                 .children(".addDiv")
                 .remove();
 
-            if (data != null && data.tDevDeviceproblemList.length > 0) {
-                var operationstring =
-                    '<p class="messageContent">本周期内，该变配电站共完成巡检<span>' +
-                    data.count +
-                    "</span>次，巡检时间为：<span>" +
-                    data.timeList.join("&nbsp") +
-                    "</span>；巡检过程中发现如下缺陷：</p>";
-                $("#operation" + num).html(operationstring);
-
+            if (data != null) {
+                if(data.count>0){
+                    var operationstring =
+                        '<p class="messageContent">本周期内，该变配电站共完成巡检<span>' +
+                        data.count +
+                        "</span>次，巡检时间为：<span>" +
+                        data.timeList.join("&nbsp") +
+                        "</span>；<span id=\"hasPro\">巡检过程中发现如下缺陷：</span></p>";
+                    $("#operation" + num).html(operationstring);
+                }else{
+                    var operationstring =
+                        '<p class="messageContent">&nbsp;&nbsp;该变电所暂无现场运维记录。</p>';
+                    $("#operation" + num).html(operationstring);
+                }
+            }
+            if(data.tDevDeviceproblemList.length > 0){
                 var itemlength = data.tDevDeviceproblemList.length;
                 var parentNum = Math.ceil((itemlength - 1) / 2);
 
@@ -1258,9 +1265,10 @@ var CustomReport = (function () {
                     }
                 }
             } else {
-                var operationstring =
+                /*var operationstring =
                     '<p class="messageContent">&nbsp;&nbsp;该配电站暂无现场运维记录。</p>';
-                $("#operation" + num).html(operationstring);
+                $("#operation" + num).html(operationstring);*/
+                $("#hasPro").text("巡检过程中未发现缺陷。");
             }
 
             $("img .lazy").lazyload({

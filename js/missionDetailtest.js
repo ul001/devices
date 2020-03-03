@@ -330,6 +330,7 @@ $(".doDetail").click(function () {
         window.location.href = "missionScene.html";
     } else if (missionTypeid == 3) {
         //缺陷整改
+        localStorage.setItem("missionTypeid", missionTypeid);
         window.location.href = "defectRectification.html";
     } else {
         $.toast("未知任务类型");
