@@ -551,7 +551,7 @@ $("#submitTo").click(function () {
             data
         ) {
             localStorage.removeItem("selectPersons");
-            window.location.href = "todoItems.html";
+            $.toast("提交成功，该任务已结束！");
         });
     });
 });
