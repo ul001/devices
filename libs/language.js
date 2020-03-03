@@ -78,7 +78,6 @@ function getZhLanguage() {
     ui_Emergenylevel: "紧急程度",
     ui_dealState: "处理状态",
     ui_findTime: "发现时间",
-
     // selectPhoto
     ui_photo: "照片",
     ui_location: "位置",
@@ -132,6 +131,16 @@ function getZhLanguage() {
     ui_Trackquery: "轨迹查询",
     //文档分类
     ui_FileList: "文档分类",
+    //变电所消缺单
+    ui_SubstationDefect: "变电所消缺单",
+    ui_Description: "描述：",
+    ui_detriment: "危害：",
+    ui_Specificlocation: "具体位置：",
+    ui_categorie: "缺陷类别：",
+    ui_Urgency: "紧急程度：",
+    ui_EliminationPeriod: "消缺期限：",
+    ui_DealStateForDefect: "处理状态：",
+    ui_FindTimeForDefect: "发现时间：",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -381,6 +390,17 @@ function getEnLanguage() {
     ui_Trackquery: "Track Query",
     //文档分类
     ui_FileList: "File List",
+    //变电所消缺单
+    ui_SubstationDefect: "Substation Defect",
+    ui_Description: "Description:",
+    ui_detriment: "detriment:",
+    ui_Specificlocation: "Specificlocation:",
+    ui_categorie: "Categorie:",
+    ui_Urgency: "Urgency:",
+    ui_EliminationPeriod: "EliminationPeriod：",
+    ui_DealStateForDefect: "ProcessingState:",
+    ui_FindTimeForDefect: "FindTime:",
+
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",

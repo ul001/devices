@@ -3,7 +3,7 @@ var taskId = localStorage.getItem("taskID");
 var goTemp = localStorage.getItem("goBackToList");
 localStorage.removeItem("goBackToList");
 var needUpdate = localStorage.getItem("need-update");
-if(needUpdate=="true"){
+if (needUpdate == "true") {
     localStorage.removeItem("need-update");
     location.reload();
 }
@@ -43,7 +43,7 @@ $(".back_btn").click(function () {
     if (goTemp == "1") {
         window.history.back();
     } else {
-//        window.location.href = "missionDetail.html";
+        //        window.location.href = "missionDetail.html";
         localStorage.setItem("need-refresh", "true");
         window.history.back();
     }
@@ -60,7 +60,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
         if (data.tDevDeviceproblemList.list.length > 0) {
             $(data.tDevDeviceproblemList.list).each(function () {
                 var problemStr = "-";
-                if(this.fProblemlocation!=undefined){
+                if (this.fProblemlocation != undefined) {
                     if (this.fProblemlocation.indexOf(",") != -1) {
                         problemStr = this.fProblemlocation.split(",")[1]
                     }
@@ -97,20 +97,20 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 if (this.fUpdateDate != undefined) {
                     solveTime = "<p>消缺时间：" + this.fUpdateDate + "</p>";
                 }
-                $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\"" + (this.treePathName==undefined?"":this.treePathName) + "\" id=\"" + this.fDeviceproblemid + "\">\n" +
+                $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\"" + (this.treePathName == undefined ? "" : this.treePathName) + "\" id=\"" + this.fDeviceproblemid + "\">\n" +
                     "                        <div class=\"col-10\">\n" +
                     "                            <i class=\"icon icon-alarm\"></i>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"col-85\">\n" +
-                    "                            <p class=\"boldText\">设备名称：" + (this.treePathName==undefined?"-":this.treePathName) + "</p>\n" +
-                    "                            <p>描述：" + (this.fDeviceproblemdes==undefined?"-":this.fDeviceproblemdes) + "</p>\n" +
-                    "                            <p>危害：" + (this.fProblemharm==undefined?"-":this.fProblemharm) + "</p>\n" +
-                    "                            <p>具体位置：" + problemStr + "</p>\n" +
-                    "                            <p>缺陷类别：" + (this.fProblemtype==undefined?"-":this.fProblemtype) + "</p>\n" +
-                    "                            <p>紧急程度：" + (this.fProblemlevel==undefined?"-":this.fProblemlevel) + "</p>\n" +
-                    "                            <p>消缺期限：" + (this.fTimelimit==undefined?"-":this.fTimelimit) + "</p>\n" +
-                    "                            <p>处理状态：" + stateStr + "</p>\n" +
-                    "                            <p>发现时间：" + (this.fCreatetime==undefined?"-":this.fCreatetime) + "</p>\n" +
+                    "                            <p class=\"boldText\">" + Operation['ui_Devname'] + (this.treePathName == undefined ? "-" : this.treePathName) + "</p>\n" +
+                    "                            <p>" + Operation['ui_Description'] + (this.fDeviceproblemdes == undefined ? "-" : this.fDeviceproblemdes) + "</p>\n" +
+                    "                            <p>" + Operation['ui_detriment'] + (this.fProblemharm == undefined ? " - " : this.fProblemharm) + " </p>\n" +
+                    "                            <p>" + Operation['ui_Specificlocation'] + problemStr + "</p>\n" +
+                    "                            <p>" + Operation['ui_categorie'] + (this.fProblemtype == undefined ? "-" : this.fProblemtype) + "</p>\n" +
+                    "                            <p>" + Operation['ui_Urgency'] + (this.fProblemlevel == undefined ? "-" : this.fProblemlevel) + "</p>\n" +
+                    "                            <p>" + Operation['ui_EliminationPeriod'] + (this.fTimelimit == undefined ? "-" : this.fTimelimit) + "</p>\n" +
+                    "                            <p>" + Operation['ui_DealStateForDefect'] + stateStr + "</p>\n" +
+                    "                            <p>" + Operation['ui_FindTimeForDefect'] + (this.fCreatetime == undefined ? "-" : this.fCreatetime) + "</p>\n" +
                     solveUser + solveTime +
                     "                        </div>\n" +
                     "                        <div class=\"col-5\">\n" +
@@ -121,10 +121,10 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
             $(".card-content-inner").click(function () {
                 var proId = $(this).attr("id");
                 var dataTree = $(this).attr("data-tree");
-//                var target_roll_height = $(this).offset().top-$(".content").offset().top+$(".content").scrollTop();
+                //                var target_roll_height = $(this).offset().top-$(".content").offset().top+$(".content").scrollTop();
                 var target_roll_height = $(".content").scrollTop();
-//记录滚动位置
-                localStorage.setItem("scrollY",target_roll_height);
+                //记录滚动位置
+                localStorage.setItem("scrollY", target_roll_height);
                 localStorage.setItem("clickTree", dataTree);
                 window.location.href = "defectInfo.html?fDeviceproblemid=" + proId + "&taskProblem=1";
             });
@@ -138,12 +138,12 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                     $("#goToWrite").click(function () {
                         window.location.href = "draw.html";
                     });
-                }else {
+                } else {
                     $(".card-footer").html('<img src="' + (Substation.ipAddressFromAPP + imgUrl + "/" + data.imgName) + '" style="width:100%;">');
                 }
-                if(missionTypeId!="3"){
+                if (missionTypeId != "3") {
                     $(".card-footer").remove();
-                    localStorage.setItem("canClick","false");
+                    localStorage.setItem("canClick", "false");
                 }
             }
         } else {
