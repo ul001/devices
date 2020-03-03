@@ -62,6 +62,11 @@ function getZhLanguage() {
     ui_taskstate: "任务状态",
     ui_Substationname: "变电所名称",
     ui_enterkeywords: "请输入关键字",
+    ui_PatrolTaskNumber: "巡检任务单号：",
+    ui_PatrolStartTime: "巡检开始时间：",
+    ui_FindDefect: "本次发现缺陷：",
+    ui_Untreated: "个  未处理：",
+    ui_unit: "个",
     // allDefectPage
     ui_DefectPage: "缺陷记录",
     ui_Defectstate: "缺陷状态",
@@ -103,8 +108,7 @@ function getZhLanguage() {
     ui_register: "签到",
     ui_ImplementDetail: "执行明细",
     ui_attention: "注意！",
-    ui_executionprompt:
-      "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
+    ui_executionprompt: "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
     //报警
     ui_Alarm: "报警",
     //patrolContent
@@ -309,6 +313,11 @@ function getEnLanguage() {
     ui_taskstate: "Task State",
     ui_Substationname: "Substation Name",
     ui_enterkeywords: "Please enter keywords",
+    ui_PatroltaskNumber: "PatrolTaskNumber:",
+    ui_PatrolStartTime: "PatrolStartTime:",
+    ui_FindDefect: "FindDefect:",
+    ui_Untreated: "   Untreated:",
+    ui_unit: "",
     // allDefectPage
     ui_DefectPage: "Defect Page",
     ui_Defectstate: "Defect state",
@@ -349,8 +358,7 @@ function getEnLanguage() {
     ui_register: "Register",
     ui_ImplementDetail: "Execute Detail",
     ui_attention: "Attention",
-    ui_executionprompt:
-      "There is only one patrol sheet for a single task, one patrol sheet can only be saved by one person, and multiple people may overwrite each other.",
+    ui_executionprompt: "There is only one patrol sheet for a single task, one patrol sheet can only be saved by one person, and multiple people may overwrite each other.",
     //报警
     ui_Alarm: "Alarm",
     //patrolContent
@@ -358,8 +366,7 @@ function getEnLanguage() {
     //patrolContent
     ui_showOnlydevice: "Show only device",
     ui_DefectRegist: "Defect Regist",
-    ui_hasnosave:
-      "The current patrol information has not been saved. Are you sure you want to leave?",
+    ui_hasnosave: "The current patrol information has not been saved. Are you sure you want to leave?",
     ui_nodeviceInThis: "No devices under this group!",
     //missionManager
     ui_submitTask: "Submit Task",
@@ -378,8 +385,7 @@ function getEnLanguage() {
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
     code_401: "The client needs to be authenticated, the client needs to log",
-    code_105:
-      "New items are not allowed in the entry contains details of equipment or inspection equipment item details",
+    code_105: "New items are not allowed in the entry contains details of equipment or inspection equipment item details",
     code_101: "Please delete the child",
     code_500: "Service Exception",
     code_1000: "Pagecustom database table data anomalies",
@@ -388,8 +394,7 @@ function getEnLanguage() {
     code_301: "File upload failed",
     code_302: "Please add a picture",
     code_303: "Delete failed, not this picture",
-    code_107:
-      "New item type of business needs to be consistent with the parent service type",
+    code_107: "New item type of business needs to be consistent with the parent service type",
     code_108: "Without this menu",
     code_109: "This menu is not initialized sort value",
     code_120: "There is no change in the menu",
@@ -426,16 +431,11 @@ function getEnLanguage() {
     code_318: "The current mission has a single inspection",
     code_319: "It is not responsible for the executor",
     code_320: "Currently exist under the user role and its subordinate role",
-    code_321:
-      "The presence of the user currently subordinate user group and user group",
-    code_322:
-      "The presence of substations under the current organization and its subordinate organizations",
-    code_323:
-      "The presence of the organization and its subordinate role under the current organizational structure",
-    code_324:
-      "User groups exist under the current organization and its subordinate organizations",
-    code_325:
-      "Substation region exists under the current region and its subordinate",
+    code_321: "The presence of the user currently subordinate user group and user group",
+    code_322: "The presence of substations under the current organization and its subordinate organizations",
+    code_323: "The presence of the organization and its subordinate role under the current organizational structure",
+    code_324: "User groups exist under the current organization and its subordinate organizations",
+    code_325: "Substation region exists under the current region and its subordinate",
     code_326: "H5 file upload failed",
     code_327: "Insert fails, the company name already exists",
     code_328: "Insert failed, please try again (Company Number repeat)",
@@ -445,8 +445,7 @@ function getEnLanguage() {
     code_332: "File size can not exceed 10M",
     code_333: "Failed to delete database records",
     code_334: "file does not exist",
-    code_335:
-      "The user is disabled, please notify the administrator open permissions",
+    code_335: "The user is disabled, please notify the administrator open permissions",
     code_336: "You can not disable the currently logged on user",
     code_700: "Refresh token",
     code_205: "The device already exists",
@@ -471,8 +470,7 @@ function getEnLanguage() {
     code_355: "admin role can not be deleted",
     code_356: "admin user login name can not be modified",
     code_357: "admin users can not delete",
-    code_358:
-      "Deletion failed, please log in with administrator privileges account",
+    code_358: "Deletion failed, please log in with administrator privileges account",
     code_359: "User login name already exists",
     code_360: "Home current configuration as the default configuration",
     code_361: "EZVIZ appkey and secret information is not configured",
@@ -483,17 +481,13 @@ function getEnLanguage() {
     code_366: "The number of substations reaches the upper limit",
     code_367: "The number of instruments reaches the upper limit",
     code_368: "Without this substation",
-    code_369:
-      "You can not find any information on the organization of the substation",
+    code_369: "You can not find any information on the organization of the substation",
     code_370: "admin user can not be disabled",
     code_371: "You can not modify the admin user organization or role",
     code_372: "All the user has not selected substation",
-    code_373:
-      "The template and its subordinate template has been used in a substation",
-    code_374:
-      "The substation number is out of range, can not be used to automatically generate",
-    code_375:
-      "Present in the system numbered 10,109,999 substation, can not be automatically generated, please contact the administrator",
+    code_373: "The template and its subordinate template has been used in a substation",
+    code_374: "The substation number is out of range, can not be used to automatically generate",
+    code_375: "Present in the system numbered 10,109,999 substation, can not be automatically generated, please contact the administrator",
     code_376: "In this substation, meter number at the gateway already exists",
     code_5000: "The request failed server abnormal",
     code_377: "The substation id available",
@@ -501,8 +495,7 @@ function getEnLanguage() {
     code_379: "Primary key of the record already exists",
     code_380: "Equipment same name",
     code_381: "The substation equipment is no packet",
-    code_382:
-      "The current substation equipment under the same name already exists in the device grouping, proposed changes",
+    code_382: "The current substation equipment under the same name already exists in the device grouping, proposed changes",
     code_other: "Operation failed"
   };
 }

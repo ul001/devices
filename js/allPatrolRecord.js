@@ -111,9 +111,9 @@ function addItems(number) {
                         "                            <div class=\"col-95\">\n" +
                         "                                <p class=\"subName\">" + this.fTaskName + "<span class=\"blueColor\">(" + stateStr + ")</span></p>\n" +
                         //                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
-                        "                                <p>巡检任务单号：<span class=\"blueColor\">" + this.fTasknumber + "</span></p>\n" +
-                        "                                <p>巡检开始时间：<span class=\"blueColor\">" + this.fCreatetime + "</span></p>\n" +
-                        "                                <p>本次发现缺陷：<span class=\"redColor\">" + this.fproblemTotal + " </span>个  未处理：<span class=\"redColor\">" + this.funsolvedTotal + " </span>个</p>\n" +
+                        "                                <p>" + Operation['ui_PatroltaskNumber'] + "<span class=\"blueColor\">" + this.fTasknumber + "</span></p>\n" +
+                        "                                <p>" + Operation['ui_PatrolStartTime'] + "<span class=\"blueColor\">" + this.fCreatetime + "</span></p>\n" +
+                        "                                <p>" + Operation['ui_FindDefect'] + "<span class=\"redColor\">" + this.fproblemTotal + " </span>" + Operation['ui_Untreated'] + "<span class=\"redColor\">" + this.funsolvedTotal + " </span>" + Operation['ui_unit'] + "</p>\n" +
                         "                            </div>\n" +
                         "                            <div class=\"col-5\">\n" +
                         "                                <i class=\"icon icon-right\"></i>\n" +
