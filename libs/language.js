@@ -134,7 +134,7 @@ function getZhLanguage() {
     //变电所消缺单
     ui_SubstationDefect: "变电所消缺单",
     ui_Description: "描述：",
-    ui_detriment: "危害：",
+    ui_detriment: "缺陷危害：",
     ui_Specificlocation: "具体位置：",
     ui_categorie: "缺陷类别：",
     ui_Urgency: "紧急程度：",
@@ -143,8 +143,14 @@ function getZhLanguage() {
     ui_FindTimeForDefect: "发现时间：",
     //缺陷信息
     ui_DefectInfo: "缺陷信息",
-
-
+    ui_SeverityGrade: "严重等级:",
+    ui_Scenephotos: "现场照片:",
+    ui_RectifyPhoto: "整改照片:",
+    ui_suggestion: "处理建议:",
+    ui_CustomerComments: "客户意见:",
+    ui_Situation: "处理情况:",
+    ui_MissingPersonnel: "消缺人员:",
+    ui_SolveTime: "消缺时间:",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -406,7 +412,15 @@ function getEnLanguage() {
     ui_FindTimeForDefect: "FindTime:",
     //缺陷信息
     ui_DefectInfo: "Defect Info",
-
+    ui_Defectlocation: "Defectlocation",
+    ui_SeverityGrade: "SeverityGrade:",
+    ui_Scenephotos: "ScenePhotos:",
+    ui_RectifyPhoto: "RectifyPhoto:",
+    ui_suggestion: "suggestion:",
+    ui_CustomerComments: "CustomerIdea:",
+    ui_Situation: "Situation:",
+    ui_MissingPersonnel: "SolvePersonnel:",
+    ui_SolveTime: "SolveTime:",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",

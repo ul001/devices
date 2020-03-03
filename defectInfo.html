@@ -68,13 +68,13 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">缺陷位置：</div>
+                                        <div class="item-title label"><span data-i18n="ui_SpecificLoc"></span></div>
                                         <div class="item-input" id="defectPosition">
                                             <!--                                            <input type="checkbox" value="A相" id="checkA" checked disabled><label
                                                 for="checkA">A相</label>
                                             <input type="checkbox" value="B相" id="checkB" disabled><label
                                                 for="checkB">B相</label>
-                                            <input type="checkbox" value="C相" id="checkC" disabled><label
+                                            <input type="checkbox" value="C相"  id="checkC" disabled><label
                                                 for="checkC">C相</label>-->
                                         </div>
                                     </div>
@@ -83,7 +83,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">缺陷类别：</div>
+                                        <div class="item-title label"><span data-i18n="ui_categories"></span></div>
                                         <div class="item-input">
                                             <input type="text" id="fProblemtype" value="" readonly>
                                         </div>
@@ -93,7 +93,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">严重等级：</div>
+                                        <div class="item-title label"><span data-i18n="ui_Severitygrade"></span></div>
                                         <div class="item-input">
                                             <input type="text" id="fProblemlevel" value="" readonly>
                                         </div>
@@ -104,7 +104,8 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">消缺期限：</div>
+                                        <div class="item-title label"><span data-i18n="ui_EliminationPeriod"></span>
+                                        </div>
                                         <div class="item-input">
                                             <input type="text" id="fTimelimit" value="" readonly>
                                         </div>
@@ -115,7 +116,8 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">缺陷危害：</div>
+                                        <div class="item-title label"><span data-i18n="ui_detriment"></span>
+                                        </div>
                                         <div class="item-input">
                                             <input type="text" id="fProblemharm" value="" readonly>
                                         </div>
@@ -125,7 +127,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">发现时间：</div>
+                                        <div class="item-title label"><span data-i18n="ui_findTime"></span></div>
                                         <div class="item-input">
                                             <input type="text" id="fCreatetime" value="" readonly>
                                         </div>
@@ -135,7 +137,7 @@
                             <li class="align-top">
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">现场照片：</div>
+                                        <div class="item-title label"><span data-i18n="ui_Scenephotos"></span></div>
                                         <div class="item-input">
                                             <div class="custom_img">
                                                 <!--点击上传图片 触发下面的div 点击事件-->
@@ -153,7 +155,8 @@
                             <li class="align-top">
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label"><span class="blueColor">整改照片：</span></div>
+                                        <div class="item-title label"><span class="blueColor"
+                                                data-i18n="ui_RectifyPhoto"></span></div>
                                         <div class="item-input">
                                             <div class="custom_img">
                                                 <!--点击上传图片 触发下面的div 点击事件-->
@@ -182,7 +185,8 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">处理建议：</div>
+                                        <div class="item-title label blueColor"><span class="blueColor"
+                                                data-i18n="ui_suggestion"></span></div>
                                         <div class="item-input">
                                             <input type="text" id="fResolution" name="fResolution" value="">
                                         </div>
@@ -192,7 +196,8 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">客户意见：</div>
+                                        <div class="item-title label blueColor"><span class="blueColor"
+                                                data-i18n="ui_CustomerComments"></span></div>
                                         <div class="item-input">
                                             <select id="fClientadvice" name="fClientadvice">
                                                 <option value="待客户答复">待客户答复</option>
@@ -207,7 +212,8 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">处理情况：</div>
+                                        <div class="item-title label blueColor"><span class="blueColor"
+                                                data-i18n="ui_Situation"></span></div>
                                         <div class="item-input">
                                             <select id="fState" name="fState">
                                                 <option value="0">未处理</option>
@@ -224,7 +230,8 @@
                             <li class="showSolveUser" style="display:none;">
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">消缺人员：</div>
+                                        <div class="item-title label blueColor"><span class="blueColor"
+                                                data-i18n="ui_MissingPersonnel"></span></div>
                                         <div class="item-input">
                                             <input type="text" id="fSolveUser">
                                         </div>
@@ -234,7 +241,8 @@
                             <li class="showSolveTime" style="display:none;">
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">消缺时间：</div>
+                                        <div class="item-title label blueColor"><span class="blueColor"
+                                                data-i18n="ui_SolveTime"></span></div>
                                         <div class="item-input">
                                             <input type="text" id="fSolveTime">
                                         </div>
