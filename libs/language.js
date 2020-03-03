@@ -62,7 +62,7 @@ function getZhLanguage() {
     ui_taskstate: "任务状态",
     ui_Substationname: "变电所名称",
     ui_enterkeywords: "请输入关键字",
-    ui_PatrolTaskNumber: "巡检任务单号：",
+    ui_PatroltaskNumber: "巡检任务单号：",
     ui_PatrolStartTime: "巡检开始时间：",
     ui_FindDefect: "本次发现缺陷：",
     ui_Untreated: "个  未处理：",
