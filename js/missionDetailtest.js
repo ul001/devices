@@ -5,7 +5,7 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 var isUseTrace = "0";
 //是否有轨迹功能传参
-try{
+try {
     if (isIOS) {
         window.webkit.messageHandlers.iOS.postMessage("");
         var storage = localStorage.getItem("accessToken");
@@ -14,7 +14,7 @@ try{
     } else if (isAndroid) {
         isUseTrace = android.getTrackUse();
     }
-}catch(e){
+} catch (e) {
     isUseTrace = "0";
 };
 
@@ -223,13 +223,13 @@ $("#startTask").click(function () {
         if (temp && isUseTrace == "1") {
             $.confirm("是否要开启轨迹记录功能？", function () {
                 //开启轨迹
-                try{
+                try {
                     if (isIOS) {
                         window.webkit.messageHandlers.openTrackFunc.postMessage(null);
                     } else if (isAndroid) {
                         android.startTrace();
                     }
-                }catch(e){
+                } catch (e) {
 
                 }
                 location.reload();
@@ -271,7 +271,7 @@ $("#taskIn").click(function () {
         lat = array[0];
         lon = array[1];
         addr = array[2];
-        if(addr==null||addr=="null"){
+        if (addr == null || addr == "null") {
             addr = "";
         }
         //                                    alert(lat+"\n"+lon+"\n"+addr);
@@ -343,6 +343,9 @@ $("#submitTask").click(function () {
         if (!textDetail) {
             textDetail = "";
         }
+        if (isIOS) {
+            window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
+        }
         var param = {
             fTaskid: taskID,
             fExplain: textDetail
@@ -353,37 +356,37 @@ $("#submitTask").click(function () {
             $("#doTask").hide();
             $("#submitTask").hide();
             $("#doDetail").show();
-            try{
+            try {
                 if (isAndroid) {
                     android.refresh();
-                    if(temp && isUseTrace == "1"){
-                //android关闭轨迹
+                    if (temp && isUseTrace == "1") {
+                        //android关闭轨迹
                         var isOpen = android.getTrackOpen();
-                        if(isOpen=="true"){
-                            android.stopTrace();
-                        }else{
+                        if (isOpen == "true") {
                             $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
                                 android.stopTrace();
                             });
+                        } else {
+                            // android.stopTrace();
                         }
                     }
                     android.removeSPItem(taskID);
-                }else if(isIOS){
+                } else if (isIOS) {
                     localStorage.removeItem(taskID);
                     localStorage.setItem("need-refresh", "true");
-                    if(temp && isUseTrace == "1"){
+                    if (temp && isUseTrace == "1") {
                         //ios关闭轨迹
-                        var isOpen = android.getTrackOpen();
-                        if(isOpen=="true"){
-                            window.webkit.messageHandlers.closeTrackFunc.postMessage("");
-                        }else{
+                        var isOpen = localStorage.isOpenTrack;
+                        if (isOpen == "true") {
                             $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
                                 window.webkit.messageHandlers.closeTrackFunc.postMessage("");
                             });
+                        } else {
+                            window.webkit.messageHandlers.closeTrackFunc.postMessage("");
                         }
                     }
                 }
-            }catch(e){
+            } catch (e) {
                 localStorage.removeItem(taskID);
             };
         });
@@ -400,9 +403,9 @@ $("#chargeSubmit").click(function () {
         Substation.getDataByAjax("/submitTask", param, function (data) {
             $.toast("提交成功，该任务已结束！");
             if (isAndroid) {
-                try{
+                try {
                     android.removeSPItem(taskID);
-                }catch(e){
+                } catch (e) {
                     localStorage.removeItem(taskID);
                 };
                 android.refresh();
