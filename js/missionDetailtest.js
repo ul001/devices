@@ -215,27 +215,34 @@ getNetData();
 $("#startTask").click(function () {
     $.showPreloader(Operation['ui_loading']);
     Substation.getDataByAjax("/taskStart", "taskId=" + taskID, function (data) {
-        if (isAndroid) {
-            android.refresh();
-        } else {
-            localStorage.setItem("need-refresh", "true");
-        }
         if (temp && isUseTrace == "1") {
-            $.confirm("是否要开启轨迹记录功能？", function () {
                 //开启轨迹
                 try {
                     if (isIOS) {
-                        window.webkit.messageHandlers.openTrackFunc.postMessage(null);
+                        localStorage.setItem("need-refresh", "true");
+                        var isOpen = localStorage.isOpenTrack;
+                        if (isOpen == "false") {
+                            $.confirm("是否要开启轨迹记录功能？", function () {
+                            window.webkit.messageHandlers.openTrackFunc.postMessage(null);},
+                            function(){});
+                        }
                     } else if (isAndroid) {
-                        android.startTrace();
+                        android.refresh();
+                        //android关闭轨迹
+                        var isOpen = android.getTrackOpen();
+                        if (isOpen == "false") {
+                            $.confirm("是否要开启轨迹记录功能？", function () {
+                                android.startTrace();},
+                                function(){});
+                        }
+                    }else{
+                        localStorage.setItem("need-refresh", "true");
                     }
                 } catch (e) {
 
-                }
-                location.reload();
-            }, function () {
-                location.reload();
-            });
+                }finally{
+                    location.reload();
+                };
         } else {
             location.reload();
         }
