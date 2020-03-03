@@ -141,6 +141,10 @@ function getZhLanguage() {
     ui_EliminationPeriod: "消缺期限：",
     ui_DealStateForDefect: "处理状态：",
     ui_FindTimeForDefect: "发现时间：",
+    //缺陷信息
+    ui_DefectInfo: "缺陷信息",
+
+
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -400,6 +404,8 @@ function getEnLanguage() {
     ui_EliminationPeriod: "EliminationPeriod：",
     ui_DealStateForDefect: "ProcessingState:",
     ui_FindTimeForDefect: "FindTime:",
+    //缺陷信息
+    ui_DefectInfo: "Defect Info",
 
     //code码
     code_200: "Request succeeds, insert success",
