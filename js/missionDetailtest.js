@@ -271,6 +271,9 @@ $("#taskIn").click(function () {
         lat = array[0];
         lon = array[1];
         addr = array[2];
+        if(addr==null||addr=="null"){
+            addr = "";
+        }
         //                                    alert(lat+"\n"+lon+"\n"+addr);
     }
     var fDistance = -1;
