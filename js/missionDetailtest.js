@@ -11,6 +11,7 @@ try {
         var storage = localStorage.getItem("accessToken");
         storage = JSON.parse(storage);
         isUseTrace = storage.isOpenTrack;
+        window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
     } else if (isAndroid) {
         isUseTrace = android.getTrackUse();
     }
@@ -41,13 +42,6 @@ var subLat;
 var temp = false;
 
 function getNetData() {
-    try {
-        if (isIOS) {
-            window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
-        }
-    } catch (e) {
-
-    };
     Substation.getDataByAjax(
         "/selectTaskByTaskId",
         "taskId=" + taskID,
