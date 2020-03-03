@@ -421,8 +421,8 @@ function loadPage() {
                     };
                     Substation.getDataByAjax("/deleteCheckItemProblems", params, function () {
                         $.toast("删除成功");
-                        saveThisPage();
-                        localStorage.setItem("need-update", "true");
+//                        saveThisPage();
+                        localStorage.setItem("need-refresh", "true");
                     });
                 }, function () {
                     $(":radio[name='" + radioName + "'][value='yes']").prop("checked", true);
@@ -610,19 +610,19 @@ function saveThisPage() {
                     changeListVal(this.pid);
                 });
                 //                fillData(thisGroupid);
-            if(isAndroid){
-            //android持久化储存
-                try{
-                    android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
-                }catch(e){
+                if(isAndroid){
+                //android持久化储存
+                    try{
+                        android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
+                    }catch(e){
+                        localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+                    }
+                }else{
                     localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
                 }
-            }else{
-                localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-            }
                 $("#" + thisGroupid + " .item-inner").addClass("finished");
             }
-            localStorage.setItem("need-update", "true");
+//            localStorage.setItem("need-refresh", "true");
         }
     });
 
