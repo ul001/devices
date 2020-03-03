@@ -143,6 +143,8 @@ function loadPage() {
                                 "<div class=\"content-block\">\n" + tempStr +
                                 "</div>\n" +
                                 "</div>");
+                        }else{
+                            $.alert("暂无巡检单记录！");
                         }
                         $(".icon.icon-tips").hide();
                     } else {
