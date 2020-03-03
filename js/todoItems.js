@@ -71,7 +71,6 @@ jQuery(document).ready(function () {
     if (isIOS) {
       localStorage.removeItem("missionTypeid");
       localStorage.removeItem("taskID");
-      localStorage.removeItem("missiontaskID");
       window.webkit.messageHandlers.goBackiOS.postMessage("");
     } else {
       android.goBack();

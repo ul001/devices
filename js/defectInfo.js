@@ -361,7 +361,7 @@ function saveFormData() {
     return;
   }
   var params = new FormData($("#form1")[0]);
-  var taskId = localStorage.getItem("missiontaskID");
+  var taskId = localStorage.getItem("taskID");
   params.append("fDeviceproblemid", fDeviceproblemid);
   params.append("fTaskId", taskId);
   Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (
