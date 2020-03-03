@@ -358,9 +358,14 @@ $("#submitTask").click(function () {
                     android.refresh();
                     if(temp && isUseTrace == "1"){
                 //android关闭轨迹
-                        $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
+                        var isOpen = android.getTrackOpen();
+                        if(isOpen=="true"){
                             android.stopTrace();
-                        });
+                        }else{
+                            $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
+                                android.stopTrace();
+                            });
+                        }
                     }
                     android.removeSPItem(taskID);
                 }else if(isIOS){
@@ -368,9 +373,14 @@ $("#submitTask").click(function () {
                     localStorage.setItem("need-refresh", "true");
                     if(temp && isUseTrace == "1"){
                         //ios关闭轨迹
-                        $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
+                        var isOpen = android.getTrackOpen();
+                        if(isOpen=="true"){
                             window.webkit.messageHandlers.closeTrackFunc.postMessage("");
-                        });
+                        }else{
+                            $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
+                                window.webkit.messageHandlers.closeTrackFunc.postMessage("");
+                            });
+                        }
                     }
                 }
             }catch(e){
