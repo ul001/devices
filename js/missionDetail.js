@@ -108,7 +108,6 @@ jQuery(document).ready(function () {
                         $("#TotalDefectNum").css("color", "red");
                         $("#TotalDefectNum").click(function () {
                             //缺陷整改
-                            localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             if (missionTypeid == 3) {
@@ -130,7 +129,6 @@ jQuery(document).ready(function () {
                         $("#Unprocessednumber").css("color", "red");
                         $("#Unprocessednumber").click(function () {
                             //缺陷整改
-                            localStorage.setItem("missiontaskID", taskID);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             if (missionTypeid == 3) {
@@ -366,7 +364,7 @@ jQuery(document).ready(function () {
                         } else {
                             localStorage.setItem("fSubid", missionsubid);
                             localStorage.setItem("fPlacecheckformid", placeCheckFormId);
-                            localStorage.setItem("missiontaskID", taskID);
+                            localStorage.setItem("taskID", taskID);
                             if (missionTypeid == 1) {
                                 //巡检任务
                                 localStorage.setItem("fSubname", "执行情况");
@@ -479,7 +477,7 @@ jQuery(document).ready(function () {
         localStorage.setItem("fSubname", "执行情况");
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
-        localStorage.setItem("missiontaskID", taskID);
+        localStorage.setItem("taskID", taskID);
         if (taskCreatId != Substation.loginUserid && missionType != 3) {
             localStorage.setItem("hiddenBtn", "NO");
         } else {

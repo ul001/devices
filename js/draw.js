@@ -187,7 +187,7 @@ save.onclick = function () {
     // formData.append('fTaskid', taskID);
     //var blob = dataURLtoBlob(imgBase64);
     //var imgFile = blobToFile(blob,"signName.png");
-    var taskID = localStorage.getItem("missiontaskID");
+    var taskID = localStorage.getItem("taskID");
     var param = new FormData();
     param.append('file', dataURLtoFile(imgBase64)); //放到表单中，此处的file要和后台取文件时候的属性名称保持一致
     param.append('fTaskid', taskID);
