@@ -225,8 +225,9 @@ $("#startTask").click(function () {
                     if (isOpen == "false") {
                         $.confirm("是否要开启轨迹记录功能？", function () {
                                 window.webkit.messageHandlers.openTrackFunc.postMessage(null);
+                                location.reload();
                             },
-                            function () {});
+                            function () {location.reload();});
                     }
                 } else if (isAndroid) {
                     android.refresh();
@@ -235,15 +236,14 @@ $("#startTask").click(function () {
                     if (isOpen == "false") {
                         $.confirm("是否要开启轨迹记录功能？", function () {
                                 android.startTrace();
+                                location.reload();
                             },
-                            function () {});
+                            function () {location.reload();});
                     }
                 } else {
                     localStorage.setItem("need-refresh", "true");
                 }
             } catch (e) {
-
-            } finally {
                 location.reload();
             };
         } else {
