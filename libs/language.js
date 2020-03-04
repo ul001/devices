@@ -238,6 +238,7 @@ function getZhLanguage() {
     ui_dangerLevel3:"紧急",
     ui_subscribe:"订阅",
     ui_successfully:"成功",
+    ui_identify:"辨识标准",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -596,6 +597,7 @@ function getEnLanguage() {
     ui_dangerLevel3:"Urgent",
     ui_subscribe:"Subscribe",
     ui_successfully:"Successfully",
+    ui_identify:"Identify standard",
 
     //code码
     code_200: "Request succeeds, insert success",
