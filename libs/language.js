@@ -227,6 +227,11 @@ function getZhLanguage() {
     ui_customerSign: "客户签名",
     ui_errorTitle: "页面无响应",
     ui_errorTip: "页面无响应，请检查网络连接。",
+    //alarmsDetails
+    ui_MeterName: "仪表名称：",
+    ui_EventType: "事件类型：",
+    //
+    ui_MessageType: "消息类型",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -573,6 +578,11 @@ function getEnLanguage() {
     ui_customerSign: "Customer signature",
     ui_errorTitle: "Page is not responding",
     ui_errorTip: "The page is not responding, please check the network connection.",
+    //alarmsDetails
+    ui_MeterName: "MeterName：",
+    ui_EventType: "EventType：",
+    //
+    ui_MessageType: "Message Type",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
