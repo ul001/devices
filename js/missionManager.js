@@ -4,8 +4,6 @@ var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-var titlename = localStorage.getItem("fSubname");
-$("#titleContent").text(titlename);
 
 //任务id
 var taskID = localStorage.getItem("taskID");
@@ -277,18 +275,18 @@ function getNetData() {
                 }
                 if (this.hasOwnProperty("fDistance")) {
                     if (this.fDistance > 300) {
-                        distance = "<span style=\"color:red;\">" + this.fDistance + "</span>米";
+                        distance = "<span style=\"color:red;\">" + this.fDistance + "</span>"+Operation['ui_meter'];
                     } else {
-                        distance = this.fDistance + "米";
+                        distance = this.fDistance +Operation['ui_meter'];
                     }
                 }
                 var taskStateName = "";
                 if (this.fExesituation == 7) {
-                    taskStateName = "<span style=\"color:gray;\">未签到</span>";
+                    taskStateName = "<span style=\"color:gray;\">"+Operation['ui_notCheck']+"</span>";
                 } else if (this.fExesituation == 8) {
-                    taskStateName = "<span style=\"color:blue;\">已签到</span>";
+                    taskStateName = "<span style=\"color:blue;\">"+Operation['ui_checked']+"</span>";
                 } else if (this.fExesituation == 9) {
-                    taskStateName = "<span style=\"color:springgreen;\">已提交</span>";
+                    taskStateName = "<span style=\"color:springgreen;\">"+Operation['ui_submitted']+"</span>";
                 } else {
 
                 }
@@ -534,7 +532,7 @@ getNetData();
 //46.总任务提交按钮事件
 // userIds 1,2,3
 $("#submitTo").click(function () {
-    $.confirm("确定要提交并结束任务吗？", function () {
+    $.confirm(Operation['ui_submitTaskTip'], function () {
         var param;
         if (taskTobeSubmitArr.length > 0) {
             var arrStr = taskTobeSubmitArr.join(',');
@@ -551,7 +549,7 @@ $("#submitTo").click(function () {
             data
         ) {
             localStorage.removeItem("selectPersons");
-            $.toast("提交成功，该任务已结束！");
+            $.toast(Operation['ui_submitTaskSuccessTip']);
         });
     });
 });
@@ -641,6 +639,6 @@ function selectTrace(getUserid, startTime, endTime) {
             window.webkit.messageHandlers.pushYYGJView.postMessage(yydic);
         }
     } else {
-        $.toast("当前任务尚未开始,无法查询");
+        $.alert(Operation['ui_noStartTimeTraceTip']);
     }
 }

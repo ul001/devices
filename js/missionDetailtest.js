@@ -73,6 +73,20 @@ function getNetData() {
                 taskchargerid = taskInfo.fTaskchargerid;
                 taskCreatId = taskInfo.fTaskcreateuserid;
                 var thisUser = {};
+
+                //任务执行结果
+                if (taskInfo.taskResult == 3) {
+                    $("#TotalDefect").html(Operation['ui_plannedDone']);
+                    $("#TotalDefect").css("color", "springgreen");
+                } else if (taskInfo.taskResult == 4) {
+                    $("#TotalDefect").html(Operation['ui_overLimitDone']);
+                    $("#TotalDefect").css("color", "red");
+                } else if (taskInfo.taskResult == 5) {
+                    $("#TotalDefect").html(Operation['ui_unDone']);
+                    $("#TotalDefect").css("color", "red");
+                } else {
+                    $("#TotalDefect").html("-");
+                }
                 //判断后续
                 if (userList != undefined && userList.length > 0) {
                     $(userList).each(function () {
@@ -83,11 +97,11 @@ function getNetData() {
 
                         var taskStateName = "";
                         if (this.fExesituation == 7) {
-                            taskStateName = "<span style='color:gray;'>未签到</span>";
+                            taskStateName = "<span style='color:gray;'>"+Operation['ui_notCheck']+"</span>";
                         } else if (this.fExesituation == 8) {
-                            taskStateName = "<span style='color:blue;'>已签到</span>";
+                            taskStateName = "<span style='color:blue;'>"+Operation['ui_checked']+"</span>";
                         } else if (this.fExesituation == 9) {
-                            taskStateName = "<span style='color:springgreen;'>已提交</span>";
+                            taskStateName = "<span style='color:springgreen;'>"+Operation['ui_submitted']+"</span>";
                         } else {
 
                         }
@@ -173,11 +187,11 @@ function getNetData() {
                         localStorage.setItem("taskID", taskID);
                         if (temp) {
                             if ($("#startTask").css("display") != "none") {
-                                $.toast("请先开启该任务！");
+                                $.toast(Operation['ui_openTaskTip']);
                                 return;
                             }
                             if ($("#taskIn").css("display") != "none") {
-                                $.toast("请先现场签到！");
+                                $.toast(Operation['ui_signinTip']);
                                 return;
                             }
                         }
@@ -194,11 +208,11 @@ function getNetData() {
                         localStorage.setItem("taskID", taskID);
                         if (temp) {
                             if ($("#startTask").css("display") != "none") {
-                                $.toast("请先开启该任务！");
+                                $.toast(Operation['ui_openTaskTip']);
                                 return;
                             }
                             if ($("#taskIn").css("display") != "none") {
-                                $.toast("请先现场签到！");
+                                $.toast(Operation['ui_signinTip']);
                                 return;
                             }
                         }
@@ -223,7 +237,7 @@ $("#startTask").click(function () {
                     localStorage.setItem("need-refresh", "true");
                     var isOpen = localStorage.isOpenTrack;
                     if (isOpen == "false") {
-                        $.confirm("是否要开启轨迹记录功能？", function () {
+                        $.confirm(Operation['ui_openTraceTip'], function () {
                                 window.webkit.messageHandlers.openTrackFunc.postMessage(null);
                                 location.reload();
                             },
@@ -234,7 +248,7 @@ $("#startTask").click(function () {
                     //android关闭轨迹
                     var isOpen = android.getTrackOpen();
                     if (isOpen == "false") {
-                        $.confirm("是否要开启轨迹记录功能？", function () {
+                        $.confirm(Operation['ui_openTraceTip'], function () {
                                 android.startTrace();
                                 location.reload();
                             },
@@ -267,11 +281,11 @@ $("#taskIn").click(function () {
     var addr = "";
     if (loc == undefined || !loc.length) {
         $.hidePreloader();
-        $.toast("无法获取位置，请检查网络并确保定位授权");
+        $.toast(Operation['ui_localErrorTip']);
         return;
     } else if (loc == "-1") {
         $.hidePreloader();
-        $.toast("获取位置超时,建议打开GPS定位服务。");
+        $.toast(Operation['ui_gpsTip']);
         return;
     } else {
         $.hidePreloader();
@@ -305,7 +319,7 @@ $("#taskIn").click(function () {
     }
     //                            alert(""+taskID+","+lon+","+lat+","+addr);
     Substation.postDataByAjax("/taskSingIn", param, function (data) {
-        $.toast("签到成功！");
+        $.toast(Operation['ui_signSuccessTip']);
         localStorage.removeItem("locationStrJS");
         location.reload();
     });
@@ -343,13 +357,13 @@ $(".doDetail").click(function () {
         localStorage.setItem("missionTypeid", missionTypeid);
         window.location.href = "defectRectification.html";
     } else {
-        $.toast("未知任务类型");
+//        $.toast("未知任务类型");
     }
 });
 
 //提交按钮事件
 $("#submitTask").click(function () {
-    $.confirm("确定要提交任务吗？", function () {
+    $.confirm(Operation['ui_uploadTaskTip'], function () {
         var textDetail = $("#textareaDetail").val();
         if (!textDetail) {
             textDetail = "";
@@ -367,7 +381,7 @@ $("#submitTask").click(function () {
         };
         // fExplain 执行情况
         Substation.getDataByAjax("/submitUserTask", param, function (data) {
-            $.toast("任务提交成功！");
+            $.toast(Operation['ui_uploadTaskSuccessTip']);
             $("#doTask").hide();
             $("#submitTask").hide();
             $("#doDetail").show();
@@ -378,7 +392,7 @@ $("#submitTask").click(function () {
                         //android关闭轨迹
                         var isOpen = android.getTrackOpen();
                         if (isOpen == "true") {
-                            $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
+                            $.confirm(Operation['ui_endTraceTip'], function () {
                                 android.stopTrace();
                             });
                         } else {
@@ -393,7 +407,7 @@ $("#submitTask").click(function () {
                         //ios关闭轨迹
                         var isOpen = localStorage.isOpenTrack;
                         if (isOpen == "true") {
-                            $.confirm("该任务已结束，是否关闭轨迹录制？", function () {
+                            $.confirm(Operation['ui_endTraceTip'], function () {
                                 window.webkit.messageHandlers.closeTrackFunc.postMessage("");
                             });
                         } else {
@@ -410,13 +424,13 @@ $("#submitTask").click(function () {
 
 //负责人提交任务
 $("#chargeSubmit").click(function () {
-    $.confirm("确定要提交并结束任务吗？", function () {
+    $.confirm(Operation['ui_submitTaskTip'], function () {
         var param;
         param = {
             fTaskid: taskID
         };
         Substation.getDataByAjax("/submitTask", param, function (data) {
-            $.toast("提交成功，该任务已结束！");
+            $.toast(Operation['ui_submitTaskSuccessTip']);
             if (isAndroid) {
                 try {
                     android.removeSPItem(taskID);

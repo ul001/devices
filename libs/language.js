@@ -155,7 +155,7 @@ function getZhLanguage() {
     //用户报告
     ui_UserReport: "用户报告",
     ui_rightButton: "点击右上角按钮筛选！",
-
+    //Autoload
     ui_nodata: "暂无相关数据",
     ui_yes: "是",
     ui_no: "否",
@@ -317,7 +317,7 @@ function getZhLanguage() {
     code_380: "设备重名",
     code_381: "该变电所没有设备分组",
     code_382: "该变电所当前设备分组下已存在同名设备，建议修改",
-    code_other: "操作失败"
+    code_other: "操作失败",
   };
 }
 
@@ -522,6 +522,7 @@ function getEnLanguage() {
     //missionmanage
     ui_meter: "meters",
     ui_noStartTimeTraceTip: "The executor has not started the task and cannot query its track.",
+
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
@@ -637,6 +638,6 @@ function getEnLanguage() {
     code_380: "Equipment same name",
     code_381: "The substation equipment is no packet",
     code_382: "The current substation equipment under the same name already exists in the device grouping, proposed changes",
-    code_other: "Operation failed"
+    code_other: "Operation failed",
   };
 }

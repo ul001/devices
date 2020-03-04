@@ -24,7 +24,7 @@
                     <span data-i18n="ui_back"></span>
                 </button>
                 <h1 class="title title_color">
-                    <p class="limit-length" id="titleContent">待办</p>
+                    <p class="limit-length" id="titleContent"></p>
                 </h1>
                 <button class="button pull-right clickrightbtn" style="color:white;border:1px solid white;">
                     <span data-i18n="ui_taskType"></span>
@@ -32,7 +32,7 @@
             </header>
             <div class="bar bar-header-secondary">
                 <div class="searchbar">
-                    <a class="searchbar-cancel">取消</a>
+                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
                     <div class="search-input">
                         <label class="icon icon-search" for="searchDaiban"></label>
                         <input type="search" id="searchDaiban" placeholder="" data-placeholder="ui_subHolderNoCode" />
@@ -41,9 +41,9 @@
             </div>
             <div class="content">
                 <div class="buttons-tab">
-                    <a href="#tab1" class="tab-link button active" id="daiban" name="1">待办</a>
-                    <a href="#tab2" class="tab-link button" id="zaiban" name="2">在办</a>
-                    <a href="#tab3" class="tab-link button" id="banbi" name="3">办毕</a>
+                    <a href="#tab1" class="tab-link button active" id="daiban" name="1" data-i18n="ui_todo"></a>
+                    <a href="#tab2" class="tab-link button" id="zaiban" name="2" data-i18n="ui_doing"></a>
+                    <a href="#tab3" class="tab-link button" id="banbi" name="3" data-i18n="ui_done"></a>
                 </div>
                 <div class="tabs pull-to-refresh-container">
                     <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll">
