@@ -1,7 +1,5 @@
 jQuery(document).ready(function () {
     // $(function () {
-    var titlename = localStorage.getItem("fSubname");
-    $("#titleContent").text(titlename);
 
     var showmissionBtn = localStorage.getItem("showType");
 
@@ -122,13 +120,13 @@ jQuery(document).ready(function () {
                     }
                     //任务执行结果
                     if (taskInfo.taskResult == 3) {
-                        $("#TotalDefect").html("按时完成");
+                        $("#TotalDefect").html(Operation['ui_plannedDone']);
                         $("#TotalDefect").css("color", "springgreen");
                     } else if (taskInfo.taskResult == 4) {
-                        $("#TotalDefect").html("超时完成");
+                        $("#TotalDefect").html(Operation['ui_overLimitDone']);
                         $("#TotalDefect").css("color", "red");
                     } else if (taskInfo.taskResult == 5) {
-                        $("#TotalDefect").html("未完成");
+                        $("#TotalDefect").html(Operation['ui_unDone']);
                         $("#TotalDefect").css("color", "red");
                     } else {
                         $("#TotalDefect").html("-");
@@ -176,35 +174,21 @@ jQuery(document).ready(function () {
 
                     //执行任务按钮事件
                     $("#carryOut").click(function () {
-
                         localStorage.setItem("fSubid", missionsubid);
                         localStorage.setItem("fPlacecheckformid", placeCheckFormId);
                         localStorage.setItem("taskID", taskID);
                         if (missionTypeid == 1) {
                             //巡检任务
-                            localStorage.setItem("fSubname", "执行情况");
-                            if ($("#carryOut").text() == "执行明细") {
-                                window.location.href = "patrolContent.html";
-                            } else {
-                                $.confirm(
-                                    "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
-                                    "注意！",
-                                    function () {
-                                        window.location.href = "patrolContent.html";
-                                    }
-                                );
-                            }
+                            window.location.href = "patrolContent.html";
                         } else if (missionTypeid == 2) {
                             //现场交接任务
-                            localStorage.setItem("fSubname", "执行情况");
                             window.location.href = "missionScene.html";
                         } else if (missionTypeid == 3) {
                             //缺陷整改
                             localStorage.setItem("missionTypeid", missionTypeid);
-                            localStorage.setItem("fSubname", "执行情况");
                             window.location.href = "defectRectification.html";
                         } else {
-                            $.toast("fTasktypeid=null，未知任务类型");
+//                            $.toast("fTasktypeid=null，未知任务类型");
                         }
 
                     });
@@ -219,13 +203,11 @@ jQuery(document).ready(function () {
                     $(data.taskUserList).each(function () {
                         var taskStateName = "";
                         if (this.fExesituation == 7) {
-                            taskStateName = "未签到";
+                            taskStateName = "<span style='color:gray;'>"+Operation['ui_notCheck']+"</span>";
                         } else if (this.fExesituation == 8) {
-                            taskStateName = "已签到";
+                            taskStateName = "<span style='color:blue;'>"+Operation['ui_checked']+"</span>";
                         } else if (this.fExesituation == 9) {
-                            taskStateName = "已提交";
-                        } else {
-
+                            taskStateName = "<span style='color:springgreen;'>"+Operation['ui_submitted']+"</span>";
                         }
                         var text = "";
                         text += "<li>";
@@ -252,15 +234,6 @@ jQuery(document).ready(function () {
                         text += "                                </div>";
                         text += "                            </li>";
                         $("#missionState").append(text);
-                        if (this.fTaskstateid == 1) {
-                            $("#input" + this.fUserid).css("color", "gray");
-                        } else if (this.fTaskstateid == 2) {
-                            $("#input" + this.fUserid).css("color", "blue");
-                        } else if (this.fTaskstateid == 3 || this.fTaskstateid == 4) {
-                            $("#input" + this.fUserid).css("color", "springgreen");
-                        } else {
-                            $("#input" + this.fUserid).css("color", "red");
-                        }
                     });
                 }
             }
@@ -285,9 +258,8 @@ jQuery(document).ready(function () {
 
     //管理页面
     $("#clickManager").click(function () {
-        localStorage.setItem("fSubname", "执行情况");
-        localStorage.setItem("missionSubid", missionsubid);
-        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
+//        localStorage.setItem("missionSubid", missionsubid);
+//        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("taskID", taskID);
         if (taskCreatId != Substation.loginUserid && missionType != 3) {
             localStorage.setItem("hiddenBtn", "NO");

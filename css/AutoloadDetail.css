@@ -59,3 +59,7 @@
 .list-block .item-title.label{
     white-space: initial;
 }
+
+.button i.icon:first-child {
+    margin-right: 0.1rem;
+}

@@ -29,18 +29,18 @@ jQuery(document).ready(function () {
     tabName = num;
     $("#titleContent").text("");
     if (num == 1) {
-      $("#titleContent").text("待办事项");
+      $("#titleContent").text(Operation['ui_todo']+" "+Operation['ui_goods']);
     } else if (num == 2) {
-      $("#titleContent").text("在办事项");
+      $("#titleContent").text(Operation['ui_doing']+" "+Operation['ui_goods']);
     } else if (num == 3) {
-      $("#titleContent").text("办毕事项");
+      $("#titleContent").text(Operation['ui_done']+" "+Operation['ui_goods']);
     }
     getFirstPage(num);
   } else {
     $("#daiban").click();
     var num = $("#daiban").attr("name");
     tabName = num;
-    $("#titleContent").text("待办事项");
+    $("#titleContent").text(Operation['ui_todo']+" "+Operation['ui_goods']);
     getFirstPage(num);
   }
 
@@ -51,19 +51,19 @@ jQuery(document).ready(function () {
       // $(".list-container").empty();
       // url = "/getWarningMessageSignalEvents";
       taskstatus = 0;
-      $("#titleContent").text("待办事项");
+      $("#titleContent").text(Operation['ui_todo']+" "+Operation['ui_goods']);
     } else if (i == 1) {
       // pageNum = 1;
       // $(".list-container").empty();
       // url = "/getWarningMessageOverLimitEvents";
       taskstatus = 1;
-      $("#titleContent").text("在办事项");
+      $("#titleContent").text(Operation['ui_doing']+" "+Operation['ui_goods']);
     } else if (i == 2) {
       // pageNum = 1;
       // $(".list-container").empty();
       // url = "/getWarningMessagePlatformRunEvents";
       taskstatus = 2;
-      $("#titleContent").text("办毕事项");
+      $("#titleContent").text(Operation['ui_done']+" "+Operation['ui_goods']);
     }
   });
 
@@ -126,11 +126,11 @@ jQuery(document).ready(function () {
       text: "",
       verticalButtons: true,
       buttons: [{
-          text: "全部",
+          text: Operation['ui_All'],
           onClick: function () {
-            $(".clickrightbtn").text("全部");
+            $(".clickrightbtn").text(Operation['ui_All']);
             tasktypeid = "";
-            tasktypeName = "全部";
+            tasktypeName = Operation['ui_All'];
             localStorage.setItem("taskTypeId", tasktypeid);
             localStorage.setItem("taskTypeName", tasktypeName);
             pageNum = 1;
@@ -165,11 +165,11 @@ jQuery(document).ready(function () {
                   }
                 },*/
         {
-          text: "巡检",
+          text: Operation['ui_xunjian'],
           onClick: function () {
-            $(".clickrightbtn").text("巡检");
+            $(".clickrightbtn").text(Operation['ui_xunjian']);
             tasktypeid = 1;
-            tasktypeName = "巡检";
+            tasktypeName = Operation['ui_xunjian'];
             localStorage.setItem("taskTypeId", tasktypeid);
             localStorage.setItem("taskTypeName", tasktypeName);
             pageNum = 1;
@@ -177,11 +177,11 @@ jQuery(document).ready(function () {
           }
         },
         {
-          text: "消缺",
+          text: Operation['ui_xiaoque'],
           onClick: function () {
-            $(".clickrightbtn").text("消缺");
+            $(".clickrightbtn").text(Operation['ui_xiaoque']);
             tasktypeid = 3;
-            tasktypeName = "消缺";
+            tasktypeName = Operation['ui_xiaoque'];
             localStorage.setItem("taskTypeId", tasktypeid);
             localStorage.setItem("taskTypeName", tasktypeName);
             pageNum = 1;
@@ -331,9 +331,9 @@ jQuery(document).ready(function () {
               this.fSubName;
             text += "                                            </p>";
             text +=
-              "<p>任务单号：" +
+              "<p>"+Operation['ui_taskid']+"：" +
               (this.fTasknumber == undefined ? "" : this.fTasknumber) +
-              "</p><p>实际完成时间：" +
+              "</p><p>"+Operation['ui_donetime']+"："  +
               (this.sortDate == undefined ? "" : this.sortDate) +
               "</p>";
             text += "                                        </div>";
@@ -439,9 +439,9 @@ jQuery(document).ready(function () {
               this.fSubName;
             text += "                                            </p>";
             text +=
-              "<p>任务单号：" +
+              "<p>"+Operation['ui_taskid']+"："  +
               (this.fTasknumber == undefined ? "" : this.fTasknumber) +
-              "</p><p>计划完成时间：" +
+              "</p><p>"+Operation['ui_plandonetime']+"："  +
               this.fDeadlinedate.substring(0, 11) +
               showHasCommit +
               "</p>";
@@ -521,7 +521,7 @@ jQuery(document).ready(function () {
     }, function (errorCode) {
       if (errorCode == 0) {
         $.detachInfiniteScroll($(".infinite-scroll"));
-        $(".infinite-scroll-preloader").html("--网络异常--");
+        $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
       } else {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html("");

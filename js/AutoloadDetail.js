@@ -243,7 +243,7 @@ var CustomerDevice = (function () {
                         $("#copy").attr("disabled", true);
                         $("#save").attr("disabled", true);
                         $("#container-info")
-                            .html("暂无相关信息！")
+                            .html(Operation['ui_nodata']+"！")
                             .css("text-align", "center");
                     }
                     addEdit();
@@ -511,8 +511,8 @@ var CustomerDevice = (function () {
                     if (val.value == "yes") {
                         // string = '<div class="showDiv">' +
                         //     '<label class="nameInputInfo" name="radio">' + decodeURIComponent(val.name) + '</label>' + ':' +
-                        //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' + count + '">是</label>' +
-                        //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no"><label style="margin-right: 10px" for="operationNo' + count + '">否</label>' +
+                        //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' + count + '">'+Operation['ui_yes']+'</label>' +
+                        //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no"><label style="margin-right: 10px" for="operationNo' + count + '">'+Operation['ui_no']+'</label>' +
                         //     '</div>';
                         string =
                             '<li><div class="showDiv item-content"><div class="item-inner">' +
@@ -525,21 +525,21 @@ var CustomerDevice = (function () {
                             count +
                             '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' +
                             count +
-                            '">是</label>' +
+                            '">'+Operation['ui_yes']+'</label>' +
                             '<input type="radio" id="operationNo' +
                             count +
                             '" name="operation' +
                             count +
                             '" value="no"><label style="margin-right: 10px" for="operationNo' +
                             count +
-                            '">否</label>' +
+                            '">'+Operation['ui_no']+'</label>' +
                             "</div></div></li>";
                     }
                     if (val.value == "no") {
                         // string = '<div class="showDiv">' +
                         //     '<label class="nameInputInfo" name="radio">' + decodeURIComponent(val.name) + '</label>' + ':' +
-                        //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' + count + '">是</label>' +
-                        //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no" checked><label style="margin-right: 10px" for="operationNo' + count + '">否</label>' +
+                        //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' + count + '">'+Operation['ui_yes']+'</label>' +
+                        //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no" checked><label style="margin-right: 10px" for="operationNo' + count + '">'+Operation['ui_no']+'</label>' +
                         //     '</div>';
                         string =
                             '<li><div class="showDiv item-content"><div class="item-inner">' +
@@ -552,14 +552,14 @@ var CustomerDevice = (function () {
                             count +
                             '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' +
                             count +
-                            '">是</label>' +
+                            '">'+Operation['ui_yes']+'</label>' +
                             '<input type="radio" id="operationNo' +
                             count +
                             '" name="operation' +
                             count +
                             '" value="no" checked><label style="margin-right: 10px" for="operationNo' +
                             count +
-                            '">否</label>' +
+                            '">'+Operation['ui_no']+'</label>' +
                             "</div></div></li>";
                     }
                     break;
@@ -744,7 +744,7 @@ jQuery(document).ready(function () {
     $("#copy").on("click", function () {
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast("当前无可复制的设备。");
+            $.toast(Operation['ui_cannotcopy']);
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
@@ -793,7 +793,7 @@ jQuery(document).ready(function () {
     $("#delete").on("click", function () {
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast("当前无可删除的设备。");
+            $.toast(Operation['ui_cannotdel']);
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
@@ -816,7 +816,7 @@ jQuery(document).ready(function () {
             return;
         }
         var name = $(".active[role='presentation']").text();
-        $.confirm("确认删除" + name + "吗？", function () {
+        $.confirm(Operation['ui_suredel'] + name + Operation['ui_question'], function () {
             Substation.getDataByAjaxAllData(
                 "/deleteDevice",
                 "deleteId=" + selectId,
@@ -941,7 +941,7 @@ jQuery(document).ready(function () {
         var info = customerDevice.getselectInfo();
 
         if (info.fFunctionfield == undefined) {
-            $.toast("暂无设备信息，请增加相关信息！");
+            $.alert(Operation['ui_devicetemplate']);
             return;
         }
 
