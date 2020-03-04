@@ -93,25 +93,25 @@ function addItems(number, lastIndex) {
                     var stateStr = "-";
                     switch (this.fState) {
                         case "0":
-                            stateStr = "<span class=\"redColor\">未处理</span>";
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
                             break;
                         case "2":
-                            stateStr = "<span class=\"redColor\">待处理</span>";
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState2']+"</span>";
                             break;
                         case "3":
-                            stateStr = "<span class=\"redColor\">待客户停电处理</span>";
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState3']+"</span>";
                             break;
                         case "4":
-                            stateStr = "<span class=\"redColor\">待线路停电处理</span>";
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState4']+"</span>";
                             break;
                         case "5":
-                            stateStr = "<span class=\"redColor\">其他</span>";
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState5']+"</span>";
                             break;
                         case "1":
-                            stateStr = "<span class=\"button-success\">已处理</span>";
+                            stateStr = "<span class=\"button-success\">"+Operation['ui_defectState1']+"</span>";
                             break;
                         default:
-                            stateStr = "<span class=\"redColor\">未处理</span>";
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
                             break;
                     }
                     /*var solveUser = "";
@@ -180,7 +180,7 @@ function addItems(number, lastIndex) {
         function (errorCode) {
             if (errorCode == 0) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html("--网络异常--");
+                $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
             } else {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("");

@@ -146,7 +146,7 @@ $(function () {
                 function (errorCode) {
                     if (errorCode == 0) {
                         $.detachInfiniteScroll($(".infinite-scroll"));
-                        $(".infinite-scroll-preloader").html("--网络异常--");
+                        $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
                     } else {
                         $.detachInfiniteScroll($(".infinite-scroll"));
                         $(".infinite-scroll-preloader").html("");
