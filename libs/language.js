@@ -151,6 +151,9 @@ function getZhLanguage() {
     ui_Situation: "处理情况:",
     ui_MissingPersonnel: "消缺人员:",
     ui_SolveTime: "消缺时间:",
+    //用户报告
+    ui_UserReport: "用户报告",
+    ui_rightButton: "点击右上角按钮筛选！",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -371,7 +374,7 @@ function getEnLanguage() {
     ui_TaskResult: "TaskResult:",
     ui_TaskRemarks: "Task Remarks",
     ui_Entertexthere: "Enter text here...",
-    ui_Implementationsituation: "Implementation situation",
+    ui_Implementationsituation: "Implementation",
     ui_Implement: "Execute",
     ui_submit: "Submit",
     ui_register: "Register",
@@ -421,6 +424,10 @@ function getEnLanguage() {
     ui_Situation: "Situation:",
     ui_MissingPersonnel: "SolvePersonnel:",
     ui_SolveTime: "SolveTime:",
+    //用户报告
+    ui_UserReport: "User Report",
+    ui_rightButton: "Click the top right button to filter!",
+
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",

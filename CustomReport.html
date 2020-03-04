@@ -119,23 +119,23 @@
 </head>
 
 <body>
-<div class="page-group">
-    <div class="page">
-        <!--        <div class="right-main" style="overflow: auto">-->
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
-                <span class="icon icon-left"></span>
-                返回
-            </a>
-            <a class="button button-link button-nav pull-right open-panel">
-                <i class="icon icon-selectSome"></i>
-            </a>
-            <h1 class="title title_color">
-                用户报告
-            </h1>
-        </header>
-        <div class="content green">
-            <!-- <div class="select CustomReportMenu">
+    <div class="page-group">
+        <div class="page">
+            <!--        <div class="right-main" style="overflow: auto">-->
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_UserReport"></span>
+                </h1>
+            </header>
+            <div class="content green">
+                <!-- <div class="select CustomReportMenu">
                 <p>用户报告信息</p>
                 <label class="energy-date signal-date">起始日期：</label>
                 <div id="startDate" class="input-group date form_date count-data signal-date-sel" data-date=""
@@ -167,25 +167,26 @@
                 <button class="search select" type="button" id="checkAllList">全选当页</button>
                 <button class="search reportcollect-search" type="button" id="addConfirm">确 定</button>
             </div> -->
-            <div class="CustomReport" id="CustomReport"></div>
-            <div id="outterdiv" style="position: fixed;z-index: 1999;display: none">
-                <div id="innerdiv">
-                    <img id="bigimg" style="border: 5px solid #fff;" src="" />
+                <div class="CustomReport" id="CustomReport"></div>
+                <div id="outterdiv" style="position: fixed;z-index: 1999;display: none">
+                    <div id="innerdiv">
+                        <img id="bigimg" style="border: 5px solid #fff;" src="" />
+                    </div>
+                    <div class="add-a" style="position: fixed;"></div>
                 </div>
-                <div class="add-a" style="position: fixed;"></div>
+                <div id="outTip"
+                    style="width: 100%;height: 100%;position: fixed;top: 2.2rem;left: 0;z-index: 1999;background: #575757;">
+                    <img src="img/firstTip.png" style="width:100%;">
+                </div>
             </div>
-            <div id="outTip" style="width: 100%;height: 100%;position: fixed;top: 2.2rem;left: 0;z-index: 1999;background: #575757;">
-                <img src="img/firstTip.png" style="width:100%;">
-            </div>
-        </div>
-        <!-- <button type="button" class="CustomPrint" id="print">打 印</button>
+            <!-- <button type="button" class="CustomPrint" id="print">打 印</button>
     <div class="double"><input type="checkbox" id="double" /><span>双面打印</span></div> -->
-        <div id="cd-nav">
-            <a href="#" class="cd-nav-trigger">Menu<span></span></a>
+            <div id="cd-nav">
+                <a href="#" class="cd-nav-trigger">Menu<span></span></a>
 
-            <nav id="cd-main-nav">
-                <ul class="">
-                    <!--                        <li><a href="#">Homepage</a></li>
+                <nav id="cd-main-nav">
+                    <ul class="">
+                        <!--                        <li><a href="#">Homepage</a></li>
                                             <li><a href="#">Services</a></li>
                                             <li><a href="#">Portfolio</a></li>
                                             <li><a href="#">Pricing</a></li>
@@ -197,58 +198,61 @@
                                             <li><a href="#">Contact</a></li>
                                             <li><a href="#">Contact</a></li>
                                             <li><a href="#">Contact</a></li>-->
-                </ul>
-            </nav>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
-    <div class="panel-overlay"></div>
-    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-        <div class="content-block">
-            <div>
-                <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
-                    <a href="#" class="button" id="yestoday">昨日</a>
-                    <a href="#" class="button" id="thisMonth">当月</a>
-                    <a href="#" class="button" id="lastMonth">上月</a></p>
-            </div>
-            <div>
-                <label>时间选择</label><br>
-                <input type="text" id="dateStart" placeholder="开始日期" readonly /> -
-                <input type="text" id="dateEnd" placeholder="截止日期" readonly />
-            </div>
-            <div>
-                <label>变电所名称</label><br>
-                <div class="searchbar">
-                    <div class="search-input">
-                        <label class="icon icon-search" for="search"></label>
-                        <input type="search" id='search' placeholder='请输入关键字' /><i class="icon icon-clear"></i>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <div>
+                    <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a></p>
+                </div>
+                <div>
+                    <label><span data-i18n="ui_timeSelect"></span></label><br>
+                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                </div>
+                <div>
+                    <label><span data-i18n="ui_Substationname"></span></label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
+                                class="icon icon-clear"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="list-block">
-                <ul id="listContainer">
+                <div class="list-block">
+                    <ul id="listContainer">
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="btnBar row no-gutter">
-            <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel">取消</a>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a></div>
             </div>
-            <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn">查询</a></div>
         </div>
     </div>
-</div>
-<script src="libs/jquery-1.12.4.min.js"></script>
-<script src="libs/light7.min.js"></script>
-<script src="libs/language.js"></script>
-<script src="libs/light7-swiper.min.js"></script>
-<script src="libs/bootstrap-table.min.js"></script>
-<script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
-<script type="text/javascript" src="libs/config.js"></script>
-<script type="text/javascript" src="libs/highcharts.js"></script>
-<script type="text/javascript" src="libs/echarts.min.js"></script>
-<script type="text/javascript" src="libs/imgLazy.js"></script>
-<script type="text/javascript" src="libs/tools.js"></script>
-<script type="text/javascript" src="js/CustomReport.js"></script>
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src="libs/language.js"></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
+    <script type="text/javascript" src="libs/config.js"></script>
+    <script type="text/javascript" src="libs/highcharts.js"></script>
+    <script type="text/javascript" src="libs/echarts.min.js"></script>
+    <script type="text/javascript" src="libs/imgLazy.js"></script>
+    <script type="text/javascript" src="libs/tools.js"></script>
+    <script type="text/javascript" src="js/CustomReport.js"></script>
 </body>
 
 </html>
