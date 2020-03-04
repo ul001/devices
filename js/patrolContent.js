@@ -99,7 +99,7 @@ function loadPage() {
                                 "                                                <div class=\"item-media\"><i\n" +
                                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                                 "                                                <div class=\"item-inner\">\n" +
-                                "                                                    是\n" +
+                                "                                                    "+Operation['ui_yes']+"\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
                                 "                                            &nbsp;\n" +
@@ -108,7 +108,7 @@ function loadPage() {
                                 "                                                <div class=\"item-media\"><i\n" +
                                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                                 "                                                <div class=\"item-inner\">\n" +
-                                "                                                    否\n" +
+                                "                                                    "+Operation['ui_no']+"\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
                                 "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + decodeURIComponent(this.identification) + "\"></i>\n" +
@@ -176,7 +176,7 @@ function loadPage() {
                     });
                     $(".icon-tips").unbind().click(function () {
                         var tipStr = $(this).attr("data-value");
-                        $("#popShow").text("辨识标准：" + tipStr);
+                        $("#popShow").text(Operation['ui_identify']+"：" + tipStr);
                         //                        $(".open-popover").click();
                     });
                 });
