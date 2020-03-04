@@ -70,7 +70,7 @@ function loadPage() {
                 tempNum = tempJson.checkInfo.length;
             }
             if (tempNum == 0) {
-                $.alert("可前往网页端设备管理->设备定义->选择(" + $('#subName').text() + ")分组->巡检信息添加巡检项");
+                $.alert(Operation['ui_gotowebpagedevice'] + $('#subName').text() + Operation['ui_patrolinformationadd']);
                 $("#saveBtn").hide();
                 hasSave = true;
             }
@@ -415,14 +415,14 @@ function loadPage() {
                 $.router.loadPage("#page2");
                 loadPage2();
             } else {
-                $.confirm("确定要删除已登记的缺陷？", function () {
+                $.confirm(Operation['ui_noSaveWantDelete'], function () {
                     var params = {
                         fSubdeviceinfoid: clickDeviceId,
                         fPlacecheckformid: fPlacecheckformid,
                         fDeviceitem: deviceItemCode
                     };
                     Substation.getDataByAjax("/deleteCheckItemProblems", params, function () {
-                        $.toast("删除成功");
+                        $.toast(Operation['ui_delsuccess']);
                         //                        saveThisPage();
                         localStorage.setItem("need-refresh", "true");
                     });
@@ -553,7 +553,7 @@ function saveThisPage() {
         var thisTemp = false;
         $("input[data-state='true']").each(function () {
             if ($(this).val() == "") {
-                $.toast("请填入必填项");
+                $.toast(Operation['ui_fillrequireditems']);
                 thisTemp = true;
                 return;
             }
@@ -594,7 +594,7 @@ function saveThisPage() {
         deviceList: jsonStr
     }, function (data) {
         if (data.code == 200) {
-            $.toast("保存成功");
+            $.toast(Operation['ui_savesuccess']);
             var thisGroupid = pids[pids.length - 1].pid;
             var needChange = true;
             $.each(allGroupList, function (i, obj) {
@@ -647,7 +647,7 @@ function changeImg(e, filePath, index) {
     fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
     //检查后缀名
     if (!fileFormat.match(/.png|.jpg|.jpeg/)) {
-        showError('文件格式必须为：png/jpg/jpeg');
+        showError(Operation['ui_Thefileformatmustbe']);
         return;
     }
     //获取并记录图片的base64编码
@@ -697,7 +697,8 @@ function removeImg(obj, index) {
                 $("#file" + (i + 1)).remove();
             } else {
                 //                if(confirm("确定要删除已保存的图片？")){
-                $.confirm("确定要删除已保存的图片？", function () {
+
+                $.confirm(Operation['ui_noSaveWantDelete'], function () {
                     $(".imgContainer").eq(i).remove();
                     Substation.getDataByAjax("/deleteSubstationImg", {
                         fId: imgId
@@ -755,16 +756,16 @@ function saveFormData() {
         }
     });
     if ($(".fileInput").length > 6) {
-        $.toast("最多上传6张图片");
+        $.toast(Operation['ui_morethansixpic']);
         return;
     }
     if ($(".imgContainer").length + $(".fileInput").length > 6) {
-        $.toast("最多上传6张图片");
+        $.toast(Operation['ui_morethansixpic']);
         return;
     }
     if ($("input:checkbox").length > 0) {
         if ($("input:checkbox:checked").length == 0) {
-            $.toast("请选择缺陷位置！");
+            $.toast(Operation['ui_selectDefectLoc']);
             return;
         } else {
             var checkedVal = ",";
@@ -787,7 +788,7 @@ function saveFormData() {
     params.append("fDeviceitem", itemCode);
     Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (data) {
         if (data.code == 200) {
-            $.toast("上传成功");
+            $.toast(Operation['ui_uploadSuccess']);
             $(":radio[name='" + clickRadioName + "'][value='yes']").prop("checked", true);
             localStorage.setItem("need-refresh", "true");
             setTimeout($.router.back(), 1000);
@@ -813,7 +814,7 @@ function goToInfo() {
                         localStorage.setItem("clickPids", JSON.stringify(pids));
                         window.location.href = "defectInfo.html?fDeviceproblemid=" + data;
                     } else {
-                        $.toast("没有该缺陷详情记录！");
+                        $.toast(operation['ui_noDefectRecord']);
                     }
                 });
             }
@@ -825,7 +826,7 @@ function goToInfo() {
 $("#backBtn").click(function () {
     if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) && !hasSave && canClick != "false") {
         //ios
-        var r = confirm("消息尚未保存，确定退出吗？")
+        var r = confirm(Operation['ui_noSaveWantOut'])
         if (r == true) {
             window.history.back();
         } else {
@@ -848,7 +849,7 @@ window.addEventListener("resize", function () {
 $(window).bind('beforeunload', function () {
     if (canClick != "false") {
         if (!hasSave) {
-            return '您输入的内容尚未保存，确定离开此页面吗？';
+            return Operation['ui_noSaveWantOut'];
         }
     }
 });
