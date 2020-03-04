@@ -53,8 +53,8 @@ var CustomReport = (function () {
             for (var i = 1; i <= leng; i++) {
                 var string =
                     '<div class="report-p1 split list-group" style="page-break-before: always">' +
-                    '<h5 class="list-group-title" style="display:none;">0</h5>'+
-                    '<h5 class="this_title" data-index="0" style="display:none;">首页</h5>'+
+                    '<h5 class="list-group-title" style="display:none;">0</h5>' +
+                    '<h5 class="this_title" data-index="0" style="display:none;">首页</h5>' +
                     '<label class="R-advert">电力运维  我们是您的管家</label>' +
                     "<h1>用电分析报告</h1>" +
                     '<div class="firstTable"><table class="message">' +
@@ -80,9 +80,9 @@ var CustomReport = (function () {
                     '<img src="img/report-bg-01.png" class="page1-bg" />' +
                     "</div>" +
                     '<div class="report-p2 list-group" style="page-break-before: always">' +
-                    '<h5 class="list-group-title" style="display:none;">1</h5>'+
-                    '<h5 class="this_title" data-index="1" style="display:none;">变配电站概况</h5>'+
-                    '<h5 class="this_title" data-index="1" style="display:none;">用电量分析</h5>'+
+                    '<h5 class="list-group-title" style="display:none;">1</h5>' +
+                    '<h5 class="this_title" data-index="1" style="display:none;">变配电站概况</h5>' +
+                    '<h5 class="this_title" data-index="1" style="display:none;">用电量分析</h5>' +
                     "<h3>1、变配电站概况</h3>" +
                     '<div class="subTable"><table class="table table-bordered substation">' +
                     "<tr>" +
@@ -129,8 +129,8 @@ var CustomReport = (function () {
                     '<img src="img/report-bg-02.png" class="page2-bg"/>' +
                     "</div>" +
                     '<div class="report-p4 list-group">' +
-                    '<h5 class="list-group-title" style="display:none;">2.2</h5>'+
-                    '<h5 class="this_title" data-index="2.2" style="display:none;">变压器运行情况</h5>'+
+                    '<h5 class="list-group-title" style="display:none;">2.2</h5>' +
+                    '<h5 class="this_title" data-index="2.2" style="display:none;">变压器运行情况</h5>' +
                     "<h4>2.2、线路能耗排名</h4>" +
                     '<div class="ranking" id="ranking' +
                     i +
@@ -149,8 +149,8 @@ var CustomReport = (function () {
                     '<div class="report-p3 list-group" id="showEvent' +
                     i +
                     '" style="page-break-before: always">' +
-                    '<h5 class="list-group-title" style="display:none;">4</h5>'+
-                    '<h5 class="this_title" data-index="4" style="display:none;">事件统计</h5>'+
+                    '<h5 class="list-group-title" style="display:none;">4</h5>' +
+                    '<h5 class="this_title" data-index="4" style="display:none;">事件统计</h5>' +
                     "<h3>4、事件统计</h3>" +
                     "<h4>4.1、遥测越限事件</h4>" +
                     '<p id="event' +
@@ -176,8 +176,8 @@ var CustomReport = (function () {
                     '<div class="report-p6 list-group" id="report6' +
                     i +
                     '">' +
-                    '<h5 class="list-group-title" style="display:none;">5</h5>'+
-                    '<h5 class="this_title" data-index="5" style="display:none;">现场运维情况</h5>'+
+                    '<h5 class="list-group-title" style="display:none;">5</h5>' +
+                    '<h5 class="this_title" data-index="5" style="display:none;">现场运维情况</h5>' +
                     '<h3 class="message">5、现场运维情况</h3>' +
                     '<p id="operation' +
                     i +
@@ -224,24 +224,26 @@ var CustomReport = (function () {
                 $(".contacts-block").indexList();
                 $("#cd-main-nav ul").empty();
                 $(".index-list-bar").hide();
-                $(".this_title").each(function(){
+                $(".this_title").each(function () {
                     var thisStr = $(this).text();
                     var thisIndex = $(this).attr("data-index");
-                    $("#cd-main-nav ul").append('<li data-index="'+thisIndex+'"><a href="#">'+thisStr+'</a></li>');
+                    $("#cd-main-nav ul").append('<li data-index="' + thisIndex + '"><a href="#">' + thisStr + '</a></li>');
                 });
                 $(".cd-nav-trigger").show();
-                $("#cd-main-nav ul li").click(function(){
+                $("#cd-main-nav ul li").click(function () {
                     $(".menu-is-open").removeClass("menu-is-open");
                     $("#cd-main-nav ul").removeClass("is-visible");
                     var thisIndex = $(this).attr("data-index");
-                    var target_roll_height = $('.this_title[data-index="'+thisIndex+'"]').eq(0).parent().offset().top-$(".content").offset().top+$(".content").scrollTop();
-                    $(".content").animate({scrollTop: target_roll_height}, 500);
-/*                    $(".index-list-bar li").each(function(){
-                        if($(this).children("strong").html().indexOf(thisIndex)!=-1){
-                            $(this).trigger("click");;
-                            return false;
-                        }
-                    });*/
+                    var target_roll_height = $('.this_title[data-index="' + thisIndex + '"]').eq(0).parent().offset().top - $(".content").offset().top + $(".content").scrollTop();
+                    $(".content").animate({
+                        scrollTop: target_roll_height
+                    }, 500);
+                    /*                    $(".index-list-bar li").each(function(){
+                                            if($(this).children("strong").html().indexOf(thisIndex)!=-1){
+                                                $(this).trigger("click");;
+                                                return false;
+                                            }
+                                        });*/
                 });
             }
         }
@@ -249,7 +251,7 @@ var CustomReport = (function () {
         function initHtml() {
             var string =
                 '<div class="report-p1 split list-group" style="page-break-before: always">' +
-                '<h5 class="list-group-title" style="display:none;">0</h5>'+
+                '<h5 class="list-group-title" style="display:none;">0</h5>' +
                 '<label class="R-advert">电力运维  我们是您的管家</label>' +
                 "<h1>用电分析报告</h1>" +
                 '<table class="message">' +
@@ -269,7 +271,7 @@ var CustomReport = (function () {
                 '<img src="img/report-bg-01.png" class="page1-bg" />' +
                 "</div>" +
                 '<div class="report-p2 list-group" style="page-break-before: always">' +
-                '<h5 class="list-group-title" style="display:none;">1</h5>'+
+                '<h5 class="list-group-title" style="display:none;">1</h5>' +
                 "<h3>1、变配电站概况</h3>" +
                 '<table class="table table-bordered substation">' +
                 "<tr>" +
@@ -300,7 +302,7 @@ var CustomReport = (function () {
                 '<img src="img/report-bg-02.png" class="page2-bg"/>' +
                 "</div>" +
                 '<div class="report-p4 list-group">' +
-                '<h5 class="list-group-title" style="display:none;">2.2</h5>'+
+                '<h5 class="list-group-title" style="display:none;">2.2</h5>' +
                 "<h4>2.2、线路能耗排名</h4>" +
                 '<div class="ranking" id="ranking"></div>' +
                 '<p class="ranking-p"></p>' +
@@ -309,7 +311,7 @@ var CustomReport = (function () {
                 '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
                 '<div class="monitor list-group" id="monitor">' +
-                '<h5 class="list-group-title" style="display:none;">3.1</h5>'+
+                '<h5 class="list-group-title" style="display:none;">3.1</h5>' +
                 '<div class="report-p5">' +
                 "<h4>3.1、日负荷曲线</h4>" +
                 '<div class="daycurve"></div>' +
@@ -321,7 +323,7 @@ var CustomReport = (function () {
                 "</div>" +
                 "</div>" +
                 '<div class="report-p3 list-group" style="page-break-before: always">' +
-                '<h5 class="list-group-title" style="display:none;">4</h5>'+
+                '<h5 class="list-group-title" style="display:none;">4</h5>' +
                 "<h3>4、事件统计</h3>" +
                 "<h4>4.1、遥测越限事件</h4>" +
                 '<p id="event"></p>' +
@@ -336,7 +338,7 @@ var CustomReport = (function () {
                 '<img src="img/report-bg-02.png" class="page3-bg"/>' +
                 "</div>" +
                 '<div class="report-p6 list-group" style="page-break-before: always">' +
-                '<h5 class="list-group-title" style="display:none;">5</h5>'+
+                '<h5 class="list-group-title" style="display:none;">5</h5>' +
                 '<h3 class="message">5、现场运维情况</h3>' +
                 '<div class="daycurve"></div>' +
                 // '<img src="img/report-bg-02.png" class="page3-bg"/>' +
@@ -451,7 +453,7 @@ var CustomReport = (function () {
                         '<div class="report-p5 list-group" id="report' +
                         i +
                         '">' +
-                        '<h5 class="list-group-title" style="display:none;">3.'+i+'</h5>'+
+                        '<h5 class="list-group-title" style="display:none;">3.' + i + '</h5>' +
                         "<h4>3." +
                         i +
                         "、" +
@@ -508,7 +510,7 @@ var CustomReport = (function () {
                         '<div class="report-p5 list-group" id="report' +
                         i +
                         '">' +
-                        '<h5 class="list-group-title" style="display:none;">3.'+i+'</h5>'+
+                        '<h5 class="list-group-title" style="display:none;">3.' + i + '</h5>' +
                         "<h4>3." +
                         i +
                         "、" +
@@ -908,7 +910,7 @@ var CustomReport = (function () {
                     '<div class="report-p3 list-group" id="addshowEvent' +
                     num +
                     '" style="page-break-before: always">' +
-                    '<h5 class="list-group-title" style="display:none;">4.2</h5>'+
+                    '<h5 class="list-group-title" style="display:none;">4.2</h5>' +
                     '<h4 class="change" id="changeDiv' +
                     num +
                     '">4.2、遥信变位事件</h4>' +
@@ -945,7 +947,7 @@ var CustomReport = (function () {
                 .remove();
 
             if (data != null) {
-                if(data.count>0){
+                if (data.count > 0) {
                     var operationstring =
                         '<p class="messageContent">本周期内，该变配电站共完成巡检<span>' +
                         data.count +
@@ -953,13 +955,13 @@ var CustomReport = (function () {
                         data.timeList.join("&nbsp") +
                         "</span>；<span id=\"hasPro\">巡检过程中发现如下缺陷：</span></p>";
                     $("#operation" + num).html(operationstring);
-                }else{
+                } else {
                     var operationstring =
                         '<p class="messageContent">&nbsp;&nbsp;该变电所暂无现场运维记录。</p>';
                     $("#operation" + num).html(operationstring);
                 }
             }
-            if(data.tDevDeviceproblemList.length > 0){
+            if (data.tDevDeviceproblemList.length > 0) {
                 var itemlength = data.tDevDeviceproblemList.length;
                 var parentNum = Math.ceil((itemlength - 1) / 2);
 
@@ -1132,12 +1134,12 @@ var CustomReport = (function () {
                             if (select.beforeimg != undefined) {
                                 $.each(select.beforeimg, function (key, value) {
                                     var beforeimgurl_min =
-                                Substation.ipAddressFromAPP +
+                                        Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgmin;
                                     var beforeimgurl =
-                                Substation.ipAddressFromAPP +
+                                        Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgurl;
@@ -1152,12 +1154,12 @@ var CustomReport = (function () {
                             if (select.afterimg != undefined) {
                                 $.each(select.afterimg, function (key, value) {
                                     var afterimgurl_min =
-                                Substation.ipAddressFromAPP +
+                                        Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgmin;
                                     var afterimgurl =
-                                Substation.ipAddressFromAPP +
+                                        Substation.ipAddressFromAPP +
                                         select.imgUrl +
                                         "/" +
                                         value.fDeviceproblemimgurl;
@@ -1211,47 +1213,47 @@ var CustomReport = (function () {
                                 "</div>" +
                                 "</div>";
 
-/*                            Str +=
-                                '<div class="liveMessage">' +
-                                '<div class="Num">' +
-                                '<div class="NumList">' +
-                                Substation.Common.addZero(numList) +
-                                "</div>" +
-                                "</div>" +
-                                '<div class="ListMessageR">' +
-                                '<div class="List2 ListTime">发现时间：<label>' +
-                                fDiscovertime +
-                                "</label></div>" +
-                                '<div class="List2 ListTime">严重等级：<label>' +
-                                fProblemlevel +
-                                "</label></div>" +
-                                '<p class="typeList">设备名称：<label>' +
-                                treePathName +
-                                "</label></p>" +
-                                '<p class="typeList">缺陷类别：<label>' +
-                                fProblemtype +
-                                "</label></p>" +
-                                '<p class="typeList typeListLast">缺陷描述：<label>' +
-                                fDeviceproblemdes +
-                                "</label></p>" +
-                                '<div class="List2">缺陷状态：<label>' +
-                                fstate +
-                                "</label></div>" +
-                                '<div class="List2">消缺时间：<label>' +
-                                updataTime +
-                                "</label></div>" +
-                                '<div class="List2 imgHideDiv imgHideDiv2">缺陷图片：' +
-                                '<div class="ListImg">' +
-                                imgstrun2 +
-                                "</div>" +
-                                "</div>" +
-                                '<div class="List2 imgHideDiv imgHideDiv2">整改图片：' +
-                                '<div class="ListImg">' +
-                                imgstr2 +
-                                "</div>" +
-                                "</div>" +
-                                "</div>" +
-                                "</div>";*/
+                            /*                            Str +=
+                                                            '<div class="liveMessage">' +
+                                                            '<div class="Num">' +
+                                                            '<div class="NumList">' +
+                                                            Substation.Common.addZero(numList) +
+                                                            "</div>" +
+                                                            "</div>" +
+                                                            '<div class="ListMessageR">' +
+                                                            '<div class="List2 ListTime">发现时间：<label>' +
+                                                            fDiscovertime +
+                                                            "</label></div>" +
+                                                            '<div class="List2 ListTime">严重等级：<label>' +
+                                                            fProblemlevel +
+                                                            "</label></div>" +
+                                                            '<p class="typeList">设备名称：<label>' +
+                                                            treePathName +
+                                                            "</label></p>" +
+                                                            '<p class="typeList">缺陷类别：<label>' +
+                                                            fProblemtype +
+                                                            "</label></p>" +
+                                                            '<p class="typeList typeListLast">缺陷描述：<label>' +
+                                                            fDeviceproblemdes +
+                                                            "</label></p>" +
+                                                            '<div class="List2">缺陷状态：<label>' +
+                                                            fstate +
+                                                            "</label></div>" +
+                                                            '<div class="List2">消缺时间：<label>' +
+                                                            updataTime +
+                                                            "</label></div>" +
+                                                            '<div class="List2 imgHideDiv imgHideDiv2">缺陷图片：' +
+                                                            '<div class="ListImg">' +
+                                                            imgstrun2 +
+                                                            "</div>" +
+                                                            "</div>" +
+                                                            '<div class="List2 imgHideDiv imgHideDiv2">整改图片：' +
+                                                            '<div class="ListImg">' +
+                                                            imgstr2 +
+                                                            "</div>" +
+                                                            "</div>" +
+                                                            "</div>" +
+                                                            "</div>";*/
                         }
                         var itemNum = k + 1;
                         var reportStr =
@@ -1283,7 +1285,7 @@ var CustomReport = (function () {
         function imgshow(_this, bigimg, innerdiv, outterdiv) {
             outterdiv[0].style.display = "block";
             var src = _this.attr("data-url");
-            if(src==undefined||src==""){
+            if (src == undefined || src == "") {
                 src = _this.attr("src");
             }
             bigimg.attr("src", src);
@@ -1677,11 +1679,11 @@ jQuery(document).ready(function () {
 
     customReport.getData("", "", "0");
 
-    $(".cd-nav-trigger").click(function(){
-        if($(this).hasClass("menu-is-open")){
+    $(".cd-nav-trigger").click(function () {
+        if ($(this).hasClass("menu-is-open")) {
             $(this).removeClass("menu-is-open");
             $("#cd-main-nav ul").removeClass("is-visible");
-        }else{
+        } else {
             $("#cd-main-nav ul").addClass("is-visible");
             $(this).addClass("menu-is-open");
         }
@@ -1786,45 +1788,45 @@ jQuery(document).ready(function () {
     //     }
     //   });
 
-//    var checkedList = [];
-//
-//    $("#addConfirm").click(function () {
-//        // if (!Substation.DOMOperator.timeCompare()) {
-//        //     alert("请选择正确的开始截止时间！！！");
-//        //     return;
-//        // }
-//
-//        checkedList = [];
-//        checkedList.push("10100001");
-//        // $.each($("#sublist input"), function (index, val) {
-//        //     if ($(val)[0].checked) {
-//        // checkedList.push($(val).val());
-//
-//        //     }
-//        // });
-//
-//        if (checkedList.length == 0) {
-//            alert("请至少选择一个变配电站！！！");
-//            return;
-//        }
-//
-//        customReport.getData(
-//            "main/getSubstationInfoReportByfSubId",
-//            //   "fSubids=" +
-//            //     checkedList.join(",") +
-//            //     "&startTime=" +
-//            //     $.cookie("newDate") +
-//            //     "&endTime=" +
-//            //     $.cookie("lastDate")
-//            // );
-//            "fSubids=" +
-//            checkedList.join(",") +
-//            "&startTime=" +
-//            "2019-12-01" +
-//            "&endTime=" +
-//            "2019-12-31"
-//        );
-//    });
+    //    var checkedList = [];
+    //
+    //    $("#addConfirm").click(function () {
+    //        // if (!Substation.DOMOperator.timeCompare()) {
+    //        //     alert("请选择正确的开始截止时间！！！");
+    //        //     return;
+    //        // }
+    //
+    //        checkedList = [];
+    //        checkedList.push("10100001");
+    //        // $.each($("#sublist input"), function (index, val) {
+    //        //     if ($(val)[0].checked) {
+    //        // checkedList.push($(val).val());
+    //
+    //        //     }
+    //        // });
+    //
+    //        if (checkedList.length == 0) {
+    //            alert("请至少选择一个变配电站！！！");
+    //            return;
+    //        }
+    //
+    //        customReport.getData(
+    //            "main/getSubstationInfoReportByfSubId",
+    //            //   "fSubids=" +
+    //            //     checkedList.join(",") +
+    //            //     "&startTime=" +
+    //            //     $.cookie("newDate") +
+    //            //     "&endTime=" +
+    //            //     $.cookie("lastDate")
+    //            // );
+    //            "fSubids=" +
+    //            checkedList.join(",") +
+    //            "&startTime=" +
+    //            "2019-12-01" +
+    //            "&endTime=" +
+    //            "2019-12-31"
+    //        );
+    //    });
 
     //打印
     //   $("#print").click(function() {
@@ -1865,7 +1867,7 @@ jQuery(document).ready(function () {
     if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
         $.toast("点击右上角按钮筛选！");
     }
-    $("#outTip").click(function(){
+    $("#outTip").click(function () {
         $("#outTip").hide();
     });
     $('#searchBtn').click(function () {
@@ -1884,7 +1886,7 @@ jQuery(document).ready(function () {
         }
         $("#outTip").hide();
         $(".content").scrollTop(0);
-//        getFirstPage();
+        //        getFirstPage();
         customReport.getData(
             "/main/getSubstationInfoReportByfSubId",
             //   "fSubids=" +
@@ -1894,7 +1896,7 @@ jQuery(document).ready(function () {
             //     "&endTime=" +
             //     $.cookie("lastDate")
             // );
-            "fSubids=" +selectSubid+
+            "fSubids=" + selectSubid +
             "&startTime=" +
             $("#dateStart").val() +
             "&endTime=" +
