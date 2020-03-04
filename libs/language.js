@@ -232,6 +232,13 @@ function getZhLanguage() {
     ui_EventType: "事件类型：",
     //
     ui_MessageType: "消息类型",
+
+    ui_dangerLevel1:"一般",
+    ui_dangerLevel2:"重大",
+    ui_dangerLevel3:"紧急",
+    ui_subscribe:"订阅",
+    ui_successfully:"成功",
+
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -583,6 +590,13 @@ function getEnLanguage() {
     ui_EventType: "EventType：",
     //
     ui_MessageType: "Message Type",
+
+    ui_dangerLevel1:"General",
+    ui_dangerLevel2:"Major",
+    ui_dangerLevel3:"Urgent",
+    ui_subscribe:"Subscribe",
+    ui_successfully:"Successfully",
+
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",

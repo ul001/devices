@@ -95,7 +95,7 @@ jQuery(document).ready(function () {
           var fMessinfotypeid = $(this).attr("id");
           var checkValue = $(this).prop("checked");
           // if ($("input[type='checkbox']").prop("checked")) {
-          var showStr = "订阅" + $(this).attr("name") + "成功";
+          var showStr = Operation['ui_subscribe'] + $(this).attr("name") + Operation['ui_successfully'];
           if (checkValue == true) {
             param = {
               fMessinfotypeid: fMessinfotypeid,
