@@ -249,7 +249,6 @@ $("#startTask").click(function () {
                     android.refresh();
                     //android关闭轨迹
                     var isOpen = android.getTrackOpen();
-                    alert(isOpen);
                     if (isOpen == "false") {
                         $.confirm(Operation['ui_openTraceTip'], function () {
                                 android.startTrace();
