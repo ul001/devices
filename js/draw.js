@@ -195,7 +195,7 @@ save.onclick = function () {
 
     Substation.postFormDataByAjax("/saveClientSignImg", param, function (data) {
         if (data.code == 200) {
-            $.toast("保存成功");
+            $.toast(Operation['ui_savesuccess']);
             localStorage.setItem("need-update", "true");
             window.history.back();
         }
