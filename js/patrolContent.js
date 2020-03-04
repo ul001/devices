@@ -28,10 +28,10 @@ if (canClick == "false") {
 }
 var getSaveList = localStorage.getItem(missiontaskID);
 //android持久化储存
-if(isAndroid){
-    try{
+if (isAndroid) {
+    try {
         getSaveList = android.getSPItem(missiontaskID);
-    }catch(e){
+    } catch (e) {
         getSaveList = localStorage.getItem(missiontaskID);
     }
 }
@@ -143,8 +143,8 @@ function loadPage() {
                                 "<div class=\"content-block\">\n" + tempStr +
                                 "</div>\n" +
                                 "</div>");
-                        }else{
-                            $.alert("暂无巡检单记录！");
+                        } else {
+                            $.alert(Operation['ui_noDeviceRecord']);
                         }
                         $(".icon.icon-tips").hide();
                     } else {
@@ -423,7 +423,7 @@ function loadPage() {
                     };
                     Substation.getDataByAjax("/deleteCheckItemProblems", params, function () {
                         $.toast("删除成功");
-//                        saveThisPage();
+                        //                        saveThisPage();
                         localStorage.setItem("need-refresh", "true");
                     });
                 }, function () {
@@ -612,19 +612,19 @@ function saveThisPage() {
                     changeListVal(this.pid);
                 });
                 //                fillData(thisGroupid);
-                if(isAndroid){
-                //android持久化储存
-                    try{
-                        android.setSPItem(missiontaskID,JSON.stringify(allGroupList));
-                    }catch(e){
+                if (isAndroid) {
+                    //android持久化储存
+                    try {
+                        android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
+                    } catch (e) {
                         localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
                     }
-                }else{
+                } else {
                     localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
                 }
                 $("#" + thisGroupid + " .item-inner").addClass("finished");
             }
-//            localStorage.setItem("need-refresh", "true");
+            //            localStorage.setItem("need-refresh", "true");
         }
     });
 

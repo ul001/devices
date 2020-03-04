@@ -1865,7 +1865,7 @@ jQuery(document).ready(function () {
     var selectSubid = "";
     var clickSubid = "";
     if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
-        $.toast("点击右上角按钮筛选！");
+        $.toast(Operation['ui_rightButton']);
     }
     $("#outTip").click(function () {
         $("#outTip").hide();
