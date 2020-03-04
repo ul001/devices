@@ -90,16 +90,16 @@ function addItems(number) {
                     var stateStr = "";
                     switch (this.fTaststateid) {
                         case 1:
-                            stateStr = "待办";
+                            stateStr = Operation['ui_todo'];
                             break;
                         case 2:
-                            stateStr = "在办";
+                            stateStr = Operation['ui_doing'];
                             break;
                         case 3:
-                            stateStr = "办毕";
+                            stateStr = Operation['ui_done'];
                             break;
                         default:
-                            stateStr = "待办";
+                            stateStr = Operation['ui_todo'];
                             break;
                     }
                     $("#list-container").append("<div class=\"card\" data-task=\"" + this.fTaskid + "\" data-id=\"" + this.fSubid + "\" id=\"" + this.fPlacecheckformid + "\">\n" +
@@ -192,7 +192,7 @@ function addItems(number) {
         function (errorCode) {
             if (errorCode == 0) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html("--网络异常--");
+                $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
             } else {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("");

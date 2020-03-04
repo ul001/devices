@@ -68,34 +68,34 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 var stateStr = "-";
                 switch (this.fState) {
                     case "0":
-                        stateStr = "<span class=\"redColor\">未处理</span>";
+                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
                         break;
                     case "2":
-                        stateStr = "<span class=\"redColor\">待处理</span>";
+                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState2']+"</span>";
                         break;
                     case "3":
-                        stateStr = "<span class=\"redColor\">待客户停电处理</span>";
+                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState3']+"</span>";
                         break;
                     case "4":
-                        stateStr = "<span class=\"redColor\">待线路停电处理</span>";
+                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState4']+"</span>";
                         break;
                     case "5":
-                        stateStr = "<span class=\"redColor\">其他</span>";
+                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState5']+"</span>";
                         break;
                     case "1":
-                        stateStr = "<span class=\"button-success\">已处理</span>";
+                        stateStr = "<span class=\"button-success\">"+Operation['ui_defectState1']+"</span>";
                         break;
                     default:
-                        stateStr = "<span class=\"redColor\">未处理</span>";
+                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
                         break;
                 }
                 var solveUser = "";
                 if (this.fSolvedUserName != undefined) {
-                    solveUser = "<p>消缺人员：" + this.fSolvedUserName + "</p>";
+                    solveUser = "<p>"+Operation['ui_solvePerson'] + this.fSolvedUserName + "</p>";
                 }
                 var solveTime = "";
                 if (this.fUpdateDate != undefined) {
-                    solveTime = "<p>消缺时间：" + this.fUpdateDate + "</p>";
+                    solveTime = "<p>"+Operation['ui_solvedTime'] + this.fUpdateDate + "</p>";
                 }
                 $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\"" + (this.treePathName == undefined ? "" : this.treePathName) + "\" id=\"" + this.fDeviceproblemid + "\">\n" +
                     "                        <div class=\"col-10\">\n" +
@@ -134,7 +134,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
             } else {
                 if (data.imgName == null || data.imgName == "") {
                     //消缺任务 无签名
-                    $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>');
+                    $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">'+Operation['ui_customerSign']+'</a></p>');
                     $("#goToWrite").click(function () {
                         window.location.href = "draw.html";
                     });
@@ -147,10 +147,12 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 }
             }
         } else {
-            $(".content").html("无匹配数据");
+            $(".content").html('');
+            $.toast(Operation['ui_nodata']);
         }
     } else {
-        $(".content").html("无匹配数据");
+        $(".content").html('');
+        $.toast(Operation['ui_nodata']);
     }
     $(".content").scrollTop(Number(scrollYM));
     localStorage.removeItem("scrollY");

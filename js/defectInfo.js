@@ -353,11 +353,11 @@ function saveFormData() {
     }
   });
   if ($(".fileInput").length > 6) {
-    $.toast("最多上传6张图片");
+    $.toast(Operation['ui_uploadPicTip']);
     return;
   }
   if ($(".RectificationPIC").length + $(".fileInput").length > 6) {
-    $.toast("最多上传6张图片");
+    $.toast(Operation['ui_uploadPicTip']);
     return;
   }
   var params = new FormData($("#form1")[0]);
@@ -368,7 +368,7 @@ function saveFormData() {
     data
   ) {
     if (data.code == 200) {
-      $.toast("保存成功");
+      $.toast(Operation['ui_savesuccess']);
       localStorage.setItem("need-update", "true");
       window.history.back();
     }
