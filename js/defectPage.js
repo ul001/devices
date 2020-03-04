@@ -21,9 +21,9 @@ var identification = decodeURIComponent(defectJson.identification);
 var deadline = decodeURIComponent(defectJson.deadline);
 var dangerous = defectJson.dangerous;
 $("#defectDiscribe").val(name);
-if(defectPosition==""||defectPosition==null){
+if (defectPosition == "" || defectPosition == null) {
     $(".redColor").remove();
-}else{
+} else {
     var defectPositionArray = defectPosition.split(";");
     $("#defectPosition").empty();
     $(defectPositionArray).each(function (index, obj) {
@@ -175,10 +175,10 @@ function saveFormData() {
         checkedVal = checkedVal.substring(0, checkedVal.length - 1);
         defectPositionVal = defectPosition + checkedVal;
     }
-/*    if ($(".fileInput") && $(".fileInput").length == 0) {
-        $.toast("请上传现场照！");
-        return;
-    }*/
+    /*    if ($(".fileInput") && $(".fileInput").length == 0) {
+            $.toast("请上传现场照！");
+            return;
+        }*/
     var params = new FormData($('#form1')[0]);
     params.append("fTimelimit", deadline);
     params.append("fProblemlocation", defectPositionVal);
