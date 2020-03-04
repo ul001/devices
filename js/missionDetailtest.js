@@ -242,17 +242,22 @@ $("#startTask").click(function () {
                                 location.reload();
                             },
                             function () {location.reload();});
+                    }else{
+                        location.reload();
                     }
                 } else if (isAndroid) {
                     android.refresh();
                     //android关闭轨迹
                     var isOpen = android.getTrackOpen();
+                    alert(isOpen);
                     if (isOpen == "false") {
                         $.confirm(Operation['ui_openTraceTip'], function () {
                                 android.startTrace();
                                 location.reload();
                             },
                             function () {location.reload();});
+                    }else{
+                        location.reload();
                     }
                 } else {
                     localStorage.setItem("need-refresh", "true");
