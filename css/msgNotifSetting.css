@@ -13,3 +13,6 @@
 .content-block-title{
     padding:.05rem
 }
+.list-block .item-title.label{
+    width:80%;
+}

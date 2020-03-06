@@ -52,7 +52,7 @@ var Substation = {
   loginUserid: userId,
 
   removeUndefined: function (data) {
-    var dataStr = data == undefined ? "无" : data;
+    var dataStr = data == undefined ? "-" : data;
     return dataStr;
   },
 
@@ -255,7 +255,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast("信息错误");
+          $.toast(Operation['ui_nodata']);
           return;
         } else {
           if (data.code == "200") {
@@ -271,9 +271,9 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast("无法连接到网络，请检查网络设置。");
+          $.toast(Operation['ui_neterror']);
         } else {
-          $.toast("数据请求失败");
+          $.toast(Operation['code_fail']);
         }
       }
     });
@@ -292,7 +292,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast("信息错误");
+          $.toast(Operation['ui_nodata']);
           return;
         } else {
           if (data.code == "200") {
@@ -308,9 +308,9 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast("无法连接到网络，请检查网络设置。");
+          $.toast(Operation['ui_neterror']);
         } else {
-          $.toast("数据请求失败");
+          $.toast(Operation['code_fail']);
         }
       }
     });
@@ -330,7 +330,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast("信息错误");
+          $.toast(Operation['ui_nodata']);
           return;
         } else {
           if (data.code == "200") {
@@ -346,9 +346,9 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast("无法连接到网络，请检查网络设置。");
+          $.toast(Operation['ui_neterror']);
         } else {
-          $.toast("数据请求失败");
+          $.toast(Operation['code_fail']);
         }
       }
     });
@@ -365,7 +365,7 @@ var Substation = {
       },
       success: function (data) {
         if (data == undefined) {
-          $.toast("信息错误");
+          $.toast(Operation['ui_nodata']);
           return;
         } else {
           if (data.code == "200") {
@@ -381,9 +381,9 @@ var Substation = {
       error: function (data) {
         errorCallback(data.status);
         if (data.status == 0) {
-          $.toast("无法连接到网络，请检查网络设置。");
+          $.toast(Operation['ui_neterror']);
         } else {
-          $.toast("数据请求失败");
+          $.toast(Operation['code_fail']);
         }
       }
     });
@@ -402,7 +402,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast("信息错误");
+          $.toast(Operation['ui_nodata']);
           return;
         } else {
           if (data.code == 200) {
@@ -418,9 +418,9 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast("无法连接到网络，请检查网络设置。");
+          $.toast(Operation['ui_neterror']);
         } else {
-          $.toast("数据请求失败");
+          $.toast(Operation['code_fail']);
         }
       }
     });
@@ -455,9 +455,9 @@ var Substation = {
       .fail(function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast("无法连接到网络，请检查网络设置。");
+          $.toast(Operation['ui_neterror']);
         } else {
-          $.toast("数据请求失败");
+          $.toast(Operation['code_fail']);
         }
       });
   },
@@ -469,57 +469,6 @@ var Substation = {
       return "http://116.236.149.165:8090/SubstationWEBV2/";
     },
 
-    requestData: function (url, params, successCallback) {
-      $.ajax({
-        type: "GET",
-        url: Substation.Common.addHead() + url,
-        data: params,
-        beforeSend: function (request) {
-          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-          request.setRequestHeader("Authorization", tokenFromAPP);
-        },
-        success: function (data) {
-          if (data == undefined) {
-            console.log("信息错误");
-            return;
-          } else {
-            if (data.code == "200") {
-              successCallback(data.data);
-            }
-            if (data.code == "401") {
-              location.href = "Login.html";
-              return;
-            }
-          }
-        },
-        error: function () {
-          alert("操作失败请重试！");
-        }
-      });
-    },
-    requestDataByPOST: function (url, params, successCallback) {
-      $.ajax({
-          url: Substation.Common.addHead() + url,
-          type: "POST",
-          cache: false,
-          data: params,
-          beforeSend: function (request) {
-            request.setRequestHeader(
-              "Authorization",
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NjU5NTk5OTQsInVzZXJuYW1lIjoiYWRtaW4ifQ.1WhB3EvQZ2IJ3uMDOr1sQ-X8brr3SU1OJoR52Ovg-Kw"
-            );
-            // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-          },
-          processData: false,
-          contentType: false
-        })
-        .done(function (data) {
-          successCallback(data);
-        })
-        .fail(function () {
-          alert("操作失败！");
-        });
-    },
     //配电图
     showDataOnSVG: function (type, SvgInfo) {
       if (type == "updata") {
@@ -939,244 +888,6 @@ var Substation = {
           $(".map-total8>p>span").html(data.signalSwitchTimes);
         }
       }
-    },
-
-    showDataOnMonitor: function (type, monInfo) {
-      if (type == "updata") {
-        var url = "main/energySecurity/leakageMonitor";
-        var params = "fSubid=" + $.cookie("stationId");
-        Substation.Common.requestData(url, params, function (data) {
-          var type = $(".row-leakage")
-            .find(".active")
-            .attr("name");
-          if (type == "Tile") {
-            showDataLeakageMonitorping(data);
-          } else {
-            showDataLeakageMonitor(data);
-          }
-        });
-      } else {
-        var type = $(".row-leakage")
-          .find(".active")
-          .attr("name");
-        if (type == "Tile") {
-          showDataLeakageMonitorping(monInfo);
-        } else {
-          showDataLeakageMonitor(monInfo);
-        }
-      }
-
-      function showDataLeakageMonitor(data) {
-        $(".overlimit-h.ping-h").html("");
-        $(".overlimit-h.ping-h").html(
-          "<div id='tableDataLeakageMonitor'><table id='dataTable'></table></div>"
-        );
-        $("#dataTable").attr("data-height", $(".overlimit-h").height());
-        var columns = [
-          [{
-              field: "fMeterName",
-              title: "监测点名称",
-              rowspan: 2,
-              valign: "middle",
-              align: "center"
-            },
-            {
-              field: "fIl",
-              title: "漏电流(mA)",
-              rowspan: 2,
-              valign: "middle",
-              align: "center"
-            },
-            {
-              title: "线缆温度(℃)",
-              valign: "middle",
-              align: "center",
-              colspan: 3,
-              valign: "middle",
-              align: "center"
-            },
-            {
-              field: "alarmState",
-              title: "漏电报警状态",
-              rowspan: 2,
-              valign: "middle",
-              align: "center"
-            },
-            {
-              field: "historyData",
-              title: "历史数据",
-              rowspan: 2,
-              valign: "middle",
-              align: "center"
-            }
-          ],
-          [{
-              field: "tempA",
-              title: "A",
-              valign: "middle",
-              align: "center"
-            },
-            {
-              field: "tempB",
-              title: "B",
-              valign: "middle",
-              align: "center"
-            },
-            {
-              field: "tempC",
-              title: "C",
-              valign: "middle",
-              align: "center"
-            }
-          ]
-        ];
-
-        var tableRows = [];
-
-        //遍历数据生成表格
-        $.each(data.leakageCurrentValues, function (key, val) {
-          var row = {};
-          row.fMetercode = val.fMetercode;
-          row.fMeterName = val.fMeterName;
-          row.fIl = val.fIl;
-          row.tempA = val.fTempa;
-          row.tempB = val.fTempb;
-          row.tempC = val.fTempc;
-          row.alarmState = val.fIlwarning;
-          if (row.alarmState == "1") {
-            row.alarmState = '<img src="app/image/bell-red.gif">';
-          }
-          if (row.alarmState == "0") {
-            row.alarmState = '<img src="app/image/bell-green.png">';
-          }
-          row.historyData =
-            '<button class="search search-romote search-sig s-s-monitor searchBtn" type="button" data-toggle="modal">查询</button>';
-
-          tableRows.push(row);
-        });
-        Substation.DOMOperator.generateTable(
-          $("#dataTable"),
-          columns,
-          tableRows,
-          true
-        );
-        $(".fixed-table-container").css("padding-bottom", "0");
-
-        $("#dataTable").on("click-row.bs.table", function (e, row, $element) {
-          $(".currentSelect")
-            .css("background", "white")
-            .removeClass("currentSelect");
-          $element.css("background", "#cee4f9").addClass("currentSelect");
-          $(".searchBtn").attr("data-target", "#myModal");
-          selectedInfo = row;
-        });
-      }
-
-      function showDataLeakageMonitorping(data) {
-        $(".overlimit-h.ping-h").html("");
-        var newData = data.leakageCurrentValues;
-        var len = newData.length;
-        var imga = "-";
-        if (len > 0) {
-          for (var i = 0; i < len; i++) {
-            var childDiv = document.createElement("div");
-            var parentDiv = $(".overlimit-h.ping-h");
-            childDiv.setAttribute("class", "ping");
-            if (data.leakageCurrentValues[i].fIlwarning == "1") {
-              imga = '<img src="app/image/big-redbell.gif">';
-            }
-            if (data.leakageCurrentValues[i].fIlwarning == "0") {
-              imga = '<img src="app/image/big-greenbell.png">';
-            }
-
-            var fIl = "--";
-            var fTempa = "--";
-            var fTempb = "--";
-            var fTempc = "--";
-            if (newData[i].fIl != undefined) {
-              fIl = newData[i].fIl;
-            }
-            if (newData[i].fTempa != undefined) {
-              fTempa = newData[i].fTempa;
-            }
-            if (newData[i].fTempb != undefined) {
-              fTempb = newData[i].fTempb;
-            }
-            if (newData[i].fTempb != undefined) {
-              fTempc = newData[i].fTempc;
-            }
-
-            var divString = "";
-            divString +=
-              '<div class="p-circle">' +
-              imga +
-              "</div>" +
-              "<div>" +
-              "</div>" +
-              '<div class="p-contain" value="' +
-              newData[i].fMeterName +
-              '" id="' +
-              newData[i].fMetercode +
-              '">' +
-              "<h4>" +
-              newData[i].fMeterName +
-              "</h4>" +
-              '<div id="p-contain">' +
-              "<p>" +
-              '<img src="app/image/ping1.png">' +
-              '<font class="i18n" name="LeakI">漏&nbsp;&nbsp;电&nbsp;&nbsp;流：</font>' +
-              fIl +
-              "mA" +
-              "</p>" +
-              "<p>" +
-              '<img src="app/image/ping2.png">' +
-              '<font class="i18n" name="TempI">线缆温度：</font>A：' +
-              fTempa +
-              "℃" +
-              "</p>" +
-              '<p class="p-contain-BC">' +
-              "B：" +
-              fTempb +
-              "℃" +
-              "</p>" +
-              '<p class="p-contain-BC">' +
-              "C：" +
-              fTempc +
-              "℃" +
-              "</p>" +
-              "</div>" +
-              '<button class="search search-romote search-sig s-s-monitor searchBtn searchList" type="button" data-toggle="modal" data-target="#myModal">查询</button>' +
-              "</div>";
-            childDiv.innerHTML = divString;
-            parentDiv.append(childDiv);
-          }
-          $(document).on("click", ".searchList", function () {
-            var $this = $(this);
-            var id = $this.parent("div")[0].id;
-            var name = $this.parent("div").attr("value");
-
-            selectedInfo.fMetercode = id;
-            selectedInfo.fMeterName = name;
-            $(".searchList").attr("data-target", "#myModal");
-          });
-        } else {
-          $(".overlimit-h.ping-h")
-            .html("没有找到匹配的记录")
-            .css("textAlign", "center");
-        }
-      }
-    },
-
-    //运维管理打开新页面
-    openNewTab: function (url) {
-      var href = document.createElement("a");
-      href.id = "newLink";
-      href.target = "_blank";
-
-      href.href = url;
-      document.body.appendChild(href);
-      href.click();
-      document.body.removeChild(href);
     },
 
     //上一天

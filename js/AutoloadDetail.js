@@ -430,10 +430,10 @@ var CustomerDevice = (function () {
         //根据真实数据填充
         function showPageInfo(data, parent) {
             var pageInfo = JSON.parse(data);
-            pageInfo.forEach(function (val) {
+            pageInfo.forEach(function (val,i) {
                 val.value.forEach(function (value) {
                     var name = decodeURIComponent(value.name);
-                    var prevLable = $(parent).find("div:contains('" + name + "')");
+                    var prevLable = $($(parent).children(".baseInfoDiv")[i]).find(".item-title:contains('" + name + "')");
                     var info = decodeURIComponent(value.value);
                     switch (value.type) {
                         case "input":
@@ -441,16 +441,16 @@ var CustomerDevice = (function () {
                             break;
                         case "radio":
                             if (info == "yes") {
-                                $(prevLable).children(".item-inner").find("input[value='yes']").attr("checked", true);
+                                $(prevLable).next("input[value='yes']").attr("checked", true);
                             }
                             if (info == "no") {
-                                $(prevLable).children(".item-inner").find("input[value='no']").attr("checked", true);
+                                $(prevLable).next("input[value='no']").attr("checked", true);
                             }
                             break;
                         case "select":
                             var selectOption = decodeURIComponent(value.value);
-                            var options = $(prevLable).find("select").children("option");
-                            var select = $(prevLable).find("select");
+                            var options = $(prevLable).next("select").children("option");
+                            var select = $(prevLable).next("select");
                             $.each(options, function (key, value2) {
                                 if (value2.innerHTML == selectOption) {
                                     // $(value2).attr('selected', true);
@@ -459,7 +459,7 @@ var CustomerDevice = (function () {
                             });
                             break;
                         case "date":
-                            $(prevLable).children(".dateTime").val(value.value);
+                            $(prevLable).next("input").val(value.value);
                             break;
                     }
                 })

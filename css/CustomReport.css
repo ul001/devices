@@ -54,6 +54,7 @@ i.icon.icon-alarm {
 
 .list-block {
     margin: 0;
+    height:calc(100% - 13rem);
 }
 
 .list-block .item-title.label {
@@ -74,6 +75,7 @@ i.icon.icon-alarm {
 
 .content-block {
     color: #3d4145;
+    height:100%;
 }
 
 .content-block label {
@@ -86,12 +88,8 @@ i.icon.icon-alarm {
 }
 
 #listContainer {
-    max-height: 11rem;
+    max-height: 100%;
     overflow: auto;
-}
-
-.item-content:active {
-    background-color: #d9d9d9;
 }
 
 .subName {
@@ -150,6 +148,11 @@ i.icon.icon-selectSome {
 }
 
 #listContainer .item-content:active {
+    background: #02A8A6;
+    color: #fff;
+}
+
+.item-content.select {
     background: #02A8A6;
     color: #fff;
 }
