@@ -356,6 +356,7 @@ function getZhLanguage() {
     code_381: "该变电所没有设备分组",
     code_382: "该变电所当前设备分组下已存在同名设备，建议修改",
     code_other: "操作失败",
+    code_fail:"服务器异常",
   };
 }
 
@@ -675,8 +676,8 @@ function getEnLanguage() {
     code_343: "Custom report calculated item name already exists",
     code_344: "This substation gateway name already exists",
     code_345: "Insertion fails, the gateway code repeat",
-    code_346: "Fluorite cloud appKey can not be empty",
-    code_347: "Fluorite cloud appSecret can not be empty",
+    code_346: "Ezkit appKey can not be empty",
+    code_347: "Ezkit appSecret can not be empty",
     code_600: "You use software license has expired",
     code_348: "The current user does not have permission to substation",
     code_349: "This substation has been the instrument name",
@@ -715,5 +716,6 @@ function getEnLanguage() {
     code_381: "The substation equipment is no packet",
     code_382: "The current substation equipment under the same name already exists in the device grouping, proposed changes",
     code_other: "Operation failed",
+    code_fail:"Server exception",
   };
 }

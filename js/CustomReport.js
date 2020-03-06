@@ -1865,7 +1865,8 @@ jQuery(document).ready(function () {
     var selectSubid = "";
     var clickSubid = "";
     if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
-        $.toast(Operation['ui_rightButton']);
+//        $.toast(Operation['ui_rightButton']);
+        $(".pull-right").click();
     }
     $("#outTip").click(function () {
         $("#outTip").hide();
@@ -1908,15 +1909,24 @@ jQuery(document).ready(function () {
     $("#dateEnd").calendar();
     $("#listContainer").hide();
 
-    function getSomeSubstation() {
+    function getSomeSubstation(isAll) {
         var url = "/getSubListByLetter";
+        if(isAll==1){
+            url = "/getSubstationListByUser";
+        }
+        var listObj=[];
         var searchKey = $("#search").val();
         var params = {
             key: searchKey
         }
         $("#listContainer").empty();
         Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            $(data).each(function () {
+            if(isAll == 1){
+                listObj = data.list;
+            }else{
+                listObj = data;
+            }
+            $(listObj).each(function () {
                 $("#listContainer").append('<li class="item-content" data-id="' + this.fSubid + '">' +
                     '<div class="item-inner">' +
                     '<div class="item-title">' + this.fSubname + '</div>' +
@@ -1928,12 +1938,15 @@ jQuery(document).ready(function () {
                 clickSubid = $(this).attr("data-id");
                 var clickName = $(this).find(".item-title").text();
                 $("#search").val(clickName);
-                $("#listContainer").empty();
-                $("#listContainer").hide();
+                $(this).addClass("select").siblings().removeClass("select");
+//                $("#listContainer").empty();
+//                $("#listContainer").hide();
                 //            $("#subName").text(clickName);
             });
         });
     }
+
+    getSomeSubstation(1);
 
     $('#search').bind('keydown', function (event) {
         if (event.keyCode == 13) {
@@ -1950,7 +1963,7 @@ jQuery(document).ready(function () {
         }
     });
 
-    /*$('#search').on("focus",function(){
+    $('#search').on("focus",function(){
         if($("#search").val().length>0){
             $(".icon.icon-clear").show();
         }else{
@@ -1960,11 +1973,12 @@ jQuery(document).ready(function () {
 
     $('#search').blur(function(){
         $(".icon.icon-clear").hide();
-    });*/
+    });
 
     $(".icon.icon-clear").click(function () {
         $("#search").val("");
         $(this).hide();
+        getSomeSubstation(1);
     });
 
     //时间快捷按钮

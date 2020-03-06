@@ -11,7 +11,13 @@ jQuery(document).ready(function () {
   function loadMenu() {
     $(".showlist").empty();
     $.showPreloader(Operation['ui_loading']);
-    Substation.getDataByAjaxNoLoading("/selectMessageType", {}, function (data) {
+    var isEnglish = 0;
+    if(languageOption=="en"){
+        isEnglish = 1;
+    }else{
+        isEnglish = 0;
+    }
+    Substation.getDataByAjaxNoLoading("/selectMessageType", {"english":isEnglish}, function (data) {
       // {
       //     messageType: [{
       //         fMessinfotypeid: 1,
