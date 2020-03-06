@@ -165,6 +165,7 @@ function getZhLanguage() {
     //用户报告
     ui_UserReport: "用户报告",
     ui_rightButton: "点击右上角按钮筛选！",
+    ui_subSelectTip: "请筛选并点击查询按钮！",
     //Autoload
     ui_nodata: "暂无相关数据",
     ui_yes: "是",
@@ -525,6 +526,7 @@ function getEnLanguage() {
     //用户报告
     ui_UserReport: "User Report",
     ui_rightButton: "Click the top right button to filter!",
+    ui_subSelectTip: "Please filter and click the query button!",
     //Autoload
     ui_nodata: "No related data",
     ui_yes: "Yes",
