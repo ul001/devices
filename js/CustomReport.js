@@ -1862,11 +1862,26 @@ jQuery(document).ready(function () {
     //   });
 
     //添加右上角事件
+    var subObj = JSON.parse(localStorage.getItem("subObj"));
+    try{
+        if(isAndroid){
+            subObj = JSON.parse(android.getSpItem("subObj"));
+        }
+    }catch(e){
+    }
     var selectSubid = "";
     var clickSubid = "";
+    var clickName = "";
+    getSomeSubstation(1);
+    if(subObj!=null&&subObj!=undefined){
+        selectSubid = subObj.subId;
+        $("#search").val(subObj.subName);
+        $(".item-content[data-id="+subObj.subId+"]").addClass("select").siblings().removeClass("select");
+        $('#searchBtn').click();
+    }
     if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
-//        $.toast(Operation['ui_rightButton']);
         $(".pull-right").click();
+        $.toast(Operation['ui_subSelectTip']);
     }
     $("#outTip").click(function () {
         $("#outTip").hide();
@@ -1883,6 +1898,14 @@ jQuery(document).ready(function () {
         } else if (clickSubid != "") {
             //        $("#subName").text($("#search").val());
             selectSubid = clickSubid;
+            var subObj = {subId:clickSubid,subName:clickName};
+            localStorage.setItem("subObj",JSON.stringify(subObj));
+            try{
+                if(isAndroid){
+                    android.setSpItem("subObj",JSON.stringify(ubObj));
+                }
+            }catch(e){
+            }
             clickSubid = "";
         }
         $("#outTip").hide();
@@ -1936,17 +1959,15 @@ jQuery(document).ready(function () {
             $("#listContainer").show();
             $("#listContainer .item-content").unbind().click(function () {
                 clickSubid = $(this).attr("data-id");
-                var clickName = $(this).find(".item-title").text();
+                clickName = $(this).find(".item-title").text();
                 $("#search").val(clickName);
                 $(this).addClass("select").siblings().removeClass("select");
-//                $("#listContainer").empty();
-//                $("#listContainer").hide();
+                $("#listContainer").hide();
+                $("#listContainer").empty();
                 //            $("#subName").text(clickName);
             });
         });
     }
-
-    getSomeSubstation(1);
 
     $('#search').bind('keydown', function (event) {
         if (event.keyCode == 13) {
@@ -2056,10 +2077,10 @@ jQuery(document).ready(function () {
     });
 
     $(".back_btn").click(function () {
-        var u = navigator.userAgent,
-            app = navigator.appVersion;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+//        var u = navigator.userAgent,
+//            app = navigator.appVersion;
+//        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+//        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
         if (isIOS) {
             window.webkit.messageHandlers.goBackiOS.postMessage("");
         } else {
