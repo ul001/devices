@@ -54,7 +54,7 @@ i.icon.icon-alarm {
 
 .list-block {
     margin: 0;
-    height:calc(100% - 13rem);
+    height: calc(100% - 13rem);
 }
 
 .list-block .item-title.label {
@@ -75,7 +75,7 @@ i.icon.icon-alarm {
 
 .content-block {
     color: #3d4145;
-    height:100%;
+    height: 100%;
 }
 
 .content-block label {
@@ -144,7 +144,16 @@ i.icon.icon-selectSome {
 }
 
 #listContainer {
-    border: 1px solid #CCCCCC;
+    border: 0px solid #CCCCCC;
+}
+
+.item-title::before {
+    content: " ";
+    width: 24px;
+    height: 20px;
+    float: left;
+    background: url(../img/showSubList.png) no-repeat;
+    background-size: 18px 18px;
 }
 
 #listContainer .item-content:active {
@@ -169,10 +178,12 @@ i.icon.icon-selectSome {
 .bar .button-nav.pull-right {
     margin-right: 0;
 }
+
 .index-list-bar li {
-    width:initial;
+    width: initial;
     color: #02A8A6;
 }
+
 .cd-nav-trigger {
     position: fixed;
     bottom: 20px;
@@ -187,6 +198,7 @@ i.icon.icon-selectSome {
     white-space: nowrap;
     z-index: 2;
 }
+
 .cd-nav-trigger span {
     position: absolute;
     display: block;
@@ -201,6 +213,7 @@ i.icon.icon-selectSome {
     -moz-transition: background 0.3s;
     transition: background 0.3s;
 }
+
 .cd-nav-trigger span::before {
     top: -6px;
     -webkit-transform: rotate(0);
@@ -209,6 +222,7 @@ i.icon.icon-selectSome {
     -o-transform: rotate(0);
     transform: rotate(0);
 }
+
 .cd-nav-trigger span::after {
     bottom: -6px;
     -webkit-transform: rotate(0);
@@ -217,7 +231,9 @@ i.icon.icon-selectSome {
     -o-transform: rotate(0);
     transform: rotate(0);
 }
-.cd-nav-trigger span::before, .cd-nav-trigger span::after {
+
+.cd-nav-trigger span::before,
+.cd-nav-trigger span::after {
     content: '';
     position: absolute;
     left: 0;
@@ -235,12 +251,15 @@ i.icon.icon-selectSome {
     -moz-transition: -moz-transform 0.3s, background 0s;
     transition: transform 0.3s, background 0s;
 }
+
 .cd-nav-trigger.menu-is-open {
     box-shadow: none;
 }
+
 .cd-nav-trigger.menu-is-open span {
     background: rgba(232, 74, 100, 0);
 }
+
 .cd-nav-trigger.menu-is-open span::before {
     top: 0;
     -webkit-transform: rotate(135deg);
@@ -249,6 +268,7 @@ i.icon.icon-selectSome {
     -o-transform: rotate(135deg);
     transform: rotate(135deg);
 }
+
 .cd-nav-trigger.menu-is-open span::after {
     bottom: 0;
     -webkit-transform: rotate(225deg);
@@ -257,9 +277,12 @@ i.icon.icon-selectSome {
     -o-transform: rotate(225deg);
     transform: rotate(225deg);
 }
-.cd-nav-trigger.menu-is-open span::before, .cd-nav-trigger.menu-is-open span::after {
+
+.cd-nav-trigger.menu-is-open span::before,
+.cd-nav-trigger.menu-is-open span::after {
     background: #02A8A6;
 }
+
 #cd-nav ul {
     list-style: none;
     position: fixed;
@@ -273,10 +296,10 @@ i.icon.icon-selectSome {
     visibility: hidden;
     overflow: hidden;
     z-index: 1;
-    margin:0;
-    padding:0;
-    max-height:60%;
-    overflow:auto;
+    margin: 0;
+    padding: 0;
+    max-height: 60%;
+    overflow: auto;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-transform: scale(0);
@@ -293,6 +316,7 @@ i.icon.icon-selectSome {
     -moz-transition: -moz-transform 0.3s, visibility 0s 0.3s;
     transition: transform 0.3s, visibility 0s 0.3s;
 }
+
 #cd-nav ul.is-visible {
     visibility: visible;
     -webkit-transform: scale(1);
@@ -304,14 +328,17 @@ i.icon.icon-selectSome {
     -moz-transition: -moz-transform 0.3s, visibility 0s 0s;
     transition: transform 0.3s, visibility 0s 0s;
 }
+
 #cd-nav li a {
     display: block;
     padding: 1.6em;
     border-bottom: 1px solid #eff2f6;
 }
-#cd-nav li{
-    margin:0;
+
+#cd-nav li {
+    margin: 0;
 }
+
 a {
     color: #02A8A6;
     text-decoration: none;
