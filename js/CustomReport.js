@@ -1992,9 +1992,9 @@ jQuery(document).ready(function () {
         }
     });
 
-    $('#search').blur(function(){
+/*    $('#search').blur(function(){
         $(".icon.icon-clear").hide();
-    });
+    });*/
 
     $(".icon.icon-clear").click(function () {
         $("#search").val("");

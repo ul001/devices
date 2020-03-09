@@ -120,6 +120,11 @@ i.icon.icon-selectSome {
 
 #listContainer .item-inner {
     font-size: .7rem;
+    padding-right:0;
+}
+
+#listContainer .item-content {
+    padding-left:0;
 }
 
 .content-block .buttons-row .button {
