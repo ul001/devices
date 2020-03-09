@@ -40,6 +40,15 @@ if (taskProblem == 1) {
   problemParam["fTaskid"] = taskId;
 }
 
+if(canClick=="false"){
+    $(".upload_img_wrap .upload_img").unbind();
+    $(".upload_img_wrap .upload_img").css("display", "none");
+    $(".blueColor").removeClass("blueColor");
+    $("#saveData").css("display", "none");
+    $("#fClientadvice").val('');
+    $("#fState").val('');
+}
+
 Substation.getDataByAjax(url, problemParam, function (data) {
   var imgUrl = data.imgUrl;
   var defectJson = data.tDevDeviceproblem;
@@ -191,10 +200,6 @@ Substation.getDataByAjax(url, problemParam, function (data) {
       }
       thisInput.html('<input type="text" readonly value="' + thisValue + '">');
     });
-    $(".upload_img_wrap .upload_img").unbind();
-    $(".upload_img_wrap .upload_img").css("display", "none");
-    $(".blueColor").removeClass("blueColor");
-    $("#saveData").css("display", "none");
   }
 });
 

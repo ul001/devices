@@ -381,7 +381,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">缺陷描述：</div>
+                                        <div class="item-title label blueColor" data-i18n="ui_DefectExplain"></div>
                                         <div class="item-input">
                                             <input type="text" id="defectDiscribe" name="fDeviceproblemdes" value="">
                                         </div>
@@ -392,7 +392,7 @@
                                 <div class="item-content">
                                     <div class="item-inner">
                                         <div class="item-title label"><span class="redColor">*</span><span
-                                                class="blueColor">缺陷位置：</span></div>
+                                                class="blueColor" data-i18n="ui_defectPoision"></span></div>
                                         <div class="item-input" id="defectPosition">
                                             <!--                                        <input type="checkbox" value="A" id="checkA"><label
                                             for="checkA">A相</label>
@@ -407,7 +407,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">缺陷类别：</div>
+                                        <div class="item-title label blueColor" data-i18n="ui_categories"></div>
                                         <div class="item-input">
                                             <select name="fProblemtype" id="dangerCategory">
                                                 <option value="导电类">导电类</option>
@@ -431,12 +431,12 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">严重等级：</div>
+                                        <div class="item-title label blueColor" data-i18n="ui_SeverityGrade"></div>
                                         <div class="item-input">
                                             <select name="fProblemlevel" id="dangerType">
-                                                <option value="一般">一般</option>
-                                                <option value="重大">重大</option>
-                                                <option value="紧急">紧急</option>
+                                                <option value="一般" data-i18n="ui_dangerLevel1"></option>
+                                                <option value="重大" data-i18n="ui_dangerLevel2"></option>
+                                                <option value="紧急" data-i18n="ui_dangerLevel3"></option>
                                             </select>
                                         </div>
                                     </div>
@@ -445,7 +445,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label">消缺期限：</div>
+                                        <div class="item-title label" data-i18n="ui_EliminationPeriod"></div>
                                         <div class="item-input">
                                             <input type="text" name="fTimelimit" id="deadline" value="" disabled>
                                         </div>
@@ -456,7 +456,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">缺陷危害：</div>
+                                        <div class="item-title label blueColor" data-i18n="ui_detriment"></div>
                                         <div class="item-input">
                                             <input type="text" name="fProblemharm" id="dangerous" value="">
                                         </div>
@@ -466,7 +466,7 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label blueColor">处理建议：</div>
+                                        <div class="item-title label blueColor" data-i18n="ui_suggestion"></div>
                                         <div class="item-input">
                                             <input type="text" name="fResolution" id="suggest" value="">
                                         </div>
@@ -478,7 +478,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label">
                                             <!--<span
-                                                class="redColor">*</span>--><span class="blueColor">现场照：</span></div>
+                                                class="redColor">*</span>--><span class="blueColor" data-i18n="ui_Scenephotos"></span></div>
                                         <div class="item-input">
                                             <div class="custom_img">
                                                 <!--点击上传图片 触发下面的div 点击事件-->
@@ -597,7 +597,7 @@
         <div class="panel panel-left panel-reveal" id='panel-left-demo'>
             <div class="content-block">
                 <a href="#" class="close-panel" style="display:none;">关闭</a>
-                <button id="showOrHide" type="button" class="button">仅显示有设备分类</button>
+                <button id="showOrHide" type="button" class="button" data-i18n="ui_showOnlydevice"></button>
             </div>
             <div class="list-block">
                 <ul class="list-container">

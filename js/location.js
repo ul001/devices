@@ -98,7 +98,7 @@
 
     function loadScript() {
       var script = document.createElement("script");
-      script.src = "http://api.map.baidu.com/api?v=3.0&ak=Ysaj307vcP9KgGcn8w2qqaxIdybbBG6d&callback=initialize";
+      script.src = "http://api.map.baidu.com/api?v=3.0&ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb&callback=initialize";
       document.body.appendChild(script);
     }
 
