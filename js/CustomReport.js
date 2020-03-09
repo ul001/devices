@@ -1877,21 +1877,22 @@ jQuery(document).ready(function () {
         selectSubid = subObj.subId;
         $("#search").val(subObj.subName);
         $(".item-content[data-id="+subObj.subId+"]").addClass("select").siblings().removeClass("select");
-        $('#searchBtn').click();
-    }
-    if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
-        $(".pull-right").click();
-        $.toast(Operation['ui_subSelectTip']);
     }
     $("#outTip").click(function () {
         $("#outTip").hide();
     });
     $('#searchBtn').click(function () {
-        $(".close-panel").click();
         /*    if(saveParam!=null){
                 clickSubid = saveParam['fSubid'];
                 saveParam=null;
             }*/
+        var start = new Date($("#dateStart").val().replace(/-/g,'/'));
+        var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
+        if(start>end){
+            $.toast(Operation['ui_dateselecttip']);
+            return;
+        }
+        $(".close-panel").click();
         if ($("#search").val() == "") {
             //        $("#subName").text("所有变电所");
             selectSubid = "";
@@ -2088,5 +2089,13 @@ jQuery(document).ready(function () {
         }
     });
 
-    $("#thisMonth").click();
+    $("#lastMonth").click();
+
+    if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
+        $(".pull-right").click();
+        $.toast(Operation['ui_subSelectTip']);
+    }else{
+        $('#searchBtn').click();
+        $("#outTip").hide();
+    }
 });

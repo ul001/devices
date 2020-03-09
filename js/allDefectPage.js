@@ -219,6 +219,12 @@ $(document).on('infinite', '.infinite-scroll', function () {
 });
 
 $('#searchBtn').click(function () {
+    var start = new Date($("#dateStart").val().replace(/-/g,'/'));
+    var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
+    if(start>end){
+        $.toast(Operation['ui_dateselecttip']);
+        return;
+    }
     $(".close-panel").click();
     /*    if(saveParam!=null){
             clickSubid = saveParam['fSubid'];
@@ -239,15 +245,24 @@ $("#dateStart").calendar();
 $("#dateEnd").calendar();
 $("#listContainer").hide();
 
-function getSomeSubstation() {
+function getSomeSubstation(isAll) {
     var url = "/getSubListByLetter";
+    if(isAll==1){
+        url = "/getSubstationListByUser";
+    }
+    var listObj=[];
     var searchKey = $("#search").val();
     var params = {
         key: searchKey
     }
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        $(data).each(function () {
+        if(isAll == 1){
+            listObj = data.list;
+        }else{
+            listObj = data;
+        }
+        $(listObj).each(function () {
             $("#listContainer").append('<li class="item-content" data-id="' + this.fSubid + '">' +
                 '<div class="item-inner">' +
                 '<div class="item-title">' + this.fSubname + '</div>' +
@@ -281,7 +296,7 @@ $('#search').on("input", function () {
     }
 });
 
-/*$('#search').on("focus",function(){
+$('#search').on("focus",function(){
     if($("#search").val().length>0){
         $(".icon.icon-clear").show();
     }else{
@@ -289,14 +304,16 @@ $('#search').on("input", function () {
     }
 });
 
-$('#search').blur(function(){
+/*$('#search').blur(function(){
     $(".icon.icon-clear").hide();
 });*/
 
 $(".icon.icon-clear").click(function () {
     $("#search").val("");
+    getSomeSubstation(1);
     $(this).hide();
 });
+getSomeSubstation(1);
 
 //时间快捷按钮
 $(".buttons-row .button").click(function () {
