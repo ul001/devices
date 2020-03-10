@@ -243,6 +243,21 @@ function getZhLanguage() {
     ui_subscribe:"订阅",
     ui_successfully:"成功",
     ui_identify:"辨识标准",
+    //报警详情页
+    ui_alarmDetail:"报警详情",
+    ui_alarmEndTime:"结束时间:",
+    ui_alarmMeterId:"仪表编号:",
+    ui_alarmMeterName:"仪表名称:",
+    ui_alarmParamId:"参数编号:",
+    ui_alarmParamName:"参数名称:",
+    ui_alarmType:"报警类型:",
+    ui_type:"类型:",
+    ui_detail:"详情:",
+    ui_alarmValue:"报警值:",
+    ui_limitValue:"限定值:",
+    ui_time:"时间:",
+    ui_alarmDeviceId:"设备编号:",
+    ui_alarmDeviceName:"设备名称:",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -606,6 +621,21 @@ function getEnLanguage() {
     ui_subscribe:"Subscribe",
     ui_successfully:"Successfully",
     ui_identify:"Identify standard",
+    //报警详情页
+    ui_alarmDetail:"Alarm details",
+    ui_alarmEndTime:"EndTime:",
+    ui_alarmMeterId:"MeterId:",
+    ui_alarmMeterName:"MeterName:",
+    ui_alarmParamId:"ParamId:",
+    ui_alarmParamName:"ParamName:",
+    ui_alarmType:"AlarmType:",
+    ui_type:"Type:",
+    ui_detail:"Detail:",
+    ui_alarmValue:"AlarmValue:",
+    ui_limitValue:"LimitValue:",
+    ui_time:"Time:",
+    ui_alarmDeviceId:"DeviceID:",
+    ui_alarmDeviceName:"DeviceName:",
 
     //code码
     code_200: "Request succeeds, insert success",
