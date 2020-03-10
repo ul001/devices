@@ -84,9 +84,10 @@ var Substation = {
     } else {
       //        script.src = "libs/language_zh.js";
       getZhLanguage();
-      var script = document.createElement("script");
-      script.src = "libs/cn.min.js";
-      document.body.appendChild(script);
+//      var script = document.createElement("script");
+//      script.src = "libs/cn.min.js";
+//      document.body.appendChild(script);
+      $("head").append("<script src=\"libs/cn.min.js\"></script>");
     }
     this.loadLanguageData();
     //    document.body.appendChild(script);
@@ -2025,8 +2026,7 @@ var Substation = {
       pass = !flag;
       return pass;
     }
-  }
-
+  },
 
 };
 

@@ -1,0 +1,14 @@
+.item-content .item-inner .item-title{
+    width:40%;
+}
+
+.item-content .item-inner .item-after{
+    width:60%;
+    color: #3E4145;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
