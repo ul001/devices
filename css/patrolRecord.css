@@ -116,10 +116,6 @@ i.icon.icon-alarm {
     overflow: hidden;
 }
 
-.list-block {
-    margin: 0;
-}
-
 .list-block .item-title.label {
     width: initial;
 }
@@ -135,6 +131,7 @@ i.icon.icon-alarm {
 }
 
 .content-block {
+    height:100%;
     color: #3d4145;
 }
 
@@ -145,11 +142,6 @@ i.icon.icon-alarm {
 
 #search {
     margin: 0;
-}
-
-#listContainer {
-    max-height: 11rem;
-    overflow: auto;
 }
 
 .item-content:active {
@@ -177,8 +169,33 @@ i.icon.icon-alarm {
     background-image: url(../img/i-clear.png);
 }
 
+#listContainer {
+    max-height: 100%;
+    overflow: auto;
+    border: none;
+}
+
 #listContainer .item-inner {
     font-size: .7rem;
+    padding-right:0;
+}
+
+#listContainer .item-content {
+    padding-left:0;
+}
+
+.item-title::before {
+    content: " ";
+    width: 1.2rem;
+    height: 1rem;
+    float: left;
+    background: url(../img/showSubList.png) no-repeat;
+    background-size: 0.9rem;
+}
+
+.list-block {
+    margin: 0;
+    height: calc(100% - 16.5rem);
 }
 
 .content-block .buttons-row .button {
@@ -200,10 +217,6 @@ i.icon.icon-alarm {
 
 #searchBtn {
     background: #02A8A6;
-}
-
-#listContainer {
-    border: 1px solid #CCCCCC;
 }
 
 #listContainer .item-content:active {
