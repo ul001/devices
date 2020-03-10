@@ -102,10 +102,6 @@ i.icon.icon-alarm {
     overflow: hidden;
 }
 
-.list-block {
-    margin: 0;
-}
-
 .list-block .item-title.label {
     width: initial;
 }
@@ -124,6 +120,7 @@ i.icon.icon-alarm {
 
 .content-block {
     color: #3d4145;
+    height:100%;
 }
 
 .content-block label {
@@ -136,8 +133,32 @@ i.icon.icon-alarm {
 }
 
 #listContainer {
-    max-height: 11rem;
+    max-height: 100%;
     overflow: auto;
+    border: none;
+}
+
+#listContainer .item-inner {
+    font-size: .7rem;
+    padding-right:0;
+}
+
+#listContainer .item-content {
+    padding-left:0;
+}
+
+.item-title::before {
+    content: " ";
+    width: 1.2rem;
+    height: 1rem;
+    float: left;
+    background: url(../img/showSubList.png) no-repeat;
+    background-size: 0.9rem;
+}
+
+.list-block {
+    margin: 0;
+    height: calc(100% - 13rem);
 }
 
 .item-content:active {
@@ -170,10 +191,6 @@ i.icon.icon-selectSome {
     background-image: url(../img/i-clear.png);
 }
 
-#listContainer .item-inner {
-    font-size: .7rem;
-}
-
 .content-block .buttons-row .button {
     font-size: .75rem;
     border-color: #02A8A6;
@@ -196,10 +213,6 @@ i.icon.icon-selectSome {
     background: #02A8A6;
 }
 
-#listContainer {
-    border: 1px solid #CCCCCC;
-}
-
 #listContainer .item-content:active {
     background: #02A8A6;
     color: #fff;
@@ -220,12 +233,6 @@ i.icon.icon-selectSome {
 
 .list-block .item-title {
     white-space: initial;
-}
-
-.content-block {
-    max-height: 90%;
-    overflow: auto;
-    margin: 0;
 }
 
 .popup-btn {

@@ -261,11 +261,12 @@ jQuery(document).ready(function () {
 //        localStorage.setItem("missionSubid", missionsubid);
 //        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("taskID", taskID);
-        if (taskCreatId != Substation.loginUserid && missionType != 3) {
-            localStorage.setItem("hiddenBtn", "NO");
-        } else {
-            localStorage.setItem("hiddenBtn", "YES");
-        }
+//        if (taskCreatId != Substation.loginUserid && missionType != "3") {
+//            localStorage.setItem("hiddenBtn", "NO");
+//        } else {
+//            localStorage.setItem("hiddenBtn", "YES");
+//        }
+        localStorage.setItem("hiddenBtn", "YES");
         window.location.href = "missionManager.html";
     });
 

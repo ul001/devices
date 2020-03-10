@@ -118,15 +118,6 @@ i.icon.icon-selectSome {
     background-image: url(../img/i-clear.png);
 }
 
-#listContainer .item-inner {
-    font-size: .7rem;
-    padding-right:0;
-}
-
-#listContainer .item-content {
-    padding-left:0;
-}
-
 .content-block .buttons-row .button {
     font-size: .75rem;
     border-color: #02A8A6;
@@ -149,16 +140,25 @@ i.icon.icon-selectSome {
 }
 
 #listContainer {
-    border: 0px solid #CCCCCC;
+    border: none;
+}
+
+#listContainer .item-inner {
+    font-size: .7rem;
+    padding-right:0;
+}
+
+#listContainer .item-content {
+    padding-left:0;
 }
 
 .item-title::before {
     content: " ";
-    width: 24px;
-    height: 20px;
+    width: 1.2rem;
+    height: 1rem;
     float: left;
     background: url(../img/showSubList.png) no-repeat;
-    background-size: 18px 18px;
+    background-size: 0.9rem;
 }
 
 #listContainer .item-content:active {
