@@ -2,8 +2,8 @@ var loading = false;
 var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
-var clickID = Substation.GetQueryString("clickID");
-//var clickID = "bianwei";
+//var clickID = Substation.GetQueryString("clickID");
+var clickID = "platform";
 var titleName = localStorage.getItem("titleName");
 $(".title.title_color").text(titleName);
 var u = navigator.userAgent,
@@ -82,8 +82,9 @@ function addItems(number, lastIndex) {
                         "                </div>";
                 });
                 $('.list-container').append(html);
+                addCardLongClick();
                 //addClick();
-                Substation.getDataByAjaxNoLoading("/close");
+                Substation.getDataByAjaxNoLoading("/close",{},function(){});
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
@@ -108,12 +109,9 @@ function addItems(number, lastIndex) {
             }
             return;
         });
-
-
-
 }
 
-addItems(itemsPerLoad, 0);
+//addItems(itemsPerLoad, 0);
 
 var lastIndex = 10;
 
@@ -137,7 +135,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
     }, 1000);
 });
 
-$(".back_btn").click(function () {
+function goBack() {
     if (isAndroid) {
         android.goBack();
     } else if (isIOS) {
@@ -146,9 +144,23 @@ $(".back_btn").click(function () {
     } else {
         window.history.back();
     }
-});
+}
 
-$(".manager_btn").click(function () {
+function selectAll(){
+    if($(".back_btn").text()=="全选"){
+        $(".back_btn").text("全不选");
+        $("input:checkbox").prop("checked","checked");
+    }else{
+        $(".back_btn").text("全选");
+        $("input:checkbox").removeAttr("checked");
+    }
+}
+
+$(".back_btn").on("click",goBack);
+$(".item-media").hide();
+$(".manager_btn").on("click",manageCard);
+
+function manageCard() {
     //点击管理切换样式
     var html = "";
     if (!$(".bar-footer").length || $(".bar-footer").is(":hidden")) {
@@ -156,47 +168,96 @@ $(".manager_btn").click(function () {
         $(".back_btn").text("全选");
         $(".selectAlarms").toggle();
         $(".bar-footer").toggle();
-        html += '<nav class="bar bar-footer row">' +
-            '<a href="#" class="button bg-primary col-33" onclick=""><i class="icon icon-downChange"></i>确认</a>' +
-            '</nav>';
-        $(".content").after(html);
+        $(".open-panel").toggle();
+        $(".item-media").show();
+        $(".item-link").removeClass("item-link");
+        $(".label-checkbox.item-content").off("touchstart touchmove touchend");
+        $(".back_btn").off("click").on("click",selectAll);
+        $(".hasConfirmed input").prop("checked","checked").attr("disabled",true);
+//        html += '<nav class="bar bar-footer row">' +
+//            '<a href="#" class="button bg-primary col-33" onclick=""><i class="icon icon-downChange"></i>确认</a>' +
+//            '</nav>';
+//        $(".content").after(html);
     } else {
         $(".selectAlarms").toggle();
         $(".bar-footer").toggle();
+        $(".open-panel").toggle();
+        $(".label-checkbox.item-content").addClass("item-link");
+        addCardLongClick();
+        $(".item-media").hide();
         $(".manager_btn").text("管理");
-        html += '<span class="icon icon-left"></span>' + '<span data-i18n="ui_back"></span>';
+        html += '<span class="icon icon-left"></span>' + '<span>'+Operation['ui_back']+'</span>';
         $(".back_btn").html(html);
+        $(".back_btn").off("click").on("click",goBack);
+        $("input[type='checkbox']:checked").removeAttr("checked").removeAttr("disabled");
     }
+}
+
+addCardLongClick();
+
+document.addEventListener("click",function(){
+    $("#showDiv").hide();
 });
 
-$(".product").on({
-    touchstart: function (e) {
-        timeOutEvent = setTimeout(function () {
-            //此处为长按事件-----在此显示遮罩层及删除按钮
-        }, 500);
-    },
-    touchmove: function () {
-        clearTimeout(timeOutEvent);
-        timeOutEvent = 0;
-        e.preventDefault();
-    },
-    touchend: function (e) {
-        clearTimeout(timeOutEvent);
-        if (timeOutEvent != 0) { //点击
-            //此处为点击事件----在此处添加跳转详情页
-        }
-        return false;
-    }
+$("#confirmed").on("click",function(){
+    var thisId = $("#showDiv").attr("data-id");
+    $("#"+thisId).addClass("hasConfirmed");
 });
+$("#unConfirm").on("click",function(){
+    var thisId = $("#showDiv").attr("data-id");
+    $("#"+thisId).removeClass("hasConfirmed");
+});
+$("#manage").on("click",manageCard);
+
+function addCardLongClick(){
+    var longClick =0;
+    $(".item-link").on({
+        touchstart: function (e) {
+            var thisCardId = $(this).parent(".card").attr("id");
+            longClick =0;
+            timeOutEvent = setTimeout(function () {
+                longClick = 1;
+                var touch = e.originalEvent.targetTouches[0];
+                var screenWidth = $(window).width();
+                var screenHeight = $(window).height();
+                var divWidth = $("#showDiv").width();
+                var divHeight = $("#showDiv").height();
+                if(divWidth+touch.pageX>screenWidth){
+                    $("#showDiv").css("left",touch.pageX-divWidth+'px');
+                }else{
+                    $("#showDiv").css("left",touch.pageX+'px');
+                }
+                if(divHeight+touch.pageY+10>screenHeight){
+                    $("#showDiv").css("top",touch.pageY -10-divHeight+'px');
+                }else{
+                    $("#showDiv").css("top",touch.pageY+10+'px');
+                }
+                $("#showDiv").attr("data-id",thisCardId);
+                $("#showDiv").show();
+            }, 500);
+        },
+        touchmove: function (e) {
+            clearTimeout(timeOutEvent);
+            timeOutEvent = 0;
+            e.preventDefault();
+        },
+        touchend: function (e) {
+            clearTimeout(timeOutEvent);
+            if (timeOutEvent != 0 && longClick == 0) { //点击
+                if($("#showDiv").is(':visible')){
+                    $("#showDiv").hide();
+                }else{
+                    window.location.href="alarmDetailView.html";
+                }
+            }
+            return false;
+        }
+    });
+}
 
 $('#searchBtn').click(function () {
     $(".close-panel").click();
 
-    if (saveParam != null) {
-        clickSubid = saveParam['fSubid'];
-        saveParam = null;
-
-    }
     if ($("#search").val() == "") {
         //        $("#subName").text("所有变电所");
         selectSubid = "";
@@ -211,42 +272,61 @@ $('#searchBtn').click(function () {
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
 $("#listContainer").hide();
-
-function getSomeSubstation() {
+getSomeSubstation(1);
+function getSomeSubstation(isAll) {
     var url = "/getSubListByLetter";
+    if(isAll==1){
+        url = "/getSubstationListByUser";
+    }
+    var listObj=[];
     var searchKey = $("#search").val();
     var params = {
         key: searchKey
-    }
+    };
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        $(data).each(function () {
-            $("#listContainer").append('<li class="item-content" data-id="' + this.fSubid + '">' +
+        if(isAll == 1){
+            listObj = data.list;
+        }else{
+            listObj = data;
+        }
+        $(listObj).each(function () {
+            $("#listContainer").append(
+                '<li class="item-content" data-id="' +
+                this.fSubid +
+                '">' +
                 '<div class="item-inner">' +
-                '<div class="item-title">' + this.fSubname + '</div>' +
-                '</div>' +
-                '</li>');
+                '<div class="item-title">' +
+                this.fSubname +
+                "</div>" +
+                "</div>" +
+                "</li>"
+            );
         });
         $("#listContainer").show();
-        $("#listContainer .item-content").unbind().click(function () {
-            clickSubid = $(this).attr("data-id");
-            var clickName = $(this).find(".item-title").text();
-            $("#search").val(clickName);
-            $("#listContainer").empty();
-            $("#listContainer").hide();
-            //            $("#subName").text(clickName);
-        });
+        $("#listContainer .item-content")
+            .unbind()
+            .click(function () {
+                clickSubid = $(this).attr("data-id");
+                var clickName = $(this)
+                    .find(".item-title")
+                    .text();
+                $("#search").val(clickName);
+                $("#listContainer").empty();
+                $("#listContainer").hide();
+                //            $("#subName").text(clickName);
+            });
     });
 }
 
-$('#search').bind('keydown', function (event) {
+$("#search").bind("keydown", function (event) {
     if (event.keyCode == 13) {
         getSomeSubstation();
         document.activeElement.blur();
     }
 });
 
-$('#search').on("input", function () {
+$("#search").on("input", function () {
     if ($("#search").val().length > 0) {
         $(".icon.icon-clear").show();
     } else {
@@ -254,8 +334,17 @@ $('#search').on("input", function () {
     }
 });
 
+$('#search').on("focus",function(){
+    if($("#search").val().length>0){
+        $(".icon.icon-clear").show();
+    }else{
+        $(".icon.icon-clear").hide();
+    }
+});
+
 $(".icon.icon-clear").click(function () {
     $("#search").val("");
+    getSomeSubstation(1);
     $(this).hide();
 });
 

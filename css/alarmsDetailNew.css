@@ -47,7 +47,7 @@ i.icon.icon-alarm {
     background-image: url(../img/i-alarmp.png);
 }
 
-.card .col-25 p {
+.card .no-gutter p {
     margin: 0.2rem 0;
 }
 
@@ -217,14 +217,8 @@ i.icon.icon-selectSome {
     margin-right: 0;
 }
 
-.list-block .item-title {
-    white-space: initial;
-}
-
-.content-block {
-    max-height: 90%;
-    overflow: auto;
-    margin: 0;
+.panel .content-block {
+    height: 100%;
 }
 
 .popup-btn {
@@ -233,7 +227,137 @@ i.icon.icon-selectSome {
 
 
 /* 添加已确认图片 */
-.hasBoom {
-    background: url(../img/i-hasCommit.png) right 1rem top no-repeat;
-    background-size: 3.0rem;
+.hasConfirmed{
+    background:#fff url(../img/confirmed.png) right 33% top no-repeat;
+    background-size: 3rem;
+}
+
+#showDiv{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 11000;
+    display: none;
+    margin: 0;
+    background: rgba(255,255,255,.95);
+    opacity: 1;
+    -webkit-transition-duration: .3s;
+    -o-transition-duration: .3s;
+    transition-duration: .3s;
+    -webkit-transition-property: opacity;
+    -o-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transform: none;
+    -ms-transform: none;
+    -o-transform: none;
+    transform: none;
+    display:none;
+    font-size:.6rem;
+    font-weight:bold;
+    -webkit-box-shadow: #666 0 0 0.3rem;
+    -moz-box-shadow: #666 0 0 0.3rem;
+    box-shadow: #666 0 0 0.3rem;
+}
+
+span.danger{
+    padding:.1rem;
+    border-radius:.15rem;
+    background:#FFA629;
+    color:#fff;
+}
+
+span.dangerer{
+    padding:.1rem;
+    border-radius:.15rem;
+    background:#FFF100;
+    color:#A39729;
+}
+
+span.common{
+    padding:.1rem;
+    border-radius:.15rem;
+    background:#21BBF7;
+    color:#fff;
+}
+
+span.veryDanger{
+    padding:.1rem;
+    border-radius:.15rem;
+    background:#DC3545;
+    color:#fff;
+}
+
+.col-25{
+    font-size:.6rem;
+}
+
+.list-block .item-inner.row{
+    padding: 0 .7rem 0 0;
+}
+
+.list-block .item-link .item-inner.row{
+    background-position:100% center;
+}
+
+.text-right{
+    text-align:right;
+}
+
+label.label-checkbox i.icon-form-checkbox{
+    width:.8rem;
+    height:.8rem;
+}
+
+.list-block .item-content{
+    padding-left:.5rem;
+}
+
+.list-block .item-media+.item-inner{
+    margin-left:.5rem;
+}
+
+.item-link .item-media+.item-inner{
+    margin-left:0;
+}
+
+label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkbox{
+    background:#6ECD44;
+}
+
+.button.bg-green{
+    background:#02A8A6;
+    color:#fff;
+    border:none;
+    border-radius:1rem;
+    width:33%;
+    float:right;
+}
+/*变电所列表筛选*/
+.panel .list-block{
+    margin: 0;
+    height: calc(100% - 20rem);
+}
+
+#listContainer {
+    max-height: 100%;
+    overflow: auto;
+    border: none;
+}
+
+#listContainer .item-inner {
+    font-size: .7rem;
+    padding-right:0;
+}
+
+#listContainer .item-content {
+    padding-left:0;
+}
+
+#listContainer .item-title::before {
+    content: " ";
+    width: 1.2rem;
+    height: 1rem;
+    float: left;
+    background: url(../img/showSubList.png) no-repeat;
+    background-size: 0.9rem;
 }
