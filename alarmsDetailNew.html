@@ -26,11 +26,14 @@
                 <a class="button button-link button-nav pull-right open-panel">
                     <i class="icon icon-selectSome"></i>
                 </a>
-                <a class="button button-link button-nav pull-right manager_btn">
-                    <i class="manager">管理</i>
+                <a class="button button-link button-nav pull-right click_btn manager_btn">
+                    管理
                 </a>
                 <h1 class="title title_color">报警</h1>
             </header>
+            <nav class="bar bar-footer" style="display:none;">
+                <a href="#" class="button bg-green" onclick="">确认</a>
+            </nav>
             <!--            <div class="bar bar-header-secondary">
                 <a href="#" class="button">一键已读</a>
             </div>-->
@@ -39,7 +42,7 @@
                     <div class="preloader"></div>
                     <div class="pull-to-refresh-arrow"></div>
                 </div>
-                <div class="list-container">
+                <div class="list-container list-block">
                     <!--<div class="card">-->
                     <!--<div class="card-content">-->
                     <!--<div class="content-padded">-->
@@ -57,6 +60,76 @@
                     <!--</div>-->
                     <!--</div>-->
                     <!--</div>-->
+<!--                    <ul>-->
+                        <div class="card" id="1">
+                            <label class="label-checkbox item-content item-link">
+                                <input type="checkbox" name="my-checkbox">
+                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                <div class="item-inner row no-gutter">
+                                    <div class="col-75">
+                                        <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
+                                        <P>仪表名称：ahfadslh</P>
+                                        <p>事件类型：fadfhlk</p>
+                                    </div>
+                                    <div class="col-25">
+                                        <p class="text-right"><span class="veryDanger">特别严重</span></p>
+                                        <P>2019-12-23 06:00:00</P>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="card" id="2">
+                            <label class="label-checkbox item-content item-link">
+                                <input type="checkbox" name="my-checkbox">
+                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                <div class="item-inner row no-gutter">
+                                    <div class="col-75">
+                                        <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
+                                        <P>仪表名称：ahfadslh</P>
+                                        <p>事件类型：fadfhlk</p>
+                                    </div>
+                                    <div class="col-25">
+                                        <p class="text-right"><span class="danger">严重</span></p>
+                                        <P>2019-12-23 06:00:00</P>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="card" id="3">
+                            <label class="label-checkbox item-content item-link">
+                                <input type="checkbox" name="my-checkbox">
+                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                <div class="item-inner row no-gutter">
+                                    <div class="col-75">
+                                        <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
+                                        <P>仪表名称：ahfadslh</P>
+                                        <p>事件类型：fadfhlk</p>
+                                    </div>
+                                    <div class="col-25">
+                                        <p class="text-right"><span class="dangerer">较重</span></p>
+                                        <P>2019-12-23 06:00:00</P>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    <div class="card" id="4">
+                        <label class="label-checkbox item-content item-link">
+                            <input type="checkbox" name="my-checkbox">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner row no-gutter">
+                                <div class="col-75">
+                                    <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
+                                    <P>仪表名称：ahfadslh</P>
+                                    <p>事件类型：fadfhlk</p>
+                                </div>
+                                <div class="col-25">
+                                    <p class="text-right"><span class="common">一般</span></p>
+                                    <P>2019-12-23 06:00:00</P>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+<!--                    </ul>-->
                 </div>
                 <!-- preloader -->
                 <div class="infinite-scroll-preloader">
@@ -65,9 +138,22 @@
             </div>
 
         </div>
+        <div id="showDiv" class="list-block">
+            <ul>
+                <li class="item-content" id="confirmed">
+                    <div class="item-inner"><div class="item-title">标为已确认</div></div>
+                </li>
+                <li class="item-content" id="unConfirm">
+                    <div class="item-inner"><div class="item-title">标为未确认</div></div>
+                </li>
+                <li class="item-content" id="manage">
+                    <div class="item-inner"><div class="item-title">管理</div></div>
+                </li>
+            </ul>
+        </div>
         <div class="panel-overlay"></div>
         <!-- About Popup -->
-        <div class="popup popup-about">
+<!--        <div class="popup popup-about">
             <div class="content-block">
                 <div class="content-block-title">选择报警类型</div>
                 <div class="list-block media-list">
@@ -79,7 +165,7 @@
                 <div class="col-50"><a href="#" class="button button-big button-fill button-success"
                         id="commitBtn">确定</a></div>
             </div>
-        </div>
+        </div>-->
         <div class="panel panel-right panel-reveal" id='panel-right-demo'>
             <div class="content-block">
                 <div>
