@@ -84,7 +84,7 @@ var CustomReport = (function () {
                     '<h5 class="this_title" data-index="1" style="display:none;">变配电站概况</h5>' +
                     '<h5 class="this_title" data-index="1" style="display:none;">用电量分析</h5>' +
                     "<h3>1、变配电站概况</h3>" +
-                    '<div class="subTable"><table class="table table-bordered substation">' +
+                    '<div class="subTable"><table class="table-bordered substation">' +
                     "<tr>" +
                     "<td>站点名称</td>" +
                     '<td colspan="3" id="name' +
@@ -153,7 +153,7 @@ var CustomReport = (function () {
                     '<h5 class="this_title" data-index="4" style="display:none;">事件统计</h5>' +
                     "<h3>4、事件统计</h3>" +
                     "<h4>4.1、遥测越限事件</h4>" +
-                    '<p id="event' +
+                    '<p class="powerString" id="event' +
                     i +
                     '"></p>' +
                     '<div class="eventDiv" id="eventDiv' +
@@ -162,7 +162,7 @@ var CustomReport = (function () {
                     '<h4 class="change" id="changeDiv' +
                     i +
                     '">4.2、遥信变位事件</h4>' +
-                    '<p id="sigevent' +
+                    '<p class="powerString" id="sigevent' +
                     i +
                     '"></p>' +
                     '<div id="sigeventTable' +
@@ -326,12 +326,12 @@ var CustomReport = (function () {
                 '<h5 class="list-group-title" style="display:none;">4</h5>' +
                 "<h3>4、事件统计</h3>" +
                 "<h4>4.1、遥测越限事件</h4>" +
-                '<p id="event"></p>' +
+                '<p class="powerString" id="event"></p>' +
                 '<div class="eventDiv" id="eventDiv">' +
                 '<div class="daycurve"></div>' +
                 "</div>" +
                 '<h4 class="change" id="change">4.2、遥信变位事件</h4>' +
-                '<p id="sigevent"></p>' +
+                '<p class="powerString" id="sigevent"></p>' +
                 '<div id="sigeventTable">' +
                 '<div class="daycurve"></div>' +
                 "</div>" +
@@ -381,7 +381,6 @@ var CustomReport = (function () {
             });
             if (data.energyDayResultVoList.length != 0) {
                 powerstring +=
-                    "&nbsp;&nbsp;" +
                     "该变配电站监测周期内总耗电量" +
                     JSON.parse(data.totalEnergyDayResult).toFixed(1) +
                     "kW·h，" +
@@ -391,7 +390,7 @@ var CustomReport = (function () {
                     JSON.parse(data.maxEnergyValue).toFixed(1) +
                     "kW·h，日耗电情况详见下图：";
             } else {
-                powerstring += "&nbsp;&nbsp;该配电站暂无耗电量数据。";
+                powerstring += "该配电站暂无耗电量数据。";
             }
 
             $("#powerString" + num).html(powerstring);
@@ -732,7 +731,8 @@ var CustomReport = (function () {
             );
             $("#monitorDiv" + num).bootstrapTable({
                 data: moniData,
-                columns: columns
+                columns: columns,
+                height:300
             });
         }
 
@@ -756,7 +756,10 @@ var CustomReport = (function () {
                 enabled: false
             };
             var legend = {
-                enabled: istrue
+                enabled: istrue,
+                margin:0,
+                x:0,
+                y:20,
             };
             var plotOption = {
                 series: {
@@ -803,7 +806,6 @@ var CustomReport = (function () {
             var eventstring = "";
             if (length <= 10) {
                 eventstring +=
-                    "&nbsp;&nbsp;&nbsp;&nbsp;" +
                     "本监测周期内经运维平台统计共发生" +
                     data.overlimitTimes +
                     "次遥测越限事件，统计数据如下：";
@@ -811,7 +813,6 @@ var CustomReport = (function () {
             }
             if (length > 10) {
                 eventstring +=
-                    "&nbsp;&nbsp;&nbsp;&nbsp;" +
                     "本监测周期内经运维平台统计共发生" +
                     data.overlimitTimes +
                     "次遥测越限事件，为您显示发生次数排名前10的事件，统计数据如下：";
@@ -862,7 +863,8 @@ var CustomReport = (function () {
             );
             $("#eventTable" + num).bootstrapTable({
                 data: neweventData,
-                columns: columns
+                columns: columns,
+                height:180
             });
         }
 
@@ -929,11 +931,11 @@ var CustomReport = (function () {
             );
             $("#sigeveDiv" + num).bootstrapTable({
                 data: sigData,
-                columns: columns
+                columns: columns,
+                height:180
             });
 
             var sigeventstring =
-                "&nbsp;&nbsp;&nbsp;&nbsp;" +
                 "本监测周期内经运维平台统计共发生" +
                 data.switchingTimes +
                 "次遥信越限事件，统计数据如下：";
