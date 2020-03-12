@@ -348,3 +348,27 @@ a {
     color: #02A8A6;
     text-decoration: none;
 }
+
+#monitorTable1{
+    max-height:15rem;
+}
+
+#eventDiv1{
+    max-height:10rem;
+}
+
+#sigeventTable1{
+    max-height:10rem;
+}
+
+.bootstrap-table .fixed-table-container.fixed-height:not(.has-footer){
+    border-bottom:none;
+}
+
+.fixed-table-border{
+    display:none;
+}
+
+.powerString{
+    text-indent:2em;
+}
