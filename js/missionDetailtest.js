@@ -2,7 +2,7 @@ var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-
+var allCommit = true;
 var isUseTrace = "0";
 //是否有轨迹功能传参
 try {
@@ -98,8 +98,10 @@ function getNetData() {
                         var taskStateName = "";
                         if (this.fExesituation == 7) {
                             taskStateName = "<span style='color:gray;'>"+Operation['ui_notCheck']+"</span>";
+                            allCommit = false;
                         } else if (this.fExesituation == 8) {
                             taskStateName = "<span style='color:blue;'>"+Operation['ui_checked']+"</span>";
+                            allCommit = false;
                         } else if (this.fExesituation == 9) {
                             taskStateName = "<span style='color:springgreen;'>"+Operation['ui_submitted']+"</span>";
                         } else {
@@ -428,7 +430,13 @@ $("#submitTask").click(function () {
 
 //负责人提交任务
 $("#chargeSubmit").click(function () {
-    $.confirm(Operation['ui_submitTaskTip'], function () {
+    var comfirmTip = "";
+    if(allCommit){
+        comfirmTip = Operation['ui_submitTaskTip'];
+    }else{
+        comfirmTip = Operation['ui_noAllCommit']+Operation['ui_submitTaskTip'];
+    }
+    $.confirm(comfirmTip, function () {
         var param;
         param = {
             fTaskid: taskID
