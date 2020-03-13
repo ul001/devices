@@ -4,6 +4,22 @@ var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+var isAllCommit = true;
+var isUseTrace = "0";
+//是否有轨迹功能传参
+try {
+    if (isIOS) {
+        window.webkit.messageHandlers.iOS.postMessage("");
+        var storage = localStorage.getItem("accessToken");
+        storage = JSON.parse(storage);
+        isUseTrace = storage.isOpenTrack;
+        window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
+    } else if (isAndroid) {
+        isUseTrace = android.getTrackUse();
+    }
+} catch (e) {
+    isUseTrace = "0";
+};
 
 //任务id
 var taskID = localStorage.getItem("taskID");
@@ -282,8 +298,10 @@ function getNetData() {
                 }
                 var taskStateName = "";
                 if (this.fExesituation == 7) {
+                    isAllCommit = false;
                     taskStateName = "<span style=\"color:gray;\">"+Operation['ui_notCheck']+"</span>";
                 } else if (this.fExesituation == 8) {
+                    isAllCommit = false;
                     taskStateName = "<span style=\"color:blue;\">"+Operation['ui_checked']+"</span>";
                 } else if (this.fExesituation == 9) {
                     taskStateName = "<span style=\"color:springgreen;\">"+Operation['ui_submitted']+"</span>";
@@ -397,21 +415,23 @@ function getNetData() {
                 text += "                                    </div>";
                 text += "                                </div>";
                 text += "                            </li>";
-                text += "                            <li>";
-                text +=
-                    '                                <div class="showDiv item-content">';
-                text +=
-                    '                                    <div class="item-inner">';
-                text +=
-                    '                                        <div class="item-title label">' + Operation['ui_trajectory'] + '</div>';
-                text +=
-                    '                                        <div class="item-label">';
-                text += "<a href=\"#\" class=\"button\" style=\"width:70%;\" onClick=\"selectTrace(" + thisUserId + ",'" + this.fTaskstarttime + "','" + this.fCreateTime + "')\">" + Operation['ui_Trackquery'] + '</a>';
-                text += "                                        </div>";
-                text += "                                        </div>";
-                text += "                                    </div>";
-                text += "                                </div>";
-                text += "                            </li>";
+                if(isUseTrace=="1"){
+                    text += "                            <li>";
+                    text +=
+                        '                                <div class="showDiv item-content">';
+                    text +=
+                        '                                    <div class="item-inner">';
+                    text +=
+                        '                                        <div class="item-title label">' + Operation['ui_trajectory'] + '</div>';
+                    text +=
+                        '                                        <div class="item-label">';
+                    text += "<a href=\"#\" class=\"button\" style=\"width:70%;\" onClick=\"selectTrace(" + thisUserId + ",'" + this.fTaskstarttime + "','" + this.fCreateTime + "')\">" + Operation['ui_Trackquery'] + '</a>';
+                    text += "                                        </div>";
+                    text += "                                        </div>";
+                    text += "                                    </div>";
+                    text += "                                </div>";
+                    text += "                            </li>";
+                }
                 text +=
                     "                            <!-- 除自己外 且状态在执行中的任务 -->";
                 // text += "                            <li>";
@@ -532,7 +552,13 @@ getNetData();
 //46.总任务提交按钮事件
 // userIds 1,2,3
 $("#submitTo").click(function () {
-    $.confirm(Operation['ui_submitTaskTip'], function () {
+    var comfirmTip = "";
+    if(isAllCommit){
+        comfirmTip = Operation['ui_submitTaskTip'];
+    }else{
+        comfirmTip = Operation['ui_noAllCommit']+Operation['ui_submitTaskTip'];
+    }
+    $.confirm(comfirmTip, function () {
         var param;
         if (taskTobeSubmitArr.length > 0) {
             var arrStr = taskTobeSubmitArr.join(',');

@@ -433,7 +433,7 @@ var CustomerDevice = (function () {
             pageInfo.forEach(function (val,i) {
                 val.value.forEach(function (value) {
                     var name = decodeURIComponent(value.name);
-                    var prevLable = $($(parent).children(".baseInfoDiv")[i]).find(".item-title:contains('" + name + "')");
+                    var prevLable = $(parent).children(".baseInfoDiv[name='"+val.name+"']").find(".item-title:contains('" + name + "')");
                     var info = decodeURIComponent(value.value);
                     switch (value.type) {
                         case "input":
