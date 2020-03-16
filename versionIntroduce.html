@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/patrolRecord.css" />
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="router1">
+            <!-- <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn back_btn"
+            onclick="window.history.back()"
+          >
+            <span class="icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color">
+           
+            <span data-i18n="ui_Patrolrecord"></span>
+          </h1>
+        </header> -->
+            <!--        <div class="bar bar-header-secondary" style="line-height:2.2rem">
+            <p class="limit-length"><i class="icon icon-sub"></i><span id="subName"></span></p>
+        </div>-->
+            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div id="list-container">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-content-inner row no-gutter">
+                                <!-- <div class="col-10">
+                                    <i class="icon icon-week"></i>
+                                </div> -->
+                                <div class="col-95">
+                                    <p class="subName">2019-07第一次巡视</p>
+                                    <p>版本更新时间：<span class="blueColor">2019-07-16</span></p>
+                                </div>
+                                <div class="col-5">
+                                    <i class="icon icon-right"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-overlay"></div>
+    </div>
+    <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
+    <script src="libs/language.js"></script>
+    <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/versionIntroduce.js"></script>
+</body>
+
+</html>
