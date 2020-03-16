@@ -33,11 +33,12 @@ html {
     text-align: left;
 }
 
-.icon-missionDetail {
+.icon-upload {
+    display: inline-block;
     width: 0.85rem;
     height: 0.85rem;
     margin-bottom: 0.2rem;
-    background-image: url(../img/i-missionDetail.jpg);
+    background-image: url(../img/i-uploadDetail.jpg);
 }
 
 .button i.icon:first-child:last-child {
