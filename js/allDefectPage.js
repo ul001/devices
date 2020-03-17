@@ -151,7 +151,16 @@ function addItems(number, lastIndex) {
                         "                </div>";
                 });
                 $('#list-container').append(html);
+                //声明一个控制点击的变量
+                var upLoadClicktag = true;
                 $(".card").unbind().click(function () {
+                    if(!upLoadClicktag){
+                        return;
+                    }
+                    upLoadClicktag = false;
+                    setTimeout(function() {
+                        upLoadClicktag = true;
+                    }, 1000);
                     var clickId = $(this).attr("id");
                     var clickTree = $(this).attr("value");
                     localStorage.setItem("clickTree", clickTree);

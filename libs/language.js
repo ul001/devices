@@ -146,7 +146,7 @@ function getZhLanguage() {
     //文档分类
     ui_FileList: "文档分类",
     //变电所消缺单
-    ui_SubstationDefect: "变电所消缺单",
+    ui_SubstationDefect: "变电所缺陷单",
     ui_Description: "描述：",
     ui_detriment: "缺陷危害：",
     ui_Specificlocation: "具体位置：",
