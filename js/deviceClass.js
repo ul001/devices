@@ -188,7 +188,7 @@ function linkClick(parentId) {
         upLoadClicktag = false;
         setTimeout(function() {
           upLoadClicktag = true;
-        }, 1000);
+        }, 200);
         var fField = $(this).attr("value");
         thisTempid = fField;
         var clickId = $(this).attr("id");

@@ -702,7 +702,7 @@ jQuery(document).ready(function () {
         upLoadClicktag = false;
         setTimeout(function() {
             upLoadClicktag = true;
-        }, 1000);
+        }, 500);
         var info = customerDevice.getselectInfo();
         if (info.fFunctionfield == undefined) {
             $.toast(Operation['ui_nodevice']);
@@ -756,7 +756,7 @@ jQuery(document).ready(function () {
         upLoadClicktag = false;
         setTimeout(function() {
             upLoadClicktag = true;
-        }, 1000);
+        }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
             $.toast(Operation['ui_cannotcopy']);
@@ -812,7 +812,7 @@ jQuery(document).ready(function () {
         upLoadClicktag = false;
         setTimeout(function() {
             upLoadClicktag = true;
-        }, 1000);
+        }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
             $.toast(Operation['ui_cannotdel']);
@@ -875,7 +875,7 @@ jQuery(document).ready(function () {
         upLoadClicktag = false;
         setTimeout(function() {
             upLoadClicktag = true;
-        }, 1000);
+        }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
             $.toast(Operation['ui_nosave']);
