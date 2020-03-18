@@ -174,7 +174,15 @@ reSetCanvas.onclick = function () {
     setCanvasBg('white');
 };
 
+var upLoadClicktag = true;
 save.onclick = function () {
+    if(!upLoadClicktag){
+        return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+        upLoadClicktag = true;
+    }, 1000);
     var imgBase64 = canvas.toDataURL("image/png");
     // var fileName = (new Date()).getTime() + ".jpeg"; //随机文件名
 

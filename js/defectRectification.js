@@ -118,7 +118,16 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                     "                        </div>\n" +
                     "                    </div>");
             });
+            //声明一个控制点击的变量
+            var upLoadClicktag = true;
             $(".card-content-inner").click(function () {
+                if(!upLoadClicktag){
+                    return;
+                }
+                upLoadClicktag = false;
+                setTimeout(function() {
+                    upLoadClicktag = true;
+                }, 1000);
                 var proId = $(this).attr("id");
                 var dataTree = $(this).attr("data-tree");
                 //                var target_roll_height = $(this).offset().top-$(".content").offset().top+$(".content").scrollTop();

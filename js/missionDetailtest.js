@@ -19,6 +19,8 @@ try {
     isUseTrace = "0";
 };
 
+var upLoadClicktag = true;
+
 //任务id
 var taskID = localStorage.getItem("taskID");
 //巡检单id
@@ -184,6 +186,13 @@ function getNetData() {
                 if (taskInfo.deviceProblemSum > 0) {
                     $("#TotalDefectNum").css("color", "red");
                     $("#TotalDefectNum").click(function () {
+                        if(!upLoadClicktag){
+                          return;
+                        }
+                        upLoadClicktag = false;
+                        setTimeout(function() {
+                          upLoadClicktag = true;
+                        }, 1000);
                         //缺陷整改
                         localStorage.setItem("missionTypeid", missionTypeid);
                         localStorage.setItem("taskID", taskID);
@@ -205,6 +214,13 @@ function getNetData() {
                 if (taskInfo.deviceProblemUnresolved > 0) {
                     $("#Unprocessednumber").css("color", "red");
                     $("#Unprocessednumber").click(function () {
+                        if(!upLoadClicktag){
+                          return;
+                        }
+                        upLoadClicktag = false;
+                        setTimeout(function() {
+                          upLoadClicktag = true;
+                        }, 1000);
                         //缺陷整改
                         localStorage.setItem("missionTypeid", missionTypeid);
                         localStorage.setItem("taskID", taskID);
@@ -333,6 +349,13 @@ $("#taskIn").click(function () {
 
 //执行任务按钮事件
 $(".doDetail").click(function () {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     localStorage.setItem("fSubid", missionsubid);
     localStorage.setItem("taskID", taskID);
     if ($(this).attr("id") == "doTask") {
@@ -369,6 +392,13 @@ $(".doDetail").click(function () {
 
 //提交按钮事件
 $("#submitTask").click(function () {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     $.confirm(Operation['ui_uploadTaskTip'], function () {
         var textDetail = $("#textareaDetail").val();
         if (!textDetail) {
@@ -430,6 +460,13 @@ $("#submitTask").click(function () {
 
 //负责人提交任务
 $("#chargeSubmit").click(function () {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     var comfirmTip = "";
     if(allCommit){
         comfirmTip = Operation['ui_submitTaskTip'];
@@ -469,6 +506,13 @@ $(".pull-left.click_btn").click(function () {
 
 //管理页面
 $("#clickManager").click(function () {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     /*    localStorage.setItem("fSubname", "执行情况");
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/

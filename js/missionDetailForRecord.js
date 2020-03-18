@@ -2,7 +2,7 @@ jQuery(document).ready(function () {
     // $(function () {
 
     var showmissionBtn = localStorage.getItem("showType");
-
+    var upLoadClicktag = true;
     // if (showmissionBtn == "missionDoing") {
     //     localStorage.setItem("canClick", true);
     //     var missionType = localStorage.getItem("missionType");
@@ -98,6 +98,13 @@ jQuery(document).ready(function () {
                         $("#TotalDefectNum").css("color", "red");
                         $("#TotalDefectNum").click(function () {
                             //缺陷整改
+                            if(!upLoadClicktag){
+                              return;
+                            }
+                            upLoadClicktag = false;
+                            setTimeout(function() {
+                              upLoadClicktag = true;
+                            }, 1000);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
                             localStorage.setItem("goBackToList", "1");
@@ -110,6 +117,13 @@ jQuery(document).ready(function () {
                     if (taskInfo.deviceProblemUnresolved > 0) {
                         $("#Unprocessednumber").css("color", "red");
                         $("#Unprocessednumber").click(function () {
+                            if(!upLoadClicktag){
+                              return;
+                            }
+                            upLoadClicktag = false;
+                            setTimeout(function() {
+                              upLoadClicktag = true;
+                            }, 1000);
                             //缺陷整改
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
@@ -174,6 +188,13 @@ jQuery(document).ready(function () {
 
                     //执行任务按钮事件
                     $("#carryOut").click(function () {
+                        if(!upLoadClicktag){
+                          return;
+                        }
+                        upLoadClicktag = false;
+                        setTimeout(function() {
+                          upLoadClicktag = true;
+                        }, 1000);
                         localStorage.setItem("fSubid", missionsubid);
                         localStorage.setItem("fPlacecheckformid", placeCheckFormId);
                         localStorage.setItem("taskID", taskID);
@@ -258,6 +279,13 @@ jQuery(document).ready(function () {
 
     //管理页面
     $("#clickManager").click(function () {
+        if(!upLoadClicktag){
+          return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+          upLoadClicktag = true;
+        }, 1000);
 //        localStorage.setItem("missionSubid", missionsubid);
 //        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("taskID", taskID);

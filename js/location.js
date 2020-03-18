@@ -102,7 +102,13 @@
       document.body.appendChild(script);
     }
 
+    //声明一个控制点击的变量
+    var upLoadClicktag = true;
     function saveLocation() {
+        if(!upLoadClicktag){
+            return;
+        }
+        upLoadClicktag = false;
         var params = {
             fSubid:selectSubid,
             fLongitude:lng,
@@ -112,6 +118,7 @@
         Substation.postDataByAjax("/updateSubstationLocation",params,function(data){
             if(data.code==200){
                 $.toast("保存成功");
+                upLoadClicktag = true;
                 window.location.href="selectedSubstation.html";
             }
         });

@@ -341,6 +341,13 @@ function loadPage() {
 
     function linkClick(parentId) {
         $(".list-block .item-link").unbind().click(function (event) {
+            if(!upLoadClicktag){
+              return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function() {
+              upLoadClicktag = true;
+            }, 1000);
             var clickId = $(this).attr("id");
             //            var params = {
             //                fSubid: selectSubid,
@@ -402,6 +409,13 @@ function loadPage() {
 
     function addRadioClick() {
         $(":radio").change(function () {
+            if(!upLoadClicktag){
+              return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function() {
+              upLoadClicktag = true;
+            }, 1000);
             var clickDeviceId = $(".tab.active").attr("id");
             var radioName = $(this).attr("name");
             var deviceItemCode = $(this).attr("data-code");
@@ -448,6 +462,13 @@ function loadPage() {
     addLeftClick();
 
     $("#saveBtn").click(function () {
+        if(!upLoadClicktag){
+          return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+          upLoadClicktag = true;
+        }, 1000);
         hasSave = true;
         saveThisPage();
     });
@@ -749,7 +770,15 @@ function closePicture(obj) {
 
 loadSavedPic();*/
 
+var upLoadClicktag = true;
 function saveFormData() {
+    if(!upLoadClicktag){
+        return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+        upLoadClicktag = true;
+    }, 1000);
     $(".fileInput").each(function () {
         if ($(this).val() == "" || $(this).val() == null) {
             $(this).remove();
@@ -798,6 +827,13 @@ function saveFormData() {
 
 //巡检记录点击是跳转
 function goToInfo() {
+    if(!upLoadClicktag){
+        return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+        upLoadClicktag = true;
+    }, 1000);
     if (canClick == "false") {
         $(".card-content").unbind().click(function () {
             var thisRadio = $(this).find(":radio:checked");
@@ -821,17 +857,11 @@ function goToInfo() {
         });
     }
 }
-
+var clickBackBtn = 0;
 //返回按钮
 $("#backBtn").click(function () {
-    if (!!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) && !hasSave && canClick != "false") {
-        //ios
-        var r = confirm(Operation['ui_noSaveWantOut'])
-        if (r == true) {
-            window.history.back();
-        } else {
-            return;
-        }
+    if (!hasSave && canClick != "false") {
+        $.confirm(Operation['ui_noSaveWantOut'],function(){clickBackBtn = 1;window.history.back();},function(){});
     } else {
         window.history.back();
     }
@@ -846,9 +876,10 @@ window.addEventListener("resize", function () {
     }
 });
 
-$(window).bind('beforeunload', function () {
+$(window).bind('beforeunload', function (e) {
     if (canClick != "false") {
-        if (!hasSave) {
+        if (!hasSave&&clickBackBtn!=1) {
+            (e || window.event).returnValue = Operation['ui_noSaveWantOut'];
             return Operation['ui_noSaveWantOut'];
         }
     }

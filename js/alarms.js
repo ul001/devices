@@ -92,7 +92,15 @@ function fillData(parentId) {
         } else if(isAndroid){
             android.getAlarmNum(unreadCountSum);
         }
+        var upLoadClicktag = true;
         $(".item-link").unbind().click(function () {
+            if(!upLoadClicktag){
+                return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function() {
+                upLoadClicktag = true;
+            }, 1000);
             var clickId = $(this).attr("value");
             var titleName = $(this).find($(".item-title")).text();
             localStorage.setItem("titleName", titleName);

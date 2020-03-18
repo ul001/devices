@@ -3,15 +3,14 @@ var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-var menuId;
+var menuId = "350";
 if (isIOS) {
     window.webkit.messageHandlers.iOS.postMessage(null);
     var storage = localStorage.getItem("accessToken");
     storage = JSON.parse(storage);
     menuId = storage.fmenuId;
-} else {
+} else if(isAndroid){
     menuId = android.getMenuId();
-    //menuId = 350;
 }
 
 // window.addEventListener('pageshow', function (e) {
@@ -98,8 +97,15 @@ function fillData(parentId) {
     // });
     // }
     // });
-
+    var upLoadClicktag = true;
     $(".item-link").unbind().click(function () {
+        if(!upLoadClicktag){
+          return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+          upLoadClicktag = true;
+        }, 1000);
         var clickId = $(this).attr("value");
         var titleName = $(this).find($(".item-title")).text();
         localStorage.setItem("titleName", titleName);

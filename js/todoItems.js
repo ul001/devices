@@ -348,7 +348,16 @@ jQuery(document).ready(function () {
           $(list).append(text);
           // $(".list-container").append(text);
           //我要处理 巡视
+          //声明一个控制点击的变量
+          var upLoadClicktag = true;
           $(".card1").unbind().click(function () {
+            if(!upLoadClicktag){
+                return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function() {
+                upLoadClicktag = true;
+            }, 1000);
             var taskID = $(this).attr("id");
 //            var tasktypeid = $(this).attr("name");
 //            localStorage.setItem("showType", "missionFinish");
@@ -472,8 +481,17 @@ jQuery(document).ready(function () {
           $(list).append(text);
         }
         //addClick();
+        //声明一个控制点击的变量
+        var upLoadClicktag = true;
         $(".card2").unbind().click(function () {
-          var taskID = $(this).attr("name");
+            if(!upLoadClicktag){
+                return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function() {
+                upLoadClicktag = true;
+            }, 1000);
+            var taskID = $(this).attr("name");
 //          var tasktypeid = $(this).attr("data-taskid");
 //          if (tasktypeid == 1) {
             //巡视任务
