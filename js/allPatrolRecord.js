@@ -157,7 +157,15 @@ function addItems(number) {
                     localStorage.setItem("taskID",clickTaskId);
                     window.location.href="missionDetailForRecord.html";
                 });*/
+                var upLoadClicktag = true;
                 $(".card").unbind().click(function () {
+                    if(!upLoadClicktag){
+                        return;
+                    }
+                    upLoadClicktag = false;
+                    setTimeout(function() {
+                        upLoadClicktag = true;
+                    }, 1000);
                     var fPlacecheckformid = $(this).attr("id");
                     var clickSub = $(this).attr("data-id");
                     var clickTaskId = $(this).attr("data-task");

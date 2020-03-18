@@ -351,7 +351,15 @@ function closePicture(obj) {
 
 //loadSavedPic();
 
+var upLoadClicktag = true;
 function saveFormData() {
+  if(!upLoadClicktag){
+      return;
+  }
+  upLoadClicktag = false;
+  setTimeout(function() {
+      upLoadClicktag = true;
+  }, 1000);
   $(".fileInput").each(function () {
     if ($(this).val() == "" || $(this).val() == null) {
       $(this).remove();

@@ -43,6 +43,7 @@ var selectSubid = localStorage.getItem("fSubid");
 var selectSubname = localStorage.getItem("fSubname");
 $("#titleContent").text(selectSubname);
 var thisMenuList = [];
+var upLoadClicktag = true;
 
 if (localStorage.getItem("need-refresh") == "true") {
     localStorage.removeItem("need-refresh");
@@ -181,6 +182,13 @@ function fillH5(parentId) {
 
 function linkClick(parentId) {
     $(".item-content").click(function (event) {
+        if(!upLoadClicktag){
+          return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+          upLoadClicktag = true;
+        }, 1000);
         var fField = $(this).attr("value");
         thisTempid = fField;
         var clickId = $(this).attr("id");
@@ -359,6 +367,13 @@ function confirmSort() {
 }
 
 function addDeviceClass() {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     localStorage.setItem("pids", JSON.stringify(pids));
     localStorage.setItem("pid", thisPid);
     localStorage.setItem("clickNum", clickNum);

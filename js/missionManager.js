@@ -549,9 +549,17 @@ getNetData();
 //     }
 // });
 
+var upLoadClicktag = true;
 //46.总任务提交按钮事件
 // userIds 1,2,3
 $("#submitTo").click(function () {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     var comfirmTip = "";
     if(isAllCommit){
         comfirmTip = Operation['ui_submitTaskTip'];
@@ -641,6 +649,13 @@ $(".pull-left.click_btn").click(function () {
 // });
 
 function selectTrace(getUserid, startTime, endTime) {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     if (startTime != "undefined" && startTime != "") {
         startTime = startTime.replace(/-/g, '/');
         startTime = new Date(startTime).getTime() / 1000;

@@ -19,7 +19,15 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
+var upLoadClicktag = true;
 function goToLocation(subid) {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     localStorage.setItem("fSubid", subid);
     if (isAndroid) {
         android.goToIn3();
@@ -29,6 +37,13 @@ function goToLocation(subid) {
 }
 
 function goToDevice(subId, subname) {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
     if (isAndroid) {
@@ -39,6 +54,13 @@ function goToDevice(subId, subname) {
 }
 
 function goToPhoto(subId) {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     localStorage.setItem("fSubid", subId);
     if (isAndroid) {
         android.goToIn2();

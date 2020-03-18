@@ -32,7 +32,15 @@ $(document).on("refresh", ".pull-to-refresh-content", function (e) {
     }, 2000);
 });
 
+var upLoadClicktag = true;
 function downloadFile(filecode, filepath, filename) {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
     if (isAndroid) {
         android.openFile(
             Substation.ipAddressFromAPP + filepath + "/" + filecode

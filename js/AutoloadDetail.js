@@ -693,8 +693,16 @@ jQuery(document).ready(function () {
     var Subname = localStorage.getItem("fSubname");
     $("#titleContent").html(Subname);
 
+    var upLoadClicktag = true;
     // 新增按钮
     $("#Add").on("click", function () {
+        if(!upLoadClicktag){
+            return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+            upLoadClicktag = true;
+        }, 1000);
         var info = customerDevice.getselectInfo();
         if (info.fFunctionfield == undefined) {
             $.toast(Operation['ui_nodevice']);
@@ -742,6 +750,13 @@ jQuery(document).ready(function () {
 
     // 复制按钮
     $("#copy").on("click", function () {
+        if(!upLoadClicktag){
+            return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+            upLoadClicktag = true;
+        }, 1000);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
             $.toast(Operation['ui_cannotcopy']);
@@ -791,6 +806,13 @@ jQuery(document).ready(function () {
 
     // 删除按钮
     $("#delete").on("click", function () {
+        if(!upLoadClicktag){
+            return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+            upLoadClicktag = true;
+        }, 1000);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
             $.toast(Operation['ui_cannotdel']);
@@ -847,6 +869,13 @@ jQuery(document).ready(function () {
 
     // 保存按钮点击
     $("#save").on("click", function () {
+        if(!upLoadClicktag){
+            return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function() {
+            upLoadClicktag = true;
+        }, 1000);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
             $.toast(Operation['ui_nosave']);
