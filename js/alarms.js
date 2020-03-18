@@ -3,13 +3,13 @@ var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-var menuId;
+var menuId = "342";
 if (isIOS) {
     window.webkit.messageHandlers.iOS.postMessage(null);
     var storage = localStorage.getItem("accessToken");
     storage = JSON.parse(storage);
     menuId = storage.fmenuId;
-} else {
+} else if(isAndroid){
     menuId = android.getMenuId();
 }
 
@@ -89,7 +89,7 @@ function fillData(parentId) {
                 'unreadCountSum': unreadCountSum
             };
             window.webkit.messageHandlers.jsToOcWithPrams.postMessage(message);
-        } else {
+        } else if(isAndroid){
             android.getAlarmNum(unreadCountSum);
         }
         $(".item-link").unbind().click(function () {
