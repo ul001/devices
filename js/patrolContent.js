@@ -347,7 +347,7 @@ function loadPage() {
             upLoadClicktag = false;
             setTimeout(function() {
               upLoadClicktag = true;
-            }, 1000);
+            }, 200);
             var clickId = $(this).attr("id");
             //            var params = {
             //                fSubid: selectSubid,
