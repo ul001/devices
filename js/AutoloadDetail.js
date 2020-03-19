@@ -459,7 +459,10 @@ var CustomerDevice = (function () {
                             });
                             break;
                         case "date":
-                            $(prevLable).next("input").val(value.value);
+                            $(prevLable).next($(".dateTime")).val(value.value);
+                            try{
+                                $(prevLable).next($(".datetime-local")).val(value.value.replace(" ","T"));
+                            }catch(e){}
                             break;
                     }
                 })
@@ -598,16 +601,33 @@ var CustomerDevice = (function () {
                     // string = '<div class="showDiv">' +
                     //     '<label class="nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' + ':' +
                     //     '<input type="text" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '">';
-                    string =
-                        '<li><div class="showDiv item-content"><div class="item-inner">' +
-                        '<label class="item-title label nameInputInfo" name="date">' +
-                        decodeURIComponent(val.name) +
-                        "</label>" +
-                        '<input type="date" class="daycalendarBox' +
-                        count +
-                        ' dateTime" value="' +
-                        decodeURIComponent(val.value) +
-                        '"></div></div></li>';
+                    if(val.value=="devInstall"){
+                        string ='<li><div class="showDiv item-content"><div class="item-inner">' +
+                            '<label class="item-title label nameInputInfo" name="date">' +
+                            decodeURIComponent(val.name) +
+                            "</label>" +
+                            '<input type="datetime-local" class="daycalendarBox' +
+                            count +
+                            ' datetime-local" value=""></div></div></li>';
+                    }else if(val.value=="devicewarranty"){
+                        string ='<li><div class="showDiv item-content"><div class="item-inner">' +
+                            '<label class="item-title label nameInputInfo" name="date">' +
+                            decodeURIComponent(val.name) +
+                            "</label>" +
+                            '<input type="number" class="daycalendarBox' +
+                            count +
+                            ' dateTime" value="">'+Operation['ui_month']+'</div></div></li>';
+                    }else{
+                        string ='<li><div class="showDiv item-content"><div class="item-inner">' +
+                            '<label class="item-title label nameInputInfo" name="date">' +
+                            decodeURIComponent(val.name) +
+                            "</label>" +
+                            '<input type="date" class="daycalendarBox' +
+                            count +
+                            ' dateTime" value="' +
+                            decodeURIComponent(val.value) +
+                            '"></div></div></li>';
+                    }
                     break;
             }
             $(select).append(string);
@@ -929,7 +949,14 @@ jQuery(document).ready(function () {
                             break;
                         case "date":
                             // value = $(val).children().children(".dateTime").val();
-                            value = $(val).find($(".dateTime")).val();
+                            if($(val).find($(".dateTime"))){
+                                value = $(val).find($(".dateTime")).val();
+                            }
+                            if($(val).find($(".datetime-local"))){
+                                try{
+                                    value = $(val).find($(".datetime-local")).val().replace("T"," ");
+                                }catch(e){}
+                            }
                             break;
                     }
                     row.type = type;
