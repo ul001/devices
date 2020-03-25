@@ -603,12 +603,12 @@ var CustomerDevice = (function () {
                     //     '<input type="text" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '">';
                     if(val.value=="devInstall"){
                         string ='<li><div class="showDiv item-content"><div class="item-inner">' +
-                            '<label class="item-title label nameInputInfo" name="date">' +
+                            '<label class="item-title label nameInputInfo" style="width:initial;" name="date">' +
                             decodeURIComponent(val.name) +
                             "</label>" +
                             '<input type="datetime-local" class="daycalendarBox' +
                             count +
-                            ' datetime-local" value=""></div></div></li>';
+                            ' datetime-local" min="2010-01-01T00:00" max="2050-01-01T00:00" value=""/></div></div></li>';
                     }else if(val.value=="devicewarranty"){
                         string ='<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" name="date">' +
