@@ -1281,19 +1281,28 @@ var CustomReport = (function () {
         }
 
         $(document).on("click", ".img", function (event) {
-            imgshow($(this), $("#bigimg"), $("#innerdiv"), $("#outterdiv"));
+//            imgshow($(this), $("#bigimg"), $("#outterdiv"));
+            imgDisplay(this);
         });
 
-        function imgshow(_this, bigimg, innerdiv, outterdiv) {
+        function imgDisplay(obj) {
+          var src = $(obj).attr("src");
+          var imgHtml =
+            '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img onclick="closePicture(this)" src=' +
+            src +
+            ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>';
+          $("body").append(imgHtml);
+        }
+
+        function imgshow(_this, bigimg, outterdiv) {
             outterdiv[0].style.display = "block";
             var src = _this.attr("data-url");
             if (src == undefined || src == "") {
                 src = _this.attr("src");
             }
             bigimg.attr("src", src);
-            $("<img/>")
-                .attr("src", src)
-                .load(function () {
+            $("<img/>").attr("src", src);
+                /*.load(function () {
                     var windowW = $(window).innerWidth();
                     var windowH = $(window).innerHeight();
                     var realwidth = this.width;
@@ -1334,7 +1343,7 @@ var CustomReport = (function () {
                 $(this).fadeOut("fast");
                 outterdiv[0].style.display = "none";
                 document.body.style.overflow = null;
-            });
+            });*/
         }
 
         //现场运维情况-无图片
@@ -2105,3 +2114,8 @@ jQuery(document).ready(function () {
         $("#outTip").hide();
     }
 });
+function closePicture(obj) {
+  $(obj)
+    .parent("div")
+    .remove();
+}
