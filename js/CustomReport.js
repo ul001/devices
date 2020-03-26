@@ -732,7 +732,7 @@ var CustomReport = (function () {
             $("#monitorDiv" + num).bootstrapTable({
                 data: moniData,
                 columns: columns,
-                height:300
+                height: 300
             });
         }
 
@@ -757,9 +757,9 @@ var CustomReport = (function () {
             };
             var legend = {
                 enabled: istrue,
-                margin:0,
-                x:0,
-                y:20,
+                margin: 0,
+                x: 0,
+                y: 20,
             };
             var plotOption = {
                 series: {
@@ -864,7 +864,7 @@ var CustomReport = (function () {
             $("#eventTable" + num).bootstrapTable({
                 data: neweventData,
                 columns: columns,
-                height:180
+                height: 180
             });
         }
 
@@ -932,7 +932,7 @@ var CustomReport = (function () {
             $("#sigeveDiv" + num).bootstrapTable({
                 data: sigData,
                 columns: columns,
-                height:180
+                height: 180
             });
 
             var sigeventstring =
@@ -1313,15 +1313,18 @@ var CustomReport = (function () {
                         imgwidth = realwidth;
                         imgheight = realheight;
                     }
-                    bigimg.css("width", imgwidth);
-                    bigimg.css("height", imgheight);
+                    // bigimg.css("width", imgwidth);
+                    // bigimg.css("height", imgheight);
+                    bigimg.css("width", '95%');
+                    bigimg.css("height", '95%');
                     var h = imgheight / 2;
                     var w = imgwidth / 2;
                     innerdiv.css({
                         positon: "relative"
                     });
                     outterdiv[0].style.top = "calc(50% - " + h + "px)";
-                    outterdiv[0].style.left = "calc(50% - " + w + "px)";
+                    // outterdiv[0].style.left = "calc(50% - " + w + "px)";
+                    outterdiv[0].style.left = "5%";
                     $("body").css({
                         overflow: "hidden"
                     });
@@ -1865,20 +1868,19 @@ jQuery(document).ready(function () {
 
     //添加右上角事件
     var subObj = JSON.parse(localStorage.getItem("subObj"));
-    try{
-        if(isAndroid){
+    try {
+        if (isAndroid) {
             subObj = JSON.parse(android.getSpItem("subObj"));
         }
-    }catch(e){
-    }
+    } catch (e) {}
     var selectSubid = "";
     var clickSubid = "";
     var clickName = "";
     getSomeSubstation(1);
-    if(subObj!=null&&subObj!=undefined){
+    if (subObj != null && subObj != undefined) {
         selectSubid = subObj.subId;
         $("#search").val(subObj.subName);
-        $(".item-content[data-id="+subObj.subId+"]").addClass("select").siblings().removeClass("select");
+        $(".item-content[data-id=" + subObj.subId + "]").addClass("select").siblings().removeClass("select");
     }
     $("#outTip").click(function () {
         $("#outTip").hide();
@@ -1888,9 +1890,9 @@ jQuery(document).ready(function () {
                 clickSubid = saveParam['fSubid'];
                 saveParam=null;
             }*/
-        var start = new Date($("#dateStart").val().replace(/-/g,'/'));
-        var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
-        if(start>end){
+        var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+        var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+        if (start > end) {
             $.toast(Operation['ui_dateselecttip']);
             return;
         }
@@ -1901,14 +1903,16 @@ jQuery(document).ready(function () {
         } else if (clickSubid != "") {
             //        $("#subName").text($("#search").val());
             selectSubid = clickSubid;
-            var subObj = {subId:clickSubid,subName:clickName};
-            localStorage.setItem("subObj",JSON.stringify(subObj));
-            try{
-                if(isAndroid){
-                    android.setSpItem("subObj",JSON.stringify(ubObj));
+            var subObj = {
+                subId: clickSubid,
+                subName: clickName
+            };
+            localStorage.setItem("subObj", JSON.stringify(subObj));
+            try {
+                if (isAndroid) {
+                    android.setSpItem("subObj", JSON.stringify(ubObj));
                 }
-            }catch(e){
-            }
+            } catch (e) {}
             clickSubid = "";
         }
         $("#outTip").hide();
@@ -1937,19 +1941,19 @@ jQuery(document).ready(function () {
 
     function getSomeSubstation(isAll) {
         var url = "/getSubListByLetter";
-        if(isAll==1){
+        if (isAll == 1) {
             url = "/getSubstationListByUser";
         }
-        var listObj=[];
+        var listObj = [];
         var searchKey = $("#search").val();
         var params = {
             key: searchKey
         }
         $("#listContainer").empty();
         Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            if(isAll == 1){
+            if (isAll == 1) {
                 listObj = data.list;
-            }else{
+            } else {
                 listObj = data;
             }
             $(listObj).each(function () {
@@ -1987,17 +1991,17 @@ jQuery(document).ready(function () {
         }
     });
 
-    $('#search').on("focus",function(){
-        if($("#search").val().length>0){
+    $('#search').on("focus", function () {
+        if ($("#search").val().length > 0) {
             $(".icon.icon-clear").show();
-        }else{
+        } else {
             $(".icon.icon-clear").hide();
         }
     });
 
-/*    $('#search').blur(function(){
-        $(".icon.icon-clear").hide();
-    });*/
+    /*    $('#search').blur(function(){
+            $(".icon.icon-clear").hide();
+        });*/
 
     $(".icon.icon-clear").click(function () {
         $("#search").val("");
@@ -2080,10 +2084,10 @@ jQuery(document).ready(function () {
     });
 
     $(".back_btn").click(function () {
-//        var u = navigator.userAgent,
-//            app = navigator.appVersion;
-//        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-//        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+        //        var u = navigator.userAgent,
+        //            app = navigator.appVersion;
+        //        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+        //        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
         if (isIOS) {
             window.webkit.messageHandlers.goBackiOS.postMessage("");
         } else {
@@ -2096,7 +2100,7 @@ jQuery(document).ready(function () {
     if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
         $(".pull-right").click();
         $.toast(Operation['ui_subSelectTip']);
-    }else{
+    } else {
         $('#searchBtn').click();
         $("#outTip").hide();
     }
