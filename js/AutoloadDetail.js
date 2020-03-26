@@ -608,7 +608,7 @@ var CustomerDevice = (function () {
                             "</label>" +
                             '<input type="datetime-local" class="daycalendarBox' +
                             count +
-                            ' datetime-local" min="2010-01-01T00:00" max="2050-01-01T00:00" value=""/></div></div></li>';
+                            ' datetime-local" style="text-align:end;" min="2010-01-01T00:00" max="2050-01-01T00:00" value=""/></div></div></li>';
                     }else if(val.value=="devicewarranty"){
                         string ='<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" name="date">' +
