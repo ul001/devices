@@ -2,8 +2,8 @@ var loading = false;
 var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
-//var clickID = Substation.GetQueryString("clickID");
-var clickID = "platform";
+var clickID = Substation.GetQueryString("clickID");
+// var clickID = "platform";
 var titleName = localStorage.getItem("titleName");
 $(".title.title_color").text(titleName);
 var u = navigator.userAgent,
@@ -34,24 +34,46 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 function addItems(number, lastIndex) {
     var html = '';
     var url = "";
-    if (clickID == "bianwei") {
-        url = "/getWarningMessageSignalEvents";
-        //$(".title").html("遥信变位报警");
-    } else if (clickID == "yuexian") {
-        url = "/getWarningMessageOverLimitEvents";
-        //$(".title").html("遥测越限报警");
-    } else if (clickID == "platform") {
-        url = "/getWarningMessagePlatformRunEvents";
-        //$(".title").html("平台运行报警");
-    }
+    // if (clickID == "bianwei") {
+    //     url = "/getWarningMessageSignalEvents";
+    //     //$(".title").html("遥信变位报警");
+    // } else if (clickID == "yuexian") {
+    //     url = "/getWarningMessageOverLimitEvents";
+    //     //$(".title").html("遥测越限报警");
+    // } else if (clickID == "platform") {
+    //     url = "/getWarningMessagePlatformRunEvents";
+    //     //$(".title").html("平台运行报警");
+    // }
     // var searchKey = $("#search").val();
     var params = {
+        fMessinfotypeID: clickID,
         pageNo: pageNum,
         pageSize: number
         // key: searchKey
     };
-    Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            var datadic = data.WarningMessage;
+    // fAlarmeventlogid: 3
+
+    // fAlarmtime: "2020-03-27 06:43:23"
+
+    // fConfirmstatus: false
+
+    // fDevicecode: "40400006000"
+
+    // fDevicename: "1"
+
+    // fMessInfoExplain: "网关离线"
+
+    // fMessInfoTypeExplain: "通讯状态"
+
+    // fMessinfocode: "gatewayOffline"
+
+    // fMessinfotypeid: 2
+
+    // fSubid: 40400006
+
+    // fSubname: "测试变电所"
+    Substation.getDataByAjaxNoLoading("/getAlarmEventLogList", params, function (data) {
+            var datadic = data.alarmEventLogList;
             if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
                 if (pageNum == 1) {
                     $(".list-container").empty();
@@ -60,18 +82,18 @@ function addItems(number, lastIndex) {
                     html += "<div class=\"card\">\n" +
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"content-padded\">\n" +
-                        "                            <div class=\"row no-gutter sub_card" + (this.fIsread == true ? "" : " unRead") + "\">\n" +
+                        "                            <div class=\"row no-gutter sub_card\">\n" +
                         "                                <div class=\"col-10 selectAlarms\">\n" +
                         "                                    <input type=\"checkbox\" name=\"checkbox\">\n" +
                         "                                </div>\n" +
                         "                                <div class=\"col-60\">\n" +
                         "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
-                        "                                    <P>" + Operation['ui_MeterName'] + (clickID == "platform" ? (this.fDevicename) : (this.fMetername)) + "</P>\n" +
-                        "                                    <p>" + Operation['ui_EventType'] + this.fAlarmtype + "</p>\n" +
+                        "                                    <P>" + Operation['ui_MeterName'] + (clickID == "platform" ? (this.fDevicename) : (this.fDevicename)) + "</P>\n" +
+                        "                                    <p>" + Operation['ui_EventType'] + this.fMessInfoExplain + "</p>\n" +
                         "                                </div>\n" +
                         "                                <div class=\"col-25\">\n" +
                         "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
-                        "                                    <p><span class=\"cardtime\">" + this.fStarttime + "</span></p>" +
+                        "                                    <p><span class=\"cardtime\">" + this.fAlarmtime + "</span></p>" +
                         "                                </div>\n" +
                         "                                <div class=\"col-5\">\n" +
                         "                                    <i class=\"icon icon-right\"></i>\n" +
@@ -84,7 +106,7 @@ function addItems(number, lastIndex) {
                 $('.list-container').append(html);
                 addCardLongClick();
                 //addClick();
-                Substation.getDataByAjaxNoLoading("/close",{},function(){});
+                Substation.getDataByAjaxNoLoading("/close", {}, function () {});
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
@@ -111,7 +133,7 @@ function addItems(number, lastIndex) {
         });
 }
 
-//addItems(itemsPerLoad, 0);
+addItems(itemsPerLoad, 0);
 
 var lastIndex = 10;
 
@@ -146,19 +168,19 @@ function goBack() {
     }
 }
 
-function selectAll(){
-    if($(".back_btn").text()=="全选"){
+function selectAll() {
+    if ($(".back_btn").text() == "全选") {
         $(".back_btn").text("全不选");
-        $("input:checkbox").prop("checked","checked");
-    }else{
+        $("input:checkbox").prop("checked", "checked");
+    } else {
         $(".back_btn").text("全选");
         $("input:checkbox").removeAttr("checked");
     }
 }
 
-$(".back_btn").on("click",goBack);
+$(".back_btn").on("click", goBack);
 $(".item-media").hide();
-$(".manager_btn").on("click",manageCard);
+$(".manager_btn").on("click", manageCard);
 
 function manageCard() {
     //点击管理切换样式
@@ -172,12 +194,12 @@ function manageCard() {
         $(".item-media").show();
         $(".item-link").removeClass("item-link");
         $(".label-checkbox.item-content").off("touchstart touchmove touchend");
-        $(".back_btn").off("click").on("click",selectAll);
-        $(".hasConfirmed input").prop("checked","checked").attr("disabled",true);
-//        html += '<nav class="bar bar-footer row">' +
-//            '<a href="#" class="button bg-primary col-33" onclick=""><i class="icon icon-downChange"></i>确认</a>' +
-//            '</nav>';
-//        $(".content").after(html);
+        $(".back_btn").off("click").on("click", selectAll);
+        $(".hasConfirmed input").prop("checked", "checked").attr("disabled", true);
+        //        html += '<nav class="bar bar-footer row">' +
+        //            '<a href="#" class="button bg-primary col-33" onclick=""><i class="icon icon-downChange"></i>确认</a>' +
+        //            '</nav>';
+        //        $(".content").after(html);
     } else {
         $(".selectAlarms").toggle();
         $(".bar-footer").toggle();
@@ -186,35 +208,35 @@ function manageCard() {
         addCardLongClick();
         $(".item-media").hide();
         $(".manager_btn").text("管理");
-        html += '<span class="icon icon-left"></span>' + '<span>'+Operation['ui_back']+'</span>';
+        html += '<span class="icon icon-left"></span>' + '<span>' + Operation['ui_back'] + '</span>';
         $(".back_btn").html(html);
-        $(".back_btn").off("click").on("click",goBack);
+        $(".back_btn").off("click").on("click", goBack);
         $("input[type='checkbox']:checked").removeAttr("checked").removeAttr("disabled");
     }
 }
 
 addCardLongClick();
 
-document.addEventListener("click",function(){
+document.addEventListener("click", function () {
     $("#showDiv").hide();
 });
 
-$("#confirmed").on("click",function(){
+$("#confirmed").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
-    $("#"+thisId).addClass("hasConfirmed");
+    $("#" + thisId).addClass("hasConfirmed");
 });
-$("#unConfirm").on("click",function(){
+$("#unConfirm").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
-    $("#"+thisId).removeClass("hasConfirmed");
+    $("#" + thisId).removeClass("hasConfirmed");
 });
-$("#manage").on("click",manageCard);
+$("#manage").on("click", manageCard);
 
-function addCardLongClick(){
-    var longClick =0;
+function addCardLongClick() {
+    var longClick = 0;
     $(".item-link").on({
         touchstart: function (e) {
             var thisCardId = $(this).parent(".card").attr("id");
-            longClick =0;
+            longClick = 0;
             timeOutEvent = setTimeout(function () {
                 longClick = 1;
                 var touch = e.originalEvent.targetTouches[0];
@@ -222,17 +244,17 @@ function addCardLongClick(){
                 var screenHeight = $(window).height();
                 var divWidth = $("#showDiv").width();
                 var divHeight = $("#showDiv").height();
-                if(divWidth+touch.pageX>screenWidth){
-                    $("#showDiv").css("left",touch.pageX-divWidth+'px');
-                }else{
-                    $("#showDiv").css("left",touch.pageX+'px');
+                if (divWidth + touch.pageX > screenWidth) {
+                    $("#showDiv").css("left", touch.pageX - divWidth + 'px');
+                } else {
+                    $("#showDiv").css("left", touch.pageX + 'px');
                 }
-                if(divHeight+touch.pageY+10>screenHeight){
-                    $("#showDiv").css("top",touch.pageY -10-divHeight+'px');
-                }else{
-                    $("#showDiv").css("top",touch.pageY+10+'px');
+                if (divHeight + touch.pageY + 10 > screenHeight) {
+                    $("#showDiv").css("top", touch.pageY - 10 - divHeight + 'px');
+                } else {
+                    $("#showDiv").css("top", touch.pageY + 10 + 'px');
                 }
-                $("#showDiv").attr("data-id",thisCardId);
+                $("#showDiv").attr("data-id", thisCardId);
                 $("#showDiv").show();
             }, 500);
         },
@@ -244,10 +266,10 @@ function addCardLongClick(){
         touchend: function (e) {
             clearTimeout(timeOutEvent);
             if (timeOutEvent != 0 && longClick == 0) { //点击
-                if($("#showDiv").is(':visible')){
+                if ($("#showDiv").is(':visible')) {
                     $("#showDiv").hide();
-                }else{
-                    window.location.href="alarmDetailView.html";
+                } else {
+                    window.location.href = "alarmDetailView.html";
                 }
             }
             return false;
@@ -273,21 +295,22 @@ $("#dateStart").calendar();
 $("#dateEnd").calendar();
 $("#listContainer").hide();
 getSomeSubstation(1);
+
 function getSomeSubstation(isAll) {
     var url = "/getSubListByLetter";
-    if(isAll==1){
+    if (isAll == 1) {
         url = "/getSubstationListByUser";
     }
-    var listObj=[];
+    var listObj = [];
     var searchKey = $("#search").val();
     var params = {
         key: searchKey
     };
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        if(isAll == 1){
+        if (isAll == 1) {
             listObj = data.list;
-        }else{
+        } else {
             listObj = data;
         }
         $(listObj).each(function () {
@@ -334,10 +357,10 @@ $("#search").on("input", function () {
     }
 });
 
-$('#search').on("focus",function(){
-    if($("#search").val().length>0){
+$('#search').on("focus", function () {
+    if ($("#search").val().length > 0) {
         $(".icon.icon-clear").show();
-    }else{
+    } else {
         $(".icon.icon-clear").hide();
     }
 });

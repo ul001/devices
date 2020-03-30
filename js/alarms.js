@@ -9,7 +9,7 @@ if (isIOS) {
     var storage = localStorage.getItem("accessToken");
     storage = JSON.parse(storage);
     menuId = storage.fmenuId;
-} else if(isAndroid){
+} else if (isAndroid) {
     menuId = android.getMenuId();
 }
 
@@ -31,22 +31,40 @@ window.addEventListener('pageshow', function (e) {
 function loadMenu() {
     $(".list-container").empty();
     $.showPreloader(Operation['ui_loading']);
-    Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
-        pid: menuId
-    }, function (data) {
-        if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
-            $(data.menuList).each(function () {
-                $(".list-container").append("<li class=\"item-content item-link\" id=\"" + this.fMenuid + "\" value=\"" + this.fCode + "\">\n" +
+    Substation.getDataByAjaxNoLoading("/getMessInfoType", "", function (data) {
+        if (data.hasOwnProperty("tDtMessInfoType") && data.tDtMessInfoType.length > 0) {
+            $(data.tDtMessInfoType).each(function () {
+                if (this.fMessinfotypeid == '1') {
+                    return true;
+                }
+                $(".list-container").append("<li class=\"item-content item-link\" id=\"item" + this.fMessinfotypeid + "\" value=\"" + this.fMessinfotypeid + "\">\n" +
                     "                        <div class=\"item-media\"><i class=\"icon icon-alarm\"></i></div>\n" +
                     "                        <div class=\"item-inner\">\n" +
-                    "                            <div class=\"item-title\">" + this.fMenuname + "</div>\n" +
-                    "                            <div class=\"item-after\" id=\"" + this.fCode + "\"></div>\n" +
+                    "                            <div class=\"item-title\">" + this.fMessinfotypeexplain + "</div>\n" +
+                    "                            <div class=\"item-after\" id=\"" + this.fMessinfotypeid + "\"></div>\n" +
                     "                        </div>\n" +
                     "                    </li>")
             });
             fillData(0);
         }
     });
+
+    // Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
+    //     pid: menuId
+    // }, function (data) {
+    //     if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
+    //         $(data.menuList).each(function () {
+    //             $(".list-container").append("<li class=\"item-content item-link\" id=\"" + this.fMenuid + "\" value=\"" + this.fCode + "\">\n" +
+    //                 "                        <div class=\"item-media\"><i class=\"icon icon-alarm\"></i></div>\n" +
+    //                 "                        <div class=\"item-inner\">\n" +
+    //                 "                            <div class=\"item-title\">" + this.fMenuname + "</div>\n" +
+    //                 "                            <div class=\"item-after\" id=\"" + this.fCode + "\"></div>\n" +
+    //                 "                        </div>\n" +
+    //                 "                    </li>")
+    //         });
+    //         fillData(0);
+    //     }
+    // });
 }
 
 function fillData(parentId) {
@@ -72,7 +90,6 @@ function fillData(parentId) {
                         unreadCountSum += value.count;
                     }
                 }
-
             } else if (name == "平台运行") {
                 if ($("#platform")) {
                     if (value.count > 0) {
@@ -89,35 +106,37 @@ function fillData(parentId) {
                 'unreadCountSum': unreadCountSum
             };
             window.webkit.messageHandlers.jsToOcWithPrams.postMessage(message);
-        } else if(isAndroid){
+        } else if (isAndroid) {
             android.getAlarmNum(unreadCountSum);
         }
         var upLoadClicktag = true;
         $(".item-link").unbind().click(function () {
-            if(!upLoadClicktag){
+            if (!upLoadClicktag) {
                 return;
             }
             upLoadClicktag = false;
-            setTimeout(function() {
+            setTimeout(function () {
                 upLoadClicktag = true;
             }, 1000);
             var clickId = $(this).attr("value");
             var titleName = $(this).find($(".item-title")).text();
             localStorage.setItem("titleName", titleName);
             if (clickId != "" && clickId != null) {
-                //                if (isIOS) {
-                //                    window.webkit.messageHandlers.pushNewWebView.postMessage({
-                //                        "title": titleName,
-                //                        "url": "?clickID=" + clickId
-                //                    });
-                //                } else {
+                // if (isAndroid) {
+                //     android.goToWebActivity(titleName, "alarmsDetail.html?clickID=" + clickId);
+                // } else if (isIOS) {
+                //     window.location.href = "alarmsDetail.html?clickID=" + clickId;
+                //     window.webkit.messageHandlers.needHiddenTabbar.postMessage("YES");
+                // } else {
+                //     window.location.href = "alarmsDetail.html?clickID=" + clickId;
+                // }
                 if (isAndroid) {
-                    android.goToWebActivity(titleName, "alarmsDetail.html?clickID=" + clickId);
+                    android.goToWebActivity(titleName, "alarmsDetailNew.html?clickID=" + clickId);
                 } else if (isIOS) {
-                    window.location.href = "alarmsDetail.html?clickID=" + clickId;
+                    window.location.href = "alarmsDetailNew.html?clickID=" + clickId;
                     window.webkit.messageHandlers.needHiddenTabbar.postMessage("YES");
                 } else {
-                    window.location.href = "alarmsDetail.html?clickID=" + clickId;
+                    window.location.href = "alarmsDetailNew.html?clickID=" + clickId;
                 }
             }
         });
