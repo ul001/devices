@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>设备分类</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" type="text/css" href="css/mainPrint.css" />
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap-table.min.css" />
+    <link rel="stylesheet" href="css/DeviceControlList.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page">
+            <!--        <div class="right-main" style="overflow: auto">-->
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_devicesort"></span>
+                </h1>
+            </header>
+            <div class="content pull-to-refresh-content">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div id="container">
+                    <div class="row button_bar" style="display:none;">
+                        <a id="light_opening" href="#" class="col-50 button active">
+                            <span data-i18n="">合闸</span>
+                        </a>
+                        <a id="light_closed" href="#" class="col-50 button">
+                            <span data-i18n="">分闸</span>
+                        </a>
+                        <!--                    <a id="no_device" href="#" class="col-33 button">-->
+                        <!--                        <span data-i18n="">无设备</span>-->
+                        <!--                    </a>-->
+                    </div>
+                    <div class="content-list">
+                        <label class="list-item label-checkbox light_opening" data-id="1">
+                            <div class="img_text">
+                                <img src="img/lightsort.png">
+                            </div>
+                            <div class="row">
+                                <span class="label-title col-100">照明控制</span>
+                            </div>
+                        </label>
+                        <label class="list-item label-checkbox no_device" data-id="2">
+                            <div class="img_text">
+                                <img src="img/yibiaosort.png">
+                            </div>
+                            <div class="row">
+                                <span class="label-title col-100">仪表控制</span>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="footer_bar">
+                        <a href="#" class="footer_btn button button-fill button-big" style="display:none;">关闭灯光</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <!-- <div>
+                    <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a></p>
+                </div>
+                <div>
+                    <label><span data-i18n="ui_timeSelect"></span></label><br>
+                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                </div> -->
+                <div>
+                    <label><span data-i18n="ui_Substationname"></span></label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
+                                class="icon icon-clear"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-block">
+                    <ul id="listContainer">
+
+                    </ul>
+                </div>
+            </div>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a></div>
+            </div>
+        </div>
+    </div>
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src="libs/language.js"></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/bootstrap-table.min.js"></script>
+    <script type="text/javascript" src="libs/bootstrap-pagination.min.js"></script>
+    <script type="text/javascript" src="libs/config.js"></script>
+    <script type="text/javascript" src="libs/tools.js"></script>
+    <script type="text/javascript" src="js/DeviceControlList.js"></script>
+</body>
+
+</html>
