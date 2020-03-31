@@ -112,6 +112,7 @@ function getZhLanguage() {
     ui_executionprompt: "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
     //报警
     ui_Alarm: "报警",
+
     //patrolContent
     ui_Subinspection: "变电所巡检",
     ui_selectSub: "选择设备分组",
@@ -236,9 +237,21 @@ function getZhLanguage() {
     //alarmsDetails
     ui_MeterName: "仪表名称：",
     ui_EventType: "事件类型：",
+    ui_alarmConfirm: "确认状态",
+    ui_alarmConfirmed: "已确认",
+    ui_alarmUnconfirmed: "未确认",
+    ui_manager: "管理",
+    ui_MarkConfirmed: "标记已确认",
+    ui_MarkUnconfirmed: "标记未确认",
+
+    //版本历史
+    ui_updateHistory: "版本历史",
+    ui_version: "版本",
+    ui_mainUpdate: "主要更新",
+    ui_updateTime: "更新时间：",
+    ui_versionLog: "版本更新功能",
     //
     ui_MessageType: "消息类型",
-
     ui_dangerLevel1: "一般",
     ui_dangerLevel2: "重大",
     ui_dangerLevel3: "紧急",
@@ -497,6 +510,18 @@ function getEnLanguage() {
     ui_executionprompt: "There is only one patrol sheet for a single task, one patrol sheet can only be saved by one person, and multiple people may overwrite each other.",
     //报警
     ui_Alarm: "Alarm",
+    ui_alarmConfirm: "Confirm Status",
+    ui_alarmConfirmed: "Confirmed",
+    ui_alarmUnconfirmed: "Unconfirmed",
+    ui_manager: "Manage",
+    ui_MarkConfirmed: "MarkConfirmed",
+    ui_MarkUnconfirmed: "MarkUnconfirmed",
+    //版本历史
+    ui_updateHistory: "Version History",
+    ui_version: "Version ",
+    ui_mainUpdate: " major update",
+    ui_updateTime: "Updated:",
+    ui_versionLog: "Version Update Function",
     //patrolContent
     ui_Subinspection: "Substation inspection",
     //patrolContent

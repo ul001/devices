@@ -27,12 +27,12 @@
                     <i class="icon icon-selectSome"></i>
                 </a>
                 <a class="button button-link button-nav pull-right click_btn manager_btn">
-                    管理
+                    <span data-i18n="ui_manager"></span>
                 </a>
                 <h1 class="title title_color">报警</h1>
             </header>
             <nav class="bar bar-footer" style="display:none;">
-                <a href="#" class="button bg-green" onclick="">确认</a>
+                <a href="#" class="button bg-green" onclick="selectConfirm()"><span data-i18n="ui_confirm"></span></a>
             </nav>
             <!--            <div class="bar bar-header-secondary">
                 <a href="#" class="button">一键已读</a>
@@ -43,75 +43,57 @@
                     <div class="pull-to-refresh-arrow"></div>
                 </div>
                 <div class="list-container list-block">
-                    <!--<div class="card">-->
-                    <!--<div class="card-content">-->
-                    <!--<div class="content-padded">-->
-                    <!--<div class="row  no-gutter sub_card unRead">-->
-                    <!--<div class="col-75">-->
-                    <!--<p class="subName"><i class="icon icon-subIcon"></i>那科瑞</p>-->
-                    <!--<P>仪表名称：ahfadslh</P>-->
-                    <!--<p>事件类型：fadfhlk</p>-->
-                    <!--</div>-->
-                    <!--<div class="col-25">-->
-                    <!--<p><span>fdatet</span></p>-->
-                    <!--<p><i class="icon icon-alarm"></i></p>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-<!--                    <ul>-->
-                        <div class="card" id="1">
-                            <label class="label-checkbox item-content item-link">
-                                <input type="checkbox" name="my-checkbox">
-                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-                                <div class="item-inner row no-gutter">
-                                    <div class="col-75">
-                                        <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
-                                        <P>仪表名称：ahfadslh</P>
-                                        <p>事件类型：fadfhlk</p>
-                                    </div>
-                                    <div class="col-25">
-                                        <p class="text-right"><span class="veryDanger">特别严重</span></p>
-                                        <P>2019-12-23 06:00:00</P>
-                                    </div>
+                    <!-- <div class="card" id="1">
+                        <label class="label-checkbox item-content item-link">
+                            <input type="checkbox" name="my-checkbox">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner row no-gutter">
+                                <div class="col-75">
+                                    <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
+                                    <P>仪表名称：ahfadslh</P>
+                                    <p>事件类型：fadfhlk</p>
                                 </div>
-                            </label>
-                        </div>
-                        <div class="card" id="2">
-                            <label class="label-checkbox item-content item-link">
-                                <input type="checkbox" name="my-checkbox">
-                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-                                <div class="item-inner row no-gutter">
-                                    <div class="col-75">
-                                        <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
-                                        <P>仪表名称：ahfadslh</P>
-                                        <p>事件类型：fadfhlk</p>
-                                    </div>
-                                    <div class="col-25">
-                                        <p class="text-right"><span class="danger">严重</span></p>
-                                        <P>2019-12-23 06:00:00</P>
-                                    </div>
+                                <div class="col-25">
+                                    <p class="text-right"><span class="veryDanger">特别严重</span></p>
+                                    <P>2019-12-23 06:00:00</P>
                                 </div>
-                            </label>
-                        </div>
-                        <div class="card" id="3">
-                            <label class="label-checkbox item-content item-link">
-                                <input type="checkbox" name="my-checkbox">
-                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-                                <div class="item-inner row no-gutter">
-                                    <div class="col-75">
-                                        <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
-                                        <P>仪表名称：ahfadslh</P>
-                                        <p>事件类型：fadfhlk</p>
-                                    </div>
-                                    <div class="col-25">
-                                        <p class="text-right"><span class="dangerer">较重</span></p>
-                                        <P>2019-12-23 06:00:00</P>
-                                    </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="card" id="2">
+                        <label class="label-checkbox item-content item-link">
+                            <input type="checkbox" name="my-checkbox">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner row no-gutter">
+                                <div class="col-75">
+                                    <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
+                                    <P>仪表名称：ahfadslh</P>
+                                    <p>事件类型：fadfhlk</p>
                                 </div>
-                            </label>
-                        </div>
+                                <div class="col-25">
+                                    <p class="text-right"><span class="danger">严重</span></p>
+                                    <P>2019-12-23 06:00:00</P>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="card" id="3">
+                        <label class="label-checkbox item-content item-link">
+                            <input type="checkbox" name="my-checkbox">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner row no-gutter">
+                                <div class="col-75">
+                                    <p class="subName limit-length"><i class="icon icon-subIcon"></i>安科瑞</p>
+                                    <P>仪表名称：ahfadslh</P>
+                                    <p>事件类型：fadfhlk</p>
+                                </div>
+                                <div class="col-25">
+                                    <p class="text-right"><span class="dangerer">较重</span></p>
+                                    <P>2019-12-23 06:00:00</P>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
                     <div class="card" id="4">
                         <label class="label-checkbox item-content item-link">
                             <input type="checkbox" name="my-checkbox">
@@ -128,32 +110,37 @@
                                 </div>
                             </div>
                         </label>
-                    </div>
-<!--                    </ul>-->
-                </div>
-                <!-- preloader -->
-                <div class="infinite-scroll-preloader">
-                    <div class="preloader"></div>
+                    </div> -->
                 </div>
             </div>
-
+            <!-- preloader -->
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
         </div>
-        <div id="showDiv" class="list-block">
-            <ul>
-                <li class="item-content" id="confirmed">
-                    <div class="item-inner"><div class="item-title">标为已确认</div></div>
-                </li>
-                <li class="item-content" id="unConfirm">
-                    <div class="item-inner"><div class="item-title">标为未确认</div></div>
-                </li>
-                <li class="item-content" id="manage">
-                    <div class="item-inner"><div class="item-title">管理</div></div>
-                </li>
-            </ul>
-        </div>
-        <div class="panel-overlay"></div>
-        <!-- About Popup -->
-<!--        <div class="popup popup-about">
+    </div>
+    <div id="showDiv" class="list-block">
+        <ul>
+            <li class="item-content" id="confirmed">
+                <div class="item-inner">
+                    <div class="item-title"><span data-i18n="ui_MarkConfirmed"></span></div>
+                </div>
+            </li>
+            <li class="item-content" id="unConfirm">
+                <div class="item-inner">
+                    <div class="item-title"><span data-i18n="ui_MarkUnconfirmed"></span></div>
+                </div>
+            </li>
+            <li class="item-content" id="manage">
+                <div class="item-inner">
+                    <div class="item-title"><span data-i18n="ui_manager"></span></div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-overlay"></div>
+    <!-- About Popup -->
+    <!--        <div class="popup popup-about">
             <div class="content-block">
                 <div class="content-block-title">选择报警类型</div>
                 <div class="list-block media-list">
@@ -166,29 +153,28 @@
                         id="commitBtn">确定</a></div>
             </div>
         </div>-->
-        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-            <div class="content-block">
-                <div>
-                    <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
-                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
-                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
-                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a></p>
-                </div>
-                <div>
-                    <label><span data-i18n="ui_timeSelect"></span></label><br>
-                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
-                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
-                </div>
-                <div>
-                    <label><span data-i18n="ui_taskstate"></span></label><br>
-                    <select id="fState">
-                        <option value="" data-i18n="ui_All"></option>
-                        <option value="1" data-i18n="ui_todo"></option>
-                        <option value="2" data-i18n="ui_doing"></option>
-                        <option value="3" data-i18n="ui_done"></option>
-                    </select>
-                </div>
-                <!--            <div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+        <div class="content-block">
+            <div>
+                <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                    <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                    <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                    <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a></p>
+            </div>
+            <div>
+                <label><span data-i18n="ui_timeSelect"></span></label><br>
+                <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+            </div>
+            <div>
+                <label><span data-i18n="ui_alarmConfirm"></span></label><br>
+                <select id="fState">
+                    <option value="" data-i18n="ui_All"></option>
+                    <option value="1" data-i18n="ui_alarmConfirmed"></option>
+                    <option value="2" data-i18n="ui_alarmUnconfirmed"></option>
+                </select>
+            </div>
+            <!--            <div>
                 <label>紧急程度</label><br>
                 <select id="dangerType">
                     <option value="">全部</option>
@@ -197,30 +183,30 @@
                     <option value="紧急">紧急</option>
                 </select>
             </div>-->
-                <div>
-                    <label><span data-i18n="ui_Substationname"></span></label><br>
-                    <div class="searchbar">
-                        <div class="search-input">
-                            <label class="icon icon-search" for="search"></label>
-                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
-                                class="icon icon-clear"></i>
-                        </div>
+            <div>
+                <label><span data-i18n="ui_Substationname"></span></label><br>
+                <div class="searchbar">
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
+                            class="icon icon-clear"></i>
                     </div>
                 </div>
-                <div class="list-block">
-                    <ul id="listContainer">
-
-                    </ul>
-                </div>
             </div>
-            <div class="btnBar row no-gutter">
-                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
-                            data-i18n="ui_cancel"></span></a>
-                </div>
-                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
-                            data-i18n="ui_query"></span></a></div>
+            <div class="list-block">
+                <ul id="listContainer">
+
+                </ul>
             </div>
         </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                        data-i18n="ui_cancel"></span></a>
+            </div>
+            <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
+                        data-i18n="ui_query"></span></a></div>
+        </div>
+    </div>
     </div>
     <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
