@@ -12,6 +12,8 @@ var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓�
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 var selectSubid = "";
 var clickSubid = "";
+var saveAlarmParam = JSON.parse(localStorage.getItem("saveAlarmParam"));
+localStorage.removeItem("saveAlarmParam");
 
 function getFirstPage() {
     $(".list-container").empty();
@@ -33,79 +35,102 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number, lastIndex) {
     var html = '';
-    var url = "";
-    // if (clickID == "bianwei") {
-    //     url = "/getWarningMessageSignalEvents";
-    //     //$(".title").html("遥信变位报警");
-    // } else if (clickID == "yuexian") {
-    //     url = "/getWarningMessageOverLimitEvents";
-    //     //$(".title").html("遥测越限报警");
-    // } else if (clickID == "platform") {
-    //     url = "/getWarningMessagePlatformRunEvents";
-    //     //$(".title").html("平台运行报警");
-    // }
+    var url = "/getAlarmEventLogList";
+    var params = {};
     // var searchKey = $("#search").val();
-    var params = {
-        fMessinfotypeID: clickID,
-        pageNo: pageNum,
-        pageSize: number
-        // key: searchKey
-    };
-    // fAlarmeventlogid: 3
-
-    // fAlarmtime: "2020-03-27 06:43:23"
-
-    // fConfirmstatus: false
-
-    // fDevicecode: "40400006000"
-
-    // fDevicename: "1"
-
-    // fMessInfoExplain: "网关离线"
-
-    // fMessInfoTypeExplain: "通讯状态"
-
-    // fMessinfocode: "gatewayOffline"
-
-    // fMessinfotypeid: 2
-
-    // fSubid: 40400006
-
-    // fSubname: "测试变电所"
-    Substation.getDataByAjaxNoLoading("/getAlarmEventLogList", params, function (data) {
+    if (saveAlarmParam != null && saveAlarmParam != "") {
+        params = saveAlarmParam;
+        params['pageNum'] = pageNum;
+        params['pageSize'] = number;
+        var startTime = params['ftimeStart'];
+        var endTime = params['ftimeEnd'];
+        if (startTime != "" && startTime != null) {
+            $("#dateStart").val(startTime.substring(0, 10));
+        }
+        if (endTime != "" && endTime != null) {
+            $("#dateEnd").val(endTime.substring(0, 10));
+        }
+        if (params['fTaskstateid'] != undefined) {
+            $("#fState").val(params['fTaskstateid']);
+        }
+        $("#search").val(params['subName']);
+    } else {
+        params = {
+            fMessinfotypeID: clickID,
+            pageNum: pageNum,
+            pageSize: number
+        };
+        if (selectSubid != "" && selectSubid != null) {
+            params['fSubid'] = selectSubid;
+        }
+        var dateStartVal = $("#dateStart").val();
+        var dateEndVal = $("#dateEnd").val();
+        var stateVal = $("#fState").val();
+        if (dateStartVal != "") {
+            // params['ftimeStart'] = dateStartVal + " 00:00:00";
+        }
+        if (dateEndVal != "") {
+            // params['ftimeEnd'] = dateEndVal + " 23:59:59";
+        }
+        if (stateVal != "") {
+            // params['fTaskstateid'] = stateVal;
+        }
+    }
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
             var datadic = data.alarmEventLogList;
             if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
                 if (pageNum == 1) {
                     $(".list-container").empty();
                 }
                 $(datadic.list).each(function () {
-                    html += "<div class=\"card\">\n" +
-                        "                    <div class=\"card-content\">\n" +
-                        "                        <div class=\"content-padded\">\n" +
-                        "                            <div class=\"row no-gutter sub_card\">\n" +
-                        "                                <div class=\"col-10 selectAlarms\">\n" +
-                        "                                    <input type=\"checkbox\" name=\"checkbox\">\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"col-60\">\n" +
-                        "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
-                        "                                    <P>" + Operation['ui_MeterName'] + (clickID == "platform" ? (this.fDevicename) : (this.fDevicename)) + "</P>\n" +
-                        "                                    <p>" + Operation['ui_EventType'] + this.fMessInfoExplain + "</p>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"col-25\">\n" +
-                        "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
-                        "                                    <p><span class=\"cardtime\">" + this.fAlarmtime + "</span></p>" +
-                        "                                </div>\n" +
-                        "                                <div class=\"col-5\">\n" +
-                        "                                    <i class=\"icon icon-right\"></i>\n" +
-                        "                                </div>\n" +
-                        "                            </div>\n" +
-                        "                        </div>\n" +
-                        "                    </div>\n" +
-                        "                </div>";
+                    html += "<div class=\"card\" id=\"" + this.fAlarmeventlogid + "\">";
+                    html += "                        <label class=\"label-checkbox item-content item-link\">";
+                    html += "                            <input type=\"checkbox\" name=\"my-checkbox\" value=\"" + this.fAlarmeventlogid + "\">";
+                    html += "                            <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"><\/i><\/div>";
+                    html += "                            <div class=\"item-inner row no-gutter\">";
+                    html += "                                <div class=\"col-75\">";
+                    html += "                                    <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"><\/i>" + this.fSubname + "<\/p>";
+                    html += "                                    <P>" + Operation['ui_MeterName'] + (clickID == "platform" ? (this.fDevicename) : (this.fDevicename)) + "<\/P>";
+                    html += "                                    <p>" + Operation['ui_EventType'] + this.fMessInfoExplain + "<\/p>";
+                    html += "                                <\/div>";
+                    html += "                                <div class=\"col-25\">";
+                    html += "                                    <p class=\"text-right\"><span class=\"danger\">" + this.fMessInfoTypeExplain + "<\/span><\/p>";
+                    html += "                                    <P>" + this.fAlarmtime + "<\/P>";
+                    html += "                                <\/div>";
+                    html += "                            <\/div>";
+                    html += "                        <\/label>";
+                    html += "                    <\/div>";
+                    // html += "<div class=\"card\">\n" +
+                    //     "                    <div class=\"card-content\">\n" +
+                    //     "                        <div class=\"content-padded\">\n" +
+                    //     "                            <div class=\"row no-gutter sub_card\">\n" +
+                    //     "                                <div class=\"col-10 selectAlarms\">\n" +
+                    //     "                                    <input type=\"checkbox\" name=\"checkbox\">\n" +
+                    //     "                                </div>\n" +
+                    //     "                                <div class=\"col-60\">\n" +
+                    //     "                                    <p class=\"subName\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>\n" +
+                    //     "                                    <P>" + Operation['ui_MeterName'] + (clickID == "platform" ? (this.fDevicename) : (this.fDevicename)) + "</P>\n" +
+                    //     "                                    <p>" + Operation['ui_EventType'] + this.fMessInfoExplain + "</p>\n" +
+                    //     "                                </div>\n" +
+                    //     "                                <div class=\"col-25\">\n" +
+                    //     "                                    <p><i class=\"icon icon-alarm\"></i></p>\n" +
+                    //     "                                    <p><span class=\"cardtime\">" + this.fAlarmtime + "</span></p>" +
+                    //     "                                </div>\n" +
+                    //     "                                <div class=\"col-5\">\n" +
+                    //     "                                    <i class=\"icon icon-right\"></i>\n" +
+                    //     "                                </div>\n" +
+                    //     "                            </div>\n" +
+                    //     "                        </div>\n" +
+                    //     "                    </div>\n" +
+                    //     "                </div>";
                 });
                 $('.list-container').append(html);
                 addCardLongClick();
                 //addClick();
+                $(".item-media").hide();
+                //保存记录
+                params['subName'] = $("#search").val();
+                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
                 Substation.getDataByAjaxNoLoading("/close", {}, function () {});
                 pageNum++;
             } else {
@@ -221,15 +246,27 @@ document.addEventListener("click", function () {
     $("#showDiv").hide();
 });
 
+//点击确认
 $("#confirmed").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
     $("#" + thisId).addClass("hasConfirmed");
 });
+
+//未确认
 $("#unConfirm").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
     $("#" + thisId).removeClass("hasConfirmed");
 });
 $("#manage").on("click", manageCard);
+
+//多选确定事件
+function selectConfirm() {
+    $('input[type=checkbox]:checked').each(function (e) {
+        if ($('input[type=checkbox]:checked').val()) {
+            var num = this.value;
+        }
+    });
+}
 
 function addCardLongClick() {
     var longClick = 0;
@@ -278,8 +315,18 @@ function addCardLongClick() {
 }
 
 $('#searchBtn').click(function () {
+    var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+    var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+    if (start > end) {
+        $.toast(Operation['ui_dateselecttip']);
+        return;
+    }
     $(".close-panel").click();
-
+    //存变电所
+    if (saveAlarmParam != null) {
+        clickSubid = saveAlarmParam['fSubid'];
+        saveAlarmParam = null;
+    }
     if ($("#search").val() == "") {
         //        $("#subName").text("所有变电所");
         selectSubid = "";
