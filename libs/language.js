@@ -22,6 +22,8 @@ function getZhLanguage() {
     ui_upload: "上传",
     ui_dateselecttip: "请选择正确的查询时间",
     ui_month: "月",
+    ui_SelectAll: "全选",
+    ui_UnselectAll: "全不选",
     //deviceClass
     ui_edit: "编辑",
     ui_hidenodevice: "隐藏无设备分类",
@@ -420,6 +422,8 @@ function getEnLanguage() {
     ui_upload: "Upload",
     ui_dateselecttip: "Please select the correct query time",
     ui_month: "month",
+    ui_SelectAll: "SelectAll",
+    ui_UnselectAll: "UnselectAll",
     //deviceClass
     ui_edit: "Edit",
     ui_hidenodevice: "Hide No Device",
