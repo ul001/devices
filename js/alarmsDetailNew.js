@@ -194,11 +194,11 @@ function goBack() {
 }
 
 function selectAll() {
-    if ($(".back_btn").text() == "全选") {
-        $(".back_btn").text("全不选");
+    if ($(".back_btn").text() == Operation['ui_SelectAll']) {
+        $(".back_btn").text(Operation['ui_UnselectAll']);
         $("input:checkbox").prop("checked", "checked");
     } else {
-        $(".back_btn").text("全选");
+        $(".back_btn").text(Operation['ui_SelectAll']);
         $("input:checkbox").removeAttr("checked");
     }
 }
@@ -211,8 +211,8 @@ function manageCard() {
     //点击管理切换样式
     var html = "";
     if (!$(".bar-footer").length || $(".bar-footer").is(":hidden")) {
-        $(".manager_btn").text("取消");
-        $(".back_btn").text("全选");
+        $(".manager_btn").text(Operation['ui_cancel']);
+        $(".back_btn").text(Operation['ui_SelectAll']);
         $(".selectAlarms").toggle();
         $(".bar-footer").toggle();
         $(".open-panel").toggle();
@@ -232,7 +232,7 @@ function manageCard() {
         $(".label-checkbox.item-content").addClass("item-link");
         addCardLongClick();
         $(".item-media").hide();
-        $(".manager_btn").text("管理");
+        $(".manager_btn").text(Operation['ui_manager']);
         html += '<span class="icon icon-left"></span>' + '<span>' + Operation['ui_back'] + '</span>';
         $(".back_btn").html(html);
         $(".back_btn").off("click").on("click", goBack);
