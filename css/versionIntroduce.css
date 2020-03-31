@@ -1,0 +1,16 @@
+.update-li .item-title{
+    font-size:.7rem;
+}
+
+.update-li .item-subtitle{
+    font-size:.6rem;
+}
+
+.content .list-block{
+    margin:0;
+}
+
+.list-block.media-list .item-inner{
+    padding-top:.3rem;
+    padding-bottom:.3rem;
+}

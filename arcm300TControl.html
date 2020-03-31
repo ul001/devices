@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>照明控制</title>
+    <title>ARCM300T控制</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <link rel="shortcut icon" href="/favicon.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/lightingControl.css">
+    <link rel="stylesheet" href="css/arcm300TControl.css">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
             <a id="record_btn" class="button button-link button-nav pull-right click_btn">
                 <span data-i18n="">记录</span>
             </a>
-            <h1 class="title title_color">照明控制</h1>
+            <h1 class="title title_color">ARCM300T控制</h1>
         </header>
         <div class="content pull-to-refresh-content">
             <div class="pull-to-refresh-layer">
@@ -37,17 +37,17 @@
                 <div class="pull-to-refresh-arrow"></div>
             </div>
             <div id="container">
-                <div class="row button_bar" style="display:none;">
-                    <a id="light_opening" href="#" class="col-50 button active">
-                        <span data-i18n="">合闸</span>
-                    </a>
-                    <a id="light_closed" href="#" class="col-50 button">
-                        <span data-i18n="">分闸</span>
-                    </a>
-<!--                    <a id="no_device" href="#" class="col-33 button">-->
-<!--                        <span data-i18n="">无设备</span>-->
+<!--                <div class="row button_bar" style="display:none;">-->
+<!--                    <a id="light_opening" href="#" class="col-50 button active">-->
+<!--                        <span data-i18n="">合闸</span>-->
 <!--                    </a>-->
-                </div>
+<!--                    <a id="light_closed" href="#" class="col-50 button">-->
+<!--                        <span data-i18n="">分闸</span>-->
+<!--                    </a>-->
+<!--                    &lt;!&ndash;                    <a id="no_device" href="#" class="col-33 button">&ndash;&gt;-->
+<!--                    &lt;!&ndash;                        <span data-i18n="">无设备</span>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                    </a>&ndash;&gt;-->
+<!--                </div>-->
                 <div class="content-list">
                     <label class="list-item label-checkbox light_opening" data-id="1">
                         <div class="row">
@@ -57,7 +57,7 @@
                             <a href="#" class="view_detail col-25 button">详情</a>
                         </div>
                         <div class="img_text">
-                            <img src="img/lightClose.png">
+                            <img src="img/arcm300t.png">
                             <span class="right-bottom">合闸</span>
                         </div>
                     </label>
@@ -66,11 +66,11 @@
                             <input type="checkbox" name="my-checkbox">
                             <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>
                             <span class="label-title col-75">南楼一层</span>
-<!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
+                            <!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
                         </div>
                         <div class="img_text">
-                            <img src="img/noDevice.png">
-                            <span class="right-bottom">无设备</span>
+                            <img src="img/arcm300t.png">
+                            <div class="right-bottom">无设备</div>
                         </div>
                     </label>
                     <label class="list-item label-checkbox light_closed" data-id="3">
@@ -78,10 +78,10 @@
                             <input type="checkbox" name="my-checkbox">
                             <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>
                             <span class="label-title col-75">南楼一层照明</span>
-<!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
+                            <!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
                         </div>
                         <div class="img_text">
-                            <img src="img/lightClose.png">
+                            <img src="img/arcm300t.png">
                             <span class="right-bottom">分闸</span>
                         </div>
                     </label>
@@ -93,13 +93,16 @@
                             <a href="#" class="view_detail col-25 button">详情</a>
                         </div>
                         <div class="img_text">
-                            <img src="img/lightClose.png">
+                            <img src="img/arcm300t.png">
                             <span class="right-bottom">合闸</span>
                         </div>
                     </label>
                 </div>
-                <div class="footer_bar">
-                    <a href="#" class="footer_btn button button-fill button-big" style="display:none;">关闭灯光</a>
+                <div class="row footer_bar">
+                        <a href="#" class="footer_btn col-20 button active">复位</a>
+                        <a href="#" class="footer_btn col-20 button">分闸</a>
+                        <a href="#" class="footer_btn col-20 button">消音</a>
+                        <a href="#" class="footer_btn col-20 button">自检</a>
                 </div>
             </div>
         </div>
@@ -110,7 +113,7 @@
 <script src="libs/language.js"></script>
 <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
 <script type='text/javascript' src="libs/tools.js" charset="utf-8"></script>
-<script type='text/javascript' src="js/lightingControl.js" charset="utf-8"></script>
+<script type='text/javascript' src="js/arcm300TControl.js" charset="utf-8"></script>
 
 </body>
 
