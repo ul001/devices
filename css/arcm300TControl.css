@@ -24,6 +24,11 @@
 /*    position:relative;*/
     text-align:center;
 }
+
+.content-list .img_text img{
+/*    position:relative;*/
+    width:60%;
+}
 .content-list .button{
     padding:initial;
 }
@@ -69,7 +74,7 @@ label.label-checkbox i.icon-form-checkbox {
     justify-content: center;
     position: fixed;
     bottom: 1rem;
-    width:100%;
+    width:104%;
 }
 
 .footer_bar .footer_btn{
