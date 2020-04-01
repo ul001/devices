@@ -12,6 +12,7 @@ var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓�
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 var selectSubid = "";
 var clickSubid = "";
+var alarmDetailList = [];
 var saveAlarmParam = JSON.parse(localStorage.getItem("saveAlarmParam"));
 localStorage.removeItem("saveAlarmParam");
 
@@ -19,7 +20,7 @@ function getFirstPage() {
     $(".list-container").empty();
     pageNum = 1;
     addItems(itemsPerLoad, 0);
-    lastIndex = 10;
+    lastIndex = 30;
     $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
     loading = false;
     $.attachInfiniteScroll($('.infinite-scroll'));
@@ -42,16 +43,16 @@ function addItems(number, lastIndex) {
         params = saveAlarmParam;
         params['pageNum'] = pageNum;
         params['pageSize'] = number;
-        var startTime = params['ftimeStart'];
-        var endTime = params['ftimeEnd'];
+        var startTime = params['fStarttime'];
+        var endTime = params['fEndtime'];
         if (startTime != "" && startTime != null) {
             $("#dateStart").val(startTime.substring(0, 10));
         }
         if (endTime != "" && endTime != null) {
             $("#dateEnd").val(endTime.substring(0, 10));
         }
-        if (params['fTaskstateid'] != undefined) {
-            $("#fState").val(params['fTaskstateid']);
+        if (params['fConfirmstatus'] != undefined) {
+            $("#fState").val(params['fConfirmstatus']);
         }
         $("#search").val(params['subName']);
     } else {
@@ -67,13 +68,17 @@ function addItems(number, lastIndex) {
         var dateEndVal = $("#dateEnd").val();
         var stateVal = $("#fState").val();
         if (dateStartVal != "") {
-            // params['ftimeStart'] = dateStartVal + " 00:00:00";
+            params['fStarttime'] = dateStartVal + " 00:00:00";
         }
         if (dateEndVal != "") {
-            // params['ftimeEnd'] = dateEndVal + " 23:59:59";
+            params['fEndtime'] = dateEndVal + " 23:59:59";
         }
         if (stateVal != "") {
-            // params['fTaskstateid'] = stateVal;
+            if (stateVal == '1') {
+                params['fConfirmstatus'] = true;
+            } else {
+                params['fConfirmstatus'] = false;
+            }
         }
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
@@ -83,7 +88,11 @@ function addItems(number, lastIndex) {
                     $(".list-container").empty();
                 }
                 $(datadic.list).each(function () {
-                    html += "<div class=\"card\" id=\"" + this.fAlarmeventlogid + "\">";
+                    if (this.fConfirmstatus) {
+                        html += "<div class=\"card hasConfirmed\" id=\"" + this.fAlarmeventlogid + "\">";
+                    } else {
+                        html += "<div class=\"card\" id=\"" + this.fAlarmeventlogid + "\">";
+                    }
                     html += "                        <label class=\"label-checkbox item-content item-link\">";
                     html += "                            <input type=\"checkbox\" name=\"my-checkbox\" value=\"" + this.fAlarmeventlogid + "\">";
                     html += "                            <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"><\/i><\/div>";
@@ -123,8 +132,10 @@ function addItems(number, lastIndex) {
                     //     "                        </div>\n" +
                     //     "                    </div>\n" +
                     //     "                </div>";
+                    alarmDetailList.push(this);
                 });
                 $('.list-container').append(html);
+
                 addCardLongClick();
                 //addClick();
                 $(".item-media").hide();
@@ -160,7 +171,7 @@ function addItems(number, lastIndex) {
 
 addItems(itemsPerLoad, 0);
 
-var lastIndex = 10;
+var lastIndex = 30;
 
 $(document).on('infinite', '.infinite-scroll', function () {
 
@@ -250,23 +261,96 @@ document.addEventListener("click", function () {
 $("#confirmed").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
     $("#" + thisId).addClass("hasConfirmed");
+    setAlarmEventConfirmed(thisId, '1');
 });
 
 //未确认
 $("#unConfirm").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
     $("#" + thisId).removeClass("hasConfirmed");
+    setAlarmEventConfirmed(thisId, '0');
 });
 $("#manage").on("click", manageCard);
 
 //多选确定事件
 function selectConfirm() {
+    var arr = [];
     $('input[type=checkbox]:checked').each(function (e) {
         if ($('input[type=checkbox]:checked').val()) {
             var num = this.value;
+            arr.push(num);
         }
     });
+    var logList = arr.join(','); //数组转成为字符串
+    confirmAlarmEvents(logList);
 }
+//批量确认方法
+function confirmAlarmEvents(logidList) {
+    var url = "/confirmAlarmEvents";
+
+    Substation.getDataByAjaxNoLoading(url, {
+            "logidList": logidList
+        },
+        function (data) {
+            manageCard();
+            getFirstPage();
+        },
+        function (errorCode) {
+            // if (errorCode == 0) {
+            //     $.detachInfiniteScroll($(".infinite-scroll"));
+            //     $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
+            // } else {
+            //     $.detachInfiniteScroll($(".infinite-scroll"));
+            //     $(".infinite-scroll-preloader").html("");
+            // }
+            return;
+        });
+}
+//单个确认取消方法
+function setAlarmEventConfirmed(logid, confirmType) {
+    var url = '';
+    if (confirmType == '1') {
+        //确认
+        url = "/confirmAlarmEvents";
+        Substation.getDataByAjaxNoLoading(url, {
+                "logidList": logid
+            },
+            function (data) {
+
+            },
+            function (errorCode) {
+                // if (errorCode == 0) {
+                //     $.detachInfiniteScroll($(".infinite-scroll"));
+                //     $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
+                // } else {
+                //     $.detachInfiniteScroll($(".infinite-scroll"));
+                //     $(".infinite-scroll-preloader").html("");
+                // }
+                return;
+            });
+    } else {
+        //未确认
+        url = "/setAlarmEventUnConfirmed";
+        Substation.getDataByAjaxNoLoading(url, {
+                "fAlarmeventlogid": logid
+            },
+            function (data) {
+
+            },
+            function (errorCode) {
+                // if (errorCode == 0) {
+                //     $.detachInfiniteScroll($(".infinite-scroll"));
+                //     $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
+                // } else {
+                //     $.detachInfiniteScroll($(".infinite-scroll"));
+                //     $(".infinite-scroll-preloader").html("");
+                // }
+                return;
+            });
+    }
+
+}
+
 
 function addCardLongClick() {
     var longClick = 0;
@@ -306,6 +390,15 @@ function addCardLongClick() {
                 if ($("#showDiv").is(':visible')) {
                     $("#showDiv").hide();
                 } else {
+                    var thisCardId = $(this).parent(".card").attr("id");
+                    var paramStr = '';
+                    $.each(alarmDetailList, function (index, value) {
+                        if (value['fAlarmeventlogid'] == thisCardId) {
+                            paramStr = JSON.stringify(value);
+                        }
+                    });
+                    // window.location.href = encodeURI("alarmDetailView.html" + "?value=" + paramStr);
+                    localStorage.setItem("DetailParam", paramStr);
                     window.location.href = "alarmDetailView.html";
                 }
             }
@@ -323,7 +416,7 @@ $('#searchBtn').click(function () {
     }
     $(".close-panel").click();
     //存变电所
-    if (saveAlarmParam != null) {
+    if (saveAlarmParam != null && clickSubid == "") {
         clickSubid = saveAlarmParam['fSubid'];
         saveAlarmParam = null;
     }
@@ -492,75 +585,5 @@ window.addEventListener("resize", function () {
     }
 });
 
-//Substation.getDataByAjax("/getfCircuitidsList",{fSubid:10100001},function(data){
-//    if(data!=null&&data!=undefined){
-//        var showlist = $("<ul></ul>");
-//        showAll(data,showlist);
-//        $(".media-list").html(showlist);
-//        addClick();
-//    }
-//});
-//
-//function showAll(treeList,parent){
-//    $(treeList).each(function(index,obj){
-//        if(obj.hasOwnProperty("nodes")&&obj.nodes.length>0){
-//            var li = $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>");
-//            $(li).append("                                            <label class=\"label-checkbox item-content\">\n" +
-//                      "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
-//                      "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-//                      "                                                <div class=\"item-inner\">\n" +
-//                      "                                                    <div class=\"item-title-row\">\n" +
-//                      "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
-//                      "                                                    </div>\n" +
-//                      "                                                </div>\n" +
-//                      "                                            </label>\n").append("<ul></ul>").appendTo(parent);
-//            showAll(obj.nodes,$(li).children().eq(1));
-//        }else{
-//            $("<li id=\""+obj.id+"\" data-parentId=\""+obj.fParentid+"\"></li>").append(
-//                        "                                            <label class=\"label-checkbox item-content\">\n" +
-//                        "                                                <input type=\"checkbox\" name=\"checkbox\" value=\""+obj.id+"\">\n" +
-//                        "                                                <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-//                        "                                                <div class=\"item-inner\">\n" +
-//                        "                                                    <div class=\"item-title-row\">\n" +
-//                        "                                                        <div class=\"item-title\">"+obj.text+"</div>\n" +
-//                        "                                                    </div>\n" +
-//                        "                                                </div>\n" +
-//                        "                                            </label>\n").appendTo(parent);
-//        }
-//    });
-//}
-//
-//function addClick(){
-//    $(".media-list input[name='checkbox']").change(function(){
-//        var thisValue = $(this).prop("checked");
-//        var thisVal = $(this).val();
-//        if(thisValue==true){
-//            $(this).parents("li").each(function(index,obj){
-//                $($(obj).find('input[name="checkbox"]')[0]).prop("checked",true);
-//            });
-//            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
-//                $(obj).prop("checked",true)
-//            });
-//        }else{
-///*            $(this).parents("li").each(function(index,obj){
-//                if($(obj).find($("input[name='checkbox']:checked").val()!="").length==0){
-//                    $($(obj).find('input[name="checkbox"]')[0]).prop("checked",false);
-//                }
-//            });*/
-//            $(this).parent().parent().find("input[name='checkbox']").each(function(index,obj){
-//                $(obj).prop("checked",false)
-//            });
-//            var parentLi = $("#"+thisVal).parent().parent("li");
-//            while(parentLi){
-//                if(parentLi.find("input[name='checkbox']:checked").length==1){
-//                    $(parentLi.find("input[name='checkbox']")[0]).prop("checked",false);
-//                    parentLi = parentLi.parent().parent("li");
-//                }else{
-//                    break;
-//                }
-//            }
-//        }
-//    });
-//}
 
 $.init();
