@@ -221,11 +221,12 @@ $(".manager_btn").on("click", manageCard);
 function manageCard() {
     //点击管理切换样式
     var html = "";
-    if (!$(".bar-footer").length || $(".bar-footer").is(":hidden")) {
+    if (!$("#bar-footer").length || $("#bar-footer").is(":hidden")) {
         $(".manager_btn").text(Operation['ui_cancel']);
         $(".back_btn").text(Operation['ui_SelectAll']);
         $(".selectAlarms").toggle();
-        $(".bar-footer").toggle();
+        $("#bar-footer").toggle();
+        $("#bar-footer").addClass("bar-footer");
         $(".open-panel").toggle();
         $(".item-media").show();
         $(".item-link").removeClass("item-link");
@@ -238,7 +239,8 @@ function manageCard() {
         //        $(".content").after(html);
     } else {
         $(".selectAlarms").toggle();
-        $(".bar-footer").toggle();
+        $("#bar-footer").toggle();
+        $("#bar-footer").removeClass("bar-footer");
         $(".open-panel").toggle();
         $(".label-checkbox.item-content").addClass("item-link");
         addCardLongClick();

@@ -335,7 +335,7 @@ label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkb
 /*变电所列表筛选*/
 .panel .list-block{
     margin: 0;
-    height: calc(100% - 20rem);
+    height: calc(100% - 16.5rem);
 }
 
 #listContainer {
