@@ -14,5 +14,8 @@
     padding:.05rem
 }
 .list-block .item-title.label{
-    width:80%;
+    width:75%;
+}
+.showlist .parentLi:last-child>.item-content>.item-inner{
+    border-bottom:1px solid #e7e7e7;;
 }

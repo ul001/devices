@@ -6,53 +6,57 @@ if(isAndroid){
 }
 function getData(){
     $.ajax({
-    type: "GET",
-    url: "http://116.236.149.165:8090/SubstationWEBV2/v4/getVersionHistory",
-    data: {fId:appId},
-    beforeSend: function (request) {
-                    // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-                    request.setRequestHeader("Authorization", tokenFromAPP);
-                },
-    success: function (data) {
-                if (data == undefined) {
-                  $("#noDataDiv").show();
-                  return;
-                } else {
-                  if (data.code == "200") {
-                    $(".list-container").empty();
-                    if(data.data==null||data.data==""||data.data==undefined){
-                        $("#noDataDiv").show();
-                    }else{
-                        if(data.data.list!=undefined && data.data.list.length>0){
-                            $(data.data.list).each(function(){
-                                $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='"+JSON.stringify(this.fUpdatelog.replace(/\r\n/g,'<br>'))+"'>\n" +
-                                        "                        <div class=\"item-inner\">\n" +
-                                        "                            <div class=\"item-title-row\">\n" +
-                                        "                                <div class=\"item-title\">"+Operation['ui_version']+this.fVersion+Operation['ui_mainUpdate']+"</div>\n" +
-                                        "                            </div>\n" +
-                                        "                            <div class=\"item-subtitle\">"+Operation['ui_updateTime']+"<span class=\"blueColor\">"+this.fUpdatetime.substring(0,10)+"</span></div>\n" +
-                                        "                        </div>\n" +
-                                        "                    </li>");
-                            });
-                            addClick();
-                        }else{
+        type: "GET",
+        url: "http://116.236.149.165:8090/SubstationWEBV2/v4/getVersionHistory",
+        data: {fId:appId},
+        beforeSend: function (request) {
+                        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+                        request.setRequestHeader("Authorization", tokenFromAPP);
+                        $.showPreloader(Operation['ui_loading']);
+                    },
+        success: function (data) {
+                    if (data == undefined) {
+                      $("#noDataDiv").show();
+                      return;
+                    } else {
+                      if (data.code == "200") {
+                        $(".list-container").empty();
+                        if(data.data==null||data.data==""||data.data==undefined){
                             $("#noDataDiv").show();
+                        }else{
+                            if(data.data.list!=undefined && data.data.list.length>0){
+                                $(data.data.list).each(function(){
+                                    $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='"+JSON.stringify(this.fUpdatelog.replace(/\r\n/g,'<br>'))+"'>\n" +
+                                            "                        <div class=\"item-inner\">\n" +
+                                            "                            <div class=\"item-title-row\">\n" +
+                                            "                                <div class=\"item-title\">"+Operation['ui_version']+this.fVersion+Operation['ui_mainUpdate']+"</div>\n" +
+                                            "                            </div>\n" +
+                                            "                            <div class=\"item-subtitle\">"+Operation['ui_updateTime']+"<span class=\"blueColor\">"+this.fUpdatetime.substring(0,10)+"</span></div>\n" +
+                                            "                        </div>\n" +
+                                            "                    </li>");
+                                });
+                                addClick();
+                            }else{
+                                $("#noDataDiv").show();
+                            }
                         }
+                      } else if (data.code == "5000") {
+                        Substation.showCodeTips(data.code);
+                        Substation.reportError(JSON.stringify(data.data.stackTrace));
+                      } else {
+                        Substation.showCodeTips(data.code);
+                      }
                     }
-                  } else if (data.code == "5000") {
-                    Substation.showCodeTips(data.code);
-                    Substation.reportError(JSON.stringify(data.data.stackTrace));
-                  } else {
-                    Substation.showCodeTips(data.code);
-                  }
+                },
+        error: function (data) {
+                if (data.status == 0) {
+                  $.toast(Operation['ui_neterror']);
+                } else {
+                  $.toast(Operation['code_fail']);
                 }
             },
-    error: function (data) {
-            if (data.status == 0) {
-              $.toast(Operation['ui_neterror']);
-            } else {
-              $.toast(Operation['code_fail']);
-            }
+        complete:function(){
+            $.hidePreloader();
         }
     });
 }
