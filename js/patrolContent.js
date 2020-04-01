@@ -99,7 +99,7 @@ function loadPage() {
                                 "                                                <div class=\"item-media\"><i\n" +
                                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                                 "                                                <div class=\"item-inner\">\n" +
-                                "                                                    "+Operation['ui_yes']+"\n" +
+                                "                                                    " + Operation['ui_yes'] + "\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
                                 "                                            &nbsp;\n" +
@@ -108,7 +108,7 @@ function loadPage() {
                                 "                                                <div class=\"item-media\"><i\n" +
                                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                                 "                                                <div class=\"item-inner\">\n" +
-                                "                                                    "+Operation['ui_no']+"\n" +
+                                "                                                    " + Operation['ui_no'] + "\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
                                 "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + decodeURIComponent(this.identification) + "\"></i>\n" +
@@ -176,7 +176,7 @@ function loadPage() {
                     });
                     $(".icon-tips").unbind().click(function () {
                         var tipStr = $(this).attr("data-value");
-                        $("#popShow").text(Operation['ui_identify']+"：" + tipStr);
+                        $("#popShow").text(Operation['ui_identify'] + "：" + tipStr);
                         //                        $(".open-popover").click();
                     });
                 });
@@ -341,12 +341,12 @@ function loadPage() {
 
     function linkClick(parentId) {
         $(".list-block .item-link").unbind().click(function (event) {
-            if(!upLoadClicktag){
-              return;
+            if (!upLoadClicktag) {
+                return;
             }
             upLoadClicktag = false;
-            setTimeout(function() {
-              upLoadClicktag = true;
+            setTimeout(function () {
+                upLoadClicktag = true;
             }, 200);
             var clickId = $(this).attr("id");
             //            var params = {
@@ -409,12 +409,12 @@ function loadPage() {
 
     function addRadioClick() {
         $(":radio").change(function () {
-            if(!upLoadClicktag){
-              return;
+            if (!upLoadClicktag) {
+                return;
             }
             upLoadClicktag = false;
-            setTimeout(function() {
-              upLoadClicktag = true;
+            setTimeout(function () {
+                upLoadClicktag = true;
             }, 1000);
             var clickDeviceId = $(".tab.active").attr("id");
             var radioName = $(this).attr("name");
@@ -462,15 +462,19 @@ function loadPage() {
     addLeftClick();
 
     $("#saveBtn").click(function () {
-        if(!upLoadClicktag){
-          return;
+        if (!upLoadClicktag) {
+            return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
-          upLoadClicktag = true;
+        setTimeout(function () {
+            upLoadClicktag = true;
         }, 1000);
         hasSave = true;
         saveThisPage();
+        //添加判断
+        if ($(".buttons-tab .tab-link:last").hasClass('active')) {
+            $(".icon-select").click();
+        }
     });
 
     fillData(-1);
@@ -499,6 +503,7 @@ function loadPage() {
         $("#subName").text(titleTreeName);
         fillRightData();
         //        $(".close-panel").click();
+
         $("#" + clickItemNum).click();
     }
 }
@@ -771,12 +776,13 @@ function closePicture(obj) {
 loadSavedPic();*/
 
 var upLoadClicktag = true;
+
 function saveFormData() {
-    if(!upLoadClicktag){
+    if (!upLoadClicktag) {
         return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
+    setTimeout(function () {
         upLoadClicktag = true;
     }, 1000);
     $(".fileInput").each(function () {
@@ -827,11 +833,11 @@ function saveFormData() {
 
 //巡检记录点击是跳转
 function goToInfo() {
-    if(!upLoadClicktag){
+    if (!upLoadClicktag) {
         return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
+    setTimeout(function () {
         upLoadClicktag = true;
     }, 1000);
     if (canClick == "false") {
@@ -861,7 +867,10 @@ var clickBackBtn = 0;
 //返回按钮
 $("#backBtn").click(function () {
     if (!hasSave && canClick != "false") {
-        $.confirm(Operation['ui_noSaveWantOut'],function(){clickBackBtn = 1;window.history.back();},function(){});
+        $.confirm(Operation['ui_noSaveWantOut'], function () {
+            clickBackBtn = 1;
+            window.history.back();
+        }, function () {});
     } else {
         window.history.back();
     }
@@ -878,7 +887,7 @@ window.addEventListener("resize", function () {
 
 $(window).bind('beforeunload', function (e) {
     if (canClick != "false") {
-        if (!hasSave&&clickBackBtn!=1) {
+        if (!hasSave && clickBackBtn != 1) {
             (e || window.event).returnValue = Operation['ui_noSaveWantOut'];
             return Operation['ui_noSaveWantOut'];
         }
