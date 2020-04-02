@@ -97,12 +97,13 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 if (this.fUpdateDate != undefined) {
                     solveTime = "<p>"+Operation['ui_solvedTime'] + this.fUpdateDate + "</p>";
                 }
-                $(".card-content").append("<div class=\"card-content-inner row no-gutter\" data-tree=\"" + (this.treePathName == undefined ? "" : this.treePathName) + "\" id=\"" + this.fDeviceproblemid + "\">\n" +
+                $(".card-content").append("<div class=\"card-content-inner row no-gutter\" id=\"" + this.fDeviceproblemid + "\">\n" +
                     "                        <div class=\"col-10\">\n" +
                     "                            <i class=\"icon icon-alarm\"></i>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"col-85\">\n" +
-                    "                            <p class=\"boldText\">" + Operation['ui_Devname'] + (this.treePathName == undefined ? "-" : this.treePathName) + "</p>\n" +
+                    "                            <p class=\"boldText\">" + Operation['ui_Devname'] + (this.fdeviceinfoName == undefined ? "-" : this.fdeviceinfoName) + "</p>\n" +
+//                    "                            <p>" + Operation['ui_classPath'] + (this.fDeviceNamePath == undefined ? "-" : this.fDeviceNamePath) + "</p>\n" +
                     "                            <p>" + Operation['ui_Description'] + (this.fDeviceproblemdes == undefined ? "-" : this.fDeviceproblemdes) + "</p>\n" +
                     "                            <p>" + Operation['ui_detriment'] + (this.fProblemharm == undefined ? " - " : this.fProblemharm) + " </p>\n" +
                     "                            <p>" + Operation['ui_Specificlocation'] + problemStr + "</p>\n" +
@@ -129,12 +130,12 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                     upLoadClicktag = true;
                 }, 1000);
                 var proId = $(this).attr("id");
-                var dataTree = $(this).attr("data-tree");
+//                var dataTree = $(this).attr("data-tree");
                 //                var target_roll_height = $(this).offset().top-$(".content").offset().top+$(".content").scrollTop();
                 var target_roll_height = $(".content").scrollTop();
                 //记录滚动位置
                 localStorage.setItem("scrollY", target_roll_height);
-                localStorage.setItem("clickTree", dataTree);
+//                localStorage.setItem("clickTree", dataTree);
                 window.location.href = "defectInfo.html?fDeviceproblemid=" + proId + "&taskProblem=1";
             });
             var missionTypeId = localStorage.getItem("missionTypeid");

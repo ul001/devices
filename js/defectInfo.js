@@ -54,8 +54,15 @@ Substation.getDataByAjax(url, problemParam, function (data) {
   var defectJson = data.tDevDeviceproblem;
   var beforeimg = data.beforeimg;
   var afterimg = data.afterimg;
+  var deviceName = defectJson.fdeviceinfoName;
+  if(deviceName==undefined){
+      deviceName = defectJson.treePathName;
+      $(".pathShow").hide();
+  }else{
+      $("#treePath").text(Substation.removeUnDefinedStr(defectJson.fDeviceNamePath));
+  }
   $("#taskNumber").text(Substation.removeUnDefinedStr(defectJson.fTasknumber));
-  $("#treePathName").text(Substation.removeUnDefinedStr(defectJson.treePathName));
+  $("#deviceName").text(Substation.removeUnDefinedStr(deviceName));
   $("#fDeviceproblemdes").text(Substation.removeUnDefinedStr(defectJson.fDeviceproblemdes));
   var fProblemlocation = Substation.removeUnDefinedStr(defectJson.fProblemlocation);
   $("#defectPosition").empty();

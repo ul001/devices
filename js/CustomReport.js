@@ -980,6 +980,7 @@ var CustomReport = (function () {
                     var fDiscovertime,
                         fProblemlevel,
                         treePathName,
+                        classPath,
                         fProblemtype,
                         fDeviceproblemdes,
                         updataTime;
@@ -990,9 +991,9 @@ var CustomReport = (function () {
                     select.fProblemlevel === undefined ?
                         (fProblemlevel = "-") :
                         (fProblemlevel = select.fProblemlevel);
-                    select.treePathName === undefined ?
+                    select.fdeviceinfoName === undefined ?
                         (treePathName = "-") :
-                        (treePathName = select.treePathName);
+                        (treePathName = select.fdeviceinfoName);
 
                     select.fProblemtype === undefined ?
                         (fProblemtype = "-") :
@@ -1003,6 +1004,9 @@ var CustomReport = (function () {
                     select.newestUpdate === undefined ?
                         (updataTime = "-") :
                         (updataTime = select.newestUpdate);
+                    select.fDeviceNamePath === undefined ?
+                        (classPath = "-") :
+                        (classPath = select.fDeviceNamePath);
 
                     if (select.fState === "0") {
                         fstate = "未处理";
@@ -1047,6 +1051,9 @@ var CustomReport = (function () {
                         '<div class="ListMessageR">' +
                         '<p>发现时间：<label>' +
                         fDiscovertime + '</p>' +
+                        '<p>分类路径：<label>' +
+                        classPath +
+                        "</label></p>" +
                         '<p>设备名称：<label>' +
                         treePathName +
                         "</label></p>" +
@@ -1098,6 +1105,7 @@ var CustomReport = (function () {
                             var fDiscovertime,
                                 fProblemlevel,
                                 treePathName,
+                                classPath,
                                 fProblemtype,
                                 fDeviceproblemdes,
                                 updataTime;
@@ -1108,9 +1116,9 @@ var CustomReport = (function () {
                             select.fProblemlevel === undefined ?
                                 (fProblemlevel = "-") :
                                 (fProblemlevel = select.fProblemlevel);
-                            select.treePathName === undefined ?
+                            select.fdeviceinfoName === undefined ?
                                 (treePathName = "-") :
-                                (treePathName = select.treePathName);
+                                (treePathName = select.fdeviceinfoName);
 
                             select.fProblemtype === undefined ?
                                 (fProblemtype = "-") :
@@ -1121,6 +1129,9 @@ var CustomReport = (function () {
                             select.newestUpdate === undefined ?
                                 (updataTime = "-") :
                                 (updataTime = select.newestUpdate);
+                            select.fDeviceNamePath === undefined ?
+                                (classPath = "-") :
+                                (classPath = select.fDeviceNamePath);
 
                             if (select.fState === "0") {
                                 fstate = "未处理";
@@ -1184,6 +1195,9 @@ var CustomReport = (function () {
                                 '<div class="ListMessageR">' +
                                 '<p>发现时间：<label>' +
                                 fDiscovertime + '</p>' +
+                                '<p>分类路径：<label>' +
+                                classPath +
+                                "</label></p>" +
                                 '<p>设备名称：<label>' +
                                 treePathName +
                                 "</label></p>" +
@@ -1375,6 +1389,7 @@ var CustomReport = (function () {
                     var fDiscovertime,
                         fProblemlevel,
                         treePathName,
+                        classPath,
                         fProblemtype,
                         fDeviceproblemdes,
                         updataTime;
@@ -1385,9 +1400,9 @@ var CustomReport = (function () {
                     select.fProblemlevel === undefined ?
                         (fProblemlevel = "-") :
                         (fProblemlevel = select.fProblemlevel);
-                    select.treePathName === undefined ?
+                    select.fdeviceinfoName === undefined ?
                         (treePathName = "-") :
-                        (treePathName = select.treePathName);
+                        (treePathName = select.fdeviceinfoName);
 
                     select.fProblemtype === undefined ?
                         (fProblemtype = "-") :
@@ -1398,6 +1413,9 @@ var CustomReport = (function () {
                     select.newestUpdate === undefined ?
                         (updataTime = "-") :
                         (updataTime = select.newestUpdate);
+                    select.fDeviceNamePath === undefined ?
+                        (classPath = "-") :
+                        (classPath = select.fDeviceNamePath);
 
                     if (select.fState === "0") {
                         fstate = "未处理";
@@ -1416,6 +1434,9 @@ var CustomReport = (function () {
                         '<div class="ListMessageR">' +
                         '<p>发现时间：<label>' +
                         fDiscovertime + '</p>' +
+                        '<p>分类路径：<label>' +
+                        classPath +
+                        "</label></p>" +
                         '<p>设备名称：<label>' +
                         treePathName +
                         "</label></p>" +
@@ -1455,6 +1476,7 @@ var CustomReport = (function () {
                             var fDiscovertime,
                                 fProblemlevel,
                                 treePathName,
+                                classPath,
                                 fProblemtype,
                                 fDeviceproblemdes,
                                 updataTime;
@@ -1465,9 +1487,9 @@ var CustomReport = (function () {
                             select.fProblemlevel === undefined ?
                                 (fProblemlevel = "-") :
                                 (fProblemlevel = select.fProblemlevel);
-                            select.treePathName === undefined ?
+                            select.fdeviceinfoName === undefined ?
                                 (treePathName = "-") :
-                                (treePathName = select.treePathName);
+                                (treePathName = select.fdeviceinfoName);
 
                             select.fProblemtype === undefined ?
                                 (fProblemtype = "-") :
@@ -1478,6 +1500,9 @@ var CustomReport = (function () {
                             select.newestUpdate === undefined ?
                                 (updataTime = "-") :
                                 (updataTime = select.newestUpdate);
+                            select.fDeviceNamePath === undefined ?
+                                (classPath = "-") :
+                                (classPath = select.fDeviceNamePath);
 
                             if (select.fState === "0") {
                                 fstate = "未处理";
@@ -1496,6 +1521,9 @@ var CustomReport = (function () {
                                 '<div class="ListMessageR">' +
                                 '<p>发现时间：<label>' +
                                 fDiscovertime + '</p>' +
+                                '<p>分类路径：<label>' +
+                                classPath +
+                                "</label></p>" +
                                 '<p>设备名称：<label>' +
                                 treePathName +
                                 "</label></p>" +

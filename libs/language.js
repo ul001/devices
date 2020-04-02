@@ -280,6 +280,7 @@ function getZhLanguage() {
     ui_fConfirmtime: "确认时间:",
     //设备分类
     ui_devicesort: "设备分类",
+    ui_classPath:"分类路径：",
 
 
 
@@ -682,6 +683,7 @@ function getEnLanguage() {
     ui_fConfirmtime: "ConfirmTime:",
     //设备分类
     ui_devicesort: "Device Sort",
+    ui_classPath:"ClassPath:",
 
     //code码
     code_200: "Request succeeds, insert success",
