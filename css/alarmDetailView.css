@@ -5,10 +5,12 @@
 .item-content .item-inner .item-after{
     width:60%;
     color: #3E4145;
-    word-break: break-all;
-    text-overflow: ellipsis;
+/*    word-break: break-all;
+    text-overflow: ellipsis;*/
+    max-height:initial;
+    white-space:initial;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }
