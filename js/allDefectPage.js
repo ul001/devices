@@ -122,7 +122,11 @@ function addItems(number, lastIndex) {
                     if(this.fUpdateDate!=undefined){
                         solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
                     }*/
-                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" value=\"" + Substation.removeUnDefinedStr(this.treePathName) + "\">\n" +
+                    var deviceName = this.fdeviceinfoName;
+                    if(deviceName==undefined){
+                        deviceName = this.treePathName;
+                    }
+                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\">\n" +
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"card-content-inner row no-gutter\">\n" +
                         /*"                            <div class=\"col-10\">\n" +
@@ -130,7 +134,7 @@ function addItems(number, lastIndex) {
                         "                            </div>\n" +*/
                         "                            <div class=\"col-95\">\n" +
                         "<p class=\"subName limit-length\">" + Substation.removeUnDefinedStr(this.fSubName) + "</p>" +
-                        "                                <p>" + Operation['ui_Devname'] + "<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.treePathName) + "</span>\n" +
+                        "                                <p>" + Operation['ui_Devname'] + "<span class=\"redColor\">" + Substation.removeUnDefinedStr(deviceName) + "</span>\n" +
                         "                                </p>\n" +
                         "                                <p>" + Operation['ui_DefectExplain'] + "<span class=\"redColor\">" + Substation.removeUnDefinedStr(this.fDeviceproblemdes) + "</span></p>\n" +
                         //                        "                                <p>危害:"+this.fProblemharm+"</p>\n" +
@@ -162,8 +166,8 @@ function addItems(number, lastIndex) {
                         upLoadClicktag = true;
                     }, 1000);
                     var clickId = $(this).attr("id");
-                    var clickTree = $(this).attr("value");
-                    localStorage.setItem("clickTree", clickTree);
+//                    var clickTree = $(this).attr("value");
+//                    localStorage.setItem("clickTree", clickTree);
                     /*params['subName']=$("#search").val();
                     localStorage.setItem("saveParam",JSON.stringify(params));*/
                     localStorage.setItem("canClick", false);
