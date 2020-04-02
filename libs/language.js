@@ -245,7 +245,7 @@ function getZhLanguage() {
     ui_manager: "管理",
     ui_MarkConfirmed: "标记已确认",
     ui_MarkUnconfirmed: "标记未确认",
-
+    ui_Overshootvalue: "越限值:",
     //版本历史
     ui_updateHistory: "版本历史",
     ui_version: "版本",
@@ -275,6 +275,9 @@ function getZhLanguage() {
     ui_time: "时间:",
     ui_alarmDeviceId: "设备编号:",
     ui_alarmDeviceName: "设备名称:",
+    ui_fConfirmstatus: "确认状态:",
+    ui_fConfirmuserid: "确认人:",
+    ui_fConfirmtime: "确认时间:",
     //设备分类
     ui_devicesort: "设备分类",
 
@@ -673,6 +676,10 @@ function getEnLanguage() {
     ui_time: "Time:",
     ui_alarmDeviceId: "DeviceID:",
     ui_alarmDeviceName: "DeviceName:",
+    ui_Overshootvalue: "OvershootValue:",
+    ui_fConfirmstatus: "ConfirmStatus:",
+    ui_fConfirmuserid: "ConfirmuserName:",
+    ui_fConfirmtime: "ConfirmTime:",
     //设备分类
     ui_devicesort: "Device Sort",
 
