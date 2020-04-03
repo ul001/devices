@@ -169,7 +169,7 @@ function loadPage() {
                         });
                     }
                     $(".tab-link.button").unbind().click(function () {
-                        var clickItemNum = $(this).attr("id");
+                        var clickItemNum = $(this).attr("data-id");
                         clickGroupTree += "-" + $(this).text();
                         localStorage.setItem("itemNum", clickItemNum);
                         localStorage.setItem("clickTree", clickGroupTree);
@@ -416,7 +416,7 @@ function loadPage() {
             setTimeout(function () {
                 upLoadClicktag = true;
             }, 1000);
-            var clickDeviceId = $(".tab.active").attr("data-id");
+            var clickDeviceId = $(".tab.active").attr("id");
             var radioName = $(this).attr("name");
             var deviceItemCode = $(this).attr("data-code");
             if ($(this).val() == "yes") {
@@ -844,7 +844,7 @@ function goToInfo() {
         $(".card-content").unbind().click(function () {
             var thisRadio = $(this).find(":radio:checked");
             if (thisRadio.val() == "yes") {
-                var clickDeviceId = $(".tab.active").attr("data-id");
+                var clickDeviceId = $(".tab.active").attr("id");
                 var deviceItemCode = thisRadio.attr("data-code");
                 var params = {
                     fPlacecheckformid: fPlacecheckformid,
