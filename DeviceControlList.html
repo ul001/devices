@@ -12,8 +12,6 @@
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="libs/light7-swipeout.css" />
     <link rel="stylesheet" href="css/general.css" />
-    <link rel="stylesheet" type="text/css" href="css/mainPrint.css" />
-    <link rel="stylesheet" type="text/css" href="libs/bootstrap-table.min.css" />
     <link rel="stylesheet" href="css/DeviceControlList.css">
 </head>
 
@@ -33,44 +31,33 @@
                     <span data-i18n="ui_devicesort"></span>
                 </h1>
             </header>
-            <div class="content pull-to-refresh-content">
-                <div class="pull-to-refresh-layer">
-                    <div class="preloader"></div>
-                    <div class="pull-to-refresh-arrow"></div>
-                </div>
+            <div class="bar bar-header-secondary limit-length" style="line-height:2.2rem;">
+                <i class="icon icon-sub"></i><span id="subName"></span>
+            </div>
+            <div class="content">
                 <div id="container">
-                    <div class="row button_bar" style="display:none;">
-                        <a id="light_opening" href="#" class="col-50 button active">
-                            <span data-i18n="">合闸</span>
-                        </a>
-                        <a id="light_closed" href="#" class="col-50 button">
-                            <span data-i18n="">分闸</span>
-                        </a>
-                        <!--                    <a id="no_device" href="#" class="col-33 button">-->
-                        <!--                        <span data-i18n="">无设备</span>-->
-                        <!--                    </a>-->
-                    </div>
                     <div class="content-list">
-                        <label class="list-item label-checkbox light_opening" data-id="1">
+                        <label class="list-item label-checkbox light_opening" id="lightControl">
                             <div class="img_text">
-                                <img src="img/lightsort.png">
+                                <img class="imgBox" src="img/lightsort.png">
                             </div>
                             <div class="row">
                                 <span class="label-title col-100">照明控制</span>
                             </div>
                         </label>
-                        <label class="list-item label-checkbox no_device" data-id="2">
+                        <label class="list-item label-checkbox no_device" id="arcm300TControl">
                             <div class="img_text">
-                                <img src="img/yibiaosort.png">
+                                <img class="imgBox" src="img/yibiaosort.png">
                             </div>
                             <div class="row">
                                 <span class="label-title col-100">仪表控制</span>
                             </div>
                         </label>
                     </div>
-                    <div class="footer_bar">
-                        <a href="#" class="footer_btn button button-fill button-big" style="display:none;">关闭灯光</a>
-                    </div>
+                </div>
+                <div id="outTip"
+                     style="width: 100%;height: 100%;position: fixed;top: 2.2rem;left: 0;z-index: 1999;background: #575757;">
+                    <img src="img/firstTip.png" style="width:100%;">
                 </div>
             </div>
         </div>

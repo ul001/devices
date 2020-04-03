@@ -137,7 +137,7 @@ function loadPage() {
                     });
                     if (canClick == "false") {
                         if (thisValueJson.length > 0) {
-                            $(".buttons-tab").append("<a href=\"#" + obj.fSubdeviceinfoid + "\" id=\"" + itemNum + "\" class=\"tab-link button\">" + obj.fDevicename + "</a>");
+                            $(".buttons-tab").append("<a href=\"#" + obj.fSubdeviceinfoid + "\" data-id=\"" + itemNum + "\" class=\"tab-link button\">" + obj.fDevicename + "</a>");
                             $(".content-block .tabs").append("<div id=\"" + obj.fSubdeviceinfoid + "\" class=\"tab pull-to-refresh-content\">\n" +
                                 "<div class=\"pull-to-refresh-layer\"></div>\n" +
                                 "<div class=\"content-block\">\n" + tempStr +
@@ -148,7 +148,7 @@ function loadPage() {
                         }
                         $(".icon.icon-tips").hide();
                     } else {
-                        $(".buttons-tab").append("<a href=\"#" + obj.fSubdeviceinfoid + "\" id=\"" + itemNum + "\" class=\"tab-link button\">" + obj.fDevicename + "</a>");
+                        $(".buttons-tab").append("<a href=\"#" + obj.fSubdeviceinfoid + "\" data-id=\"" + itemNum + "\" class=\"tab-link button\">" + obj.fDevicename + "</a>");
                         $(".content-block .tabs").append("<div id=\"" + obj.fSubdeviceinfoid + "\" class=\"tab pull-to-refresh-content\">\n" +
                             "<div class=\"pull-to-refresh-layer\"></div>\n" +
                             "<div class=\"content-block\">\n" + tempStr +
@@ -416,7 +416,7 @@ function loadPage() {
             setTimeout(function () {
                 upLoadClicktag = true;
             }, 1000);
-            var clickDeviceId = $(".tab.active").attr("id");
+            var clickDeviceId = $(".tab.active").attr("data-id");
             var radioName = $(this).attr("name");
             var deviceItemCode = $(this).attr("data-code");
             if ($(this).val() == "yes") {
@@ -844,7 +844,7 @@ function goToInfo() {
         $(".card-content").unbind().click(function () {
             var thisRadio = $(this).find(":radio:checked");
             if (thisRadio.val() == "yes") {
-                var clickDeviceId = $(".tab.active").attr("id");
+                var clickDeviceId = $(".tab.active").attr("data-id");
                 var deviceItemCode = thisRadio.attr("data-code");
                 var params = {
                     fPlacecheckformid: fPlacecheckformid,
