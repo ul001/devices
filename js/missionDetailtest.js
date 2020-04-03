@@ -526,7 +526,7 @@ $("#clickManager").click(function () {
         localStorage.setItem("missionSubid", missionsubid);
         localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
     localStorage.setItem("taskID", taskID);
-    if (taskCreatId != loginUserid && missionType != "3") {
+    if (missionType != "3") {
         localStorage.setItem("hiddenBtn", "NO");
     } else {
         localStorage.setItem("hiddenBtn", "YES");

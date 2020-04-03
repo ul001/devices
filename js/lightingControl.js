@@ -64,14 +64,16 @@ function selectAll(){
 }
 
 function goBack() {
-    if (isAndroid) {
-        android.goBack();
-    } else if (isIOS) {
+//    if (isAndroid) {
+//        android.goBack();
+//    } else if (isIOS) {
+//        window.history.back();
+//        window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
+//    } else {
         window.history.back();
-        window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
-    } else {
-        window.history.back();
-    }
+//    }
 }
+
+$("#back_btn").on("click",goBack);
 
 $.init();

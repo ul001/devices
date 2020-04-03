@@ -1,6 +1,5 @@
 jQuery(document).ready(function () {
 
-
     //添加右上角事件
     var subObj = JSON.parse(localStorage.getItem("subObj"));
     try {
@@ -15,6 +14,7 @@ jQuery(document).ready(function () {
     if (subObj != null && subObj != undefined) {
         selectSubid = subObj.subId;
         $("#search").val(subObj.subName);
+        $("#subName").text(subObj.subName);
         $(".item-content[data-id=" + subObj.subId + "]").addClass("select").siblings().removeClass("select");
     }
     $("#outTip").click(function () {
@@ -25,12 +25,12 @@ jQuery(document).ready(function () {
                 clickSubid = saveParam['fSubid'];
                 saveParam=null;
             }*/
-        var start = new Date($("#dateStart").val().replace(/-/g, '/'));
-        var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
-        if (start > end) {
-            $.toast(Operation['ui_dateselecttip']);
-            return;
-        }
+//        var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+//        var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+//        if (start > end) {
+//            $.toast(Operation['ui_dateselecttip']);
+//            return;
+//        }
         $(".close-panel").click();
         if ($("#search").val() == "") {
             //        $("#subName").text("所有变电所");
@@ -49,29 +49,12 @@ jQuery(document).ready(function () {
                 }
             } catch (e) {}
             clickSubid = "";
+            $("#subName").text(clickName);
         }
         $("#outTip").hide();
         $(".content").scrollTop(0);
-        //        getFirstPage();
-        customReport.getData(
-            "/main/getSubstationInfoReportByfSubId",
-            //   "fSubids=" +
-            //     checkedList.join(",") +
-            //     "&startTime=" +
-            //     $.cookie("newDate") +
-            //     "&endTime=" +
-            //     $.cookie("lastDate")
-            // );
-            "fSubids=" + selectSubid +
-            "&startTime=" +
-            $("#dateStart").val() +
-            "&endTime=" +
-            $("#dateEnd").val()
-        );
     });
 
-    $("#dateStart").calendar();
-    $("#dateEnd").calendar();
     $("#listContainer").hide();
 
     function getSomeSubstation(isAll) {
@@ -144,64 +127,6 @@ jQuery(document).ready(function () {
         getSomeSubstation(1);
     });
 
-    //时间快捷按钮
-    $(".buttons-row .button").click(function () {
-        $(this).addClass("active").siblings().removeClass("active");
-    });
-    $("#today").click(function () {
-        var myDate = new Date();
-        var todayVal = myDate.format("yyyy-MM-dd");
-        $("#dateStart").val(todayVal);
-        $("#dateEnd").val(todayVal);
-    });
-    $("#yestoday").click(function () {
-        var myDate = new Date();
-        myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
-        var yestodayVal = myDate.format("yyyy-MM-dd");
-        $("#dateStart").val(yestodayVal);
-        $("#dateEnd").val(yestodayVal);
-    });
-    $("#thisMonth").click(function () {
-        var myDate = new Date();
-        var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
-        var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
-        var firstDayVal = firstDay.format("yyyy-MM-dd");
-        var lastDayVal = lastDay.format("yyyy-MM-dd");
-        $("#dateStart").val(firstDayVal);
-        $("#dateEnd").val(lastDayVal);
-    });
-    $("#lastMonth").click(function () {
-        var myDate = new Date();
-        var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
-        var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
-        var firstDayVal = firstDay.format("yyyy-MM-dd");
-        var lastDayVal = lastDay.format("yyyy-MM-dd");
-        $("#dateStart").val(firstDayVal);
-        $("#dateEnd").val(lastDayVal);
-    });
-
-    Date.prototype.format = function (fmt) { //author: meizz
-        var o = {
-            "M+": this.getMonth() + 1, //月份
-            "d+": this.getDate(), //日
-            "h+": this.getHours(), //小时
-            "m+": this.getMinutes(), //分
-            "s+": this.getSeconds(), //秒
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-            "S": this.getMilliseconds() //毫秒
-        };
-        if (/(y+)/.test(fmt))
-            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)
-            if (new RegExp("(" + k + ")").test(fmt))
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-        return fmt;
-    }
-
-    $("#dateStart,#dateEnd").click(function () {
-        $(".buttons-row").find($(".active")).removeClass("active");
-    });
-
     //解决键盘遮挡问题
     var h = $(window).height();
     window.addEventListener("resize", function () {
@@ -230,13 +155,21 @@ jQuery(document).ready(function () {
         }
     });
 
-    $("#lastMonth").click();
+//    $("#lastMonth").click();
 
-    if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
+    if (selectSubid == "") {
         $(".pull-right").click();
         $.toast(Operation['ui_subSelectTip']);
     } else {
         $('#searchBtn').click();
         $("#outTip").hide();
     }
+
+    $("#lightControl").click(function(){
+        window.location.href = "lightingControl.html";
+    });
+
+    $("#arcm300TControl").click(function(){
+        window.location.href = "arcm300TControl.html";
+    });
 });
