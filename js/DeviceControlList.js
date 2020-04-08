@@ -1,5 +1,13 @@
 jQuery(document).ready(function () {
-
+    var menuId = "2536";
+    if (isIOS) {
+        window.webkit.messageHandlers.iOS.postMessage(null);
+        var storage = localStorage.getItem("accessToken");
+        storage = JSON.parse(storage);
+        menuId = storage.fmenuId;
+    } else if (isAndroid) {
+        menuId = android.getMenuId();
+    }
     //添加右上角事件
     var subObj = JSON.parse(localStorage.getItem("subObj"));
     try {
@@ -10,27 +18,31 @@ jQuery(document).ready(function () {
     var selectSubid = "";
     var clickSubid = "";
     var clickName = "";
+    loadMenu();
     getSomeSubstation(1);
     if (subObj != null && subObj != undefined) {
         selectSubid = subObj.subId;
         $("#search").val(subObj.subName);
         $("#subName").text(subObj.subName);
-        $(".item-content[data-id=" + subObj.subId + "]").addClass("select").siblings().removeClass("select");
+        $(".item-content[data-id=" + subObj.subId + "]")
+            .addClass("select")
+            .siblings()
+            .removeClass("select");
     }
     $("#outTip").click(function () {
         $("#outTip").hide();
     });
-    $('#searchBtn').click(function () {
+    $("#searchBtn").click(function () {
         /*    if(saveParam!=null){
-                clickSubid = saveParam['fSubid'];
-                saveParam=null;
-            }*/
-//        var start = new Date($("#dateStart").val().replace(/-/g, '/'));
-//        var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
-//        if (start > end) {
-//            $.toast(Operation['ui_dateselecttip']);
-//            return;
-//        }
+                    clickSubid = saveParam['fSubid'];
+                    saveParam=null;
+                }*/
+        //        var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+        //        var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+        //        if (start > end) {
+        //            $.toast(Operation['ui_dateselecttip']);
+        //            return;
+        //        }
         $(".close-panel").click();
         if ($("#search").val() == "") {
             //        $("#subName").text("所有变电所");
@@ -57,6 +69,75 @@ jQuery(document).ready(function () {
 
     $("#listContainer").hide();
 
+    function loadMenu() {
+        if (!menuId || menuId == undefined) {
+            toast("无设备列表");
+            return;
+        }
+        Substation.getDataByAjaxNoLoading(
+            "/getSubinfoVoByPid", {
+                pid: menuId
+            },
+            function (data) {
+                if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
+                    $(data.menuList).each(function () {
+                        var sb =
+                            ' <label class="list-item label-checkbox light_opening" id="' +
+                            this.fCode +
+                            '">';
+                        sb += '                            <div class="img_text">';
+                        if (this.fCode == "lightingControl") {
+                            sb +=
+                                '                                <img class="imgBox" src="img/lightsort.png">';
+                        } else {
+                            sb +=
+                                '                                <img class="imgBox" src="img/yibiaosort.png">';
+                        }
+                        sb += "                            </div>";
+                        sb += '                            <div class="row">';
+                        sb +=
+                            '                                <span class="label-title col-100">' +
+                            this.fMenuname +
+                            "</span>";
+                        sb += "                            </div>";
+                        sb += "                        </label>";
+                        $(".content-list").append(sb);
+
+                        //声明一个控制点击的变量
+                        var upLoadClicktag = true;
+                        $(".label-checkbox").unbind().click(function () {
+                            if (!upLoadClicktag) {
+                                return;
+                            }
+                            upLoadClicktag = false;
+                            setTimeout(function () {
+                                upLoadClicktag = true;
+                            }, 1000);
+                            var clickId = $(this).attr("id");
+                            //                    var clickTree = $(this).attr("value");
+                            //                    localStorage.setItem("clickTree", clickTree);
+                            /*params['subName']=$("#search").val();
+                            localStorage.setItem("saveParam",JSON.stringify(params));*/
+                            // localStorage.setItem("canClick", false);
+                            // if (isAndroid) {
+                            //     localStorage.setItem("fDeviceproblemid", clickId);
+                            //     android.goToIn();
+                            // } else {
+                            if (clickId == "lightingControl") {
+                                window.location.href = "lightingControl.html";
+                            } else {
+                                window.location.href = "arcm300TControl.html";
+                            }
+                            // window.location.href = "defectInfo.html?fDeviceproblemid=" + clickId;
+                            // }
+                        });
+
+                    });
+                }
+            }
+        );
+    }
+
     function getSomeSubstation(isAll) {
         var url = "/getSubListByLetter";
         if (isAll == 1) {
@@ -66,7 +147,7 @@ jQuery(document).ready(function () {
         var searchKey = $("#search").val();
         var params = {
             key: searchKey
-        }
+        };
         $("#listContainer").empty();
         Substation.getDataByAjaxNoLoading(url, params, function (data) {
             if (isAll == 1) {
@@ -75,33 +156,46 @@ jQuery(document).ready(function () {
                 listObj = data;
             }
             $(listObj).each(function () {
-                $("#listContainer").append('<li class="item-content" data-id="' + this.fSubid + '">' +
+                $("#listContainer").append(
+                    '<li class="item-content" data-id="' +
+                    this.fSubid +
+                    '">' +
                     '<div class="item-inner">' +
-                    '<div class="item-title">' + this.fSubname + '</div>' +
-                    '</div>' +
-                    '</li>');
+                    '<div class="item-title">' +
+                    this.fSubname +
+                    "</div>" +
+                    "</div>" +
+                    "</li>"
+                );
             });
             $("#listContainer").show();
-            $("#listContainer .item-content").unbind().click(function () {
-                clickSubid = $(this).attr("data-id");
-                clickName = $(this).find(".item-title").text();
-                $("#search").val(clickName);
-                $(this).addClass("select").siblings().removeClass("select");
-                $("#listContainer").hide();
-                $("#listContainer").empty();
-                //            $("#subName").text(clickName);
-            });
+            $("#listContainer .item-content")
+                .unbind()
+                .click(function () {
+                    clickSubid = $(this).attr("data-id");
+                    clickName = $(this)
+                        .find(".item-title")
+                        .text();
+                    $("#search").val(clickName);
+                    $(this)
+                        .addClass("select")
+                        .siblings()
+                        .removeClass("select");
+                    $("#listContainer").hide();
+                    $("#listContainer").empty();
+                    //            $("#subName").text(clickName);
+                });
         });
     }
 
-    $('#search').bind('keydown', function (event) {
+    $("#search").bind("keydown", function (event) {
         if (event.keyCode == 13) {
             getSomeSubstation();
             document.activeElement.blur();
         }
     });
 
-    $('#search').on("input", function () {
+    $("#search").on("input", function () {
         if ($("#search").val().length > 0) {
             $(".icon.icon-clear").show();
         } else {
@@ -109,7 +203,7 @@ jQuery(document).ready(function () {
         }
     });
 
-    $('#search').on("focus", function () {
+    $("#search").on("focus", function () {
         if ($("#search").val().length > 0) {
             $(".icon.icon-clear").show();
         } else {
@@ -118,8 +212,8 @@ jQuery(document).ready(function () {
     });
 
     /*    $('#search').blur(function(){
-            $(".icon.icon-clear").hide();
-        });*/
+              $(".icon.icon-clear").hide();
+          });*/
 
     $(".icon.icon-clear").click(function () {
         $("#search").val("");
@@ -131,12 +225,15 @@ jQuery(document).ready(function () {
     var h = $(window).height();
     window.addEventListener("resize", function () {
         if ($(window).height() < h) {
-            $('.btnBar').hide();
+            $(".btnBar").hide();
         }
         if ($(window).height() >= h) {
-            $('.btnBar').show();
+            $(".btnBar").show();
         }
-        if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        if (
+            document.activeElement.tagName == "INPUT" ||
+            document.activeElement.tagName == "TEXTAREA"
+        ) {
             window.setTimeout(function () {
                 document.activeElement.scrollIntoViewIfNeeded();
             }, 0);
@@ -155,21 +252,21 @@ jQuery(document).ready(function () {
         }
     });
 
-//    $("#lastMonth").click();
+    //    $("#lastMonth").click();
 
     if (selectSubid == "") {
         $(".pull-right").click();
-        $.toast(Operation['ui_subSelectTip']);
+        $.toast(Operation["ui_subSelectTip"]);
     } else {
-        $('#searchBtn').click();
+        $("#searchBtn").click();
         $("#outTip").hide();
     }
 
-    $("#lightControl").click(function(){
+    $("#lightControl").click(function () {
         window.location.href = "lightingControl.html";
     });
 
-    $("#arcm300TControl").click(function(){
+    $("#arcm300TControl").click(function () {
         window.location.href = "arcm300TControl.html";
     });
 });
