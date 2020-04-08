@@ -256,7 +256,10 @@ $("#startTask").click(function () {
                     var isOpen = localStorage.isOpenTrack;
                     if (isOpen == "false") {
                         $.confirm(Operation['ui_openTraceTip'], function () {
-                                window.webkit.messageHandlers.openTrackFunc.postMessage(null);
+                                var taskDIC = {
+                                    "fTaskNumber": taskID
+                                };
+                                window.webkit.messageHandlers.openTrackFunc.postMessage(taskDIC);
                                 location.reload();
                             },
                             function () {
