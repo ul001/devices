@@ -281,8 +281,9 @@ function getZhLanguage() {
     //设备分类
     ui_devicesort: "设备分类",
     ui_classPath:"分类路径：",
-
-
+    ui_allSelect:"全部订阅",
+    ui_allNoSelect:"全部退订",
+    ui_selectNotifyTitle:"消息通知",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -684,6 +685,9 @@ function getEnLanguage() {
     //设备分类
     ui_devicesort: "Device Sort",
     ui_classPath:"ClassPath:",
+    ui_allSelect:"Subscribe all",
+    ui_allNoSelect:"Unsubscribe all",
+    ui_selectNotifyTitle:"Notification",
 
     //code码
     code_200: "Request succeeds, insert success",
