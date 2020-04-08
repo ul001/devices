@@ -65,21 +65,27 @@ jQuery(document).ready(function () {
         }
         $("#outTip").hide();
         $(".content").scrollTop(0);
+        loadMenu();
     });
 
     $("#listContainer").hide();
 
     function loadMenu() {
+        if (!selectSubid) {
+            return;
+        }
         if (!menuId || menuId == undefined) {
             toast("无设备列表");
             return;
         }
+
         Substation.getDataByAjaxNoLoading(
             "/getSubinfoVoByPid", {
                 pid: menuId
             },
             function (data) {
                 if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
+                    $(".content-list").empty();
                     $(data.menuList).each(function () {
                         var sb =
                             ' <label class="list-item label-checkbox light_opening" id="' +
@@ -114,15 +120,7 @@ jQuery(document).ready(function () {
                                 upLoadClicktag = true;
                             }, 1000);
                             var clickId = $(this).attr("id");
-                            //                    var clickTree = $(this).attr("value");
-                            //                    localStorage.setItem("clickTree", clickTree);
-                            /*params['subName']=$("#search").val();
-                            localStorage.setItem("saveParam",JSON.stringify(params));*/
-                            // localStorage.setItem("canClick", false);
-                            // if (isAndroid) {
-                            //     localStorage.setItem("fDeviceproblemid", clickId);
-                            //     android.goToIn();
-                            // } else {
+
                             if (clickId == "lightingControl") {
                                 window.location.href = "lightingControl.html";
                             } else {
