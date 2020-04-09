@@ -153,3 +153,114 @@ data = {
 	UIImagePickerControllerMediaType = "public.image";
 	UIImagePickerControllerOriginalImage = <UIImage:0x281ef99e0 anonymous {3024, 4032}>, scale = 1
 }
+
+//灯光列表
+ "list": [
+            {
+                "fSubid": 10100001,
+                "fMetercode": "12",
+                "fFuncid": "13",
+                "fGatewayid": "10100001002",
+                "fComid": "C1",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT1",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}",
+                "deviceValue": 0,
+                "deviceValueExplain": "分闸"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "120",
+                "fFuncid": "13",
+                "fGatewayid": "10100001001",
+                "fComid": "11",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT2",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "121",
+                "fFuncid": "13",
+                "fGatewayid": "10100001001",
+                "fComid": "1",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT3",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "122",
+                "fFuncid": "13",
+                "fGatewayid": "10100001001",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT4",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "123",
+                "fFuncid": "13",
+                "fGatewayid": "10100001001",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT5",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "123456",
+                "fFuncid": "123456",
+                "fGatewayid": "10100001001",
+                "fComid": "",
+                "fDevicetype": "照明",
+                "fDevicename": "123456",
+                "fStatedesc": "{\"0\": \"11\", \"1\": \"11\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "1234561",
+                "fFuncid": "123456",
+                "fGatewayid": "10100001001",
+                "fComid": "",
+                "fDevicetype": "照明",
+                "fDevicename": "1234561",
+                "fStatedesc": "{\"0\": \"11\", \"1\": \"11\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "124",
+                "fFuncid": "13",
+                "fGatewayid": "10100001001",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT6",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "125",
+                "fFuncid": "13",
+                "fGatewayid": "10100001001",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT7",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
+            },
+            {
+                "fSubid": 10100001,
+                "fMetercode": "126",
+                "fFuncid": "13",
+                "fGatewayid": "10100001001",
+                "fFuncname": "11",
+                "fDevicetype": "照明",
+                "fDevicename": "TESTLIGHT8",
+                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
+            }
+        ],
+        "firstPage": 1,
+        "prePage": 0,
