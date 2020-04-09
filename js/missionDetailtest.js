@@ -17,7 +17,7 @@ try {
     }
 } catch (e) {
     isUseTrace = "0";
-};
+}
 
 var upLoadClicktag = true;
 
@@ -31,6 +31,8 @@ var missionsubid;
 var missionTypeid;
 //任务负责人 fTaskchargerid
 var taskchargerid;
+//任务单号
+var TaskNumber;
 
 var taskCreatId;
 
@@ -44,209 +46,215 @@ var subLat;
 var temp = false;
 
 function getNetData() {
-    Substation.getDataByAjax(
-        "/selectTaskByTaskId",
-        "taskId=" + taskID,
-        function (data) {
-            if (data.hasOwnProperty("placeCheckFormId")) {
-                placeCheckFormId = data.placeCheckFormId;
+    Substation.getDataByAjax("/selectTaskByTaskId", "taskId=" + taskID, function (
+        data
+    ) {
+        if (data.hasOwnProperty("placeCheckFormId")) {
+            placeCheckFormId = data.placeCheckFormId;
+        }
+        var taskInfo = data.taskInfo;
+        var userList = data.taskUserList;
+        subLon = taskInfo.fLongitude;
+        subLat = taskInfo.fLatitude;
+        if (taskInfo != null && taskInfo != undefined) {
+            missionsubid = taskInfo.fSubid;
+            $("#missionId").html(taskInfo.fTasknumber);
+            TaskNumber = taskInfo.fTasknumber;
+            $("#missionType").html(taskInfo.fTasktypeexplain);
+            $("#missionName").html(taskInfo.fTaskname);
+            $("#createName").html(taskInfo.fTaskcreateusername);
+            $("#chargerName").html(taskInfo.fTaskchargername);
+            $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
+            $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
+            //任务开始时间
+            $("#ActStartTime").html(taskInfo.fTaskstartdate);
+            //任务提交时间
+            $("#ActFinishTime").html(taskInfo.fTaskfinishdate);
+            var missionContent = taskInfo.fTaskcontent;
+            $("#missionCont").html(missionContent);
+
+            missionTypeid = taskInfo.fTasktypeid;
+            taskchargerid = taskInfo.fTaskchargerid;
+            taskCreatId = taskInfo.fTaskcreateuserid;
+            var thisUser = {};
+
+            //任务执行结果
+            if (taskInfo.taskResult == 3) {
+                $("#TotalDefect").html(Operation["ui_plannedDone"]);
+                $("#TotalDefect").css("color", "springgreen");
+            } else if (taskInfo.taskResult == 4) {
+                $("#TotalDefect").html(Operation["ui_overLimitDone"]);
+                $("#TotalDefect").css("color", "red");
+            } else if (taskInfo.taskResult == 5) {
+                $("#TotalDefect").html(Operation["ui_unDone"]);
+                $("#TotalDefect").css("color", "red");
+            } else {
+                $("#TotalDefect").html("-");
             }
-            var taskInfo = data.taskInfo;
-            var userList = data.taskUserList;
-            subLon = taskInfo.fLongitude;
-            subLat = taskInfo.fLatitude;
-            if (taskInfo != null && taskInfo != undefined) {
-                missionsubid = taskInfo.fSubid;
-                $("#missionId").html(taskInfo.fTasknumber);
-                $("#missionType").html(taskInfo.fTasktypeexplain);
-                $("#missionName").html(taskInfo.fTaskname);
-                $("#createName").html(taskInfo.fTaskcreateusername);
-                $("#chargerName").html(taskInfo.fTaskchargername);
-                $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
-                $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
-                //任务开始时间
-                $("#ActStartTime").html(taskInfo.fTaskstartdate);
-                //任务提交时间
-                $("#ActFinishTime").html(taskInfo.fTaskfinishdate);
-                var missionContent = taskInfo.fTaskcontent;
-                $("#missionCont").html(missionContent);
+            //判断后续
+            if (userList != undefined && userList.length > 0) {
+                $(userList).each(function () {
+                    if (this.fUserid == loginUserid) {
+                        temp = true;
+                        thisUser = this;
+                    }
 
-                missionTypeid = taskInfo.fTasktypeid;
-                taskchargerid = taskInfo.fTaskchargerid;
-                taskCreatId = taskInfo.fTaskcreateuserid;
-                var thisUser = {};
+                    var taskStateName = "";
+                    if (this.fExesituation == 7) {
+                        taskStateName =
+                            "<span style='color:gray;'>" +
+                            Operation["ui_notCheck"] +
+                            "</span>";
+                        allCommit = false;
+                    } else if (this.fExesituation == 8) {
+                        taskStateName =
+                            "<span style='color:blue;'>" +
+                            Operation["ui_checked"] +
+                            "</span>";
+                        allCommit = false;
+                    } else if (this.fExesituation == 9) {
+                        taskStateName =
+                            "<span style='color:springgreen;'>" +
+                            Operation["ui_submitted"] +
+                            "</span>";
+                    } else {}
 
-                //任务执行结果
-                if (taskInfo.taskResult == 3) {
-                    $("#TotalDefect").html(Operation['ui_plannedDone']);
-                    $("#TotalDefect").css("color", "springgreen");
-                } else if (taskInfo.taskResult == 4) {
-                    $("#TotalDefect").html(Operation['ui_overLimitDone']);
-                    $("#TotalDefect").css("color", "red");
-                } else if (taskInfo.taskResult == 5) {
-                    $("#TotalDefect").html(Operation['ui_unDone']);
-                    $("#TotalDefect").css("color", "red");
+                    var text = "";
+                    text += "<li>";
+                    text +=
+                        '                                <div class="item-content showDiv">';
+                    text +=
+                        '                                    <div class="item-inner">';
+                    text +=
+                        '                                        <div class="item-title label">' +
+                        this.userName +
+                        "</div>";
+                    text +=
+                        '                                        <div class="item-input">';
+                    text +=
+                        '                                            <div class = "item-label" id="input' +
+                        this.fUserid +
+                        '" ';
+                    text +=
+                        '                                                name="number" >' +
+                        taskStateName +
+                        "</div>";
+                    text += "                                        </div>";
+                    text += "                                    </div>";
+                    text += "                                </div>";
+                    text += "                            </li>";
+                    $("#missionState").append(text);
+                });
+            }
+
+            //是执行人
+            //按钮显隐判断
+            if (temp) {
+                $("#addVarContain124").show();
+                if (thisUser.fTaskstarttime == undefined && missionType == "1") {
+                    $("#startTask").show();
                 } else {
-                    $("#TotalDefect").html("-");
-                }
-                //判断后续
-                if (userList != undefined && userList.length > 0) {
-                    $(userList).each(function () {
-                        if (this.fUserid == loginUserid) {
-                            temp = true;
-                            thisUser = this;
-                        }
-
-                        var taskStateName = "";
-                        if (this.fExesituation == 7) {
-                            taskStateName = "<span style='color:gray;'>" + Operation['ui_notCheck'] + "</span>";
-                            allCommit = false;
-                        } else if (this.fExesituation == 8) {
-                            taskStateName = "<span style='color:blue;'>" + Operation['ui_checked'] + "</span>";
-                            allCommit = false;
-                        } else if (this.fExesituation == 9) {
-                            taskStateName = "<span style='color:springgreen;'>" + Operation['ui_submitted'] + "</span>";
-                        } else {
-
-                        }
-
-                        var text = "";
-                        text += "<li>";
-                        text +=
-                            '                                <div class="item-content showDiv">';
-                        text +=
-                            '                                    <div class="item-inner">';
-                        text +=
-                            '                                        <div class="item-title label">' +
-                            this.userName +
-                            "</div>";
-                        text +=
-                            '                                        <div class="item-input">';
-                        text +=
-                            '                                            <div class = "item-label" id="input' +
-                            this.fUserid +
-                            '" ';
-                        text +=
-                            '                                                name="number" >' +
-                            taskStateName +
-                            "</div>";
-                        text += "                                        </div>";
-                        text += "                                    </div>";
-                        text += "                                </div>";
-                        text += "                            </li>";
-                        $("#missionState").append(text);
-                    });
-                }
-
-                //是执行人
-                //按钮显隐判断
-                if (temp) {
-                    $("#addVarContain124").show();
-                    if (thisUser.fTaskstarttime == undefined && missionType == "1") {
-                        $("#startTask").show();
+                    if (thisUser.fSignintime == undefined) {
+                        $("#taskIn").show();
                     } else {
-                        if (thisUser.fSignintime == undefined) {
-                            $("#taskIn").show();
+                        if (thisUser.fCreatetime == undefined) {
+                            $("#doTask").show();
+                            $("#submitTask").show();
+                            localStorage.setItem("canClick", "true");
                         } else {
-                            if (thisUser.fCreatetime == undefined) {
-                                $("#doTask").show();
-                                $("#submitTask").show();
-                                localStorage.setItem("canClick", "true");
-                            } else {
-                                $("#textareaDetail").attr("placeholder", "");
-                                $("#textareaDetail").attr("readonly", true);
-                                $("#textareaDetail").val(thisUser.fExplain);
-                                $("#doDetail").show();
-                                localStorage.setItem("canClick", "false");
-                            }
+                            $("#textareaDetail").attr("placeholder", "");
+                            $("#textareaDetail").attr("readonly", true);
+                            $("#textareaDetail").val(thisUser.fExplain);
+                            $("#doDetail").show();
+                            localStorage.setItem("canClick", "false");
                         }
                     }
-                } else {
-                    localStorage.setItem("canClick", "false");
-                    if (loginUserid == taskchargerid) {
-                        //负责人按钮
-                        if (taskInfo.fTaskfinishdate == undefined) {
-                            $("#chargeTask").show();
-                            $("#chargeSubmit").show();
-                        } else {
-                            $("#doDetail").show();
-                        }
+                }
+            } else {
+                localStorage.setItem("canClick", "false");
+                if (loginUserid == taskchargerid) {
+                    //负责人按钮
+                    if (taskInfo.fTaskfinishdate == undefined) {
+                        $("#chargeTask").show();
+                        $("#chargeSubmit").show();
                     } else {
                         $("#doDetail").show();
                     }
-                }
-
-                //执行人管理按钮
-                if (loginUserid != taskchargerid && loginUserid != taskCreatId) {
-                    $("#clickManager").css("display", "none");
-                }
-
-                //缺陷总数
-                $("#TotalDefectNum").html(taskInfo.deviceProblemSum);
-                if (taskInfo.deviceProblemSum > 0) {
-                    $("#TotalDefectNum").css("color", "red");
-                    $("#TotalDefectNum").click(function () {
-                        if (!upLoadClicktag) {
-                            return;
-                        }
-                        upLoadClicktag = false;
-                        setTimeout(function () {
-                            upLoadClicktag = true;
-                        }, 1000);
-                        //缺陷整改
-                        localStorage.setItem("missionTypeid", missionTypeid);
-                        localStorage.setItem("taskID", taskID);
-                        if (temp) {
-                            if ($("#startTask").css("display") != "none") {
-                                $.toast(Operation['ui_openTaskTip']);
-                                return;
-                            }
-                            if ($("#taskIn").css("display") != "none") {
-                                $.toast(Operation['ui_signinTip']);
-                                return;
-                            }
-                        }
-                        window.location.href = "defectRectification.html";
-                    });
-                }
-                //缺陷未处理数
-                $("#Unprocessednumber").html(taskInfo.deviceProblemUnresolved);
-                if (taskInfo.deviceProblemUnresolved > 0) {
-                    $("#Unprocessednumber").css("color", "red");
-                    $("#Unprocessednumber").click(function () {
-                        if (!upLoadClicktag) {
-                            return;
-                        }
-                        upLoadClicktag = false;
-                        setTimeout(function () {
-                            upLoadClicktag = true;
-                        }, 1000);
-                        //缺陷整改
-                        localStorage.setItem("missionTypeid", missionTypeid);
-                        localStorage.setItem("taskID", taskID);
-                        if (temp) {
-                            if ($("#startTask").css("display") != "none") {
-                                $.toast(Operation['ui_openTaskTip']);
-                                return;
-                            }
-                            if ($("#taskIn").css("display") != "none") {
-                                $.toast(Operation['ui_signinTip']);
-                                return;
-                            }
-                        }
-                        window.location.href = "defectRectification.html?value=0";
-                    });
+                } else {
+                    $("#doDetail").show();
                 }
             }
+
+            //执行人管理按钮
+            if (loginUserid != taskchargerid && loginUserid != taskCreatId) {
+                $("#clickManager").css("display", "none");
+            }
+
+            //缺陷总数
+            $("#TotalDefectNum").html(taskInfo.deviceProblemSum);
+            if (taskInfo.deviceProblemSum > 0) {
+                $("#TotalDefectNum").css("color", "red");
+                $("#TotalDefectNum").click(function () {
+                    if (!upLoadClicktag) {
+                        return;
+                    }
+                    upLoadClicktag = false;
+                    setTimeout(function () {
+                        upLoadClicktag = true;
+                    }, 1000);
+                    //缺陷整改
+                    localStorage.setItem("missionTypeid", missionTypeid);
+                    localStorage.setItem("taskID", taskID);
+                    if (temp) {
+                        if ($("#startTask").css("display") != "none") {
+                            $.toast(Operation["ui_openTaskTip"]);
+                            return;
+                        }
+                        if ($("#taskIn").css("display") != "none") {
+                            $.toast(Operation["ui_signinTip"]);
+                            return;
+                        }
+                    }
+                    window.location.href = "defectRectification.html";
+                });
+            }
+            //缺陷未处理数
+            $("#Unprocessednumber").html(taskInfo.deviceProblemUnresolved);
+            if (taskInfo.deviceProblemUnresolved > 0) {
+                $("#Unprocessednumber").css("color", "red");
+                $("#Unprocessednumber").click(function () {
+                    if (!upLoadClicktag) {
+                        return;
+                    }
+                    upLoadClicktag = false;
+                    setTimeout(function () {
+                        upLoadClicktag = true;
+                    }, 1000);
+                    //缺陷整改
+                    localStorage.setItem("missionTypeid", missionTypeid);
+                    localStorage.setItem("taskID", taskID);
+                    if (temp) {
+                        if ($("#startTask").css("display") != "none") {
+                            $.toast(Operation["ui_openTaskTip"]);
+                            return;
+                        }
+                        if ($("#taskIn").css("display") != "none") {
+                            $.toast(Operation["ui_signinTip"]);
+                            return;
+                        }
+                    }
+                    window.location.href = "defectRectification.html?value=0";
+                });
+            }
         }
-    );
+    });
 }
 
 getNetData();
 
 //开启任务
 $("#startTask").click(function () {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     Substation.getDataByAjax("/taskStart", "taskId=" + taskID, function (data) {
         if (temp && isUseTrace == "1") {
             //开启轨迹
@@ -255,16 +263,21 @@ $("#startTask").click(function () {
                     localStorage.setItem("need-refresh", "true");
                     var isOpen = localStorage.isOpenTrack;
                     if (isOpen == "false") {
-                        $.confirm(Operation['ui_openTraceTip'], function () {
+                        $.confirm(
+                            Operation["ui_openTraceTip"],
+                            function () {
                                 var taskDIC = {
-                                    "fTaskNumber": taskID
+                                    fTaskNumber: TaskNumber
                                 };
-                                window.webkit.messageHandlers.openTrackFunc.postMessage(taskDIC);
+                                window.webkit.messageHandlers.openTrackFunc.postMessage(
+                                    taskDIC
+                                );
                                 location.reload();
                             },
                             function () {
                                 location.reload();
-                            });
+                            }
+                        );
                     } else {
                         location.reload();
                     }
@@ -273,13 +286,16 @@ $("#startTask").click(function () {
                     //android关闭轨迹
                     var isOpen = android.getTrackOpen();
                     if (isOpen == "false") {
-                        $.confirm(Operation['ui_openTraceTip'], function () {
+                        $.confirm(
+                            Operation["ui_openTraceTip"],
+                            function () {
                                 android.startTrace();
                                 location.reload();
                             },
                             function () {
                                 location.reload();
-                            });
+                            }
+                        );
                     } else {
                         location.reload();
                     }
@@ -288,7 +304,7 @@ $("#startTask").click(function () {
                 }
             } catch (e) {
                 location.reload();
-            };
+            }
         } else {
             location.reload();
         }
@@ -297,7 +313,7 @@ $("#startTask").click(function () {
 
 //现场签到
 $("#taskIn").click(function () {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     var loc = "";
     if (isIOS) {
         window.webkit.messageHandlers.getLocation.postMessage("");
@@ -315,11 +331,11 @@ function getLocAndCheckIn(loc) {
     var addr = "";
     if (loc == undefined || !loc.length) {
         $.hidePreloader();
-        $.toast(Operation['ui_localErrorTip']);
+        $.toast(Operation["ui_localErrorTip"]);
         return;
     } else if (loc == "-1") {
         $.hidePreloader();
-        $.toast(Operation['ui_gpsTip']);
+        $.toast(Operation["ui_gpsTip"]);
         return;
     } else {
         $.hidePreloader();
@@ -349,11 +365,11 @@ function getLocAndCheckIn(loc) {
     };
     fDistance = parseInt(fDistance);
     if (fDistance > 0 && fDistance < 2147483647) {
-        param['fDistance'] = fDistance;
+        param["fDistance"] = fDistance;
     }
     //                            alert(""+taskID+","+lon+","+lat+","+addr);
     Substation.postDataByAjax("/taskSingIn", param, function (data) {
-        $.toast(Operation['ui_signSuccessTip']);
+        $.toast(Operation["ui_signSuccessTip"]);
         localStorage.removeItem("locationStrJS");
         location.reload();
     });
@@ -378,15 +394,11 @@ $(".doDetail").click(function () {
     if (missionTypeid == 1) {
         localStorage.setItem("fPlacecheckformid", placeCheckFormId);
         if ($(this).attr("id") == "doTask") {
-            var attion = Operation['ui_attention'];
-            var attiondetail = Operation['ui_executionprompt'];
-            $.confirm(
-                attiondetail,
-                attion,
-                function () {
-                    window.location.href = "patrolContent.html";
-                }
-            );
+            var attion = Operation["ui_attention"];
+            var attiondetail = Operation["ui_executionprompt"];
+            $.confirm(attiondetail, attion, function () {
+                window.location.href = "patrolContent.html";
+            });
         } else {
             window.location.href = "patrolContent.html";
         }
@@ -411,7 +423,7 @@ $("#submitTask").click(function () {
     setTimeout(function () {
         upLoadClicktag = true;
     }, 1000);
-    $.confirm(Operation['ui_uploadTaskTip'], function () {
+    $.confirm(Operation["ui_uploadTaskTip"], function () {
         var textDetail = $("#textareaDetail").val();
         if (!textDetail) {
             textDetail = "";
@@ -420,16 +432,14 @@ $("#submitTask").click(function () {
             if (isIOS) {
                 window.webkit.messageHandlers.isStartTrackFunc.postMessage("");
             }
-        } catch (e) {
-
-        };
+        } catch (e) {}
         var param = {
             fTaskid: taskID,
             fExplain: textDetail
         };
         // fExplain 执行情况
         Substation.getDataByAjax("/submitUserTask", param, function (data) {
-            $.toast(Operation['ui_uploadTaskSuccessTip']);
+            $.toast(Operation["ui_uploadTaskSuccessTip"]);
             $("#doTask").hide();
             $("#submitTask").hide();
             $("#doDetail").show();
@@ -440,7 +450,7 @@ $("#submitTask").click(function () {
                         //android关闭轨迹
                         var isOpen = android.getTrackOpen();
                         if (isOpen == "true") {
-                            $.confirm(Operation['ui_endTraceTip'], function () {
+                            $.confirm(Operation["ui_endTraceTip"], function () {
                                 android.stopTrace();
                             });
                         } else {
@@ -455,7 +465,7 @@ $("#submitTask").click(function () {
                         //ios关闭轨迹
                         var isOpen = localStorage.isOpenTrack;
                         if (isOpen == "true") {
-                            $.confirm(Operation['ui_endTraceTip'], function () {
+                            $.confirm(Operation["ui_endTraceTip"], function () {
                                 window.webkit.messageHandlers.closeTrackFunc.postMessage("");
                             });
                         } else {
@@ -465,7 +475,7 @@ $("#submitTask").click(function () {
                 }
             } catch (e) {
                 localStorage.removeItem(taskID);
-            };
+            }
         });
     });
 });
@@ -481,9 +491,9 @@ $("#chargeSubmit").click(function () {
     }, 1000);
     var comfirmTip = "";
     if (allCommit) {
-        comfirmTip = Operation['ui_submitTaskTip'];
+        comfirmTip = Operation["ui_submitTaskTip"];
     } else {
-        comfirmTip = Operation['ui_noAllCommit'] + Operation['ui_submitTaskTip'];
+        comfirmTip = Operation["ui_noAllCommit"] + Operation["ui_submitTaskTip"];
     }
     $.confirm(comfirmTip, function () {
         var param;
@@ -491,13 +501,13 @@ $("#chargeSubmit").click(function () {
             fTaskid: taskID
         };
         Substation.getDataByAjax("/submitTask", param, function (data) {
-            $.toast(Operation['ui_submitTaskSuccessTip']);
+            $.toast(Operation["ui_submitTaskSuccessTip"]);
             if (isAndroid) {
                 try {
                     android.removeSPItem(taskID);
                 } catch (e) {
                     localStorage.removeItem(taskID);
-                };
+                }
                 android.refresh();
             } else {
                 localStorage.removeItem(taskID);
@@ -526,8 +536,8 @@ $("#clickManager").click(function () {
         upLoadClicktag = true;
     }, 1000);
     /*    localStorage.setItem("fSubname", "执行情况");
-        localStorage.setItem("missionSubid", missionsubid);
-        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
+          localStorage.setItem("missionSubid", missionsubid);
+          localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
     localStorage.setItem("taskID", taskID);
     if (missionType != "3") {
         localStorage.setItem("hiddenBtn", "NO");
@@ -552,12 +562,15 @@ window.addEventListener(
 var h = $(window).height();
 window.addEventListener("resize", function () {
     if ($(window).height() < h) {
-        $('.buttonsEvent').hide();
+        $(".buttonsEvent").hide();
     }
     if ($(window).height() >= h) {
-        $('.buttonsEvent').show();
+        $(".buttonsEvent").show();
     }
-    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+    if (
+        document.activeElement.tagName == "INPUT" ||
+        document.activeElement.tagName == "TEXTAREA"
+    ) {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
         }, 0);
