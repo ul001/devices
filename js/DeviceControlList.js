@@ -120,14 +120,15 @@ jQuery(document).ready(function () {
                                 upLoadClicktag = true;
                             }, 1000);
                             var clickId = $(this).attr("id");
-
-                            if (clickId == "lightingControl") {
-                                window.location.href = "lightingControl.html";
+                            if (!selectSubid || selectSubid == "" || selectSubid == undefined) {
+                                return;
                             } else {
-                                window.location.href = "arcm300TControl.html";
+                                if (clickId == "lightingControl") {
+                                    window.location.href = "lightingControl.html?fSubid=" + selectSubid;
+                                } else {
+                                    window.location.href = "arcm300TControl.html?fSubid=" + selectSubid;
+                                }
                             }
-                            // window.location.href = "defectInfo.html?fDeviceproblemid=" + clickId;
-                            // }
                         });
 
                     });

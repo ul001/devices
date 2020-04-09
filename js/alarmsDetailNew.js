@@ -39,48 +39,48 @@ function addItems(number, lastIndex) {
     var url = "/getAlarmEventLogList";
     var params = {};
     // var searchKey = $("#search").val();
-//    if (saveAlarmParam != null && saveAlarmParam != "") {
-//        params = saveAlarmParam;
-//        params['pageNum'] = pageNum;
-//        params['pageSize'] = number;
-//        var startTime = params['fStarttime'];
-//        var endTime = params['fEndtime'];
-//        if (startTime != "" && startTime != null) {
-//            $("#dateStart").val(startTime.substring(0, 10));
-//        }
-//        if (endTime != "" && endTime != null) {
-//            $("#dateEnd").val(endTime.substring(0, 10));
-//        }
-//        if (params['fConfirmstatus'] != undefined) {
-//            $("#fState").val(params['fConfirmstatus']);
-//        }
-//        $("#search").val(params['subName']);
-//    } else {
-        params = {
-            fMessinfotypeID: clickID,
-            pageNum: pageNum,
-            pageSize: number
-        };
-        if (selectSubid != "" && selectSubid != null) {
-            params['fSubid'] = selectSubid;
+    //    if (saveAlarmParam != null && saveAlarmParam != "") {
+    //        params = saveAlarmParam;
+    //        params['pageNum'] = pageNum;
+    //        params['pageSize'] = number;
+    //        var startTime = params['fStarttime'];
+    //        var endTime = params['fEndtime'];
+    //        if (startTime != "" && startTime != null) {
+    //            $("#dateStart").val(startTime.substring(0, 10));
+    //        }
+    //        if (endTime != "" && endTime != null) {
+    //            $("#dateEnd").val(endTime.substring(0, 10));
+    //        }
+    //        if (params['fConfirmstatus'] != undefined) {
+    //            $("#fState").val(params['fConfirmstatus']);
+    //        }
+    //        $("#search").val(params['subName']);
+    //    } else {
+    params = {
+        fMessinfotypeID: clickID,
+        pageNo: pageNum,
+        pageSize: number
+    };
+    if (selectSubid != "" && selectSubid != null) {
+        params['fSubid'] = selectSubid;
+    }
+    var dateStartVal = $("#dateStart").val();
+    var dateEndVal = $("#dateEnd").val();
+    var stateVal = $("#fState").val();
+    if (dateStartVal != "") {
+        params['fStarttime'] = dateStartVal + " 00:00:00";
+    }
+    if (dateEndVal != "") {
+        params['fEndtime'] = dateEndVal + " 23:59:59";
+    }
+    if (stateVal != "") {
+        if (stateVal == '1') {
+            params['fConfirmstatus'] = true;
+        } else {
+            params['fConfirmstatus'] = false;
         }
-        var dateStartVal = $("#dateStart").val();
-        var dateEndVal = $("#dateEnd").val();
-        var stateVal = $("#fState").val();
-        if (dateStartVal != "") {
-            params['fStarttime'] = dateStartVal + " 00:00:00";
-        }
-        if (dateEndVal != "") {
-            params['fEndtime'] = dateEndVal + " 23:59:59";
-        }
-        if (stateVal != "") {
-            if (stateVal == '1') {
-                params['fConfirmstatus'] = true;
-            } else {
-                params['fConfirmstatus'] = false;
-            }
-        }
-//    }
+    }
+    //    }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
             var datadic = data.alarmEventLogList;
             if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
@@ -99,8 +99,8 @@ function addItems(number, lastIndex) {
                     html += "                            <div class=\"item-inner row no-gutter\">";
                     html += "                                <div class=\"col-75\">";
                     html += "                                    <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>" + this.fSubname + "</p>";
-                    html += "                                    <P>" + Operation['ui_MeterName'] + (clickID == "platform" ? (this.fDevicename) : (this.fDevicename)) + "</P>";
-                    html += "                                    <p>" + Operation['ui_EventType'] + this.fMessInfoExplain + "</p>";
+                    html += "                                    <P>" + Operation['ui_MeterName'] + (this.fDevicename ? this.fDevicename : "") + "</P>";
+                    html += "                                    <p>" + Operation['ui_EventType'] + (this.fMessInfoExplain ? this.fMessInfoExplain : "") + "</p>";
                     html += "                                </div>";
                     html += "                                <div class=\"col-25\">";
                     html += "                                    <p class=\"text-right\"><span class=\"danger\">" + this.fMessInfoTypeExplain + "</span></p>";
@@ -140,9 +140,9 @@ function addItems(number, lastIndex) {
                 //addClick();
                 $(".item-media").hide();
                 //保存记录
-//                params['subName'] = $("#search").val();
-//                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
-//                Substation.getDataByAjaxNoLoading("/close", {}, function () {});
+                //                params['subName'] = $("#search").val();
+                //                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
+                //                Substation.getDataByAjaxNoLoading("/close", {}, function () {});
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
@@ -404,7 +404,7 @@ function addCardLongClick() {
                     window.location.href = "alarmDetailView.html";
                 }
             }
-//            return false;
+            //            return false;
         }
     });
 }
@@ -418,10 +418,10 @@ $('#searchBtn').click(function () {
     }
     $(".close-panel").click();
     //存变电所
-//    if (saveAlarmParam != null && clickSubid == "") {
-//        clickSubid = saveAlarmParam['fSubid'];
-//        saveAlarmParam = null;
-//    }
+    //    if (saveAlarmParam != null && clickSubid == "") {
+    //        clickSubid = saveAlarmParam['fSubid'];
+    //        saveAlarmParam = null;
+    //    }
     if ($("#search").val() == "") {
         //        $("#subName").text("所有变电所");
         selectSubid = "";
