@@ -128,6 +128,14 @@ function addItems(number, lastIndex) {
           html += "                        </label>";
           $(".content-list").append(html);
           lightList.push(this);
+
+          $(".list-item").click(function (deviceValue) {
+            if ($(".footer_btn").is(":hidden")) {
+              // fSubname
+              localStorage.setItem("lightingDetail", paramStr);
+              window.location.href = "lightingDetail.html";
+            }
+          });
         });
         $(".item-media").hide();
         $("input:checkbox").prop("disabled", "disabled");
@@ -139,6 +147,9 @@ function addItems(number, lastIndex) {
         //                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
         //                Substation.getDataByAjaxNoLoading("/close", {}, function () {});
         pageNum++;
+
+
+
       } else {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html("--end--");
@@ -173,10 +184,6 @@ $("#control_btn").click(function () {
   controlClick();
 });
 
-$(".label-checkbox").click(function (params) {
-
-});
-
 $(".button_bar .button").click(function () {
   $(this)
     .addClass("active")
@@ -196,7 +203,24 @@ $(".footer_btn").click(function () {
   var arr = [];
   var controlUrl = "/sendBulbControlDemandHTTP";
   var controlparam = {};
-  if ($(".footer_btn").text == "关闭灯光") {} else {
+  if ($(".footer_btn").text == "关闭灯光") {
+    $("input[type=checkbox]:checked").each(function (e) {
+      // if ($('input[type=checkbox]:checked').val()) {
+      controlparam = {
+        fSubid: subid,
+        fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
+          $("input[type=checkbox]:checked").attr("datagatewayid") : "",
+        fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
+          $("input[type=checkbox]:checked").attr("datametercode") : "",
+        fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
+          $("input[type=checkbox]:checked").attr("datafuncid") : "",
+        fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
+          $("input[type=checkbox]:checked").attr("datacomid") : "",
+        fValue: "0"
+      };
+      arr.push(controlparam);
+    });
+  } else {
     $("input[type=checkbox]:checked").each(function (e) {
       // if ($('input[type=checkbox]:checked').val()) {
       controlparam = {
@@ -214,14 +238,18 @@ $(".footer_btn").click(function () {
       arr.push(controlparam);
     });
   }
-  var param = {
-    tEtControlDemandList: JSON.stringify(arr)
-  };
-  Substation.postDataByAjax(controlUrl, param, function (data) {
-    $(this)
-      .addClass("active")
-      .siblings()
-      .removeClass("active");
+  // var param = {
+  //   tEtControlDemandList: JSON.stringify(arr)
+  // };
+  var param = JSON.stringify(arr);
+  Substation.postDataWithFormdataByAjax(controlUrl, param, function (data) {
+    if (data.code == 200) {
+      $.toast("命令发送成功");
+      $(this)
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+    }
   });
   // var logList = arr.join(','); //数组转成为字符串
   // confirmAlarmEvents(logList);

@@ -33,8 +33,8 @@ function creatView(param) {
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
-        sb += '                                    <div class="item-title" data-i18n="ui_startTime">' + Operation['ui_startTime'] + ':' + '</div>';
-        sb += '                                    <div class="item-after startTime">' + (param.fAlarmtime ? param.fAlarmtime : "") + '</div>';
+        sb += '                                    <div class="item-title" data-i18n="ui_startTime">仪表编号:</div>';
+        sb += '                                    <div class="item-after startTime">' + (param.fMetercode ? param.fMetercode : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
