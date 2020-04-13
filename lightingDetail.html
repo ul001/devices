@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/alarmDetailView.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color">
+                    <p class="limit-length" id="titleContent"><span data-i18n="ui_alarmDetail"></span></p>
+                </h1>
+            </header>
+
+            <div class="content">
+                <div class="content-block">
+                    <div class="content-block-title" data-i18n="ui_alarmDetail"></div>
+                    <!--                遥信-->
+                    <div id="yaoxin" class="list-block">
+                        <!-- <ul>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_Subname"></div>
+                                    <div class="item-after subName"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title"><span data-i18n="ui_startTime"></span>:</div>
+                                    <div class="item-after startTime"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmMeterId"></div>
+                                    <div class="item-after meterId"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmMeterName"></div>
+                                    <div class="item-after meterName"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmParamId"></div>
+                                    <div class="item-after paramId"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmParamName"></div>
+                                    <div class="item-after paramName"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmType"></div>
+                                    <div class="item-after alarmType"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_type"></div>
+                                    <div class="item-after type"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_detail"></div>
+                                    <div class="item-after detail"></div>
+                                </div>
+                            </li>
+                        </ul> -->
+                    </div>
+
+                    <!-- <div id="yuexian" class="list-block">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_Subname"></div>
+                                    <div class="item-after subName"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title"><span data-i18n="ui_startTime"></span>:</div>
+                                    <div class="item-after startTime"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmEndTime"></div>
+                                    <div class="item-after endTime"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmType"></div>
+                                    <div class="item-after alarmType"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmMeterName"></div>
+                                    <div class="item-after meterName"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmParamName"></div>
+                                    <div class="item-after paramName"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmValue"></div>
+                                    <div class="item-after alarmValue"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_limitValue"></div>
+                                    <div class="item-after limitValue"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_detail"></div>
+                                    <div class="item-after detail"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                   
+                    <div id="offline" class="list-block">
+                        <ul>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_Subname"></div>
+                                    <div class="item-after subName"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmType"></div>
+                                    <div class="item-after alarmType"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_time"></div>
+                                    <div class="item-after time"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmDeviceId"></div>
+                                    <div class="item-after deviceId"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_alarmDeviceName"></div>
+                                    <div class="item-after deviceId"></div>
+                                </div>
+                            </li>
+                            <li class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_detail"></div>
+                                    <div class="item-after detail"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/language.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script src="libs/tools.js"></script>
+    <script type='text/javascript' src='js/alarmDetailView.js' charset='utf-8'></script>
+</body>
+
+</html>
