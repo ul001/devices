@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODcwMjMyNjIsInVzZXJuYW1lIjoiaGFoYWhhIn0.OjHxpsBmuL5DZ_TLELyEJjrb0FIlw574xDnyHWL7sSI";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODU3NDE4MDAsInVzZXJuYW1lIjoiaGFoYWhhIn0.lN6fA645l5Pi7UQRSjTrLak-17RhnmGDyI00fBJPM4o";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
 //语言字段传参
@@ -16,27 +16,27 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 //判断数组中是否包含某字符串
-try{
-    if (isIOS) {
-      //ios系统的处理
-      window.webkit.messageHandlers.iOS.postMessage(null);
-      var storage = localStorage.getItem("accessToken");
-      // storage = storage ? JSON.parse(storage):[];
-      storage = JSON.parse(storage);
-      baseUrlFromAPP = storage.baseurl;
-      tokenFromAPP = storage.token;
-      ipAddress = storage.ipAddress;
-      userId = storage.userID;
-      languageOption = storage.languageType;
-    } else {
-      baseUrlFromAPP = android.getBaseUrl();
-      tokenFromAPP = android.getToken();
-      ipAddress = android.getIpAddress();
-      userId = android.getUserid();
-      languageOption = android.postLanguage();
-    }
-}catch(e){
-    languageOption = "zh";
+try {
+  if (isIOS) {
+    //ios系统的处理
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    // storage = storage ? JSON.parse(storage):[];
+    storage = JSON.parse(storage);
+    baseUrlFromAPP = storage.baseurl;
+    tokenFromAPP = storage.token;
+    ipAddress = storage.ipAddress;
+    userId = storage.userID;
+    languageOption = storage.languageType;
+  } else {
+    baseUrlFromAPP = android.getBaseUrl();
+    tokenFromAPP = android.getToken();
+    ipAddress = android.getIpAddress();
+    userId = android.getUserid();
+    languageOption = android.postLanguage();
+  }
+} catch (e) {
+  languageOption = "zh";
 }
 
 //取消回车事件
@@ -84,9 +84,9 @@ var Substation = {
     } else {
       //        script.src = "libs/language_zh.js";
       getZhLanguage();
-//      var script = document.createElement("script");
-//      script.src = "libs/cn.min.js";
-//      document.body.appendChild(script);
+      //      var script = document.createElement("script");
+      //      script.src = "libs/cn.min.js";
+      //      document.body.appendChild(script);
       $("head").append("<script src=\"libs/cn.min.js\"></script>");
     }
     this.loadLanguageData();
@@ -398,6 +398,46 @@ var Substation = {
       data: params,
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", tokenFromAPP);
+        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+      },
+      success: function (data) {
+        $.hidePreloader();
+        if (data == undefined) {
+          $.toast(Operation['ui_nodata']);
+          return;
+        } else {
+          if (data.code == 200) {
+            successCallback(data);
+          } else if (data.code == "5000") {
+            Substation.showCodeTips(data.code);
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
+          } else {
+            Substation.showCodeTips(data.code);
+          }
+        }
+      },
+      error: function (data) {
+        $.hidePreloader();
+        if (data.status == 0) {
+          $.toast(Operation['ui_neterror']);
+        } else {
+          $.toast(Operation['code_fail']);
+        }
+      }
+    });
+  },
+
+  postDataWithRawByAjax: function (url, params, successCallback) {
+    $.showPreloader(Operation['ui_loading']);
+    $.ajax({
+      url: baseUrlFromAPP + url,
+      type: "POST",
+      data: params,
+      dataType: "JSON",
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", tokenFromAPP);
+        request.setRequestHeader('Content-Type', 'application/json');
+        // request.setRequestHeader('Content-Type', 'multipart/form-data');
         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
       },
       success: function (data) {
