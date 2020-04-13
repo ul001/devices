@@ -20,13 +20,14 @@ var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓�
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 var upLoadClicktag = true;
+
 function goToLocation(subid) {
-    if(!upLoadClicktag){
-      return;
+    if (!upLoadClicktag) {
+        return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
-      upLoadClicktag = true;
+    setTimeout(function () {
+        upLoadClicktag = true;
     }, 1000);
     localStorage.setItem("fSubid", subid);
     if (isAndroid) {
@@ -37,12 +38,12 @@ function goToLocation(subid) {
 }
 
 function goToDevice(subId, subname) {
-    if(!upLoadClicktag){
-      return;
+    if (!upLoadClicktag) {
+        return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
-      upLoadClicktag = true;
+    setTimeout(function () {
+        upLoadClicktag = true;
     }, 1000);
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
@@ -54,12 +55,12 @@ function goToDevice(subId, subname) {
 }
 
 function goToPhoto(subId) {
-    if(!upLoadClicktag){
-      return;
+    if (!upLoadClicktag) {
+        return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
-      upLoadClicktag = true;
+    setTimeout(function () {
+        upLoadClicktag = true;
     }, 1000);
     localStorage.setItem("fSubid", subId);
     if (isAndroid) {
@@ -114,13 +115,13 @@ function addItems(number, lastIndex) {
                         "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
                         "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
                         //                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
-                        "                                    <p class=\"limit-length\">" +Operation['ui_address']+"："+ Substation.removeUnDefinedStr(this.fAddress) + "</p>\n" +
+                        "                                    <p class=\"limit-length\">" + Operation['ui_address'] + "：" + Substation.removeUnDefinedStr(this.fAddress) + "</p>\n" +
                         "                                </div>\n" +
                         "                                <div class=\"col-20\">\n" +
-                        "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">"+Operation['ui_photo']+"\n" +
+                        "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">" + Operation['ui_photo'] + "\n" +
                         "                                    </button>\n" +
                         "                                    <br>\n" +
-                        "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fSubid + ")\" type=\"button\">"+Operation['ui_location']+"\n" +
+                        "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fSubid + ")\" type=\"button\">" + Operation['ui_location'] + "\n" +
                         "                                    </button>\n" +
                         "                                </div>\n" +
                         "                            </div>\n" +
@@ -145,7 +146,7 @@ function addItems(number, lastIndex) {
         function (errorCode) {
             if (errorCode == 0) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
+                $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
             } else {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("");
