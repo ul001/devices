@@ -13,6 +13,7 @@ var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 var selectSubid = "";
 var clickSubid = "";
 var alarmDetailList = [];
+var isControl = false;
 //var saveAlarmParam = JSON.parse(localStorage.getItem("saveAlarmParam"));
 //localStorage.removeItem("saveAlarmParam");
 
@@ -135,10 +136,14 @@ function addItems(number, lastIndex) {
                     alarmDetailList.push(this);
                 });
                 $('.list-container').append(html);
-
-                addCardLongClick();
+                if(!isControl){
+                    addCardLongClick();
+                    $(".item-media").hide();
+                }else{
+                    $(".item-link").removeClass("item-link");
+                    $(".item-media").show();
+                }
                 //addClick();
-                $(".item-media").hide();
                 //保存记录
                 //                params['subName'] = $("#search").val();
                 //                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
@@ -222,6 +227,7 @@ function manageCard() {
     //点击管理切换样式
     var html = "";
     if (!$("#bar-footer").length || $("#bar-footer").is(":hidden")) {
+        isControl = true;
         $(".manager_btn").text(Operation['ui_cancel']);
         $(".back_btn").text(Operation['ui_SelectAll']);
         $(".selectAlarms").toggle();
@@ -238,6 +244,7 @@ function manageCard() {
         //            '</nav>';
         //        $(".content").after(html);
     } else {
+        isControl = false;
         $(".selectAlarms").toggle();
         $("#bar-footer").toggle();
         $("#bar-footer").removeClass("bar-footer");
@@ -353,12 +360,13 @@ function setAlarmEventConfirmed(logid, confirmType) {
 
 }
 
+var longClick = 0;
+var isMoving = false;
+var startY;
 function addCardLongClick() {
-    var longClick = 0;
-    var isMoving = false;
-    var startY;
     $(".item-link").on({
         touchstart: function (e) {
+            isMoving = false;
             var thisCardId = $(this).parent(".card").attr("id");
             longClick = 0;
             timeOutEvent = setTimeout(function () {
