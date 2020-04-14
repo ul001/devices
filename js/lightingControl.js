@@ -1,6 +1,13 @@
 $(".item-media").hide();
 $("input:checkbox").prop("disabled", "disabled");
 var subid = Substation.GetQueryString("fSubid");
+var subObj = JSON.parse(localStorage.getItem("subObj"));
+try {
+  if (isAndroid) {
+    subObj = JSON.parse(android.getSpItem("subObj"));
+  }
+} catch (e) {}
+// var Subname = Substation.GetQueryString("");
 var itemsPerLoad = 10;
 var pageNum = 1;
 var lightList = [];
@@ -93,15 +100,14 @@ function addItems(number, lastIndex) {
           }
           html += '                            <div class="row">';
           html +=
-            '                                <input type="checkbox" name="my-checkbox" datametercode="' +
-            this.fMetercode +
+            '                                <input type="checkbox" name="my-checkbox" datametercode="' + this.fMetercode +
             '" datafuncid="' +
             this.fFuncid +
             '" datagatewayid="' +
             this.fGatewayid +
             '" datacomid="' +
             this.fComid +
-            '">';
+            '" datafDeivcename="' + this.fDeivcename + '"  datadeviceValue="' + this.deviceValue + '" datadeviceValueExplain="' + this.deviceValueExplain + '" datafDevicetype="' + this.fDevicetype + '">';
           html +=
             '                                <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>';
           html +=
@@ -132,7 +138,20 @@ function addItems(number, lastIndex) {
           $(".list-item").click(function (deviceValue) {
             if ($(".footer_btn").is(":hidden")) {
               // fSubname
-              localStorage.setItem("lightingDetail", paramStr);
+              var value = $(this).find("input");
+              var Subname = subObj.subName;
+              param = {
+                "fSubname": Subname ? Subname : "",
+                "fMetercode": value.attr("datametercode"),
+                "datafuncid": value.attr("datafuncid"),
+                "datagatewayid": value.attr("datagatewayid"),
+                "datacomid": value.attr("datacomid"),
+                "datafDeivcename": value.attr("datafDeivcename"),
+                "deviceValue": value.attr("datadeviceValue"),
+                "datadeviceValueExplain": value.attr("datadeviceValueExplain"),
+                "datafDevicetype": value.attr("datafDevicetype"),
+              };
+              localStorage.setItem("lightingDetail", JSON.stringify(param));
               window.location.href = "lightingDetail.html";
             }
           });
@@ -242,7 +261,7 @@ $(".footer_btn").click(function () {
   //   tEtControlDemandList: JSON.stringify(arr)
   // };
   var param = JSON.stringify(arr);
-  Substation.postDataWithFormdataByAjax(controlUrl, param, function (data) {
+  Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
     if (data.code == 200) {
       $.toast("命令发送成功");
       $(this)
