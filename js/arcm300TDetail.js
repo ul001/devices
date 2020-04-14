@@ -263,4 +263,10 @@ function initContent() {
     });
 }
 
+$("#record_btn").click(function(){
+    window.location.href = "deviceControlLog.html?type=arcm300T&meterId="+meterCode;
+});
+
 initContent();
+
+$.init();
