@@ -107,7 +107,7 @@ function addItems(number, lastIndex) {
             this.fGatewayid +
             '" datacomid="' +
             this.fComid +
-            '" datafDeivcename="' + this.fDeivcename + '"  datadeviceValue="' + this.deviceValue + '" datadeviceValueExplain="' + this.deviceValueExplain + '" datafDevicetype="' + this.fDevicetype + '">';
+            '" datafDeivcename="' + this.fDevicename + '"  datadeviceValue="' + this.deviceValue + '" datadeviceValueExplain="' + this.deviceValueExplain + '" datafDevicetype="' + this.fDevicetype + '">';
           html +=
             '                                <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>';
           html +=

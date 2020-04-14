@@ -28,19 +28,19 @@ function creatView(param) {
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb += '                                    <div class="item-title" data-i18n="ui_Subname">' + Operation['ui_Subname'] + '</div>';
-        sb += '                                    <div class="item-after subName">' + (param.fSubname ? param.fSubname : '') + '</div>';
+        sb += '                                    <div class="item-after subName">' + (param.fSubname != 'undefined' ? param.fSubname : '') + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb += '                                    <div class="item-title" data-i18n="ui_startTime">' + Operation['ui_alarmDeviceId'] + '</div>';
-        sb += '                                    <div class="item-after startTime">' + (param.fMetercode ? param.fMetercode : "") + '</div>';
+        sb += '                                    <div class="item-after startTime">' + (param.fMetercode != 'undefined' ? param.fMetercode : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb += '                                    <div class="item-title" data-i18n="ui_alarmMeterName">' + Operation['ui_alarmDeviceName'] + '</div>';
-        sb += '                                    <div class="item-after meterName">' + (param.datafDeivcename ? param.datafDeivcename : "") + '</div>';
+        sb += '                                    <div class="item-after meterName">' + (param.datafDeivcename != 'undefined' ? param.datafDeivcename : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         //fGatewayid
@@ -48,7 +48,7 @@ function creatView(param) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">网关:</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.datagatewayid ? param.datagatewayid : "") + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datagatewayid != 'undefined' ? param.datagatewayid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
@@ -57,7 +57,7 @@ function creatView(param) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">串口号:</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.datacomid ? param.datacomid : "") + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datacomid != 'undefined' ? param.datacomid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
@@ -66,7 +66,7 @@ function creatView(param) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">设备类型:</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.datafDevicetype ? param.datafDevicetype : "") + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datafDevicetype != 'undefined' ? param.datafDevicetype : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
@@ -75,7 +75,7 @@ function creatView(param) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">控制编码:</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.datafuncid ? param.datafuncid : "") + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datafuncid != 'undefined' ? param.datafuncid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
@@ -94,7 +94,6 @@ function creatView(param) {
             sb += '                                </div>';
             sb += '                            </li>';
         }
-
         //越限值
         if (param.hasOwnProperty('fLimitvalue')) {
             sb += '                            <li class="item-content">';
