@@ -19,11 +19,11 @@ window.addEventListener('pageshow', function (e) {
         app = navigator.appVersion;
     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
     if (e.persisted && isIOS) {
-        // var needUpdate = localStorage.getItem("need-update");
-        // if (needUpdate) {
-        //     localStorage.removeItem("need-update");
-        // window.location.reload();
-        // }
+        var needUpdate = localStorage.getItem("need-update");
+        if (needUpdate) {
+            localStorage.removeItem("need-update");
+            window.location.reload();
+        }
         window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
     }
 });
@@ -76,37 +76,37 @@ function fillData(parentId) {
             if (value.fMessinfotypeid == '1') {
                 return true;
             }
-            if(value.unConfirmNum>0){
+            if (value.unConfirmNum > 0) {
                 var string = '<span class="badge">' + value.unConfirmNum + '</span>';
-                $("#"+value.fMessinfotypeid).html(string);
+                $("#" + value.fMessinfotypeid).html(string);
                 unreadCountSum += value.unConfirmNum;
             }
-//            var name = value.name;
-//            if (name == "遥测越限") {
-//                if ($("#yuexian")) {
-//                    if (value.count > 0) {
-//                        var string = '<span class="badge">' + value.count + '</span>';
-//                        $("#yuexian").html(string);
-//                        unreadCountSum += value.count;
-//                    }
-//                }
-//            } else if (name == "遥信变位") {
-//                if ($("#bianwei")) {
-//                    if (value.count > 0) {
-//                        var string = '<span class="badge">' + value.count + '</span>';
-//                        $("#bianwei").html(string);
-//                        unreadCountSum += value.count;
-//                    }
-//                }
-//            } else if (name == "平台运行") {
-//                if ($("#platform")) {
-//                    if (value.count > 0) {
-//                        var string = '<span class="badge">' + value.count + '</span>';
-//                        $("#platform").html(string);
-//                        unreadCountSum += value.count;
-//                    }
-//                }
-//            }
+            //            var name = value.name;
+            //            if (name == "遥测越限") {
+            //                if ($("#yuexian")) {
+            //                    if (value.count > 0) {
+            //                        var string = '<span class="badge">' + value.count + '</span>';
+            //                        $("#yuexian").html(string);
+            //                        unreadCountSum += value.count;
+            //                    }
+            //                }
+            //            } else if (name == "遥信变位") {
+            //                if ($("#bianwei")) {
+            //                    if (value.count > 0) {
+            //                        var string = '<span class="badge">' + value.count + '</span>';
+            //                        $("#bianwei").html(string);
+            //                        unreadCountSum += value.count;
+            //                    }
+            //                }
+            //            } else if (name == "平台运行") {
+            //                if ($("#platform")) {
+            //                    if (value.count > 0) {
+            //                        var string = '<span class="badge">' + value.count + '</span>';
+            //                        $("#platform").html(string);
+            //                        unreadCountSum += value.count;
+            //                    }
+            //                }
+            //            }
         });
         if (isIOS) {
             //iOS回调未读数
