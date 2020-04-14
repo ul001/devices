@@ -18,13 +18,13 @@
 span.veryDanger {
     padding: .1rem;
     border-radius: .15rem;
-    background: #DC3545;
-    color: #fff;
+    background: #FCEFEE;
+    color: #ED5B54;
 }
 
 span.normal {
     padding: .1rem;
     border-radius: .15rem;
-    background: #AC2545;
-    color: #fff;
+    background: #F1FEFF;
+    color: #83D1AE;
 }
