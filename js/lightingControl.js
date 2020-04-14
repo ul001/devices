@@ -274,6 +274,10 @@ $(".footer_btn").click(function () {
   // confirmAlarmEvents(logList);
 });
 
+$("#record_btn").click(function () {
+  window.location.href = "deviceControlLog.html?type=light";
+});
+
 function selectAll() {
   if ($("#back_btn").text() == "全选") {
     $("#back_btn").text("全不选");
