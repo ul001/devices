@@ -1,10 +1,9 @@
 var loading = false;
 var itemsPerLoad = 10;
 var pageNum = 1;
-var deviceSerial = Substation.GetQueryString("deviceSerial");
-var meterCode = Substation.getQueryString("meterCode");
+var meterId = Substation.GetQueryString("meterId");
 var deviceType = Substation.GetQueryString("type");
-var loadUrl = "/getARCMControlLogList";
+var loadUrl = "/getControlLogList";
 var subObj = JSON.parse(localStorage.getItem("subObj"));
 try {
     if (isAndroid) {
@@ -69,8 +68,8 @@ function addItems(number){
         if(controlPerson != ""){
             params['userName'] = controlPerson;
         }
-        if(deviceSerial != "" && deviceSerial !=undefined){
-            params['SerialNumber'] = deviceSerial;
+        if(meterId != "" && meterId !=undefined){
+            params['SerialNumber'] = meterId;
         }
     }else if(deviceType == "light"){
         if (dateStartVal != "") {
@@ -82,61 +81,115 @@ function addItems(number){
         if(controlPerson != ""){
             params['userName'] = controlPerson;
         }
-        if(deviceSerial != "" && deviceSerial !=undefined){
-            params['fMeterCode'] = meterCode;
+        if(meterId != "" && meterId !=undefined){
+            params['fMeterCode'] = meterId;
         }
     }
-    Substation.getDataByAjaxNoLoading(loadUrl,params,function(data){
-        var dataSrc = data.pageInfo;
-        if (pageNum == 1) {
-            $(".list-container").empty();
-        }
-        if(dataSrc.list!=undefined && dataSrc.list.length>0){
-            $(dataSrc.list).each(function(){
-                var controlStr = "";
-                switch(this.fControltype){
-                    case "reset":
-                        controlStr = "复位";
-                        break;
-                    case "DO":
-                        controlStr = "分闸";
-                        break;
-                    case "silent":
-                        controlStr = "消音";
-                        break;
-                    case "check":
-                        controlStr = "自检";
-                        break;
-                }
-                var askTime = "-";
-                if(this.fAcktime!=undefined && this.fAcktime!=""){
-                    askTime = formatDate(this.fAcktime);
-                }
-                var askResult = "暂无结果";
-                if(this.fResult!=undefined && this.fResult!=""){
-                    askResult = this.fResult;
-                }
-                $(".list-container").append('<div class="card-log">'+
-                                                 '<div class="card-top">'+
-                                                     '<div class="lightGrayColor">操作（时间：'+formatDate(this.fSendtime)+'）</div>'+
-                                                     '<div class="blackColor">'+this.fUsername+'对'+this.meterInfoname+'（'+this.fMeterserialnumber+'）进行'+controlStr+'操作</div>'+
-                                                 '</div>'+
-                                                 '<div class="card-bottom">'+
-                                                     '<div class="lightGrayColor">结果（时间：'+askTime+'）</div>'+
-                                                     '<div class="blackColor">'+askResult+'</div>'+
-                                                 '</div>'+
-                                             '</div>');
-            });
-            pageNum++;
-        } else {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
-            return;
-        }
-        if (dataSrc.list.length < itemsPerLoad) {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
-            return;
+    Substation.postDataByAjaxNoLoading(loadUrl,params,function(data){
+        if(deviceType == "light"){
+            var dataSrc = data;
+            if (pageNum == 1) {
+                $(".list-container").empty();
+            }
+            if(dataSrc.list!=undefined && dataSrc.list.length>0){
+                $(dataSrc.list).each(function(){
+                    var controlStr = "";
+                    switch(this.fControltype){
+                        case "reset":
+                            controlStr = "复位";
+                            break;
+                        case "DO":
+                            controlStr = "分闸";
+                            break;
+                        case "silent":
+                            controlStr = "消音";
+                            break;
+                        case "check":
+                            controlStr = "自检";
+                            break;
+                    }
+                    var askTime = "-";
+                    if(this.fAcktime!=undefined && this.fAcktime!=""){
+                        askTime = formatDate(this.fAcktime);
+                    }
+                    var askResult = "暂无结果";
+                    if(this.fResult!=undefined && this.fResult!=""){
+                        askResult = this.fResult;
+                    }
+                    $(".list-container").append('<div class="card-log">'+
+                                                     '<div class="card-top">'+
+                                                         '<div class="lightGrayColor">操作（时间：'+this.fOperatetime+'）</div>'+
+                                                         '<div class="blackColor">'+this.fOperatername+'对'+this.fDevicename+'（'+this.fMetercode+'）进行'+this.deviceValueExplain+'操作</div>'+
+                                                     '</div>'+
+                                                     '<div class="card-bottom">'+
+                                                         '<div class="lightGrayColor">结果（时间：'+askTime+'）</div>'+
+                                                         '<div class="blackColor">'+askResult+'</div>'+
+                                                     '</div>'+
+                                                 '</div>');
+                });
+                pageNum++;
+            } else {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
+            if (dataSrc.list.length < itemsPerLoad) {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
+        }else if(deviceType == "arcm300T"){
+            var dataSrc = data.pageInfo;
+            if (pageNum == 1) {
+                $(".list-container").empty();
+            }
+            if(dataSrc.list!=undefined && dataSrc.list.length>0){
+                $(dataSrc.list).each(function(){
+                    var controlStr = "";
+                    switch(this.fControltype){
+                        case "reset":
+                            controlStr = "复位";
+                            break;
+                        case "DO":
+                            controlStr = "分闸";
+                            break;
+                        case "silent":
+                            controlStr = "消音";
+                            break;
+                        case "check":
+                            controlStr = "自检";
+                            break;
+                    }
+                    var askTime = "-";
+                    if(this.fAcktime!=undefined && this.fAcktime!=""){
+                        askTime = formatDate(this.fAcktime);
+                    }
+                    var askResult = "暂无结果";
+                    if(this.fResult!=undefined && this.fResult!=""){
+                        askResult = this.fResult;
+                    }
+                    $(".list-container").append('<div class="card-log">'+
+                                                     '<div class="card-top">'+
+                                                         '<div class="lightGrayColor">操作（时间：'+formatDate(this.fSendtime)+'）</div>'+
+                                                         '<div class="blackColor">'+this.fUsername+'对'+this.meterInfoname+'（'+this.fMeterserialnumber+'）进行'+controlStr+'操作</div>'+
+                                                     '</div>'+
+                                                     '<div class="card-bottom">'+
+                                                         '<div class="lightGrayColor">结果（时间：'+askTime+'）</div>'+
+                                                         '<div class="blackColor">'+askResult+'</div>'+
+                                                     '</div>'+
+                                                 '</div>');
+                });
+                pageNum++;
+            } else {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
+            if (dataSrc.list.length < itemsPerLoad) {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("--end--");
+                return;
+            }
         }
     },function (errorCode) {
         if (errorCode == 0) {

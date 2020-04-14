@@ -390,6 +390,41 @@ var Substation = {
     });
   },
 
+    postDataByAjaxNoLoading: function (url, params, successCallback, errorCallback) {
+      $.ajax({
+        type: "POST",
+        url: baseUrlFromAPP + url,
+        data: params,
+        beforeSend: function (request) {
+          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+          request.setRequestHeader("Authorization", tokenFromAPP);
+        },
+        success: function (data) {
+          if (data == undefined) {
+            $.toast(Operation['ui_nodata']);
+            return;
+          } else {
+            if (data.code == "200") {
+              successCallback(data.data);
+            } else if (data.code == "5000") {
+              Substation.showCodeTips(data.code);
+              Substation.reportError(JSON.stringify(data.data.stackTrace));
+            } else {
+              Substation.showCodeTips(data.code);
+            }
+          }
+        },
+        error: function (data) {
+          errorCallback(data.status);
+          if (data.status == 0) {
+            $.toast(Operation['ui_neterror']);
+          } else {
+            $.toast(Operation['code_fail']);
+          }
+        }
+      });
+    },
+
   postDataByAjax: function (url, params, successCallback) {
     $.showPreloader(Operation['ui_loading']);
     $.ajax({
