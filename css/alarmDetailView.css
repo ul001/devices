@@ -1,16 +1,30 @@
-.item-content .item-inner .item-title{
-    width:40%;
+.item-content .item-inner .item-title {
+    width: 40%;
 }
 
-.item-content .item-inner .item-after{
-    width:60%;
+.item-content .item-inner .item-after {
+    width: 60%;
     color: #3E4145;
-/*    word-break: break-all;
+    /*    word-break: break-all;
     text-overflow: ellipsis;*/
-    max-height:initial;
-    white-space:initial;
+    max-height: initial;
+    white-space: initial;
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+}
+
+span.veryDanger {
+    padding: .1rem;
+    border-radius: .15rem;
+    background: #DC3545;
+    color: #fff;
+}
+
+span.normal {
+    padding: .1rem;
+    border-radius: .15rem;
+    background: #AC2545;
+    color: #fff;
 }
