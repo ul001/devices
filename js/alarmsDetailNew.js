@@ -229,6 +229,8 @@ function manageCard() {
     var html = "";
     if (!$("#bar-footer").length || $("#bar-footer").is(":hidden")) {
         isControl = true;
+        itemsPerLoad = 100;
+        getFirstPage();
         $(".manager_btn").text(Operation['ui_cancel']);
         $(".back_btn").text(Operation['ui_SelectAll']);
         $(".selectAlarms").toggle();
@@ -246,6 +248,8 @@ function manageCard() {
         //        $(".content").after(html);
     } else {
         isControl = false;
+        itemsPerLoad = 10;
+        getFirstPage();
         $(".selectAlarms").toggle();
         $("#bar-footer").toggle();
         $("#bar-footer").removeClass("bar-footer");

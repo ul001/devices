@@ -136,6 +136,7 @@ $("#reset").click(function () {
         var metercode = $(obj).attr("data-id");
         controlJson.push({
             "meterCode": metercode,
+            "substationId":subObj.subId,
             "type": "reset",
             "value": "1"
         });
@@ -152,6 +153,7 @@ $("#DO").click(function () {
         var metercode = $(obj).attr("data-id");
         controlJson.push({
             "meterCode": metercode,
+            "substationId":subObj.subId,
             "type": "DO",
             "value": "1"
         });
@@ -168,6 +170,7 @@ $("#silent").click(function () {
         var metercode = $(obj).attr("data-id");
         controlJson.push({
             "meterCode": metercode,
+            "substationId":subObj.subId,
             "type": "silent",
             "value": "1"
         });
@@ -184,6 +187,7 @@ $("#check").click(function () {
         var metercode = $(obj).attr("data-id");
         controlJson.push({
             "meterCode": metercode,
+            "substationId":subObj.subId,
             "type": "check",
             "value": "1"
         });
