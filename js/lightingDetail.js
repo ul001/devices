@@ -33,52 +33,68 @@ function creatView(param) {
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
-        sb += '                                    <div class="item-title" data-i18n="ui_startTime">仪表编号:</div>';
+        sb += '                                    <div class="item-title" data-i18n="ui_startTime">' + Operation['ui_alarmDeviceId'] + '</div>';
         sb += '                                    <div class="item-after startTime">' + (param.fMetercode ? param.fMetercode : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
-        sb += '                                    <div class="item-title" data-i18n="ui_alarmMeterId">' + Operation['ui_alarmDeviceId'] + '</div>';
-        sb += '                                    <div class="item-after meterId">' + (param.fDevicecode ? param.fDevicecode : "") + '</div>';
-        sb += '                                </div>';
-        sb += '                            </li>';
-        sb += '                            <li class="item-content">';
-        sb += '                                <div class="item-inner">';
         sb += '                                    <div class="item-title" data-i18n="ui_alarmMeterName">' + Operation['ui_alarmDeviceName'] + '</div>';
-        sb += '                                    <div class="item-after meterName">' + (param.fDevicename ? param.fDevicename : "") + '</div>';
+        sb += '                                    <div class="item-after meterName">' + (param.datafDeivcename ? param.datafDeivcename : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
-        sb += '                            <li class="item-content">';
-        sb += '                                <div class="item-inner">';
-        sb += '                                    <div class="item-title" data-i18n="ui_alarmType">' + Operation['ui_alarmType'] + '</div>';
-        sb += '                                    <div class="item-after alarmType">' + (param.fAlarmtype ? param.fAlarmtype : "") + '</div>';
-        sb += '                                </div>';
-        sb += '                            </li>';
-        sb += '                            <li class="item-content">';
-        sb += '                                <div class="item-inner">';
-        sb += '                                    <div class="item-title" data-i18n="ui_alarmType">' + Operation['ui_alarmDetail'] + ':' + '</div>';
-        sb += '                                    <div class="item-after alarmType">' + (param.fAlarmdesc ? param.fAlarmdesc : "") + '</div>';
-        sb += '                                </div>';
-        sb += '                            </li>';
-        //参数编号
-        if (param.hasOwnProperty('fParamcode')) {
+        //fGatewayid
+        if (param.hasOwnProperty('datagatewayid')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamId">' + Operation['ui_alarmParamId'] + '</div>';
-            sb += '                                    <div class="item-after paramId">' + (param.fParamcode ? param.fParamcode : "") + '</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">网关:</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datagatewayid ? param.datagatewayid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
-        //参数名称
-        if (param.hasOwnProperty('fValue')) {
+        //串口号
+        if (param.hasOwnProperty('datacomid')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">' + Operation['ui_alarmParamName'] + '</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.fValue ? param.fValue : "") + '</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">串口号:</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datacomid ? param.datacomid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
+        //datafDevicetype
+        if (param.hasOwnProperty('datafDevicetype')) {
+            sb += '                            <li class="item-content">';
+            sb += '                                <div class="item-inner">';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">设备类型:</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datafDevicetype ? param.datafDevicetype : "") + '</div>';
+            sb += '                                </div>';
+            sb += '                            </li>';
+        }
+        //控制编码
+        if (param.hasOwnProperty('datafuncid')) {
+            sb += '                            <li class="item-content">';
+            sb += '                                <div class="item-inner">';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">控制编码:</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.datafuncid ? param.datafuncid : "") + '</div>';
+            sb += '                                </div>';
+            sb += '                            </li>';
+        }
+        //fResult
+        if (param.hasOwnProperty('deviceValue')) {
+            sb += '                            <li class="item-content">';
+            sb += '                                <div class="item-inner">';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamId">当前状态:</div>';
+            if (param.deviceValue == '0') {
+                sb += '                                    <div class="item-after paramId">分闸</div>';
+            } else if (param.deviceValue == '1') {
+                sb += '                                    <div class="item-after paramId">合闸</div>';
+            } else {
+                sb += '                                    <div class="item-after paramId">无设备</div>';
+            }
+            sb += '                                </div>';
+            sb += '                            </li>';
+        }
+
         //越限值
         if (param.hasOwnProperty('fLimitvalue')) {
             sb += '                            <li class="item-content">';
