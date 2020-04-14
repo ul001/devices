@@ -27,7 +27,7 @@
                 <span data-i18n="">控制</span>
             </a>
             <a id="record_btn" class="button button-link button-nav pull-right click_btn">
-                <span data-i18n="">记录</span>
+                <span id="controlLog" data-i18n="">记录</span>
             </a>
             <h1 class="title title_color">ARCM300T控制</h1>
         </header>
@@ -49,60 +49,60 @@
 <!--                    &lt;!&ndash;                    </a>&ndash;&gt;-->
 <!--                </div>-->
                 <div class="content-list">
-                    <label class="list-item label-checkbox light_opening" data-id="1">
-                        <div class="row">
-                            <input type="checkbox" name="my-checkbox">
-                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>
-                            <span class="label-title col-75">南楼变电所一楼一层照名控制</span>
-                            <a href="#" class="view_detail col-25 button">详情</a>
-                        </div>
-                        <div class="img_text">
-                            <img src="img/arcm300t.png">
-                            <span class="right-bottom">合闸</span>
-                        </div>
-                    </label>
-                    <label class="list-item label-checkbox no_device" data-id="2">
-                        <div class="row">
-                            <input type="checkbox" name="my-checkbox">
-                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>
-                            <span class="label-title col-75">南楼一层</span>
-                            <!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
-                        </div>
-                        <div class="img_text">
-                            <img src="img/arcm300t.png">
-                            <div class="right-bottom">无设备</div>
-                        </div>
-                    </label>
-                    <label class="list-item label-checkbox light_closed" data-id="3">
-                        <div class="row">
-                            <input type="checkbox" name="my-checkbox">
-                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>
-                            <span class="label-title col-75">南楼一层照明</span>
-                            <!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
-                        </div>
-                        <div class="img_text">
-                            <img src="img/arcm300t.png">
-                            <span class="right-bottom">分闸</span>
-                        </div>
-                    </label>
-                    <label class="list-item label-checkbox light_opening" data-id="4">
-                        <div class="row">
-                            <input type="checkbox" name="my-checkbox">
-                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>
-                            <span class="label-title col-75">南楼变电所一楼一层照名控制</span>
-                            <a href="#" class="view_detail col-25 button">详情</a>
-                        </div>
-                        <div class="img_text">
-                            <img src="img/arcm300t.png">
-                            <span class="right-bottom">合闸</span>
-                        </div>
-                    </label>
+<!--                    <label class="list-item label-checkbox light_opening" data-id="1">-->
+<!--                        <div class="row">-->
+<!--                            <input type="checkbox" name="my-checkbox">-->
+<!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+<!--                            <span class="label-title col-75">南楼变电所一楼一层照名控制</span>-->
+<!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
+<!--                        </div>-->
+<!--                        <div class="img_text">-->
+<!--                            <img src="img/arcm300t.png">-->
+<!--                            <span class="right-bottom">合闸</span>-->
+<!--                        </div>-->
+<!--                    </label>-->
+<!--                    <label class="list-item label-checkbox no_device" data-id="2">-->
+<!--                        <div class="row">-->
+<!--                            <input type="checkbox" name="my-checkbox">-->
+<!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+<!--                            <span class="label-title col-75">南楼一层</span>-->
+<!--                            &lt;!&ndash;                            <a href="#" class="view_detail col-25 button">详情</a>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div class="img_text">-->
+<!--                            <img src="img/arcm300t.png">-->
+<!--                            <div class="right-bottom">无设备</div>-->
+<!--                        </div>-->
+<!--                    </label>-->
+<!--                    <label class="list-item label-checkbox light_closed" data-id="3">-->
+<!--                        <div class="row">-->
+<!--                            <input type="checkbox" name="my-checkbox">-->
+<!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+<!--                            <span class="label-title col-75">南楼一层照明</span>-->
+<!--                            &lt;!&ndash;                            <a href="#" class="view_detail col-25 button">详情</a>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                        <div class="img_text">-->
+<!--                            <img src="img/arcm300t.png">-->
+<!--                            <span class="right-bottom">分闸</span>-->
+<!--                        </div>-->
+<!--                    </label>-->
+<!--                    <label class="list-item label-checkbox light_opening" data-id="4">-->
+<!--                        <div class="row">-->
+<!--                            <input type="checkbox" name="my-checkbox">-->
+<!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+<!--                            <span class="label-title col-75">南楼变电所一楼一层照名控制</span>-->
+<!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
+<!--                        </div>-->
+<!--                        <div class="img_text">-->
+<!--                            <img src="img/arcm300t.png">-->
+<!--                            <span class="right-bottom">合闸</span>-->
+<!--                        </div>-->
+<!--                    </label>-->
                 </div>
                 <div class="row footer_bar">
-                        <a href="#" class="footer_btn col-20 button active">复位</a>
-                        <a href="#" class="footer_btn col-20 button active">分闸</a>
-                        <a href="#" class="footer_btn col-20 button active">消音</a>
-                        <a href="#" class="footer_btn col-20 button active">自检</a>
+                        <a id="reset" href="#" class="footer_btn col-20 button active">复位</a>
+                        <a id="DO" href="#" class="footer_btn col-20 button active">分闸</a>
+                        <a id="silent" href="#" class="footer_btn col-20 button active">消音</a>
+                        <a id="check" href="#" class="footer_btn col-20 button active">自检</a>
                 </div>
             </div>
         </div>
