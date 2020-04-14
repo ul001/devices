@@ -11,25 +11,37 @@ function initContent() {
         var strArr = "";
         if (data.list != undefined && data.list.length && data.list.length > 0) {
             $(data.list).each(function () {
-                strArr += "<label class=\"list-item label-checkbox light_opening\" onclick=\"goToDetail(" + this.meterCode + ")\">\n" +
+                var thisStatus = "<span class='normalStatus'>正常</span>";
+                var imgStr= "<img src=\"img/arcm300t.png\">";
+                if(this.meterStatus=="1"){
+                    thisStatus = "<span class='alarmStatus'>报警</span>";
+                    imgStr= "<img src=\"img/arcm300Talarm.png\">"
+                }
+                strArr += "<label class=\"list-item label-checkbox light_opening\" data-id=\"" + this.meterCode + "\">\n" +
                     "                        <div class=\"row\">\n" +
                     "                            <input class=\"selectBox\" type=\"checkbox\" name=\"my-checkbox\" data-id=\"" + this.meterCode + "\">\n" +
                     "                            <div class=\"item-media col-15\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                    "                            <span class=\"label-title col-75\">" + this.meterName + "</span>\n" +
+                    "                            <span class=\"label-title col-85\">" + this.meterName + "</span>\n" +
                     // "                            <a href=\"#\" class=\"view_detail col-25 button\">详情</a>\n" +
                     "                        </div>\n" +
-                    "                        <div class=\"img_text\">\n" +
-                    "                            <img src=\"img/arcm300t.png\">\n" +
-                    //      "                            <span class=\"right-bottom\">合闸</span>\n" +
+                    "                        <div class=\"row no-gutter\">\n" +
+                    "                        <div class=\"col-40\">\n" +
+                    "                            "+imgStr+"\n" +
+                    "                        </div>\n" +
+                    "                        <div class=\"col-60\">\n" +
+                          "                            <p class='right-float limit-length' style='margin-top:.3rem;'>编号："+this.meterCode+"</p>\n" +
+                          "                            <p class='right-float'>"+thisStatus+"</p>\n" +
+                    "                        </div>\n" +
                     "                        </div>\n" +
                     "                    </label>";
             });
             $(".content-list").html(strArr);
             if (isControl == 0) {
                 $(".item-media").hide();
-                $(".label-title").removeClass("col-60").addClass("col-75");
+                $(".label-title").removeClass("col-85").addClass("col-100");
+                $(".list-item").on("click",goToDetail);
             } else {
-                $(".label-title").removeClass("col-75").addClass("col-60");
+                $(".label-title").removeClass("col-100").addClass("col-85");
             }
         }
     });
@@ -38,6 +50,7 @@ function initContent() {
 initContent();
 
 function controlClick() {
+    $("input:checkbox").removeAttr("checked");
     if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
         isControl = 1;
         $("#back_btn").text("全选");
@@ -45,24 +58,26 @@ function controlClick() {
         $("#control_btn").text("取消");
         $("#record_btn").toggle();
         $("#light_opening").click();
-        $(".label-title").removeClass("col-75").addClass("col-60");
+        $(".label-title").removeClass("col-100").addClass("col-85");
         $(".item-media").toggle();
         $(".button_bar").toggle();
         $(".footer_btn").toggle();
         $("input:checkbox").removeAttr("disabled");
+        $(".list-item").off("click",goToDetail);
     } else {
         isControl = 0;
         $("#back_btn").html('<span class="icon icon-left"></span>' + '<span>' + Operation['ui_back'] + '</span>');
         $("#back_btn").off("click").on("click", goBack);
         $("#control_btn").text("控制");
         $("#record_btn").toggle();
-        $(".label-title").removeClass("col-60").addClass("col-75");
+        $(".label-title").removeClass("col-85").addClass("col-100");
         $(".item-media").toggle();
         $(".list-item").show();
         $(".button_bar").toggle();
         $(".footer_btn").toggle();
         $("input:checkbox").prop("disabled", "disabled");
         $("input:checkbox").removeAttr("checked");
+        $(".list-item").on("click",goToDetail);
     }
 }
 
@@ -174,17 +189,20 @@ $("#check").click(function () {
         });
     });
     Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-
+        if(data.data.a!=undefined){
+            $.toast(data.data.a);
+        }
     });
 });
 
-function goToDetail(meterCode) {
+function goToDetail() {
+    var meterCode = $(this).attr("data-id");
     localStorage.setItem("meterCode", meterCode);
     window.location.href = "arcm300TDetail.html";
 }
 
 $("#controlLog").click(function () {
-    window.location.href = "arcm300TControlLog.html";
+    window.location.href = "deviceControlLog.html?type=arcm300T";
 });
 
 $.init();

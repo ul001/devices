@@ -1,7 +1,176 @@
 .card-content-inner {
+
+}
+
+.list-container .card-log {
+    position: relative;
+    margin: .3rem;
+    font-size: .7rem;
+    background: #fff;
+    border-radius: .3rem;
+    padding:.3rem 1rem;
+}
+
+.card-top{
+    border-bottom:1px solid LightGreen;
+}
+
+/*筛选*/
+#dateStart,
+#dateEnd,
+#fState,
+#dangerType,
+#search {
+    border-radius: 0.25rem;
+    border: 0.05rem solid #CCCCCC;
+    height: 1.5rem;
+    margin: 0.1rem 0 0.5rem 0;
+}
+
+#dateStart,
+#dateEnd {
+    padding-left: 0.25rem;
+    width: 46%;
+    font-size: 0.75rem;
+}
+
+#fState,
+#dangerType,
+#search {
+    width: 100%;
+}
+
+.searchbar {
+    height: initial;
+    padding: 0;
+}
+
+#panel-right-demo {
+    background-color: #FFFFFF;
+    color: #3d4145;
+    overflow: hidden;
+}
+
+.list-block {
+    margin: 0;
+}
+
+.list-block .item-title.label {
+    width: initial;
+}
+
+.btnBar {
+    /*position:absolute;*/
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+}
+
+.pull-right.open-panel {
+    color: #fff;
+}
+
+.content-block {
+    color: #3d4145;
+}
+
+.content-block label {
+    font-size: 0.9rem;
+    color: black;
+}
+
+#search {
+    margin: 0;
+}
+
+#listContainer {
+    max-height: 11rem;
+    overflow: auto;
+}
+
+.item-content:active {
+    background-color: #d9d9d9;
+}
+
+.subName {
+    font-weight: bold;
+}
+
+i.icon.icon-selectSome {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-selectSome.png);
+}
+
+.card-content-inner {
+    position: relative;
     padding: .35rem;
+}
+
+.searchbar .search-input i.icon.icon-clear {
+    width: .9rem;
+    height: .9rem;
+    z-index: 100;
+    cursor: pointer;
+    left: initial;
+    display: none;
+    right: .3rem;
+    background-image: url(../img/i-clear.png);
+}
+
+#listContainer .item-inner {
+    font-size: .7rem;
+}
+
+.content-block .buttons-row .button {
+    font-size: .75rem;
+    border-color: #02A8A6;
+    color: #02A8A6;
+}
+
+.content-block .buttons-row .button.active {
+    font-size: .75rem;
+    border-color: #02A8A6;
+    color: #fff;
+    background-color: #02A8A6;
+}
+
+.btnBar .button {
+    border-radius: initial;
+}
+
+#searchBtn,
+#commitBtn {
+    background: #02A8A6;
+}
+
+#listContainer {
+    border: 1px solid #CCCCCC;
+}
+
+#listContainer .item-content:active {
+    background: #02A8A6;
+    color: #fff;
+}
+
+.button.button-fill.button-cancel {
+    background: #ccc;
+    color: #3d4145;
 }
 
 #list-container .card {
     margin: 0.3rem;
+}
+
+.bar .button-nav.pull-right {
+    margin-right: 0;
+}
+
+.panel .content-block {
+    height: 100%;
+}
+
+.popup-btn {
+    min-height: 2.4rem;
 }
