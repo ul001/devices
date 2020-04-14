@@ -75,20 +75,22 @@ function initContent() {
             if (param.hasOwnProperty('meterDetail')) {
                 if (param.meterStatus == '1') {
                     var detailParam = JSON.parse(param.meterDetail);
+                    // var detailParam = JSON.parse("{\"temp\":{\"tempA\":\"A相温度报警\",\"tempB\":\"B相温度报警\",\"tempC\":\"C相温度报警\",\"tempN\":\"N相温度报警\"},\"overvoltage\":{\"ua\":\"A相过压报警\",\"ub\":\"B相过压报警\",\"uc\":\"C相过压警\"},\"electricLeakage\":\"漏电报警\",\"undervoltage\":{\"ua\":\"A相欠压报警\",\"ub\":\"B相欠压报警\",\"uc\":\"C相欠压报警\"}}");
                     // var detailParam = JSON.parse("{\"temp\":{\"tempA\":\"A相温度报警\",\"tempB\":\"B相温度报警\",\"tempC\":\"C相温度报警\",\"tempN\":\"N相温度报警\"},\"overvoltage\":{\"ua\":\"A相过压报警\",\"ub\":\"B相过压报警\",\"uc\":\"C相过压报警\"},\"iLeakage\":\"漏电报警\",\"overCurrent\":{\"Ia\":\"A相过流报警\",　\"Ib\":\"B相过流报警\",\"Ic\":\"C相过流报警\"},\"switch\":\"开\",\"undervoltage\":{\"ua\":\"A相欠压报警\",\"ub\":\"B相欠压报警\",\"uc\":\"C相欠压报警\"}}");
                     if (detailParam.hasOwnProperty('temp')) {
                         var arr = [];
-                        if (detailParam.temp.hasOwnProperty('tempA')) {
-                            arr.push(detailParam.temp.tempA);
+                        var temp = detailParam.temp;
+                        if (temp.hasOwnProperty('tempA')) {
+                            arr.push(temp.tempA);
                         }
-                        if (detailParam.temp.hasOwnProperty('tempB')) {
-                            arr.push(detailParam.temp.tempB);
+                        if (temp.hasOwnProperty('tempB')) {
+                            arr.push(temp.tempB);
                         }
-                        if (detailParam.temp.hasOwnProperty('tempC')) {
-                            arr.push(detailParam.temp.tempC);
+                        if (temp.hasOwnProperty('tempC')) {
+                            arr.push(temp.tempC);
                         }
-                        if (detailParam.temp.hasOwnProperty('tempN')) {
-                            arr.push(detailParam.temp.tempN);
+                        if (temp.hasOwnProperty('tempN')) {
+                            arr.push(temp.tempN);
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
@@ -107,14 +109,15 @@ function initContent() {
                     //过压
                     if (detailParam.hasOwnProperty('overvoltage')) {
                         var arr = [];
-                        if (detailParam.temp.hasOwnProperty('ua')) {
-                            arr.push(detailParam.overvoltage.ua);
+                        var overvoltage = detailParam.overvoltage;
+                        if (overvoltage.hasOwnProperty('ua')) {
+                            arr.push(overvoltage.ua);
                         }
-                        if (detailParam.temp.hasOwnProperty('ub')) {
-                            arr.push(detailParam.overvoltage.ub);
+                        if (overvoltage.hasOwnProperty('ub')) {
+                            arr.push(overvoltage.ub);
                         }
-                        if (detailParam.temp.hasOwnProperty('uc')) {
-                            arr.push(detailParam.overvoltage.uc);
+                        if (overvoltage.hasOwnProperty('uc')) {
+                            arr.push(overvoltage.uc);
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
@@ -149,14 +152,15 @@ function initContent() {
                     //过流
                     if (detailParam.hasOwnProperty('overCurrent')) {
                         var arr = [];
-                        if (detailParam.temp.hasOwnProperty('Ia')) {
-                            arr.push(detailParam.overCurrent.Ia);
+                        var overCurrent = detailParam.overCurrent;
+                        if (overCurrent.hasOwnProperty('Ia')) {
+                            arr.push(overCurrent.Ia);
                         }
-                        if (detailParam.temp.hasOwnProperty('Ib')) {
-                            arr.push(detailParam.overCurrent.Ib);
+                        if (overCurrent.hasOwnProperty('Ib')) {
+                            arr.push(overCurrent.Ib);
                         }
-                        if (detailParam.temp.hasOwnProperty('Ic')) {
-                            arr.push(detailParam.overCurrent.Ic);
+                        if (overCurrent.hasOwnProperty('Ic')) {
+                            arr.push(overCurrent.Ic);
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
@@ -175,14 +179,15 @@ function initContent() {
                     //欠压
                     if (detailParam.hasOwnProperty('undervoltage')) {
                         var arr = [];
-                        if (detailParam.temp.hasOwnProperty('ua')) {
-                            arr.push(detailParam.undervoltage.ua);
+                        var undervoltage = detailParam.undervoltage;
+                        if (undervoltage.hasOwnProperty('ua')) {
+                            arr.push(undervoltage.ua);
                         }
-                        if (detailParam.temp.hasOwnProperty('ub')) {
-                            arr.push(detailParam.undervoltage.ub);
+                        if (undervoltage.hasOwnProperty('ub')) {
+                            arr.push(undervoltage.ub);
                         }
-                        if (detailParam.temp.hasOwnProperty('uc')) {
-                            arr.push(detailParam.undervoltage.uc);
+                        if (undervoltage.hasOwnProperty('uc')) {
+                            arr.push(undervoltage.uc);
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
@@ -203,7 +208,7 @@ function initContent() {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
                         sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">开关量:</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.iLeakage + '</span></div>';
+                        sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.switch+'</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
