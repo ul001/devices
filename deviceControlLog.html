@@ -23,6 +23,9 @@
                 <span class="icon icon-left"></span>
                 <span data-i18n="ui_back"></span>
             </a>
+            <a class="button button-link button-nav pull-right bar_right_btn open-panel">
+                <span>筛选</span>
+            </a>
             <h1 class="title title_color">
                 <p class="limit-length" id="titleContent">操作记录</p>
             </h1>
@@ -33,10 +36,58 @@
                 <div class="preloader"></div>
                 <div class="pull-to-refresh-arrow"></div>
             </div>
-            <div class="list-container"></div>
+            <div class="list-container">
+                <div class="card-log">
+                    <div class="card-top">
+                        <div class="lightGrayColor">操作（时间：2020-04-14 09:56:00）</div>
+                        <div class="blackColor">张三对三楼北（20301804）进行合闸操作</div>
+                    </div>
+                    <div class="card-bottom">
+                        <div class="lightGrayColor">结果（时间：）</div>
+                        <div class="blackColor">暂无结果</div>
+                    </div>
+                </div>
+            </div>
             <div class="infinite-scroll-preloader">
                 <div class="preloader"></div>
             </div>
+        </div>
+    </div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+        <div class="content-block">
+            <div>
+                <p class="buttons-row"><a href="#" class="button" id="today"><span
+                        data-i18n="ui_today"></span></a>
+                    <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                    <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                    <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
+                </p>
+            </div>
+            <div>
+                <label><span data-i18n="ui_timeSelect"></span></label><br>
+                <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime"
+                       readonly/> -
+                <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime"
+                       readonly/>
+            </div>
+            <div>
+                <label>操作人员</label><br>
+                <div class="searchbar">
+                    <div class="search-input">
+                        <input type="search" id='search' placeholder='请输入操作人员用户名'/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#"
+                                   class="button button-big button-fill button-cancel close-panel"><span
+                    data-i18n="ui_cancel"></span></a>
+            </div>
+            <div class="col-50"><a href="#" class="button button-big button-fill"
+                                   id="searchBtn"><span
+                    data-i18n="ui_query"></span></a></div>
         </div>
     </div>
 </div>
