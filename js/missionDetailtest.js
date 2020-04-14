@@ -289,7 +289,7 @@ $("#startTask").click(function () {
                         $.confirm(
                             Operation["ui_openTraceTip"],
                             function () {
-                                android.startTrace();
+                                android.startTrace(TaskNumber);
                                 location.reload();
                             },
                             function () {

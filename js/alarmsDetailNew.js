@@ -353,9 +353,10 @@ function setAlarmEventConfirmed(logid, confirmType) {
 
 }
 
-
 function addCardLongClick() {
     var longClick = 0;
+    var isMoving = false;
+    var startY;
     $(".item-link").on({
         touchstart: function (e) {
             var thisCardId = $(this).parent(".card").attr("id");
@@ -379,12 +380,29 @@ function addCardLongClick() {
                 }
                 $("#showDiv").attr("data-id", thisCardId);
                 $("#showDiv").show();
-            }, 500);
+                if(isMoving){
+                    $("#showDiv").hide();
+                }
+            }, 1000);
+            startY = e.originalEvent.changedTouches[0].pageY;
         },
         touchmove: function (e) {
             clearTimeout(timeOutEvent);
             timeOutEvent = 0;
-            e.preventDefault();
+            var moveEndY = e.originalEvent.changedTouches[0].pageY;
+            var Y = moveEndY - startY;
+            if(Y > 10) {
+                isMoving = true;
+            } else if(Y < -10) {
+                isMoving = true;
+            } else {
+                isMoving = false;
+            }
+            if(isMoving){
+                $("#showDiv").hide();
+            }else{
+                e.preventDefault();
+            }
         },
         touchend: function (e) {
             clearTimeout(timeOutEvent);
@@ -404,7 +422,11 @@ function addCardLongClick() {
                     window.location.href = "alarmDetailView.html";
                 }
             }
-            //            return false;
+            if(isMoving){
+                return true;
+            }
+            isMoving = false;
+            return false;
         }
     });
 }
