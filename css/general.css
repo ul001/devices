@@ -68,6 +68,14 @@ input {
     color: #778899;
 }
 
+.lightGrayColor {
+    color: #656565;
+}
+
+.blackColor{
+    color: #000000;
+}
+
 .item-input select {
     background: url('../img/right.png') no-repeat right center;
 }
@@ -86,4 +94,9 @@ input {
 
 select {
     background: #fff;
+}
+
+.bar .button-nav.bar_right_btn{
+    color: #fff;
+    margin-right:.3rem;
 }

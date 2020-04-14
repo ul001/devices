@@ -25,9 +25,10 @@
     text-align:center;
 }
 
-.content-list .img_text img{
+.content-list img{
 /*    position:relative;*/
-    width:60%;
+    width:100%;
+    padding:.3rem;
 }
 .content-list .button{
     padding:initial;
@@ -83,4 +84,25 @@ label.label-checkbox i.icon-form-checkbox {
 
 .content-list .row .view_detail{
     float:right;
+}
+
+.right-float{
+    text-align:end;
+    margin:0;
+}
+
+.row .normalStatus{
+    border-radius : .3rem;
+    border:1px solid #94BC7F;
+    color:#94BC7F;
+    background:#F1F4E9;
+    padding:.1rem .3rem;
+}
+
+.row .alarmStatus{
+    border-radius : .3rem;
+    border:1px solid #DA908F;
+    color:#DA908F;
+    background:#F5F4F1;
+    padding:.1rem .3rem;
 }
