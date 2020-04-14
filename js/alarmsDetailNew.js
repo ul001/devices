@@ -136,10 +136,10 @@ function addItems(number, lastIndex) {
                     alarmDetailList.push(this);
                 });
                 $('.list-container').append(html);
-                if(!isControl){
+                if (!isControl) {
                     addCardLongClick();
                     $(".item-media").hide();
-                }else{
+                } else {
                     $(".item-link").removeClass("item-link");
                     $(".item-media").show();
                 }
@@ -148,6 +148,7 @@ function addItems(number, lastIndex) {
                 //                params['subName'] = $("#search").val();
                 //                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
                 //                Substation.getDataByAjaxNoLoading("/close", {}, function () {});
+                localStorage.setItem("need-update", "1");
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
@@ -363,6 +364,7 @@ function setAlarmEventConfirmed(logid, confirmType) {
 var longClick = 0;
 var isMoving = false;
 var startY;
+
 function addCardLongClick() {
     $(".item-link").on({
         touchstart: function (e) {
@@ -388,7 +390,7 @@ function addCardLongClick() {
                 }
                 $("#showDiv").attr("data-id", thisCardId);
                 $("#showDiv").show();
-                if(isMoving){
+                if (isMoving) {
                     $("#showDiv").hide();
                 }
             }, 1000);
@@ -399,16 +401,16 @@ function addCardLongClick() {
             timeOutEvent = 0;
             var moveEndY = e.originalEvent.changedTouches[0].pageY;
             var Y = moveEndY - startY;
-            if(Y > 10) {
+            if (Y > 10) {
                 isMoving = true;
-            } else if(Y < -10) {
+            } else if (Y < -10) {
                 isMoving = true;
             } else {
                 isMoving = false;
             }
-            if(isMoving){
+            if (isMoving) {
                 $("#showDiv").hide();
-            }else{
+            } else {
                 e.preventDefault();
             }
         },
@@ -430,7 +432,7 @@ function addCardLongClick() {
                     window.location.href = "alarmDetailView.html";
                 }
             }
-            if(isMoving){
+            if (isMoving) {
                 return true;
             }
             isMoving = false;
