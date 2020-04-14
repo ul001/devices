@@ -50,6 +50,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
 });
 
 function addItems(number){
+    params = {};
     params['pageNo']=pageNum;
     params['pageSize']=number;
     if(selectSubid!=""){
@@ -63,7 +64,7 @@ function addItems(number){
             params['startTime'] = dateStartVal + " 00:00:00";
         }
         if (dateEndVal != "") {
-            params['entTime'] = dateEndVal + " 23:59:59";
+            params['endTime'] = dateEndVal + " 23:59:59";
         }
         if(controlPerson != ""){
             params['userName'] = controlPerson;
@@ -79,10 +80,10 @@ function addItems(number){
             params['fEndtime'] = dateEndVal + " 23:59:59";
         }
         if(controlPerson != ""){
-            params['userName'] = controlPerson;
+            params['fUsername'] = controlPerson;
         }
         if(meterId != "" && meterId !=undefined){
-            params['fMeterCode'] = meterId;
+            params['fMetercode'] = meterId;
         }
     }
     Substation.postDataByAjaxNoLoading(loadUrl,params,function(data){
@@ -110,7 +111,7 @@ function addItems(number){
                     }
                     var askTime = "-";
                     if(this.fAcktime!=undefined && this.fAcktime!=""){
-                        askTime = formatDate(this.fAcktime);
+                        askTime = this.fSendtime;
                     }
                     var askResult = "暂无结果";
                     if(this.fResult!=undefined && this.fResult!=""){

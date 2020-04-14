@@ -8,7 +8,6 @@
 // var param = JSON.parse(value);
 
 var param = JSON.parse(localStorage.getItem("lightingDetail"));
-localStorage.removeItem("lightingDetail");
 creatView(param);
 
 function creatView(param) {

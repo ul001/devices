@@ -77,8 +77,8 @@ function addItems(number, lastIndex) {
 
   params = {
     fSubid: subid,
-    pageNo: pageNum,
-    pageSize: number
+//    pageNo: pageNum,
+//    pageSize: number
   };
   Substation.getDataByAjaxNoLoading(
     url,
@@ -158,7 +158,6 @@ function addItems(number, lastIndex) {
         });
         $(".item-media").hide();
         $("input:checkbox").prop("disabled", "disabled");
-        addCardLongClick();
         //addClick();
         $(".item-media").hide();
         //保存记录
@@ -169,15 +168,6 @@ function addItems(number, lastIndex) {
 
 
 
-      } else {
-        $.detachInfiniteScroll($(".infinite-scroll"));
-        $(".infinite-scroll-preloader").html("--end--");
-        return;
-      }
-      if (datadic.list.length < itemsPerLoad) {
-        $.detachInfiniteScroll($(".infinite-scroll"));
-        $(".infinite-scroll-preloader").html("--end--");
-        return;
       }
       //复选框初始化
       $(".selectAlarms").toggle();
