@@ -286,6 +286,7 @@ function getZhLanguage() {
     ui_selectNotifyTitle: "消息通知",
     //照明
     ui_lightingDetail: "照明详情",
+    ui_hasComfirm:"确认",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -690,7 +691,8 @@ function getEnLanguage() {
     ui_allNoSelect: "Unsubscribe all",
     ui_selectNotifyTitle: "Notification",
     //照明
-    ui_lightingDetail: "照明详情",
+    ui_lightingDetail: "Lighting details",
+    ui_hasComfirm:"Confirm",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
