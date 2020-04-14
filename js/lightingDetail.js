@@ -146,7 +146,7 @@ function creatView(param) {
 }
 
 $("#record_btn").click(function () {
-    window.location.href = 'deviceControlLog.html?type=light&meterId=' + param.fMetercode + '';
+    window.location.href = 'deviceControlLog.html?type=light&meterId=' + param.fMetercode + '&meterId=' + param.datafuncid + '';
 });
 
 $.init();
