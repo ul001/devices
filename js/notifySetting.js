@@ -6,38 +6,39 @@ $(".showlist").empty();
 //isEnglish = 0;
 //}
 Substation.getDataByAjax("/getMessInfoType", {
-//"english": isEnglish
+    //"english": isEnglish
 }, function (data) {
     if (data.hasOwnProperty("tDtMessInfoType") && data.tDtMessInfoType.length > 0) {
         var strVar = "";
         $(data.tDtMessInfoType).each(function () {
-            strVar += "<li onclick=\"goToNext("+this.fMessinfotypeid+",'"+this.fMessinfotypeexplain+"')\">"+
-                            "<div class=\"item-content item-link\">"+
-                                "<div class=\"item-inner\">"+
-                                    "<div class=\"item-title label\">"+this.fMessinfotypeexplain+"</div>"+
-                                "</div>"+
-                            "</div>"+
-                        "</li>";
+            strVar += "<li onclick=\"goToNext(" + this.fMessinfotypeid + ",'" + this.fMessinfotypeexplain + "')\">" +
+                "<div class=\"item-content item-link\">" +
+                "<div class=\"item-inner\">" +
+                "<div class=\"item-title label\">" + this.fMessinfotypeexplain + "</div>" +
+                "</div>" +
+                "</div>" +
+                "</li>";
         });
         $(".showlist").append(strVar);
     }
 });
 
-function goToNext(typeid,typename){
-    localStorage.setItem("titleName",typename);
-    localStorage.setItem("typeId",typeid);
+function goToNext(typeid, typename) {
+    localStorage.setItem("titleName", typename);
+    localStorage.setItem("typeId", typeid);
     window.location.href = "notifyClassView.html";
 }
 
-function goBack(){
-    if(isAndroid){
+function goBack() {
+    if (isAndroid) {
         android.goBack();
-    }else{
+    } else {
         window.history.back();
+        window.webkit.messageHandlers.goBackiOS.postMessage("");
     }
 }
 
-function manageSelect(){
+function manageSelect() {
     if (!$("#bar-footer").length || $("#bar-footer").is(":hidden")) {
 
     }
