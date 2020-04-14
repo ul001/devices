@@ -108,11 +108,11 @@ jQuery(document).ready(function () {
                         $("#TotalDefectNum").css("color", "red");
                         var upLoadClicktag = true;
                         $("#TotalDefectNum").click(function () {
-                            if(!upLoadClicktag){
+                            if (!upLoadClicktag) {
                                 return;
                             }
                             upLoadClicktag = false;
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 upLoadClicktag = true;
                             }, 1000);
                             //缺陷整改
@@ -137,11 +137,11 @@ jQuery(document).ready(function () {
                         $("#Unprocessednumber").css("color", "red");
                         var upLoadClicktag = true;
                         $("#Unprocessednumber").click(function () {
-                            if(!upLoadClicktag){
+                            if (!upLoadClicktag) {
                                 return;
                             }
                             upLoadClicktag = false;
-                            setTimeout(function() {
+                            setTimeout(function () {
                                 upLoadClicktag = true;
                             }, 1000);
                             //缺陷整改
@@ -376,11 +376,11 @@ jQuery(document).ready(function () {
                     var upLoadClicktag = true;
                     //执行任务按钮事件
                     $("#carryOut").click(function () {
-                        if(!upLoadClicktag){
+                        if (!upLoadClicktag) {
                             return;
                         }
                         upLoadClicktag = false;
-                        setTimeout(function() {
+                        setTimeout(function () {
                             upLoadClicktag = true;
                         }, 1000);
                         if (this.name == "true") {
@@ -499,11 +499,11 @@ jQuery(document).ready(function () {
     var upLoadClicktag = true;
     //管理页面
     $("#clickManager").click(function () {
-        if(!upLoadClicktag){
+        if (!upLoadClicktag) {
             return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
             upLoadClicktag = true;
         }, 1000);
         localStorage.setItem("fSubname", "执行情况");
