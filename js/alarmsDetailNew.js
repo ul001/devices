@@ -353,12 +353,13 @@ function setAlarmEventConfirmed(logid, confirmType) {
 
 }
 
+var longClick = 0;
+var isMoving = false;
+var startY;
 function addCardLongClick() {
-    var longClick = 0;
-    var isMoving = false;
-    var startY;
     $(".item-link").on({
         touchstart: function (e) {
+            isMoving = false;
             var thisCardId = $(this).parent(".card").attr("id");
             longClick = 0;
             timeOutEvent = setTimeout(function () {
