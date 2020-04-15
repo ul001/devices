@@ -129,74 +129,121 @@ function goBack() {
 
 $("#back_btn").on("click", goBack);
 
+var canclick = 1;
 //复位
 $("#reset").click(function () {
-    var controlJson = [];
-    $(".selectBox:checked").each(function (i, obj) {
-        var metercode = $(obj).attr("data-id");
-        controlJson.push({
-            "meterCode": metercode,
-            "substationId":subObj.subId,
-            "type": "reset",
-            "value": "1"
+    if(canclick==1){
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
+        var controlJson = [];
+        $(".selectBox:checked").each(function (i, obj) {
+            var metercode = $(obj).attr("data-id");
+            controlJson.push({
+                "meterCode": metercode,
+                "substationId":subObj.subId,
+                "type": "reset",
+                "value": "1"
+            });
         });
-    });
-    Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-
-    });
+        canclick = 0;
+        $(".footer_btn").addClass("noclick");
+        Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
+            if(data.data.a!=undefined){
+                $.toast(data.data.a);
+            }
+        });
+    }else{
+        $.toast("请勿频繁操作!");
+    }
 });
 
 //分闸
 $("#DO").click(function () {
-    var controlJson = [];
-    $(".selectBox:checked").each(function (i, obj) {
-        var metercode = $(obj).attr("data-id");
-        controlJson.push({
-            "meterCode": metercode,
-            "substationId":subObj.subId,
-            "type": "DO",
-            "value": "1"
+    if(canclick==1){
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
+        var controlJson = [];
+        $(".selectBox:checked").each(function (i, obj) {
+            var metercode = $(obj).attr("data-id");
+            controlJson.push({
+                "meterCode": metercode,
+                "substationId":subObj.subId,
+                "type": "DO",
+                "value": "1"
+            });
         });
-    });
-    Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-
-    });
+        canclick = 0;
+        $(".footer_btn").addClass("noclick");
+        Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
+            if(data.data.a!=undefined){
+                $.toast(data.data.a);
+            }
+        });
+    }else{
+        $.toast("请勿频繁操作!");
+    }
 });
 
 //消音
 $("#silent").click(function () {
-    var controlJson = [];
-    $(".selectBox:checked").each(function (i, obj) {
-        var metercode = $(obj).attr("data-id");
-        controlJson.push({
-            "meterCode": metercode,
-            "substationId":subObj.subId,
-            "type": "silent",
-            "value": "1"
+    if(canclick==1){
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
+        var controlJson = [];
+        $(".selectBox:checked").each(function (i, obj) {
+            var metercode = $(obj).attr("data-id");
+            controlJson.push({
+                "meterCode": metercode,
+                "substationId":subObj.subId,
+                "type": "silent",
+                "value": "1"
+            });
         });
-    });
-    Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-
-    });
+        canclick = 0;
+        $(".footer_btn").addClass("noclick");
+        Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
+            if(data.data.a!=undefined){
+                $.toast(data.data.a);
+            }
+        });
+    }else{
+        $.toast("请勿频繁操作!");
+    }
 });
 
 //自检
 $("#check").click(function () {
-    var controlJson = [];
-    $(".selectBox:checked").each(function (i, obj) {
-        var metercode = $(obj).attr("data-id");
-        controlJson.push({
-            "meterCode": metercode,
-            "substationId":subObj.subId,
-            "type": "check",
-            "value": "1"
+    if(canclick==1){
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
+        var controlJson = [];
+        $(".selectBox:checked").each(function (i, obj) {
+            var metercode = $(obj).attr("data-id");
+            controlJson.push({
+                "meterCode": metercode,
+                "substationId":subObj.subId,
+                "type": "check",
+                "value": "1"
+            });
         });
-    });
-    Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-        if(data.data.a!=undefined){
-            $.toast(data.data.a);
-        }
-    });
+        canclick = 0;
+        $(".footer_btn").addClass("noclick");
+        Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
+            if(data.data.a!=undefined){
+                $.toast(data.data.a);
+            }
+        });
+    }else{
+        $.toast("请勿频繁操作!");
+    }
 });
 
 function goToDetail() {
