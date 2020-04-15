@@ -57,20 +57,20 @@ function initContent() {
                 sb += '                            </li>';
             }
             //fResult
-            if (param.hasOwnProperty('meterStatus')) {
-                sb += '                            <li class="item-content">';
-                sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">设备状态:</div>';
-                if (param.meterStatus == '0') {
-                    sb += '                                    <div class="item-after dataId">正常</div>';
-                } else if (param.meterStatus == '1') {
-                    sb += '                                    <div class="item-after dataId" style="color:red">报警</div>';
-                } else {
-                    sb += '                                    <div class="item-after dataId"></div>';
-                }
-                sb += '                                </div>';
-                sb += '                            </li>';
-            }
+            // if (param.hasOwnProperty('meterStatus')) {
+            //     sb += '                            <li class="item-content">';
+            //     sb += '                                <div class="item-inner">';
+            //     sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">设备状态:</div>';
+            //     if (param.meterStatus == '0') {
+            //         sb += '                                    <div class="item-after dataId">正常</div>';
+            //     } else if (param.meterStatus == '1') {
+            //         sb += '                                    <div class="item-after dataId" style="color:red">报警</div>';
+            //     } else {
+            //         sb += '                                    <div class="item-after dataId"></div>';
+            //     }
+            //     sb += '                                </div>';
+            //     sb += '                            </li>';
+            // }
             //fResult
             if (param.hasOwnProperty('meterDetail')) {
                 if (param.meterStatus == '1') {
