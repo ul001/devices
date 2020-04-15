@@ -1,15 +1,17 @@
 jQuery(document).ready(function () {
     var menuId = "2536";
-    if (isIOS) {
-        window.webkit.messageHandlers.iOS.postMessage(null);
-        var storage = localStorage.getItem("accessToken");
-        storage = JSON.parse(storage);
-        menuId = storage.fmenuId;
-    } else if (isAndroid) {
-        menuId = android.getMenuId();
-    }
     //添加右上角事件
     var subObj = JSON.parse(localStorage.getItem("subObj"));
+    try {
+        if (isIOS) {
+            window.webkit.messageHandlers.iOS.postMessage(null);
+            var storage = localStorage.getItem("accessToken");
+            storage = JSON.parse(storage);
+            menuId = storage.fmenuId;
+        } else if (isAndroid) {
+            menuId = android.getMenuId();
+        }
+    } catch (e) {}
     try {
         if (isAndroid) {
             subObj = JSON.parse(android.getSpItem("subObj"));
