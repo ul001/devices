@@ -134,12 +134,12 @@ function addItems(number, lastIndex) {
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("--end--");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;
             }
             if (data.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("--end--");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;
             }
         },
@@ -172,7 +172,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
 
         if (lastIndex >= maxItems) {
             $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
+            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
             return;
         }
 

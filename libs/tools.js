@@ -468,6 +468,7 @@ var Substation = {
       url: baseUrlFromAPP + url,
       type: "POST",
       data: params,
+      timeout: 10000,
       dataType: "JSON",
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", tokenFromAPP);
@@ -484,8 +485,7 @@ var Substation = {
           if (data.code == 200) {
             successCallback(data);
           } else if (data.code == "5000") {
-            Substation.showCodeTips(data.code);
-            Substation.reportError(JSON.stringify(data.data.stackTrace));
+            $.toast(Operation['ui_datanoreturn']);
           } else {
             Substation.showCodeTips(data.code);
           }
@@ -493,10 +493,11 @@ var Substation = {
       },
       error: function (data) {
         $.hidePreloader();
-        if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
-        } else {
-          $.toast(Operation['code_fail']);
+        $.toast(Operation['ui_datanoreturn']);
+      },
+      complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
+        if(status=='timeout'){//超时,status还有success,error等值的情况
+            $.toast(Operation['ui_overtime']);
         }
       }
     });

@@ -175,6 +175,7 @@ function getZhLanguage() {
     ui_subSelectTip: "请筛选并点击查询按钮！",
     //Autoload
     ui_nodata: "暂无相关数据",
+    ui_nomoredata: "没有更多数据了",
     ui_yes: "是",
     ui_no: "否",
     ui_cannotcopy: "无可复制的设备。",
@@ -287,6 +288,8 @@ function getZhLanguage() {
     //照明
     ui_lightingDetail: "照明详情",
     ui_hasComfirm:"确认",
+    ui_datanoreturn:"后台服务器维护中，请稍后再试。",
+    ui_overtime:"请求超时，请稍后再试。",
     //code码
     code_200: "请求成功，插入成功",
     code_201: "主外键异常",
@@ -592,6 +595,7 @@ function getEnLanguage() {
     ui_subSelectTip: "Please filter and click the query button!",
     //Autoload
     ui_nodata: "No related data",
+    ui_nomoredata: "No more data",
     ui_yes: "Yes",
     ui_no: "No",
     ui_cannotcopy: "No devices to copy.",
@@ -693,6 +697,8 @@ function getEnLanguage() {
     //照明
     ui_lightingDetail: "Lighting details",
     ui_hasComfirm:"Confirm",
+    ui_datanoreturn:"Background server maintenance, please try again later.",
+    ui_overtime:"Request timed out, please try again later.",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
