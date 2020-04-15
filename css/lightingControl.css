@@ -76,6 +76,12 @@ label.label-checkbox i.icon-form-checkbox {
     width:66%;
 }
 
+.content .footer_bar .footer_btn.noclick{
+    color:#fff;
+    background:#D6D6D6;
+    border-color:#D6D6D6;
+}
+
 .content-list .row .view_detail{
     float:right;
 }

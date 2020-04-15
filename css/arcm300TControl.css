@@ -50,6 +50,12 @@
     border-color:#01ADA8;
 }
 
+.content .footer_bar .button.noclick.active{
+    color:#fff;
+    background:#D6D6D6;
+    border-color:#D6D6D6;
+}
+
 .content .footer_bar .button.active{
     color:#fff;
     background:#01ADA8;
