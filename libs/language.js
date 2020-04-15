@@ -243,8 +243,8 @@ function getZhLanguage() {
     ui_alarmConfirmed: "已确认",
     ui_alarmUnconfirmed: "未确认",
     ui_manager: "管理",
-    ui_MarkConfirmed: "标记已确认",
-    ui_MarkUnconfirmed: "标记未确认",
+    ui_MarkConfirmed: "标为已确认",
+    ui_MarkUnconfirmed: "标为未确认",
     ui_Overshootvalue: "越限值:",
     //版本历史
     ui_updateHistory: "版本历史",
