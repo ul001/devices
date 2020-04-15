@@ -38,11 +38,11 @@ var selectPersons = localStorage.getItem("selectPersons");
 var taskTobeSubmitArr = [];
 
 var hiddenBtn = localStorage.getItem("hiddenBtn");
-if (hiddenBtn == "YES") {
-    $("#addVarContain126").css('display', 'none');
-} else {
-    $("#addVarContain126").css('display', 'block');
-}
+//if (hiddenBtn == "YES") {
+//    $("#addVarContain126").css('display', 'none');
+//} else {
+//    $("#addVarContain126").css('display', 'block');
+//}
 
 window.addEventListener(
     "pageshow",

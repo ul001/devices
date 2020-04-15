@@ -274,14 +274,12 @@ document.addEventListener("click", function () {
 //点击确认
 $("#confirmed").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
-    $("#" + thisId).addClass("hasConfirmed");
     setAlarmEventConfirmed(thisId, '1');
 });
 
 //未确认
 $("#unConfirm").on("click", function () {
     var thisId = $("#showDiv").attr("data-id");
-    $("#" + thisId).removeClass("hasConfirmed");
     setAlarmEventConfirmed(thisId, '0');
 });
 $("#manage").on("click", manageCard);
@@ -330,7 +328,8 @@ function setAlarmEventConfirmed(logid, confirmType) {
                 "logidList": logid
             },
             function (data) {
-
+                $("#" + logid).addClass("hasConfirmed");
+                getFirstPage();
             },
             function (errorCode) {
                 // if (errorCode == 0) {
@@ -349,7 +348,8 @@ function setAlarmEventConfirmed(logid, confirmType) {
                 "fAlarmeventlogid": logid
             },
             function (data) {
-
+                $("#" + logid).removeClass("hasConfirmed");
+                getFirstPage();
             },
             function (errorCode) {
                 // if (errorCode == 0) {
