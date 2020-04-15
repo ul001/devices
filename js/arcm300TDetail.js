@@ -257,14 +257,51 @@ function initContent() {
                     sb += '                                </div>';
                     sb += '                            </li>';
                 }
+            } else {
+                sb += '                            <li class="item-content">';
+                sb += '                                <div class="item-inner">';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">温度:</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                </div>';
+                sb += '                            </li>';
+                sb += '                            <li class="item-content">';
+                sb += '                                <div class="item-inner">';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过压:</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                </div>';
+                sb += '                            </li>';
+                sb += '                            <li class="item-content">';
+                sb += '                                <div class="item-inner">';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">漏电:</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                </div>';
+                sb += '                            </li>';
+                sb += '                            <li class="item-content">';
+                sb += '                                <div class="item-inner">';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过流:</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                </div>';
+                sb += '                            </li>';
+                sb += '                            <li class="item-content">';
+                sb += '                                <div class="item-inner">';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">欠压:</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                </div>';
+                sb += '                            </li>';
+                sb += '                            <li class="item-content">';
+                sb += '                                <div class="item-inner">';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">开关量:</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">合闸</span></div>';
+                sb += '                                </div>';
+                sb += '                            </li>';
             }
             $('.list-block').append(sb);
         }
     });
 }
 
-$("#record_btn").click(function(){
-    window.location.href = "deviceControlLog.html?type=arcm300T&meterId="+meterCode;
+$("#record_btn").click(function () {
+    window.location.href = "deviceControlLog.html?type=arcm300T&meterId=" + meterCode;
 });
 
 initContent();
