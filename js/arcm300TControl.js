@@ -151,7 +151,7 @@ $("#reset").click(function () {
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
             if(data.data.a!=undefined){
-                $.toast(data.data.a);
+                $.alert(data.data.a);
             }
         });
     }else{
@@ -180,7 +180,7 @@ $("#DO").click(function () {
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
             if(data.data.a!=undefined){
-                $.toast(data.data.a);
+                $.alert(data.data.a);
             }
         });
     }else{
@@ -209,7 +209,7 @@ $("#silent").click(function () {
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
             if(data.data.a!=undefined){
-                $.toast(data.data.a);
+                $.alert(data.data.a);
             }
         });
     }else{
@@ -238,7 +238,7 @@ $("#check").click(function () {
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
             if(data.data.a!=undefined){
-                $.toast(data.data.a);
+                $.alert(data.data.a);
             }
         });
     }else{
