@@ -81,7 +81,7 @@ jQuery(document).ready(function () {
             return;
         }
 
-        Substation.getDataByAjaxNoLoading(
+        Substation.getDataByAjax(
             "/getSubinfoVoByPid", {
                 pid: menuId
             },

@@ -112,7 +112,7 @@ function addItems(number, lastIndex) {
             '                                <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>';
           html +=
             '                                <span class="label-title col-100">' +
-            this.fDevicename +
+            Substation.removeUndefined(this.fDevicename) +
             "</span>";
           html += "                            </div>";
           html += '                            <div class="img_text">';

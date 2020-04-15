@@ -21,7 +21,7 @@ function initContent() {
                     "                        <div class=\"row\">\n" +
                     "                            <input class=\"selectBox\" type=\"checkbox\" name=\"my-checkbox\" data-id=\"" + this.meterCode + "\">\n" +
                     "                            <div class=\"item-media col-15\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                    "                            <span class=\"label-title col-85\">" + this.meterName + "</span>\n" +
+                    "                            <span class=\"label-title col-85\">" + Substation.removeUndefined(this.meterName) + "</span>\n" +
                     // "                            <a href=\"#\" class=\"view_detail col-25 button\">详情</a>\n" +
                     "                        </div>\n" +
                     "                        <div class=\"row no-gutter\">\n" +
