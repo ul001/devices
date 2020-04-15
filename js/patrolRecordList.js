@@ -173,12 +173,12 @@ function addItems(number) {
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("--end--");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;
             }
             if (data.placecheckformAllList.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("--end--");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;
             }
         },
@@ -207,7 +207,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
         loading = false;
         if (lastIndex >= maxItems) {
             $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("--end--");
+            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
             return;
         }
         addItems(itemsPerLoad);

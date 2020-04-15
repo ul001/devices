@@ -528,12 +528,12 @@ jQuery(document).ready(function () {
         pageNum++;
       } else {
         $.detachInfiniteScroll($(".infinite-scroll"));
-        $(".infinite-scroll-preloader").html("--end--");
+        $(".infinite-scroll-preloader").html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
         return;
       }
       if (taskList.list.length < itemsPerLoad) {
         $.detachInfiniteScroll($(".infinite-scroll"));
-        $(".infinite-scroll-preloader").html("--end--");
+        $(".infinite-scroll-preloader").html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
         return;
       }
     }, function (errorCode) {
@@ -576,7 +576,7 @@ jQuery(document).ready(function () {
 
       if (lastIndex >= maxItems) {
         $.detachInfiniteScroll($(".infinite-scroll"));
-        $(".infinite-scroll-preloader").html("--end--");
+        $(".infinite-scroll-preloader").html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
         return;
       }
       tabName = $(".tab-link.button.active").attr("name");
