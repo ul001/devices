@@ -440,9 +440,9 @@ $("#submitTask").click(function () {
         // fExplain 执行情况
         Substation.getDataByAjax("/submitUserTask", param, function (data) {
             $.toast(Operation["ui_uploadTaskSuccessTip"]);
-            $("#doTask").hide();
-            $("#submitTask").hide();
-            $("#doDetail").show();
+//            $("#doTask").hide();
+//            $("#submitTask").hide();
+//            $("#doDetail").show();
             try {
                 if (isAndroid) {
                     android.refresh();
@@ -452,9 +452,11 @@ $("#submitTask").click(function () {
                         if (isOpen == "true") {
                             $.confirm(Operation["ui_endTraceTip"], function () {
                                 android.stopTrace();
-                            });
+                                location.reload();
+                            },function(){android.stopTrace();location.reload();});
                         } else {
-                            // android.stopTrace();
+                            android.stopTrace();
+                            location.reload();
                         }
                     }
                     android.removeSPItem(taskID);
@@ -467,14 +469,17 @@ $("#submitTask").click(function () {
                         if (isOpen == "true") {
                             $.confirm(Operation["ui_endTraceTip"], function () {
                                 window.webkit.messageHandlers.closeTrackFunc.postMessage("");
-                            });
+                                location.reload();
+                            },function(){location.reload();});
                         } else {
                             window.webkit.messageHandlers.closeTrackFunc.postMessage("");
+                            location.reload();
                         }
                     }
                 }
             } catch (e) {
                 localStorage.removeItem(taskID);
+                location.reload();
             }
         });
     });
