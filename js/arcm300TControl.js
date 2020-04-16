@@ -1,4 +1,6 @@
 var subObj = JSON.parse(localStorage.getItem("subObj"));
+var titleName = localStorage.getItem("controlClassTitle");
+$(".title.title_color").text(titleName);
 var isControl = 0;
 $(".item-media").hide();
 $("input:checkbox").prop("disabled", "disabled");
@@ -11,10 +13,10 @@ function initContent() {
         var strArr = "";
         if (data.list != undefined && data.list.length && data.list.length > 0) {
             $(data.list).each(function () {
-                var thisStatus = "<span class='normalStatus'>正常</span>";
+                var thisStatus = "<span class='normalStatus'>"+Operation['ui_normal']+"</span>";
                 var imgStr= "<img src=\"img/arcm300t.png\">";
                 if(this.meterStatus=="1"){
-                    thisStatus = "<span class='alarmStatus'>报警</span>";
+                    thisStatus = "<span class='alarmStatus'>"+Operation['ui_Alarm']+"</span>";
                     imgStr= "<img src=\"img/arcm300Talarm.png\">"
                 }
                 strArr += "<label class=\"list-item label-checkbox light_opening\" data-id=\"" + this.meterCode + "\">\n" +
@@ -29,7 +31,7 @@ function initContent() {
                     "                            "+imgStr+"\n" +
                     "                        </div>\n" +
                     "                        <div class=\"col-60\">\n" +
-                          "                            <p class='right-float limit-length' style='margin-top:.3rem;'>编号："+this.meterCode+"</p>\n" +
+                          "                            <p class='right-float limit-length' style='margin-top:.3rem;'>"+Operation['ui_deviceId']+"："+this.meterCode+"</p>\n" +
                           "                            <p class='right-float'>"+thisStatus+"</p>\n" +
                     "                        </div>\n" +
                     "                        </div>\n" +
@@ -53,9 +55,9 @@ function controlClick() {
     $("input:checkbox").removeAttr("checked");
     if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
         isControl = 1;
-        $("#back_btn").text("全选");
+        $("#back_btn").text(Operation['ui_SelectAll']);
         $("#back_btn").off("click").on("click", selectAll);
-        $("#control_btn").text("取消");
+        $("#control_btn").text(Operation['ui_cancel']);
         $("#record_btn").toggle();
         $("#light_opening").click();
         $(".label-title").removeClass("col-100").addClass("col-85");
@@ -68,7 +70,7 @@ function controlClick() {
         isControl = 0;
         $("#back_btn").html('<span class="icon icon-left"></span>' + '<span>' + Operation['ui_back'] + '</span>');
         $("#back_btn").off("click").on("click", goBack);
-        $("#control_btn").text("控制");
+        $("#control_btn").text(Operation['ui_control']);
         $("#record_btn").toggle();
         $(".label-title").removeClass("col-85").addClass("col-100");
         $(".item-media").toggle();
@@ -94,24 +96,12 @@ $("#control_btn").click(function () {
     controlClick();
 });
 
-$(".button_bar .button").click(function () {
-    $(this).addClass("active").siblings().removeClass("active");
-    var showClass = $(this).attr("id");
-    $(".list-item").hide();
-    $("." + showClass).show();
-    if (showClass == "light_opening") {
-        $(".footer_btn").text("关闭灯光");
-    } else if (showClass == "light_closed") {
-        $(".footer_btn").text("开启灯光");
-    }
-});
-
 function selectAll() {
-    if ($("#back_btn").text() == "全选") {
-        $("#back_btn").text("全不选");
+    if ($("#back_btn").text() == Operation['ui_selectAll']) {
+        $("#back_btn").text(Operation['ui_UnselectAll']);
         $(".list-item:visible input:checkbox").prop("checked", "checked");
     } else {
-        $("#back_btn").text("全选");
+        $("#back_btn").text(Operation['ui_selectAll']);
         $(".list-item:visible input:checkbox").removeAttr("checked");
     }
 }
@@ -155,7 +145,7 @@ $("#reset").click(function () {
             }
         });
     }else{
-        $.toast("请勿频繁操作!");
+        $.toast(Operation['ui_operateTip']);
     }
 });
 
@@ -184,7 +174,7 @@ $("#DO").click(function () {
             }
         });
     }else{
-        $.toast("请勿频繁操作!");
+        $.toast(Operation['ui_operateTip']);
     }
 });
 
@@ -213,7 +203,7 @@ $("#silent").click(function () {
             }
         });
     }else{
-        $.toast("请勿频繁操作!");
+        $.toast(Operation['ui_operateTip']);
     }
 });
 
@@ -242,7 +232,7 @@ $("#check").click(function () {
             }
         });
     }else{
-        $.toast("请勿频繁操作!");
+        $.toast(Operation['ui_operateTip']);
     }
 });
 
