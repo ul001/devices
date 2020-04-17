@@ -2,6 +2,8 @@ $(".item-media").hide();
 $("input:checkbox").prop("disabled", "disabled");
 var subid = Substation.GetQueryString("fSubid");
 var subObj = JSON.parse(localStorage.getItem("subObj"));
+var titleName = localStorage.getItem("controlClassTitle");
+$(".title.title_color").text(titleName);
 try {
   if (isAndroid) {
     subObj = JSON.parse(android.getSpItem("subObj"));
