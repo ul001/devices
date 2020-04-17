@@ -22,7 +22,11 @@
             <header class="bar bar-nav bar_color">
                 <h1 class="title title_color"><span data-i18n="ui_Alarm"></span></h1>
             </header>
-            <div class="content">
+            <div class="content pull-to-refresh-content infinite-scroll">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
                 <div class="list-block">
                     <ul class="list-container">
                         <!--                    <li class="item-content item-link" id="1">
@@ -47,6 +51,9 @@
                         </div>
                     </li>-->
                     </ul>
+                </div>
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
                 </div>
             </div>
         </div>

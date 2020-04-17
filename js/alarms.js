@@ -13,6 +13,15 @@ if (isIOS) {
     menuId = android.getMenuId();
 }
 
+//下拉刷新
+$(document).on('refresh', '.pull-to-refresh-content', function (e) {
+    setTimeout(function () {
+        loadMenu();
+        // done
+        $.pullToRefreshDone('.pull-to-refresh-content');
+    }, 2000);
+});
+
 window.addEventListener('pageshow', function (e) {
     //ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
     var u = navigator.userAgent,
@@ -30,7 +39,8 @@ window.addEventListener('pageshow', function (e) {
 
 function loadMenu() {
     $(".list-container").empty();
-    $.showPreloader(Operation['ui_loading']);
+//    $.showPreloader(Operation['ui_loading']);
+    $(".infinite-scroll-preloader").html('<div class="preloader"></div>');
     Substation.getDataByAjaxNoLoading("/getMessInfoType", "", function (data) {
         if (data.hasOwnProperty("tDtMessInfoType") && data.tDtMessInfoType.length > 0) {
             $(data.tDtMessInfoType).each(function () {
@@ -43,8 +53,9 @@ function loadMenu() {
                     "                            <div class=\"item-title\">" + this.fMessinfotypeexplain + "</div>\n" +
                     "                            <div class=\"item-after\" id=\"" + this.fMessinfotypeid + "\"></div>\n" +
                     "                        </div>\n" +
-                    "                    </li>")
+                    "                    </li>");
             });
+            $(".infinite-scroll-preloader").empty();
             fillData(0);
         }
     });
@@ -148,7 +159,7 @@ function fillData(parentId) {
                 }
             }
         });
-        $.hidePreloader();
+//        $.hidePreloader();
     });
     // }
     // });
