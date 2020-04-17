@@ -77,7 +77,7 @@ jQuery(document).ready(function () {
             return;
         }
         if (!menuId || menuId == undefined) {
-            toast("无设备列表");
+            toast(Operation['ui_noDeviceList']);
             return;
         }
 
@@ -125,9 +125,12 @@ jQuery(document).ready(function () {
                             if (!selectSubid || selectSubid == "" || selectSubid == undefined) {
                                 return;
                             } else {
+                                var thisTitleName = $($("#"+clickId).find(".label-title")[0]).text();
                                 if (clickId == "lightingControl") {
+                                    localStorage.setItem("controlClassTitle",thisTitleName);
                                     window.location.href = "lightingControl.html?fSubid=" + selectSubid;
                                 } else {
+                                    localStorage.setItem("controlClassTitle",thisTitleName);
                                     window.location.href = "arcm300TControl.html?fSubid=" + selectSubid;
                                 }
                             }
@@ -263,11 +266,13 @@ jQuery(document).ready(function () {
         $("#outTip").hide();
     }
 
-    $("#lightControl").click(function () {
-        window.location.href = "lightingControl.html";
-    });
-
-    $("#arcm300TControl").click(function () {
-        window.location.href = "arcm300TControl.html";
-    });
+//    $("#lightControl").click(function () {
+//        var clickTitle = $(this).find(".label-title")[0].text();
+//        window.location.href = "lightingControl.html";
+//    });
+//
+//    $("#arcm300TControl").click(function () {
+//        var clickTitle = $(this).find(".label-title")[0].text();
+//        window.location.href = "arcm300TControl.html";
+//    });
 });

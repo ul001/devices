@@ -97,33 +97,33 @@ function addItems(number){
                     var controlStr = "";
                     switch(this.fControltype){
                         case "reset":
-                            controlStr = "复位";
+                            controlStr = Operation['ui_reset'];
                             break;
                         case "DO":
-                            controlStr = "分闸";
+                            controlStr = Operation['ui_DO'];
                             break;
                         case "silent":
-                            controlStr = "消音";
+                            controlStr = Operation['ui_silent'];
                             break;
                         case "check":
-                            controlStr = "自检";
+                            controlStr = Operation['ui_check'];
                             break;
                     }
                     var askTime = "-";
                     if(this.fAcktime!=undefined && this.fAcktime!=""){
                         askTime = this.fSendtime;
                     }
-                    var askResult = "暂无结果";
+                    var askResult = Operation['ui_noResult'];
                     if(this.fResult!=undefined && this.fResult!=""){
                         askResult = this.fResult;
                     }
                     $(".list-container").append('<div class="card-log">'+
                                                      '<div class="card-top">'+
-                                                         '<div class="lightGrayColor">操作（时间：'+this.fOperatetime+'）</div>'+
-                                                         '<div class="blackColor">'+this.fOperatername+'对'+this.fDevicename+'（'+this.fMetercode+'）进行'+this.deviceValueExplain+'操作</div>'+
+                                                         '<div class="lightGrayColor">'+Operation['ui_operating']+'（'+Operation['ui_logTime']+'：'+this.fOperatetime+'）</div>'+
+                                                         '<div class="blackColor">'+this.fOperatername+Operation['ui_logTowards']+this.fDevicename+'（'+this.fMetercode+'）'+Operation['ui_logDoing']+this.deviceValueExplain+Operation['ui_logOperate']+'</div>'+
                                                      '</div>'+
                                                      '<div class="card-bottom">'+
-                                                         '<div class="lightGrayColor">结果（时间：'+askTime+'）</div>'+
+                                                         '<div class="lightGrayColor">'+Operation['ui_result']+'（'+Operation['ui_logTime']+'：'+askTime+'）</div>'+
                                                          '<div class="blackColor">'+askResult+'</div>'+
                                                      '</div>'+
                                                  '</div>');
@@ -149,33 +149,33 @@ function addItems(number){
                     var controlStr = "";
                     switch(this.fControltype){
                         case "reset":
-                            controlStr = "复位";
+                            controlStr = Operation['ui_reset'];
                             break;
                         case "DO":
-                            controlStr = "分闸";
+                            controlStr = Operation['ui_DO'];
                             break;
                         case "silent":
-                            controlStr = "消音";
+                            controlStr = Operation['ui_silent'];
                             break;
                         case "check":
-                            controlStr = "自检";
+                            controlStr = Operation['ui_check'];
                             break;
                     }
                     var askTime = "-";
                     if(this.fAcktime!=undefined && this.fAcktime!=""){
                         askTime = formatDate(this.fAcktime);
                     }
-                    var askResult = "暂无结果";
+                    var askResult = Operation['ui_noResult'];
                     if(this.fResult!=undefined && this.fResult!=""){
                         askResult = this.fResult;
                     }
                     $(".list-container").append('<div class="card-log">'+
                                                      '<div class="card-top">'+
-                                                         '<div class="lightGrayColor">操作（时间：'+formatDate(this.fSendtime)+'）</div>'+
-                                                         '<div class="blackColor">'+this.fUsername+'对'+this.meterInfoname+'（'+this.fMeterserialnumber+'）进行'+controlStr+'操作</div>'+
+                                                         '<div class="lightGrayColor">'+Operation['ui_operating']+'（'+Operation['ui_logTime']+'：'+formatDate(this.fSendtime)+'）</div>'+
+                                                         '<div class="blackColor">'+this.fUsername+Operation['ui_logTowards']+this.meterInfoname+'（'+this.fMeterserialnumber+'）'+Operation['ui_logDoing']+controlStr+Operation['ui_logOperate']+'</div>'+
                                                      '</div>'+
                                                      '<div class="card-bottom">'+
-                                                         '<div class="lightGrayColor">结果（时间：'+askTime+'）</div>'+
+                                                         '<div class="lightGrayColor">'+Operation['ui_result']+'（'+Operation['ui_logTime']+'：'+askTime+'）</div>'+
                                                          '<div class="blackColor">'+askResult+'</div>'+
                                                      '</div>'+
                                                  '</div>');
