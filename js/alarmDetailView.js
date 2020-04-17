@@ -75,11 +75,20 @@ function creatView(param) {
             sb += '                            </li>';
         }
         //参数名称
-        if (param.hasOwnProperty('fValue')) {
+        if (param.hasOwnProperty('fParamname')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">' + Operation['ui_alarmParamName'] + '</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.fValue ? param.fValue : "") + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.fParamname ? param.fParamname : "") + '</div>';
+            sb += '                                </div>';
+            sb += '                            </li>';
+        }
+        //参数值
+        if (param.hasOwnProperty('valueType')) {
+            sb += '                            <li class="item-content">';
+            sb += '                                <div class="item-inner">';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamValue">' + Operation['ui_alarmParamValue'] + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.valueType ? param.valueType : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
