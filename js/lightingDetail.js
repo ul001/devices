@@ -46,7 +46,7 @@ function creatView(param) {
         if (param.hasOwnProperty('datagatewayid')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">网关:</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">' + Operation['ui_gateway'] + '</div>';
             sb += '                                    <div class="item-after paramName">' + (param.datagatewayid != 'undefined' ? param.datagatewayid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
@@ -55,7 +55,7 @@ function creatView(param) {
         if (param.hasOwnProperty('datacomid')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">串口号:</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">' + Operation['ui_Serialnumber'] + '</div>';
             sb += '                                    <div class="item-after paramName">' + (param.datacomid != 'undefined' ? param.datacomid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
@@ -64,7 +64,7 @@ function creatView(param) {
         if (param.hasOwnProperty('datafDevicetype')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">设备类型:</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">' + Operation['ui_Equipmenttype'] + '</div>';
             sb += '                                    <div class="item-after paramName">' + (param.datafDevicetype != 'undefined' ? param.datafDevicetype : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
@@ -73,7 +73,7 @@ function creatView(param) {
         if (param.hasOwnProperty('datafuncid')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">控制编码:</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamName">' + Operation['ui_Controlencoding'] + '</div>';
             sb += '                                    <div class="item-after paramName">' + (param.datafuncid != 'undefined' ? param.datafuncid : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
@@ -82,13 +82,13 @@ function creatView(param) {
         if (param.hasOwnProperty('deviceValue')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamId">当前状态:</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamId">' + Operation['ui_currentstate'] + '</div>';
             if (param.deviceValue == '0') {
-                sb += '                                    <div class="item-after paramId">分闸</div>';
+                sb += '                                    <div class="item-after paramId">' + Operation['ui_Opening'] + '</div>';
             } else if (param.deviceValue == '1') {
-                sb += '                                    <div class="item-after paramId">合闸</div>';
+                sb += '                                    <div class="item-after paramId">' + Operation['ui_Closing'] + '</div>';
             } else {
-                sb += '                                    <div class="item-after paramId">无设备</div>';
+                sb += '                                    <div class="item-after paramId">' + Operation['ui_nolightDevice'] + '</div>';
             }
             sb += '                                </div>';
             sb += '                            </li>';

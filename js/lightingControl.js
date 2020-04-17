@@ -16,11 +16,11 @@ var lightList = [];
 
 function controlClick() {
   if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
-    $("#back_btn").text("全选");
+    $("#back_btn").text(Operation['ui_SelectAll']);
     $("#back_btn")
       .off("click")
       .on("click", selectAll);
-    $("#control_btn").text("取消");
+    $("#control_btn").text(Operation['ui_cancel']);
     $("#record_btn").toggle();
     $("#light_opening").click();
     $(".label-title")
@@ -40,7 +40,7 @@ function controlClick() {
     $("#back_btn")
       .off("click")
       .on("click", goBack);
-    $("#control_btn").text("控制");
+    $("#control_btn").text(Operation['ui_control']);
     $("#record_btn").toggle();
     $(".label-title")
       .removeClass("col-60")
@@ -79,8 +79,8 @@ function addItems(number, lastIndex) {
 
   params = {
     fSubid: subid,
-//    pageNo: pageNum,
-//    pageSize: number
+    //    pageNo: pageNum,
+    //    pageSize: number
   };
   Substation.getDataByAjaxNoLoading(
     url,
@@ -204,56 +204,56 @@ $(".button_bar .button").click(function () {
   $(".list-item").hide();
   $("." + showClass).show();
   if (showClass == "light_opening") {
-    $(".footer_btn").text("关闭灯光");
+    $(".footer_btn").text(Operation['ui_CloseLight']);
   } else if (showClass == "light_closed") {
-    $(".footer_btn").text("开启灯光");
+    $(".footer_btn").text(Operation['ui_OpenLight']);
   }
 });
 
 var canClick = 1;
 $(".footer_btn").click(function () {
-  if(canClick == 1){
-    setTimeout(function(){
-        canClick = 1;
-        $(".footer_btn").removeClass("noclick");
-    },15000);
+  if (canClick == 1) {
+    setTimeout(function () {
+      canClick = 1;
+      $(".footer_btn").removeClass("noclick");
+    }, 15000);
     var arr = [];
     var controlUrl = "/sendBulbControlDemandHTTP";
     var controlparam = {};
-    if ($(".footer_btn").text == "关闭灯光") {
-        $("input[type=checkbox]:checked").each(function (e) {
-          // if ($('input[type=checkbox]:checked').val()) {
-          controlparam = {
-            fSubid: subid,
-            fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
-              $("input[type=checkbox]:checked").attr("datagatewayid") : "",
-            fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
-              $("input[type=checkbox]:checked").attr("datametercode") : "",
-            fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
-              $("input[type=checkbox]:checked").attr("datafuncid") : "",
-            fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
-              $("input[type=checkbox]:checked").attr("datacomid") : "",
-            fValue: "0"
-          };
-          arr.push(controlparam);
-        });
+    if ($(".footer_btn").text == Operation['ui_CloseLight']) {
+      $("input[type=checkbox]:checked").each(function (e) {
+        // if ($('input[type=checkbox]:checked').val()) {
+        controlparam = {
+          fSubid: subid,
+          fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
+            $("input[type=checkbox]:checked").attr("datagatewayid") : "",
+          fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
+            $("input[type=checkbox]:checked").attr("datametercode") : "",
+          fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
+            $("input[type=checkbox]:checked").attr("datafuncid") : "",
+          fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
+            $("input[type=checkbox]:checked").attr("datacomid") : "",
+          fValue: "0"
+        };
+        arr.push(controlparam);
+      });
     } else {
-        $("input[type=checkbox]:checked").each(function (e) {
-          // if ($('input[type=checkbox]:checked').val()) {
-          controlparam = {
-            fSubid: subid,
-            fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
-              $("input[type=checkbox]:checked").attr("datagatewayid") : "",
-            fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
-              $("input[type=checkbox]:checked").attr("datametercode") : "",
-            fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
-              $("input[type=checkbox]:checked").attr("datafuncid") : "",
-            fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
-              $("input[type=checkbox]:checked").attr("datacomid") : "",
-            fValue: "1"
-          };
-          arr.push(controlparam);
-        });
+      $("input[type=checkbox]:checked").each(function (e) {
+        // if ($('input[type=checkbox]:checked').val()) {
+        controlparam = {
+          fSubid: subid,
+          fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
+            $("input[type=checkbox]:checked").attr("datagatewayid") : "",
+          fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
+            $("input[type=checkbox]:checked").attr("datametercode") : "",
+          fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
+            $("input[type=checkbox]:checked").attr("datafuncid") : "",
+          fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
+            $("input[type=checkbox]:checked").attr("datacomid") : "",
+          fValue: "1"
+        };
+        arr.push(controlparam);
+      });
     }
     // var param = {
     //   tEtControlDemandList: JSON.stringify(arr)
@@ -262,17 +262,17 @@ $(".footer_btn").click(function () {
     $(".footer_btn").addClass("noclick");
     canClick = 0;
     Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
-    if (data.code == 200) {
-      $.toast("命令发送成功");
-      $(this)
-        .addClass("active")
-        .siblings()
-        .removeClass("active");
-    }
+      if (data.code == 200) {
+        $.toast("命令发送成功");
+        $(this)
+          .addClass("active")
+          .siblings()
+          .removeClass("active");
+      }
     });
     // var logList = arr.join(','); //数组转成为字符串
     // confirmAlarmEvents(logList);
-  }else{
+  } else {
     $.toast("请勿频繁操作。");
   }
 });
@@ -282,11 +282,11 @@ $("#record_btn").click(function () {
 });
 
 function selectAll() {
-  if ($("#back_btn").text() == "全选") {
-    $("#back_btn").text("全不选");
+  if ($("#back_btn").text() == Operation['ui_SelectAll']) {
+    $("#back_btn").text(Operation['ui_UnselectAll']);
     $(".list-item:visible input:checkbox").prop("checked", "checked");
   } else {
-    $("#back_btn").text("全选");
+    $("#back_btn").text(Operation['ui_SelectAll']);
     $(".list-item:visible input:checkbox").removeAttr("checked");
   }
 }

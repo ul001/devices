@@ -42,7 +42,7 @@ function initContent() {
             if (param.hasOwnProperty('gatewayId')) {
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataName">网关:</div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataName">' + Operation['ui_gateway'] + '</div>';
                 sb += '                                    <div class="item-after dataName">' + (param.gatewayId ? param.gatewayId : "") + '</div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
@@ -51,7 +51,7 @@ function initContent() {
             if (param.hasOwnProperty('updateTime')) {
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataName">更新时间:</div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataName">' + Operation['ui_updateTime'] + '</div>';
                 sb += '                                    <div class="item-after dataName">' + (param.updateTime ? param.updateTime : "") + '</div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
@@ -62,7 +62,7 @@ function initContent() {
             //     sb += '                                <div class="item-inner">';
             //     sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">设备状态:</div>';
             //     if (param.meterStatus == '0') {
-            //         sb += '                                    <div class="item-after dataId">正常</div>';
+            //         sb += '                                    <div class="item-after dataId">' + Operation['ui_normal'] + '</div>';
             //     } else if (param.meterStatus == '1') {
             //         sb += '                                    <div class="item-after dataId" style="color:red">报警</div>';
             //     } else {
@@ -94,15 +94,15 @@ function initContent() {
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">温度:</div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_temperature'] + '</div>';
                         sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + arr.join('/') + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">温度:</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_temperature'] + '</div>';
+                        sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     }
@@ -121,15 +121,15 @@ function initContent() {
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过压:</div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overvoltage'] + '</div>';
                         sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + arr.join('/') + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过压:</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overvoltage'] + '</div>';
+                        sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     }
@@ -137,15 +137,15 @@ function initContent() {
                     if (detailParam.hasOwnProperty('iLeakage')) {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">漏电:</div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Electleakage'] + '</div>';
                         sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.iLeakage + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">漏电:</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Electleakage'] + '</div>';
+                        sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     }
@@ -164,15 +164,15 @@ function initContent() {
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过流:</div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overcurrent'] + '</div>';
                         sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + arr.join('/') + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过流:</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overcurrent'] + '</div>';
+                        sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     }
@@ -191,15 +191,15 @@ function initContent() {
                         }
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">欠压:</div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Undervoltage'] + '</div>';
                         sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + arr.join('/') + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">欠压:</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Undervoltage'] + '</div>';
+                        sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     }
@@ -207,14 +207,14 @@ function initContent() {
                     if (detailParam.hasOwnProperty('switch')) {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">开关量:</div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Switching'] + '</div>';
                         sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.switch+'</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
-                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">开关量:</div>';
+                        sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Switching'] + '</div>';
                         sb += '                                    <div class="item-after dataId"><span class="normal">合闸</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
@@ -222,37 +222,37 @@ function initContent() {
                 } else {
                     sb += '                            <li class="item-content">';
                     sb += '                                <div class="item-inner">';
-                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">温度:</div>';
-                    sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_temperature'] + '</div>';
+                    sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                     sb += '                                </div>';
                     sb += '                            </li>';
                     sb += '                            <li class="item-content">';
                     sb += '                                <div class="item-inner">';
-                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过压:</div>';
-                    sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overvoltage'] + '</div>';
+                    sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                     sb += '                                </div>';
                     sb += '                            </li>';
                     sb += '                            <li class="item-content">';
                     sb += '                                <div class="item-inner">';
-                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">漏电:</div>';
-                    sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Electleakage'] + '</div>';
+                    sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                     sb += '                                </div>';
                     sb += '                            </li>';
                     sb += '                            <li class="item-content">';
                     sb += '                                <div class="item-inner">';
-                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过流:</div>';
-                    sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overcurrent'] + '</div>';
+                    sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                     sb += '                                </div>';
                     sb += '                            </li>';
                     sb += '                            <li class="item-content">';
                     sb += '                                <div class="item-inner">';
-                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">欠压:</div>';
-                    sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Undervoltage'] + '</div>';
+                    sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                     sb += '                                </div>';
                     sb += '                            </li>';
                     sb += '                            <li class="item-content">';
                     sb += '                                <div class="item-inner">';
-                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">开关量:</div>';
+                    sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Switching'] + '</div>';
                     sb += '                                    <div class="item-after dataId"><span class="normal">合闸</span></div>';
                     sb += '                                </div>';
                     sb += '                            </li>';
@@ -260,37 +260,37 @@ function initContent() {
             } else {
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">温度:</div>';
-                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_temperature'] + '</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过压:</div>';
-                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overvoltage'] + '</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">漏电:</div>';
-                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Electleakage'] + '</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">过流:</div>';
-                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Overcurrent'] + '</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">欠压:</div>';
-                sb += '                                    <div class="item-after dataId"><span class="normal">正常</span></div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Undervoltage'] + '</div>';
+                sb += '                                    <div class="item-after dataId"><span class="normal">' + Operation['ui_normal'] + '</span></div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
                 sb += '                            <li class="item-content">';
                 sb += '                                <div class="item-inner">';
-                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">开关量:</div>';
+                sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Switching'] + '</div>';
                 sb += '                                    <div class="item-after dataId"><span class="normal">合闸</span></div>';
                 sb += '                                </div>';
                 sb += '                            </li>';
