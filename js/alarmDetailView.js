@@ -44,7 +44,7 @@ function creatView(param) {
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb += '                                    <div class="item-title" data-i18n="ui_alarmMeterId">' + Operation['ui_alarmDeviceId'] + '</div>';
-        sb += '                                    <div class="item-after meterId">' + (param.fDevicecode ? param.fDevicecode : "") + '</div>';
+        sb += '                                    <div class="item-after meterId">' + (param.fDevicecode != undefined ? param.fDevicecode : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
@@ -56,13 +56,13 @@ function creatView(param) {
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb += '                                    <div class="item-title" data-i18n="ui_alarmType">' + Operation['ui_alarmType'] + '</div>';
-        sb += '                                    <div class="item-after alarmType">' + (param.fAlarmtype ? param.fAlarmtype : "") + '</div>';
+        sb += '                                    <div class="item-after alarmType">' + (param.fAlarmtype != undefined ? param.fAlarmtype : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb += '                                    <div class="item-title" data-i18n="ui_alarmType">' + Operation['ui_alarmDetail'] + ':' + '</div>';
-        sb += '                                    <div class="item-after alarmType">' + (param.fAlarmdesc ? param.fAlarmdesc : "") + '</div>';
+        sb += '                                    <div class="item-after alarmType">' + (param.fAlarmdesc != undefined ? param.fAlarmdesc : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
         //参数编号
@@ -70,7 +70,7 @@ function creatView(param) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_alarmParamId">' + Operation['ui_alarmParamId'] + '</div>';
-            sb += '                                    <div class="item-after paramId">' + (param.fParamcode ? param.fParamcode : "") + '</div>';
+            sb += '                                    <div class="item-after paramId">' + (param.fParamcode != undefined ? param.fParamcode : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
@@ -83,21 +83,30 @@ function creatView(param) {
             sb += '                                </div>';
             sb += '                            </li>';
         }
-        //参数值
+        //参数说明
         if (param.hasOwnProperty('valueType')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
-            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamValue">' + Operation['ui_alarmParamValue'] + '</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.valueType ? param.valueType : "") + '</div>';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamValueType">' + Operation['ui_alarmParamValueType'] + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.valueType != undefined ? param.valueType : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
-        //越限值
+        //参数值
+        if (param.hasOwnProperty('fValue')) {
+            sb += '                            <li class="item-content">';
+            sb += '                                <div class="item-inner">';
+            sb += '                                    <div class="item-title" data-i18n="ui_alarmParamValue">' + Operation['ui_alarmParamValue'] + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.fValue != undefined ? param.fValue : "") + '</div>';
+            sb += '                                </div>';
+            sb += '                            </li>';
+        }
+        //越限值 设定值
         if (param.hasOwnProperty('fLimitvalue')) {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_Overshootvalue">' + Operation['ui_Overshootvalue'] + '</div>';
-            sb += '                                    <div class="item-after paramName">' + (param.fLimitvalue ? param.fLimitvalue : "") + '</div>';
+            sb += '                                    <div class="item-after paramName">' + (param.fLimitvalue != undefined ? param.fLimitvalue : "") + '</div>';
             sb += '                                </div>';
             sb += '                            </li>';
         }
