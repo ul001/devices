@@ -11,9 +11,9 @@ try {
     }
 } catch (e) {}
 var selectSubid = subObj.subId;
-if(deviceType == "arcm300T"){
+if (deviceType == "arcm300T") {
     loadUrl = "/getARCMControlLogList";
-}else if(deviceType == "light"){
+} else if (deviceType == "light") {
     loadUrl = "/getControlLogList";
 }
 var params = {};
@@ -49,53 +49,53 @@ $(document).on('infinite', '.infinite-scroll', function () {
     }, 1000);
 });
 
-function addItems(number){
+function addItems(number) {
     params = {};
-    params['pageNo']=pageNum;
-    params['pageSize']=number;
-    if(selectSubid!=""){
+    params['pageNo'] = pageNum;
+    params['pageSize'] = number;
+    if (selectSubid != "") {
         params['fSubid'] = selectSubid;
     }
     var dateStartVal = $("#dateStart").val();
     var dateEndVal = $("#dateEnd").val();
     var controlPerson = $("#search").val();
-    if(deviceType == "arcm300T"){
+    if (deviceType == "arcm300T") {
         if (dateStartVal != "") {
             params['startTime'] = dateStartVal + " 00:00:00";
         }
         if (dateEndVal != "") {
             params['endTime'] = dateEndVal + " 23:59:59";
         }
-        if(controlPerson != ""){
+        if (controlPerson != "") {
             params['userName'] = controlPerson;
         }
-        if(meterId != "" && meterId !=undefined){
+        if (meterId != "" && meterId != undefined) {
             params['SerialNumber'] = meterId;
         }
-    }else if(deviceType == "light"){
+    } else if (deviceType == "light") {
         if (dateStartVal != "") {
             params['fStarttime'] = dateStartVal + " 00:00:00";
         }
         if (dateEndVal != "") {
             params['fEndtime'] = dateEndVal + " 23:59:59";
         }
-        if(controlPerson != ""){
+        if (controlPerson != "") {
             params['fUsername'] = controlPerson;
         }
-        if(meterId != "" && meterId !=undefined){
+        if (meterId != "" && meterId != undefined) {
             params['fMetercode'] = meterId;
         }
     }
-    Substation.postDataByAjaxNoLoading(loadUrl,params,function(data){
-        if(deviceType == "light"){
+    Substation.postDataByAjaxNoLoading(loadUrl, params, function (data) {
+        if (deviceType == "light") {
             var dataSrc = data;
             if (pageNum == 1) {
                 $(".list-container").empty();
             }
-            if(dataSrc.list!=undefined && dataSrc.list.length>0){
-                $(dataSrc.list).each(function(){
+            if (dataSrc.list != undefined && dataSrc.list.length > 0) {
+                $(dataSrc.list).each(function () {
                     var controlStr = "";
-                    switch(this.fControltype){
+                    switch (this.fControltype) {
                         case "reset":
                             controlStr = Operation['ui_reset'];
                             break;
@@ -110,44 +110,44 @@ function addItems(number){
                             break;
                     }
                     var askTime = "-";
-                    if(this.fAcktime!=undefined && this.fAcktime!=""){
+                    if (this.fAcktime != undefined && this.fAcktime != "") {
                         askTime = this.fSendtime;
                     }
                     var askResult = Operation['ui_noResult'];
-                    if(this.fResult!=undefined && this.fResult!=""){
+                    if (this.fResult != undefined && this.fResult != "") {
                         askResult = this.fResult;
                     }
-                    $(".list-container").append('<div class="card-log">'+
-                                                     '<div class="card-top">'+
-                                                         '<div class="lightGrayColor">'+Operation['ui_operating']+'（'+Operation['ui_logTime']+'：'+this.fOperatetime+'）</div>'+
-                                                         '<div class="blackColor">'+this.fOperatername+Operation['ui_logTowards']+this.fDevicename+'（'+this.fMetercode+'）'+Operation['ui_logDoing']+this.deviceValueExplain+Operation['ui_logOperate']+'</div>'+
-                                                     '</div>'+
-                                                     '<div class="card-bottom">'+
-                                                         '<div class="lightGrayColor">'+Operation['ui_result']+'（'+Operation['ui_logTime']+'：'+askTime+'）</div>'+
-                                                         '<div class="blackColor">'+askResult+'</div>'+
-                                                     '</div>'+
-                                                 '</div>');
+                    $(".list-container").append('<div class="card-log">' +
+                        '<div class="card-top">' +
+                        '<div class="lightGrayColor">' + Operation['ui_operating'] + '（' + Operation['ui_logTime'] + '：' + this.fOperatetime + '）</div>' +
+                        '<div class="blackColor">' + this.fOperatername + Operation['ui_logTowards'] + this.fDevicename + '（' + this.fMetercode + '）' + Operation['ui_logDoing'] + this.deviceValueExplain + Operation['ui_logOperate'] + '</div>' +
+                        '</div>' +
+                        '<div class="card-bottom">' +
+                        '<div class="lightGrayColor">' + Operation['ui_result'] + '（' + Operation['ui_logTime'] + '：' + askTime + '）</div>' +
+                        '<div class="blackColor">' + askResult + '</div>' +
+                        '</div>' +
+                        '</div>');
                 });
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             if (dataSrc.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
-        }else if(deviceType == "arcm300T"){
+        } else if (deviceType == "arcm300T") {
             var dataSrc = data.pageInfo;
             if (pageNum == 1) {
                 $(".list-container").empty();
             }
-            if(dataSrc.list!=undefined && dataSrc.list.length>0){
-                $(dataSrc.list).each(function(){
+            if (dataSrc.list != undefined && dataSrc.list.length > 0) {
+                $(dataSrc.list).each(function () {
                     var controlStr = "";
-                    switch(this.fControltype){
+                    switch (this.fControltype) {
                         case "reset":
                             controlStr = Operation['ui_reset'];
                             break;
@@ -162,43 +162,43 @@ function addItems(number){
                             break;
                     }
                     var askTime = "-";
-                    if(this.fAcktime!=undefined && this.fAcktime!=""){
+                    if (this.fAcktime != undefined && this.fAcktime != "") {
                         askTime = formatDate(this.fAcktime);
                     }
                     var askResult = Operation['ui_noResult'];
-                    if(this.fResult!=undefined && this.fResult!=""){
+                    if (this.fResult != undefined && this.fResult != "") {
                         askResult = this.fResult;
                     }
-                    $(".list-container").append('<div class="card-log">'+
-                                                     '<div class="card-top">'+
-                                                         '<div class="lightGrayColor">'+Operation['ui_operating']+'（'+Operation['ui_logTime']+'：'+formatDate(this.fSendtime)+'）</div>'+
-                                                         '<div class="blackColor">'+this.fUsername+Operation['ui_logTowards']+this.meterInfoname+'（'+this.fMeterserialnumber+'）'+Operation['ui_logDoing']+controlStr+Operation['ui_logOperate']+'</div>'+
-                                                     '</div>'+
-                                                     '<div class="card-bottom">'+
-                                                         '<div class="lightGrayColor">'+Operation['ui_result']+'（'+Operation['ui_logTime']+'：'+askTime+'）</div>'+
-                                                         '<div class="blackColor">'+askResult+'</div>'+
-                                                     '</div>'+
-                                                 '</div>');
+                    $(".list-container").append('<div class="card-log">' +
+                        '<div class="card-top">' +
+                        '<div class="lightGrayColor">' + Operation['ui_operating'] + '（' + Operation['ui_logTime'] + '：' + this.fSendtime + '）</div>' +
+                        '<div class="blackColor">' + this.fUsername + Operation['ui_logTowards'] + this.meterInfoname + '（' + this.fMeterserialnumber + '）' + Operation['ui_logDoing'] + controlStr + Operation['ui_logOperate'] + '</div>' +
+                        '</div>' +
+                        '<div class="card-bottom">' +
+                        '<div class="lightGrayColor">' + Operation['ui_result'] + '（' + Operation['ui_logTime'] + '：' + askTime + '）</div>' +
+                        '<div class="blackColor">' + askResult + '</div>' +
+                        '</div>' +
+                        '</div>');
                 });
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             if (dataSrc.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
         }
-    },function (errorCode) {
+    }, function (errorCode) {
         if (errorCode == 0) {
-          $.detachInfiniteScroll($(".infinite-scroll"));
-          $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
+            $.detachInfiniteScroll($(".infinite-scroll"));
+            $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
         } else {
-          $.detachInfiniteScroll($(".infinite-scroll"));
-          $(".infinite-scroll-preloader").html("");
+            $.detachInfiniteScroll($(".infinite-scroll"));
+            $(".infinite-scroll-preloader").html("");
         }
         return;
     });
@@ -217,17 +217,20 @@ $('#searchBtn').click(function () {
     getFirstPage();
 });
 
-function add0(m){return m<10?'0'+m:m }
-function formatDate(timestamp){
-  //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
-	var time = new Date(timestamp);
-	var year = time.getFullYear();
-	var month = time.getMonth()+1;
-	var date = time.getDate();
-	var hours = time.getHours();
-	var minutes = time.getMinutes();
-	var seconds = time.getSeconds();
-	return year+'-'+add0(month)+'-'+add0(date)+' '+add0(hours)+':'+add0(minutes)+':'+add0(seconds);
+function add0(m) {
+    return m < 10 ? '0' + m : m
+}
+
+function formatDate(timestamp) {
+    //timestamp是整数，否则要parseInt转换,不会出现少个0的情况
+    var time = new Date(timestamp);
+    var year = time.getFullYear();
+    var month = time.getMonth() + 1;
+    var date = time.getDate();
+    var hours = time.getHours();
+    var minutes = time.getMinutes();
+    var seconds = time.getSeconds();
+    return year + '-' + add0(month) + '-' + add0(date) + ' ' + add0(hours) + ':' + add0(minutes) + ':' + add0(seconds);
 }
 
 //时间快捷按钮
