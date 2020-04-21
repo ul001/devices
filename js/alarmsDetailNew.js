@@ -293,8 +293,12 @@ function selectConfirm() {
             arr.push(num);
         }
     });
-    var logList = arr.join(','); //数组转成为字符串
-    confirmAlarmEvents(logList);
+    if(arr.length>0){
+        var logList = arr.join(','); //数组转成为字符串
+        confirmAlarmEvents(logList);
+    }else{
+        $.toast("未选择任何条目");
+    }
 }
 //批量确认方法
 function confirmAlarmEvents(logidList) {
