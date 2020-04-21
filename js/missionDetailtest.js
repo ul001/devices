@@ -117,6 +117,9 @@ function getNetData() {
                             "<span style='color:springgreen;'>" +
                             Operation["ui_submitted"] +
                             "</span>";
+                        if(isUseTrace=="1"){
+                            taskStateName += "<a href=\"#\" class=\"button\" style=\"width:60%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
+                        }
                     } else {}
 
                     var text = "";
@@ -551,6 +554,43 @@ $("#clickManager").click(function () {
     }
     window.location.href = "missionManager.html";
 });
+
+//查询轨迹
+function selectTrace(getUserid, startTime, endTime) {
+    if(!upLoadClicktag){
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function() {
+      upLoadClicktag = true;
+    }, 1000);
+    if (startTime != "undefined" && startTime != "") {
+        startTime = startTime.replace(/-/g, '/');
+        startTime = new Date(startTime).getTime() / 1000;
+        if (endTime == "undefined" || endTime == "") {
+            endTime = startTime + 86400;
+        } else {
+            endTime = endTime.replace(/-/g, '/');
+            endTime = new Date(endTime).getTime() / 1000;
+            if ((endTime - startTime) > 86400) {
+                endTime = startTime + 86400;
+            }
+        }
+        //查询轨迹
+        if (isAndroid) {
+            android.showThisTrace(getUserid, startTime, endTime);
+        } else if (isIOS) {
+            var yydic = {
+                "entityName": getUserid,
+                "startTime": startTime,
+                "endTime": endTime
+            };
+            window.webkit.messageHandlers.pushYYGJView.postMessage(yydic);
+        }
+    } else {
+        $.alert(Operation['ui_noStartTimeTraceTip']);
+    }
+}
 
 window.addEventListener(
     "pageshow",

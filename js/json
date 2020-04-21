@@ -23,14 +23,6 @@ URL: http://116.236.149.162:8090/SubstationWEBV2/authority/pageCustomList?fSubid
 //登录接口返回字段json
 data = {
 		authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzUyNjU2ODYsInVzZXJuYW1lIjoibmFuYXlhIn0.QYcO45eHM8olf3opHtUSOwZbNTMcX6NG9H7OtDuuF20";
-		messagePushInfo = {
-			messageAccessKeyId = "LTAI4Fx5XcDnkFd4A3HTJiu1"
-			messageAccessKeySecret = "RlCbxZbJ5g0q5p7iYmdrxSC10eoaOY";
-			messageAndroidKey = "28116693";
-			messageAndroidSecret = "test";
-			messageIOSKey = "28124642";
-			messageIOSSecret = "test";
-		}
 		userId = 312;
 		versionURL = "fileVersion/v3/H5";
 		versionURL2 = "fileVersion/v3/H5-2";
