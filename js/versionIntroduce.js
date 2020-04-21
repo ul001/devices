@@ -26,7 +26,7 @@ function getData(){
                         }else{
                             if(data.data.list!=undefined && data.data.list.length>0){
                                 $(data.data.list).each(function(){
-                                    $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='"+JSON.stringify(this.fUpdatelog.replace(/\r\n/g,'<br>'))+"'>\n" +
+                                    $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='"+JSON.stringify(this.fUpdatelog.replace(/\r\n/g,'<br>').replace(/\n/g,'<br>'))+"'>\n" +
                                             "                        <div class=\"item-inner\">\n" +
                                             "                            <div class=\"item-title-row\">\n" +
                                             "                                <div class=\"item-title\">"+Operation['ui_version']+this.fVersion+Operation['ui_mainUpdate']+"</div>\n" +
