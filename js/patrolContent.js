@@ -437,7 +437,7 @@ function loadPage() {
                     };
                     Substation.getDataByAjax("/deleteCheckItemProblems", params, function () {
                         $.toast(Operation['ui_delsuccess']);
-                        //                        saveThisPage();
+                        saveThisPage();
                         localStorage.setItem("need-refresh", "true");
                     });
                 }, function () {
@@ -826,22 +826,22 @@ function saveFormData() {
             $.toast(Operation['ui_uploadSuccess']);
             $(":radio[name='" + clickRadioName + "'][value='yes']").prop("checked", true);
             localStorage.setItem("need-refresh", "true");
-            setTimeout($.router.back(), 1000);
+            setTimeout(function(){$.router.back();saveThisPage();}, 1000);
         }
     });
 }
 
 //巡检记录点击是跳转
 function goToInfo() {
-    if (!upLoadClicktag) {
-        return;
-    }
-    upLoadClicktag = false;
-    setTimeout(function () {
-        upLoadClicktag = true;
-    }, 1000);
     if (canClick == "false") {
         $(".card-content").unbind().click(function () {
+            if (!upLoadClicktag) {
+                return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function () {
+                upLoadClicktag = true;
+            }, 1000);
             var thisRadio = $(this).find(":radio:checked");
             if (thisRadio.val() == "yes") {
                 var clickDeviceId = $(".tab.active").attr("id");
