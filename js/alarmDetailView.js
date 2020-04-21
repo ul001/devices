@@ -37,7 +37,7 @@ function creatView(param) {
         sb += '                            </li>';
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
-        sb += '                                    <div class="item-title" data-i18n="ui_startTime">' + Operation['ui_startTime'] + ':' + '</div>';
+        sb += '                                    <div class="item-title" data-i18n="ui_happenTime">' + Operation['ui_happenTime'] + ':' + '</div>';
         sb += '                                    <div class="item-after startTime">' + (param.fAlarmtime ? param.fAlarmtime : "") + '</div>';
         sb += '                                </div>';
         sb += '                            </li>';
