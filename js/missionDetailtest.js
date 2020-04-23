@@ -186,12 +186,26 @@ function getNetData() {
                 if (loginUserid == taskchargerid) {
                     //负责人按钮
                     if (taskInfo.fTaskfinishdate == undefined) {
-                        $("#chargeTask").show();
+
                         //根据提交数配置
                         if (isChangeReturnCount == userList.length) {
+                            $("#chargeTask").css('width', '28%');
+                            $("#chargeSubmit").css('width', '28%');
+                            $("#chargeTask span").text(Operation['ui_chargeTask']);
+                            $("#chargeSubmit span").text(Operation['ui_chargeSubmit']);
+                            $("#chargeTask").show();
                             $("#chargeReturn").show();
+                            $("#chargeSubmit").show();
+                        } else {
+                            $("#chargeTask").css('width', '40%');
+                            $("#chargeSubmit").css('width', '40%');
+                            $("#chargeTask span").text(Operation['ui_doingDetail']);
+                            $("#chargeSubmit span").text(Operation['ui_taskSubmit']);
+                            $("#chargeTask").show();
+                            $("#chargeSubmit").show();
+
                         }
-                        $("#chargeSubmit").show();
+
                     } else {
                         $("#doDetail").show();
                     }
