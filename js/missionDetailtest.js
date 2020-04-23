@@ -92,6 +92,7 @@ function getNetData() {
                 $("#TotalDefect").html("-");
             }
             //判断后续
+            var isChangeReturnCount = 0;
             if (userList != undefined && userList.length > 0) {
                 $(userList).each(function () {
                     if (this.fUserid == loginUserid) {
@@ -117,9 +118,10 @@ function getNetData() {
                             "<span style='color:springgreen;'>" +
                             Operation["ui_submitted"] +
                             "</span>";
-                        if(isUseTrace=="1"){
+                        if (isUseTrace == "1") {
                             taskStateName += "<a href=\"#\" class=\"button\" style=\"width:60%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
                         }
+                        isChangeReturnCount++;
                     } else {}
 
                     var text = "";
@@ -165,11 +167,17 @@ function getNetData() {
                             $("#submitTask").show();
                             localStorage.setItem("canClick", "true");
                         } else {
-                            $("#textareaDetail").attr("placeholder", "");
-                            $("#textareaDetail").attr("readonly", true);
-                            $("#textareaDetail").val(thisUser.fExplain);
-                            $("#doDetail").show();
-                            localStorage.setItem("canClick", "false");
+                            if (thisUser.fExesituation == 8) {
+                                $("#doTask").show();
+                                $("#submitTask").show();
+                                localStorage.setItem("canClick", "true");
+                            } else {
+                                $("#textareaDetail").attr("placeholder", "");
+                                $("#textareaDetail").attr("readonly", true);
+                                $("#textareaDetail").val(thisUser.fExplain);
+                                $("#doDetail").show();
+                                localStorage.setItem("canClick", "false");
+                            }
                         }
                     }
                 }
@@ -179,7 +187,10 @@ function getNetData() {
                     //负责人按钮
                     if (taskInfo.fTaskfinishdate == undefined) {
                         $("#chargeTask").show();
-                        $("#chargeReturn").show();
+                        //根据提交数配置
+                        if (isChangeReturnCount == userList.length) {
+                            $("#chargeReturn").show();
+                        }
                         $("#chargeSubmit").show();
                     } else {
                         $("#doDetail").show();
@@ -444,9 +455,9 @@ $("#submitTask").click(function () {
         // fExplain 执行情况
         Substation.getDataByAjax("/submitUserTask", param, function (data) {
             $.toast(Operation["ui_uploadTaskSuccessTip"]);
-//            $("#doTask").hide();
-//            $("#submitTask").hide();
-//            $("#doDetail").show();
+            //            $("#doTask").hide();
+            //            $("#submitTask").hide();
+            //            $("#doDetail").show();
             try {
                 if (isAndroid) {
                     android.refresh();
@@ -457,7 +468,10 @@ $("#submitTask").click(function () {
                             $.confirm(Operation["ui_endTraceTip"], function () {
                                 android.stopTrace();
                                 location.reload();
-                            },function(){android.stopTrace();location.reload();});
+                            }, function () {
+                                android.stopTrace();
+                                location.reload();
+                            });
                         } else {
                             android.stopTrace();
                             location.reload();
@@ -474,7 +488,9 @@ $("#submitTask").click(function () {
                             $.confirm(Operation["ui_endTraceTip"], function () {
                                 window.webkit.messageHandlers.closeTrackFunc.postMessage("");
                                 location.reload();
-                            },function(){location.reload();});
+                            }, function () {
+                                location.reload();
+                            });
                         } else {
                             window.webkit.messageHandlers.closeTrackFunc.postMessage("");
                             location.reload();
@@ -490,7 +506,7 @@ $("#submitTask").click(function () {
 });
 
 //负责人驳回任务
-$("#chargeReturn").click(function(){
+$("#chargeReturn").click(function () {
     if (!upLoadClicktag) {
         return;
     }
@@ -503,7 +519,7 @@ $("#chargeReturn").click(function(){
         param = {
             fTaskid: taskID
         };
-        Substation.getDataByAjax("/returnTask", param, function (data) {
+        Substation.getDataByAjax("/rejectTasksubmit", param, function (data) {
 
             if (isAndroid) {
                 try {
@@ -590,12 +606,12 @@ $("#clickManager").click(function () {
 
 //查询轨迹
 function selectTrace(getUserid, startTime, endTime) {
-    if(!upLoadClicktag){
-      return;
+    if (!upLoadClicktag) {
+        return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
-      upLoadClicktag = true;
+    setTimeout(function () {
+        upLoadClicktag = true;
     }, 1000);
     if (startTime != "undefined" && startTime != "") {
         startTime = startTime.replace(/-/g, '/');
