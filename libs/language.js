@@ -220,6 +220,10 @@ function getZhLanguage() {
     ui_plannedDone: "按时完成",
     ui_overLimitDone: "超时完成",
     ui_unDone: "未完成",
+    ui_chargeTask:"明细",
+    ui_chargeReturn:"驳回",
+    ui_chargeSubmit:"提交",
+    ui_chargeReturnTip:"确定要驳回该任务吗？",
     //missionmanage
     ui_meter: "米",
     ui_noStartTimeTraceTip: "该执行人尚未开启任务，无法查询其轨迹。",
@@ -696,6 +700,10 @@ function getEnLanguage() {
     ui_plannedDone: "Complete on time",
     ui_overLimitDone: "Timeout completion",
     ui_unDone: "Unfinished",
+    ui_chargeTask:"Detail",
+    ui_chargeReturn:"Reject",
+    ui_chargeSubmit:"Submit",
+    ui_chargeReturnTip:"Are you sure to reject the task?",
     //missionmanage
     ui_meter: "meters",
     ui_noStartTimeTraceTip:

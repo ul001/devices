@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODczNjQ0NjUsInVzZXJuYW1lIjoiaGFoYWhhIn0._dqvKA0Ldqv-B5Uk0-gRBcoum6ZHtdP83p0G5K1ceOg";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODc5NzIwNDYsInVzZXJuYW1lIjoiaGFoYWhhIn0.OZ2P5wKiAPQQmV8rYwa2LhJp3YvUvOgStC2dyWIC1Ws";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
 //语言字段传参
