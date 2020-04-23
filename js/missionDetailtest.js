@@ -179,6 +179,7 @@ function getNetData() {
                     //负责人按钮
                     if (taskInfo.fTaskfinishdate == undefined) {
                         $("#chargeTask").show();
+                        $("#chargeReturn").show();
                         $("#chargeSubmit").show();
                     } else {
                         $("#doDetail").show();
@@ -484,6 +485,38 @@ $("#submitTask").click(function () {
                 localStorage.removeItem(taskID);
                 location.reload();
             }
+        });
+    });
+});
+
+//负责人驳回任务
+$("#chargeReturn").click(function(){
+    if (!upLoadClicktag) {
+        return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function () {
+        upLoadClicktag = true;
+    }, 1000);
+    $.confirm(Operation["ui_chargeReturnTip"], function () {
+        var param;
+        param = {
+            fTaskid: taskID
+        };
+        Substation.getDataByAjax("/returnTask", param, function (data) {
+
+            if (isAndroid) {
+                try {
+                    android.removeSPItem(taskID);
+                } catch (e) {
+                    localStorage.removeItem(taskID);
+                }
+                android.refresh();
+            } else {
+                localStorage.removeItem(taskID);
+                localStorage.setItem("need-refresh", "true");
+            }
+            location.reload();
         });
     });
 });
