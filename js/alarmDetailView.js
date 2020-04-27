@@ -8,8 +8,8 @@
 // var param = JSON.parse(value);
 var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
 
-var param = JSON.parse(localStorage.getItem("DetailParam"));
-localStorage.removeItem("DetailParam");
+// var param = JSON.parse(localStorage.getItem("DetailParam"));
+// localStorage.removeItem("DetailParam");
 // creatView(param);
 loadMenu();
 
