@@ -6,10 +6,28 @@
 // var urlinfo = window.location.href, //获取url 
 //     value = urlinfo.split("?")[1].split("=")[1]; //
 // var param = JSON.parse(value);
+var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
 
 var param = JSON.parse(localStorage.getItem("DetailParam"));
 localStorage.removeItem("DetailParam");
-creatView(param);
+// creatView(param);
+loadMenu();
+
+function loadMenu() {
+    $(".list-container").empty();
+    if (!alarmeventlogid) {
+        toast("数据异常，未获取到报警对应ID");
+        return;
+    }
+    $.showPreloader(Operation['ui_loading']);
+    Substation.getDataByAjaxNoLoading("/getAlarmEventLogById", {
+        fAlarmeventlogid: alarmeventlogid
+    }, function (data) {
+        if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
+            creatView(data.alarmEventLogById);
+        }
+    });
+}
 
 function creatView(param) {
     var html = '';
@@ -147,7 +165,8 @@ function creatView(param) {
         sb += '                        </ul>';
 
         $('#yaoxin').append(sb);
+        $.hidePreloader();
     } else {
-
+        $.hidePreloader();
     }
 }
