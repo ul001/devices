@@ -152,12 +152,12 @@ function addItems(number, lastIndex) {
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             if (datadic.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             //复选框初始化
@@ -191,7 +191,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
         loading = false;
         if (lastIndex >= maxItems) {
             $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
             return;
         }
         addItems(itemsPerLoad, lastIndex);
@@ -287,16 +287,16 @@ $("#manage").on("click", manageCard);
 //多选确定事件
 function selectConfirm() {
     var arr = [];
-    $('input[type=checkbox]:checked').each(function (i,obj) {
+    $('input[type=checkbox]:checked').each(function (i, obj) {
         if ($(obj).val()) {
             var num = obj.value;
             arr.push(num);
         }
     });
-    if(arr.length>0){
+    if (arr.length > 0) {
         var logList = arr.join(','); //数组转成为字符串
         confirmAlarmEvents(logList);
-    }else{
+    } else {
         $.toast("未选择任何条目");
     }
 }
@@ -430,14 +430,20 @@ function addCardLongClick() {
                 } else {
                     var thisCardId = $(this).parent(".card").attr("id");
                     var paramStr = '';
+                    var alarmeventlogid = '';
                     $.each(alarmDetailList, function (index, value) {
                         if (value['fAlarmeventlogid'] == thisCardId) {
+                            alarmeventlogid = thisCardId;
                             paramStr = JSON.stringify(value);
                         }
                     });
                     // window.location.href = encodeURI("alarmDetailView.html" + "?value=" + paramStr);
-                    localStorage.setItem("DetailParam", paramStr);
-                    window.location.href = "alarmDetailView.html";
+                    // localStorage.setItem("DetailParam", paramStr);
+                    if (alarmeventlogid) {
+                        window.location.href = "alarmDetailView.html?alarmeventlogid=" + alarmeventlogid;
+                    } else {
+                        toast("数据异常，未获取到报警对应ID");
+                    }
                 }
             }
             if (isMoving) {
