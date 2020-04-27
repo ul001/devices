@@ -16,7 +16,7 @@ loadMenu();
 function loadMenu() {
     $(".list-container").empty();
     if (!alarmeventlogid) {
-        toast("数据异常，未获取到报警对应ID");
+        $.toast("数据异常，未获取到报警对应ID");
         return;
     }
     $.showPreloader(Operation['ui_loading']);
@@ -26,7 +26,7 @@ function loadMenu() {
         if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
             creatView(data.alarmEventLogById);
         }
-    });
+    },function(errorcode){});
 }
 
 function creatView(param) {
