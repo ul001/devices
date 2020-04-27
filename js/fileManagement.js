@@ -314,7 +314,7 @@ function getSomeSubstation(isAll) {
                 $("#listContainer").hide();
                 //            $("#subName").text(clickName);
             });
-    });
+    },function(errorCode){});
 }
 
 $("#search").bind("keydown", function (event) {
