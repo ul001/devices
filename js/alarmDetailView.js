@@ -9,7 +9,7 @@
 var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
-if(jumpId!=undefined && jumpId!=null && jumpId!=""){
+if (jumpId != undefined && jumpId != null && jumpId != "") {
     alarmeventlogid = jumpId;
     isPush = "1";
 }
@@ -27,23 +27,30 @@ function loadMenu() {
     }
     $.showPreloader(Operation['ui_loading']);
     Substation.getDataByAjaxNoLoading("/getAlarmEventLogById", {
-        fAlarmeventlogid: alarmeventlogid
-    }, function (data) {
-        if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
-            creatView(data.alarmEventLogById);
-        }
-    },function(errorcode){});
+            fAlarmeventlogid: alarmeventlogid
+        }, function (data) {
+            if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
+                creatView(data.alarmEventLogById);
+            } else {
+                $.toast("数据异常，未获取到报警对应详情");
+            }
+            $.hidePreloader();
+        },
+        function (errorcode) {
+            $.hidePreloader();
+        });
 }
 
 $(".pull-left.click_btn").click(function () {
-    if(isPush == "1"){
+    if (isPush == "1") {
         //推送详情点击返回事件
         if (isAndroid) {
             android.goBack();
-        } else if(isIOS){
-//            window.history.back();
+        } else if (isIOS) {
+            //            window.history.back();
+            window.webkit.messageHandlers.goBackiOS.postMessage("");
         }
-    }else{
+    } else {
         window.history.back();
     }
 });
