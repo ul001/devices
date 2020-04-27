@@ -14,8 +14,8 @@ if(jumpId!=undefined && jumpId!=null && jumpId!=""){
     isPush = "1";
 }
 
-var param = JSON.parse(localStorage.getItem("DetailParam"));
-localStorage.removeItem("DetailParam");
+// var param = JSON.parse(localStorage.getItem("DetailParam"));
+// localStorage.removeItem("DetailParam");
 // creatView(param);
 loadMenu();
 
