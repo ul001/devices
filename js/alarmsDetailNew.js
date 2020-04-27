@@ -287,9 +287,9 @@ $("#manage").on("click", manageCard);
 //多选确定事件
 function selectConfirm() {
     var arr = [];
-    $('input[type=checkbox]:checked').each(function (e) {
-        if ($('input[type=checkbox]:checked').val()) {
-            var num = this.value;
+    $('input[type=checkbox]:checked').each(function (i,obj) {
+        if ($(obj).val()) {
+            var num = obj.value;
             arr.push(num);
         }
     });

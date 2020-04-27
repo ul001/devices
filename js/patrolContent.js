@@ -92,10 +92,10 @@ function loadPage() {
                             inputStr = "<div class=\"card\">\n" +
                                 "                                <div class=\"card-content\">\n" +
                                 "                                    <div class=\"card-content-inner\">\n" +
-                                "                                        " + decodeURIComponent(this.name) + "\n" +
+                                "                                        " + this.name + "\n" +
                                 "                                        <div class=\"pull-right\">\n" +
                                 "                                            <label class=\"label-checkbox item-content\">\n" +
-                                "                                                <input type=\"radio\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" data-json='" + JSON.stringify(this) + "' name=\"" + (obj.fSubdeviceinfoid + "" + this.code) + "\" value=\"yes\">\n" +
+                                "                                                <input type=\"radio\" data-name=\"" + this.name + "\" data-code=\"" + this.code + "\" data-json='" + JSON.stringify(this) + "' name=\"" + (obj.fSubdeviceinfoid + "" + this.code) + "\" value=\"yes\">\n" +
                                 "                                                <div class=\"item-media\"><i\n" +
                                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                                 "                                                <div class=\"item-inner\">\n" +
@@ -104,20 +104,20 @@ function loadPage() {
                                 "                                            </label>\n" +
                                 "                                            &nbsp;\n" +
                                 "                                            <label class=\"label-checkbox item-content\">\n" +
-                                "                                                <input type=\"radio\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" name=\"" + (obj.fSubdeviceinfoid + "" + this.code) + "\" value=\"no\" checked>\n" +
+                                "                                                <input type=\"radio\" data-name=\"" + this.name + "\" data-code=\"" + this.code + "\" name=\"" + (obj.fSubdeviceinfoid + "" + this.code) + "\" value=\"no\" checked>\n" +
                                 "                                                <div class=\"item-media\"><i\n" +
                                 "                                                        class=\"icon icon-form-checkbox\"></i></div>\n" +
                                 "                                                <div class=\"item-inner\">\n" +
                                 "                                                    " + Operation['ui_no'] + "\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
-                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + decodeURIComponent(this.identification) + "\"></i>\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + this.identification + "\"></i>\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
                                 "                            </div>\n";
                         } else if (this.type == "input") {
-                            var thisInputName = decodeURIComponent(this.name);
+                            var thisInputName = this.name;
                             if (this.value == "true") {
                                 thisInputName = "<span class=\"redColor\">*</span>" + thisInputName;
                             }
@@ -126,8 +126,8 @@ function loadPage() {
                                 "                                    <div class=\"card-content-inner\">\n" +
                                 "                                        " + thisInputName + "\n" +
                                 "                                        <div class=\"pull-right\">\n" +
-                                "                                            <input type=\"text\" data-name=\"" + decodeURIComponent(this.name) + "\" data-code=\"" + this.code + "\" data-state=\"" + this.value + "\">\n" +
-                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + decodeURIComponent(this.identification) + "\"></i>\n" +
+                                "                                            <input type=\"text\" data-name=\"" + this.name + "\" data-code=\"" + this.code + "\" data-state=\"" + this.value + "\">\n" +
+                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + this.identification + "\"></i>\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
@@ -511,10 +511,10 @@ function loadPage() {
 function loadPage2() {
     var defectJson = JSON.parse(localStorage.getItem("defectJson"));
     var code = defectJson.code;
-    var name = decodeURIComponent(defectJson.name);
-    defectPosition = decodeURIComponent(defectJson.defectPosition);
-    var identification = decodeURIComponent(defectJson.identification);
-    deadline = decodeURIComponent(defectJson.deadline);
+    var name = defectJson.name;
+    defectPosition = defectJson.defectPosition;
+    var identification = defectJson.identification;
+    deadline = defectJson.deadline;
     var dangerous = defectJson.dangerous;
     $("#defectDiscribe").val(name);
     $("#defectPosition").empty();
