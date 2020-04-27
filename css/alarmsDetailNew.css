@@ -47,6 +47,16 @@ i.icon.icon-alarm {
     background-image: url(../img/i-alarmp.png);
 }
 
+i.icon.icon-clearAlarm {
+    width: 0.9rem;
+    height: 0.9rem;
+    border:1px #fff solid;
+    border-radius:.45rem;
+    background-image: url(../img/clear_alarm2.png);
+    margin-left:.2rem;
+    background-size:80%;
+}
+
 .card .no-gutter p {
     margin: 0.2rem 0;
 }

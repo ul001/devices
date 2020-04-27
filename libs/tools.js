@@ -3,7 +3,7 @@
  * @date 2017-04-26 09:46
  * @description 存放常用工具类
  */
-var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v4";
+var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
 var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODc5NzIwNDYsInVzZXJuYW1lIjoiaGFoYWhhIn0.OZ2P5wKiAPQQmV8rYwa2LhJp3YvUvOgStC2dyWIC1Ws";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";

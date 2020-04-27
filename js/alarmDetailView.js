@@ -7,6 +7,12 @@
 //     value = urlinfo.split("?")[1].split("=")[1]; //
 // var param = JSON.parse(value);
 var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
+var jumpId = Substation.GetQueryString("jumpId");
+var isPush = "0";
+if(jumpId!=undefined && jumpId!=null && jumpId!=""){
+    alarmeventlogid = jumpId;
+    isPush = "1";
+}
 
 var param = JSON.parse(localStorage.getItem("DetailParam"));
 localStorage.removeItem("DetailParam");
@@ -28,6 +34,19 @@ function loadMenu() {
         }
     },function(errorcode){});
 }
+
+$(".pull-left.click_btn").click(function () {
+    if(isPush == "1"){
+        //推送详情点击返回事件
+        if (isAndroid) {
+            android.goBack();
+        } else if(isIOS){
+//            window.history.back();
+        }
+    }else{
+        window.history.back();
+    }
+});
 
 function creatView(param) {
     var html = '';
