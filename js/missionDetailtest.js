@@ -25,7 +25,7 @@ var upLoadClicktag = true;
 var taskID = localStorage.getItem("taskID");
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
-if(jumpId!=undefined && jumpId!=null && jumpId!=""){
+if (jumpId != undefined && jumpId != null && jumpId != "") {
     taskID = jumpId;
     isPush = "1";
 }
@@ -597,14 +597,15 @@ $("#chargeSubmit").click(function () {
 });
 
 $(".pull-left.click_btn").click(function () {
-    if(isPush == "1"){
+    if (isPush == "1") {
         //推送详情点击返回事件
         if (isAndroid) {
             android.goBack();
-        } else if(isIOS){
-//            window.history.back();
+        } else if (isIOS) {
+            window.webkit.messageHandlers.goBackiOS.postMessage("");
+            //            window.history.back();
         }
-    }else{
+    } else {
         if (isAndroid) {
             android.goBack();
         } else {
