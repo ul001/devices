@@ -2010,7 +2010,7 @@ jQuery(document).ready(function () {
                 $("#listContainer").empty();
                 //            $("#subName").text(clickName);
             });
-        });
+        },function(errorcode){});
     }
 
     $('#search').bind('keydown', function (event) {

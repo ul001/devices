@@ -71,7 +71,7 @@ function loadMenu() {
       $(".infinite-scroll-preloader").empty();
       fillData(0);
     }
-  });
+  },function(errorcode){});
 
   // Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
   //     pid: menuId
@@ -182,7 +182,7 @@ function fillData(parentId) {
         }
       });
     //        $.hidePreloader();
-  });
+  },function(errorcode){});
   // }
   // });
 }

@@ -47,7 +47,7 @@ function loadMenu() {
             fillData(0);
         }
         $.hidePreloader();
-    });
+    },function(errorcode){});
 }
 
 function fillData(parentId) {
