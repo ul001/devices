@@ -57,7 +57,7 @@ function getSomeSubstation() {
             $("#listContainer").hide();
             //            $("#subName").text(clickName);
         });
-    });
+    },function(errorcode){});
 }
 
 $('#search').bind('keydown', function (event) {
