@@ -119,8 +119,8 @@ function addItems(number) {
                     }
                     $(".list-container").append('<div class="card-log">' +
                         '<div class="card-top">' +
-                        '<div class="lightGrayColor">' + Operation['ui_operating'] + '（' + Operation['ui_logTime'] + '：' + this.fOperatetime + '）</div>' +
-                        '<div class="blackColor">' + this.fOperatername + Operation['ui_logTowards'] + Substation.removeUndefined(this.fDevicename) + '（' + this.fMetercode + '）' + Operation['ui_logDoing'] + this.deviceValueExplain + Operation['ui_logOperate'] + '</div>' +
+                        '<div class="lightGrayColor">' + Operation['ui_operating'] + '（' + Operation['ui_logTime'] + '：' + Substation.removeUndefined(this.fOperatetime) + '）</div>' +
+                        '<div class="blackColor">' + Substation.removeUndefined(this.fOperatername) + Operation['ui_logTowards'] + Substation.removeUndefined(this.fDevicename) + '（' + Substation.removeUndefined(this.fMetercode) + '）' + Operation['ui_logDoing'] + Substation.removeUndefined(this.deviceValueExplain) + Operation['ui_logOperate'] + '</div>' +
                         '</div>' +
                         '<div class="card-bottom">' +
                         '<div class="lightGrayColor">' + Operation['ui_result'] + '（' + Operation['ui_logTime'] + '：' + askTime + '）</div>' +
@@ -171,8 +171,8 @@ function addItems(number) {
                     }
                     $(".list-container").append('<div class="card-log">' +
                         '<div class="card-top">' +
-                        '<div class="lightGrayColor">' + Operation['ui_operating'] + '（' + Operation['ui_logTime'] + '：' + this.fSendtime + '）</div>' +
-                        '<div class="blackColor">' + this.fUsername + Operation['ui_logTowards'] + this.meterInfoname + '（' + this.fMeterserialnumber + '）' + Operation['ui_logDoing'] + controlStr + Operation['ui_logOperate'] + '</div>' +
+                        '<div class="lightGrayColor">' + Operation['ui_operating'] + '（' + Operation['ui_logTime'] + '：' + Substation.removeUndefined(this.fSendtime) + '）</div>' +
+                        '<div class="blackColor">' + Substation.removeUndefined(this.fUsername) + Operation['ui_logTowards'] + Substation.removeUndefined(this.meterInfoname) + '（' + Substation.removeUndefined(this.fMeterserialnumber) + '）' + Operation['ui_logDoing'] + controlStr + Operation['ui_logOperate'] + '</div>' +
                         '</div>' +
                         '<div class="card-bottom">' +
                         '<div class="lightGrayColor">' + Operation['ui_result'] + '（' + Operation['ui_logTime'] + '：' + askTime + '）</div>' +
