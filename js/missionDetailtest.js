@@ -23,6 +23,10 @@ var upLoadClicktag = true;
 
 //任务id
 var taskID = localStorage.getItem("taskID");
+var jumpId = Substation.GetQueryString("taskID");
+if(jumpId!=undefined && jumpId!=null && jumpId!=""){
+    taskID = jumpId;
+}
 //巡检单id
 var placeCheckFormId;
 //巡检的变电所id
@@ -36,7 +40,7 @@ var TaskNumber;
 
 var taskCreatId;
 
-var missionType = localStorage.getItem("missionType");
+var missionState;
 //当前帐号userid
 var loginUserid = Substation.loginUserid;
 
@@ -76,6 +80,7 @@ function getNetData() {
             missionTypeid = taskInfo.fTasktypeid;
             taskchargerid = taskInfo.fTaskchargerid;
             taskCreatId = taskInfo.fTaskcreateuserid;
+            missionState = taskInfo.fTaskstateid;
             var thisUser = {};
 
             //任务执行结果
@@ -156,7 +161,7 @@ function getNetData() {
             //按钮显隐判断
             if (temp) {
                 $("#addVarContain124").show();
-                if (thisUser.fTaskstarttime == undefined && missionType == "1") {
+                if (thisUser.fTaskstarttime == undefined && missionState == "1") {
                     $("#startTask").show();
                 } else {
                     if (thisUser.fSignintime == undefined) {
@@ -610,7 +615,7 @@ $("#clickManager").click(function () {
           localStorage.setItem("missionSubid", missionsubid);
           localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
     localStorage.setItem("taskID", taskID);
-    if (missionType != "3") {
+    if (missionState != "3") {
         localStorage.setItem("hiddenBtn", "NO");
     } else {
         localStorage.setItem("hiddenBtn", "YES");
