@@ -5,14 +5,17 @@ var pageNum = 1;
 var clickID = Substation.GetQueryString("clickID");
 // var clickID = "platform";
 var titleName = localStorage.getItem("titleName");
-$("#titleName").text(titleName);
+if(titleName!=null && titleName!=undefined && titleName.length>8){
+    titleName = titleName.substring(0,8)+"...";
+}
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
 if(jumpId!=undefined && jumpId!=null && jumpId!=""){
     clickID = jumpId;
     isPush = "1";
-    $("#titleName").text("通讯状态");
+    titleName="通讯状态";
 }
+$("#titleName").text(titleName);
 var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
@@ -218,11 +221,11 @@ function goBack() {
 }
 
 function selectAll() {
-    if ($(".back_btn").text() == Operation['ui_SelectAll']) {
+    if ($(".back_btn").text() == Operation['ui_SelectPageAll']) {
         $(".back_btn").text(Operation['ui_UnselectAll']);
         $("input:checkbox").prop("checked", "checked");
     } else {
-        $(".back_btn").text(Operation['ui_SelectAll']);
+        $(".back_btn").text(Operation['ui_SelectPageAll']);
         $("input:checkbox").removeAttr("checked");
     }
 }
@@ -239,7 +242,7 @@ function manageCard() {
         itemsPerLoad = 100;
         getFirstPage();
         $(".manager_btn").text(Operation['ui_cancel']);
-        $(".back_btn").text(Operation['ui_SelectAll']);
+        $(".back_btn").text(Operation['ui_SelectPageAll']);
         $(".selectAlarms").toggle();
         $("#bar-footer").toggle();
         $("#bar-footer").addClass("bar-footer");
@@ -304,7 +307,7 @@ function selectConfirm() {
         var logList = arr.join(','); //数组转成为字符串
         confirmAlarmEvents(logList);
     } else {
-        $.toast("未选择任何条目");
+        $.toast(Operation['ui_selectNo']);
     }
 }
 //批量确认方法
@@ -375,6 +378,19 @@ function setAlarmEventConfirmed(logid, confirmType) {
     }
 
 }
+
+//一键确认
+$("#clearAlarm").click(function(){
+    $.confirm(Operation['ui_selectTip'],function(){
+        Substation.getDataByAjaxNoLoading("/oneClickConfirmAlarmEvents", {
+            "fMessinfotypeid": clickID
+        },
+        function (data) {
+            getFirstPage();
+        },
+        function (errorCode) {});
+    });
+});
 
 var longClick = 0;
 var isMoving = false;

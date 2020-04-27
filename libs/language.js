@@ -23,6 +23,7 @@ function getZhLanguage() {
     ui_dateselecttip: "请选择正确的查询时间",
     ui_month: "月",
     ui_SelectAll: "全选",
+    ui_SelectPageAll: "本页全选",
     ui_UnselectAll: "全不选",
     ui_select: "筛选",
     //deviceClass
@@ -253,6 +254,8 @@ function getZhLanguage() {
     ui_MarkConfirmed: "标为已确认",
     ui_MarkUnconfirmed: "标为未确认",
     ui_Overshootvalue: "设定值:",
+    ui_selectNo:"未选择任何条目！",
+    ui_selectTip:"是否将该类报警全部标为已确认？",
     //版本历史
     ui_updateHistory: "版本历史",
     ui_version: "版本",
@@ -486,6 +489,7 @@ function getEnLanguage() {
     ui_dateselecttip: "Please select the correct query time",
     ui_month: "month",
     ui_SelectAll: "SelectAll",
+    ui_SelectPageAll: "SelectPage",
     ui_UnselectAll: "UnselectAll",
     ui_select: "Filter",
     //deviceClass
@@ -756,6 +760,8 @@ function getEnLanguage() {
     ui_alarmDeviceId: "DeviceID:",
     ui_alarmDeviceName: "DeviceName:",
     ui_Overshootvalue: "OvershootValue:",
+    ui_selectNo:"No entry selected!",
+    ui_selectTip:"Are all such alarms marked as confirmed?",
     ui_fConfirmstatus: "ConfirmStatus:",
     ui_fConfirmuserid: "ConfirmuserName:",
     ui_fConfirmtime: "ConfirmTime:",
