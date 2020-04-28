@@ -124,9 +124,9 @@ var Substation = {
 
   showCodeTips: function (code) {
     if (Operation['code_' + code] == undefined || Operation['code_' + code] == null) {
-      $.toast(Operation['code_other']);
+      $.alert(Operation['code_other']);
     } else {
-      $.toast(Operation['code_' + code]);
+      $.alert(Operation['code_' + code]);
     }
   },
 
