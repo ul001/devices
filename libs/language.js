@@ -340,7 +340,8 @@ function getZhLanguage() {
     ui_Opening: "分闸",
     ui_CloseLight: "关闭灯光",
     ui_OpenLight: "开启灯光",
-    ui_nolightDevice: "No Device",
+    ui_nolightDevice: "无设备",
+    ui_sendSuccess: "命令发送成功",
     //灯光详情
     ui_Serialnumber: "串口号:",
     ui_Equipmenttype: "设备类型:",
@@ -830,6 +831,7 @@ function getEnLanguage() {
     ui_CloseLight: "Close Light",
     ui_OpenLight: "Open Light",
     ui_nolightDevice: "No Device",
+    ui_sendSuccess: "Command sent successfully",
     //灯光详情
     ui_Serialnumber: "SerialNumber:",
     ui_Equipmenttype: "EquipmentType:",
