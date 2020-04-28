@@ -13,7 +13,6 @@ var isPush = "0";
 if(jumpId!=undefined && jumpId!=null && jumpId!=""){
     clickID = jumpId;
     isPush = "1";
-    titleName="通讯状态";
 }
 $("#titleName").text(titleName);
 var u = navigator.userAgent,
@@ -94,6 +93,14 @@ function addItems(number, lastIndex) {
     //    }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
             var datadic = data.alarmEventLogList;
+            var messgeInfo = data.tDtMessInfoType;
+            if(messgeInfo!=undefined){
+                titleName = messgeInfo.fMessinfotypeexplain;
+                if(titleName!=null && titleName!=undefined && titleName.length>8){
+                    titleName = titleName.substring(0,8)+"...";
+                }
+                $("#titleName").text(titleName);
+            }
             if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
                 if (pageNum == 1) {
                     $(".list-container").empty();
