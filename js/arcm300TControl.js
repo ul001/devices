@@ -133,7 +133,7 @@ $("#reset").click(function () {
                 "value": "1"
             });
         });
-        if(controlJson.length && controlJson.length==0){
+        if(controlJson.length==0){
             $.toast(Operation['ui_selectNo']);
             return;
         }
@@ -166,7 +166,7 @@ $("#DO").click(function () {
                 "value": "1"
             });
         });
-        if(controlJson.length && controlJson.length==0){
+        if(controlJson.length==0){
             $.toast(Operation['ui_selectNo']);
             return;
         }
@@ -199,7 +199,7 @@ $("#silent").click(function () {
                 "value": "1"
             });
         });
-        if(controlJson.length && controlJson.length==0){
+        if(controlJson.length==0){
             $.toast(Operation['ui_selectNo']);
             return;
         }
@@ -232,7 +232,7 @@ $("#check").click(function () {
                 "value": "1"
             });
         });
-        if(controlJson.length && controlJson.length==0){
+        if(controlJson.length==0){
             $.toast(Operation['ui_selectNo']);
             return;
         }
