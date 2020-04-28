@@ -5,8 +5,11 @@ var pageNum = 1;
 var clickID = Substation.GetQueryString("clickID");
 // var clickID = "platform";
 var titleName = localStorage.getItem("titleName");
-if (titleName != null && titleName != undefined && titleName.length > 8) {
-    titleName = titleName.substring(0, 8) + "...";
+if (titleName != null && titleName != undefined) {
+    if(titleName.length > 8){
+        titleName = titleName.substring(0, 8) + "...";
+    }
+    $("#titleName").text(titleName);
 }
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
@@ -14,7 +17,6 @@ if (jumpId != undefined && jumpId != null && jumpId != "") {
     clickID = jumpId;
     isPush = "1";
 }
-$("#titleName").text(titleName);
 var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
