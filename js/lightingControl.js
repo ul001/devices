@@ -267,7 +267,7 @@ $(".footer_btn").click(function () {
     $(".footer_btn").addClass("noclick");
     Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
       if (data.code == 200) {
-        $.toast("命令发送成功");
+        $.toast(Operation['ui_sendSuccess']);
         $(this)
           .addClass("active")
           .siblings()
@@ -277,7 +277,7 @@ $(".footer_btn").click(function () {
     // var logList = arr.join(','); //数组转成为字符串
     // confirmAlarmEvents(logList);
   } else {
-    $.toast("请勿频繁操作。");
+    $.alert(Operation['ui_operateAllTip']);
   }
 });
 
