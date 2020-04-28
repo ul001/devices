@@ -213,10 +213,6 @@ $(".button_bar .button").click(function () {
 var canClick = 1;
 $(".footer_btn").click(function () {
   if (canClick == 1) {
-    setTimeout(function () {
-      canClick = 1;
-      $(".footer_btn").removeClass("noclick");
-    }, 15000);
     var arr = [];
     var controlUrl = "/sendBulbControlDemandHTTP";
     var controlparam = {};
@@ -258,9 +254,17 @@ $(".footer_btn").click(function () {
     // var param = {
     //   tEtControlDemandList: JSON.stringify(arr)
     // };
+    if(arr.length && arr.length==0){
+        $.toast(Operation['ui_selectNo']);
+        return;
+    }
     var param = JSON.stringify(arr);
-    $(".footer_btn").addClass("noclick");
+    setTimeout(function () {
+      canClick = 1;
+      $(".footer_btn").removeClass("noclick");
+    }, 15000);
     canClick = 0;
+    $(".footer_btn").addClass("noclick");
     Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
       if (data.code == 200) {
         $.toast("命令发送成功");
