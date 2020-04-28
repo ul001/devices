@@ -5,12 +5,12 @@ var pageNum = 1;
 var clickID = Substation.GetQueryString("clickID");
 // var clickID = "platform";
 var titleName = localStorage.getItem("titleName");
-if(titleName!=null && titleName!=undefined && titleName.length>8){
-    titleName = titleName.substring(0,8)+"...";
+if (titleName != null && titleName != undefined && titleName.length > 8) {
+    titleName = titleName.substring(0, 8) + "...";
 }
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
-if(jumpId!=undefined && jumpId!=null && jumpId!=""){
+if (jumpId != undefined && jumpId != null && jumpId != "") {
     clickID = jumpId;
     isPush = "1";
 }
@@ -94,10 +94,10 @@ function addItems(number, lastIndex) {
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
             var datadic = data.alarmEventLogList;
             var messgeInfo = data.tDtMessInfoType;
-            if(messgeInfo!=undefined){
+            if (messgeInfo != undefined) {
                 titleName = messgeInfo.fMessinfotypeexplain;
-                if(titleName!=null && titleName!=undefined && titleName.length>8){
-                    titleName = titleName.substring(0,8)+"...";
+                if (titleName != null && titleName != undefined && titleName.length > 8) {
+                    titleName = titleName.substring(0, 8) + "...";
                 }
                 $("#titleName").text(titleName);
             }
@@ -217,13 +217,23 @@ $(document).on('infinite', '.infinite-scroll', function () {
 });
 
 function goBack() {
-    if (isAndroid) {
-        android.goBack();
-    } else if (isIOS) {
-        window.history.back();
-        window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
+    if (isPush == "1") {
+        //推送详情点击返回事件
+        if (isAndroid) {
+            android.goBack();
+        } else if (isIOS) {
+            //            window.history.back();
+            window.webkit.messageHandlers.goBackiOS.postMessage("");
+        }
     } else {
-        window.history.back();
+        if (isAndroid) {
+            android.goBack();
+        } else if (isIOS) {
+            window.history.back();
+            window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
+        } else {
+            window.history.back();
+        }
     }
 }
 
@@ -387,15 +397,15 @@ function setAlarmEventConfirmed(logid, confirmType) {
 }
 
 //一键确认
-$("#clearAlarm").click(function(){
-    $.confirm(Operation['ui_selectTip'],function(){
+$("#clearAlarm").click(function () {
+    $.confirm(Operation['ui_selectTip'], function () {
         Substation.getDataByAjaxNoLoading("/oneClickConfirmAlarmEvents", {
-            "fMessinfotypeid": clickID
-        },
-        function (data) {
-            getFirstPage();
-        },
-        function (errorCode) {});
+                "fMessinfotypeid": clickID
+            },
+            function (data) {
+                getFirstPage();
+            },
+            function (errorCode) {});
     });
 });
 
