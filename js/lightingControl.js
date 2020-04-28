@@ -254,7 +254,7 @@ $(".footer_btn").click(function () {
     // var param = {
     //   tEtControlDemandList: JSON.stringify(arr)
     // };
-    if(arr.length && arr.length==0){
+    if(arr.length==0){
         $.toast(Operation['ui_selectNo']);
         return;
     }
