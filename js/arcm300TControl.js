@@ -123,10 +123,6 @@ var canclick = 1;
 //复位
 $("#reset").click(function () {
     if(canclick==1){
-        setTimeout(function(){
-            canclick = 1;
-            $(".footer_btn").removeClass("noclick");
-        },15000);
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
@@ -137,6 +133,14 @@ $("#reset").click(function () {
                 "value": "1"
             });
         });
+        if(controlJson.length==0){
+            $.toast(Operation['ui_selectNo']);
+            return;
+        }
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
@@ -145,17 +149,13 @@ $("#reset").click(function () {
             }
         });
     }else{
-        $.toast(Operation['ui_operateTip']);
+        $.alert(Operation['ui_operateAllTip']);
     }
 });
 
 //分闸
 $("#DO").click(function () {
     if(canclick==1){
-        setTimeout(function(){
-            canclick = 1;
-            $(".footer_btn").removeClass("noclick");
-        },15000);
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
@@ -166,6 +166,14 @@ $("#DO").click(function () {
                 "value": "1"
             });
         });
+        if(controlJson.length==0){
+            $.toast(Operation['ui_selectNo']);
+            return;
+        }
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
@@ -174,17 +182,13 @@ $("#DO").click(function () {
             }
         });
     }else{
-        $.toast(Operation['ui_operateTip']);
+        $.alert(Operation['ui_operateAllTip']);
     }
 });
 
 //消音
 $("#silent").click(function () {
     if(canclick==1){
-        setTimeout(function(){
-            canclick = 1;
-            $(".footer_btn").removeClass("noclick");
-        },15000);
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
@@ -195,6 +199,14 @@ $("#silent").click(function () {
                 "value": "1"
             });
         });
+        if(controlJson.length==0){
+            $.toast(Operation['ui_selectNo']);
+            return;
+        }
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
@@ -203,17 +215,13 @@ $("#silent").click(function () {
             }
         });
     }else{
-        $.toast(Operation['ui_operateTip']);
+        $.alert(Operation['ui_operateAllTip']);
     }
 });
 
 //自检
 $("#check").click(function () {
     if(canclick==1){
-        setTimeout(function(){
-            canclick = 1;
-            $(".footer_btn").removeClass("noclick");
-        },15000);
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
@@ -224,6 +232,14 @@ $("#check").click(function () {
                 "value": "1"
             });
         });
+        if(controlJson.length==0){
+            $.toast(Operation['ui_selectNo']);
+            return;
+        }
+        setTimeout(function(){
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        },15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
@@ -232,7 +248,7 @@ $("#check").click(function () {
             }
         });
     }else{
-        $.toast(Operation['ui_operateTip']);
+        $.alert(Operation['ui_operateAllTip']);
     }
 });
 
