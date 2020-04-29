@@ -312,6 +312,7 @@ function getZhLanguage() {
     ui_normal: "正常",
     ui_deviceId: "编号",
     ui_operateTip: "请勿频繁操作!",
+    ui_operateAllTip: "控制指令发送时间间隔为15秒，请勿频繁操作！",
     ui_noDeviceList: "无设备列表",
     //    设备控制记录
     ui_operateLog: "操作记录",
@@ -339,7 +340,8 @@ function getZhLanguage() {
     ui_Opening: "分闸",
     ui_CloseLight: "关闭灯光",
     ui_OpenLight: "开启灯光",
-    ui_nolightDevice: "No Device",
+    ui_nolightDevice: "无设备",
+    ui_sendSuccess: "命令发送成功",
     //灯光详情
     ui_Serialnumber: "串口号:",
     ui_Equipmenttype: "设备类型:",
@@ -800,6 +802,7 @@ function getEnLanguage() {
     ui_normal: "normal",
     ui_deviceId: "Number",
     ui_operateTip: "Do not operate frequently!",
+    ui_operateAllTip: "The control command sending interval is 15 seconds, please do not operate frequently!",
     ui_noDeviceList: "No device list",
     //    设备控制记录
     ui_operateLog: "Operation record",
@@ -828,6 +831,7 @@ function getEnLanguage() {
     ui_CloseLight: "Close Light",
     ui_OpenLight: "Open Light",
     ui_nolightDevice: "No Device",
+    ui_sendSuccess: "Command sent successfully",
     //灯光详情
     ui_Serialnumber: "SerialNumber:",
     ui_Equipmenttype: "EquipmentType:",
