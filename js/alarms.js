@@ -69,7 +69,7 @@ function loadMenu() {
         );
       });
       $(".infinite-scroll-preloader").empty();
-      fillData(0);
+      fillData();
     }
   },function(errorcode){});
 
@@ -91,7 +91,7 @@ function loadMenu() {
   // });
 }
 
-function fillData(parentId) {
+function fillData() {
   Substation.getDataByAjaxNoLoading("/getUnConfirmedEventsNum", {}, function(
     data
   ) {
