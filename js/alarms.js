@@ -14,15 +14,15 @@ if (isIOS) {
 }
 
 //下拉刷新
-$(document).on("refresh", ".pull-to-refresh-content", function(e) {
-  setTimeout(function() {
+$(document).on("refresh", ".pull-to-refresh-content", function (e) {
+  setTimeout(function () {
     loadMenu();
     // done
     $.pullToRefreshDone(".pull-to-refresh-content");
   }, 2000);
 });
 
-window.addEventListener("pageshow", function(e) {
+window.addEventListener("pageshow", function (e) {
   //ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
   var u = navigator.userAgent,
     app = navigator.appVersion;
@@ -41,37 +41,37 @@ function loadMenu() {
   $(".list-container").empty();
   //    $.showPreloader(Operation['ui_loading']);
   $(".infinite-scroll-preloader").html('<div class="preloader"></div>');
-  Substation.getDataByAjaxNoLoading("/getMessInfoType", "", function(data) {
+  Substation.getDataByAjaxNoLoading("/getMessInfoType", "", function (data) {
     if (
       data.hasOwnProperty("tDtMessInfoType") &&
       data.tDtMessInfoType.length > 0
     ) {
-      $(data.tDtMessInfoType).each(function() {
+      $(data.tDtMessInfoType).each(function () {
         if (this.fMessinfotypeid == "1") {
           return true;
         }
         $(".list-container").append(
           '<li class="item-content item-link" id="item' +
-            this.fMessinfotypeid +
-            '" value="' +
-            this.fMessinfotypeid +
-            '">\n' +
-            '                        <div class="item-media"><i class="icon icon-alarm"></i></div>\n' +
-            '                        <div class="item-inner">\n' +
-            '                            <div class="item-title">' +
-            this.fMessinfotypeexplain +
-            "</div>\n" +
-            '                            <div class="item-after" id="' +
-            this.fMessinfotypeid +
-            '"></div>\n' +
-            "                        </div>\n" +
-            "                    </li>"
+          this.fMessinfotypeid +
+          '" value="' +
+          this.fMessinfotypeid +
+          '">\n' +
+          '                        <div class="item-media"><i class="icon icon-alarm"></i></div>\n' +
+          '                        <div class="item-inner">\n' +
+          '                            <div class="item-title">' +
+          this.fMessinfotypeexplain +
+          "</div>\n" +
+          '                            <div class="item-after" id="' +
+          this.fMessinfotypeid +
+          '"></div>\n' +
+          "                        </div>\n" +
+          "                    </li>"
         );
       });
       $(".infinite-scroll-preloader").empty();
       fillData();
     }
-  },function(errorcode){});
+  }, function (errorcode) {});
 
   // Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
   //     pid: menuId
@@ -92,13 +92,14 @@ function loadMenu() {
 }
 
 function fillData() {
-  Substation.getDataByAjaxNoLoading("/getUnConfirmedEventsNum", {}, function(
+  Substation.getDataByAjaxNoLoading("/getUnConfirmedEventsNum", {}, function (
     data
   ) {
     if (!data.unConfirmedEventsNum.length) {
       return;
     }
-    $(data.unConfirmedEventsNum).each(function(key, value) {
+    unreadCountSum = 0;
+    $(data.unConfirmedEventsNum).each(function (key, value) {
       if (value.fMessinfotypeid == "1") {
         return true;
       }
@@ -146,12 +147,12 @@ function fillData() {
     var upLoadClicktag = true;
     $(".item-link")
       .unbind()
-      .click(function() {
+      .click(function () {
         if (!upLoadClicktag) {
           return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
           upLoadClicktag = true;
         }, 1000);
         var clickId = $(this).attr("value");
@@ -182,7 +183,7 @@ function fillData() {
         }
       });
     //        $.hidePreloader();
-  },function(errorcode){});
+  }, function (errorcode) {});
   // }
   // });
 }
