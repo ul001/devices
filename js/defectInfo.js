@@ -40,13 +40,13 @@ if (taskProblem == 1) {
   problemParam["fTaskid"] = taskId;
 }
 
-if(canClick=="false"){
-    $(".upload_img_wrap .upload_img").unbind();
-    $(".upload_img_wrap .upload_img").css("display", "none");
-    $(".blueColor").removeClass("blueColor");
-    $("#saveData").css("display", "none");
-    $("#fClientadvice").val('');
-    $("#fState").val('');
+if (canClick == "false") {
+  $(".upload_img_wrap .upload_img").unbind();
+  $(".upload_img_wrap .upload_img").css("display", "none");
+  $(".blueColor").removeClass("blueColor");
+  $("#saveData").css("display", "none");
+  $("#fClientadvice").val('');
+  $("#fState").val('');
 }
 
 Substation.getDataByAjax(url, problemParam, function (data) {
@@ -55,11 +55,11 @@ Substation.getDataByAjax(url, problemParam, function (data) {
   var beforeimg = data.beforeimg;
   var afterimg = data.afterimg;
   var deviceName = defectJson.fdeviceinfoName;
-  if(deviceName==undefined){
-      deviceName = defectJson.treePathName;
-      $(".pathShow").hide();
-  }else{
-      $("#treePath").text(Substation.removeUnDefinedStr(defectJson.fDeviceNamePath));
+  if (deviceName == undefined) {
+    deviceName = defectJson.treePathName;
+    $(".pathShow").hide();
+  } else {
+    $("#treePath").text(Substation.removeUnDefinedStr(defectJson.fDeviceNamePath));
   }
   $("#taskNumber").text(Substation.removeUnDefinedStr(defectJson.fTasknumber));
   $("#deviceName").text(Substation.removeUnDefinedStr(deviceName));
@@ -359,13 +359,14 @@ function closePicture(obj) {
 //loadSavedPic();
 
 var upLoadClicktag = true;
+
 function saveFormData() {
-  if(!upLoadClicktag){
-      return;
+  if (!upLoadClicktag) {
+    return;
   }
   upLoadClicktag = false;
-  setTimeout(function() {
-      upLoadClicktag = true;
+  setTimeout(function () {
+    upLoadClicktag = true;
   }, 1000);
   $(".fileInput").each(function () {
     if ($(this).val() == "" || $(this).val() == null) {

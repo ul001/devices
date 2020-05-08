@@ -27,11 +27,10 @@ function loadMenu() {
   }
   $.showPreloader(Operation["ui_loading"]);
   Substation.getDataByAjaxNoLoading(
-    "/getAlarmEventLogById",
-    {
+    "/getAlarmEventLogById", {
       fAlarmeventlogid: alarmeventlogid
     },
-    function(data) {
+    function (data) {
       if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
         creatView(data.alarmEventLogById);
       } else {
@@ -39,13 +38,13 @@ function loadMenu() {
       }
       $.hidePreloader();
     },
-    function(errorcode) {
+    function (errorcode) {
       $.hidePreloader();
     }
   );
 }
 
-$(".pull-left.click_btn").click(function() {
+$(".pull-left.click_btn").click(function () {
   if (isPush == "1") {
     //推送详情点击返回事件
     if (isAndroid) {
