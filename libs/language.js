@@ -349,6 +349,10 @@ function getZhLanguage() {
     //消警信息
     ui_alarmCleanInfo: "消警信息",
     ui_processExplain: "处理说明:",
+    ui_messageId: "推送ID:",
+    ui_messageName: "接收人:",
+    ui_messageBody: "推送详情:",
+    ui_Title: "标题",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -833,7 +837,10 @@ function getEnLanguage() {
     //消警信息
     ui_alarmCleanInfo: "Alarm Info",
     ui_processExplain: "Process Explain:",
-
+    ui_messageId: "Push ID:",
+    ui_messageName: "Receiver:",
+    ui_messageBody: "Push Detail:",
+    ui_Title: "Title",
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
