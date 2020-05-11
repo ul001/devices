@@ -353,6 +353,7 @@ function getZhLanguage() {
     ui_messageName: "接收人:",
     ui_messageBody: "推送详情:",
     ui_Title: "标题",
+    ui_selectRealPerson: "已选择的人员",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -841,6 +842,9 @@ function getEnLanguage() {
     ui_messageName: "Receiver:",
     ui_messageBody: "Push Detail:",
     ui_Title: "Title",
+
+    ui_selectRealPerson: "Selected Person",
+
     //code码
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
