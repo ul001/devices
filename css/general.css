@@ -104,3 +104,16 @@ select {
 .bottomTip{
     font-size:.65rem;
 }
+
+.textRight{
+    text-align:right;
+}
+
+.toast{
+    max-width:90%;
+    height:initial;
+    line-height:initial;
+    padding:.35rem .8rem;
+    font-size:.7rem;
+    border-radius:.2rem;
+}

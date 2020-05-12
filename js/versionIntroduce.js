@@ -7,11 +7,11 @@ if(isAndroid){
 function getData(){
     $.ajax({
         type: "GET",
-        url: "http://116.236.149.165:8090/SubstationWEBV2/v4/getVersionHistory",
+        url: "http://116.236.149.165:8090/SubstationWEBV2/sys/getVersionHistory",
         data: {fId:appId},
         beforeSend: function (request) {
                         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-                        request.setRequestHeader("Authorization", tokenFromAPP);
+//                        request.setRequestHeader("Authorization", tokenFromAPP);
                         $.showPreloader(Operation['ui_loading']);
                     },
         success: function (data) {
