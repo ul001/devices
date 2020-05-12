@@ -279,6 +279,16 @@ function creatView(param) {
     sb += "                        </ul>";
 
     $("#yaoxin").append(sb);
+    var showstr =
+      '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">'+Operation['ui_postAlarmClean']+'</a></div>';
+    $("#yaoxin").append(showstr);
+    //执行任务按钮事件
+    $("#carryOut").click(function () {
+      localStorage.setItem("alarmSubid", param.fSubid);
+      localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
+      window.location.href = "alarmCleanPost.html";
+    });
+    // $("#addVarContain126").html(showstr);
     $.hidePreloader();
   } else {
     $.hidePreloader();

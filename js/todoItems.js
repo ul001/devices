@@ -318,6 +318,10 @@ jQuery(document).ready(function () {
               //缺陷
               text +=
                 '                                                src="img/missionque.png" />';
+            } else if (this.fTasktypeid == 5) {
+              //消警
+              text +=
+                '                                                src="img/missionjing.png" />';
             } else {
               //巡检
               text +=
@@ -433,6 +437,10 @@ jQuery(document).ready(function () {
               //缺陷
               text +=
                 '                                                src="img/missionque.png" />';
+            } else if (this.fTasktypeid == 5) {
+              //消警
+              text +=
+                '                                                src="img/missionjing.png" />';
             } else {
               //巡检
               text +=

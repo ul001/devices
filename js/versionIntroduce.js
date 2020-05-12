@@ -7,7 +7,7 @@ if(isAndroid){
 function getData(){
     $.ajax({
         type: "GET",
-        url: "http://116.236.149.165:8090/SubstationWEBV2/sys/getVersionHistory",
+        url: "http://116.236.149.165:8090/SubstationWEBV2/sys/getAndroidVersionHistory",
         data: {fId:appId},
         beforeSend: function (request) {
                         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
