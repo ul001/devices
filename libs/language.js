@@ -353,6 +353,8 @@ function getZhLanguage() {
     ui_messageName: "接收人:",
     ui_messageBody: "推送详情:",
     ui_Title: "标题",
+    ui_selectRealPerson: "已选择的人员",
+    ui_postAlarmClean:"发布消警任务",
     //发布消警
     ui_alarmCleanPost:"报警派单",
     ui_charger:"负责人",
@@ -371,6 +373,7 @@ function getZhLanguage() {
     ui_remove:"移除",
     ui_notEmpty:"不允许为空",
     ui_timeSelectError:"开始时间必须小于结束时间！",
+    ui_postSuccess:"派单成功！",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -859,6 +862,8 @@ function getEnLanguage() {
     ui_messageName: "Receiver:",
     ui_messageBody: "Push Detail:",
     ui_Title: "Title",
+    ui_selectRealPerson: "Selected Person",
+    ui_postAlarmClean:"Issue alarm elimination task",
     //发布消警
     ui_alarmCleanPost:"Alarm dispatch",
     ui_charger:"Principal",
@@ -877,6 +882,7 @@ function getEnLanguage() {
     ui_remove:"Remove",
     ui_notEmpty:" is not allowed to be empty",
     ui_timeSelectError:"StartTime must be less than CompletionTime!",
+    ui_postSuccess:"Successful delivery!",
 
     //code码
     code_200: "Request succeeds, insert success",

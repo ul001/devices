@@ -86,11 +86,17 @@ function addItems(number, lastIndex) {
     //        }
     //        $("#search").val(params['subName']);
     //    } else {
+
     params = {
         fPushType: "1",
         pageNo: pageNum,
         pageSize: number
     };
+    if (isAndroid) {
+        params["fTargetType"] = "Android";
+    } else if (isIOS) {
+        params["fTargetType"] = "IOS";
+    }
     if (selectSubid != "" && selectSubid != null) {
         params["fSubid"] = selectSubid;
     }

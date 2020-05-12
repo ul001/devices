@@ -1,6 +1,8 @@
 //读取本地传参
-var selectSubId = localStorage.getItem("");
-var selectAlarmId = localStorage.getItem("");
+var selectSubId = localStorage.getItem("alarmSubid");
+var selectAlarmId = localStorage.getItem("alarmEventlogid");
+localStorage.removeItem("alarmSubid");
+localStorage.removeItem("alarmEventlogid");
 
 var peopleType = "";
 var selectUserList = [];
@@ -108,7 +110,11 @@ function postTask(){
     var params = {userIds:workerIdStr,fTaskchargerid:chargerId,fTasktypeid:5,fStartdate:startTime+" 00:00:00",fDeadlinedate:completeTime+" 23:59:59",
         fTaskcontent:taskContent,subIds:selectSubId,fAlarmeventlogid:selectAlarmId};
     Substation.postDataByAjax("/releaseTask",params,function(data){
-
+        if(data.code=="200"){
+            $.alert(Operation['ui_postSuccess'],function(){
+                window.history.back();
+            });
+        }
     });
 }
 
