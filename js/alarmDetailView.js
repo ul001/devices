@@ -279,6 +279,16 @@ function creatView(param) {
     sb += "                        </ul>";
 
     $("#yaoxin").append(sb);
+    var showstr =
+      '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>发布消警任务</a> </div> </div>';
+    $("#yaoxin").append(showstr);
+    //执行任务按钮事件
+    $("#carryOut").click(function () {
+      localStorage.setItem("alarmSubid", param.fSubid);
+      localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
+      window.location.href = "alarmCleanPost.html";
+    });
+    // $("#addVarContain126").html(showstr);
     $.hidePreloader();
   } else {
     $.hidePreloader();

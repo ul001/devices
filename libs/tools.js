@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODg1NTY0ODIsInVzZXJuYW1lIjoiaGFoYWhhIn0.y49CcpTXBAN4zPeo_yeaPNgqpSmKT9_2zlAlvyVFMvM";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1ODk4NTc3MzYsInVzZXJuYW1lIjoibmFuYXlhIn0.X9upla4ArUWEiSHL_C03F-C1tE1vhuek-reueHyhdb4";
 var ipAddress = "http://116.236.149.165:8090";
 var userId = "315";
 //语言字段传参
@@ -390,40 +390,40 @@ var Substation = {
     });
   },
 
-    postDataByAjaxNoLoading: function (url, params, successCallback, errorCallback) {
-      $.ajax({
-        type: "POST",
-        url: baseUrlFromAPP + url,
-        data: params,
-        beforeSend: function (request) {
-          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
-          request.setRequestHeader("Authorization", tokenFromAPP);
-        },
-        success: function (data) {
-          if (data == undefined) {
-            $.toast(Operation['ui_nodata']);
-            return;
+  postDataByAjaxNoLoading: function (url, params, successCallback, errorCallback) {
+    $.ajax({
+      type: "POST",
+      url: baseUrlFromAPP + url,
+      data: params,
+      beforeSend: function (request) {
+        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+        request.setRequestHeader("Authorization", tokenFromAPP);
+      },
+      success: function (data) {
+        if (data == undefined) {
+          $.toast(Operation['ui_nodata']);
+          return;
+        } else {
+          if (data.code == "200") {
+            successCallback(data.data);
+          } else if (data.code == "5000") {
+            Substation.showCodeTips(data.code);
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
-            if (data.code == "200") {
-              successCallback(data.data);
-            } else if (data.code == "5000") {
-              Substation.showCodeTips(data.code);
-              Substation.reportError(JSON.stringify(data.data.stackTrace));
-            } else {
-              Substation.showCodeTips(data.code);
-            }
-          }
-        },
-        error: function (data) {
-          errorCallback(data.status);
-          if (data.status == 0) {
-            $.toast(Operation['ui_neterror']);
-          } else {
-            $.toast(Operation['code_fail']);
+            Substation.showCodeTips(data.code);
           }
         }
-      });
-    },
+      },
+      error: function (data) {
+        errorCallback(data.status);
+        if (data.status == 0) {
+          $.toast(Operation['ui_neterror']);
+        } else {
+          $.toast(Operation['code_fail']);
+        }
+      }
+    });
+  },
 
   postDataByAjax: function (url, params, successCallback) {
     $.showPreloader(Operation['ui_loading']);
@@ -495,9 +495,9 @@ var Substation = {
         $.hidePreloader();
         $.toast(Operation['ui_datanoreturn']);
       },
-      complete : function(XMLHttpRequest,status){ //请求完成后最终执行参数
-        if(status=='timeout'){//超时,status还有success,error等值的情况
-            $.toast(Operation['ui_overtime']);
+      complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
+        if (status == 'timeout') { //超时,status还有success,error等值的情况
+          $.toast(Operation['ui_overtime']);
         }
       }
     });

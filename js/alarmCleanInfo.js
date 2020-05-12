@@ -19,7 +19,7 @@ var selectSubid = localStorage.getItem("fSubid");
 var canClick = localStorage.getItem("canClick");
 
 // var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
-var alarmeventlogid = "2020050712100851951629671";
+var alarmeventlogid = "20200512153410265227891";
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
 if (jumpId != undefined && jumpId != null && jumpId != "") {
@@ -40,13 +40,13 @@ function loadMenu() {
     }
     $.showPreloader(Operation["ui_loading"]);
     Substation.getDataByAjaxNoLoading(
-        "/getAlarmEventLogById", {
-            fAlarmeventlogid: alarmeventlogid
+        "/getTaskAndAlarmEventDetailById", {
+            fTaskandalarmeventid: alarmeventlogid
             // fAlarmeventlogid: "2020050712100851951629671"
         },
         function (data) {
-            if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
-                creatView(data.alarmEventLogById);
+            if (data.hasOwnProperty("taskAndAlarmEventDetail") && data.taskAndAlarmEventDetail) {
+                creatView(data);
 
             } else {
                 $.toast("数据异常，未获取到报警对应详情");
@@ -73,24 +73,25 @@ $(".pull-left.click_btn").click(function () {
     }
 });
 
-function creatView(param) {
+function creatView(dataParam) {
     var html = "";
-    if (param) {
-        // fAlarmeventlogid: 事件id(必有)
-        // fSubid: 变电所id（ 必有）
-        // fMessinfocode: 消息类型（ 用于分类， 报警页面应该不用显示）（ 维护了对应的messinfocode才会有）
-        // fMessinfotypeid: 消息种类（ 用于分类， 报警页面应该不用显示）（ 维护了code对应的type才会有）
-        // fDevicecode: 设备编号（ 必有）
-        // fParamcode: 参数编码(仪表报警有， 网关没有，)（ 不一定）
-        // fValue: 参数对应值(仪表报警有， 网关没有)（ 不一定）
-        // fLimitvalue: 越限值(仪表报警下的越限报警有， 普通仪表报警没有， 如开关门报警没有， A相相电压越限就有)（ 不一定）
-        // fAlarmType报警情况（ 必有）
-        // fAlarmDesc: 报警详情（ 必有）
-        // fAlarmTime: 报警时间（ 必有）
-        // fConfirmstatus: 确认状态
-        // fConfirmuserid: 确认人id
-        // fConfirmtime: 确认时间
+    if (dataParam) {
+        var taskParam = dataParam.taskAndAlarmEventDetail;
+        var picArr = dataParam.tDevTaskAndAlarmEventImgs;
+        var param = JSON.parse(taskParam.fAlarmevnetlogcontent);
         var sb = "                        <ul>";
+        sb += '                            <li class="item-content">';
+        sb += '                                <div class="item-inner">';
+        sb +=
+            '                                    <div class="item-title label" data-i18n="ui_Subname">' +
+            Operation["ui_taskNumber"] +
+            "</div>";
+        sb +=
+            '                                    <div class="item-label subName">' +
+            (taskParam.fTasknumber ? taskParam.fTasknumber : "") +
+            "</div>";
+        sb += "                                </div>";
+        sb += "                            </li>";
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb +=
@@ -373,6 +374,49 @@ function creatView(param) {
         sb += "                        <\/li>";
         sb += "                        </ul>";
         $("#form1").append(sb);
+
+        if (picArr.length > 0) {
+            $.each(picArr, function (i, value) {
+                imgNum++;
+                if (value.fImgnamemin == undefined) {
+                    var imgDiv =
+                        '<div class="imgContainer RectificationPIC" id=' +
+                        value.fTaskandalarmeventid +
+                        " data-index=" +
+                        (i + 1) +
+                        "><img   src=" +
+                        (Substation.ipAddressFromAPP +
+                            imgUrl +
+                            "/" +
+                            value.fImgname) +
+                        " name=" +
+                        (Substation.ipAddressFromAPP +
+                            imgUrl +
+                            "/" +
+                            value.fImgname) +
+                        '  onclick="imgDisplay(this)"></div>';
+                } else {
+                    var imgDiv =
+                        '<div class="imgContainer RectificationPIC" id=' +
+                        value.fTaskandalarmeventid +
+                        " data-index=" +
+                        (i + 1) +
+                        "><img   src=" +
+                        (Substation.ipAddressFromAPP +
+                            imgUrl +
+                            "/" +
+                            value.fImgnamemin) +
+                        " name=" +
+                        (Substation.ipAddressFromAPP +
+                            imgUrl +
+                            "/" +
+                            value.fImgname) +
+                        '  onclick="imgDisplay(this)"></div>';
+                }
+
+                $("#imgBox").append(imgDiv);
+            });
+        }
         $.hidePreloader();
     } else {
         $.hidePreloader();
