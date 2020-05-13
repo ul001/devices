@@ -17,7 +17,7 @@ var taskProblem = Substation.GetQueryString("taskProblem");
 var selectSubid = localStorage.getItem("fSubid");
 //var clickTree = localStorage.getItem("clickTree");
 var canClick = localStorage.getItem("canClick");
-
+var alarmeventlogid = localStorage.getItem("alarmeventlogid");
 // var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
 var alarmeventlogid = "20200512153410265227891";
 var jumpId = Substation.GetQueryString("jumpId");
@@ -76,6 +76,7 @@ $(".pull-left.click_btn").click(function () {
 function creatView(dataParam) {
     var html = "";
     if (dataParam) {
+        var imgUrl = dataParam.ImgURL;
         var taskParam = dataParam.taskAndAlarmEventDetail;
         var picArr = dataParam.tDevTaskAndAlarmEventImgs;
         var param = JSON.parse(taskParam.fAlarmevnetlogcontent);
@@ -350,7 +351,7 @@ function creatView(dataParam) {
             "</span></div>";
         sb += '                                        <div class="item-input">';
         sb +=
-            '                                            <input type="text" id="fResolution" name="fResolution" value="">';
+            '                                            <input type="text" id="fSolveresult" name="fSolveresult" value="">';
         sb += "                                        </div>";
         sb += "                                    </div>";
         sb += "                                </div>";
@@ -374,6 +375,21 @@ function creatView(dataParam) {
         sb += "                        <\/li>";
         sb += "                        </ul>";
         $("#form1").append(sb);
+
+
+
+        $("#fSolveresult").val(Substation.removeUnDefinedStr(taskParam.fSolveresult));
+        $("#fState").val(Substation.removeUnDefinedStr(taskParam.fState));
+        if (canClick == "false") {
+            $(".upload_img_wrap .upload_img").unbind();
+            $(".upload_img_wrap .upload_img").css("display", "none");
+            $(".blueColor").removeClass("blueColor");
+            $("#saveData").css("display", "none");
+            $("#fClientadvice").val('');
+            $("#fState").val('');
+            $("#fSolveresult").attr("readonly", true);
+            // $("#fState").attr("readonly", true);
+        }
 
         if (picArr.length > 0) {
             $.each(picArr, function (i, value) {
@@ -598,9 +614,9 @@ function saveFormData() {
     }
     var params = new FormData($("#form1")[0]);
     var taskId = localStorage.getItem("taskID");
-    params.append("fDeviceproblemid", fDeviceproblemid);
-    params.append("fTaskId", taskId);
-    Substation.postFormDataByAjax("/updateDeviceProblemDetail", params, function (
+    // params.append("fDeviceproblemid", fDeviceproblemid);
+    params.append("fTaskandalarmeventid", alarmeventlogid);
+    Substation.postFormDataByAjax("/modifyTaskAndAlarmEventDetail", params, function (
         data
     ) {
         if (data.code == 200) {

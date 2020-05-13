@@ -23,6 +23,7 @@ var upLoadClicktag = true;
 
 //任务id
 var taskID = localStorage.getItem("taskID");
+var tasktypeid = localStorage.getItem("tasktypeid");
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
 if (jumpId != undefined && jumpId != null && jumpId != "") {
@@ -282,6 +283,11 @@ function getNetData() {
                     window.location.href = "defectRectification.html?value=0";
                 });
             }
+            //如果是消警任务，则剔除
+            if (tasktypeid == 5) {
+                $("#totaldefect").remove();
+                $("#defectUntreatNum").remove();
+            }
         }
     });
 }
@@ -445,6 +451,11 @@ $(".doDetail").click(function () {
         //缺陷整改
         localStorage.setItem("missionTypeid", missionTypeid);
         window.location.href = "defectRectification.html";
+    } else if (missionTypeid == 5) {
+        //消警任务
+        localStorage.setItem("alarmeventlogid", missionTypeid);
+        localStorage.setItem("missionTypeid", missionTypeid);
+        window.location.href = "alarmCleanInfo.html";
     } else {
         //        $.toast("未知任务类型");
     }
