@@ -313,6 +313,7 @@ span.veryDanger{
 label.label-checkbox i.icon-form-checkbox{
     width:.8rem;
     height:.8rem;
+    border-radius: .8rem;
 }
 
 .list-block .item-content{
@@ -328,7 +329,7 @@ label.label-checkbox i.icon-form-checkbox{
 }
 
 label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkbox{
-    background:#6ECD44;
+    background:#01ADA8;;
 }
 
 .button.bg-green{

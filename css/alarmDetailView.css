@@ -28,3 +28,15 @@ span.normal {
     background: #F1FEFF;
     color: #83D1AE;
 }
+
+.list-block .button-bottom.button-fill{
+    background-color: #01ADA8;
+    width:80%;
+    margin-left:10%;
+    height:1.8rem;
+    line-height:1.8rem;
+}
+
+.bottomDiv{
+    padding:1rem;
+}

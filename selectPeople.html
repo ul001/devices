@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/selectPeople.css">
+</head>
+
+<body>
+<div class="page-group">
+    <div id="page1" class="page page-current">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn" onclick="window.history.back()">
+                <span class=" icon icon-left"></span>
+                返回
+            </a>
+            <h1 class="title title_color">选择<span id="peopleType"></span></h1>
+        </header>
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                <div class="search-input">
+                    <label class="icon icon-search" for="searchDaiban"></label>
+                    <input type="search" id="searchDaiban" placeholder="请输入用户名关键词"/>
+                </div>
+            </div>
+        </div>
+        <nav class="bar bar-footer">
+            <span id="showSelected">已选择:</span>
+            <a href="#" class="button bg-primary col-33" onclick="saveSelectedPeople()">确定</a>
+        </nav>
+        <div class="content">
+            <div class="list-block">
+                <ul id="classList">
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">
+                                    <span data-id="-1">组织机构</span><!--<i class="icon icon-right"></i>
+                                    <span class="preClass">安科瑞运维小组</span><i class="icon icon-right"></i>
+                                    <span>运维测试</span>-->
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="classUl">
+                    <li>
+                        <div class="item-content" data-id="10100001">
+                            <div class="item-inner">
+                                <div class="item-title">安科瑞运维小组</div>
+                                <div class="item-after">
+                                    <span class="nextClass">
+                                        <i class="icon icon-nextclass"></i>下级
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content" data-id="10100001">
+                            <div class="item-inner">
+                                <div class="item-title">江苏安科瑞运维</div>
+                                <div class="item-after">
+                                    <span class="nextClass">
+                                        <i class="icon icon-nextclass"></i>下级
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="personUl" id="selectAll">
+                    <li>
+                        <label class="label-checkbox item-content" data-id="10100001">
+                            <input type="checkbox" name="my-checkbox">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">全选</div>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+                <ul class="personUl" id="personListUl">
+                    <li>
+                        <label class="label-checkbox item-content" data-id="10100001">
+                            <input type="checkbox" name="my-checkbox">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">panhong</div>
+                            </div>
+                        </label>
+                    </li>
+                    <li>
+                        <label class="label-checkbox item-content" data-id="10100001">
+                            <input type="checkbox" name="my-checkbox">
+                            <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                            <div class="item-inner">
+                                <div class="item-title">xuhang</div>
+                            </div>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="page2" class="page">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn" onclick="$.router.back();">
+                <span class=" icon icon-left"></span>
+                返回
+            </a>
+            <h1 class="title title_color">已选择<span id="numberShow">3</span>人</h1>
+            <a class="button button-link button-nav pull-right click_btn" onclick="$.router.back();">
+                确定
+            </a>
+        </header>
+        <div class="content">
+            <div class="list-block">
+                <ul id="selectedUl">
+                    <li>
+                        <div class="item-content">
+                            <div class="item-inner">
+                                <div class="item-title">江苏安科瑞运维</div>
+                                <div class="item-after">
+                                    <span class="removeUser redColor">
+                                        移除
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+<script src="libs/language.js"></script>
+<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<script src="libs/tools.js"></script>
+<script src="js/selectPeople.js"></script>
+</body>
+
+</html>

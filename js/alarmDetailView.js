@@ -280,7 +280,7 @@ function creatView(param) {
 
     $("#yaoxin").append(sb);
     var showstr =
-      '<div class="row buttonsEvent"> <div class = "col-80" id = "checkFinishInCss" > <a href = "# "class = "button button-big button-fill bottom-btn" id = "carryOut" ><i class="icon icon-missionDetail"></i>发布消警任务</a> </div> </div>';
+      '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">'+Operation['ui_postAlarmClean']+'</a></div>';
     $("#yaoxin").append(showstr);
     //执行任务按钮事件
     $("#carryOut").click(function () {
