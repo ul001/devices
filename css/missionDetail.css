@@ -42,7 +42,7 @@
     background-image: url(../img/i-checkInPic.jpg);
 }
 
-.icon-starttask{
+.icon-starttask {
     display: inline-block;
     width: 0.85rem;
     height: 0.85rem;
@@ -72,7 +72,7 @@
     background-image: url(../img/i-missionDetail.jpg);
 }
 
-.icon-chargeReturn{
+.icon-chargeReturn {
     width: 0.9rem;
     height: 0.9rem;
     margin-bottom: 0.2rem;
@@ -88,7 +88,7 @@
     margin-left: 2.5rem;
 }
 
-.row.no-gutter{
+.row.no-gutter {
     display: flex;
     justify-content: center;
     position: fixed;
@@ -96,20 +96,24 @@
     width: 100%;
 }
 
-#addVarContain125{
-    margin-bottom:5rem;
+#addVarContain125 {
+    margin-bottom: 5rem;
 }
 
-.row .button{
-    display:none;
+.row .button {
+    display: none;
 }
 
-#submitTask,#chargeReturn,#chargeSubmit{
-    margin-left:.75rem;
+#submitTask,
+#chargeReturn,
+#chargeSubmit {
+    margin-left: .75rem;
 }
 
-#chargeTask,#chargeReturn,#chargeSubmit{
-    width:28%;
+#chargeTask,
+#chargeReturn,
+#chargeSubmit {
+    width: 28%;
 }
 
 /* #addVarContan126 .row {

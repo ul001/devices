@@ -187,6 +187,18 @@ jQuery(document).ready(function () {
             pageNum = 1;
             getFirstPage(tabName);
           }
+        },
+        {
+          text: "消警",
+          onClick: function () {
+            $(".clickrightbtn").text("消警");
+            tasktypeid = 5;
+            tasktypeName = "消警";
+            localStorage.setItem("taskTypeId", tasktypeid);
+            localStorage.setItem("taskTypeName", tasktypeName);
+            pageNum = 1;
+            getFirstPage(tabName);
+          }
         }
         // {
         //     text: '合同收款',
@@ -299,9 +311,11 @@ jQuery(document).ready(function () {
             text +=
               '                            <div class="card card1"  id="' +
               this.fTaskid +
-              '" name="' +
+              '"  name="' +
               this.fTasktypeid +
-              '"';
+              '" data-taskid="' +
+              this.fTasktypeid +
+              '">';
             text +=
               '                                <div class="card-content">';
             text +=
@@ -363,8 +377,9 @@ jQuery(document).ready(function () {
               upLoadClicktag = true;
             }, 1000);
             var taskID = $(this).attr("id");
-            //            var tasktypeid = $(this).attr("name");
+            var tasktypeid = $(this).attr("name");
             //            localStorage.setItem("showType", "missionFinish");
+            localStorage.setItem("tasktypeid", tasktypeid);
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             if (isAndroid) {
@@ -500,10 +515,11 @@ jQuery(document).ready(function () {
             upLoadClicktag = true;
           }, 1000);
           var taskID = $(this).attr("name");
-          //          var tasktypeid = $(this).attr("data-taskid");
+          var tasktypeid = $(this).attr("data-taskid");
           //          if (tasktypeid == 1) {
           //巡视任务
           //            localStorage.setItem("showType", "missionDoing");
+          localStorage.setItem("tasktypeid", tasktypeid);
           localStorage.setItem("missionType", clickNum);
           localStorage.setItem("taskID", taskID);
           if (isAndroid) {
