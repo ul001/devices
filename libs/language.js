@@ -354,6 +354,26 @@ function getZhLanguage() {
     ui_messageBody: "推送详情:",
     ui_Title: "标题",
     ui_selectRealPerson: "已选择的人员",
+    ui_postAlarmClean:"发布消警任务",
+    //发布消警
+    ui_alarmCleanPost:"报警派单",
+    ui_charger:"负责人",
+    ui_worker:"执行人",
+    ui_askFinishTime:"要求完成时间",
+    ui_pleaseSelect:"请选择",
+    ui_alarmTaskContent:"任务内容",
+    ui_alarmTaskContentTip:"请输入任务内容",
+    //选人
+    ui_selectPeople:"选择",
+    ui_selectUser:"请输入用户名或姓名进行搜索",
+    ui_hasSelected:"已选择",
+    ui_organization:"组织机构",
+    ui_personNum:"人",
+    ui_nextClass:"下级",
+    ui_remove:"移除",
+    ui_notEmpty:"不允许为空",
+    ui_timeSelectError:"开始时间必须小于结束时间！",
+    ui_postSuccess:"派单成功！",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -842,8 +862,27 @@ function getEnLanguage() {
     ui_messageName: "Receiver:",
     ui_messageBody: "Push Detail:",
     ui_Title: "Title",
-
     ui_selectRealPerson: "Selected Person",
+    ui_postAlarmClean:"Issue alarm elimination task",
+    //发布消警
+    ui_alarmCleanPost:"Alarm dispatch",
+    ui_charger:"Principal",
+    ui_worker:"Executive",
+    ui_askFinishTime:"CompletionTime",
+    ui_pleaseSelect:"Please choose",
+    ui_alarmTaskContent:"Task content",
+    ui_alarmTaskContentTip:"Please enter the task content",
+    //选人
+    ui_selectPeople:"Select",
+    ui_selectUser:"Please enter a username or name to search",
+    ui_hasSelected:"Selected",
+    ui_organization:"Organization",
+    ui_personNum:"person",
+    ui_nextClass:"Next",
+    ui_remove:"Remove",
+    ui_notEmpty:" is not allowed to be empty",
+    ui_timeSelectError:"StartTime must be less than CompletionTime!",
+    ui_postSuccess:"Successful delivery!",
 
     //code码
     code_200: "Request succeeds, insert success",
