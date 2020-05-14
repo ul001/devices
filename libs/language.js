@@ -368,12 +368,15 @@ function getZhLanguage() {
     ui_selectUser:"请输入用户名或姓名进行搜索",
     ui_hasSelected:"已选择",
     ui_organization:"组织机构",
-    ui_personNum:"人",
+    ui_personNum:"个",
     ui_nextClass:"下级",
     ui_remove:"移除",
     ui_notEmpty:"不允许为空",
     ui_timeSelectError:"开始时间必须小于结束时间！",
     ui_postSuccess:"派单成功！",
+    //发布任务
+    ui_substation:"变电所",
+    ui_taskPost:"发布任务",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -877,12 +880,15 @@ function getEnLanguage() {
     ui_selectUser:"Please enter a username or name to search",
     ui_hasSelected:"Selected",
     ui_organization:"Organization",
-    ui_personNum:"person",
+    ui_personNum:"",
     ui_nextClass:"Next",
     ui_remove:"Remove",
     ui_notEmpty:" is not allowed to be empty",
     ui_timeSelectError:"StartTime must be less than CompletionTime!",
     ui_postSuccess:"Successful delivery!",
+    //发布任务
+    ui_substation:"Substation",
+    ui_taskPost:"Post task",
 
     //code码
     code_200: "Request succeeds, insert success",
