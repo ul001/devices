@@ -117,3 +117,7 @@ select {
     font-size:.7rem;
     border-radius:.2rem;
 }
+
+.bar .button-nav.pull-left {
+    margin-left:0;
+}

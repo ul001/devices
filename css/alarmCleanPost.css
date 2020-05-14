@@ -153,3 +153,9 @@ ul#classList .item-title{
 .preClass{
     color:#01ADA8;
 }
+
+.list-block select{
+    font-size:.75rem;
+    direction:rtl;
+    background:initial;
+}
