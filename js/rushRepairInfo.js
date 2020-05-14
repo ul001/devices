@@ -73,7 +73,9 @@ function creatView(dataParam) {
         var taskParam = dataParam.taskAndRushRepairDetail;
         var picArr = dataParam.tDevTaskAndRushRepairImgs;
         try{
-            $("#fState").val(Substation.removeUnDefinedStr(taskParam.fState));
+            $("#fState").val(taskParam.fState);
+            $("#taskNumber").text(taskParam.fTasknumber);
+            $("#taskContent").text(taskParam.fTaskcontent);
         }catch(e){}
         if (canClick == "false") {
             $(".upload_img_wrap .upload_img").unbind();
@@ -303,7 +305,7 @@ function saveFormData() {
     // params.append("fDeviceproblemid", fDeviceproblemid);
     params.append("fTaskandrushrepairid", repairId);
     Substation.postFormDataByAjax(
-        "/modifyTaskAndAlarmEventDetail",
+        "/modifyTaskAndRushRepairDetail",
         params,
         function (data) {
             if (data.code == 200) {
