@@ -16,236 +16,234 @@
 </head>
 
 <body>
-<div class="page-group">
-    <div class="page" id="patrolRecord">
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn back_btn">
-                <span class="icon icon-left"></span>
-                返回
-            </a>
-            <a class="button button-link button-nav pull-right open-panel">
-                <i class="icon icon-selectSome"></i>
-            </a>
-            <h1 class="title title_color">
-                巡检记录
-            </h1>
-        </header>
-        <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
-             data-distance="100">
-            <div class="pull-to-refresh-layer">
-                <div class="preloader"></div>
-                <div class="pull-to-refresh-arrow"></div>
-            </div>
-            <div id="list-container">
+    <div class="page-group">
+        <div class="page" id="patrolRecord">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <h1 class="title title_color">
+                    巡检记录
+                </h1>
+            </header>
+            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div id="list-container">
 
-            </div>
-            <div class="infinite-scroll-preloader">
-                <div class="preloader"></div>
+                </div>
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="page" id="missionDetail">
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn">
-                <span class=" icon icon-left"></span>
-                返回
-            </a>
-            <h1 class="title title_color">任务详情
-                <!-- < class="limit-length" id="titleContent"></> -->
-            </h1>
-        </header>
-        <div class="content">
-            <div class="content-block" id="addVarContain123">
-                <div class="content-block-title">任务详情</div>
-                <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
-                    <ul>
-                        <li>
-                            <div class="item-content showDiv">
-                                <div class="item-inner">
-                                    <div class="item-title label">任务单号:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="missionId"></div>
+        <div class="page" id="missionDetail">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn">
+                    <span class=" icon icon-left"></span>
+                    返回
+                </a>
+                <h1 class="title title_color">任务详情
+                    <!-- < class="limit-length" id="titleContent"></> -->
+                </h1>
+            </header>
+            <div class="content">
+                <div class="content-block" id="addVarContain123">
+                    <div class="content-block-title">任务详情</div>
+                    <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务单号:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="missionId"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">任务类型:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="missionType"></div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务类型:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="missionType"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">变电所名称:</div>
-                                    <!-- <div class="item-input"><input type="text" readonly="readonly" id="input3"
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">变电所名称:</div>
+                                        <!-- <div class="item-input"><input type="text" readonly="readonly" id="input3"
                                             class="valueInput" value="上海安科瑞电气股份有限公司" name="name"
                                             validator="required" style="overflow:scroll;">
                                     </div> -->
-                                    <div class="item-input">
-                                        <div class="item-label" id="missionName"></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="missionName"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">发起人:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="createName"></div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">发起人:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="createName"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">负责人:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="chargerName"></div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">负责人:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="chargerName"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content" id="checkerDiv" style="display:none;">
-                                <div class="item-inner">
-                                    <div class="item-title label">客户:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="checkerName"></div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content" id="checkerDiv" style="display:none;">
+                                    <div class="item-inner">
+                                        <div class="item-title label">客户:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="checkerName"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">计划开始时间:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="createTime"></div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">计划开始时间:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="createTime"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">计划完成时间:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="finishTime"></div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">计划完成时间:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="finishTime"></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">任务内容:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="missionCont">-</div>
-                                        <!-- <textarea id="missionContent" readonly="readonly"></textarea> -->
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务内容:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="missionCont">-</div>
+                                            <!-- <textarea id="missionContent" readonly="readonly"></textarea> -->
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">任务开始时间:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="ActStartTime">-</div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务开始时间:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="ActStartTime">-</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">任务完成时间:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="ActFinishTime">-</div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务完成时间:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="ActFinishTime">-</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">缺陷总数:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="TotalDefectNum">-</div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">缺陷总数:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="TotalDefectNum">-</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">缺陷未处理数:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="Unprocessednumber">-</div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">缺陷未处理数:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="Unprocessednumber">-</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="showDiv item-content">
-                                <div class="item-inner">
-                                    <div class="item-title label">任务执行结果:</div>
-                                    <div class="item-input">
-                                        <div class="item-label" id="TotalDefect">-</div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label">任务执行结果:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="TotalDefect">-</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="content-block" id="addVarContain124">
-                <div class="content-block-title">执行情况</div>
-                <div id="13" class="list-block baseInfoDiv" name="zhejiuduile">
-                    <ul>
-                        <li>
-                            <div class="item-content showDiv">
-                                <div class="item-inner">
-                                    <div class="item-title label">执行情况:</div>
-                                    <div class="item-input"><textarea
-                                            id="textareaDetail"></textarea>
+                <div class="content-block" id="addVarContain124">
+                    <div class="content-block-title">执行情况</div>
+                    <div id="13" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label">执行情况:</div>
+                                        <div class="item-input"><textarea id="textareaDetail"></textarea>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <div class="content-block" id="addVarContain125">
-                <div class="content-block-title">任务进度
-                    <!-- <nobr> -->
-                    <a href="#" id="clickManager" name="clickManager"
-                       style="z-index:9999;display: inline-block">查看明细>></a>
-                    <!-- </nobr> -->
-                </div>
-                <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
-                    <ul id="missionState">
+                <div class="content-block" id="addVarContain125">
+                    <div class="content-block-title">任务进度
+                        <!-- <nobr> -->
+                        <a href="#" id="clickManager" name="clickManager"
+                            style="z-index:9999;display: inline-block">查看明细>></a>
+                        <!-- </nobr> -->
+                    </div>
+                    <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul id="missionState">
 
-                    </ul>
+                        </ul>
+                    </div>
                 </div>
-            </div>
-            <!-- <div class="content-block" id="addVarContain127">
+                <!-- <div class="content-block" id="addVarContain127">
                 <div class="row buttonsEvent">
                     <div class="col-100" id="hiddenBtn"><a href="#" class="button button-big button-fill bottom-btn"
                             id="checkIn"></a>
                     </div>
                 </div>
             </div> -->
-            <div class="content-block" id="addVarContain126">
-                <!-- <div class="row buttonsEvent">
+                <div class="content-block" id="addVarContain126">
+                    <!-- <div class="row buttonsEvent">
                     <div class="col-33" id="checkInCss"><a href="#" class="button button-big button-fill bottom-btn"
                             id="checkIn">现场签到</a>
                     </div>
@@ -256,25 +254,25 @@
                             class="button button-big button-fill bottom-btn" id="submitTo">提交</a>
                     </div>
                 </div> -->
+                </div>
             </div>
         </div>
-    </div>
-    <div class="page" id="defectRectification">
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn">
-                <span class="icon icon-left"></span>
-                返回
-            </a>
-            <h1 class="title title_color">变电所消缺单</h1>
-        </header>
-        <div class="bar bar-header-secondary" style="line-height:2.2rem">
-            <i class="icon icon-sub"></i><span id="substaionName"></span>
-            <!--<a href="" class="pull-right" style="font-size:0.75rem">巡视方案设置>></a>-->
-        </div>
-        <div class="content" id="resolve">
-            <div class="card noClick">
-                <div class="card-content">
-                    <!--<div class="card-content-inner row no-gutter">
+        <div class="page" id="defectRectification">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn">
+                    <span class="icon icon-left"></span>
+                    返回
+                </a>
+                <h1 class="title title_color">变电所消缺单</h1>
+            </header>
+            <div class="bar bar-header-secondary" style="line-height:2.2rem">
+                <i class="icon icon-sub"></i><span id="substaionName"></span>
+                <!--<a href="" class="pull-right" style="font-size:0.75rem">巡视方案设置>></a>-->
+            </div>
+            <div class="content" id="resolve">
+                <div class="card noClick">
+                    <div class="card-content">
+                        <!--<div class="card-content-inner row no-gutter">
                         <div class="col-10">
                             <i class="icon icon-alarm"></i>
                         </div>
@@ -312,69 +310,66 @@
                             <i class="icon icon-right"></i>
                         </div>
                     </div>-->
-                </div>
-                <div class="card-footer">
-                    <!--<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>
+                    </div>
+                    <div class="card-footer">
+                        <!--<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">客户签名</a></p>
                     <img src="img/i-alarm.png" style="width:100%;">-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel-overlay"></div>
-    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-        <div class="content-block">
-            <div>
-                <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
-                    <a href="#" class="button" id="yestoday">昨日</a>
-                    <a href="#" class="button" id="thisMonth">当月</a>
-                    <a href="#" class="button" id="lastMonth">上月</a></p>
-            </div>
-            <div>
-                <label>时间选择</label><br>
-                <input type="text" id="dateStart" placeholder="开始日期" readonly/> -
-                <input type="text" id="dateEnd" placeholder="截止日期" readonly/>
-            </div>
-            <div>
-                <label>任务状态</label><br>
-                <select id="fState">
-                    <option value="">全部</option>
-                    <option value="1">待办</option>
-                    <option value="2">在办</option>
-                    <option value="3">办毕</option>
-                </select>
-            </div>
-
-            <div>
-                <label>变电所名称</label><br>
-                <div class="searchbar">
-                    <div class="search-input">
-                        <label class="icon icon-search" for="search"></label>
-                        <input type="search" id='search' placeholder='请输入关键字'/><i
-                            class="icon icon-clear"></i>
                     </div>
                 </div>
             </div>
-            <div class="list-block">
-                <ul id="listContainer">
-
-                </ul>
-            </div>
         </div>
-        <div class="btnBar row no-gutter">
-            <div class="col-50"><a href="#"
-                                   class="button button-big button-fill button-cancel close-panel">取消</a>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <div>
+                    <p class="buttons-row"><a href="#" class="button" id="today">今日</a>
+                        <a href="#" class="button" id="yestoday">昨日</a>
+                        <a href="#" class="button" id="thisMonth">当月</a>
+                        <a href="#" class="button" id="lastMonth">上月</a></p>
+                </div>
+                <div>
+                    <label>时间选择</label><br>
+                    <input type="text" id="dateStart" placeholder="开始日期" readonly /> -
+                    <input type="text" id="dateEnd" placeholder="截止日期" readonly />
+                </div>
+                <div>
+                    <label>任务状态</label><br>
+                    <select id="fState">
+                        <option value="">全部</option>
+                        <option value="1">待办</option>
+                        <option value="2">在办</option>
+                        <option value="3">办毕</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>变电所名称</label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='请输入关键字' /><i class="icon icon-clear"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-block">
+                    <ul id="listContainer">
+
+                    </ul>
+                </div>
             </div>
-            <div class="col-50"><a href="#"
-                                   class="button button-big button-fill" id="searchBtn">查询</a></div>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel">取消</a>
+                </div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn">查询</a></div>
+            </div>
         </div>
     </div>
-</div>
-<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
-<script src="libs/language.js"></script>
-<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
-<script src="libs/tools.js"></script>
-<script src="js/patrolRecordList.js"></script>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/language.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/patrolRecordList.js"></script>
 </body>
 
 </html>
