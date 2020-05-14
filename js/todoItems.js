@@ -189,11 +189,23 @@ jQuery(document).ready(function () {
           }
         },
         {
-          text: "消警",
+          text: Operation['ui_xiaojing'],
           onClick: function () {
-            $(".clickrightbtn").text("消警");
+            $(".clickrightbtn").text(Operation['ui_xiaojing']);
             tasktypeid = 5;
-            tasktypeName = "消警";
+            tasktypeName = Operation['ui_xiaojing'];
+            localStorage.setItem("taskTypeId", tasktypeid);
+            localStorage.setItem("taskTypeName", tasktypeName);
+            pageNum = 1;
+            getFirstPage(tabName);
+          }
+        },
+        {
+          text: Operation['ui_qiangxiu'],
+          onClick: function () {
+            $(".clickrightbtn").text(Operation['ui_qiangxiu']);
+            tasktypeid = 6;
+            tasktypeName = Operation['ui_qiangxiu'];
             localStorage.setItem("taskTypeId", tasktypeid);
             localStorage.setItem("taskTypeName", tasktypeName);
             pageNum = 1;
@@ -334,10 +346,14 @@ jQuery(document).ready(function () {
               //消警
               text +=
                 '                                                src="img/missionjing.png" />';
-            } else {
+            } else if (this.fTasktypeid == 1){
               //巡检
               text +=
                 '                                                src="img/missionxun.png" />';
+            } else if (this.fTasktypeid == 6){
+              //抢修
+              text +=
+                '                                                src="img/missionxiu.png" />';
             }
             text += "                                        </div>";
             text +=
@@ -453,10 +469,14 @@ jQuery(document).ready(function () {
               //消警
               text +=
                 '                                                src="img/missionjing.png" />';
-            } else {
+            } else if (this.fTasktypeid == 1){
               //巡检
               text +=
                 '                                                src="img/missionxun.png" />';
+            } else if (this.fTasktypeid == 6){
+              //抢修
+              text +=
+                '                                                src="img/missionxiu.png" />';
             }
             text += "                                        </div>";
             text +=
