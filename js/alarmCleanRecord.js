@@ -31,7 +31,7 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number) {
     var html = '';
-    var url = "/getDeviceProblemList";
+    var url = "/getTaskAndAlarmEventList";
     var params = {};
     /*if(saveParam!=null&&saveParam!=""){
         params=saveParam;
@@ -54,7 +54,7 @@ function addItems(number) {
         $("#search").val(params['subName']);
     }else{*/
     params = {
-        pageNum: pageNum,
+        pageNo: pageNum,
         pageSize: number
     };
     if (selectSubid != "") {
@@ -63,7 +63,6 @@ function addItems(number) {
     var dateStartVal = $("#dateStart").val();
     var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
-    var dangerVal = $("#dangerType").val();
     if (dateStartVal != "") {
         params['ftimeStart'] = dateStartVal + " 00:00:00";
     }
@@ -73,35 +72,53 @@ function addItems(number) {
     if (stateVal != "") {
         params['fState'] = stateVal;
     }
-    if (dangerVal != "") {
-        params['fProblemlevel'] = dangerVal;
-    }
     //    }
-    Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            if (data.tDevDeviceproblemList.list.length > 0) {
+    Substation.postDataByAjaxNoLoading(url, params, function (data) {
+            if (data.taskAndAlarmEventList.list.length > 0) {
                 if (pageNum == 1) {
                     $("#list-container").empty();
                 }
-                $(data.tDevDeviceproblemList.list).each(function () {
-                    var deviceName = this.fdeviceinfoName;
-                    if(deviceName==undefined){
-                        deviceName = this.treePathName;
+                $(data.taskAndAlarmEventList.list).each(function () {
+                    var stateStr = "";
+                    switch (this.fState) {
+                        case "0":
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                            break;
+                        case "2":
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState2']+"</span>";
+                            break;
+                        case "3":
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState3']+"</span>";
+                            break;
+                        case "4":
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState4']+"</span>";
+                            break;
+                        case "5":
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState5']+"</span>";
+                            break;
+                        case "1":
+                            stateStr = "<span class=\"button-success\">"+Operation['ui_defectState1']+"</span>";
+                            break;
+                        default:
+                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                            break;
                     }
-                    html += "<div class=\"card\" id=\""+this.fDeviceproblemid+"\">\n" +
+                    var alarmJson = JSON.parse(this.fAlarmevnetlogcontent);
+                    html += "<div class=\"card\" id=\""+this.fTaskandalarmeventid+"\">\n" +
                             "    <div class=\"item-content item-link\">\n" +
                             "        <div class=\"item-inner row no-gutter\">\n" +
-                            "            <div class=\"col-70\">\n" +
-                            "                <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>云平台演示箱\n" +
+                            "            <div>\n" +
+                            "                <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>"+Substation.removeUndefined(this.fSubname)+"\n" +
                             "                </p>\n" +
-                            "                <p>任务单号：R20040175</p>\n" +
-                            "                <p>仪表名称：云平台演示箱</p>\n" +
-                            "                <p>事件类型：网关离线</p>\n" +
-                            "                <p>处理状态：未处理</p>\n" +
+                            "                <p>仪表名称："+Substation.removeUndefined(alarmJson.fDevicename)+"</p>\n" +
+                            "                <p>事件类型："+Substation.removeUndefined(alarmJson.fMessInfoExplain)+"</p>\n" +
+                            "                <p>处理状态："+stateStr+"</p>\n" +
+                            "                <p>创建时间："+Substation.removeUndefined(this.fCreatetime)+"</p>\n" +
                             "            </div>\n" +
-                            "            <div class=\"col-30\">\n" +
-//                            "                <p class=\"text-right\">发生时间:</p>\n" +
-                            "                <p class=\"text-right\">2019-12-23 06:00:00</p>\n" +
-                            "            </div>\n" +
+//                            "            <div class=\"col-30\">\n" +
+////                            "                <p class=\"text-right\">发生时间:</p>\n" +
+//                            "                <p class=\"text-right\">"+Substation.removeUndefined(this.fCreatetime)+"</p>\n" +
+//                            "            </div>\n" +
                             "        </div>\n" +
                             "    </div>\n" +
                             "</div>";
@@ -116,18 +133,18 @@ function addItems(number) {
                     upLoadClicktag = false;
                     setTimeout(function() {
                         upLoadClicktag = true;
-                    }, 1000);
+                    }, 200);
                     var clickId = $(this).attr("id");
 //                    var clickTree = $(this).attr("value");
 //                    localStorage.setItem("clickTree", clickTree);
                     /*params['subName']=$("#search").val();
                     localStorage.setItem("saveParam",JSON.stringify(params));*/
                     localStorage.setItem("canClick", false);
+                    localStorage.setItem("alarmeventlogid", clickId);
                     if (isAndroid) {
-                        localStorage.setItem("fDeviceproblemid", clickId);
                         android.goToIn();
                     } else {
-                        window.location.href = "defectInfo.html?fDeviceproblemid=" + clickId;
+                        window.location.href = "alarmCleanInfo.html";
                     }
                 });
                 pageNum++;
@@ -136,7 +153,7 @@ function addItems(number) {
                 $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;
             }
-            if (data.tDevDeviceproblemList.list.length < itemsPerLoad) {
+            if (data.taskAndAlarmEventList.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
                 $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;

@@ -125,6 +125,7 @@ function getGroupClass(pid){
     $(".classUl").empty();
     $(".classUl").show();
     $(".personUl").hide();
+    $("#classList").show();
     Substation.getDataByAjax("/selectUserGroupByPid",{userGroupPid: pid},function(data){
         if (data.hasOwnProperty("userGroupList") && data.userGroupList.length > 0) {
             var html = "";
@@ -272,6 +273,53 @@ function saveSelectedPeople(){
     }
     listPeople(peopleType,selectUserList);
 }
+
+//模糊搜索
+function getSearchUser(){
+    $("#personListUl").empty();
+    $(".personUl").show();
+    $(".classUl").hide();
+    $("#classList").hide();
+    var typeStr = "";
+    if(peopleType == "charger"){
+        typeStr = "type=\"radio\"";
+        $("#selectAll").hide();
+    }else if(peopleType == "worker"){
+        typeStr = "type=\"checkbox\"";
+        $("#selectAll").show();
+    }
+    Substation.postDataByAjax("/getUserListByCondition",{searchKey:$("#searchUser").val()},function(data){
+        var html = "";
+        $(data.data).each(function(){
+            html += "<li>\n" +
+                    "    <label class=\"label-checkbox item-content\">\n" +
+                    "        <input "+typeStr+" name=\"my-checkbox\" id=\""+this.fUserid+"\" data-name=\""+Substation.removeUndefined(this.userName)+"\">\n" +
+                    "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                    "        <div class=\"item-inner\">\n" +
+                    "            <div class=\"item-title\">"+Substation.removeUndefined(this.userName)+"("+Substation.removeUndefined(this.fLoginname)+")</div>\n" +
+                    "        </div>\n" +
+                    "    </label>\n" +
+                    "</li>"
+        });
+        $("#personListUl").append(html);
+        $("input[name='my-checkbox']").off("change",addChangeListener).on("change",addChangeListener);
+        checkSelectPeople();
+    });
+}
+
+$('#searchUser').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+        if($("#searchUser").val()!=""){
+            getSearchUser();
+            document.activeElement.blur();
+        }
+    }
+});
+
+$(".searchbar-cancel").click(function () {
+    $("#searchUser").val("");
+    getGroupClass(thisGroupid);
+});
 
 //page2
 function showPage2List(){
