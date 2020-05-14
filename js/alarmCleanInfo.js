@@ -1,10 +1,10 @@
 var imgNum1 = 0;
 var imgNum = 0;
-var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
-var androidProblemid = localStorage.getItem("fDeviceproblemid");
-localStorage.removeItem("fDeviceproblemid");
-if (androidProblemid != null && androidProblemid != undefined) {
-    fDeviceproblemid = androidProblemid;
+var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
+var androidAlarmeventlogid = localStorage.getItem("alarmeventlogid");
+localStorage.removeItem("alarmeventlogid");
+if (androidAlarmeventlogid != null && androidAlarmeventlogid != undefined) {
+    alarmeventlogid = androidAlarmeventlogid;
     $(".back_btn").click(function () {
         android.goBack();
     });
@@ -13,13 +13,10 @@ if (androidProblemid != null && androidProblemid != undefined) {
         window.history.back();
     });
 }
-var taskProblem = Substation.GetQueryString("taskProblem");
+//var taskProblem = Substation.GetQueryString("taskProblem");
 var selectSubid = localStorage.getItem("fSubid");
 //var clickTree = localStorage.getItem("clickTree");
 var canClick = localStorage.getItem("canClick");
-var alarmeventlogid = localStorage.getItem("alarmeventlogid");
-// var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
-// var alarmeventlogid = "20200512153410265227891";
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
 if (jumpId != undefined && jumpId != null && jumpId != "") {
@@ -398,7 +395,14 @@ function creatView(dataParam) {
             $("#fClientadvice").val("");
             //   $("#fState").val("");
             $("#fSolveresult").attr("readonly", true);
-            $("#fState").attr("readonly", true);
+            $($("select")).each(function () {
+              var thisInput = $(this).parent();
+              var thisValue = "";
+              if (this.selectedIndex != -1) {
+                thisValue = this.options[this.selectedIndex].innerText;
+              }
+              thisInput.html('<input type="text" readonly value="' + thisValue + '">');
+            });
         }
 
         if (picArr.length > 0) {

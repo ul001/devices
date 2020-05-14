@@ -159,3 +159,7 @@ ul#classList .item-title{
     direction:rtl;
     background:initial;
 }
+
+.item-inner{
+    overflow:hidden;
+}

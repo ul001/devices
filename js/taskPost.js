@@ -1,10 +1,5 @@
-//读取本地传参
-var selectSubId = localStorage.getItem("alarmSubid");
-var selectAlarmId = localStorage.getItem("alarmEventlogid");
-localStorage.removeItem("alarmSubid");
-localStorage.removeItem("alarmEventlogid");
-
 var peopleType = "";
+var subList = [];
 var selectUserList = [];
 var chargerUser = [];
 var workerUser = [];
@@ -31,10 +26,16 @@ $(".item-add").click(function(){
     $.router.loadPage("#page1");
     if(peopleType == "charger"){
         $("#peopleType").text(Operation['ui_charger']);
+        $("#searchUser").prop("placeholder",Operation['ui_selectUser']);
         selectUserList = chargerUser;
     }else if(peopleType == "worker"){
         $("#peopleType").text(Operation['ui_worker']);
+        $("#searchUser").prop("placeholder",Operation['ui_selectUser']);
         selectUserList = workerUser;
+    }else if(peopleType == "substation"){
+        $("#peopleType").text(Operation['ui_substation']);
+        $("#searchUser").prop("placeholder",Operation['ui_selectSubTip']);
+        selectUserList = subList;
     }
     $("#classList .item-title").html('<span data-id="-1">'+Operation['ui_organization']+'</span>');
     if(selectUserList.length>0){
@@ -72,6 +73,16 @@ function addCloseFunction(){
         if(workerUser.length==0){
             $(".peopleList.worker").hide();
         }
+    }else if(thisType == "substation"){
+        $(subList).each(function(i,obj){
+            if(obj.userId == thisUserid){
+                subList.splice(i,1);
+                return false;
+            }
+        });
+        if(subList.length==0){
+            $(".peopleList.substation").hide();
+        }
     }
 }
 
@@ -80,6 +91,11 @@ function postTask(){
     var startTime = $("#dateStart").val();
     var completeTime = $("#dateEnd").val();
     var taskContent = $("#taskContent").val();
+    var selectType = $("#selectType").val();
+    if(chargerUser.length==0){
+        $.toast(Operation['ui_substation']+Operation['ui_notEmpty']);
+        return;
+    }
     if(startTime=="" || startTime==undefined){
         $.toast(Operation['ui_startTime']+Operation['ui_notEmpty']);
         return;
@@ -101,18 +117,23 @@ function postTask(){
         $.toast(Operation['ui_worker']+Operation['ui_notEmpty']);
         return;
     }
+    var subIds = [];
+    $(subList).each(function(i,obj){
+        subIds.push(obj.userId);
+    });
+    var subStr = subIds.join(",");
     var chargerId = chargerUser[0].userId;
     var workerIdList = [];
     $(workerUser).each(function(i,obj){
         workerIdList.push(obj.userId);
     });
     var workerIdStr = workerIdList.join(",");
-    var params = {userIds:workerIdStr,fTaskchargerid:chargerId,fTasktypeid:5,fStartdate:startTime+" 00:00:00",fDeadlinedate:completeTime+" 23:59:59",
-        fTaskcontent:taskContent,subIds:selectSubId,fAlarmeventlogid:selectAlarmId};
+    var params = {userIds:workerIdStr,fTaskchargerid:chargerId,fTasktypeid:selectType,fStartdate:startTime+" 00:00:00",fDeadlinedate:completeTime+" 23:59:59",
+        fTaskcontent:taskContent,subIds:subStr};
     Substation.postDataByAjax("/releaseTask",params,function(data){
         if(data.code=="200"){
             $.alert(Operation['ui_postSuccess'],function(){
-                window.history.back();
+                location.reload();
             });
         }
     });
@@ -159,31 +180,55 @@ function getPersonList(gid){
         if(peopleType == "charger"){
             typeStr = "type=\"radio\"";
             $("#selectAll").hide();
-        }else if(peopleType == "worker"){
+        }else if(peopleType == "worker" || peopleType == "substation"){
             typeStr = "type=\"checkbox\"";
             $("#selectAll").show();
         }
-        Substation.getDataByAjax("/selectUserListByGroupId",{groupId: gid},function(data){
-            if (data.hasOwnProperty("userList") && data.userList.length > 0) {
-                var html = "";
-                $(data.userList).each(function(){
-                    html += "<li>\n" +
-                            "    <label class=\"label-checkbox item-content\">\n" +
-                            "        <input "+typeStr+" name=\"my-checkbox\" id=\""+this.fUserid+"\" data-name=\""+Substation.removeUndefined(this.fUsername)+"\">\n" +
-                            "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                            "        <div class=\"item-inner\">\n" +
-                            "            <div class=\"item-title\">"+Substation.removeUndefined(this.fUsername)+"</div>\n" +
-                            "        </div>\n" +
-                            "    </label>\n" +
-                            "</li>"
-                });
-                $("#personListUl").append(html);
-                $("input[name='my-checkbox']").off("change",addChangeListener).on("change",addChangeListener);
-                checkSelectPeople();
-            }else{
-                $(".personUl").hide();
-            }
-        });
+        if(peopleType == "substation"){
+            Substation.postDataByAjax("/getSubstationListBySubGroupId",{fSubgroupid: gid},function(data){
+                if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
+                    var html = "";
+                    $(data.data.list).each(function(){
+                        html += "<li>\n" +
+                                "    <label class=\"label-checkbox item-content\">\n" +
+                                "        <input "+typeStr+" name=\"my-checkbox\" id=\""+this.fSubid+"\" data-name=\""+Substation.removeUndefined(this.fSubname)+"\">\n" +
+                                "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                                "        <div class=\"item-inner\">\n" +
+                                "            <div class=\"item-title\">"+Substation.removeUndefined(this.fSubname)+"</div>\n" +
+                                "        </div>\n" +
+                                "    </label>\n" +
+                                "</li>"
+                    });
+                    $("#personListUl").append(html);
+                    $("input[name='my-checkbox']").off("change",addChangeListener).on("change",addChangeListener);
+                    checkSelectPeople();
+                }else{
+                    $(".personUl").hide();
+                }
+            });
+        }else{
+            Substation.getDataByAjax("/selectUserListByGroupId",{groupId: gid},function(data){
+                if (data.hasOwnProperty("userList") && data.userList.length > 0) {
+                    var html = "";
+                    $(data.userList).each(function(){
+                        html += "<li>\n" +
+                                "    <label class=\"label-checkbox item-content\">\n" +
+                                "        <input "+typeStr+" name=\"my-checkbox\" id=\""+this.fUserid+"\" data-name=\""+Substation.removeUndefined(this.fUsername)+"\">\n" +
+                                "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                                "        <div class=\"item-inner\">\n" +
+                                "            <div class=\"item-title\">"+Substation.removeUndefined(this.fUsername)+"</div>\n" +
+                                "        </div>\n" +
+                                "    </label>\n" +
+                                "</li>"
+                    });
+                    $("#personListUl").append(html);
+                    $("input[name='my-checkbox']").off("change",addChangeListener).on("change",addChangeListener);
+                    checkSelectPeople();
+                }else{
+                    $(".personUl").hide();
+                }
+            });
+        }
 }
 
 //跳下级事件
@@ -220,7 +265,7 @@ function addChangeListener(){
             }else{
                 selectUserList = [];
             }
-        }else if(peopleType == "worker"){
+        }else if(peopleType == "worker" || peopleType == "substation"){
             if($(this).prop("checked")){
                 selectUserList.push({userId:thisUserid,userName:thisUsername});
             }else{
@@ -270,7 +315,10 @@ function saveSelectedPeople(){
         chargerUser = selectUserList;
     }else if(peopleType == "worker"){
         workerUser = selectUserList;
+    }else if(peopleType == "substation"){
+        subList = selectUserList;
     }
+    $("#searchUser").val("");
     listPeople(peopleType,selectUserList);
 }
 
@@ -284,27 +332,47 @@ function getSearchUser(){
     if(peopleType == "charger"){
         typeStr = "type=\"radio\"";
         $("#selectAll").hide();
-    }else if(peopleType == "worker"){
+    }else if(peopleType == "worker" || peopleType == "substation"){
         typeStr = "type=\"checkbox\"";
         $("#selectAll").show();
     }
-    Substation.postDataByAjax("/getUserListByCondition",{searchKey:$("#searchUser").val()},function(data){
-        var html = "";
-        $(data.data).each(function(){
-            html += "<li>\n" +
-                    "    <label class=\"label-checkbox item-content\">\n" +
-                    "        <input "+typeStr+" name=\"my-checkbox\" id=\""+this.fUserid+"\" data-name=\""+Substation.removeUndefined(this.userName)+"\">\n" +
-                    "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                    "        <div class=\"item-inner\">\n" +
-                    "            <div class=\"item-title\">"+Substation.removeUndefined(this.userName)+"("+Substation.removeUndefined(this.fLoginname)+")</div>\n" +
-                    "        </div>\n" +
-                    "    </label>\n" +
-                    "</li>"
+    if(peopleType == "substation"){
+        Substation.postDataByAjax("/getSubstationListBySubGroupId",{search:$("#searchUser").val()},function(data){
+            var html = "";
+            $(data.data.list).each(function(){
+                html += "<li>\n" +
+                        "    <label class=\"label-checkbox item-content\">\n" +
+                        "        <input "+typeStr+" name=\"my-checkbox\" id=\""+this.fSubid+"\" data-name=\""+Substation.removeUndefined(this.fSubname)+"\">\n" +
+                        "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                        "        <div class=\"item-inner\">\n" +
+                        "            <div class=\"item-title\">"+Substation.removeUndefined(this.fSubname)+"("+Substation.removeUndefined(this.fSubid)+")</div>\n" +
+                        "        </div>\n" +
+                        "    </label>\n" +
+                        "</li>";
+            });
+            $("#personListUl").append(html);
+            $("input[name='my-checkbox']").off("change",addChangeListener).on("change",addChangeListener);
+            checkSelectPeople();
         });
-        $("#personListUl").append(html);
-        $("input[name='my-checkbox']").off("change",addChangeListener).on("change",addChangeListener);
-        checkSelectPeople();
-    });
+    }else{
+        Substation.postDataByAjax("/getUserListByCondition",{searchKey:$("#searchUser").val()},function(data){
+            var html = "";
+            $(data.data).each(function(){
+                html += "<li>\n" +
+                        "    <label class=\"label-checkbox item-content\">\n" +
+                        "        <input "+typeStr+" name=\"my-checkbox\" id=\""+this.fUserid+"\" data-name=\""+Substation.removeUndefined(this.userName)+"\">\n" +
+                        "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                        "        <div class=\"item-inner\">\n" +
+                        "            <div class=\"item-title\">"+Substation.removeUndefined(this.userName)+"("+Substation.removeUndefined(this.fLoginname)+")</div>\n" +
+                        "        </div>\n" +
+                        "    </label>\n" +
+                        "</li>";
+            });
+            $("#personListUl").append(html);
+            $("input[name='my-checkbox']").off("change",addChangeListener).on("change",addChangeListener);
+            checkSelectPeople();
+        });
+    }
 }
 
 $('#searchUser').bind('keydown', function (event) {

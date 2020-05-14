@@ -70,6 +70,9 @@ function getNetData() {
             if (taskInfo.hasOwnProperty("fTaskandalarmeventid")) {
                 fTaskandalarmeventid = taskInfo.fTaskandalarmeventid;
             }
+            if (taskInfo.hasOwnProperty("fTaskandrushrepairid")) {
+                fTaskandalarmeventid = taskInfo.fTaskandrushrepairid;
+            }
             $("#missionId").html(taskInfo.fTasknumber);
             TaskNumber = taskInfo.fTasknumber;
             $("#missionType").html(taskInfo.fTasktypeexplain);
@@ -290,7 +293,7 @@ function getNetData() {
                 });
             }
             //如果是消警任务，则剔除
-            if (missionTypeid == 5) {
+            if (missionTypeid == 5 || missionTypeid == 6) {
                 $("#totaldefect").remove();
                 $("#defectUntreatNum").remove();
             }
@@ -459,11 +462,11 @@ $(".doDetail").click(function () {
         window.location.href = "defectRectification.html";
     } else if (missionTypeid == 5) {
         //消警任务
-        localStorage.setItem("alarmeventlogid", fTaskandalarmeventid);
-        localStorage.setItem("missionTypeid", missionTypeid);
-        window.location.href = "alarmCleanInfo.html";
-    } else {
-        //        $.toast("未知任务类型");
+//        localStorage.setItem("alarmeventlogid", fTaskandalarmeventid);
+//        localStorage.setItem("missionTypeid", missionTypeid);
+        window.location.href = "alarmCleanInfo.html?alarmeventlogid="+fTaskandalarmeventid;
+    } else if(missionTypeid == 6){
+        window.location.href = "rushRepairInfo.html?repairId="+fTaskandalarmeventid;
     }
 });
 
