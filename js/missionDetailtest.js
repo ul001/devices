@@ -51,6 +51,7 @@ var subLon;
 var subLat;
 //是否执行人
 var temp = false;
+var fTaskandalarmeventid = "";
 
 function getNetData() {
     Substation.getDataByAjax("/selectTaskByTaskId", "taskId=" + taskID, function (
@@ -59,12 +60,16 @@ function getNetData() {
         if (data.hasOwnProperty("placeCheckFormId")) {
             placeCheckFormId = data.placeCheckFormId;
         }
+
         var taskInfo = data.taskInfo;
         var userList = data.taskUserList;
         subLon = taskInfo.fLongitude;
         subLat = taskInfo.fLatitude;
         if (taskInfo != null && taskInfo != undefined) {
             missionsubid = taskInfo.fSubid;
+            if (taskInfo.hasOwnProperty("fTaskandalarmeventid")) {
+                fTaskandalarmeventid = taskInfo.fTaskandalarmeventid;
+            }
             $("#missionId").html(taskInfo.fTasknumber);
             TaskNumber = taskInfo.fTasknumber;
             $("#missionType").html(taskInfo.fTasktypeexplain);
@@ -453,7 +458,7 @@ $(".doDetail").click(function () {
         window.location.href = "defectRectification.html";
     } else if (missionTypeid == 5) {
         //消警任务
-        localStorage.setItem("alarmeventlogid", missionTypeid);
+        localStorage.setItem("alarmeventlogid", fTaskandalarmeventid);
         localStorage.setItem("missionTypeid", missionTypeid);
         window.location.href = "alarmCleanInfo.html";
     } else {
