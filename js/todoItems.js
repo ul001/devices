@@ -311,11 +311,9 @@ jQuery(document).ready(function () {
             text +=
               '                            <div class="card card1"  id="' +
               this.fTaskid +
-              '"  name="' +
+              '" name="' +
               this.fTasktypeid +
-              '" data-taskid="' +
-              this.fTasktypeid +
-              '">';
+              '"';
             text +=
               '                                <div class="card-content">';
             text +=
@@ -377,9 +375,8 @@ jQuery(document).ready(function () {
               upLoadClicktag = true;
             }, 1000);
             var taskID = $(this).attr("id");
-            var tasktypeid = $(this).attr("name");
+            //            var tasktypeid = $(this).attr("name");
             //            localStorage.setItem("showType", "missionFinish");
-            localStorage.setItem("tasktypeid", tasktypeid);
             localStorage.setItem("missionType", clickNum);
             localStorage.setItem("taskID", taskID);
             if (isAndroid) {
@@ -515,11 +512,10 @@ jQuery(document).ready(function () {
             upLoadClicktag = true;
           }, 1000);
           var taskID = $(this).attr("name");
-          var tasktypeid = $(this).attr("data-taskid");
+          //          var tasktypeid = $(this).attr("data-taskid");
           //          if (tasktypeid == 1) {
           //巡视任务
           //            localStorage.setItem("showType", "missionDoing");
-          localStorage.setItem("tasktypeid", tasktypeid);
           localStorage.setItem("missionType", clickNum);
           localStorage.setItem("taskID", taskID);
           if (isAndroid) {

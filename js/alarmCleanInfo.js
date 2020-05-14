@@ -398,7 +398,7 @@ function creatView(dataParam) {
             $("#fClientadvice").val("");
             //   $("#fState").val("");
             $("#fSolveresult").attr("readonly", true);
-            // $("#fState").attr("readonly", true);
+            $("#fState").attr("readonly", true);
         }
 
         if (picArr.length > 0) {
