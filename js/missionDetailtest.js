@@ -23,7 +23,7 @@ var upLoadClicktag = true;
 
 //任务id
 var taskID = localStorage.getItem("taskID");
-var tasktypeid = localStorage.getItem("tasktypeid");
+// var tasktypeid = localStorage.getItem("tasktypeid");
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
 if (jumpId != undefined && jumpId != null && jumpId != "") {
@@ -111,6 +111,7 @@ function getNetData() {
                     if (this.fUserid == loginUserid) {
                         temp = true;
                         thisUser = this;
+                        // missionState = this.fTaskstateid;
                     }
 
                     var taskStateName = "";
@@ -169,7 +170,7 @@ function getNetData() {
             //按钮显隐判断
             if (temp) {
                 $("#addVarContain124").show();
-                if (thisUser.fTaskstarttime == undefined && missionState == "1") {
+                if (thisUser.fTaskstarttime == undefined && thisUser.fTaskstateid == "1") {
                     $("#startTask").show();
                 } else {
                     if (thisUser.fSignintime == undefined) {
@@ -289,7 +290,7 @@ function getNetData() {
                 });
             }
             //如果是消警任务，则剔除
-            if (tasktypeid == 5) {
+            if (missionTypeid == 5) {
                 $("#totaldefect").remove();
                 $("#defectUntreatNum").remove();
             }
