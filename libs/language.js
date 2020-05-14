@@ -192,6 +192,8 @@ function getZhLanguage() {
     ui_goods: "事项",
     ui_xunjian: "巡检",
     ui_xiaoque: "消缺",
+    ui_xiaojing: "消警",
+    ui_qiangxiu: "抢修",
     ui_taskid: "任务单号",
     ui_plandonetime: "计划完成时间",
     ui_donetime: "实际完成时间",
@@ -377,6 +379,8 @@ function getZhLanguage() {
     //发布任务
     ui_substation:"变电所",
     ui_taskPost:"发布任务",
+    ui_selectSubTip:"请输入变电所名称或编号进行搜索",
+    ui_repairInfo:"抢修信息",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -714,6 +718,8 @@ function getEnLanguage() {
     ui_goods: "items",
     ui_xunjian: "Inspection",
     ui_xiaoque: "Disappear",
+    ui_xiaojing: "AlarmClear",
+    ui_qiangxiu: "RushRepair",
     ui_taskid: "TaskNum",
     ui_plandonetime: "PlanEndTime",
     ui_donetime: "TaskEndTime",
@@ -889,6 +895,8 @@ function getEnLanguage() {
     //发布任务
     ui_substation:"Substation",
     ui_taskPost:"Post task",
+    ui_selectSubTip:"Please enter the name or number of the substation to search",
+    ui_repairInfo:"Emergency repair information",
 
     //code码
     code_200: "Request succeeds, insert success",

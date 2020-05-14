@@ -121,3 +121,7 @@ select {
 .bar .button-nav.pull-left {
     margin-left:0;
 }
+
+.bar .button-nav.pull-right {
+    margin-right:0;
+}

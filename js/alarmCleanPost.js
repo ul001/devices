@@ -408,4 +408,13 @@ function removeUser() {
     $("#numberShow").html(selectUserList.length);
 }
 
+//解决键盘遮挡问题
+window.addEventListener("resize", function () {
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
+});
+
 $.init();

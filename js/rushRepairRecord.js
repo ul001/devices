@@ -31,7 +31,7 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number) {
     var html = '';
-    var url = "/getTaskAndAlarmEventList";
+    var url = "/getTaskAndRushRepairList";
     var params = {};
     /*if(saveParam!=null&&saveParam!=""){
         params=saveParam;
@@ -64,21 +64,21 @@ function addItems(number) {
     var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
     if (dateStartVal != "") {
-        params['ftimeStart'] = dateStartVal + " 00:00:00";
+        params['fStarttime'] = dateStartVal + " 00:00:00";
     }
     if (dateEndVal != "") {
-        params['ftimeEnd'] = dateEndVal + " 23:59:59";
+        params['fEndtime'] = dateEndVal + " 23:59:59";
     }
     if (stateVal != "") {
         params['fState'] = stateVal;
     }
     //    }
     Substation.postDataByAjaxNoLoading(url, params, function (data) {
-            if (data.taskAndAlarmEventList.list.length > 0) {
+            if (data.taskAndRushRepairList.list.length > 0) {
                 if (pageNum == 1) {
                     $("#list-container").empty();
                 }
-                $(data.taskAndAlarmEventList.list).each(function () {
+                $(data.taskAndRushRepairList.list).each(function () {
                     var stateStr = "";
                     switch (this.fState) {
                         case "0":
@@ -103,15 +103,12 @@ function addItems(number) {
                             stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
                             break;
                     }
-                    var alarmJson = JSON.parse(this.fAlarmevnetlogcontent);
-                    html += "<div class=\"card\" id=\""+this.fTaskandalarmeventid+"\">\n" +
+                    html += "<div class=\"card\" id=\""+this.fTaskandrushrepairid+"\">\n" +
                             "    <div class=\"item-content item-link\">\n" +
                             "        <div class=\"item-inner row no-gutter\">\n" +
                             "            <div>\n" +
                             "                <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>"+Substation.removeUndefined(this.fSubname)+"\n" +
                             "                </p>\n" +
-                            "                <p>仪表名称："+Substation.removeUndefined(alarmJson.fDevicename)+"</p>\n" +
-                            "                <p>事件类型："+Substation.removeUndefined(alarmJson.fMessInfoExplain)+"</p>\n" +
                             "                <p>处理状态："+stateStr+"</p>\n" +
                             "                <p>创建时间："+Substation.removeUndefined(this.fCreatetime)+"</p>\n" +
                             "            </div>\n" +
@@ -141,10 +138,10 @@ function addItems(number) {
                     localStorage.setItem("saveParam",JSON.stringify(params));*/
                     localStorage.setItem("canClick", false);
                     if (isAndroid) {
-                        localStorage.setItem("alarmeventlogid", clickId);
+                        localStorage.setItem("repairId", clickId);
                         android.goToIn();
                     } else {
-                        window.location.href = "alarmCleanInfo.html?alarmeventlogid="+clickId;
+                        window.location.href = "rushRepairInfo.html?repairId="+clickId;
                     }
                 });
                 pageNum++;
@@ -153,7 +150,7 @@ function addItems(number) {
                 $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;
             }
-            if (data.taskAndAlarmEventList.list.length < itemsPerLoad) {
+            if (data.taskAndRushRepairList.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
                 $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
                 return;

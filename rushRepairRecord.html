@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/alarmCleanRecord.css">
+</head>
+
+<body>
+<div class="page-group">
+    <div class="page">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn back_btn">
+                <span class="icon icon-left"></span>
+                <span data-i18n="ui_back"></span>
+            </a>
+            <a class="button button-link button-nav pull-right open-panel">
+                <i class="icon icon-selectSome"></i>
+            </a>
+            <h1 class="title title_color">
+                抢修记录
+            </h1>
+        </header>
+        <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
+             data-distance="100">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
+            </div>
+            <div id="list-container" class="list-block">
+                <!--        <div class="card" id="">
+                            <div class="item-content item-link">
+                                <div class="item-inner row no-gutter">
+                                    <div class="col-75">
+                                        <p class="subName limit-length"><i class="icon icon-subIcon"></i>云平台演示箱
+                                        </p>
+                                        <p>任务单号：R20040175</p>
+                                        <p>仪表名称：云平台演示箱</p>
+                                        <p>事件类型：网关离线</p>
+                                        <p>处理状态：未处理</p>
+                                    </div>
+                                    <div class="col-25">
+                                        <p class="text-right">发生时间：</p>
+                                        <p class="text-right">2019-12-23 06:00:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>-->
+            </div>
+            <div class="infinite-scroll-preloader">
+                <div class="preloader"></div>
+            </div>
+        </div>
+    </div>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+        <div class="content-block">
+            <div>
+                <p class="buttons-row"><a href="#" class="button" id="today"><span
+                        data-i18n="ui_today"></span></a>
+                    <a href="#" class="button" id="yestoday"><span
+                            data-i18n="ui_yday"></span></a>
+                    <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                    <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
+                </p>
+            </div>
+            <div>
+                <label><span data-i18n="ui_timeSelect"></span></label><br>
+                <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime"
+                       readonly/> -
+                <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime"
+                       readonly/>
+            </div>
+            <div>
+                <label><span data-i18n="ui_dealState"></span></label><br>
+                <select id="fState">
+                    <option value="" data-i18n="ui_All"></option>
+                    <option value="0" data-i18n="ui_defectState0"></option>
+                    <option value="1" data-i18n="ui_defectState1"></option>
+                </select>
+            </div>
+            <!--            <div>-->
+            <!--                <label><span data-i18n="ui_Severitygrade"></span></label><br>-->
+            <!--                <select id="dangerType">-->
+            <!--                    <option value="" data-i18n="ui_All"></option>-->
+            <!--                    <option value="一般" data-i18n="ui_dangerLevel1"></option>-->
+            <!--                    <option value="重大" data-i18n="ui_dangerLevel2"></option>-->
+            <!--                    <option value="紧急" data-i18n="ui_dangerLevel3"></option>-->
+            <!--                </select>-->
+            <!--            </div>-->
+            <div>
+                <label><span data-i18n="ui_Substationname"></span></label><br>
+                <div class="searchbar">
+                    <div class="search-input">
+                        <label class="icon icon-search" for="search"></label>
+                        <input type="search" id='search' placeholder=''
+                               data-placeholder="ui_enterkeywords"/><i
+                            class="icon icon-clear"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="list-block" id="listBlock">
+                <ul id="listContainer">
+                </ul>
+            </div>
+        </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#"
+                                   class="button button-big button-fill button-cancel close-panel"><span
+                    data-i18n="ui_cancel"></span></a>
+            </div>
+            <div class="col-50"><a href="#" class="button button-big button-fill button-success"
+                                   id="searchBtn"><span data-i18n="ui_query"></span></a></div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+<script src="libs/language.js"></script>
+<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<script src="libs/tools.js"></script>
+<script type='text/javascript' src='js/rushRepairRecord.js' charset='utf-8'></script>
+</body>
+
+</html>

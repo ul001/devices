@@ -97,11 +97,11 @@ $("#control_btn").click(function () {
 });
 
 function selectAll() {
-    if ($("#back_btn").text() == Operation['ui_selectAll']) {
+    if ($("#back_btn").text() == Operation['ui_SelectAll']) {
         $("#back_btn").text(Operation['ui_UnselectAll']);
         $(".list-item:visible input:checkbox").prop("checked", "checked");
     } else {
-        $("#back_btn").text(Operation['ui_selectAll']);
+        $("#back_btn").text(Operation['ui_SelectAll']);
         $(".list-item:visible input:checkbox").removeAttr("checked");
     }
 }
