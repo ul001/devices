@@ -381,6 +381,10 @@ function getZhLanguage() {
     ui_taskPost:"发布任务",
     ui_selectSubTip:"请输入变电所名称或编号进行搜索",
     ui_repairInfo:"抢修信息",
+    ui_repairRecord:"抢修记录",
+    ui_alarmCleanRecord:"消警记录",
+    ui_createTime:"创建时间：",
+    ui_pushRecord:"推送消息记录",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -897,6 +901,10 @@ function getEnLanguage() {
     ui_taskPost:"Post task",
     ui_selectSubTip:"Please enter the name or number of the substation to search",
     ui_repairInfo:"Emergency repair information",
+    ui_repairRecord:"RushRepair record",
+    ui_alarmCleanRecord:"AlarmClear record",
+    ui_createTime:"Creation time:",
+    ui_pushRecord:"Push message record",
 
     //code码
     code_200: "Request succeeds, insert success",
