@@ -369,7 +369,7 @@ function getZhLanguage() {
     ui_selectPeople: "选择",
     ui_selectUser: "请输入用户名或姓名进行搜索",
     ui_hasSelected: "已选择",
-    ui_organization: "组织机构",
+    ui_organization: "用户组",
     ui_personNum: "个",
     ui_nextClass: "下级",
     ui_remove: "移除",
