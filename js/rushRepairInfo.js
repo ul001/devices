@@ -75,6 +75,7 @@ function creatView(dataParam) {
         try{
             $("#fState").val(taskParam.fState);
             $("#taskNumber").text(taskParam.fTasknumber);
+            $("#fSolveresult").val(taskParam.fSolveresult);
             $("#taskContent").text(taskParam.fTaskcontent);
         }catch(e){}
         if (canClick == "false") {
