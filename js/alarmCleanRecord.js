@@ -64,10 +64,10 @@ function addItems(number) {
     var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
     if (dateStartVal != "") {
-        params['ftimeStart'] = dateStartVal + " 00:00:00";
+        params['fStarttime'] = dateStartVal + " 00:00:00";
     }
     if (dateEndVal != "") {
-        params['ftimeEnd'] = dateEndVal + " 23:59:59";
+        params['fEndtime'] = dateEndVal + " 23:59:59";
     }
     if (stateVal != "") {
         params['fState'] = stateVal;
@@ -80,7 +80,7 @@ function addItems(number) {
                 }
                 $(data.taskAndAlarmEventList.list).each(function () {
                     var stateStr = "";
-                    switch (this.fState) {
+                    switch (this.fState+"") {
                         case "0":
                             stateStr = "<span class=\"redColor\">" + Operation['ui_defectState0'] + "</span>";
                             break;
