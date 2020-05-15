@@ -18,6 +18,21 @@ function listPeople(thisType, userList) {
     }
 }
 
+//抢修 任务必要
+$("#selectType").change(function(){
+    addRedNeed();
+});
+
+function addRedNeed(){
+    if($("#selectType").val()==6){
+        $(".rushContent").show();
+    }else{
+        $(".rushContent").hide();
+    }
+}
+
+addRedNeed();
+
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
 
@@ -37,7 +52,20 @@ $(".item-add").click(function () {
         $("#searchUser").prop("placeholder", Operation['ui_selectSubTip']);
         selectUserList = subList;
     }
-    $("#classList .item-title").html('<span data-id="-1">' + Operation['ui_organization'] + '</span>');
+    if(peopleType == "substation"){
+        $("#peopleClass").hide();
+        $("#subClass").show();
+        //组织机构
+        Substation.getDataByAjax("/getCompanyListBypIdV2",{},function(data){
+            $("#subClass .item-title").html('<span data-id="'+data.tBdCompany[0].fCoaccountno+'">' + Substation.removeUndefined(data.tBdCompany[0].fConame) + '</span>');
+            getGroupClass(data.tBdCompany[0].fCoaccountno);
+        });
+    }else{
+        $("#peopleClass").show();
+        $("#subClass").hide();
+        $("#peopleClass .item-title").html('<span data-id="-1">' + Operation['ui_organization'] + '</span>');
+        getGroupClass(-1);
+    }
     if (selectUserList.length > 0) {
         $("#showSelected").html(Operation['ui_hasSelected'] + ":" + selectUserList.length + Operation['ui_personNum'] + "<i class='icon icon-up'></i>");
         $("#showSelected").off("click", goToSelectedPage).on("click", goToSelectedPage);
@@ -45,7 +73,6 @@ $(".item-add").click(function () {
         $("#showSelected").html(Operation['ui_hasSelected'] + ":");
         $("#showSelected").off("click", goToSelectedPage);
     }
-    getGroupClass(-1);
 });
 
 function addCloseFunction() {
@@ -117,6 +144,11 @@ function postTask() {
         $.toast(Operation['ui_worker'] + Operation['ui_notEmpty']);
         return;
     }
+    if($("#selectType").val()==6){
+        if(taskContent =="" || taskContent == undefined){
+            $.toast(Operation['ui_alarmTaskContent'] + Operation['ui_notEmpty']);
+        }
+    }
     var subIds = [];
     $(subList).each(function (i, obj) {
         subIds.push(obj.userId);
@@ -154,31 +186,60 @@ function getGroupClass(pid) {
     $(".classUl").show();
     $(".personUl").hide();
     $("#classList").show();
-    Substation.getDataByAjax("/selectUserGroupByPid", {
-        userGroupPid: pid
-    }, function (data) {
-        if (data.hasOwnProperty("userGroupList") && data.userGroupList.length > 0) {
-            var html = "";
-            $(data.userGroupList).each(function () {
-                html += "<li>\n" +
-                    "    <div class=\"item-content\">\n" +
-                    "        <div class=\"item-inner\">\n" +
-                    "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsergroupname) + "</div>\n" +
-                    "            <div class=\"item-after\">\n" +
-                    "                <span class=\"nextClass\" data-id=\"" + this.fUsergroupid + "\" data-name=\"" + Substation.removeUndefined(this.fUsergroupname) + "\">\n" +
-                    "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
-                    "                </span>\n" +
-                    "            </div>\n" +
-                    "        </div>\n" +
-                    "    </div>\n" +
-                    "</li>";
-            });
-            $(".classUl").append(html);
-            $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
-        } else {
-            getPersonList(pid);
-        }
-    });
+    if(peopleType == "substation"){
+        //组织机构
+        Substation.getDataByAjax("/getCompanyListBypIdV2", {
+            fCoaccountno: pid
+        }, function (data) {
+            if (data.hasOwnProperty("tBdCompany") && data.tBdCompany.length > 0) {
+                var html = "";
+                $(data.tBdCompany).each(function () {
+                    html += "<li>\n" +
+                        "    <div class=\"item-content\">\n" +
+                        "        <div class=\"item-inner\">\n" +
+                        "            <div class=\"item-title\">" + Substation.removeUndefined(this.fConame) + "</div>\n" +
+                        "            <div class=\"item-after\">\n" +
+                        "                <span class=\"nextClass\" data-id=\"" + this.fCoaccountno + "\" data-name=\"" + Substation.removeUndefined(this.fConame) + "\">\n" +
+                        "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
+                        "                </span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "</li>";
+                });
+                $(".classUl").append(html);
+                $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
+            } else {
+                getPersonList(pid);
+            }
+        });
+    }else{
+        Substation.getDataByAjax("/selectUserGroupByPid", {
+            userGroupPid: pid
+        }, function (data) {
+            if (data.hasOwnProperty("userGroupList") && data.userGroupList.length > 0) {
+                var html = "";
+                $(data.userGroupList).each(function () {
+                    html += "<li>\n" +
+                        "    <div class=\"item-content\">\n" +
+                        "        <div class=\"item-inner\">\n" +
+                        "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsergroupname) + "</div>\n" +
+                        "            <div class=\"item-after\">\n" +
+                        "                <span class=\"nextClass\" data-id=\"" + this.fUsergroupid + "\" data-name=\"" + Substation.removeUndefined(this.fUsergroupname) + "\">\n" +
+                        "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
+                        "                </span>\n" +
+                        "            </div>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "</li>";
+                });
+                $(".classUl").append(html);
+                $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
+            } else {
+                getPersonList(pid);
+            }
+        });
+    }
 }
 
 function getPersonList(gid) {
