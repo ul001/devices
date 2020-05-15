@@ -58,6 +58,38 @@ $(".pull-left.click_btn").click(function () {
   }
 });
 
+function addPushButton(param) {
+  var menuId = "342";
+  if (isIOS) {
+    window.webkit.messageHandlers.iOS.postMessage(null);
+    var storage = localStorage.getItem("accessToken");
+    storage = JSON.parse(storage);
+    menuId = storage.fmenuId;
+  } else if (isAndroid) {
+    menuId = android.getMenuId();
+  }
+  Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
+    pid: menuId
+  }, function (data) {
+    if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
+      $(data.menuList).each(function () {
+        if (this.fCode == "pushAlarmClean") {
+          var showstr =
+            '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">' + Operation['ui_postAlarmClean'] + '</a></div>';
+          $("#yaoxin").append(showstr);
+
+          $("#carryOut").click(function () {
+            localStorage.setItem("alarmSubid", param.fSubid);
+            localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
+            window.location.href = "alarmCleanPost.html";
+          });
+        }
+      });
+      fillData(0);
+    }
+  });
+}
+
 function creatView(param) {
   var html = "";
   if (param) {
@@ -277,17 +309,17 @@ function creatView(param) {
       sb += "                            </li>";
     }
     sb += "                        </ul>";
-
+    addPushButton(param);
     $("#yaoxin").append(sb);
-    var showstr =
-      '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">'+Operation['ui_postAlarmClean']+'</a></div>';
-    $("#yaoxin").append(showstr);
+    // var showstr =
+    //   '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">' + Operation['ui_postAlarmClean'] + '</a></div>';
+    // $("#yaoxin").append(showstr);
     //执行任务按钮事件
-    $("#carryOut").click(function () {
-      localStorage.setItem("alarmSubid", param.fSubid);
-      localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
-      window.location.href = "alarmCleanPost.html";
-    });
+    // $("#carryOut").click(function () {
+    //   localStorage.setItem("alarmSubid", param.fSubid);
+    //   localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
+    //   window.location.href = "alarmCleanPost.html";
+    // });
     // $("#addVarContain126").html(showstr);
     $.hidePreloader();
   } else {

@@ -136,7 +136,7 @@ function getNetData() {
                             Operation["ui_submitted"] +
                             "</span>";
                         if (isUseTrace == "1") {
-                            taskStateName += "<a href=\"#\" class=\"button\" style=\"width:60%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
+                            taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
                         }
                         isChangeReturnCount++;
                     } else {}
@@ -462,11 +462,11 @@ $(".doDetail").click(function () {
         window.location.href = "defectRectification.html";
     } else if (missionTypeid == 5) {
         //消警任务
-//        localStorage.setItem("alarmeventlogid", fTaskandalarmeventid);
-//        localStorage.setItem("missionTypeid", missionTypeid);
-        window.location.href = "alarmCleanInfo.html?alarmeventlogid="+fTaskandalarmeventid;
-    } else if(missionTypeid == 6){
-        window.location.href = "rushRepairInfo.html?repairId="+fTaskandalarmeventid;
+        //        localStorage.setItem("alarmeventlogid", fTaskandalarmeventid);
+        //        localStorage.setItem("missionTypeid", missionTypeid);
+        window.location.href = "alarmCleanInfo.html?alarmeventlogid=" + fTaskandalarmeventid;
+    } else if (missionTypeid == 6) {
+        window.location.href = "rushRepairInfo.html?repairId=" + fTaskandalarmeventid;
     }
 });
 

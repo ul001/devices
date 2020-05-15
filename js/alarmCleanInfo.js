@@ -166,7 +166,7 @@ function creatView(dataParam) {
         sb += "                                </div>";
         sb += "                            </li>";
         //参数编号
-        if (param.hasOwnProperty("fParamcode")) {
+        if (param.hasOwnProperty("fParamcode") && param.fParamcode != "") {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb +=
@@ -181,7 +181,7 @@ function creatView(dataParam) {
             sb += "                            </li>";
         }
         //参数名称
-        if (param.hasOwnProperty("fParamname")) {
+        if (param.hasOwnProperty("fParamname") && param.fParamname != "") {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb +=
@@ -196,7 +196,7 @@ function creatView(dataParam) {
             sb += "                            </li>";
         }
         //参数说明
-        if (param.hasOwnProperty("valueType")) {
+        if (param.hasOwnProperty("valueType") && param.valueType != "") {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb +=
@@ -211,7 +211,7 @@ function creatView(dataParam) {
             sb += "                            </li>";
         }
         //参数值
-        if (param.hasOwnProperty("fValue")) {
+        if (param.hasOwnProperty("fValue") && param.fValue != "") {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb +=
@@ -226,7 +226,7 @@ function creatView(dataParam) {
             sb += "                            </li>";
         }
         //越限值 设定值
-        if (param.hasOwnProperty("fLimitvalue")) {
+        if (param.hasOwnProperty("fLimitvalue") && param.fLimitvalue != "") {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb +=
@@ -241,7 +241,7 @@ function creatView(dataParam) {
             sb += "                            </li>";
         }
         //确认状态
-        if (param.hasOwnProperty("fConfirmstatus")) {
+        if (param.hasOwnProperty("fConfirmstatus") && param.fConfirmstatus != "") {
             var value = "";
             param.fConfirmstatus ? (value = param.fConfirmstatus) : (value = "");
             value == true ? (value = "已确认") : (value = "未确认");
@@ -259,7 +259,7 @@ function creatView(dataParam) {
             sb += "                            </li>";
         }
         //确认人
-        if (param.hasOwnProperty("fConfirmusername")) {
+        if (param.hasOwnProperty("fConfirmusername") && param.fConfirmusername != "") {
             var value = "";
             param.fConfirmusername ? (value = param.fConfirmusername) : (value = "");
             sb += '                            <li class="item-content">';
@@ -276,7 +276,7 @@ function creatView(dataParam) {
             sb += "                            </li>";
         }
         //确认时间
-        if (param.hasOwnProperty("fConfirmtime")) {
+        if (param.hasOwnProperty("fConfirmtime") && param.fConfirmtime != "") {
             var value = "";
             param.fConfirmtime ? (value = param.fConfirmtime) : (value = "");
             sb += '                            <li class="item-content">';
@@ -344,10 +344,7 @@ function creatView(dataParam) {
         sb += '                                    <div class="item-inner">';
         sb +=
             '                                        <div class="item-title label blueColor"><span class="blueColor"';
-        sb +=
-            '                                                data-i18n="ui_suggestion">' +
-            Operation["ui_processExplain"] +
-            "</span></div>";
+        sb += '                                                data-i18n="ui_suggestion">' + Operation["ui_processExplain"] + "</span></div>";
         sb += '                                        <div class="item-input">';
         sb +=
             '                                            <input type="text" id="fSolveresult" name="fSolveresult" value="">';
@@ -359,7 +356,7 @@ function creatView(dataParam) {
         sb += '                            <div class="item-content">';
         sb += '                                <div class="item-inner">';
         sb +=
-            '                                    <div class="item-title label blueColor">处理情况：</div>';
+            '                                    <div class="item-title label blueColor">' + Operation["ui_Situation"] + '</div>';
         sb += '                                    <div class="item-input">';
         sb +=
             '                                        <select id="fState" name="fState">';
@@ -396,12 +393,12 @@ function creatView(dataParam) {
             //   $("#fState").val("");
             $("#fSolveresult").attr("readonly", true);
             $($("select")).each(function () {
-              var thisInput = $(this).parent();
-              var thisValue = "";
-              if (this.selectedIndex != -1) {
-                thisValue = this.options[this.selectedIndex].innerText;
-              }
-              thisInput.html('<input type="text" readonly value="' + thisValue + '">');
+                var thisInput = $(this).parent();
+                var thisValue = "";
+                if (this.selectedIndex != -1) {
+                    thisValue = this.options[this.selectedIndex].innerText;
+                }
+                thisInput.html('<input type="text" readonly value="' + thisValue + '">');
             });
         }
 
