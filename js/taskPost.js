@@ -19,14 +19,14 @@ function listPeople(thisType, userList) {
 }
 
 //抢修 任务必要
-$("#selectType").change(function(){
+$("#selectType").change(function () {
     addRedNeed();
 });
 
-function addRedNeed(){
-    if($("#selectType").val()==6){
+function addRedNeed() {
+    if ($("#selectType").val() == 6) {
         $(".rushContent").show();
-    }else{
+    } else {
         $(".rushContent").hide();
     }
 }
@@ -52,15 +52,15 @@ $(".item-add").click(function () {
         $("#searchUser").prop("placeholder", Operation['ui_selectSubTip']);
         selectUserList = subList;
     }
-    if(peopleType == "substation"){
+    if (peopleType == "substation") {
         $("#peopleClass").hide();
         $("#subClass").show();
         //组织机构
-        Substation.getDataByAjax("/getCompanyListBypIdV2",{},function(data){
-            $("#subClass .item-title").html('<span data-id="'+data.tBdCompany[0].fCoaccountno+'">' + Substation.removeUndefined(data.tBdCompany[0].fConame) + '</span>');
+        Substation.getDataByAjax("/getCompanyListBypIdV2", {}, function (data) {
+            $("#subClass .item-title").html('<span data-id="' + data.tBdCompany[0].fCoaccountno + '">' + Substation.removeUndefined(data.tBdCompany[0].fConame) + '</span>');
             getGroupClass(data.tBdCompany[0].fCoaccountno);
         });
-    }else{
+    } else {
         $("#peopleClass").show();
         $("#subClass").hide();
         $("#peopleClass .item-title").html('<span data-id="-1">' + Operation['ui_organization'] + '</span>');
@@ -144,8 +144,8 @@ function postTask() {
         $.toast(Operation['ui_worker'] + Operation['ui_notEmpty']);
         return;
     }
-    if($("#selectType").val()==6){
-        if(taskContent =="" || taskContent == undefined){
+    if ($("#selectType").val() == 6) {
+        if (taskContent == "" || taskContent == undefined) {
             $.toast(Operation['ui_alarmTaskContent'] + Operation['ui_notEmpty']);
         }
     }
@@ -186,7 +186,7 @@ function getGroupClass(pid) {
     $(".classUl").show();
     $(".personUl").hide();
     $("#classList").show();
-    if(peopleType == "substation"){
+    if (peopleType == "substation") {
         //组织机构
         Substation.getDataByAjax("/getCompanyListBypIdV2", {
             fCoaccountno: pid
@@ -213,7 +213,7 @@ function getGroupClass(pid) {
                 getPersonList(pid);
             }
         });
-    }else{
+    } else {
         Substation.getDataByAjax("/selectUserGroupByPid", {
             userGroupPid: pid
         }, function (data) {
@@ -256,7 +256,7 @@ function getPersonList(gid) {
     }
     if (peopleType == "substation") {
         Substation.postDataByAjax("/getSubstationListBySubGroupId", {
-            fSubgroupid: gid
+            fCoaccountno: gid
         }, function (data) {
             if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
                 var html = "";
