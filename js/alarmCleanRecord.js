@@ -110,10 +110,10 @@ function addItems(number) {
                         "            <div>\n" +
                         "                <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>" + Substation.removeUndefined(this.fSubname) + "\n" +
                         "                </p>\n" +
-                        "                <p>仪表名称：" + Substation.removeUndefined(alarmJson.fDevicename) + "</p>\n" +
-                        "                <p>事件类型：" + Substation.removeUndefined(alarmJson.fMessInfoExplain) + "</p>\n" +
-                        "                <p>处理状态：" + stateStr + "</p>\n" +
-                        "                <p>创建时间：" + Substation.removeUndefined(this.fCreatetime) + "</p>\n" +
+                        "                <p>" + Operation['ui_MeterName'] + Substation.removeUndefined(alarmJson.fDevicename) + "</p>\n" +
+                        "                <p>" + Operation['ui_EventType'] + Substation.removeUndefined(alarmJson.fMessInfoExplain) + "</p>\n" +
+                        "                <p>" + Operation['ui_dealState'] + stateStr + "</p>\n" +
+                        "                <p>" + Operation['ui_createTime'] + Substation.removeUndefined(this.fCreatetime) + "</p>\n" +
                         "            </div>\n" +
                         //                            "            <div class=\"col-30\">\n" +
                         ////                            "                <p class=\"text-right\">发生时间:</p>\n" +
