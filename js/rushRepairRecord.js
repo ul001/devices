@@ -80,7 +80,7 @@ function addItems(number) {
                 }
                 $(data.taskAndRushRepairList.list).each(function () {
                     var stateStr = "";
-                    switch (this.fState) {
+                    switch (this.fState+"") {
                         case "0":
                             stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
                             break;
