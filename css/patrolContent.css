@@ -27,15 +27,6 @@
   margin: 0;
 }
 
-.pull-right div {
-  display: inline-block;
-}
-
-.pull-right label.label-checkbox i.icon-form-checkbox {
-  width: 0.8rem;
-  height: 0.8rem;
-}
-
 i.icon.icon-select {
   width: 2.6rem;
   height: 1.8rem;
@@ -266,4 +257,13 @@ i.icon.icon-tips {
   background-position: -webkit-calc(100% - .5rem) center, -webkit-calc(100% - 1.7rem) center;
   background-position: calc(100% - .5rem) center, calc(100% - 1.7rem) center;
   background-size: .7rem;
+}
+
+.nextDiv div {
+  display: inline-block;
+}
+
+label.label-checkbox i.icon-form-checkbox {
+  width: 0.8rem;
+  height: 0.8rem;
 }

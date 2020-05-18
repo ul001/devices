@@ -39,6 +39,7 @@ $("#dateEnd").calendar();
 $(".item-add").click(function () {
     peopleType = $(this).attr("id");
     $.router.loadPage("#page1");
+    $("#page1 .content").scrollTop(0);
     if (peopleType == "charger") {
         $("#peopleType").text(Operation['ui_charger']);
         $("#searchUser").prop("placeholder", Operation['ui_selectUser']);
@@ -58,6 +59,7 @@ $(".item-add").click(function () {
         //组织机构
         Substation.getDataByAjax("/getCompanyListBypIdV2", {}, function (data) {
             $("#subClass .item-title").html('<span data-id="' + data.tBdCompany[0].fCoaccountno + '">' + Substation.removeUndefined(data.tBdCompany[0].fConame) + '</span>');
+            thisGroupid = data.tBdCompany[0].fCoaccountno;
             getGroupClass(data.tBdCompany[0].fCoaccountno);
         });
     } else {
@@ -183,8 +185,6 @@ var thisGroupid = -1;
 
 function getGroupClass(pid) {
     $(".classUl").empty();
-    $(".classUl").show();
-    $(".personUl").hide();
     $("#classList").show();
     if (peopleType == "substation") {
         //组织机构
@@ -192,6 +192,7 @@ function getGroupClass(pid) {
             fCoaccountno: pid
         }, function (data) {
             if (data.hasOwnProperty("tBdCompany") && data.tBdCompany.length > 0) {
+                $(".classUl").show();
                 var html = "";
                 $(data.tBdCompany).each(function () {
                     html += "<li>\n" +
@@ -207,17 +208,19 @@ function getGroupClass(pid) {
                         "    </div>\n" +
                         "</li>";
                 });
-                $(".classUl").append(html);
+                $(".classUl").html(html);
                 $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
             } else {
-                getPersonList(pid);
+                $(".classUl").hide();
             }
+            getPersonList(pid);
         });
     } else {
         Substation.getDataByAjax("/selectUserGroupByPid", {
             userGroupPid: pid
         }, function (data) {
             if (data.hasOwnProperty("userGroupList") && data.userGroupList.length > 0) {
+                $(".classUl").show();
                 var html = "";
                 $(data.userGroupList).each(function () {
                     html += "<li>\n" +
@@ -233,19 +236,18 @@ function getGroupClass(pid) {
                         "    </div>\n" +
                         "</li>";
                 });
-                $(".classUl").append(html);
+                $(".classUl").html(html);
                 $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
             } else {
-                getPersonList(pid);
+                $(".classUl").hide();
             }
+            getPersonList(pid);
         });
     }
 }
 
 function getPersonList(gid) {
     $("#personListUl").empty();
-    $(".personUl").show();
-    $(".classUl").hide();
     var typeStr = "";
     if (peopleType == "charger") {
         typeStr = "type=\"checkbox\"";
@@ -259,6 +261,7 @@ function getPersonList(gid) {
             fCoaccountno: gid
         }, function (data) {
             if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
+                $(".personUl").show();
                 var html = "";
                 $(data.data.list).each(function () {
                     html += "<li>\n" +
@@ -271,7 +274,7 @@ function getPersonList(gid) {
                         "    </label>\n" +
                         "</li>"
                 });
-                $("#personListUl").append(html);
+                $("#personListUl").html(html);
                 $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
                 checkSelectPeople();
             } else {
@@ -283,6 +286,7 @@ function getPersonList(gid) {
             groupId: gid
         }, function (data) {
             if (data.hasOwnProperty("userList") && data.userList.length > 0) {
+                $(".personUl").show();
                 var html = "";
                 $(data.userList).each(function () {
                     html += "<li>\n" +
@@ -295,7 +299,7 @@ function getPersonList(gid) {
                         "    </label>\n" +
                         "</li>"
                 });
-                $("#personListUl").append(html);
+                $("#personListUl").html(html);
                 $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
                 checkSelectPeople();
             } else {
@@ -314,7 +318,7 @@ function nextClassClick() {
     $("#classList .item-title span").addClass("preClass");
     $(".preClass").off("click", preClick).on("click", preClick);
     $("#classList .item-title").append("<i class=\"icon icon-nextArrow\"></i><span data-id=\"" + clickPid + "\">" + clickName + "</span>")
-    $("#classList").scrollLeft(10000);
+    $("#classList .item-title").scrollLeft(10000);
     getGroupClass(clickPid);
 }
 
@@ -434,7 +438,7 @@ function getSearchUser() {
                     "    </label>\n" +
                     "</li>";
             });
-            $("#personListUl").append(html);
+            $("#personListUl").html(html);
             $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
             checkSelectPeople();
         });
@@ -454,7 +458,7 @@ function getSearchUser() {
                     "    </label>\n" +
                     "</li>";
             });
-            $("#personListUl").append(html);
+            $("#personListUl").html(html);
             $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
             checkSelectPeople();
         });
@@ -477,6 +481,7 @@ $(".searchbar-cancel").click(function () {
 
 //page2
 function showPage2List() {
+    $("#page2 .content").scrollTop(0);
     $("#selectedUl").empty();
     var html = '';
     $(selectUserList).each(function () {
@@ -493,7 +498,7 @@ function showPage2List() {
             "</li>";
     });
     $("#numberShow").html(selectUserList.length);
-    $("#selectedUl").append(html);
+    $("#selectedUl").html(html);
     $(".removeUser").off("click", removeUser).on("click", removeUser);
 }
 
