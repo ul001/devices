@@ -93,7 +93,9 @@ function loadPage() {
                                 "                                <div class=\"card-content\">\n" +
                                 "                                    <div class=\"card-content-inner\">\n" +
                                 "                                        " + this.name + "\n" +
-                                "                                        <div class=\"pull-right\">\n" +
+//                                "                                        <div class=\"row no-gutter\"><div class=\"col-90\">"+this.name+"</div><div><i data-popover='.popover-links' class='icon icon-tips open-popover pull-right' data-value=\"" + this.identification + "\"></i></div></div>\n" +
+                                "                                        <i data-popover='.popover-links' class='icon icon-tips open-popover pull-right' data-value=\"" + this.identification + "\"></i>\n" +
+                                "                                        <div class=\"nextDiv\">\n" +
                                 "                                            <label class=\"label-checkbox item-content\">\n" +
                                 "                                                <input type=\"radio\" data-name=\"" + this.name + "\" data-code=\"" + this.code + "\" data-json='" + JSON.stringify(this) + "' name=\"" + (obj.fSubdeviceinfoid + "" + this.code) + "\" value=\"yes\">\n" +
                                 "                                                <div class=\"item-media\"><i\n" +
@@ -111,7 +113,6 @@ function loadPage() {
                                 "                                                    " + Operation['ui_no'] + "\n" +
                                 "                                                </div>\n" +
                                 "                                            </label>\n" +
-                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + this.identification + "\"></i>\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
@@ -125,9 +126,9 @@ function loadPage() {
                                 "                                <div class=\"card-content\">\n" +
                                 "                                    <div class=\"card-content-inner\">\n" +
                                 "                                        " + thisInputName + "\n" +
-                                "                                        <div class=\"pull-right\">\n" +
-                                "                                            <input type=\"text\" data-name=\"" + this.name + "\" data-code=\"" + this.code + "\" data-state=\"" + this.value + "\">\n" +
-                                "                                            <i data-popover='.popover-links' class='icon icon-tips open-popover' data-value=\"" + this.identification + "\"></i>\n" +
+                                "                                        <i data-popover='.popover-links' class='icon icon-tips open-popover pull-right' data-value=\"" + this.identification + "\"></i>\n" +
+                                "                                        <div>\n" +
+                                "                                            <input type=\"text\" data-name=\"" + this.name + "\" data-code=\"" + this.code + "\" data-state=\"" + this.value + "\" style=\"width:100%;\">\n" +
                                 "                                        </div>\n" +
                                 "                                    </div>\n" +
                                 "                                </div>\n" +
