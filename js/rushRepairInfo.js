@@ -28,6 +28,14 @@ if (jumpId != undefined && jumpId != null && jumpId != "") {
 // var param = JSON.parse(localStorage.getItem("DetailParam"));
 // localStorage.removeItem("DetailParam");
 // creatView(param);
+
+if(canClick == "false"){
+    $(".upload_img_wrap .upload_img").unbind();
+    $(".upload_img_wrap .upload_img").css("display", "none");
+    $(".blueColor").removeClass("blueColor");
+    $("#saveData").css("display", "none");
+}
+
 loadMenu();
 
 function loadMenu() {
@@ -72,17 +80,29 @@ function creatView(dataParam) {
         var imgUrl = dataParam.ImgURL;
         var taskParam = dataParam.taskAndRushRepairDetail;
         var picArr = dataParam.tDevTaskAndRushRepairImgs;
+        var solvePerson = taskParam.fUsername;
+        var solveTime = taskParam.fUpdatetime;
+        var createTime = taskParam.fCreatetime;
         try{
             $("#fState").val(taskParam.fState);
             $("#taskNumber").text(taskParam.fTasknumber);
             $("#fSolveresult").val(taskParam.fSolveresult);
             $("#taskContent").text(taskParam.fTaskcontent);
+            if(solvePerson != undefined){
+                $(".solvePerson").show();
+                $("#fSolvename").val(solvePerson);
+                $("#fSolvetime").val(solveTime);
+            }
+            if(createTime != undefined){
+                $(".createTime").show();
+                $("#fCreateTime").val(createTime);
+            }
         }catch(e){}
         if (canClick == "false") {
-            $(".upload_img_wrap .upload_img").unbind();
-            $(".upload_img_wrap .upload_img").css("display", "none");
-            $(".blueColor").removeClass("blueColor");
-            $("#saveData").css("display", "none");
+//            $(".upload_img_wrap .upload_img").unbind();
+//            $(".upload_img_wrap .upload_img").css("display", "none");
+//            $(".blueColor").removeClass("blueColor");
+//            $("#saveData").css("display", "none");
             $("#fSolveresult").attr("readonly", true);
             $($("select")).each(function () {
               var thisInput = $(this).parent();
