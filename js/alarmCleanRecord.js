@@ -2,7 +2,7 @@
 var selectSubid = "";
 var clickSubid = "";
 var loading = false;
-var itemsPerLoad = 8;
+var itemsPerLoad = 10;
 var pageNum = 1;
 /*var saveParam= JSON.parse(localStorage.getItem("saveParam"));
 localStorage.removeItem("saveParam");*/
