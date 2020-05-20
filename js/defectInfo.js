@@ -97,6 +97,37 @@ Substation.getDataByAjax(url, problemParam, function (data) {
   if (canClick == "false") {
     $("#fClientadvice").val(Substation.removeUnDefinedStr(defectJson.fClientadvice));
     $("#fState").val(Substation.removeUnDefinedStr(defectJson.fState));
+    if(taskProblem!=1 && defectJson.fState!=1){
+        var menuId = "2391";
+        try {
+            if (isIOS) {
+              window.webkit.messageHandlers.iOS.postMessage(null);
+              var storage = localStorage.getItem("accessToken");
+              storage = JSON.parse(storage);
+              menuId = storage.fmenuId;
+            } else if (isAndroid) {
+              menuId = android.getMenuId();
+            }
+        } catch (e) {}
+        Substation.getDataByAjax("/getSubinfoVoByPid",{pid: menuId},function(data){
+            if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
+            $(data.menuList).each(function() {
+              if (this.fCode == "pushDefectClean") {
+                var showstr =
+                  '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">' +
+                  Operation["ui_postDefectClean"] +
+                  "</a></div>";
+                $(".list-block").append(showstr);
+                $("#carryOut").click(function() {
+                  localStorage.setItem("alarmSubid", selectSubid);
+                  localStorage.setItem("problemId", fDeviceproblemid);
+                  window.location.href = "alarmCleanPost.html";
+                });
+              }
+            });
+          }
+        });
+    }
     if (defectJson.fSolvedUserName != undefined) {
       $(".showSolveUser").css("display", "block");
       $("#fSolveUser").val(defectJson.fSolvedUserName);

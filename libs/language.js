@@ -388,6 +388,7 @@ function getZhLanguage() {
     ui_pushRecord: "推送消息记录",
     ui_dealPerson: "处理人员：",
     ui_dealTime: "处理时间：",
+    ui_postDefectClean: "发布消缺任务",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -911,6 +912,7 @@ function getEnLanguage() {
     ui_pushRecord: "Push message record",
     ui_dealPerson: "Handler:",
     ui_dealTime: "HandleTime:",
+    ui_postDefectClean: "Post defectClean tasks",
 
     //code码
     code_200: "Request succeeds, insert success",

@@ -126,7 +126,7 @@ function addItems(number, lastIndex) {
                     if(deviceName==undefined){
                         deviceName = this.treePathName;
                     }
-                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\">\n" +
+                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" data-id=\""+this.fSubid+"\">\n" +
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"card-content-inner row no-gutter\">\n" +
                         /*"                            <div class=\"col-10\">\n" +
@@ -166,11 +166,13 @@ function addItems(number, lastIndex) {
                         upLoadClicktag = true;
                     }, 1000);
                     var clickId = $(this).attr("id");
+                    var subId = $(this).attr("data-id");
 //                    var clickTree = $(this).attr("value");
 //                    localStorage.setItem("clickTree", clickTree);
                     /*params['subName']=$("#search").val();
                     localStorage.setItem("saveParam",JSON.stringify(params));*/
                     localStorage.setItem("canClick", false);
+                    localStorage.setItem("fSubid",subId);
                     if (isAndroid) {
                         localStorage.setItem("fDeviceproblemid", clickId);
                         android.goToIn();
