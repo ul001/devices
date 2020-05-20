@@ -1,8 +1,16 @@
 //读取本地传参
 var selectSubId = localStorage.getItem("alarmSubid");
 var selectAlarmId = localStorage.getItem("alarmEventlogid");
+var selectProblemId = localStorage.getItem("problemId");
+var isProblem = 0;
+if(selectProblemId!=undefined){
+    isProblem = 1;
+}else if(selectAlarmId!=undefined){
+    isProblem = 0;
+}
 localStorage.removeItem("alarmSubid");
 localStorage.removeItem("alarmEventlogid");
+localStorage.removeItem("problemId");
 
 var peopleType = "";
 var selectUserList = [];
@@ -43,8 +51,6 @@ function addChangeListener() {
             } else {
                 selectUserList = [];
             }
-
-
         } else if (peopleType == "worker") {
             if ($(this).prop("checked")) {
                 selectUserList.push({
@@ -157,13 +163,20 @@ function postTask() {
     var params = {
         userIds: workerIdStr,
         fTaskchargerid: chargerId,
-        fTasktypeid: 5,
+//        fTasktypeid: 5,
         fStartdate: startTime + " 00:00:00",
         fDeadlinedate: completeTime + " 23:59:59",
         fTaskcontent: taskContent,
         subIds: selectSubId,
-        fAlarmeventlogid: selectAlarmId
+//        fAlarmeventlogid: selectAlarmId
     };
+    if(isProblem = 1){
+        params['fTasktypeid'] = 3;
+        params['fDeviceproblemid'] = selectProblemId;
+    }else{
+        params['fTasktypeid'] = 5;
+        params['fAlarmeventlogid'] = selectAlarmId;
+    }
     Substation.postDataByAjax("/releaseTask", params, function (data) {
         if (data.code == "200") {
             $.alert(Operation['ui_postSuccess'], function () {
@@ -178,13 +191,12 @@ var thisGroupid = -1;
 
 function getGroupClass(pid) {
     $(".classUl").empty();
-    $(".classUl").show();
-    $(".personUl").hide();
     $("#classList").show();
     Substation.getDataByAjax("/selectUserGroupByPid", {
         userGroupPid: pid
     }, function (data) {
         if (data.hasOwnProperty("userGroupList") && data.userGroupList.length > 0) {
+            $(".classUl").show();
             var html = "";
             $(data.userGroupList).each(function () {
                 html += "<li>\n" +
@@ -200,36 +212,31 @@ function getGroupClass(pid) {
                     "    </div>\n" +
                     "</li>";
             });
-            $(".classUl").append(html);
+            $(".classUl").html(html);
             $(".nextClass").off("click", nextClassClick);
             $(".nextClass").on("click", nextClassClick);
         } else {
-            getPersonList(pid);
+            $(".classUl").hide();
         }
+        getPersonList(pid);
     });
 }
 
 function getPersonList(gid) {
     $("#personListUl").empty();
-    $(".personUl").show();
-    $(".classUl").hide();
-    var typeStr = "";
-    if (peopleType == "charger") {
-        typeStr = "type=\"checkbox\"";
-        $("#selectAll").hide();
-    } else if (peopleType == "worker") {
-        typeStr = "type=\"checkbox\"";
-        $("#selectAll").show();
-    }
     Substation.getDataByAjax("/selectUserListByGroupId", {
         groupId: gid
     }, function (data) {
         if (data.hasOwnProperty("userList") && data.userList.length > 0) {
+            $(".personUl").show();
+            if(peopleType == "charger"){
+                $("#selectAll").hide();
+            }
             var html = "";
             $(data.userList).each(function () {
                 html += "<li>\n" +
                     "    <label class=\"label-checkbox item-content\">\n" +
-                    "        <input " + typeStr + " onchange=\"addChangeListener()\" name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.fUsername) + "\">\n" +
+                    "        <input type=\"checkbox\" onchange=\"addChangeListener()\" name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.fUsername) + "\">\n" +
                     "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
                     "        <div class=\"item-inner\">\n" +
                     "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsername) + "</div>\n" +
@@ -237,7 +244,7 @@ function getPersonList(gid) {
                     "    </label>\n" +
                     "</li>"
             });
-            $("#personListUl").append(html);
+            $("#personListUl").html(html);
             // var $events = $("input[name='my-checkbox']").data("events");
             // if ($events && $events["change"]) {
             //     $("input[name='my-checkbox']").on("change", addChangeListener);
@@ -247,7 +254,6 @@ function getPersonList(gid) {
             $("input[name='my-checkbox']").unbind("change", addChangeListener);
             $("input[name='my-checkbox']").bind("change", addChangeListener);
             // $("input[name='my-checkbox']").off("change", addChangeListener);
-
             checkSelectPeople();
         } else {
             $(".personUl").hide();
