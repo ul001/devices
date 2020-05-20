@@ -248,14 +248,6 @@ function getGroupClass(pid) {
 
 function getPersonList(gid) {
     $("#personListUl").empty();
-    var typeStr = "";
-    if (peopleType == "charger") {
-        typeStr = "type=\"checkbox\"";
-        $("#selectAll").hide();
-    } else if (peopleType == "worker" || peopleType == "substation") {
-        typeStr = "type=\"checkbox\"";
-        $("#selectAll").show();
-    }
     if (peopleType == "substation") {
         Substation.postDataByAjax("/getSubstationListBySubGroupId", {
             fCoaccountno: gid
@@ -266,7 +258,7 @@ function getPersonList(gid) {
                 $(data.data.list).each(function () {
                     html += "<li>\n" +
                         "    <label class=\"label-checkbox item-content\">\n" +
-                        "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
+                        "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
                         "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
                         "        <div class=\"item-inner\">\n" +
                         "            <div class=\"item-title\">" + Substation.removeUndefined(this.fSubname) + "</div>\n" +
@@ -287,11 +279,14 @@ function getPersonList(gid) {
         }, function (data) {
             if (data.hasOwnProperty("userList") && data.userList.length > 0) {
                 $(".personUl").show();
+                if(peopleType == "charger"){
+                    $("#selectAll").hide();
+                }
                 var html = "";
                 $(data.userList).each(function () {
                     html += "<li>\n" +
                         "    <label class=\"label-checkbox item-content\">\n" +
-                        "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.fUsername) + "\">\n" +
+                        "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.fUsername) + "\">\n" +
                         "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
                         "        <div class=\"item-inner\">\n" +
                         "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsername) + "</div>\n" +
