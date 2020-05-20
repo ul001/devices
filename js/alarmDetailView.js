@@ -5,7 +5,7 @@
 // }
 // var urlinfo = window.location.href, //获取url
 //     value = urlinfo.split("?")[1].split("=")[1]; //
-// var param = JSON.parse(value);
+var params = "";
 var alarmeventlogid = Substation.GetQueryString("alarmeventlogid");
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
@@ -27,10 +27,11 @@ function loadMenu() {
   }
   $.showPreloader(Operation["ui_loading"]);
   Substation.getDataByAjaxNoLoading(
-    "/getAlarmEventLogById", {
+    "/getAlarmEventLogById",
+    {
       fAlarmeventlogid: alarmeventlogid
     },
-    function (data) {
+    function(data) {
       if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
         creatView(data.alarmEventLogById);
       } else {
@@ -38,13 +39,13 @@ function loadMenu() {
       }
       $.hidePreloader();
     },
-    function (errorcode) {
+    function(errorcode) {
       $.hidePreloader();
     }
   );
 }
 
-$(".pull-left.click_btn").click(function () {
+$(".pull-left.click_btn").click(function() {
   if (isPush == "1") {
     //推送详情点击返回事件
     if (isAndroid) {
@@ -60,7 +61,7 @@ $(".pull-left.click_btn").click(function () {
 
 function addPushButton(param) {
   var menuId = "342";
-  try{
+  try {
     if (isIOS) {
       window.webkit.messageHandlers.iOS.postMessage(null);
       var storage = localStorage.getItem("accessToken");
@@ -69,34 +70,44 @@ function addPushButton(param) {
     } else if (isAndroid) {
       menuId = android.getMenuId();
     }
-  }catch(e){}
-  Substation.getDataByAjaxNoLoading("/getSubinfoVoByPid", {
-    pid: menuId
-  }, function (data) {
-    if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
-      $(data.menuList).each(function () {
-        if (this.fCode == "pushAlarmClean") {
-          var showstr =
-            '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">' + Operation['ui_postAlarmClean'] + '</a></div>';
-          $("#yaoxin").append(showstr);
-          $("#carryOut").click(function () {
-            localStorage.setItem("alarmSubid", param.fSubid);
-            localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
-            window.location.href = "alarmCleanPost.html";
-          });
-        }
-      });
+  } catch (e) {}
+  Substation.getDataByAjaxNoLoading(
+    "/getSubinfoVoByPid",
+    {
+      pid: menuId
+    },
+    function(data) {
+      if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
+        $(data.menuList).each(function() {
+          if (this.fCode == "pushAlarmClean") {
+            var showstr =
+              '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">' +
+              Operation["ui_postAlarmClean"] +
+              "</a></div>";
+            $("#yaoxin").append(showstr);
+            $("#carryOut").click(function() {
+              localStorage.setItem("alarmSubid", param.fSubid);
+              localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
+              window.location.href = "alarmCleanPost.html";
+            });
+          }
+        });
+      }
     }
-  });
+  );
 }
 
 //跳转视频
-function jumpVideo(){
-    if(isAndroid){
-        android.videoWatch(param.fSubid);
-    }else if(isIOS){
-
-    }
+function jumpVideo() {
+  if (isAndroid) {
+    android.videoWatch(params.fSubid);
+  } else if (isIOS) {
+    var subParam = {
+      Subid: params.fSubid,
+      Subname: params.fSubname
+    };
+    window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+  }
 }
 
 function creatView(param) {
@@ -116,6 +127,7 @@ function creatView(param) {
     // fConfirmstatus: 确认状态
     // fConfirmuserid: 确认人id
     // fConfirmtime: 确认时间
+    params = param;
     var sb = "                        <ul>";
     sb += '                            <li class="item-content">';
     sb += '                                <div class="item-inner">';
@@ -133,11 +145,11 @@ function creatView(param) {
     sb += '                                <div class="item-inner">';
     sb +=
       '                                    <div class="item-title" data-i18n="ui_Subname">' +
-      Operation["ui_Subname"] +
+      Operation["ui_SubVideo"] +
       "</div>";
     sb +=
       '                                    <div class="item-after">' +
-      '<img src="img/video_watch.png" class="videoWatch" onclick="jumpVideo()">'+
+      '<img src="img/video_watch.png" class="videoWatch" onclick="jumpVideo()">' +
       "</div>";
     sb += "                                </div>";
     sb += "                            </li>";
