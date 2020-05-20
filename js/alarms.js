@@ -23,7 +23,7 @@ $(document).on("refresh", ".pull-to-refresh-content", function (e) {
 });
 
 window.addEventListener("pageshow", function (e) {
-  //ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
+  // ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
   var u = navigator.userAgent,
     app = navigator.appVersion;
   var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
