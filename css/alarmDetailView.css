@@ -10,7 +10,7 @@
     max-height: initial;
     white-space: initial;
     overflow: hidden;
-    display: -webkit-box;
+    /*display: -webkit-box;*/
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
 }
@@ -39,4 +39,8 @@ span.normal {
 
 .bottomDiv{
     padding:1rem;
+}
+
+.videoWatch{
+    height:1.2rem;
 }

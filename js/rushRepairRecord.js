@@ -2,7 +2,7 @@
 var selectSubid = "";
 var clickSubid = "";
 var loading = false;
-var itemsPerLoad = 8;
+var itemsPerLoad = 10;
 var pageNum = 1;
 /*var saveParam= JSON.parse(localStorage.getItem("saveParam"));
 localStorage.removeItem("saveParam");*/
@@ -109,6 +109,7 @@ function addItems(number) {
                             "            <div>\n" +
                             "                <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>"+Substation.removeUndefined(this.fSubname)+"\n" +
                             "                </p>\n" +
+                            "                <p>"+Operation['ui_TaskContent']+Substation.removeUndefined(this.fTaskcontent)+"</p>\n" +
                             "                <p>"+Operation['ui_dealState']+stateStr+"</p>\n" +
                             "                <p>"+Operation['ui_createTime']+Substation.removeUndefined(this.fCreatetime)+"</p>\n" +
                             "            </div>\n" +
