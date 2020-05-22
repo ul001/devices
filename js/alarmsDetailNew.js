@@ -338,7 +338,7 @@ function confirmAlarmEvents(logidList) {
         },
         function (data) {
             manageCard();
-            getFirstPage();
+//            getFirstPage();
         },
         function (errorCode) {
             // if (errorCode == 0) {
