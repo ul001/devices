@@ -6,7 +6,7 @@ var clickID = Substation.GetQueryString("clickID");
 // var clickID = "platform";
 var titleName = localStorage.getItem("titleName");
 if (titleName != null && titleName != undefined) {
-    if(titleName.length > 8){
+    if (titleName.length > 8) {
         titleName = titleName.substring(0, 8) + "...";
     }
     $("#titleName").text(titleName);
@@ -482,7 +482,17 @@ function addCardLongClick() {
                     // window.location.href = encodeURI("alarmDetailView.html" + "?value=" + paramStr);
                     // localStorage.setItem("DetailParam", paramStr);
                     if (alarmeventlogid) {
-                        window.location.href = "alarmDetailView.html?alarmeventlogid=" + alarmeventlogid;
+                        if (isIOS) {
+                            // var alarmParam = {
+                            //     alarmId: alarmeventlogid
+                            // };
+                            // localStorage.removeItem("need-update");
+                            // window.webkit.messageHandlers.pushAlarmDetail.postMessage(alarmParam);
+                            window.location.href = "alarmDetailView.html?alarmeventlogid=" + alarmeventlogid;
+                        } else {
+                            window.location.href = "alarmDetailView.html?alarmeventlogid=" + alarmeventlogid;
+                        }
+
                     } else {
                         toast("数据异常，未获取到报警对应ID");
                     }

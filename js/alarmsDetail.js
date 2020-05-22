@@ -23,8 +23,8 @@ function getFirstPage() {
   $.attachInfiniteScroll($(".infinite-scroll"));
 }
 
-$(document).on("refresh", ".pull-to-refresh-content", function(e) {
-  setTimeout(function() {
+$(document).on("refresh", ".pull-to-refresh-content", function (e) {
+  setTimeout(function () {
     getFirstPage();
     // done
     $.pullToRefreshDone(".pull-to-refresh-content");
@@ -53,13 +53,13 @@ function addItems(number, lastIndex) {
   Substation.getDataByAjaxNoLoading(
     url,
     params,
-    function(data) {
+    function (data) {
       var datadic = data.WarningMessage;
       if (datadic.hasOwnProperty("list") && datadic.list.length > 0) {
         if (pageNum == 1) {
           $(".list-container").empty();
         }
-        $(datadic.list).each(function() {
+        $(datadic.list).each(function () {
           html +=
             '<div class="card">\n' +
             '                    <div class="card-content">\n' +
@@ -122,8 +122,8 @@ function addItems(number, lastIndex) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
           "<span class='bottomTip'>--" +
-            Operation["ui_nomoredata"] +
-            "--</span>"
+          Operation["ui_nomoredata"] +
+          "--</span>"
         );
         return;
       }
@@ -131,13 +131,13 @@ function addItems(number, lastIndex) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
           "<span class='bottomTip'>--" +
-            Operation["ui_nomoredata"] +
-            "--</span>"
+          Operation["ui_nomoredata"] +
+          "--</span>"
         );
         return;
       }
     },
-    function(errorCode) {
+    function (errorCode) {
       if (errorCode == 0) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
@@ -156,14 +156,14 @@ addItems(itemsPerLoad, 0);
 
 var lastIndex = 10;
 
-$(document).on("infinite", ".infinite-scroll", function() {
+$(document).on("infinite", ".infinite-scroll", function () {
   // 如果正在加载，则退出
   if (loading) return;
 
   // 设置flag
   loading = true;
 
-  setTimeout(function() {
+  setTimeout(function () {
     loading = false;
 
     if (lastIndex >= maxItems) {
@@ -179,7 +179,7 @@ $(document).on("infinite", ".infinite-scroll", function() {
   }, 1000);
 });
 
-$(".back_btn").click(function() {
+$(".back_btn").click(function () {
   if (isAndroid) {
     android.goBack();
   } else if (isIOS) {
