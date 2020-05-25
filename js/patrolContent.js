@@ -144,8 +144,6 @@ function loadPage() {
                                 "<div class=\"content-block\">\n" + tempStr +
                                 "</div>\n" +
                                 "</div>");
-                        } else {
-                            $.alert(Operation['ui_noDeviceRecord']);
                         }
                         $(".icon.icon-tips").hide();
                     } else {
@@ -181,6 +179,11 @@ function loadPage() {
                         //                        $(".open-popover").click();
                     });
                 });
+                if (canClick == "false") {
+                    if($(".buttons-tab").html().length == 0){
+                        $.alert(Operation['ui_noDeviceRecord']);
+                    }
+                }
             } else {
                 $("#saveBtn").css("display", "none");
                 $.alert(Operation['ui_nodeviceInThis']);
