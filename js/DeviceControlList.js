@@ -24,6 +24,7 @@ jQuery(document).ready(function () {
     getSomeSubstation(1);
     if (subObj != null && subObj != undefined) {
         selectSubid = subObj.subId;
+        clickName = subObj.subName;
         $("#search").val(subObj.subName);
         $("#subName").text(subObj.subName);
         $(".item-content[data-id=" + subObj.subId + "]")
@@ -97,9 +98,12 @@ jQuery(document).ready(function () {
                         if (this.fCode == "lightingControl") {
                             sb +=
                                 '                                <img class="imgBox" src="img/lightsort.png">';
-                        } else {
+                        } else if(this.fCode == "arcmControl"){
                             sb +=
                                 '                                <img class="imgBox" src="img/yibiaosort.png">';
+                        } else if(this.fCode == "cameraControl"){
+                            sb +=
+                                '                                <img class="imgBox" src="img/camera.png">';
                         }
                         sb += "                            </div>";
                         sb += '                            <div class="row">';
@@ -129,9 +133,19 @@ jQuery(document).ready(function () {
                                 if (clickId == "lightingControl") {
                                     localStorage.setItem("controlClassTitle",thisTitleName);
                                     window.location.href = "lightingControl.html?fSubid=" + selectSubid;
-                                } else {
+                                } else if(clickId == "arcmControl"){
                                     localStorage.setItem("controlClassTitle",thisTitleName);
                                     window.location.href = "arcm300TControl.html?fSubid=" + selectSubid;
+                                } else if(clickId == "cameraControl"){
+                                    if (isAndroid) {
+                                        android.videoWatch(selectSubid);
+                                    } else if (isIOS) {
+                                        var subParam = {
+                                          Subid: selectSubid,
+                                          Subname: clickName
+                                        };
+                                        window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+                                    }
                                 }
                             }
                         });
