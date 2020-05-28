@@ -175,7 +175,7 @@ function getNetData() {
                 $("#addVarContain124").show();
                 if (thisUser.fTaskstarttime == undefined && thisUser.fTaskstateid == "1") {
                     $("#startTask").show();
-                } else {
+                } else if(thisUser.fTaskstateid == "2"){
                     if (thisUser.fSignintime == undefined) {
                         $("#taskIn").show();
                     } else {
@@ -197,6 +197,12 @@ function getNetData() {
                             }
                         }
                     }
+                } else {
+                    $("#textareaDetail").attr("placeholder", "");
+                    $("#textareaDetail").attr("readonly", true);
+                    $("#textareaDetail").val(thisUser.fExplain);
+                    $("#doDetail").show();
+                    localStorage.setItem("canClick", "false");
                 }
             } else {
                 localStorage.setItem("canClick", "false");
