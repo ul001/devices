@@ -415,7 +415,16 @@ function removeUser() {
 }
 
 //解决键盘遮挡问题
+var h = $(window).height();
 window.addEventListener("resize", function () {
+    if ($(window).height() < h) {
+        $(".bar.bar-footer").hide();
+        $(".bar-footer~.content").css("bottom","0");
+    }
+    if ($(window).height() >= h) {
+        $(".bar.bar-footer").show();
+        $(".bar-footer~.content").css("bottom","2.2rem");
+    }
     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
         window.setTimeout(function () {
             document.activeElement.scrollIntoViewIfNeeded();
