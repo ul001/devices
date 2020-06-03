@@ -34,6 +34,7 @@ if (jumpId != undefined && jumpId != null && jumpId != "") {
 var placeCheckFormId;
 //巡检的变电所id
 var missionsubid;
+var missionsubname;
 //任务类型 fTasktypeid
 var missionTypeid;
 //任务负责人 fTaskchargerid
@@ -61,12 +62,13 @@ function getNetData() {
             placeCheckFormId = data.placeCheckFormId;
         }
 
-        var taskInfo = data.taskInfo;
+        taskInfo = data.taskInfo;
         var userList = data.taskUserList;
-        subLon = taskInfo.fLongitude;
-        subLat = taskInfo.fLatitude;
         if (taskInfo != null && taskInfo != undefined) {
+            subLon = taskInfo.fLongitude;
+            subLat = taskInfo.fLatitude;
             missionsubid = taskInfo.fSubid;
+            missionsubname = taskInfo.fSubName;
             if (taskInfo.hasOwnProperty("fTaskandalarmeventid")) {
                 fTaskandalarmeventid = taskInfo.fTaskandalarmeventid;
             }
@@ -697,6 +699,35 @@ function selectTrace(getUserid, startTime, endTime) {
         $.alert(Operation['ui_noStartTimeTraceTip']);
     }
 }
+
+$("#goMap").click(function(){
+    if(subLat!=undefined && subLat!="" && subLon!=undefined && subLon!=""){
+        if(isAndroid){
+            android.goToMap(subLat,subLon,missionsubname);
+        }else if(isIOS){
+            var locParam = {
+              Latitude: subLat,
+              Longitude: subLat,
+              locName:missionsubname};
+            window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
+        }
+    }else{
+        $.toast("尚未配置变电所经纬度！");
+    }
+});
+
+//跳转视频
+$("#jumpVideo").click(function(){
+  if (isAndroid) {
+    android.videoWatch(missionsubid);
+  } else if (isIOS) {
+    var subParam = {
+      Subid: missionsubid,
+      Subname: missionsubname
+    };
+    window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+  }
+});
 
 window.addEventListener(
     "pageshow",

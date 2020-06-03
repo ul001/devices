@@ -48,6 +48,7 @@ jQuery(document).ready(function () {
     var taskCreatId;
 
     var missionDetail = "";
+    var taskInfo;
 
     function getNetData() {
         Substation.getDataByAjax(
@@ -67,9 +68,9 @@ jQuery(document).ready(function () {
                                             $("#carryOut").attr("name", "false");
                                             $("#submitTo").attr("name", "false");
                                         }*/
-                var taskInfo = data.taskInfo;
                 var userList = data.taskUserList;
-                if (taskInfo) {
+                if (data.taskInfo) {
+                    taskInfo = data.taskInfo;
                     missionsubid = taskInfo.fSubid;
                     $("#missionId").html(taskInfo.fTasknumber);
                     $("#missionType").html(taskInfo.fTasktypeexplain);
@@ -275,6 +276,37 @@ jQuery(document).ready(function () {
             android.goBack();
         }
 //        window.location.href = "allPatrolRecord.html";
+    });
+
+    $("#goMap").click(function(){
+        var lat = taskInfo.fLatitude;
+        var lon = taskInfo.fLongitude;
+        if(lat!=undefined && lat!="" && lon!=undefined && lon!=""){
+            if(isAndroid){
+                android.goToMap(lat,lon,taskInfo.fSubName);
+            }else if(isIOS){
+                var locParam = {
+                  Latitude: lat,
+                  Longitude: lon,
+                  locName:taskInfo.fSubName};
+                window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
+            }
+        }else{
+            $.toast("尚未配置变电所经纬度！");
+        }
+    });
+
+    //跳转视频
+    $("#jumpVideo").click(function(){
+      if (isAndroid) {
+        android.videoWatch(taskInfo.fSubid);
+      } else if (isIOS) {
+        var subParam = {
+          Subid: taskInfo.fSubid,
+          Subname: taskInfo.fSubName
+        };
+        window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+      }
     });
 
     //管理页面

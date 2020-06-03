@@ -10,7 +10,7 @@ function getZhLanguage() {
     ui_location: "位置",
     ui_selectSub: "选择变电所",
     ui_subHolder: "请输入变电所名称或编号",
-    ui_subHolderNoCode: "请输入变电所名称",
+    ui_subHolderNoCode: "请输入任务单号/任务内容/变电所名称",
     //通用
     ui_loading: "正在加载...",
     ui_back: "返回",
@@ -540,7 +540,7 @@ function getEnLanguage() {
     ui_location: "Location",
     ui_selectSub: "Select a substation",
     ui_subHolder: "Please enter the substation name or number",
-    ui_subHolderNoCode: "Please enter the substation name",
+    ui_subHolderNoCode: "Please enter the task number/task content/substation name",
     //通用
     ui_loading: "Loading...",
     ui_back: "Back",

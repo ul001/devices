@@ -2,271 +2,311 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>任务详情</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <link rel="stylesheet" href="libs/light7.min.css" />
-    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
-    <link rel="stylesheet" href="libs/light7-swipeout.css" />
-    <link rel="stylesheet" href="css/general.css" />
-    <link rel="stylesheet" href="css/missionDetail.css" />
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" href="libs/light7.min.css"/>
+    <link rel="stylesheet" href="libs/light7-swiper.min.css"/>
+    <link rel="stylesheet" href="libs/light7-swipeout.css"/>
+    <link rel="stylesheet" href="css/general.css"/>
+    <link rel="stylesheet" href="css/missionDetail.css"/>
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb">
     </script>
 </head>
 
 <body>
-    <div class="page-group">
-        <div class="page" id="route6">
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left click_btn">
-                    <span class=" icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </a>
-                <h1 class="title title_color"><span data-i18n="ui_taskDetail"></span>
-                </h1>
-            </header>
-            <div class="content">
-                <div class="content-block" id="addVarContain123">
-                    <div class="content-block-title"><span data-i18n="ui_taskDetail"></span></div>
-                    <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
-                        <ul>
-                            <li>
-                                <div class="item-content showDiv">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_taskNumber"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="missionId"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_tasktyper"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="missionType"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_Subname"></span></div>
-                                        <!-- <div class="item-input"><input type="text" readonly="readonly" id="input3"
-                                            class="valueInput" value="上海安科瑞电气股份有限公司" name="name"
-                                            validator="required" style="overflow:scroll;">
-                                    </div> -->
-                                        <div class="item-input">
-                                            <div class="item-label" id="missionName"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_Originator"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="createName"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_Principal"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="chargerName"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content" id="checkerDiv" style="display:none;">
-                                    <div class="item-inner">
-                                        <div class="item-title label">客户:</div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="checkerName"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_StarPlanTime"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="createTime"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_endPlanTime"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="finishTime"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_TaskContent"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="missionCont">-</div>
-                                            <!-- <textarea id="missionContent" readonly="readonly"></textarea> -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_TaskStartTime"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="ActStartTime">-</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_TaskFinishTime"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="ActFinishTime">-</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li id="totaldefect">
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_Totaldefect"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="TotalDefectNum">-</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li id="defectUntreatNum">
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_defectUntreatNum"></span>
-                                        </div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="Unprocessednumber">-</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_TaskResult"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="TotalDefect">-</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="content-block" id="addVarContain124" style="display:none;">
-                    <div class="content-block-title"><span data-i18n="ui_TaskRemarks"></span></div>
-                    <div id="13" class="list-block baseInfoDiv" name="zhejiuduile">
-                        <ul>
-                            <li>
-                                <div class="item-content showDiv">
-                                    <div class="item-inner">
-                                        <!-- <div class="item-title label">任务备注:</div> -->
-                                        <div class="item-input"><textarea placeholder=""
-                                                data-placeholder="ui_Entertexthere" id="textareaDetail"
-                                                style="-webkit-user-select:text !important"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="content-block" id="addVarContain125">
-                    <div class="content-block-title"><span data-i18n="ui_Implementationsituation"></span>
-                        <!-- <nobr> -->
-                        <a href="#" id="clickManager" name="clickManager"
-                            style="z-index:9999;display: inline-block"><span data-i18n="ui_seeDetail"></span>>></a>
-                        <!-- </nobr> -->
-                    </div>
-                    <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
-                        <ul id="missionState">
-                            <!-- <li>
+<div class="page-group">
+    <div class="page" id="route6">
+        <header class="bar bar-nav bar_color">
+            <a class="button button-link button-nav pull-left click_btn">
+                <span class=" icon icon-left"></span>
+                <span data-i18n="ui_back"></span>
+            </a>
+            <h1 class="title title_color"><span data-i18n="ui_taskDetail"></span>
+            </h1>
+        </header>
+        <div class="content">
+            <div class="content-block" id="addVarContain123">
+                <div class="content-block-title"><span data-i18n="ui_taskDetail"></span></div>
+                <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
+                    <ul>
+                        <li>
                             <div class="item-content showDiv">
                                 <div class="item-inner">
-                                    <div class="item-title label">1 李四</div>
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_taskNumber"></span></div>
                                     <div class="item-input">
-                                        <input type="text" readonly="readonly" id="input9" class="valueInput"
-                                            value="执行中" name="number" validator="required" style="color:red">
+                                        <div class="item-label" id="missionId"></div>
                                     </div>
                                 </div>
                             </div>
                         </li>
                         <li>
-                            <div class="item-content showDiv">
+                            <div class="showDiv item-content">
                                 <div class="item-inner">
-                                    <div class="item-title label">2 王五</div>
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_tasktyper"></span></div>
                                     <div class="item-input">
-                                        <input type="text" readonly="readonly" id="input10" class="valueInput"
-                                            value="已完成" name="number" validator="required"
-                                            style="color:springgreen">
+                                        <div class="item-label" id="missionType"></div>
                                     </div>
                                 </div>
                             </div>
-                        </li> -->
-                        </ul>
-                    </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_Subname"></span></div>
+                                    <div class="item-input row no-gutter" style="display:flex;">
+                                        <div class="item-label col-85" id="missionName"></div>
+                                        <div class="col-15"
+                                             style="display:flex;align-items:center;">
+                                            <img style="width:1.2rem;" src="img/go_map1.png"
+                                                 id="goMap"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label" data-i18n="ui_SubVideo"></div>
+                                    <div class="item-input" style="display:flex;">
+                                        <img src="img/video_watch.png" style="height:1.2rem;" id="jumpVideo">
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_Originator"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="createName"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_Principal"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="chargerName"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content" id="checkerDiv" style="display:none;">
+                                <div class="item-inner">
+                                    <div class="item-title label">客户:</div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="checkerName"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_StarPlanTime"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="createTime"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_endPlanTime"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="finishTime"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_TaskContent"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="missionCont">-</div>
+                                        <!-- <textarea id="missionContent" readonly="readonly"></textarea> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_TaskStartTime"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="ActStartTime">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_TaskFinishTime"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="ActFinishTime">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="totaldefect">
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_Totaldefect"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="TotalDefectNum">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="defectUntreatNum">
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_defectUntreatNum"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="Unprocessednumber">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="showDiv item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label"><span
+                                            data-i18n="ui_TaskResult"></span></div>
+                                    <div class="item-input">
+                                        <div class="item-label" id="TotalDefect">-</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <div class="buttonsEvent">
-                    <div class="row no-gutter">
-                        <a id="startTask" href="#" class="col-66 button button-big button-fill bottom-btn"><i
-                                class="icon icon-starttask"></i><span data-i18n="ui_openTask"></span></a>
-                        <a id="taskIn" href="#" class="col-66 button button-big button-fill bottom-btn"><i
-                                class="icon icon-checkIn"></i><span data-i18n="ui_siteSign"></span></a>
-                        <a id="doTask" href="#" class="doDetail col-40 button button-big button-fill bottom-btn"><i
-                                class="icon icon-missionAction"></i><span data-i18n="ui_doTask"></span></a>
-                        <a id="submitTask" href="#" class="col-40 button button-big button-fill bottom-btn"><i
-                                class="icon icon-upload"></i><span data-i18n="ui_taskSubmit"></span></a>
-                        <a id="doDetail" href="#" class="doDetail col-66 button button-big button-fill bottom-btn"><i
-                                class="icon icon-missionDetail"></i><span data-i18n="ui_doingDetail"></span></a>
-                        <a id="chargeTask" href="#" class="doDetail col-28 button button-big button-fill bottom-btn"><i
-                                class="icon icon-missionDetail"></i><span data-i18n="ui_chargeTask"></span></a>
-                        <a id="chargeReturn" href="#" class="col-28 button button-big button-fill bottom-btn"><i
-                                class="icon icon-chargeReturn"></i><span data-i18n="ui_chargeReturn"></span></a>
-                        <a id="chargeSubmit" href="#" class="col-28 button button-big button-fill bottom-btn"><i
-                                class="icon icon-upload"></i><span data-i18n="ui_chargeSubmit"></span></a>
-                    </div>
+            </div>
+            <div class="content-block" id="addVarContain124" style="display:none;">
+                <div class="content-block-title"><span data-i18n="ui_TaskRemarks"></span></div>
+                <div id="13" class="list-block baseInfoDiv" name="zhejiuduile">
+                    <ul>
+                        <li>
+                            <div class="item-content showDiv">
+                                <div class="item-inner">
+                                    <!-- <div class="item-title label">任务备注:</div> -->
+                                    <div class="item-input"><textarea placeholder=""
+                                                                      data-placeholder="ui_Entertexthere"
+                                                                      id="textareaDetail"
+                                                                      style="-webkit-user-select:text !important"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-block" id="addVarContain125">
+                <div class="content-block-title"><span
+                        data-i18n="ui_Implementationsituation"></span>
+                    <!-- <nobr> -->
+                    <a href="#" id="clickManager" name="clickManager"
+                       style="z-index:9999;display: inline-block"><span
+                            data-i18n="ui_seeDetail"></span>>></a>
+                    <!-- </nobr> -->
+                </div>
+                <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
+                    <ul id="missionState">
+                        <!-- <li>
+                        <div class="item-content showDiv">
+                            <div class="item-inner">
+                                <div class="item-title label">1 李四</div>
+                                <div class="item-input">
+                                    <input type="text" readonly="readonly" id="input9" class="valueInput"
+                                        value="执行中" name="number" validator="required" style="color:red">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content showDiv">
+                            <div class="item-inner">
+                                <div class="item-title label">2 王五</div>
+                                <div class="item-input">
+                                    <input type="text" readonly="readonly" id="input10" class="valueInput"
+                                        value="已完成" name="number" validator="required"
+                                        style="color:springgreen">
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="buttonsEvent">
+                <div class="row no-gutter">
+                    <a id="startTask" href="#"
+                       class="col-66 button button-big button-fill bottom-btn"><i
+                            class="icon icon-starttask"></i><span
+                            data-i18n="ui_openTask"></span></a>
+                    <a id="taskIn" href="#" class="col-66 button button-big button-fill bottom-btn"><i
+                            class="icon icon-checkIn"></i><span data-i18n="ui_siteSign"></span></a>
+                    <a id="doTask" href="#"
+                       class="doDetail col-40 button button-big button-fill bottom-btn"><i
+                            class="icon icon-missionAction"></i><span data-i18n="ui_doTask"></span></a>
+                    <a id="submitTask" href="#"
+                       class="col-40 button button-big button-fill bottom-btn"><i
+                            class="icon icon-upload"></i><span data-i18n="ui_taskSubmit"></span></a>
+                    <a id="doDetail" href="#"
+                       class="doDetail col-66 button button-big button-fill bottom-btn"><i
+                            class="icon icon-missionDetail"></i><span
+                            data-i18n="ui_doingDetail"></span></a>
+                    <a id="chargeTask" href="#"
+                       class="doDetail col-28 button button-big button-fill bottom-btn"><i
+                            class="icon icon-missionDetail"></i><span
+                            data-i18n="ui_chargeTask"></span></a>
+                    <a id="chargeReturn" href="#"
+                       class="col-28 button button-big button-fill bottom-btn"><i
+                            class="icon icon-chargeReturn"></i><span
+                            data-i18n="ui_chargeReturn"></span></a>
+                    <a id="chargeSubmit" href="#"
+                       class="col-28 button button-big button-fill bottom-btn"><i
+                            class="icon icon-upload"></i><span
+                            data-i18n="ui_chargeSubmit"></span></a>
                 </div>
             </div>
         </div>
     </div>
-    <div id="allmap"></div>
-    <script src="libs/jquery-1.12.4.min.js"></script>
-    <script src="libs/light7.min.js"></script>
-    <script src="libs/language.js"></script>
-    <script src="libs/light7-swiper.min.js"></script>
-    <script src="libs/config.js"></script>
-    <script src="libs/tools.js"></script>
-    <script src="js/missionDetailtest.js"></script>
+</div>
+<div id="allmap"></div>
+<script src="libs/jquery-1.12.4.min.js"></script>
+<script src="libs/light7.min.js"></script>
+<script src="libs/language.js"></script>
+<script src="libs/light7-swiper.min.js"></script>
+<script src="libs/config.js"></script>
+<script src="libs/tools.js"></script>
+<script src="js/missionDetailtest.js"></script>
 </body>
 
 </html>
