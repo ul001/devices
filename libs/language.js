@@ -389,6 +389,10 @@ function getZhLanguage() {
     ui_dealPerson: "处理人员：",
     ui_dealTime: "处理时间：",
     ui_postDefectClean: "发布消缺任务",
+    //抢单
+    ui_noRobBill: "未抢单",
+    ui_hadRobBill: "已抢单",
+
 
     //code码
     code_200: "请求成功，插入成功",
