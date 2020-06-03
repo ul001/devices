@@ -28,7 +28,7 @@ if (jumpId != undefined && jumpId != null && jumpId != "") {
 // localStorage.removeItem("DetailParam");
 // creatView(param);
 
-if(canClick=="false"){
+if (canClick == "false") {
     $("#saveData").css("display", "none");
 }
 
@@ -382,29 +382,29 @@ function creatView(dataParam) {
         sb += "                                </div>";
         sb += "                            </div>";
         sb += "                        </li>";
-        if(taskParam.hasOwnProperty("fUsername")){
-            sb += '                        <li class="solvePerson">'+
-                                               '<div class="item-content">'+
-                                                   '<div class="item-inner">'+
-                                                       '<div class="item-title label">'+Operation['ui_dealPerson']+'</div>'+
-                                                       '<div class="item-input">'+
-                                                           '<input type="text" readonly id="fSolvename" value="'+taskParam.fUsername+'">'+
-                                                       '</div>'+
-                                                   '</div>'+
-                                               '</div>'+
-                                           '</li>';
+        if (taskParam.hasOwnProperty("fUsername")) {
+            sb += '                        <li class="solvePerson">' +
+                '<div class="item-content">' +
+                '<div class="item-inner">' +
+                '<div class="item-title label">' + Operation['ui_dealPerson'] + '</div>' +
+                '<div class="item-input">' +
+                '<input type="text" readonly id="fSolvename" value="' + taskParam.fUsername + '">' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</li>';
         }
-        if(taskParam.hasOwnProperty("fUpdatetime")){
-            sb += '                        <li class="solvePerson">'+
-                                               '<div class="item-content">'+
-                                                   '<div class="item-inner">'+
-                                                       '<div class="item-title label">'+Operation['ui_dealTime']+'</div>'+
-                                                       '<div class="item-input">'+
-                                                           '<input type="text" readonly id="fSolvetime" value="'+taskParam.fUpdatetime+'">'+
-                                                       '</div>'+
-                                                   '</div>'+
-                                               '</div>'+
-                                           '</li>';
+        if (taskParam.hasOwnProperty("fUpdatetime")) {
+            sb += '                        <li class="solvePerson">' +
+                '<div class="item-content">' +
+                '<div class="item-inner">' +
+                '<div class="item-title label">' + Operation['ui_dealTime'] + '</div>' +
+                '<div class="item-input">' +
+                '<input type="text" readonly id="fSolvetime" value="' + taskParam.fUpdatetime + '">' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '</li>';
         }
         sb += "                        </ul>";
         $("#form1").append(sb);
@@ -417,7 +417,7 @@ function creatView(dataParam) {
             $(".upload_img_wrap .upload_img").unbind();
             $(".upload_img_wrap .upload_img").css("display", "none");
             $(".blueColor").removeClass("blueColor");
-//            $("#saveData").css("display", "none");
+            //            $("#saveData").css("display", "none");
             $("#fClientadvice").val("");
             //   $("#fState").val("");
             $("#fSolveresult").attr("readonly", true);
