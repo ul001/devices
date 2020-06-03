@@ -1,10 +1,40 @@
 .sub_card {
     display: flex;
     align-items: center;
+    padding: 0.2rem;
 }
 
 .sub_card p {
     margin: 0 0.5rem 0 0.7rem;
+}
+
+.showType {
+    background: #FDECCD;
+    color: #F2A515;
+    text-align: center;
+    border-radius: 0.8rem;
+}
+
+.showTime {
+    background: #F0F3F7;
+    color: #6B7EAF;
+    font-size: 0.6rem;
+    text-align: center;
+    text-overflow: inherit;
+    border-radius: 0.8rem;
+    padding: 0.2rem;
+    /* border: 1px solid #01ADA8; */
+
+}
+
+.line {
+    border: #F2A515;
+}
+
+
+#distanceFrom {
+    position: fixed;
+    right: 0.1rem;
 }
 
 .sub_card .subName {

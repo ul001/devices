@@ -197,6 +197,7 @@ function getZhLanguage() {
     ui_qiangxiu: "抢修",
     ui_taskid: "任务单号",
     ui_plandonetime: "计划完成时间",
+    ui_planStarttime: "计划开始时间",
     ui_donetime: "实际完成时间",
     //missionDetail
     ui_seeDetail: "查看明细",
@@ -735,6 +736,7 @@ function getEnLanguage() {
     ui_qiangxiu: "RushRepair",
     ui_taskid: "TaskNum",
     ui_plandonetime: "PlanEndTime",
+    ui_planStarttime: "PlanStartTime",
     ui_donetime: "TaskEndTime",
     //missionDetail
     ui_seeDetail: "View details",
