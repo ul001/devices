@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
     <meta name="viewport"
-        content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
@@ -16,191 +16,277 @@
 </head>
 
 <body>
-    <div class="page-group">
-        <div class="page page-current" id="page-ptr-tabs">
-            <header class="bar bar-nav bar_color">
-                <button class="button button-link button-nav pull-left click_btn back_btn">
-                    <span class="icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </button>
-                <h1 class="title title_color">
-                    <p class="limit-length" id="titleContent"></p>
-                </h1>
-                <button class="button pull-right clickrightbtn" style="color:white;border:1px solid white;">
-                    <span data-i18n="ui_taskType"></span>
-                </button>
-            </header>
-            <div class="bar bar-header-secondary">
-                <div class="searchbar">
-                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
-                    <div class="search-input">
-                        <label class="icon icon-search" for="searchDaiban"></label>
-                        <input type="search" id="searchDaiban" placeholder="" data-placeholder="ui_subHolderNoCode" />
-                    </div>
+<div class="page-group">
+    <div class="page page-current" id="page-ptr-tabs">
+        <header class="bar bar-nav bar_color">
+            <button class="button button-link button-nav pull-left click_btn back_btn">
+                <span class="icon icon-left"></span>
+                <span data-i18n="ui_back"></span>
+            </button>
+            <a class="button button-link button-nav pull-right open-panel">
+                <i class="icon icon-selectSome"></i>
+            </a>
+            <h1 class="title title_color">
+                <p class="limit-length" id="titleContent"></p>
+            </h1>
+            <!--                <button class="button pull-right clickrightbtn" style="color:white;border:1px solid white;">-->
+            <!--                    <span data-i18n="ui_taskType"></span>-->
+            <!--                </button>-->
+        </header>
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                <div class="search-input">
+                    <label class="icon icon-search" for="searchDaiban"></label>
+                    <input type="search" id="searchDaiban" placeholder=""
+                           data-placeholder="ui_subHolderNoCode"/>
                 </div>
-            </div>
-            <div class="content">
-                <div class="buttons-tab">
-                    <a href="#tab1" class="tab-link button active" id="daiban" name="1" data-i18n="ui_todo"></a>
-                    <a href="#tab2" class="tab-link button" id="zaiban" name="2" data-i18n="ui_doing"></a>
-                    <a href="#tab3" class="tab-link button" id="banbi" name="3" data-i18n="ui_done"></a>
-                </div>
-                <div class="tabs pull-to-refresh-container">
-                    <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll">
-                        <!-- <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll pull-up" data-ptr-distance="55"
-                        data-distance="100"> -->
-                        <!-- 待办 -->
-                        <div class="pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <div class="list-container" id="listtab1">
-                        </div>
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
-                    </div>
-                    <div id="tab2" class="tab pull-to-refresh-content infinite-scroll">
-                        <div class=" pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <div class="list-container" id="listtab2">
-                        </div>
-                        <!-- 在办 -->
-                        <!-- <div class="list-container">
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="row no-gutter sub_card">
-                                        <div class="col-10">
-                                            <img class="showImg"
-                                                src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
-                                        </div>
-                                        <div class="col-75">
-                                            <p class="subName">巡视任务
-                                            </p>
-                                            <p><span>name</span>
-                                                <span>2019-08-26 13:11:26</span></p>
-                                        </div>
-                                        <div class="col-15">
-                                            <button class="button button-fill button-success" id="dealMission1"
-                                                type="button">我要处理
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="row no-gutter sub_card">
-                                        <div class="col-10">
-                                            <img class="showImg"
-                                                src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
-                                        </div>
-                                        <div class="col-75">
-                                            <p class="subName">现场交接任务
-                                            </p>
-                                            <p><span>name</span>
-                                                <span>2019-08-26 13:11:26</span></p>
-                                        </div>
-                                        <div class="col-15">
-                                            <button class="button button-fill button-success" id="dealMission2"
-                                                type="button">我要处理
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="row no-gutter sub_card">
-                                        <div class="col-10">
-                                            <img class="showImg"
-                                                src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
-                                        </div>
-                                        <div class="col-75">
-                                            <p class="subName">缺陷整改
-                                            </p>
-                                            <p><span>name</span>
-                                                <span>2019-08-26 13:11:26</span></p>
-                                        </div>
-                                        <div class="col-15">
-                                            <button class="button button-fill button-success" id="dealMission3"
-                                                type="button">我要处理
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
-                    </div>
-                    <div id="tab3" class="tab pull-to-refresh-content infinite-scroll">
-                        <div class="pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <div class="list-container" id="listtab3">
-                        </div>
-                        <!-- 办毕 -->
-                        <!-- <div class="list-container">
-                            <div class="card" id="cardFinish">
-                                <div class="card-content">
-                                    <div class="row no-gutter sub_card">
-                                        <div class="col-10">
-                                            <img class="showImg"
-                                                src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
-                                        </div>
-                                        <div class="col-75">
-                                            <p class="subName">安科瑞变电所
-                                            </p>
-                                            <p><span>name</span>
-                                                <span>2019-08-26 13:11:26</span>
-                                            </p>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card">
-                                <div class="card-content">
-                                    <div class="row no-gutter sub_card">
-                                        <div class="col-10">
-                                            <img class="showImg"
-                                                src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
-                                        </div>
-                                        <div class="col-75">
-                                            <p class="subName">巡视任务
-                                            </p>
-                                            <p><span>name</span>
-                                                <span>2019-08-26 13:11:26</span></p>
-                                        </div>
-                                        <div class="col-15">
-                                            <button class="button button-fill button-success" id="dealMission4"
-                                                type="button">我要处理
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
+        <div class="content">
+            <div class="buttons-tab">
+                <a href="#tab1" class="tab-link button active" id="daiban" name="1"
+                   data-i18n="ui_todo"></a>
+                <a href="#tab2" class="tab-link button" id="zaiban" name="2"
+                   data-i18n="ui_doing"></a>
+                <a href="#tab3" class="tab-link button" id="banbi" name="3" data-i18n="ui_done"></a>
+            </div>
+            <div class="tabs pull-to-refresh-container">
+                <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll">
+                    <!-- <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll pull-up" data-ptr-distance="55"
+                    data-distance="100"> -->
+                    <!-- 待办 -->
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-container" id="listtab1">
+                    </div>
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+                <div id="tab2" class="tab pull-to-refresh-content infinite-scroll">
+                    <div class=" pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-container" id="listtab2">
+                    </div>
+                    <!-- 在办 -->
+                    <!-- <div class="list-container">
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row no-gutter sub_card">
+                                    <div class="col-10">
+                                        <img class="showImg"
+                                            src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
+                                    </div>
+                                    <div class="col-75">
+                                        <p class="subName">巡视任务
+                                        </p>
+                                        <p><span>name</span>
+                                            <span>2019-08-26 13:11:26</span></p>
+                                    </div>
+                                    <div class="col-15">
+                                        <button class="button button-fill button-success" id="dealMission1"
+                                            type="button">我要处理
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row no-gutter sub_card">
+                                    <div class="col-10">
+                                        <img class="showImg"
+                                            src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
+                                    </div>
+                                    <div class="col-75">
+                                        <p class="subName">现场交接任务
+                                        </p>
+                                        <p><span>name</span>
+                                            <span>2019-08-26 13:11:26</span></p>
+                                    </div>
+                                    <div class="col-15">
+                                        <button class="button button-fill button-success" id="dealMission2"
+                                            type="button">我要处理
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row no-gutter sub_card">
+                                    <div class="col-10">
+                                        <img class="showImg"
+                                            src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
+                                    </div>
+                                    <div class="col-75">
+                                        <p class="subName">缺陷整改
+                                        </p>
+                                        <p><span>name</span>
+                                            <span>2019-08-26 13:11:26</span></p>
+                                    </div>
+                                    <div class="col-15">
+                                        <button class="button button-fill button-success" id="dealMission3"
+                                            type="button">我要处理
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+                <div id="tab3" class="tab pull-to-refresh-content infinite-scroll">
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-container" id="listtab3">
+                    </div>
+                    <!-- 办毕 -->
+                    <!-- <div class="list-container">
+                        <div class="card" id="cardFinish">
+                            <div class="card-content">
+                                <div class="row no-gutter sub_card">
+                                    <div class="col-10">
+                                        <img class="showImg"
+                                            src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
+                                    </div>
+                                    <div class="col-75">
+                                        <p class="subName">安科瑞变电所
+                                        </p>
+                                        <p><span>name</span>
+                                            <span>2019-08-26 13:11:26</span>
+                                        </p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content">
+                                <div class="row no-gutter sub_card">
+                                    <div class="col-10">
+                                        <img class="showImg"
+                                            src="http://gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg" />
+                                    </div>
+                                    <div class="col-75">
+                                        <p class="subName">巡视任务
+                                        </p>
+                                        <p><span>name</span>
+                                            <span>2019-08-26 13:11:26</span></p>
+                                    </div>
+                                    <div class="col-15">
+                                        <button class="button button-fill button-success" id="dealMission4"
+                                            type="button">我要处理
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
-    <script src="libs/language.js"></script>
-    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
-    <script src="libs/tools.js"></script>
-    <script src="js/todoItems.js"></script>
+    <div class="panel-overlay"></div>
+    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+        <div class="content-block">
+            <div id="postTime">
+                <label><span data-i18n="">发布时间</span></label><br>
+                <p class="buttons-row">
+                    <a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                    <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                    <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                    <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
+                </p>
+                <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime"
+                       readonly/> -
+                <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime"
+                       readonly/>
+            </div>
+            <div id="startTime">
+                <label><span data-i18n="">计划开始时间</span></label><br>
+                <p class="buttons-row">
+                    <a href="#" class="button" id="today1"><span data-i18n="ui_today"></span></a>
+                    <a href="#" class="button" id="yestoday1"><span data-i18n="ui_yday"></span></a>
+                    <a href="#" class="button" id="thisMonth1"><span data-i18n="ui_curr"></span></a>
+                    <a href="#" class="button" id="lastMonth1"><span data-i18n="ui_Uult"></span></a>
+                </p>
+                <input type="text" id="dateStart1" placeholder="" data-placeholder="ui_startTime"
+                       readonly/> -
+                <input type="text" id="dateEnd1" placeholder="" data-placeholder="ui_endTime"
+                       readonly/>
+            </div>
+            <div id="finishTime">
+                <label><span data-i18n="">计划完成时间</span></label><br>
+                <p class="buttons-row">
+                    <a href="#" class="button" id="today2"><span data-i18n="ui_today"></span></a>
+                    <a href="#" class="button" id="yestoday2"><span data-i18n="ui_yday"></span></a>
+                    <a href="#" class="button" id="thisMonth2"><span data-i18n="ui_curr"></span></a>
+                    <a href="#" class="button" id="lastMonth2"><span data-i18n="ui_Uult"></span></a>
+                </p>
+                <input type="text" id="dateStart2" placeholder="" data-placeholder="ui_startTime"
+                       readonly/> -
+                <input type="text" id="dateEnd2" placeholder="" data-placeholder="ui_endTime"
+                       readonly/>
+            </div>
+            <div>
+                <label><span data-i18n="">时间排序</span></label><br>
+                <select id="timeRank">
+                    <option value="" data-i18n="">默认</option>
+                    <option value="" data-i18n="">发布时间升序</option>
+                    <option value="" data-i18n="">发布时间降序</option>
+                    <option value="" data-i18n="">计划开始时间升序</option>
+                    <option value="" data-i18n="">计划开始时间降序</option>
+                    <option value="" data-i18n="">计划完成时间升序</option>
+                    <option value="" data-i18n="">计划完成时间降序</option>
+                </select>
+            </div>
+            <div>
+                <label><span data-i18n="">任务类型</span></label><br>
+                <select id="taskType">
+                    <option value="" data-i18n="ui_All"></option>
+                    <option value="1" data-i18n="ui_xunjian"></option>
+                    <option value="3" data-i18n="ui_xiaoque"></option>
+                    <option value="5" data-i18n="ui_xiaojing"></option>
+                    <option value="6" data-i18n="ui_qiangxiu"></option>
+                </select>
+            </div>
+            <div>
+                <label><span data-i18n="">负责人</span></label><input id="chargeSelect" type="text"/>
+            </div>
+            <div>
+                <label><span data-i18n="">执行人</span></label><input id="doSelect" type="text"/>
+            </div>
+        </div>
+        <div class="btnBar row no-gutter">
+            <div class="col-50"><a href="#"
+                                   class="button button-big button-fill button-cancel close-panel"><span
+                    data-i18n="ui_cancel"></span></a>
+            </div>
+            <div class="col-50"><a href="#" class="button button-big button-fill button-success"
+                                   id="searchBtn"><span data-i18n="ui_query"></span></a></div>
+        </div>
+    </div>
+</div>
+<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+<script src="libs/language.js"></script>
+<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<script src="libs/tools.js"></script>
+<script src="js/todoItems.js"></script>
 
 </body>
 

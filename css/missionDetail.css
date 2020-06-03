@@ -9,7 +9,6 @@
 .item-label {
     color: #3E4145;
     text-align: left;
-    margin-left: 0.2rem;
     word-break: break-all;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -88,7 +87,7 @@
     margin-left: 2.5rem;
 }
 
-.row.no-gutter {
+.buttonsEvent .row.no-gutter {
     display: flex;
     justify-content: center;
     position: fixed;
