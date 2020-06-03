@@ -177,7 +177,7 @@ function getNetData() {
                 $("#addVarContain124").show();
                 if (thisUser.fTaskstarttime == undefined && thisUser.fTaskstateid == "1") {
                     $("#startTask").show();
-                } else if(thisUser.fTaskstateid == "2"){
+                } else if (thisUser.fTaskstateid == "2") {
                     if (thisUser.fSignintime == undefined) {
                         $("#taskIn").show();
                     } else {
@@ -700,33 +700,34 @@ function selectTrace(getUserid, startTime, endTime) {
     }
 }
 
-$("#goMap").click(function(){
-    if(subLat!=undefined && subLat!="" && subLon!=undefined && subLon!=""){
-        if(isAndroid){
-            android.goToMap(subLat,subLon,missionsubname);
-        }else if(isIOS){
+$("#goMap").click(function () {
+    if (subLat != undefined && subLat != "" && subLon != undefined && subLon != "") {
+        if (isAndroid) {
+            android.goToMap(subLat, subLon, missionsubname);
+        } else if (isIOS) {
             var locParam = {
-              Latitude: subLat,
-              Longitude: subLat,
-              locName:missionsubname};
+                Latitude: subLat,
+                Longitude: subLon,
+                locName: missionsubname
+            };
             window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
         }
-    }else{
+    } else {
         $.toast("尚未配置变电所经纬度！");
     }
 });
 
 //跳转视频
-$("#jumpVideo").click(function(){
-  if (isAndroid) {
-    android.videoWatch(missionsubid);
-  } else if (isIOS) {
-    var subParam = {
-      Subid: missionsubid,
-      Subname: missionsubname
-    };
-    window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
-  }
+$("#jumpVideo").click(function () {
+    if (isAndroid) {
+        android.videoWatch(missionsubid);
+    } else if (isIOS) {
+        var subParam = {
+            Subid: missionsubid,
+            Subname: missionsubname
+        };
+        window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+    }
 });
 
 window.addEventListener(
