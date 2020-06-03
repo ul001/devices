@@ -144,7 +144,7 @@ function creatView(param) {
     sb += '                            <li class="item-content">';
     sb += '                                <div class="item-inner">';
     sb +=
-      '                                    <div class="item-title" data-i18n="ui_Subname">' +
+      '                                    <div class="item-title">' +
       Operation["ui_SubVideo"] +
       "</div>";
     sb +=

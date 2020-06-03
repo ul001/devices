@@ -29,12 +29,31 @@ function addRedNeed() {
     } else {
         $(".rushContent").hide();
     }
+    //抢单
+    if($("#selectType").val() == 7){
+
+    }
 }
 
 addRedNeed();
 
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
+var myDate = new Date;
+var year = myDate.getFullYear(); //获取当前年
+var mon = myDate.getMonth() + 1; //获取当前月
+var date = myDate.getDate(); //获取当前日
+var nowDate = year+"-"+format0(mon)+"-"+format0(date);
+$("#dateStart").val(nowDate);
+$("#dateEnd").val(nowDate);
+
+function format0(num){
+    if(num<10){
+        return "0"+num;
+    }else{
+        return num;
+    }
+}
 
 $(".item-add").click(function () {
     peopleType = $(this).attr("id");
@@ -531,6 +550,9 @@ $(".back_btn").click(function () {
     }
 });
 
+$("#postHistory").click(function(){
+    window.location.href="taskPostHistory.html";
+});
 
 //解决键盘遮挡问题
 var h = $(window).height();
