@@ -120,113 +120,113 @@ jQuery(document).ready(function () {
   // });
 
   //右上角按钮事件
-  $(".clickrightbtn").click(function () {
-    $.modal({
-      title: Operation['ui_taskTypeSelect'],
-      text: "",
-      verticalButtons: true,
-      buttons: [{
-          text: Operation['ui_All'],
-          onClick: function () {
-            $(".clickrightbtn").text(Operation['ui_All']);
-            tasktypeid = "";
-            tasktypeName = Operation['ui_All'];
-            localStorage.setItem("taskTypeId", tasktypeid);
-            localStorage.setItem("taskTypeName", tasktypeName);
-            pageNum = 1;
-            getFirstPage(tabName);
-          }
-        },
-        // {
-        //     text: '首次拜访',
-        //     onClick: function () {
-        //         $(".clickrightbtn").text("首次拜访");
-        //     }
-        // },
-        // {
-        //     text: '拜访',
-        //     onClick: function () {
-        //         $(".clickrightbtn").text("拜访");
-        //     }
-        // },
-        // {
-        //     text: '交接驱动',
-        //     onClick: function () {
-        //         $(".clickrightbtn").text("交接驱动");
-        //     }
-        // },
-        /*        {
-                  text: "现场交接",
-                  onClick: function() {
-                    $(".clickrightbtn").text("现场交接");
-                    tasktypeid = 2;
-                    pageNum = 1;
-                    getFirstPage(tabName);
-                  }
-                },*/
-        {
-          text: Operation['ui_xunjian'],
-          onClick: function () {
-            $(".clickrightbtn").text(Operation['ui_xunjian']);
-            tasktypeid = 1;
-            tasktypeName = Operation['ui_xunjian'];
-            localStorage.setItem("taskTypeId", tasktypeid);
-            localStorage.setItem("taskTypeName", tasktypeName);
-            pageNum = 1;
-            getFirstPage(tabName);
-          }
-        },
-        {
-          text: Operation['ui_xiaoque'],
-          onClick: function () {
-            $(".clickrightbtn").text(Operation['ui_xiaoque']);
-            tasktypeid = 3;
-            tasktypeName = Operation['ui_xiaoque'];
-            localStorage.setItem("taskTypeId", tasktypeid);
-            localStorage.setItem("taskTypeName", tasktypeName);
-            pageNum = 1;
-            getFirstPage(tabName);
-          }
-        },
-        {
-          text: Operation['ui_xiaojing'],
-          onClick: function () {
-            $(".clickrightbtn").text(Operation['ui_xiaojing']);
-            tasktypeid = 5;
-            tasktypeName = Operation['ui_xiaojing'];
-            localStorage.setItem("taskTypeId", tasktypeid);
-            localStorage.setItem("taskTypeName", tasktypeName);
-            pageNum = 1;
-            getFirstPage(tabName);
-          }
-        },
-        {
-          text: Operation['ui_qiangxiu'],
-          onClick: function () {
-            $(".clickrightbtn").text(Operation['ui_qiangxiu']);
-            tasktypeid = 6;
-            tasktypeName = Operation['ui_qiangxiu'];
-            localStorage.setItem("taskTypeId", tasktypeid);
-            localStorage.setItem("taskTypeName", tasktypeName);
-            pageNum = 1;
-            getFirstPage(tabName);
-          }
-        }
-        // {
-        //     text: '合同收款',
-        //     onClick: function () {
-        //         $(".clickrightbtn").text("合同收款");
-        //     }
-        // },
-        // {
-        //     text: '合同续签',
-        //     onClick: function () {
-        //         $(".clickrightbtn").text("合同续签");
-        //     }
-        // },
-      ]
-    });
-  });
+//  $(".clickrightbtn").click(function () {
+//    $.modal({
+//      title: Operation['ui_taskTypeSelect'],
+//      text: "",
+//      verticalButtons: true,
+//      buttons: [{
+//          text: Operation['ui_All'],
+//          onClick: function () {
+//            $(".clickrightbtn").text(Operation['ui_All']);
+//            tasktypeid = "";
+//            tasktypeName = Operation['ui_All'];
+//            localStorage.setItem("taskTypeId", tasktypeid);
+//            localStorage.setItem("taskTypeName", tasktypeName);
+//            pageNum = 1;
+//            getFirstPage(tabName);
+//          }
+//        },
+//        // {
+//        //     text: '首次拜访',
+//        //     onClick: function () {
+//        //         $(".clickrightbtn").text("首次拜访");
+//        //     }
+//        // },
+//        // {
+//        //     text: '拜访',
+//        //     onClick: function () {
+//        //         $(".clickrightbtn").text("拜访");
+//        //     }
+//        // },
+//        // {
+//        //     text: '交接驱动',
+//        //     onClick: function () {
+//        //         $(".clickrightbtn").text("交接驱动");
+//        //     }
+//        // },
+//        /*        {
+//                  text: "现场交接",
+//                  onClick: function() {
+//                    $(".clickrightbtn").text("现场交接");
+//                    tasktypeid = 2;
+//                    pageNum = 1;
+//                    getFirstPage(tabName);
+//                  }
+//                },*/
+//        {
+//          text: Operation['ui_xunjian'],
+//          onClick: function () {
+//            $(".clickrightbtn").text(Operation['ui_xunjian']);
+//            tasktypeid = 1;
+//            tasktypeName = Operation['ui_xunjian'];
+//            localStorage.setItem("taskTypeId", tasktypeid);
+//            localStorage.setItem("taskTypeName", tasktypeName);
+//            pageNum = 1;
+//            getFirstPage(tabName);
+//          }
+//        },
+//        {
+//          text: Operation['ui_xiaoque'],
+//          onClick: function () {
+//            $(".clickrightbtn").text(Operation['ui_xiaoque']);
+//            tasktypeid = 3;
+//            tasktypeName = Operation['ui_xiaoque'];
+//            localStorage.setItem("taskTypeId", tasktypeid);
+//            localStorage.setItem("taskTypeName", tasktypeName);
+//            pageNum = 1;
+//            getFirstPage(tabName);
+//          }
+//        },
+//        {
+//          text: Operation['ui_xiaojing'],
+//          onClick: function () {
+//            $(".clickrightbtn").text(Operation['ui_xiaojing']);
+//            tasktypeid = 5;
+//            tasktypeName = Operation['ui_xiaojing'];
+//            localStorage.setItem("taskTypeId", tasktypeid);
+//            localStorage.setItem("taskTypeName", tasktypeName);
+//            pageNum = 1;
+//            getFirstPage(tabName);
+//          }
+//        },
+//        {
+//          text: Operation['ui_qiangxiu'],
+//          onClick: function () {
+//            $(".clickrightbtn").text(Operation['ui_qiangxiu']);
+//            tasktypeid = 6;
+//            tasktypeName = Operation['ui_qiangxiu'];
+//            localStorage.setItem("taskTypeId", tasktypeid);
+//            localStorage.setItem("taskTypeName", tasktypeName);
+//            pageNum = 1;
+//            getFirstPage(tabName);
+//          }
+//        }
+//        // {
+//        //     text: '合同收款',
+//        //     onClick: function () {
+//        //         $(".clickrightbtn").text("合同收款");
+//        //     }
+//        // },
+//        // {
+//        //     text: '合同续签',
+//        //     onClick: function () {
+//        //         $(".clickrightbtn").text("合同续签");
+//        //     }
+//        // },
+//      ]
+//    });
+//  });
 
   function getFirstPage(clickNum) {
     var num = "#tab" + clickNum;
@@ -633,6 +633,158 @@ jQuery(document).ready(function () {
     tabName = Number(this.name);
     pageNum = 1;
     getFirstPage(tabName);
+  });
+
+  $("#dateStart").calendar();
+  $("#dateEnd").calendar();
+  $("#dateStart1").calendar();
+  $("#dateEnd1").calendar();
+  $("#dateStart2").calendar();
+  $("#dateEnd2").calendar();
+
+    //时间快捷按钮
+    $(".buttons-row .button").click(function () {
+      $(this).addClass("active").siblings().removeClass("active");
+    });
+    $("#today").click(function () {
+      var myDate = new Date();
+      var todayVal = myDate.format("yyyy-MM-dd");
+      $("#dateStart").val(todayVal);
+      $("#dateEnd").val(todayVal);
+    });
+    $("#yestoday").click(function () {
+      var myDate = new Date();
+      myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
+      var yestodayVal = myDate.format("yyyy-MM-dd");
+      $("#dateStart").val(yestodayVal);
+      $("#dateEnd").val(yestodayVal);
+    });
+    $("#thisMonth").click(function () {
+      var myDate = new Date();
+      var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
+      var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
+      var firstDayVal = firstDay.format("yyyy-MM-dd");
+      var lastDayVal = lastDay.format("yyyy-MM-dd");
+      $("#dateStart").val(firstDayVal);
+      $("#dateEnd").val(lastDayVal);
+    });
+    $("#lastMonth").click(function () {
+      var myDate = new Date();
+      var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
+      var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
+      var firstDayVal = firstDay.format("yyyy-MM-dd");
+      var lastDayVal = lastDay.format("yyyy-MM-dd");
+      $("#dateStart").val(firstDayVal);
+      $("#dateEnd").val(lastDayVal);
+    });
+
+    $("#today1").click(function () {
+        var myDate = new Date();
+        var todayVal = myDate.format("yyyy-MM-dd");
+        $("#dateStart1").val(todayVal);
+        $("#dateEnd1").val(todayVal);
+    });
+    $("#yestoday1").click(function () {
+        var myDate = new Date();
+        myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
+        var yestodayVal = myDate.format("yyyy-MM-dd");
+        $("#dateStart1").val(yestodayVal);
+        $("#dateEnd1").val(yestodayVal);
+    });
+    $("#thisMonth1").click(function () {
+        var myDate = new Date();
+        var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
+        var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
+        var firstDayVal = firstDay.format("yyyy-MM-dd");
+        var lastDayVal = lastDay.format("yyyy-MM-dd");
+        $("#dateStart1").val(firstDayVal);
+        $("#dateEnd1").val(lastDayVal);
+    });
+    $("#lastMonth1").click(function () {
+        var myDate = new Date();
+        var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
+        var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
+        var firstDayVal = firstDay.format("yyyy-MM-dd");
+        var lastDayVal = lastDay.format("yyyy-MM-dd");
+        $("#dateStart1").val(firstDayVal);
+        $("#dateEnd1").val(lastDayVal);
+    });
+
+    $("#today2").click(function () {
+        var myDate = new Date();
+        var todayVal = myDate.format("yyyy-MM-dd");
+        $("#dateStart2").val(todayVal);
+        $("#dateEnd2").val(todayVal);
+    });
+    $("#yestoday2").click(function () {
+        var myDate = new Date();
+        myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
+        var yestodayVal = myDate.format("yyyy-MM-dd");
+        $("#dateStart2").val(yestodayVal);
+        $("#dateEnd2").val(yestodayVal);
+    });
+    $("#thisMonth2").click(function () {
+        var myDate = new Date();
+        var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
+        var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
+        var firstDayVal = firstDay.format("yyyy-MM-dd");
+        var lastDayVal = lastDay.format("yyyy-MM-dd");
+        $("#dateStart2").val(firstDayVal);
+        $("#dateEnd2").val(lastDayVal);
+    });
+    $("#lastMonth2").click(function () {
+        var myDate = new Date();
+        var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
+        var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
+        var firstDayVal = firstDay.format("yyyy-MM-dd");
+        var lastDayVal = lastDay.format("yyyy-MM-dd");
+        $("#dateStart2").val(firstDayVal);
+        $("#dateEnd2").val(lastDayVal);
+    });
+
+  Date.prototype.format = function (fmt) { //author: meizz
+      var o = {
+          "M+": this.getMonth() + 1, //月份
+          "d+": this.getDate(), //日
+          "h+": this.getHours(), //小时
+          "m+": this.getMinutes(), //分
+          "s+": this.getSeconds(), //秒
+          "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+          "S": this.getMilliseconds() //毫秒
+      };
+      if (/(y+)/.test(fmt))
+          fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+      for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt))
+              fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+      return fmt;
+  }
+
+  $("#dateStart,#dateEnd").click(function () {
+      $(".buttons-row").find($(".active")).removeClass("active");
+  });
+
+  $('#searchBtn').click(function () {
+      var start = new Date($("#dateStart").val().replace(/-/g,'/'));
+      var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
+      if(start>end){
+          $.toast(Operation['ui_dateselecttip']);
+          return;
+      }
+      var start1 = new Date($("#dateStart1").val().replace(/-/g,'/'));
+      var end1 = new Date($("#dateEnd1").val().replace(/-/g,'/'));
+      if(start1>end1){
+          $.toast(Operation['ui_dateselecttip']);
+          return;
+      }
+      var start2 = new Date($("#dateStart2").val().replace(/-/g,'/'));
+      var end2 = new Date($("#dateEnd2").val().replace(/-/g,'/'));
+      if(start2>end2){
+          $.toast(Operation['ui_dateselecttip']);
+          return;
+      }
+      $(".close-panel").click();
+      getFirstPage(tabName);
   });
 
   $.init();
