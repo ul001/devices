@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的位置</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/RobBillLocation.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="router3">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left external click_btn">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a class="button button-link button-nav pull-right open-popup" id="clickPop" data-popup=".popup-about">
+                    <span class="icon icon-menu" style="color:white"></span>
+                </a>
+                <!-- <p class="buttons-row">
+                    <a href="#" class="button buttonTab active">步行</a><a href="#" class="button buttonTab">驾车</a><a
+                        href="#" class="button buttonTab">公交</a>
+                </p> -->
+                <h1 class="title title_color"><span data-i18n="ui_location"></span></h1>
+
+            </header>
+            <div class="content">
+                <div id="container" style="width:100%;height:100%"></div>
+            </div>
+            <div id="control">
+                <div onclick="walk()" class="button button-link buttonTab">步行</div>
+                <div onclick="drive()" class="button button-link buttonTab">驾车</div>
+            </div>
+        </div>
+        <div class="popup popup-about" style="display: none;">
+            <div class="content native-scroll">
+                <div class="content-inner">
+                    <p><a class="button close-popup" id="clickDown"><img class="col-15" src="img/xiangxiajiantou.png"
+                                style="height:1rem;"></a></p>
+                    <div class="content-block">
+                        <p class="subName limit-length">清华大学光华路校区</p>
+                        <p class="missionNo row" style="color:#ADB2C1;">
+                            <span class="col-85" style="margin-left:0rem;">任务单号：T9999</span>
+                            <img class="col-15" src="img/video_watch.png" style="height:0.9rem;" id="jumpVideo">
+                        </p>
+                        <p class="missionList">任务发布人：XXX</p>
+                        <p class="missionList">发布时间：XXX</p>
+                        <p class="missionList">任务内容：XXX</p>
+                        <p class="missionList">计划开始时间：XXX</p>
+                        <p class="missionList">计划完成时间：XXX</p>
+                        <p><a class="button close-popup" id="sureBtn">确定</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/language.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=Ysaj307vcP9KgGcn8w2qqaxIdybbBG6d"></script>-->
+    <script type='text/javascript' src="libs/tools.js" charset="utf-8"></script>
+    <script type='text/javascript' src="js/RobBillLocation.js" charset="utf-8"></script>
+</body>
+
+</html>

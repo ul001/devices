@@ -1,0 +1,73 @@
+    .anchorBL {
+        display: none;
+    }
+
+    .popup {
+        top: 15rem;
+        height: 60%;
+    }
+
+    .content-block {
+        margin: 0.75rem 0;
+    }
+
+    .subName {
+        font-weight: bold;
+        left: 5%;
+        font-size: 0.8rem;
+        margin: 0.2rem 0.3rem 0.1rem 0.3rem;
+    }
+
+    .missionNo {
+        margin: 0 0.3rem 0 0.3rem;
+        height: 2.0rem;
+        font-size: 0.7rem;
+        line-height: 2.0rem;
+        border-bottom: 1px solid black;
+    }
+
+    #control {
+        position: absolute;
+        right: 0rem;
+        top: 2.1rem;
+    }
+
+    .buttonTab {
+        margin: 0.5rem;
+        padding: 5px 23px;
+        color: #02A8A6;
+        border: #02A8A6;
+        border-radius: 10px;
+        box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+        font: 16px/14px Tahoma, Verdana, sans-serif;
+        text-align: center;
+        color: #fefefe;
+        background: #02A8A6;
+    }
+
+    .buttons-row {
+        margin: 0rem;
+        color: white;
+        border-color: white;
+    }
+
+    .missionList {
+        margin: 0 0.3rem 0 0.3rem;
+        font-size: 0.7rem;
+    }
+
+    #sureBtn {
+        color: white;
+        background-color: #01ADA8;
+        width: 95%;
+        margin-left: 2.5%;
+        height: 1.8rem;
+        line-height: 1.8rem;
+    }
+
+    #clickDown {
+        border: white;
+        /* width: 0.8rem;
+        height: 0.8rem;
+        background-image: url(../img/xiangxiajiantou.png); */
+    }
