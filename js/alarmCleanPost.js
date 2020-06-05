@@ -5,8 +5,10 @@ var selectProblemId = localStorage.getItem("problemId");
 var isProblem = 0;
 if(selectProblemId!=undefined){
     isProblem = 1;
+    $(".title.title_color").text(Operation['ui_defectPost']);
 }else if(selectAlarmId!=undefined){
     isProblem = 0;
+    $(".title.title_color").text(Operation['ui_alarmCleanPost']);
 }
 localStorage.removeItem("alarmSubid");
 localStorage.removeItem("alarmEventlogid");

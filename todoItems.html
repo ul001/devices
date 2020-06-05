@@ -204,7 +204,7 @@
     <div class="panel panel-right panel-reveal" id='panel-right-demo'>
         <div class="content-block">
             <div id="postTime">
-                <label><span data-i18n="">发布时间</span></label><br>
+                <label><span data-i18n="ui_postTime"></span></label><br>
                 <p class="buttons-row">
                     <a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
                     <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
@@ -217,7 +217,7 @@
                        readonly/>
             </div>
             <div id="startTime">
-                <label><span data-i18n="">计划开始时间</span></label><br>
+                <label><span data-i18n="ui_planStarttime"></span></label><br>
                 <p class="buttons-row">
                     <a href="#" class="button" id="today1"><span data-i18n="ui_today"></span></a>
                     <a href="#" class="button" id="yestoday1"><span data-i18n="ui_yday"></span></a>
@@ -230,7 +230,7 @@
                        readonly/>
             </div>
             <div id="finishTime">
-                <label><span data-i18n="">计划完成时间</span></label><br>
+                <label><span data-i18n="ui_plandonetime"></span></label><br>
                 <p class="buttons-row">
                     <a href="#" class="button" id="today2"><span data-i18n="ui_today"></span></a>
                     <a href="#" class="button" id="yestoday2"><span data-i18n="ui_yday"></span></a>
@@ -243,19 +243,19 @@
                        readonly/>
             </div>
             <div>
-                <label><span data-i18n="">时间排序</span></label><br>
+                <label><span data-i18n="ui_timeRank"></span></label><br>
                 <select id="timeRank">
-                    <option value="" data-i18n="">默认</option>
-                    <option value="" data-i18n="">发布时间升序</option>
-                    <option value="" data-i18n="">发布时间降序</option>
-                    <option value="" data-i18n="">计划开始时间升序</option>
-                    <option value="" data-i18n="">计划开始时间降序</option>
-                    <option value="" data-i18n="">计划完成时间升序</option>
-                    <option value="" data-i18n="">计划完成时间降序</option>
+                    <option value="" data-i18n="ui_timeRank0"></option>
+                    <option value="createASC" data-i18n="ui_timeRank1"></option>
+                    <option value="createDESC" data-i18n="ui_timeRank2"></option>
+                    <option value="planASC" data-i18n="ui_timeRank3"></option>
+                    <option value="planDESC" data-i18n="ui_timeRank4"></option>
+                    <option value="DeadlineASC" data-i18n="ui_timeRank5"></option>
+                    <option value="DeadlineDESC" data-i18n="ui_timeRank6"></option>
                 </select>
             </div>
             <div>
-                <label><span data-i18n="">任务类型</span></label><br>
+                <label><span data-i18n="ui_taskType"></span></label><br>
                 <select id="taskType">
                     <option value="" data-i18n="ui_All"></option>
                     <option value="1" data-i18n="ui_xunjian"></option>
@@ -265,10 +265,10 @@
                 </select>
             </div>
             <div>
-                <label><span data-i18n="">负责人</span></label><input id="chargeSelect" type="text"/>
+                <label><span data-i18n="ui_charger"></span></label><input id="chargeSelect" type="text"/>
             </div>
             <div>
-                <label><span data-i18n="">执行人</span></label><input id="doSelect" type="text"/>
+                <label><span data-i18n="ui_worker"></span></label><input id="doSelect" type="text"/>
             </div>
         </div>
         <div class="btnBar row no-gutter">

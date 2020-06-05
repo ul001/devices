@@ -1,3 +1,36 @@
-    .anchorBL {
-        display: none;
-    }
+#l-map{
+    height:100%;width:100%;
+}
+
+#l-map.search-map{
+    height: calc(100% - 10rem);
+    top: 10rem;
+}
+
+#results{
+    width: 100%;
+    height: auto;
+    max-height:11rem;
+    overflow:auto;
+    top: 0;
+    margin:0;
+    background:#fff;
+    position: absolute;
+}
+
+#results .item-inner{
+    padding:.1rem;
+}
+
+#results .item-title{
+    font-size:.7rem;
+}
+
+#results .item-subtitle{
+    font-size:.6rem;
+    color:gray;
+}
+
+.anchorBL {
+    display: none;
+}

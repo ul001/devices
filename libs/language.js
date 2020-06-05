@@ -393,7 +393,17 @@ function getZhLanguage() {
     //抢单
     ui_noRobBill: "未抢单",
     ui_hadRobBill: "已抢单",
-
+    //任务列表筛选
+    ui_postTime: "发布时间",
+    ui_timeRank: "时间排序",
+    ui_timeRank0: "默认",
+    ui_timeRank1: "发布时间升序",
+    ui_timeRank2: "发布时间降序",
+    ui_timeRank3: "计划开始时间升序",
+    ui_timeRank4: "计划开始时间降序",
+    ui_timeRank5: "计划完成时间升序",
+    ui_timeRank6: "计划完成时间降序",
+    ui_defectPost:"缺陷派单",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -919,6 +929,20 @@ function getEnLanguage() {
     ui_dealPerson: "Handler:",
     ui_dealTime: "HandleTime:",
     ui_postDefectClean: "Post defectClean tasks",
+    //抢单
+    ui_noRobBill: "Unsold",
+    ui_hadRobBill: "Orders grabbed",
+    //任务列表筛选
+    ui_postTime: "release time",
+    ui_timeRank: "Time sorting",
+    ui_timeRank0: "Default",
+    ui_timeRank1: "Release time ascending",
+    ui_timeRank2: "Release time descending",
+    ui_timeRank3: "Planned start time ascending",
+    ui_timeRank4: "Planned start time descending",
+    ui_timeRank5: "Planned completion time ascending",
+    ui_timeRank6: "Planned completion time descending",
+    ui_defectPost:"Defective dispatch",
 
     //code码
     code_200: "Request succeeds, insert success",

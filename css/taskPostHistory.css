@@ -222,3 +222,13 @@ i.icon.icon-subIcon {
     width: 46% !important;
     font-size: 0.75rem;
 }
+
+.showImg {
+    width: 2.0rem;
+    margin-left: 0.2rem;
+    border-radius: 1.0rem;
+}
+
+.card .item-content{
+    padding-left:0;
+}
