@@ -3,8 +3,10 @@
     }
 
     .popup {
-        top: 15rem;
+        top: 40%;
         height: 60%;
+        border-top-right-radius: 1rem;
+        border-top-left-radius: 1rem;
     }
 
     .content-block {
@@ -34,12 +36,12 @@
 
     .buttonTab {
         margin: 0.5rem;
-        padding: 5px 23px;
+        padding: 0 0.5rem 0 0.5rem;
         color: #02A8A6;
         border: #02A8A6;
-        border-radius: 10px;
+        border-radius: 1rem;
         box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
-        font: 16px/14px Tahoma, Verdana, sans-serif;
+        /* font: 16px/14px Tahoma, Verdana, sans-serif; */
         text-align: center;
         color: #fefefe;
         background: #02A8A6;
@@ -56,9 +58,19 @@
         font-size: 0.7rem;
     }
 
-    #sureBtn {
+    .sureBtn {
         color: white;
         background-color: #01ADA8;
+        width: 95%;
+        margin-left: 2.5%;
+        height: 1.8rem;
+        line-height: 1.8rem;
+    }
+
+    #cancel {
+        color: #01ADA8;
+        border: 1px solid #01ADA8;
+        background-color: white;
         width: 95%;
         margin-left: 2.5%;
         height: 1.8rem;
@@ -70,4 +82,11 @@
         /* width: 0.8rem;
         height: 0.8rem;
         background-image: url(../img/xiangxiajiantou.png); */
+    }
+
+    .bottomUp {
+        position: absolute;
+        width: 100%;
+        bottom: 0rem;
+        background: white;
     }
