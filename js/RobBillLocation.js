@@ -145,4 +145,8 @@
     //     //alert(selectSubid + "\n" + "lng:" + lng + "\nlat:" + lat);
     // }
 
+    $("#cancel").on('click', function () {
+        $.popup('.popup-about');
+    });
+
     $.init();

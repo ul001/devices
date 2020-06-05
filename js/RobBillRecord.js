@@ -50,6 +50,31 @@ jQuery(document).ready(function () {
         getFirstPage(num);
     }
 
+    $(".card2")
+        .unbind()
+        .click(function () {
+            if (!upLoadClicktag) {
+                return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function () {
+                upLoadClicktag = true;
+            }, 1000);
+            var taskID = $(this).attr("name");
+            //          var tasktypeid = $(this).attr("data-taskid");
+            //          if (tasktypeid == 1) {
+            //巡视任务
+            //            localStorage.setItem("showType", "missionDoing");
+            localStorage.setItem("missionType", clickNum);
+            localStorage.setItem("taskID", taskID);
+            if (isAndroid) {
+                android.goToIn();
+            } else {
+                window.location.href = "RobBillLocation.html";
+            }
+        });
+
+
     $(".buttons-tab .tab-link").click(function () {
         var i = $(this).index();
         if (i == 0) {
@@ -321,7 +346,7 @@ jQuery(document).ready(function () {
                             if (isAndroid) {
                                 android.goToIn();
                             } else {
-                                window.location.href = "missionDetail.html";
+                                window.location.href = "RobBillLocation.html";
                             }
                             //          } else if (tasktypeid == 3) {
                             //            //缺陷登记
