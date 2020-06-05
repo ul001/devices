@@ -10,8 +10,6 @@
         }
     });
 
-
-
     var selectSubid = localStorage.getItem("fSubid");
     var subName = "";
     var lng = 0;
@@ -19,11 +17,11 @@
     var dizhi = "";
     var map;
     //变电所
-    var subLat = 116.301934;
-    var subLon = 39.977552;
+    var subLat = 36.919141;
+    var subLon = 117.508328;
     //我的位置
-    var myLat = 116.508328;
-    var myLon = 39.919141;
+    var myLat = 39.977552;
+    var myLon = 116.301934;
     var p1;
     var p2;
     Substation.getDataByAjax("/getSubInfoByfSubid", {
@@ -51,21 +49,42 @@
         map.addControl(navigationControl);
         // 百度地图API功能
         // map = new BMap.Map("allmap");
-        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-
-        p1 = new BMap.Point(116.301934, 39.977552);
-        p2 = new BMap.Point(116.508328, 39.919141);
-        // var marker = new BMap.Marker(p2); // 创建标注
-        // map.addOverlay(marker);
-        // var label = new BMap.Label("变电所A", {
-        //     offset: new BMap.Size(30, 0)
-        // });
-        // marker.setLabel(label);
+        map.centerAndZoom(new BMap.Point(subLon, subLat), 11);
+        //先经度，再纬度
+        p1 = new BMap.Point(myLon, myLat);
+        p2 = new BMap.Point(subLon, subLat);
+        var opts = {
+            position: p2, // 指定文本标注所在的地理位置
+            offset: new BMap.Size(30, -30) //设置文本偏移量
+        }
+        var output = "驾车时间：";
+        var searchComplete = function (results) {
+            if (!results || !results.length) {
+                return;
+            }
+            // if (driving.getStatus() != BMAP_STATUS_SUCCESS) {
+            //     return;
+            // }
+            var plan = results.getPlan(0);
+            output += plan.getDuration(true) + "\n"; //获取时间
+            output += "总路程为：";
+            output += plan.getDistance(true) + "\n"; //获取距离
+            var label = new BMap.Label(output, opts); // 创建文本标注对象
+            label.setStyle({
+                color: "red",
+                fontSize: "12px",
+                height: "20px",
+                lineHeight: "20px",
+                fontFamily: "微软雅黑"
+            });
+            map.addOverlay(label);
+        }
         var driving = new BMap.DrivingRoute(map, {
             renderOptions: {
                 map: map,
                 autoViewport: true
-            }
+            },
+            onSearchComplete: searchComplete
         });
         driving.search(p1, p2);
         $("#clickPop").click();
@@ -84,14 +103,42 @@
             enableGeolocation: true
         });
         map.addControl(navigationControl);
-        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-        p1 = new BMap.Point(116.301934, 39.977552);
-        p2 = new BMap.Point(116.508328, 39.919141);
+        map.centerAndZoom(new BMap.Point(subLon, subLat), 11);
+        p1 = new BMap.Point(myLon, myLat);
+        p2 = new BMap.Point(subLon, subLat);
+        var opts = {
+            position: p2, // 指定文本标注所在的地理位置
+            offset: new BMap.Size(30, -30) //设置文本偏移量
+        }
+        var output = "步行时间：";
+        var searchComplete = function (results) {
+            if (!results || !results.length) {
+
+                return;
+            }
+            // if (driving.getStatus() != BMAP_STATUS_SUCCESS) {
+            //     return;
+            // }
+            var plan = results.getPlan(0);
+            output += plan.getDuration(true) + "\n"; //获取时间
+            output += "总路程为：";
+            output += plan.getDistance(true) + "\n"; //获取距离
+            var label = new BMap.Label(output, opts); // 创建文本标注对象
+            label.setStyle({
+                color: "red",
+                fontSize: "12px",
+                height: "20px",
+                lineHeight: "20px",
+                fontFamily: "微软雅黑"
+            });
+            map.addOverlay(label);
+        }
         var walking = new BMap.WalkingRoute(map, {
             renderOptions: {
                 map: map,
                 autoViewport: true
-            }
+            },
+            onSearchComplete: searchComplete
         });
         walking.search(p1, p2);
     }
@@ -108,18 +155,44 @@
             enableGeolocation: true
         });
         map.addControl(navigationControl);
-        map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);
-        p1 = new BMap.Point(116.301934, 39.977552);
-        p2 = new BMap.Point(116.508328, 39.919141);
+        map.centerAndZoom(new BMap.Point(subLon, subLat), 11);
+        p1 = new BMap.Point(myLon, myLat);
+        p2 = new BMap.Point(subLon, subLat);
+        var opts = {
+            position: p2, // 指定文本标注所在的地理位置
+            offset: new BMap.Size(30, -30) //设置文本偏移量
+        }
+        var output = "驾车时间：";
+        var searchComplete = function (results) {
+            if (!results || !results.length) {
+                return;
+            }
+            // if (driving.getStatus() != BMAP_STATUS_SUCCESS) {
+            //     return;
+            // }
+            var plan = results.getPlan(0);
+            output += plan.getDuration(true) + "\n"; //获取时间
+            output += "总路程为：";
+            output += plan.getDistance(true) + "\n"; //获取距离
+            var label = new BMap.Label(output, opts); // 创建文本标注对象
+            label.setStyle({
+                color: "red",
+                fontSize: "12px",
+                height: "20px",
+                lineHeight: "20px",
+                fontFamily: "微软雅黑"
+            });
+            map.addOverlay(label);
+        }
         var driving = new BMap.DrivingRoute(map, {
             renderOptions: {
                 map: map,
                 autoViewport: true
-            }
+            },
+            onSearchComplete: searchComplete
         });
         driving.search(p1, p2);
     }
-
 
     function loadScript() {
         var script = document.createElement("script");
@@ -159,7 +232,7 @@
                 var locParam = {
                     Latitude: subLat,
                     Longitude: subLon,
-                    locName: missionsubname
+                    // locName: missionsubname
                 };
                 window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
             }
