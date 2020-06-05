@@ -41,6 +41,8 @@
                         style="height:1rem;vertical-align:middle;">步行</div>
                 <div onclick="drive()" class="button button-link buttonTab"><img class="col-15" src="img/jiache.png"
                         style="height:1rem;vertical-align:middle;">驾车</div>
+                <div onclick="navigation()" class="button button-link buttonTab"><img class="col-15"
+                        src="img/daohang.png" style="height:1rem;vertical-align:middle;">导航</div>
             </div>
             <div class="bottomUp"><a class="button open-popup" data-popup=".popup-about" style="border:white"><img
                         class="col-15" src="img/xiangshangjiantou.png" style="height:1rem;"></a></div>
@@ -62,21 +64,40 @@
                         <p class="missionList">任务内容：XXX</p>
                         <p class="missionList">计划开始时间：XXX</p>
                         <p class="missionList">计划完成时间：XXX</p>
-                        <p><a class="button open-popup sureBtn" data-popup=".popup-services">确定</a></p>
+                    </div>
+                    <div class="popBottomBtn">
+                        <a class="button open-popup sureBtn" data-popup=".popup-services">确定</a>
                     </div>
                 </div>
             </div>
         </div>
         <div class="popup popup-services">
-            <div class="content-block">
+            <div class="content native-scroll">
                 <div class="content-inner">
                     <div class="content-block">
                         <p class="subName limit-length">确定抢单吗？</p>
-                        <p class="missionNo row" style="color:#ADB2C1;">
+                        <div class="list-block">
+                            <ul>
+                                <li>
+                                    <div id="worker" class="item-content item-link item-add">
+                                        <div class="item-inner">
+                                            <div class="item-title"><span class="redColor">* </span><span
+                                                    data-i18n="">请选择执行人</span></div>
+                                        </div>
+                                    </div>
+                                    <div class="peopleList worker">
+                                        <span class="common">徐航<i class="icon icon-close"></i></span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <p class="missionNo row" style="color:#ADB2C1;">
                             <span class="col-85" style="margin-left:0rem;">请选择执行人</span>
-                        </p>
-                        <p><a class="button sureBtn" id="">确定</a></p>
-                        <p><a class="button close-popup" data-popup=".popup-services" id="cancel">取消</a></p>
+                        </p> -->
+                        <div class="serviceBottomBtn">
+                            <p><a class="button sureBtn" id="">确定</a></p>
+                            <p><a class="button close-popup" data-popup=".popup-services" id="cancel">取消</a></p>
+                        </div>
                     </div>
                 </div>
             </div>

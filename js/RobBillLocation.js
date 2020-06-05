@@ -18,6 +18,12 @@
     var lat = 0;
     var dizhi = "";
     var map;
+    //变电所
+    var subLat = 116.301934;
+    var subLon = 39.977552;
+    //我的位置
+    var myLat = 116.508328;
+    var myLon = 39.919141;
     var p1;
     var p2;
     Substation.getDataByAjax("/getSubInfoByfSubid", {
@@ -144,6 +150,23 @@
     //     });
     //     //alert(selectSubid + "\n" + "lng:" + lng + "\nlat:" + lat);
     // }
+
+    function navigation() {
+        if (subLat != undefined && subLat != "" && subLon != undefined && subLon != "") {
+            if (isAndroid) {
+                android.goToMap(subLat, subLon, missionsubname);
+            } else if (isIOS) {
+                var locParam = {
+                    Latitude: subLat,
+                    Longitude: subLon,
+                    locName: missionsubname
+                };
+                window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
+            }
+        } else {
+            $.toast("尚未配置变电所经纬度！");
+        }
+    }
 
     $("#cancel").on('click', function () {
         $.popup('.popup-about');
