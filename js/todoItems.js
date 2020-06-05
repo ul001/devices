@@ -294,18 +294,58 @@ jQuery(document).ready(function () {
   function addItems(number, lastIndex, clickNum) {
     var text = "";
     var url = "/selectByStateAndType";
-    var searchStr = $("#searchDaiban").val();
-    if (!searchStr) {
-      searchStr = "";
-    }
+    var searchKey = $("#searchDaiban").val();
+    var fCreatest = $("#dateStart").val();
+    var fCreateet = $("#dateEnd").val();
+    var fPlanst = $("#dateStart1").val();
+    var fPlanet = $("#dateEnd1").val();
+    var fDeadlinest = $("#dateStart2").val();
+    var fDeadlineet = $("#dateEnd2").val();
+    var fTasktypeid = $("#taskType").val();
+    var chargername = $("#chargeSelect").val();
+    var executername = $("#doSelect").val();
+    var orderby = $("#timeRank").val();
     var params = {
       pageNum: pageNum,
       pageSize: number,
       fTaskstateid: clickNum,
-      fTasktypeid: tasktypeid,
+//      fTasktypeid: tasktypeid,
       // fSubid: 10100001
-      searchKey: searchStr
+//      searchKey: searchKey
     };
+    if(searchKey!="" && searchKey!=null){
+        params['searchKey'] = searchKey;
+    }
+    if(fCreatest!="" && fCreatest!=null){
+        params['fCreatest'] = fCreatest+" 00:00:00";
+    }
+    if(fCreateet!="" && fCreateet!=null){
+        params['fCreateet'] = fCreateet+" 23:59:59";
+    }
+    if(fPlanst!="" && fPlanst!=null){
+        params['fPlanst'] = fPlanst+" 00:00:00";
+    }
+    if(fPlanet!="" && fPlanet!=null){
+        params['fPlanet'] = fPlanet+" 23:59:59";
+    }
+    if(fDeadlinest!="" && fDeadlinest!=null){
+        params['fDeadlinest'] = fDeadlinest+" 00:00:00";
+    }
+    if(fDeadlineet!="" && fDeadlineet!=null){
+        params['fDeadlineet'] = fDeadlineet+" 23:59:59";
+    }
+    if(fTasktypeid!="" && fTasktypeid!=null){
+        params['fTasktypeid'] = fTasktypeid;
+    }
+    if(chargername!="" && chargername!=null){
+        params['chargername'] = chargername;
+    }
+    if(executername!="" && executername!=null){
+        params['executername'] = executername;
+    }
+    if(orderby!="" && orderby!=null){
+        params['orderby'] = orderby;
+    }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
       var taskList = data.taskList;
       if (taskList.hasOwnProperty("list") && taskList.list.length > 0) {
@@ -599,8 +639,6 @@ jQuery(document).ready(function () {
     $("#searchDaiban").val("");
     getFirstPage(tabName);
   });
-
-  //  getFirstPage(tabName);
 
   var lastIndex = 10;
   //上拉加载

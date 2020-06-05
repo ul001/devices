@@ -125,3 +125,11 @@ select {
 .bar .button-nav.pull-right {
     margin-right:0;
 }
+
+.searchbar.searchbar-active .searchbar-cancel{
+    visibility:visible;
+}
+
+.searchbar .searchbar-cancel{
+    visibility:hidden;
+}

@@ -21,40 +21,115 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number) {
     var html = '';
-    var url = "/getTaskAndAlarmEventList";
-    var params = {pageNo: pageNum,
-                  pageSize: number};
+    var url = "/getTaskListCreatedByMe";
+    var searchKey = $("#searchDaiban").val();
+    var fCreatest = $("#dateStart").val();
+    var fCreateet = $("#dateEnd").val();
+    var fPlanst = $("#dateStart1").val();
+    var fPlanet = $("#dateEnd1").val();
+    var fDeadlinest = $("#dateStart2").val();
+    var fDeadlineet = $("#dateEnd2").val();
+    var fTasktypeid = $("#taskType").val();
+    var chargername = $("#chargeSelect").val();
+    var executername = $("#doSelect").val();
+    var orderby = $("#timeRank").val();
+    var params = {
+        pageNo: pageNum,
+        pageSize: number,
+    };
+    if(searchKey!="" && searchKey!=null){
+      params['searchKey'] = searchKey;
+    }
+    if(fCreatest!="" && fCreatest!=null){
+      params['fCreatest'] = fCreatest+" 00:00:00";
+    }
+    if(fCreateet!="" && fCreateet!=null){
+      params['fCreateet'] = fCreateet+" 23:59:59";
+    }
+    if(fPlanst!="" && fPlanst!=null){
+      params['fPlanst'] = fPlanst+" 00:00:00";
+    }
+    if(fPlanet!="" && fPlanet!=null){
+      params['fPlanet'] = fPlanet+" 23:59:59";
+    }
+    if(fDeadlinest!="" && fDeadlinest!=null){
+      params['fDeadlinest'] = fDeadlinest+" 00:00:00";
+    }
+    if(fDeadlineet!="" && fDeadlineet!=null){
+      params['fDeadlineet'] = fDeadlineet+" 23:59:59";
+    }
+    if(fTasktypeid!="" && fTasktypeid!=null){
+      params['fTasktypeid'] = fTasktypeid;
+    }
+    if(chargername!="" && chargername!=null){
+      params['chargername'] = chargername;
+    }
+    if(executername!="" && executername!=null){
+      params['executername'] = executername;
+    }
+    if(orderby!="" && orderby!=null){
+      params['orderby'] = orderby;
+    }
     Substation.postDataByAjaxNoLoading(url, params, function (data) {
-        if (data.taskAndAlarmEventList.list.length > 0) {
+        if (data.pageInfo.list.length > 0) {
             if (pageNum == 1) {
                 $("#list-container").empty();
             }
-            $(data.taskAndAlarmEventList.list).each(function () {
-                html += `<div class="card" id="">
-                         <div class="item-content item-link">
-                             <div class="item-inner row no-gutter">
-                                 <div>
-                                     <p class="subName limit-length"><i class="icon icon-subIcon"></i>云平台演示箱</p>
-                                     <p>任务单号：R1923183424</p>
-                                     <p>任务类型：抢修</p>
-                                     <p>发布时间：2019-12-23 06:00:00</p>
+            $(data.pageInfo.list).each(function () {
+                var imgSrc = "";
+                if (this.fTasktypeid == 2) {
+                  //现场
+                   imgSrc = "img/missionxian.png";
+                } else if (this.fTasktypeid == 3) {
+                  //缺陷
+                   imgSrc = "img/missionque.png";
+                } else if (this.fTasktypeid == 5) {
+                  //消警
+                   imgSrc = "img/missionjing.png";
+                } else if (this.fTasktypeid == 1){
+                  //巡检
+                   imgSrc = "img/missionxun.png";
+                } else if (this.fTasktypeid == 6){
+                  //抢修
+                   imgSrc = "img/missionxiu.png";
+                }
+                html += `<div class="card" onclick="goToDetail('${this.fTaskid}')">
+                             <div class="item-content item-link">
+                                 <div class="item-inner row no-gutter">
+                                     <div class="col-15">
+                                        <img class="showImg" src="${imgSrc}" />
+                                     </div>
+                                     <div class="col-85">
+                                         <p class="subName limit-length">${this.fSubName}</p>
+                                         <p>任务单号：${this.fTasknumber}</p>
+                                         <p>发布时间：${this.fTaskcreatedate}</p>
+                                     </div>
                                  </div>
                              </div>
-                         </div>
-                     </div>`;
+                         </div>`;
             });
             $('#list-container').append(html);
+            pageNum++;
         }else {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
             return;
         }
-        if (data.taskAndAlarmEventList.list.length < itemsPerLoad) {
+        if (data.pageInfo.list.length < itemsPerLoad) {
             $.detachInfiniteScroll($('.infinite-scroll'));
             $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
             return;
         }
     });
+}
+
+function goToDetail(taskId){
+    localStorage.setItem("taskID", taskId);
+    if (isAndroid) {
+      android.goToIn();
+    } else {
+      window.location.href = "missionDetail.html";
+    }
 }
 
 $(document).on('infinite', '.infinite-scroll', function () {
