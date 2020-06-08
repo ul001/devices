@@ -27,7 +27,7 @@ jQuery(document).ready(function () {
         $("#" + thisClickItem).click();
         var num = $("#" + thisClickItem).attr("name");
         tabName = num;
-        $("#titleContent").text("");
+        // $("#titleContent").text("");
         // if (num == 1) {
         //     $("#titleContent").text(
         //         Operation["ui_todo"] + " " + Operation["ui_goods"]
@@ -90,17 +90,17 @@ jQuery(document).ready(function () {
             // $(".list-container").empty();
             // url = "/getWarningMessageOverLimitEvents";
             taskstatus = 1;
-            $("#titleContent").text(
-                Operation["ui_doing"] + " " + Operation["ui_goods"]
-            );
+            // $("#titleContent").text(
+            //     Operation["ui_doing"] + " " + Operation["ui_goods"]
+            // );
         } else if (i == 2) {
             // pageNum = 1;
             // $(".list-container").empty();
             // url = "/getWarningMessagePlatformRunEvents";
             taskstatus = 2;
-            $("#titleContent").text(
-                Operation["ui_done"] + " " + Operation["ui_goods"]
-            );
+            // $("#titleContent").text(
+            //     Operation["ui_done"] + " " + Operation["ui_goods"]
+            // );
         }
     });
 
