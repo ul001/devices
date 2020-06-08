@@ -448,13 +448,13 @@ jQuery(document).ready(function () {
     });
 
     //记住状态
-    $(".tab-link.button").click(function () {
-        var thisId = $(this).attr("id");
-        localStorage.setItem("thisItem", thisId);
-        tabName = Number(this.name);
-        pageNum = 1;
-        getFirstPage(tabName);
-    });
+    // $(".tab-link.button").click(function () {
+    //     var thisId = $(this).attr("id");
+    //     localStorage.setItem("thisItem", thisId);
+    //     tabName = Number(this.name);
+    //     pageNum = 1;
+    //     getFirstPage(tabName);
+    // });
 
     $.init();
 });

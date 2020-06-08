@@ -17,7 +17,7 @@
 
 <body>
     <div class="page-group">
-        <div class="page" id="router3">
+        <div class="page page-current" id="mainPage">
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left external click_btn">
                     <span class="icon icon-left"></span>
@@ -47,6 +47,124 @@
             <div class="bottomUp"><a class="button open-popup" data-popup=".popup-about" style="border:white"><img
                         class="col-15" src="img/xiangshangjiantou.png" style="height:1rem;"></a></div>
         </div>
+        <div id="page1" class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="clickSelectPersonBack();">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color"><span data-i18n="ui_selectPeople"></span><span id="peopleType"></span>
+                </h1>
+            </header>
+            <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="searchUser"></label>
+                        <input type="search" id="searchUser" placeholder="" data-placeholder="ui_selectUser" />
+                    </div>
+                </div>
+            </div>
+            <nav class="bar bar-footer">
+                <span id="showSelected"><span data-i18n="ui_hasSelected"></span>:</span>
+                <a href="#" class="button bg-primary col-33" onclick="saveSelectedPeople()" data-i18n="ui_confirm"></a>
+            </nav>
+            <div class="content">
+                <div class="list-block">
+                    <ul id="classList">
+                        <li id="subClass">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="peopleClass">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <span data-id="-1" data-i18n="ui_organization"></span>
+                                        <!--<i class="icon icon-right"></i>
+                                    <span class="preClass">安科瑞运维小组</span><i class="icon icon-right"></i>
+                                    <span>运维测试</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="classUl">
+                        <!--                    <li>
+                                            <div class="item-content" data-id="10100001">
+                                                <div class="item-inner">
+                                                    <div class="item-title">安科瑞运维小组</div>
+                                                    <div class="item-after">
+                                                        <span class="nextClass">
+                                                            <i class="icon icon-nextclass"></i>下级
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>-->
+                    </ul>
+                    <ul class="personUl" id="selectAll">
+                        <li>
+                            <label class="label-checkbox item-content" data-id="10100001">
+                                <input type="checkbox" name="my-checkbox">
+                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_SelectAll"></div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                    <ul class="personUl" id="personListUl">
+                        <!--                    <li>
+                                            <label class="label-checkbox item-content" data-id="10100001">
+                                                <input type="checkbox" name="my-checkbox">
+                                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title">xuhang</div>
+                                                </div>
+                                            </label>
+                                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="page2" class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="$.router.back();">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color"><span data-i18n="ui_hasSelected"></span><span
+                        id="numberShow">3</span><span data-i18n="ui_personNum"></span></h1>
+                <a class="button button-link button-nav pull-right click_btn" data-i18n="ui_confirm"
+                    onclick="$.router.back();">
+                </a>
+            </header>
+            <div class="content">
+                <div class="list-block">
+                    <ul id="selectedUl">
+                        <!--                    <li>
+                                            <div class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-title">江苏安科瑞运维</div>
+                                                    <div class="item-after">
+                                                        <span class="removeUser redColor">
+                                                            移除
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
         <div class="popup popup-about" style="display: none;">
             <div class="content native-scroll">
                 <div class="content-inner">
@@ -66,7 +184,7 @@
                         <p class="missionList">计划完成时间：XXX</p>
                     </div>
                     <div class="popBottomBtn">
-                        <a class="button open-popup sureBtn" data-popup=".popup-services">确定</a>
+                        <a class="button open-popup sureBtn" data-popup=".popup-services">抢单</a>
                     </div>
                 </div>
             </div>
@@ -86,7 +204,7 @@
                                         </div>
                                     </div>
                                     <div class="peopleList worker">
-                                        <span class="common">徐航<i class="icon icon-close"></i></span>
+                                        <!-- <span class="common">徐航<i class="icon icon-close"></i></span> -->
                                     </div>
                                 </li>
                             </ul>
