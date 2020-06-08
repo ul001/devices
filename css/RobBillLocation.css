@@ -109,7 +109,7 @@
     }
 
     .list-block {
-        background: #fff;
+        /* background: #fff; */
         border-radius: 1rem;
     }
 
@@ -159,4 +159,117 @@
     .bottomDiv {
         padding: 1rem;
         background: #fff;
+    }
+
+    /*选择人*/
+    .content .list-block {
+        margin: 0;
+        font-size: .75rem;
+    }
+
+    .bar-footer span,
+    i.icon.icon-up {
+        font-size: .75rem;
+    }
+
+    .bar-footer span {
+        height: 2.2rem;
+        line-height: 2.2rem;
+        color: #01ADA8;
+    }
+
+    .bar-footer i.icon.icon-up {
+        margin-left: .2rem;
+    }
+
+    .bar-footer .button {
+        background: #01ADA8;
+        border: 1px solid #01ADA8;
+        float: right;
+    }
+
+    i.icon.icon-nextclass {
+        width: 0.7rem;
+        height: 0.7rem;
+        background-image: url(../img/i-nextclass.png);
+        margin-bottom: .1rem;
+    }
+
+    i.icon.icon-nextArrow {
+        width: 0.75rem;
+        height: 0.75rem;
+        background-image: url(../img/i-nextarrow.png);
+    }
+
+    .nextClass {
+        color: #01ADA8;
+        font-size: .7rem;
+    }
+
+    .list-block .item-after {
+        padding-left: .5rem;
+        border-left: 1px solid #e7e7e7;
+    }
+
+    label.label-checkbox i.icon-form-checkbox {
+        position: relative;
+        width: .8rem;
+        height: .8rem;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        border: 1px solid #c7c7cc;
+        border-radius: .8rem;
+    }
+
+    label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkbox,
+    label.label-checkbox input[type=radio]:checked+.item-media i.icon-form-checkbox {
+        background: #01ADA8;
+    }
+
+    .search-input input {
+        background: #EEEEEE;
+    }
+
+    .bar.bar-header-secondary .searchbar {
+        background: #fff;
+        font-size: .75rem;
+    }
+
+    .list-block ul.classUl,
+    ul.personUl {
+        margin-top: .2rem;
+    }
+
+    ul#classList .item-title {
+        overflow: auto;
+        text-overflow: initial;
+    }
+
+    .preClass {
+        color: #01ADA8;
+    }
+
+    .list-block select {
+        font-size: .75rem;
+        direction: rtl;
+        background: initial;
+    }
+
+    .item-inner {
+        overflow: hidden;
+    }
+
+    .inputSelect .item-link .item-inner {
+        padding: 0;
+    }
+
+    .inputSelect .item-link .item-inner select,
+    input {
+        padding-right: 1.5rem !important;
+    }
+
+    i.icon.icon-history {
+        width: 1rem;
+        height: 1rem;
+        background-image: url(../img/i_history.png);
     }
