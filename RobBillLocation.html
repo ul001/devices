@@ -30,7 +30,7 @@
                     <a href="#" class="button buttonTab active">步行</a><a href="#" class="button buttonTab">驾车</a><a
                         href="#" class="button buttonTab">公交</a>
                 </p> -->
-                <h1 class="title title_color"><span data-i18n="ui_location"></span></h1>
+                <h1 class="title title_color"><span data-i18n="ui_RobBillDetails"></span></h1>
 
             </header>
             <div class="content">
@@ -38,11 +38,12 @@
             </div>
             <div id="control">
                 <div onclick="walk()" class="button button-link buttonTab"><img class="col-15" src="img/buxing.png"
-                        style="height:1rem;vertical-align:middle;">步行</div>
+                        style="height:1rem;vertical-align:middle;"><span data-i18n="ui_walk"></span></div>
                 <div onclick="drive()" class="button button-link buttonTab"><img class="col-15" src="img/jiache.png"
-                        style="height:1rem;vertical-align:middle;">驾车</div>
+                        style="height:1rem;vertical-align:middle;"><span data-i18n="ui_drive"></span></div>
                 <div onclick="navigation()" class="button button-link buttonTab"><img class="col-15"
-                        src="img/daohang.png" style="height:1rem;vertical-align:middle;">导航</div>
+                        src="img/daohang.png" style="height:1rem;vertical-align:middle;"><span
+                        data-i18n="ui_navigation"></span></div>
             </div>
             <div class="bottomUp"><a class="button open-popup" data-popup=".popup-about" style="border:white"><img
                         class="col-15" src="img/xiangshangjiantou.png" style="height:1rem;"></a></div>
@@ -96,18 +97,7 @@
                     </ul>
 
                     <ul class="classUl">
-                        <!--                    <li>
-                                            <div class="item-content" data-id="10100001">
-                                                <div class="item-inner">
-                                                    <div class="item-title">安科瑞运维小组</div>
-                                                    <div class="item-after">
-                                                        <span class="nextClass">
-                                                            <i class="icon icon-nextclass"></i>下级
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>-->
+
                     </ul>
                     <ul class="personUl" id="selectAll">
                         <li>
@@ -121,15 +111,7 @@
                         </li>
                     </ul>
                     <ul class="personUl" id="personListUl">
-                        <!--                    <li>
-                                            <label class="label-checkbox item-content" data-id="10100001">
-                                                <input type="checkbox" name="my-checkbox">
-                                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-                                                <div class="item-inner">
-                                                    <div class="item-title">xuhang</div>
-                                                </div>
-                                            </label>
-                                        </li>-->
+
                     </ul>
                 </div>
             </div>
@@ -149,18 +131,7 @@
             <div class="content">
                 <div class="list-block">
                     <ul id="selectedUl">
-                        <!--                    <li>
-                                            <div class="item-content">
-                                                <div class="item-inner">
-                                                    <div class="item-title">江苏安科瑞运维</div>
-                                                    <div class="item-after">
-                                                        <span class="removeUser redColor">
-                                                            移除
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>-->
+
                     </ul>
                 </div>
             </div>
@@ -184,7 +155,7 @@
                         <p class="missionList">计划完成时间：XXX</p>
                     </div>
                     <div class="popBottomBtn">
-                        <a class="button open-popup sureBtn" data-popup=".popup-services">抢单</a>
+                        <a class="button open-popup sureBtn" data-popup=".popup-services" data-i18n="ui_RobBill"></a>
                     </div>
                 </div>
             </div>
@@ -193,14 +164,14 @@
             <div class="content native-scroll">
                 <div class="content-inner">
                     <div class="content-block">
-                        <p class="subName limit-length">确定抢单吗？</p>
+                        <p class="subName limit-length"><span data-i18n="ui_isSureRobBill"></span></p>
                         <div class="list-block">
                             <ul>
                                 <li>
                                     <div id="worker" class="item-content item-link item-add">
                                         <div class="item-inner">
                                             <div class="item-title"><span class="redColor">* </span><span
-                                                    data-i18n="">请选择执行人</span></div>
+                                                    data-i18n="ui_pleaseSelectPerson"></span></div>
                                         </div>
                                     </div>
                                     <div class="peopleList worker">
@@ -213,8 +184,9 @@
                             <span class="col-85" style="margin-left:0rem;">请选择执行人</span>
                         </p> -->
                         <div class="serviceBottomBtn">
-                            <p><a class="button sureBtn" id="">确定</a></p>
-                            <p><a class="button close-popup" data-popup=".popup-services" id="cancel">取消</a></p>
+                            <p><a class="button sureBtn" id=""><span data-i18n="ui_confirm"></span></a></p>
+                            <p><a class="button close-popup" data-popup=".popup-services" id="cancel"
+                                    data-i18n="ui_cancel"></a></p>
                         </div>
                     </div>
                 </div>

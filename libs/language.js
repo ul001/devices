@@ -403,7 +403,15 @@ function getZhLanguage() {
     ui_timeRank4: "计划开始时间降序",
     ui_timeRank5: "计划完成时间升序",
     ui_timeRank6: "计划完成时间降序",
-    ui_defectPost:"缺陷派单",
+    ui_defectPost: "缺陷派单",
+    //抢单详情
+    ui_RobBill: "抢单",
+    ui_RobBillDetails: "抢单详情",
+    ui_walk: "步行",
+    ui_drive: "驾车",
+    ui_navigation: "导航",
+    ui_isSureRobBill: "确定抢单吗？",
+    ui_pleaseSelectPerson: "请选择执行人",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -942,7 +950,16 @@ function getEnLanguage() {
     ui_timeRank4: "Planned start time descending",
     ui_timeRank5: "Planned completion time ascending",
     ui_timeRank6: "Planned completion time descending",
-    ui_defectPost:"Defective dispatch",
+    ui_defectPost: "Defective dispatch",
+
+    //抢单详情
+    ui_RobBill: "RobBill",
+    ui_RobBillDetails: "RobBillDetails",
+    ui_walk: "Walk",
+    ui_drive: "Drive",
+    ui_navigation: "Navi",
+    ui_isSureRobBill: "Are you sure to rob the bill?",
+    ui_pleaseSelectPerson: "Please select executor",
 
     //code码
     code_200: "Request succeeds, insert success",
