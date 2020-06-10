@@ -23,6 +23,22 @@ Substation.getDataByAjax("/getMessInfoType", {
     }
 });
 
+function changeShowInApp() {
+    var params = {};
+    var checkValue = $("#isShowInApp").prop("checked");
+    if (checkValue) {
+        params['showBoxInApp'] = '1';
+    } else {
+        params['showBoxInApp'] = '0';
+    }
+    //传原生配置
+    if (isAndroid) {
+
+    } else {
+        window.webkit.messageHandlers.showBoxInApp.postMessage(params);
+    }
+}
+
 function goToNext(typeid, typename) {
     localStorage.setItem("titleName", typename);
     localStorage.setItem("typeId", typeid);

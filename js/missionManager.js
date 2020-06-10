@@ -103,20 +103,20 @@ function getNetData() {
                 }
                 if (this.hasOwnProperty("fDistance")) {
                     if (this.fDistance > 300) {
-                        distance = "<span style=\"color:red;\">" + this.fDistance + "</span>"+Operation['ui_meter'];
+                        distance = "<span style=\"color:red;\">" + this.fDistance + "</span>" + Operation['ui_meter'];
                     } else {
-                        distance = this.fDistance +Operation['ui_meter'];
+                        distance = this.fDistance + Operation['ui_meter'];
                     }
                 }
                 var taskStateName = "";
                 if (this.fExesituation == 7) {
                     isAllCommit = false;
-                    taskStateName = "<span style=\"color:gray;\">"+Operation['ui_notCheck']+"</span>";
+                    taskStateName = "<span style=\"color:gray;\">" + Operation['ui_notCheck'] + "</span>";
                 } else if (this.fExesituation == 8) {
                     isAllCommit = false;
-                    taskStateName = "<span style=\"color:blue;\">"+Operation['ui_checked']+"</span>";
+                    taskStateName = "<span style=\"color:blue;\">" + Operation['ui_checked'] + "</span>";
                 } else if (this.fExesituation == 9) {
-                    taskStateName = "<span style=\"color:springgreen;\">"+Operation['ui_submitted']+"</span>";
+                    taskStateName = "<span style=\"color:springgreen;\">" + Operation['ui_submitted'] + "</span>";
                 } else {
 
                 }
@@ -130,12 +130,12 @@ function getNetData() {
                     '                                    <div class="item-inner">';
                 text +=
                     '                                        <div class="item-title label">' + Operation['ui_Executor'] + '</div>';
-                text += '<div class="item-input row no-gutter" style="display:flex;">'+
-                             '<div class="item-label col-85" id="chargerName">'+userName+'</div>'+
-                             '<div class="col-15" style="display:flex;align-items:center;">'+
-                             '<img style="width:1rem;" src="img/call.png" id="chargerCall" class="callPhone" onclick="callPhone('+"15261866165"+')"/>'+
-                             '</div>'+
-                         '</div>';
+                text += '<div class="item-input row no-gutter" style="display:flex;">' +
+                    '<div class="item-label col-85" id="chargerName">' + userName + '</div>' +
+                    '<div class="col-15" style="display:flex;align-items:center;">' +
+                    '<img style="width:1rem;" src="img/call.png" id="chargerCall" class="callPhone" onclick="callPhone(' + "15261866165" + ')"/>' +
+                    '</div>' +
+                    '</div>';
                 text += "                                        </div>";
                 text += "                                    </div>";
                 text += "                                </div>";
@@ -230,7 +230,7 @@ function getNetData() {
                 text += "                                    </div>";
                 text += "                                </div>";
                 text += "                            </li>";
-                if(isUseTrace=="1"){
+                if (isUseTrace == "1") {
                     text += "                            <li>";
                     text +=
                         '                                <div class="showDiv item-content">';
@@ -368,18 +368,18 @@ var upLoadClicktag = true;
 //46.总任务提交按钮事件
 // userIds 1,2,3
 $("#submitTo").click(function () {
-    if(!upLoadClicktag){
-      return;
+    if (!upLoadClicktag) {
+        return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
-      upLoadClicktag = true;
+    setTimeout(function () {
+        upLoadClicktag = true;
     }, 1000);
     var comfirmTip = "";
-    if(isAllCommit){
+    if (isAllCommit) {
         comfirmTip = Operation['ui_submitTaskTip'];
-    }else{
-        comfirmTip = Operation['ui_noAllCommit']+Operation['ui_submitTaskTip'];
+    } else {
+        comfirmTip = Operation['ui_noAllCommit'] + Operation['ui_submitTaskTip'];
     }
     $.confirm(comfirmTip, function () {
         var param;
@@ -436,19 +436,24 @@ $(".pull-left.click_btn").click(function () {
     window.history.back();
 });
 
-function callPhone(phoneNum){
-    if(isAndroid){
+function callPhone(phoneNum) {
+    if (isAndroid) {
         android.callPhone(phoneNum);
+    } else {
+        var param = {
+            "phone": phoneNum
+        };
+        window.webkit.messageHandlers.takePhone.postMessage(param);
     }
 }
 
 function selectTrace(getUserid, startTime, endTime) {
-    if(!upLoadClicktag){
-      return;
+    if (!upLoadClicktag) {
+        return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
-      upLoadClicktag = true;
+    setTimeout(function () {
+        upLoadClicktag = true;
     }, 1000);
     if (startTime != "undefined" && startTime != "") {
         startTime = startTime.replace(/-/g, '/');
