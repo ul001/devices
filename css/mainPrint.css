@@ -18,13 +18,14 @@
   overflow: auto;
   border: 1px solid #eee;
   /*height:70px;*/
-  height: 3rem;
+  /* height: 3rem; */
+  height: 11rem;
   /*min-height:10px;*/
 }
 
 .List2 img {
-  height: 2.2rem;
-  width: 1.5rem;
+  /* height: 2.2rem; */
+  width: 7.6rem;
   margin: 0.2rem 0 0.1rem 0.1rem;
 }
 
@@ -336,9 +337,10 @@
 
 .CustomReport .liveMessage {
   border-bottom: 1px dotted #c9caca;
-  height: auto;
+  /* height: auto; */
   overflow: hidden;
-  clear: both;
+  /* clear: both; */
+  height: 35rem;
 }
 
 /*.CustomReport .liveMessage .Num {
@@ -433,9 +435,10 @@
 
 .CustomReport .liveMessage .imgHideDiv {
   width: 100%;
+  height: 12rem;
   /*height:120px;*/
-  height: auto;
-  clear: both;
+  /* height: auto; */
+  /* clear: both; */
   /*overflow:hidden;*/
   /*margin-bottom: 5px;*/
 }
@@ -680,13 +683,13 @@
 
 .report-p2 table {
   text-align: center;
-  width:100%;
+  width: 100%;
 }
 
-.subTable{
-  width:100%;
+.subTable {
+  width: 100%;
   margin: 0 auto;
-  overflow:auto;
+  overflow: auto;
 }
 
 .page2-bg,
@@ -698,26 +701,26 @@
   right: 0;
 }
 
-.table{
-    table-layout:fixed;
-    font-size:.6rem;
+.table {
+  table-layout: fixed;
+  font-size: .6rem;
 }
 
 tbody>tr>td {
   border: 1px solid #ddd;
   padding: .3rem;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.subTable tbody>tr>td{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space:nowrap;
+.subTable tbody>tr>td {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.bootstrap-table .fixed-table-container table.table thead th .th-inner{
-    padding:.3rem;
-    white-space:normal;
+.bootstrap-table .fixed-table-container table.table thead th .th-inner {
+  padding: .3rem;
+  white-space: normal;
 }
 
 th {
@@ -725,8 +728,8 @@ th {
   border-right: 1px solid #ddd;
 }
 
-.table tbody>tr>td{
-    white-space:normal;
+.table tbody>tr>td {
+  white-space: normal;
 }
 
 .list-group,
@@ -736,14 +739,14 @@ th {
 }
 
 .liveMessage {
-  max-height: 50%;
+  max-height: 100%;
 }
 
 .CustomReport .liveMessage .ListMessageR {
   width: 90%;
-  max-height: 16rem;
+  /* max-height: 16rem; */
   overflow: auto;
-  margin-top:.4rem;
+  margin-top: .4rem;
 }
 
 .CustomReport .Num {
