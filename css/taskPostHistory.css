@@ -232,3 +232,8 @@ i.icon.icon-subIcon {
 .card .item-content{
     padding-left:0;
 }
+
+.button.button-fill.button-reset{
+    background-color:#DCDCDC;
+    color: #3d4145;
+}

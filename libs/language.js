@@ -412,6 +412,8 @@ function getZhLanguage() {
     ui_navigation: "导航",
     ui_isSureRobBill: "确定抢单吗？",
     ui_pleaseSelectPerson: "请选择执行人",
+    ui_nolocation: "尚未配置变电所经纬度！",
+    ui_resetclear: "重置",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -960,6 +962,8 @@ function getEnLanguage() {
     ui_navigation: "Navi",
     ui_isSureRobBill: "Are you sure to rob the bill?",
     ui_pleaseSelectPerson: "Please select executor",
+    ui_nolocation: "The latitude and longitude of the substation have not been configured!",
+    ui_resetclear: "Reset",
 
     //code码
     code_200: "Request succeeds, insert success",

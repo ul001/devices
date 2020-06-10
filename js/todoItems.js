@@ -825,5 +825,19 @@ jQuery(document).ready(function () {
       getFirstPage(tabName);
   });
 
+  $(".button-reset").click(function(){
+    $("#dateStart").val("");
+    $("#dateEnd").val("");
+    $("#dateStart1").val("");
+    $("#dateEnd1").val("");
+    $("#dateStart2").val("");
+    $("#dateEnd2").val("");
+    $("#taskType").val("");
+    $("#chargeSelect").val("");
+    $("#doSelect").val("");
+    $("#timeRank").val("");
+    $(".buttons-row").find($(".active")).removeClass("active");
+  });
+
   $.init();
 });

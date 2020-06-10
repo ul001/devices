@@ -138,6 +138,11 @@ i.icon.icon-selectSome {
     width:100%;
     padding-left: 0.25rem;
 }
+
+.button.button-fill.button-reset{
+    background-color:#DCDCDC;
+    color: #3d4145;
+}
 /*
 .canBoom{
     background:url(../img/i-commitAll.png) right 1rem top no-repeat;

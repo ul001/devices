@@ -133,27 +133,28 @@
         };
         Substation.postDataByAjax("/updateSubstationLocation",params,function(data){
             if(data.code==200){
-                $.toast("保存成功");
+                $.toast(Operation['ui_savesuccess']);
                 upLoadClicktag = true;
-//                setTimeout(function(){
-//                    if(isAndroid){
-//                        android.goBack();
-//                    }else{
-//                        window.history.back();
-//                    }
-//                },1000);
+                setTimeout(function(){
+                    if(isAndroid){
+                        android.goBack();
+                    }else{
+                        window.history.back();
+                    }
+                },1000);
             }
         });
         //alert(selectSubid + "\n" + "lng:" + lng + "\nlat:" + lat);
     }
 
-//    $("#suggestId").bind('keydown', function (event) {
-//        if (event.keyCode == 13) {
+    $("#suggestId").bind('keydown', function (event) {
+        if (event.keyCode == 13) {
 //            local.search($("#suggestId").val());
 //            $("#results").show();
 //            $("#l-map").addClass("search-map");
-//        }
-//    });
+            document.activeElement.blur();
+        }
+    });
 
     $(".searchbar-cancel").click(function () {
         $("#suggestId").val("");

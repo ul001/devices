@@ -240,6 +240,7 @@ jQuery(document).ready(function () {
                         text +=
                             '                                        <div class="item-title label">' +
                             this.userName +
+                            "<img class='callPhone' onclick=\"callPhone('15261866165')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>"+
                             "</div>";
                         text +=
                             '                                        <div class="item-input">';
@@ -292,7 +293,7 @@ jQuery(document).ready(function () {
                 window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
             }
         }else{
-            $.toast("尚未配置变电所经纬度！");
+            $.toast(Operation['ui_nolocation']);
         }
     });
 
@@ -329,6 +330,12 @@ jQuery(document).ready(function () {
         localStorage.setItem("hiddenBtn", "YES");
         window.location.href = "missionManager.html";
     });
+
+    function callPhone(phoneNum){
+        if(isAndroid){
+            android.callPhone(phoneNum);
+        }
+    }
 
     $.init();
 });

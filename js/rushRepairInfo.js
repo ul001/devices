@@ -15,7 +15,8 @@ if (androidRepairId != null && androidRepairId != undefined) {
     });
 }
 //var taskProblem = Substation.GetQueryString("taskProblem");
-var selectSubid = localStorage.getItem("fSubid");
+var selectSubid;
+var selectSubname;
 //var clickTree = localStorage.getItem("clickTree");
 var canClick = localStorage.getItem("canClick");
 var jumpId = Substation.GetQueryString("jumpId");
@@ -83,11 +84,14 @@ function creatView(dataParam) {
         var solvePerson = taskParam.fUsername;
         var solveTime = taskParam.fUpdatetime;
         var createTime = taskParam.fCreatetime;
+        selectSubid = taskParam.fSubid;
+        selectSubname = taskParam.fSubname;
         try{
             $("#fState").val(taskParam.fState);
             $("#taskNumber").text(taskParam.fTasknumber);
             $("#fSolveresult").val(taskParam.fSolveresult);
             $("#taskContent").text(taskParam.fTaskcontent);
+            $("#missionName").text(taskParam.fSubname);
             if(solvePerson != undefined){
                 $(".solvePerson").show();
                 $("#fSolvename").val(solvePerson);
@@ -337,6 +341,19 @@ function saveFormData() {
         }
     );
 }
+
+//跳转视频
+$("#jumpVideo").click(function () {
+    if (isAndroid) {
+        android.videoWatch(selectSubid);
+    } else if (isIOS) {
+        var subParam = {
+            Subid: selectSubid,
+            Subname: selectSubname
+        };
+        window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+    }
+});
 
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {
