@@ -123,6 +123,18 @@ function addItems(number) {
     });
 }
 
+$("#searchDaiban").bind("keydown", function (event) {
+    if (event.keyCode == 13) {
+      getFirstPage();
+      document.activeElement.blur();
+    }
+});
+
+$(".searchbar-cancel").click(function () {
+    $("#searchDaiban").val("");
+    getFirstPage();
+});
+
 function goToDetail(taskId){
     localStorage.setItem("taskID", taskId);
     if (isAndroid) {
@@ -271,5 +283,42 @@ Date.prototype.format = function (fmt) { //author: meizz
           fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
   return fmt;
 }
+
+$('#searchBtn').click(function () {
+  var start = new Date($("#dateStart").val().replace(/-/g,'/'));
+  var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
+  if(start>end){
+      $.toast(Operation['ui_dateselecttip']);
+      return;
+  }
+  var start1 = new Date($("#dateStart1").val().replace(/-/g,'/'));
+  var end1 = new Date($("#dateEnd1").val().replace(/-/g,'/'));
+  if(start1>end1){
+      $.toast(Operation['ui_dateselecttip']);
+      return;
+  }
+  var start2 = new Date($("#dateStart2").val().replace(/-/g,'/'));
+  var end2 = new Date($("#dateEnd2").val().replace(/-/g,'/'));
+  if(start2>end2){
+      $.toast(Operation['ui_dateselecttip']);
+      return;
+  }
+  $(".close-panel").click();
+  getFirstPage();
+});
+
+$(".button-reset").click(function(){
+    $("#dateStart").val("");
+    $("#dateEnd").val("");
+    $("#dateStart1").val("");
+    $("#dateEnd1").val("");
+    $("#dateStart2").val("");
+    $("#dateEnd2").val("");
+    $("#taskType").val("");
+    $("#chargeSelect").val("");
+    $("#doSelect").val("");
+    $("#timeRank").val("");
+    $(".buttons-row").find($(".active")).removeClass("active");
+});
 
 $.init();

@@ -150,8 +150,9 @@ function getNetData() {
                     text +=
                         '                                    <div class="item-inner">';
                     text +=
-                        '                                        <div class="item-title label">' +
+                        '                                        <div class="item-title label" style="display:flex;align-items:center;">' +
                         this.userName +
+                        "<img class='callPhone' onclick=\"callPhone('15261866165')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>"+
                         "</div>";
                     text +=
                         '                                        <div class="item-input">';
@@ -302,7 +303,7 @@ function getNetData() {
             }
             //如果是消警任务，则剔除
             if (missionTypeid == 5 || missionTypeid == 6) {
-                $("#totaldefect").remove();
+                $("#totaldefect1").remove();
                 $("#defectUntreatNum").remove();
             }
         }
@@ -713,7 +714,7 @@ $("#goMap").click(function () {
             window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
         }
     } else {
-        $.toast("尚未配置变电所经纬度！");
+        $.toast(Operation['ui_nolocation']);
     }
 });
 
@@ -759,5 +760,11 @@ window.addEventListener("resize", function () {
         }, 0);
     }
 });
+
+function callPhone(phoneNum){
+    if(isAndroid){
+        android.callPhone(phoneNum);
+    }
+}
 
 $.init();

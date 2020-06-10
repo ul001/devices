@@ -170,3 +170,18 @@ a:hover {
 	padding: 0 0 0 .25rem;
 	width: 100%;
 }
+
+.item-content .item-inner .item-after {
+    width: 65%;
+    color: #3E4145;
+    max-height: initial;
+    white-space: initial;
+    overflow: hidden;
+    /* display: -webkit-box; */
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+.videoWatch{
+    height:1.2rem;
+}
