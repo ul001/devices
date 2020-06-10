@@ -965,7 +965,8 @@ var CustomReport = (function () {
             }
             if (data.tDevDeviceproblemList.length > 0) {
                 var itemlength = data.tDevDeviceproblemList.length;
-                var parentNum = Math.ceil((itemlength - 1) / 2);
+                var parentNum = Math.ceil((itemlength - 1));
+                // var parentNum = Math.ceil((itemlength - 1));
 
                 var firstStr = "";
                 for (var i = 0; i < 1; i++) {
@@ -1085,14 +1086,14 @@ var CustomReport = (function () {
                         "</div>" +
                         "</div>";
                 }
-                $("#live" + num).html("");
-                $("#live" + num).html(firstStr);
+                // $("#live" + num).html("");
+                // $("#live" + num).html(firstStr);
 
                 if (parentNum > 0) {
                     for (var k = 0; k < parentNum; k++) {
                         var Str = "";
-                        for (var i = 0; i < 2; i++) {
-                            var index = k * 2 + i + 1;
+                        for (var i = 0; i < 1; i++) {
+                            var index = k + i;
 
                             var select = data.tDevDeviceproblemList[index];
 
@@ -2010,7 +2011,7 @@ jQuery(document).ready(function () {
                 $("#listContainer").empty();
                 //            $("#subName").text(clickName);
             });
-        },function(errorcode){});
+        }, function (errorcode) {});
     }
 
     $('#search').bind('keydown', function (event) {
