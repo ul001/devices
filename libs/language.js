@@ -267,6 +267,8 @@ function getZhLanguage() {
     ui_versionLog: "版本更新功能",
     //
     ui_MessageType: "消息类型",
+    ui_WhenAppOpen: "应用打开时",
+    ui_WhenAppClose: "应用未打开",
     ui_dangerLevel1: "一般",
     ui_dangerLevel2: "重大",
     ui_dangerLevel3: "紧急",
@@ -811,7 +813,8 @@ function getEnLanguage() {
     ui_EventType: "EventType：",
     //
     ui_MessageType: "Message Type",
-
+    ui_WhenAppOpen: "When App Open",
+    ui_WhenAppClose: "When App Close",
     ui_dangerLevel1: "General",
     ui_dangerLevel2: "Major",
     ui_dangerLevel3: "Urgent",

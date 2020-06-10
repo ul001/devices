@@ -152,7 +152,7 @@ function getNetData() {
                     text +=
                         '                                        <div class="item-title label" style="display:flex;align-items:center;">' +
                         this.userName +
-                        "<img class='callPhone' onclick=\"callPhone('15261866165')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>"+
+                        "<img class='callPhone' onclick=\"callPhone('15261866165')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>" +
                         "</div>";
                     text +=
                         '                                        <div class="item-input">';
@@ -761,9 +761,14 @@ window.addEventListener("resize", function () {
     }
 });
 
-function callPhone(phoneNum){
-    if(isAndroid){
+function callPhone(phoneNum) {
+    if (isAndroid) {
         android.callPhone(phoneNum);
+    } else {
+        var param = {
+            "phone": phoneNum
+        };
+        window.webkit.messageHandlers.takePhone.postMessage(param);
     }
 }
 

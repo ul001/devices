@@ -99,12 +99,12 @@ jQuery(document).ready(function () {
                         $("#TotalDefectNum").css("color", "red");
                         $("#TotalDefectNum").click(function () {
                             //缺陷整改
-                            if(!upLoadClicktag){
-                              return;
+                            if (!upLoadClicktag) {
+                                return;
                             }
                             upLoadClicktag = false;
-                            setTimeout(function() {
-                              upLoadClicktag = true;
+                            setTimeout(function () {
+                                upLoadClicktag = true;
                             }, 1000);
                             localStorage.setItem("taskID", taskID);
                             localStorage.setItem("missionTypeid", missionTypeid);
@@ -118,12 +118,12 @@ jQuery(document).ready(function () {
                     if (taskInfo.deviceProblemUnresolved > 0) {
                         $("#Unprocessednumber").css("color", "red");
                         $("#Unprocessednumber").click(function () {
-                            if(!upLoadClicktag){
-                              return;
+                            if (!upLoadClicktag) {
+                                return;
                             }
                             upLoadClicktag = false;
-                            setTimeout(function() {
-                              upLoadClicktag = true;
+                            setTimeout(function () {
+                                upLoadClicktag = true;
                             }, 1000);
                             //缺陷整改
                             localStorage.setItem("taskID", taskID);
@@ -167,11 +167,11 @@ jQuery(document).ready(function () {
                         $("#textareaDetail").attr("readonly", true);
                         // $("#addVarContain124").css("display", "none");
                     }
-//                    if (taskchargerid != Substation.loginUserid) {
-//                        $("#clickManager").css("display", "none");
-//                    } else {
-//                        $("#addVarContain124").css("display", "none");
-//                    }
+                    //                    if (taskchargerid != Substation.loginUserid) {
+                    //                        $("#clickManager").css("display", "none");
+                    //                    } else {
+                    //                        $("#addVarContain124").css("display", "none");
+                    //                    }
                     /*                    if (missionTypeid != 1) {
                                   $("#addVarContain125").css("display", "none");
                               }*/
@@ -189,12 +189,12 @@ jQuery(document).ready(function () {
 
                     //执行任务按钮事件
                     $("#carryOut").click(function () {
-                        if(!upLoadClicktag){
-                          return;
+                        if (!upLoadClicktag) {
+                            return;
                         }
                         upLoadClicktag = false;
-                        setTimeout(function() {
-                          upLoadClicktag = true;
+                        setTimeout(function () {
+                            upLoadClicktag = true;
                         }, 1000);
                         localStorage.setItem("fSubid", missionsubid);
                         localStorage.setItem("fPlacecheckformid", placeCheckFormId);
@@ -210,7 +210,7 @@ jQuery(document).ready(function () {
                             localStorage.setItem("missionTypeid", missionTypeid);
                             window.location.href = "defectRectification.html";
                         } else {
-//                            $.toast("fTasktypeid=null，未知任务类型");
+                            //                            $.toast("fTasktypeid=null，未知任务类型");
                         }
 
                     });
@@ -225,11 +225,11 @@ jQuery(document).ready(function () {
                     $(data.taskUserList).each(function () {
                         var taskStateName = "";
                         if (this.fExesituation == 7) {
-                            taskStateName = "<span style='color:gray;'>"+Operation['ui_notCheck']+"</span>";
+                            taskStateName = "<span style='color:gray;'>" + Operation['ui_notCheck'] + "</span>";
                         } else if (this.fExesituation == 8) {
-                            taskStateName = "<span style='color:blue;'>"+Operation['ui_checked']+"</span>";
+                            taskStateName = "<span style='color:blue;'>" + Operation['ui_checked'] + "</span>";
                         } else if (this.fExesituation == 9) {
-                            taskStateName = "<span style='color:springgreen;'>"+Operation['ui_submitted']+"</span>";
+                            taskStateName = "<span style='color:springgreen;'>" + Operation['ui_submitted'] + "</span>";
                         }
                         var text = "";
                         text += "<li>";
@@ -240,7 +240,7 @@ jQuery(document).ready(function () {
                         text +=
                             '                                        <div class="item-title label">' +
                             this.userName +
-                            "<img class='callPhone' onclick=\"callPhone('15261866165')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>"+
+                            "<img class='callPhone' onclick=\"callPhone('15261866165')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>" +
                             "</div>";
                         text +=
                             '                                        <div class="item-input">';
@@ -268,72 +268,78 @@ jQuery(document).ready(function () {
     $(".pull-left.click_btn").click(function () {
         localStorage.setItem("need-refresh", "true");
         var u = navigator.userAgent,
-          app = navigator.appVersion;
+            app = navigator.appVersion;
         var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
         var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-        if(isIOS){
+        if (isIOS) {
             window.history.back();
-        }else{
+        } else {
             android.goBack();
         }
-//        window.location.href = "allPatrolRecord.html";
+        //        window.location.href = "allPatrolRecord.html";
     });
 
-    $("#goMap").click(function(){
+    $("#goMap").click(function () {
         var lat = taskInfo.fLatitude;
         var lon = taskInfo.fLongitude;
-        if(lat!=undefined && lat!="" && lon!=undefined && lon!=""){
-            if(isAndroid){
-                android.goToMap(lat,lon,taskInfo.fSubName);
-            }else if(isIOS){
+        if (lat != undefined && lat != "" && lon != undefined && lon != "") {
+            if (isAndroid) {
+                android.goToMap(lat, lon, taskInfo.fSubName);
+            } else if (isIOS) {
                 var locParam = {
-                  Latitude: lat,
-                  Longitude: lon,
-                  locName:taskInfo.fSubName};
+                    Latitude: lat,
+                    Longitude: lon,
+                    locName: taskInfo.fSubName
+                };
                 window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
             }
-        }else{
+        } else {
             $.toast(Operation['ui_nolocation']);
         }
     });
 
     //跳转视频
-    $("#jumpVideo").click(function(){
-      if (isAndroid) {
-        android.videoWatch(taskInfo.fSubid);
-      } else if (isIOS) {
-        var subParam = {
-          Subid: taskInfo.fSubid,
-          Subname: taskInfo.fSubName
-        };
-        window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
-      }
+    $("#jumpVideo").click(function () {
+        if (isAndroid) {
+            android.videoWatch(taskInfo.fSubid);
+        } else if (isIOS) {
+            var subParam = {
+                Subid: taskInfo.fSubid,
+                Subname: taskInfo.fSubName
+            };
+            window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+        }
     });
 
     //管理页面
     $("#clickManager").click(function () {
-        if(!upLoadClicktag){
-          return;
+        if (!upLoadClicktag) {
+            return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
-          upLoadClicktag = true;
+        setTimeout(function () {
+            upLoadClicktag = true;
         }, 1000);
-//        localStorage.setItem("missionSubid", missionsubid);
-//        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
+        //        localStorage.setItem("missionSubid", missionsubid);
+        //        localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);
         localStorage.setItem("taskID", taskID);
-//        if (taskCreatId != Substation.loginUserid && missionType != "3") {
-//            localStorage.setItem("hiddenBtn", "NO");
-//        } else {
-//            localStorage.setItem("hiddenBtn", "YES");
-//        }
+        //        if (taskCreatId != Substation.loginUserid && missionType != "3") {
+        //            localStorage.setItem("hiddenBtn", "NO");
+        //        } else {
+        //            localStorage.setItem("hiddenBtn", "YES");
+        //        }
         localStorage.setItem("hiddenBtn", "YES");
         window.location.href = "missionManager.html";
     });
 
-    function callPhone(phoneNum){
-        if(isAndroid){
+    function callPhone(phoneNum) {
+        if (isAndroid) {
             android.callPhone(phoneNum);
+        } else {
+            var param = {
+                "phone": phoneNum
+            };
+            window.webkit.messageHandlers.takePhone.postMessage(param);
         }
     }
 

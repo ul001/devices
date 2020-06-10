@@ -1,21 +1,52 @@
 .label-switch {
     float: right;
 }
-.list-block{
-    margin:0;
+
+.list-block {
+    margin: 0;
 }
-.content .list-block .item-content{
-    line-height:1.6rem;
+
+.content .list-block .item-content {
+    line-height: 1.6rem;
 }
-.content{
-    background-color:#fafafa;
+
+.content {
+    background-color: #fafafa;
 }
-.content-block-title{
-    padding:.05rem
+
+.content-block-title {
+    padding: .05rem
 }
-.list-block .item-title.label{
-    width:75%;
+
+.list-block .item-title.label {
+    width: 75%;
 }
-.showlist .parentLi:last-child>.item-content>.item-inner{
-    border-bottom:1px solid #e7e7e7;;
+
+.showlist .parentLi:last-child>.item-content>.item-inner {
+    border-bottom: 1px solid #e7e7e7;
+    ;
+}
+
+.label-switch input[type=checkbox]:checked+.imgSelect {
+    background-image: url(../img/hasSelect.png);
+}
+
+.imgSelect {
+    width: 2.6rem;
+    height: 1.6rem;
+    background-image: url(../img/noSelect.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.tab-allSelect,
+.tab-allNoSelect {
+    color: #02A8A6;
+    position: relative;
+    display: table-cell;
+    width: 1%;
+    height: 2.5rem;
+    text-align: center;
+    vertical-align: middle;
 }
