@@ -5,36 +5,54 @@ $(".showlist").empty();
 //} else {
 //isEnglish = 0;
 //}
-Substation.getDataByAjax("/getMessInfoType", {
-    //"english": isEnglish
-}, function (data) {
-    if (data.hasOwnProperty("tDtMessInfoType") && data.tDtMessInfoType.length > 0) {
-        var strVar = "";
-        $(data.tDtMessInfoType).each(function () {
-            strVar += "<li onclick=\"goToNext(" + this.fMessinfotypeid + ",'" + this.fMessinfotypeexplain + "')\">" +
-                "<div class=\"item-content item-link\">" +
-                "<div class=\"item-inner\">" +
-                "<div class=\"item-title label\">" + this.fMessinfotypeexplain + "</div>" +
-                "</div>" +
-                "</div>" +
-                "</li>";
-        });
-        $(".showlist").append(strVar);
+var isOpenBoxInApp = localStorage.getItem("isOpenBoxInApp");
+if (isOpenBoxInApp == 'true') {
+    $("#isShowInApp").prop("checked", "checked");
+} else {
+    $("#isShowInApp").removeAttr("checked");
+}
+
+Substation.getDataByAjax(
+    "/getMessInfoType", {
+        //"english": isEnglish
+    },
+    function (data) {
+        if (
+            data.hasOwnProperty("tDtMessInfoType") &&
+            data.tDtMessInfoType.length > 0
+        ) {
+            var strVar = "";
+            $(data.tDtMessInfoType).each(function () {
+                strVar +=
+                    '<li onclick="goToNext(' +
+                    this.fMessinfotypeid +
+                    ",'" +
+                    this.fMessinfotypeexplain +
+                    "')\">" +
+                    '<div class="item-content item-link">' +
+                    '<div class="item-inner">' +
+                    '<div class="item-title label">' +
+                    this.fMessinfotypeexplain +
+                    "</div>" +
+                    "</div>" +
+                    "</div>" +
+                    "</li>";
+            });
+            $(".showlist").append(strVar);
+        }
     }
-});
+);
 
 function changeShowInApp() {
     var params = {};
     var checkValue = $("#isShowInApp").prop("checked");
     if (checkValue) {
-        params['showBoxInApp'] = '1';
+        params["showBoxInApp"] = "1";
     } else {
-        params['showBoxInApp'] = '0';
+        params["showBoxInApp"] = "0";
     }
     //传原生配置
-    if (isAndroid) {
-
-    } else {
+    if (isAndroid) {} else {
         window.webkit.messageHandlers.showBoxInApp.postMessage(params);
     }
 }
@@ -55,7 +73,5 @@ function goBack() {
 }
 
 function manageSelect() {
-    if (!$("#bar-footer").length || $("#bar-footer").is(":hidden")) {
-
-    }
+    if (!$("#bar-footer").length || $("#bar-footer").is(":hidden")) {}
 }
