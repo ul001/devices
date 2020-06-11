@@ -133,7 +133,7 @@ function getNetData() {
                 text += '<div class="item-input row no-gutter" style="display:flex;">' +
                     '<div class="item-label col-85" id="chargerName">' + userName + '</div>' +
                     '<div class="col-15" style="display:flex;align-items:center;">' +
-                    '<img style="width:1rem;" src="img/call.png" id="chargerCall" class="callPhone" onclick="callPhone(' + "15261866165" + ')"/>' +
+                    "<img style=\"width:1rem;\" src=\"img/call.png\" id=\"chargerCall\" class=\"callPhone\" onclick=\"callPhone('" + this.fUserphone +"')\"/>" +
                     '</div>' +
                     '</div>';
                 text += "                                        </div>";

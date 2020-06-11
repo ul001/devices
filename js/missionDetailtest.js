@@ -80,7 +80,9 @@ function getNetData() {
             $("#missionType").html(taskInfo.fTasktypeexplain);
             $("#missionName").html(taskInfo.fTaskname);
             $("#createName").html(taskInfo.fTaskcreateusername);
+            $("#createCall").attr("onclick","callPhone('"+taskInfo.fTaskcreateuserphone+"')");
             $("#chargerName").html(taskInfo.fTaskchargername);
+            $("#chargerCall").attr("onclick","callPhone('"+taskInfo.fTaskchargerphone+"')");
             $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
             $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
             //任务开始时间
@@ -152,7 +154,7 @@ function getNetData() {
                     text +=
                         '                                        <div class="item-title label" style="display:flex;align-items:center;">' +
                         this.userName +
-                        "<img class='callPhone' onclick=\"callPhone('15261866165')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>" +
+                        "<img class='callPhone' onclick=\"callPhone('"+this.fUserphone+"')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>" +
                         "</div>";
                     text +=
                         '                                        <div class="item-input">';
