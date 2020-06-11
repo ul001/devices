@@ -9,7 +9,6 @@ var isOpenBoxInApp = localStorage.getItem("isOpenBoxInApp");
 try{
     if(isAndroid){
         isOpenBoxInApp = android.getSPItem("showMsgInApp");
-        alert(isOpenBoxInApp)
     }
 }catch(e){
     isOpenBoxInApp = "true";
