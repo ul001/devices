@@ -4,6 +4,12 @@ var selectUserList = [];
 var chargerUser = [];
 var workerUser = [];
 $(".peopleList").hide();
+var qiangdan = Substation.GetQueryString("type");
+if(qiangdan == "7"){
+    $("#selectType").val(7);
+    $(".title_color").text(Operation['ui_postRobBill']);
+    $(".qiang").hide();
+}
 
 //mainPage
 function listPeople(thisType, userList) {
@@ -24,7 +30,7 @@ $("#selectType").change(function () {
 });
 
 function addRedNeed() {
-    if ($("#selectType").val() == 6) {
+    if ($("#selectType").val() == 6 || $("#selectType").val() == 7) {
         $(".rushContent").show();
     } else {
         $(".rushContent").hide();
@@ -136,7 +142,7 @@ function postTask() {
     var completeTime = $("#dateEnd").val();
     var taskContent = $("#taskContent").val();
     var selectType = $("#selectType").val();
-    if (chargerUser.length == 0) {
+    if (subList.length == 0) {
         $.toast(Operation['ui_substation'] + Operation['ui_notEmpty']);
         return;
     }
@@ -153,14 +159,6 @@ function postTask() {
         $.toast(Operation['ui_timeSelectError']);
         return;
     }
-    if (chargerUser.length == 0) {
-        $.toast(Operation['ui_charger'] + Operation['ui_notEmpty']);
-        return;
-    }
-    if (workerUser.length == 0) {
-        $.toast(Operation['ui_worker'] + Operation['ui_notEmpty']);
-        return;
-    }
     if ($("#selectType").val() == 6) {
         if (taskContent == "" || taskContent == undefined) {
             $.toast(Operation['ui_alarmTaskContent'] + Operation['ui_notEmpty']);
@@ -171,28 +169,54 @@ function postTask() {
         subIds.push(obj.userId);
     });
     var subStr = subIds.join(",");
-    var chargerId = chargerUser[0].userId;
-    var workerIdList = [];
-    $(workerUser).each(function (i, obj) {
-        workerIdList.push(obj.userId);
-    });
-    var workerIdStr = workerIdList.join(",");
-    var params = {
-        userIds: workerIdStr,
-        fTaskchargerid: chargerId,
-        fTasktypeid: selectType,
-        fStartdate: startTime + " 00:00:00",
-        fDeadlinedate: completeTime + " 23:59:59",
-        fTaskcontent: taskContent,
-        subIds: subStr
-    };
-    Substation.postDataByAjax("/releaseTask", params, function (data) {
-        if (data.code == "200") {
-            $.alert(Operation['ui_postSuccess'], function () {
-                location.reload();
-            });
+    var params = {};
+    if(qiangdan == "7"){
+        params = {
+            fTasktypeid: selectType,
+            fStartdate: startTime + " 00:00:00",
+            fDeadlinedate: completeTime + " 23:59:59",
+            fTaskcontent: taskContent,
+            subIds: subStr
+        };
+        Substation.postDataByAjax("/releaseOrderTask", params, function (data) {
+            if (data.code == "200") {
+                $.alert(Operation['ui_postSuccess'], function () {
+                    window.history.back();
+                });
+            }
+        });
+    }else{
+        if (chargerUser.length == 0) {
+            $.toast(Operation['ui_charger'] + Operation['ui_notEmpty']);
+            return;
         }
-    });
+        if (workerUser.length == 0) {
+            $.toast(Operation['ui_worker'] + Operation['ui_notEmpty']);
+            return;
+        }
+        var chargerId = chargerUser[0].userId;
+        var workerIdList = [];
+        $(workerUser).each(function (i, obj) {
+            workerIdList.push(obj.userId);
+        });
+        var workerIdStr = workerIdList.join(",");
+        params = {
+            userIds: workerIdStr,
+            fTaskchargerid: chargerId,
+            fTasktypeid: selectType,
+            fStartdate: startTime + " 00:00:00",
+            fDeadlinedate: completeTime + " 23:59:59",
+            fTaskcontent: taskContent,
+            subIds: subStr
+        };
+        Substation.postDataByAjax("/releaseTask", params, function (data) {
+            if (data.code == "200") {
+                $.alert(Operation['ui_postSuccess'], function () {
+                    location.reload();
+                });
+            }
+        });
+    }
 }
 
 //page1
