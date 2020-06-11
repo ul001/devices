@@ -6,9 +6,16 @@ $(".showlist").empty();
 //isEnglish = 0;
 //}
 var isOpenBoxInApp = localStorage.getItem("isOpenBoxInApp");
-if (isOpenBoxInApp == 'true') {
-    $("#isShowInApp").prop("checked", "checked");
-} else {
+try{
+    if(isAndroid){
+        isOpenBoxInApp = android.getSPItem("showMsgInApp");
+        alert(isOpenBoxInApp)
+    }
+}catch(e){
+    isOpenBoxInApp = "true";
+};
+$("#isShowInApp").prop("checked",true);
+if (isOpenBoxInApp == 'false') {
     $("#isShowInApp").removeAttr("checked");
 }
 
@@ -52,7 +59,13 @@ function changeShowInApp() {
         params["showBoxInApp"] = "0";
     }
     //传原生配置
-    if (isAndroid) {} else {
+    if (isAndroid) {
+        if (checkValue) {
+            android.setSPItem("showMsgInApp","true");
+        } else {
+            android.setSPItem("showMsgInApp","false");
+        }
+    } else {
         window.webkit.messageHandlers.showBoxInApp.postMessage(params);
     }
 }

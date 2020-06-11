@@ -110,7 +110,7 @@ Substation.getDataByAjax(url, problemParam, function (data) {
         } else if (isAndroid) {
           menuId = android.getMenuId();
         }
-      } catch (e) {}
+      } catch (e) {menuId = "2391"}
       Substation.getDataByAjax("/getSubinfoVoByPid", {
         pid: menuId
       }, function (data) {

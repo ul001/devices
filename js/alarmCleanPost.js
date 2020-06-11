@@ -1,5 +1,5 @@
 //读取本地传参
-var selectSubId = localStorage.getItem("alarmSubid");
+var selectSubId = localStorage.getItem("fSubid");
 var selectAlarmId = localStorage.getItem("alarmEventlogid");
 var selectProblemId = localStorage.getItem("problemId");
 var isProblem = 0;
