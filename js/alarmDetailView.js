@@ -70,7 +70,7 @@ function addPushButton(param) {
     } else if (isAndroid) {
       menuId = android.getMenuId();
     }
-  } catch (e) {}
+  } catch (e) {menuId="342";}
   Substation.getDataByAjaxNoLoading(
     "/getSubinfoVoByPid",
     {
@@ -86,7 +86,7 @@ function addPushButton(param) {
               "</a></div>";
             $("#yaoxin").append(showstr);
             $("#carryOut").click(function() {
-              localStorage.setItem("alarmSubid", param.fSubid);
+              localStorage.setItem("fSubid", param.fSubid);
               localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
               window.location.href = "alarmCleanPost.html";
             });

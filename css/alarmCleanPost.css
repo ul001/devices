@@ -11,8 +11,7 @@
     width:initial;
 }
 
-.list-block .item-link.item-add .item-inner {
-    padding-right: 1.5rem;
+.list-block .item-link.item-sum .item-inner {
     background-image: url(../img/i-additem.png);
     background-repeat: no-repeat;
     background-position: 97% center;
@@ -168,7 +167,11 @@ ul#classList .item-title{
     padding:0;
 }
 
-.inputSelect .item-link .item-inner select,input{
+.item-sum.item-link .item-inner{
+    padding:0;
+}
+
+.inputSelect .item-link .item-inner select,.inputSelect .item-link .item-inner input{
     padding-right:1.5rem !important;
 }
 

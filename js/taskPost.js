@@ -29,10 +29,6 @@ function addRedNeed() {
     } else {
         $(".rushContent").hide();
     }
-    //抢单
-    if($("#selectType").val() == 7){
-
-    }
 }
 
 addRedNeed();
