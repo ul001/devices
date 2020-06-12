@@ -417,6 +417,12 @@ function getZhLanguage() {
     ui_pleaseSelectPerson: "请选择执行人",
     ui_nolocation: "尚未配置变电所经纬度！",
     ui_resetclear: "重置",
+    ui_RobTaskNo: "任务单号：",
+    ui_RobTaskInitiator: "任务发布人：",
+    ui_RobReleasetime: "发布时间：",
+    ui_RobTaskContent: "任务内容：",
+    ui_RobPlanStartTime: "计划开始时间：",
+    ui_RobPlanDeadlineTime: "计划完成时间：",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -969,6 +975,12 @@ function getEnLanguage() {
     ui_pleaseSelectPerson: "Please select executor",
     ui_nolocation: "The latitude and longitude of the substation have not been configured!",
     ui_resetclear: "Reset",
+    ui_RobTaskNo: "Task No：",
+    ui_RobTaskInitiator: "Task Initiator：",
+    ui_RobReleasetime: "Release Time：",
+    ui_RobTaskContent: "Task Content：",
+    ui_RobPlanStartTime: "Start Time：",
+    ui_RobPlanDeadlineTime: "Deadline Time：",
 
     //code码
     code_200: "Request succeeds, insert success",
