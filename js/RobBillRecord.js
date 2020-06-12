@@ -1,108 +1,8 @@
 jQuery(document).ready(function () {
-    // $("#titleContent").text($.i18n.prop('data_todogoods'));
-
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-
     var loading = false;
-    var maxItems = 1000;
     var itemsPerLoad = 10;
     var pageNum = 1;
-    var tasktypeid = "";
-    var tasktypeName = "";
-    var tabName = 1;
-    var taskstatus = 0;
-    var clickTaskTypeId = localStorage.getItem("taskTypeId");
-    var clickTasktypeName = localStorage.getItem("taskTypeName");
-    var thisClickItem = localStorage.getItem("thisItem");
-    if (clickTaskTypeId != null) {
-        tasktypeid = clickTaskTypeId;
-    }
-    if (clickTasktypeName != null && clickTasktypeName != "") {
-        $(".clickrightbtn").text(clickTasktypeName);
-    }
-    if (thisClickItem != "" && thisClickItem != null) {
-        $("#" + thisClickItem).click();
-        var num = $("#" + thisClickItem).attr("name");
-        tabName = num;
-        // $("#titleContent").text("");
-        // if (num == 1) {
-        //     $("#titleContent").text(
-        //         Operation["ui_todo"] + " " + Operation["ui_goods"]
-        //     );
-        // } else if (num == 2) {
-        //     $("#titleContent").text(
-        //         Operation["ui_doing"] + " " + Operation["ui_goods"]
-        //     );
-        // } else if (num == 3) {
-        //     $("#titleContent").text(
-        //         Operation["ui_done"] + " " + Operation["ui_goods"]
-        //     );
-        // }
-        getFirstPage(num);
-    } else {
-        $("#daiban").click();
-        var num = $("#daiban").attr("name");
-        tabName = num;
-        // $("#titleContent").text(Operation["ui_todo"] + " " + Operation["ui_goods"]);
-        getFirstPage(num);
-    }
-
-    $(".card2")
-        .unbind()
-        .click(function () {
-            if (!upLoadClicktag) {
-                return;
-            }
-            upLoadClicktag = false;
-            setTimeout(function () {
-                upLoadClicktag = true;
-            }, 1000);
-            var taskID = $(this).attr("name");
-            //          var tasktypeid = $(this).attr("data-taskid");
-            //          if (tasktypeid == 1) {
-            //巡视任务
-            //            localStorage.setItem("showType", "missionDoing");
-            localStorage.setItem("missionType", clickNum);
-            localStorage.setItem("taskID", taskID);
-            if (isAndroid) {
-                android.goToIn();
-            } else {
-                window.location.href = "RobBillLocation.html";
-            }
-        });
-
-
-    $(".buttons-tab .tab-link").click(function () {
-        var i = $(this).index();
-        if (i == 0) {
-            // pageNum = 1;
-            // $(".list-container").empty();
-            // url = "/getWarningMessageSignalEvents";
-            taskstatus = 0;
-            // $("#titleContent").text(
-            //     Operation["ui_todo"] + " " + Operation["ui_goods"]
-            // );
-        } else if (i == 1) {
-            // pageNum = 1;
-            // $(".list-container").empty();
-            // url = "/getWarningMessageOverLimitEvents";
-            taskstatus = 1;
-            // $("#titleContent").text(
-            //     Operation["ui_doing"] + " " + Operation["ui_goods"]
-            // );
-        } else if (i == 2) {
-            // pageNum = 1;
-            // $(".list-container").empty();
-            // url = "/getWarningMessagePlatformRunEvents";
-            taskstatus = 2;
-            // $("#titleContent").text(
-            //     Operation["ui_done"] + " " + Operation["ui_goods"]
-            // );
-        }
-    });
+    var typeId = 1;
 
     $(".back_btn").click(function () {
         if (isIOS) {
@@ -125,146 +25,38 @@ jQuery(document).ready(function () {
         false
     );
 
-
-    //右上角按钮事件
-    $(".clickrightbtn").click(function () {
-        $.modal({
-            title: Operation["ui_taskTypeSelect"],
-            text: "",
-            verticalButtons: true,
-            buttons: [{
-                    text: Operation["ui_All"],
-                    onClick: function () {
-                        $(".clickrightbtn").text(Operation["ui_All"]);
-                        tasktypeid = "";
-                        tasktypeName = Operation["ui_All"];
-                        localStorage.setItem("taskTypeId", tasktypeid);
-                        localStorage.setItem("taskTypeName", tasktypeName);
-                        pageNum = 1;
-                        getFirstPage(tabName);
-                    }
-                },
-                // {
-                //     text: '首次拜访',
-                //     onClick: function () {
-                //         $(".clickrightbtn").text("首次拜访");
-                //     }
-                // },
-                // {
-                //     text: '拜访',
-                //     onClick: function () {
-                //         $(".clickrightbtn").text("拜访");
-                //     }
-                // },
-                // {
-                //     text: '交接驱动',
-                //     onClick: function () {
-                //         $(".clickrightbtn").text("交接驱动");
-                //     }
-                // },
-                /*        {
-                                  text: "现场交接",
-                                  onClick: function() {
-                                    $(".clickrightbtn").text("现场交接");
-                                    tasktypeid = 2;
-                                    pageNum = 1;
-                                    getFirstPage(tabName);
-                                  }
-                                },*/
-                {
-                    text: Operation["ui_xunjian"],
-                    onClick: function () {
-                        $(".clickrightbtn").text(Operation["ui_xunjian"]);
-                        tasktypeid = 1;
-                        tasktypeName = Operation["ui_xunjian"];
-                        localStorage.setItem("taskTypeId", tasktypeid);
-                        localStorage.setItem("taskTypeName", tasktypeName);
-                        pageNum = 1;
-                        getFirstPage(tabName);
-                    }
-                },
-                {
-                    text: Operation["ui_xiaoque"],
-                    onClick: function () {
-                        $(".clickrightbtn").text(Operation["ui_xiaoque"]);
-                        tasktypeid = 3;
-                        tasktypeName = Operation["ui_xiaoque"];
-                        localStorage.setItem("taskTypeId", tasktypeid);
-                        localStorage.setItem("taskTypeName", tasktypeName);
-                        pageNum = 1;
-                        getFirstPage(tabName);
-                    }
-                },
-                {
-                    text: Operation["ui_xiaojing"],
-                    onClick: function () {
-                        $(".clickrightbtn").text(Operation["ui_xiaojing"]);
-                        tasktypeid = 5;
-                        tasktypeName = Operation["ui_xiaojing"];
-                        localStorage.setItem("taskTypeId", tasktypeid);
-                        localStorage.setItem("taskTypeName", tasktypeName);
-                        pageNum = 1;
-                        getFirstPage(tabName);
-                    }
-                },
-                {
-                    text: Operation["ui_qiangxiu"],
-                    onClick: function () {
-                        $(".clickrightbtn").text(Operation["ui_qiangxiu"]);
-                        tasktypeid = 6;
-                        tasktypeName = Operation["ui_qiangxiu"];
-                        localStorage.setItem("taskTypeId", tasktypeid);
-                        localStorage.setItem("taskTypeName", tasktypeName);
-                        pageNum = 1;
-                        getFirstPage(tabName);
-                    }
-                }
-                // {
-                //     text: '合同收款',
-                //     onClick: function () {
-                //         $(".clickrightbtn").text("合同收款");
-                //     }
-                // },
-                // {
-                //     text: '合同续签',
-                //     onClick: function () {
-                //         $(".clickrightbtn").text("合同续签");
-                //     }
-                // },
-            ]
-        });
+    $(".buttons-tab .tab-link").click(function(){
+        typeId = $(".tab-link.button.active").attr("name");
+        getFirstPage(typeId);
     });
+
+    //上拉加载
+    $(document).on("infinite", ".infinite-scroll", function () {
+        // 如果正在加载，则退出
+        if (loading) return;
+
+        // 设置flag
+        loading = true;
+
+        setTimeout(function () {
+            loading = false;
+            var tabName = $(".tab-link.button.active").attr("name");
+            addItems(itemsPerLoad,tabName);
+            // $.pullToRefreshDone(".pull-to-refresh-content");
+        }, 1000);
+    });
+
+    getFirstPage(typeId);
 
     function getFirstPage(clickNum) {
         var num = "#tab" + clickNum;
-        // if (num == 1) {
-        //     $("#tab1").empty();
-        //     addItems(itemsPerLoad, 0);
-        //     lastIndex = 10;
-        // } else if (num == 2) {
-        //     $("#tab2").empty();
-        //     addItems(itemsPerLoad, 0);
-        //     lastIndex = 10;
-        // } else {
-        //     $("#tab3").empty();
-        //     addItems(itemsPerLoad, 0);
-        //     lastIndex = 10;
-        // }
-        // $(".list-container").empty();
-
-        // $(num).empty();
-        // $(num).html(
-        //     '<div class="pull-to-refresh-layer"><div class ="preloader"></div><div class ="pull-to-refresh-arrow"></div></div><div class="list-container"></div><div class="infinite-scroll-preloader"><div class = "preloader"></div></div>'
-        // );
-
         var list = "#listtab" + clickNum;
         $(list).empty();
         $(num + " .infinite-scroll-preloader").html(
             '<div class="preloader"></div>'
         );
         pageNum = 1;
-        addItems(itemsPerLoad, 0, clickNum);
-        lastIndex = 10;
+        addItems(itemsPerLoad, clickNum);
         // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
         loading = false;
         // $.initPullToRefresh($('.pull-to-refresh-layer'));
@@ -275,134 +67,92 @@ jQuery(document).ready(function () {
     $(document).on("refresh", ".pull-to-refresh-content", function (e) {
         setTimeout(function () {
             pageNum = 1;
-            tabName = $(".tab-link.button.active").attr("name");
-            getFirstPage(Number(tabName));
+            var tabName = $(".tab-link.button.active").attr("name");
+            getFirstPage(tabName);
             // done
             $.pullToRefreshDone(".pull-to-refresh-content");
         }, 2000);
     });
 
-    //下拉刷新
-    // $(document).on("pageInit", "#page-ptr-tabs", function (e, id, page) {
-    //     $(page)
-    //         .find(".pull-to-refresh-content")
-    //         .on("refresh", function (e) {
-    //             // 2s timeout
-    //             var $this = $(this);
-    //             setTimeout(function () {
-    //                 $this.find(".content-block").prepend("<p>New Content......</p>");
-    //                 // Done
-    //                 $.pullToRefreshDone($this);
-    //             }, 2000);
-    //         });
-    // });
-
     //初始化页面接口
-    function addItems(number, lastIndex, clickNum) {
+    function addItems(number,clickNum) {
         var text = "";
-        var url = "/selectByStateAndType";
+        var url = "/getUnGrabbedOrderTaskList";
         var searchStr = $("#searchDaiban").val();
         if (!searchStr) {
             searchStr = "";
         }
-        var params = {
-            pageNum: pageNum,
-            pageSize: number,
-            fTaskstateid: clickNum,
-            fTasktypeid: tasktypeid,
-            // fSubid: 10100001
-            searchKey: searchStr
-        };
-        Substation.getDataByAjaxNoLoading(
-            url,
-            params,
-            function (data) {
-                var taskList = data.taskList;
-                if (taskList.hasOwnProperty("list") && taskList.list.length > 0) {
-
-                    // var list = "#listtab" + clickNum;
-                    // $(list).append(text);
-
-                    //addClick();
-                    //声明一个控制点击的变量
-                    var upLoadClicktag = true;
-                    $(".card2")
-                        .unbind()
-                        .click(function () {
-                            if (!upLoadClicktag) {
-                                return;
+        if(clickNum==1){
+            var params ={pageNo:pageNum,pageSize:number,userlongitude:121.30713886,userlatitude:31.34996039};
+            Substation.getDataByAjaxNoLoading(url,params,function (data) {
+                    var listDom = "#listtab" + clickNum;
+                    if(pageNum==1){
+                        $(listDom).empty();
+                    }
+                    var thisList = data.orderList;
+                    if (thisList.length > 0) {
+                        var html = "";
+                        $(thisList).each(function(){
+                            var distance = this.userDistance;
+                            if(distance==undefined){
+                                distance = "";
+                            }else {
+                                distance = Number(distance);
+                                if(distance>=1000){
+                                    distance = (distance/1000).toFixed(2)+"km";
+                                }else{
+                                    distance = distance.toFixed(2)+"m";
+                                }
                             }
-                            upLoadClicktag = false;
-                            setTimeout(function () {
-                                upLoadClicktag = true;
-                            }, 1000);
-                            var taskID = $(this).attr("name");
-                            //          var tasktypeid = $(this).attr("data-taskid");
-                            //          if (tasktypeid == 1) {
-                            //巡视任务
-                            //            localStorage.setItem("showType", "missionDoing");
-                            localStorage.setItem("missionType", clickNum);
-                            localStorage.setItem("taskID", taskID);
-                            if (isAndroid) {
-                                android.goToIn();
-                            } else {
-                                window.location.href = "RobBillLocation.html";
-                            }
-                            //          } else if (tasktypeid == 3) {
-                            //            //缺陷登记
-                            ////            localStorage.setItem("showType", "missiondefect");
-                            ////            localStorage.setItem("missionType", clickNum);
-                            //            localStorage.setItem("taskID", taskID);
-                            //            if (isAndroid) {
-                            //              android.goToIn();
-                            //            } else {
-                            //              window.location.href = "missionDetail.html";
-                            //            }
-                            //          } else {
-                            //            //现场交接
-                            ////            localStorage.setItem("showType", "missiondefect");
-                            ////            localStorage.setItem("missionType", clickNum);
-                            //            localStorage.setItem("taskID", taskID);
-                            //            if (isAndroid) {
-                            //              android.goToIn();
-                            //            } else {
-                            //              window.location.href = "missionDetail.html";
-                            //            }
-                            //          }
+                            html += `<div class="card" onclick="goToDetail('${this.fTaskid}')">
+                                         <div class="card-content">
+                                             <div class="card-content-inner">
+                                                 <p class="subName limit-length row"><span class="col-85">${this.fSubName}</span>
+                                                 <span class="col-15 showType">${Operation['ui_RobBill']}</span></p>
+                                                 <p class="row"><span class="col-66"><span style="color:gray;">${Operation['ui_TaskContent']}</span>${this.fTaskcontent}</span>
+                                                     <span class="col-33"
+                                                           style="color:#ADB2C1;text-align: right;">${distance}</span></p>
+                                                 <p class="row"><span class="col-50 showTime">${Operation['ui_StarPlanTime']+this.fStartdate.substring(0,10)}</span>
+                                                     <span class="col-50 showTime">${Operation['ui_endPlanTime']+this.fDeadlinedate.substring(0,10)}</span></p>
+                                             </div>
+                                         </div>
+                                     </div>`;
                         });
-                    pageNum++;
-                } else {
-                    $.detachInfiniteScroll($(".infinite-scroll"));
-                    $(".infinite-scroll-preloader").html(
-                        "<span class='bottomTip'>--" +
-                        Operation["ui_nomoredata"] +
-                        "--</span>"
-                    );
+                        $(listDom).html(html);
+                        pageNum++;
+                    } else {
+                        $.detachInfiniteScroll($(".infinite-scroll"));
+                        $(".infinite-scroll-preloader").html(
+                            "<span class='bottomTip'>--" +
+                            Operation["ui_nomoredata"] +
+                            "--</span>"
+                        );
+                        return;
+                    }
+                    if (thisList.length < itemsPerLoad) {
+                        $.detachInfiniteScroll($(".infinite-scroll"));
+                        $(".infinite-scroll-preloader").html(
+                            "<span class='bottomTip'>--" +
+                            Operation["ui_nomoredata"] +
+                            "--</span>"
+                        );
+                        return;
+                    }
+                },
+                function (errorCode) {
+                    if (errorCode == 0) {
+                        $.detachInfiniteScroll($(".infinite-scroll"));
+                        $(".infinite-scroll-preloader").html(
+                            "--" + Operation["ui_neterror"] + "--"
+                        );
+                    } else {
+                        $.detachInfiniteScroll($(".infinite-scroll"));
+                        $(".infinite-scroll-preloader").html("");
+                    }
                     return;
                 }
-                if (taskList.list.length < itemsPerLoad) {
-                    $.detachInfiniteScroll($(".infinite-scroll"));
-                    $(".infinite-scroll-preloader").html(
-                        "<span class='bottomTip'>--" +
-                        Operation["ui_nomoredata"] +
-                        "--</span>"
-                    );
-                    return;
-                }
-            },
-            function (errorCode) {
-                if (errorCode == 0) {
-                    $.detachInfiniteScroll($(".infinite-scroll"));
-                    $(".infinite-scroll-preloader").html(
-                        "--" + Operation["ui_neterror"] + "--"
-                    );
-                } else {
-                    $.detachInfiniteScroll($(".infinite-scroll"));
-                    $(".infinite-scroll-preloader").html("");
-                }
-                return;
-            }
-        );
+            );
+        }
     }
 
     $("#searchDaiban").bind("keydown", function (event) {
@@ -417,34 +167,8 @@ jQuery(document).ready(function () {
         getFirstPage(tabName);
     });
 
-    //  getFirstPage(tabName);
-
-    var lastIndex = 10;
-    //上拉加载
-    $(document).on("infinite", ".infinite-scroll", function () {
-        // 如果正在加载，则退出
-        if (loading) return;
-
-        // 设置flag
-        loading = true;
-
-        setTimeout(function () {
-            loading = false;
-
-            if (lastIndex >= maxItems) {
-                $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html(
-                    "<span class='bottomTip'>--" +
-                    Operation["ui_nomoredata"] +
-                    "--</span>"
-                );
-                return;
-            }
-            tabName = $(".tab-link.button.active").attr("name");
-            addItems(itemsPerLoad, lastIndex, Number(tabName));
-            lastIndex = $(".list-container .card").length;
-            // $.pullToRefreshDone(".pull-to-refresh-content");
-        }, 1000);
+    $(".overButton").click(function(){
+        window.location.href = "taskPost.html?type=7";
     });
 
     //记住状态
@@ -456,5 +180,15 @@ jQuery(document).ready(function () {
     //     getFirstPage(tabName);
     // });
 
+//    var map = new BMap.Map("allmap");
+//    var point1 = new BMap.Point(121.30713886, 31.34996039);
+//    var point2 = new BMap.Point(116.31872260, 39.99664964);
+//    var fDistance = map.getDistance(point1, point2);
+//    console.log(fDistance);
     $.init();
 });
+
+function goToDetail(taskId){
+    localStorage.setItem("robTaskId",taskId);
+    window.location.href = "RobBillLocation.html";
+}

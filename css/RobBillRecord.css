@@ -1,11 +1,9 @@
-.sub_card {
-    display: flex;
-    align-items: center;
-    padding: 0.2rem;
+.card p {
+    margin: 0;
 }
 
-.sub_card p {
-    margin: 0 0.5rem 0.2rem 0.7rem;
+.card .card-content-inner{
+    padding:0.4rem 0.4rem 0.4rem 0;
 }
 
 .showType {
@@ -37,10 +35,8 @@
     right: 0.1rem;
 }
 
-.sub_card .subName {
+.subName {
     font-weight: bold;
-    left: 5%;
-    margin: 0.2rem 0.5rem 0.1rem 0.7rem;
 }
 
 .sub_card button {
@@ -74,6 +70,27 @@ i.icon.icon-contactphone {
 .hasBoom {
     background: url(../img/i-hasCommit.png) right 1rem top no-repeat;
     background-size: 3.2rem;
+}
+
+.overButton{
+    position: fixed;
+    bottom: 40px;
+    right: 5%;
+    width: 44px;
+    height: 44px;
+    background: #02A8A6;
+    border-radius: 22px;
+    box-shadow: 0 0 5px #02A8A6;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+    z-index: 2;
+}
+
+.overImg{
+    position: absolute;
+    top: 6px;
+    left: 6px;
 }
 
 /*

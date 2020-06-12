@@ -6,105 +6,122 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>抢单</title>
     <meta name="viewport"
-        content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, user-scalable=no,initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/RobBillRecord.css">
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb">
+    </script>
 </head>
 
 <body>
-    <div class="page-group">
-        <div class="page page-current" id="page-ptr-tabs">
-            <header class="bar bar-nav bar_color">
-                <button class="button button-link button-nav pull-left click_btn back_btn">
-                    <span class="icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </button>
-                <h1 class="title title_color">
-                    <p class="limit-length" id="titleContent"><span data-i18n="ui_RobBill"></span></p>
-                </h1>
-                <button class="button pull-right clickrightbtn" style="color:white;border:1px solid white;">
-                    <span data-i18n="ui_taskType"></span>
-                </button>
-            </header>
-            <div class="bar bar-header-secondary">
-                <div class="searchbar">
-                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
-                    <div class="search-input">
-                        <label class="icon icon-search" for="searchDaiban"></label>
-                        <input type="search" id="searchDaiban" placeholder="" data-placeholder="ui_subHolderNoCode" />
-                    </div>
+<div class="page-group">
+    <div class="page page-current" id="page-ptr-tabs">
+        <header class="bar bar-nav bar_color">
+            <button class="button button-link button-nav pull-left click_btn back_btn">
+                <span class="icon icon-left"></span>
+                <span data-i18n="ui_back"></span>
+            </button>
+            <h1 class="title title_color">
+                <p class="limit-length" id="titleContent"><span data-i18n="ui_RobBill"></span></p>
+            </h1>
+        </header>
+        <div class="bar bar-header-secondary">
+            <div class="searchbar">
+                <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                <div class="search-input">
+                    <label class="icon icon-search" for="searchDaiban"></label>
+                    <input type="search" id="searchDaiban" placeholder=""
+                           data-placeholder="ui_subHolderNoCode"/>
                 </div>
             </div>
-            <div class="content">
-                <div class="buttons-tab">
-                    <a href="#tab1" class="tab-link button active" id="noRob" name="1" data-i18n="ui_noRobBill"></a>
-                    <a href="#tab2" class="tab-link button" id="hadRob" name="2" data-i18n="ui_hadRobBill"></a>
-                </div>
-                <div class="tabs pull-to-refresh-container">
-                    <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll">
-                        <!-- <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll pull-up" data-ptr-distance="55"
-                        data-distance="100"> -->
-                        <!-- 待办 -->
-                        <div class="pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <div class="list-container" id="listtab1">
-                            <div class="card card2" id="dealMission378" name="378" data-taskid="1">
-                                <div class="card-content">
-                                    <div class="row no-gutter sub_card">
-                                        <!-- <div class="col-10"> <img class="showImg" src="img/missionxun.png"> </div> -->
-                                        <div>
-                                            <p class="subName limit-length row"><span class="col-85">嘉定变电所</span><span
-                                                    class="col-15 showType">
+        </div>
+        <div class="content">
+            <div class="buttons-tab">
+                <a href="#tab1" class="tab-link button active" id="noRob" name="1"
+                   data-i18n="ui_noRobBill"></a>
+                <a href="#tab2" class="tab-link button" id="hadRob" name="2" data-i18n="">我的抢单</a>
+                <a href="#tab3" class="tab-link button" id="mineRob" name="3" data-i18n="">我发布的</a>
+            </div>
+            <div class="tabs pull-to-refresh-container">
+                <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll">
+                    <!-- <div id="tab1" class="tab active pull-to-refresh-content infinite-scroll pull-up" data-ptr-distance="55"
+                    data-distance="100"> -->
+                    <!-- 待办 -->
+                    <div class="pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-container" id="listtab1">
+                        <div class="card" id="dealMission378" name="378" data-taskid="1">
+                            <div class="card-content">
+                                <div class="card-content-inner">
+                                    <p class="subName limit-length row"><span
+                                            class="col-85">嘉定变电所</span><span
+                                            class="col-15 showType">
                                                     抢单</span></p>
-                                            <p class="row"><span class="col-85"> 任务内容：仪表故障,需要去嘉定变电所区域，进行故障排查和修复。</span>
-                                                <span class="col-15" style="color:#ADB2C1;text-align: center;">
-                                                    1.2km</span></p>
-                                            <p class="line"></p>
-                                            <p class="row"><span class="showTime">计划开始时间:2019-12-12 </span>
-                                                <span class="showTime">计划完成时间:2019-12-13</span></p>
-                                        </div>
-                                        <!-- <div class="col-5"><i class="icon icon-right"></i> </div> -->
-                                    </div>
+                                    <p class="row"><span class="col-75"><span style="color:gray;">任务内容：</span>仪表故障,需要去嘉定变电所区域，进行故障排查和修复。</span>
+                                        <span class="col-25"
+                                              style="color:#ADB2C1;text-align: right;">1.2km</span></p>
+                                    <p class="row"><span class="col-50 showTime">计划开始时间:2019-12-12 </span>
+                                        <span class="col-50 showTime">计划完成时间:2019-12-13</span></p>
                                 </div>
                             </div>
                         </div>
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
                     </div>
-                    <div id="tab2" class="tab pull-to-refresh-content infinite-scroll">
-                        <div class=" pull-to-refresh-layer">
-                            <div class="preloader"></div>
-                            <div class="pull-to-refresh-arrow"></div>
-                        </div>
-                        <div class="list-container" id="listtab2">
-                        </div>
-                        <!-- 在办 -->
-                        <div class="list-container">
-
-                        </div>
-                        <div class="infinite-scroll-preloader">
-                            <div class="preloader"></div>
-                        </div>
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
                     </div>
-
                 </div>
+                <div id="tab2" class="tab pull-to-refresh-content infinite-scroll">
+                    <div class=" pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-container" id="listtab2">
+                    </div>
+                    <!-- 在办 -->
+                    <div class="list-container">
 
+                    </div>
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
+                <div id="tab3" class="tab pull-to-refresh-content infinite-scroll">
+                    <div class=" pull-to-refresh-layer">
+                        <div class="preloader"></div>
+                        <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    <div class="list-container" id="listtab3">
+                    </div>
+                    <!-- 在办 -->
+                    <div class="list-container">
+
+                    </div>
+                    <div class="infinite-scroll-preloader">
+                        <div class="preloader"></div>
+                    </div>
+                </div>
             </div>
+
+        </div>
+        <div>
+            <div class="overButton" href="#"><img class="overImg" src="img/add_task.png"></div>
         </div>
     </div>
-    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
-    <script src="libs/language.js"></script>
-    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
-    <script src="libs/tools.js"></script>
-    <script src="js/RobBillRecord.js"></script>
+</div>
+<div id="allmap"></div>
+<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+<script src="libs/language.js"></script>
+<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+<script src="libs/tools.js"></script>
+<script src="js/RobBillRecord.js"></script>
 
 </body>
 
