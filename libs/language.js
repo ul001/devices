@@ -408,6 +408,7 @@ function getZhLanguage() {
     ui_defectPost: "缺陷派单",
     //抢单详情
     ui_RobBill: "抢单",
+    ui_postRobBill: "发布抢单",
     ui_RobBillDetails: "抢单详情",
     ui_walk: "步行",
     ui_drive: "驾车",
@@ -959,6 +960,7 @@ function getEnLanguage() {
 
     //抢单详情
     ui_RobBill: "RobBill",
+    ui_postRobBill: "Rush orders",
     ui_RobBillDetails: "RobBillDetails",
     ui_walk: "Walk",
     ui_drive: "Drive",
