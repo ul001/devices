@@ -23,9 +23,9 @@
                     <span class="icon icon-left"></span>
                     <span data-i18n="ui_back"></span>
                 </a>
-                <a class="button button-link button-nav pull-right open-popup" id="clickPop" data-popup=".popup-about">
+                <!-- <a class="button button-link button-nav pull-right open-popup" id="clickPop" data-popup=".popup-about">
                     <span class="icon icon-menu" style="color:white"></span>
-                </a>
+                </a> -->
                 <!-- <p class="buttons-row">
                     <a href="#" class="button buttonTab active">步行</a><a href="#" class="button buttonTab">驾车</a><a
                         href="#" class="button buttonTab">公交</a>
@@ -45,8 +45,9 @@
                         src="img/daohang.png" style="height:1rem;vertical-align:middle;"><span
                         data-i18n="ui_navigation"></span></div>
             </div>
-            <div class="bottomUp"><a class="button open-popup" data-popup=".popup-about" style="border:white"><img
-                        class="col-15" src="img/xiangshangjiantou.png" style="height:1rem;"></a></div>
+            <div class="bottomUp"><a class="button open-popup" id="clickPopup" data-popup=".popup-about"
+                    style="border:white"><img class="col-15" src="img/xiangshangjiantou.png" style="height:1rem;"></a>
+            </div>
         </div>
         <div id="page1" class="page">
             <header class="bar bar-nav bar_color">
@@ -184,7 +185,8 @@
                             <span class="col-85" style="margin-left:0rem;">请选择执行人</span>
                         </p> -->
                         <div class="serviceBottomBtn">
-                            <p><a class="button sureBtn" id=""><span data-i18n="ui_confirm"></span></a></p>
+                            <p><a class="button sureBtn" onclick="publishRobTask()" id=""><span
+                                        data-i18n="ui_confirm"></span></a></p>
                             <p><a class="button close-popup" data-popup=".popup-services" id="cancel"
                                     data-i18n="ui_cancel"></a></p>
                         </div>
