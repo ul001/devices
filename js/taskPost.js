@@ -5,7 +5,7 @@ var chargerUser = [];
 var workerUser = [];
 $(".peopleList").hide();
 var qiangdan = Substation.GetQueryString("type");
-if(qiangdan == "7"){
+if (qiangdan == "7") {
     $("#selectType").val(7);
     $(".title_color").text(Operation['ui_postRobBill']);
     $(".qiang").hide();
@@ -45,14 +45,14 @@ var myDate = new Date;
 var year = myDate.getFullYear(); //获取当前年
 var mon = myDate.getMonth() + 1; //获取当前月
 var date = myDate.getDate(); //获取当前日
-var nowDate = year+"-"+format0(mon)+"-"+format0(date);
+var nowDate = year + "-" + format0(mon) + "-" + format0(date);
 $("#dateStart").val(nowDate);
 $("#dateEnd").val(nowDate);
 
-function format0(num){
-    if(num<10){
-        return "0"+num;
-    }else{
+function format0(num) {
+    if (num < 10) {
+        return "0" + num;
+    } else {
         return num;
     }
 }
@@ -170,7 +170,7 @@ function postTask() {
     });
     var subStr = subIds.join(",");
     var params = {};
-    if(qiangdan == "7"){
+    if (qiangdan == "7") {
         params = {
             fTasktypeid: selectType,
             fStartdate: startTime + " 00:00:00",
@@ -185,7 +185,7 @@ function postTask() {
                 });
             }
         });
-    }else{
+    } else {
         if (chargerUser.length == 0) {
             $.toast(Operation['ui_charger'] + Operation['ui_notEmpty']);
             return;
@@ -292,6 +292,9 @@ function getPersonList(gid) {
             fCoaccountno: gid
         }, function (data) {
             if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
+                //修改单选
+                $("#selectAll").hide();
+
                 $(".personUl").show();
                 var html = "";
                 $(data.data.list).each(function () {
@@ -318,7 +321,7 @@ function getPersonList(gid) {
         }, function (data) {
             if (data.hasOwnProperty("userList") && data.userList.length > 0) {
                 $(".personUl").show();
-                if(peopleType == "charger"){
+                if (peopleType == "charger") {
                     $("#selectAll").hide();
                 }
                 var html = "";
@@ -371,7 +374,7 @@ function addChangeListener() {
     var thisUserid = $(this).attr("id");
     var thisUsername = $(this).attr("data-name");
     if (thisUserid != undefined) {
-        if (peopleType == "charger") {
+        if (peopleType == "charger" || peopleType == "substation") {
             if ($(this).prop("checked")) {
                 selectUserList = [{
                     userId: thisUserid,
@@ -382,7 +385,7 @@ function addChangeListener() {
             } else {
                 selectUserList = [];
             }
-        } else if (peopleType == "worker" || peopleType == "substation") {
+        } else if (peopleType == "worker") {
             if ($(this).prop("checked")) {
                 selectUserList.push({
                     userId: thisUserid,
@@ -449,10 +452,10 @@ function getSearchUser() {
     $(".classUl").hide();
     $("#classList").hide();
     var typeStr = "";
-    if (peopleType == "charger") {
+    if (peopleType == "charger" || peopleType == "substation") {
         typeStr = "type=\"checkbox\"";
         $("#selectAll").hide();
-    } else if (peopleType == "worker" || peopleType == "substation") {
+    } else if (peopleType == "worker") {
         typeStr = "type=\"checkbox\"";
         $("#selectAll").show();
     }
@@ -570,8 +573,8 @@ $(".back_btn").click(function () {
     }
 });
 
-$("#postHistory").click(function(){
-    window.location.href="taskPostHistory.html";
+$("#postHistory").click(function () {
+    window.location.href = "taskPostHistory.html";
 });
 
 //解决键盘遮挡问题
@@ -579,11 +582,11 @@ var h = $(window).height();
 window.addEventListener("resize", function () {
     if ($(window).height() < h) {
         $(".bar.bar-footer").hide();
-        $(".bar-footer~.content").css("bottom","0");
+        $(".bar-footer~.content").css("bottom", "0");
     }
     if ($(window).height() >= h) {
         $(".bar.bar-footer").show();
-        $(".bar-footer~.content").css("bottom","2.2rem");
+        $(".bar-footer~.content").css("bottom", "2.2rem");
     }
     if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
         window.setTimeout(function () {

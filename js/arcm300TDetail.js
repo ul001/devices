@@ -6,17 +6,11 @@ function initContent() {
         meterCode: meterCode
     }, function (data) {
         // buildId: "1234"
-
         // gatewayId: "10100001001"
-
         // meterCode: "100101"
-
         // meterId: "100101"
-
         // meterName: "测试2"
-
         // stationId: "10100001"
-
         var param = data.meterInfo;
         if (param) {
             var sb = '                        <ul>';
@@ -138,7 +132,7 @@ function initContent() {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
                         sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Electleakage'] + '</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.iLeakage + '</span></div>';
+                        sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.iLeakage.iLeakage + '</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
@@ -208,7 +202,7 @@ function initContent() {
                         sb += '                            <li class="item-content">';
                         sb += '                                <div class="item-inner">';
                         sb += '                                    <div class="item-title" data-i18n="ui_alarmdataId">' + Operation['ui_Switching'] + '</div>';
-                        sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.switch+'</span></div>';
+                        sb += '                                    <div class="item-after dataId"><span class="veryDanger">' + detailParam.switch.switch+'</span></div>';
                         sb += '                                </div>';
                         sb += '                            </li>';
                     } else {
