@@ -9,7 +9,7 @@
 .showType {
     background: #FDECCD;
     color: #F2A515;
-    text-align: center;
+    padding:.1rem .3rem;
     border-radius: 0.8rem;
 }
 
