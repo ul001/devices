@@ -25,32 +25,37 @@ if (!taskid) {
     taskid = 967;
 }
 var selectSubid = localStorage.getItem("fSubid");
-var subName = "";
+// var subName = "";
 var lng = 0;
 var lat = 0;
 var dizhi = "";
 var map;
 //变电所
-var subLat = 36.919141;
-var subLon = 117.508328;
+var subLat;
+var subLon;
+// var subLat = 36.919141;
+// var subLon = 117.508328;
 //我的位置
-var myLat = 39.977552;
-var myLon = 116.301934;
+var myLat = localStorage.getItem("userlatitude");
+var myLon = localStorage.getItem("userlongitude");
 var p1;
 var p2;
-Substation.getDataByAjax(
-    "/getSubInfoByfSubid", {
-        fSubid: selectSubid
-    },
-    function (data) {
-        if (data.subInfo != undefined) {
-            subName = data.subInfo.fSubname;
-            lng = data.subInfo.fLongitude;
-            lat = data.subInfo.fLatitude;
-            loadScript();
-        }
-    }
-);
+
+// function setMap() {
+//     Substation.getDataByAjax(
+//         "/getSubInfoByfSubid", {
+//             fSubid: subDetail.fSubid
+//         },
+//         function (data) {
+//             if (data.subInfo != undefined) {
+//                 // subName = subDetail.fSubName;
+//                 // lng = data.subInfo.fLongitude;
+//                 // lat = data.subInfo.fLatitude;
+//                 loadScript();
+//             }
+//         }
+//     );
+// }
 
 function initialize() {
     map = new BMap.Map("container");
@@ -129,7 +134,7 @@ function walk() {
     var output = "步行时间：";
     var searchComplete = function (results) {
         if (!results || JSON.stringify(results) == "{}") {
-            $.toast("步行距离过远，建议选择其他交通方式！");
+            $.toast("未查询到步行路线，建议选择其他交通方式！");
             return;
         }
         // if (driving.getStatus() != BMAP_STATUS_SUCCESS) {
@@ -249,30 +254,33 @@ function getNetData() {
         function (data) {
             if (data.hasOwnProperty("orderTaskDetail")) {
                 subDetail = data.orderTaskDetail;
-                // var strVar = "";
-                // strVar += " <p class=\"subName limit-length\">" + subDetail.fSubName + "<\/p>";
-                // strVar += "                        <p class=\"missionNo row\" style=\"color:#ADB2C1;\">";
-                // strVar += "                            <span class=\"col-85\" style=\"margin-left:0rem;\">任务单号：" + subDetail.fTasknumber + "<\/span>";
-                // strVar += "                            <img class=\"col-15\" src=\"img\/video_watch.png\" style=\"height: 0.9rem;width: 1.5rem;\"";
-                // strVar += "                                id=\"jumpVideo\">";
-                // strVar += "                        <\/p>";
-                // strVar += "                        <p class=\"missionList\">任务发布人：" + subDetail.fSubName + "<\/p>";
-                // strVar += "                        <p class=\"missionList\">发布时间：" + subDetail.fSubName + "<\/p>";
-                // strVar += "                        <p class=\"missionList\">任务内容：" + subDetail.fSubName + "<\/p>";
-                // strVar += "                        <p class=\"missionList\">计划开始时间：" + subDetail.fSubName + "<\/p>";
-                // strVar += "                        <p class=\"missionList\">计划完成时间：" + subDetail.fSubName + "<\/p>";
                 strVar = `<p class="subName limit-length">${subDetail.fSubName}</p>
                         <p class="missionNo row" style="color:#ADB2C1;">
-                            <span class="col-85" style="margin-left:0rem;">${Operation['ui_RobTaskNo']}${subDetail.fSubName}</span>
+                            <span class="col-85" style="margin-left:0rem;">${
+                              Operation["ui_RobTaskNo"]
+                            }${subDetail.fTasknumber}</span>
                             <img class="col-15" src="img/video_watch.png" style="height: 0.9rem;width: 1.5rem;"
                                 id="jumpVideo">
                         </p>
-                        <p class="missionList">${Operation['ui_RobTaskInitiator']}${subDetail.fTaskcreateusername}</p>
-                        <p class="missionList">${Operation['ui_RobReleasetime']}${subDetail.fTaskcreatedate}</p>
-                        <p class="missionList">${Operation['ui_RobTaskContent']}${subDetail.fTaskcontent}</p>
-                        <p class="missionList">${Operation['ui_RobPlanStartTime']}${subDetail.fStartdate}</p>
-                        <p class="missionList">${Operation['ui_RobPlanDeadlineTime']}${subDetail.fDeadlinedate}</p>`;
+                        <p class="missionList">${
+                          Operation["ui_RobTaskInitiator"]
+                        }${subDetail.fTaskcreateusername}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobReleasetime"]
+                        }${subDetail.fTaskcreatedate}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobTaskContent"]
+                        }${subDetail.fTaskcontent}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobPlanStartTime"]
+                        }${subDetail.fStartdate}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobPlanDeadlineTime"]
+                        }${subDetail.fDeadlinedate}</p>`;
                 $("#taskDetail").html(strVar);
+                subLat = subDetail.fLatitude;
+                subLon = subDetail.fLongitude;
+                loadScript();
 
                 //跳转视频
                 $("#jumpVideo").click(function () {
@@ -853,12 +861,14 @@ function publishRobTask() {
         var userStrs = userIds.join(",");
         Substation.getDataByAjax(
             "/achieveOrderTask", {
-                "fTaskid": taskid,
-                "userIds": userStrs
+                fTaskid: taskid,
+                userIds: userStrs
             },
             function (data) {
+                $.toast("抢单成功！");
                 $.router.back();
-            });
+            }
+        );
     }
 }
 

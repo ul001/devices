@@ -80,9 +80,9 @@ function getNetData() {
             $("#missionType").html(taskInfo.fTasktypeexplain);
             $("#missionName").html(taskInfo.fTaskname);
             $("#createName").html(taskInfo.fTaskcreateusername);
-            $("#createCall").attr("onclick","callPhone('"+taskInfo.fTaskcreateuserphone+"')");
+            $("#createCall").attr("onclick", "callPhone('" + taskInfo.fTaskcreateuserphone + "')");
             $("#chargerName").html(taskInfo.fTaskchargername);
-            $("#chargerCall").attr("onclick","callPhone('"+taskInfo.fTaskchargerphone+"')");
+            $("#chargerCall").attr("onclick", "callPhone('" + taskInfo.fTaskchargerphone + "')");
             $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
             $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
             //任务开始时间
@@ -154,7 +154,7 @@ function getNetData() {
                     text +=
                         '                                        <div class="item-title label" style="display:flex;align-items:center;">' +
                         this.userName +
-                        "<img class='callPhone' onclick=\"callPhone('"+this.fUserphone+"')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>" +
+                        "<img class='callPhone' onclick=\"callPhone('" + this.fUserphone + "')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>" +
                         "</div>";
                     text +=
                         '                                        <div class="item-input">';
@@ -303,8 +303,8 @@ function getNetData() {
                     window.location.href = "defectRectification.html?value=0";
                 });
             }
-            //如果是消警任务，则剔除
-            if (missionTypeid == 5 || missionTypeid == 6) {
+            //如果是消警5、抢单7、抢修6任务，则剔除
+            if (missionTypeid == 5 || missionTypeid == 6 || missionTypeid == 7) {
                 $("#totaldefect1").remove();
                 $("#defectUntreatNum").remove();
             }
@@ -477,6 +477,8 @@ $(".doDetail").click(function () {
         //        localStorage.setItem("missionTypeid", missionTypeid);
         window.location.href = "alarmCleanInfo.html?alarmeventlogid=" + fTaskandalarmeventid;
     } else if (missionTypeid == 6) {
+        window.location.href = "rushRepairInfo.html?repairId=" + fTaskandalarmeventid;
+    } else if (missionTypeid == 7) {
         window.location.href = "rushRepairInfo.html?repairId=" + fTaskandalarmeventid;
     }
 });
