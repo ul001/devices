@@ -122,7 +122,7 @@ function getZhLanguage() {
     ui_Subinspection: "变电所巡检",
     ui_selectSub: "选择设备分组",
     //patrolContent
-    ui_showOnlydevice: "仅显示有设备分类",
+    ui_showOnlydevice: "仅显示有巡检项的设备分类",
     ui_DefectRegist: "缺陷登记",
     ui_hasnosave: "当前巡检信息尚未保存，确定要离开吗？",
     ui_nodeviceInThis: "此分组下无设备！",
