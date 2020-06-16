@@ -15,143 +15,134 @@
 </head>
 
 <body>
-<div class="page-group">
-    <div class="page">
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back();">
-                <span class="icon icon-left"></span>
-                <span data-i18n="ui_back"></span>
-            </a>
-            <a class="button button-link button-nav pull-right open-panel">
-                <i class="icon icon-selectSome"></i>
-            </a>
-            <h1 class="title title_color" data-i18n="">任务发布记录</h1>
-        </header>
-        <div class="bar bar-header-secondary">
-            <div class="searchbar">
-                <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
-                <div class="search-input">
-                    <label class="icon icon-search" for="searchDaiban"></label>
-                    <input type="search" id="searchDaiban" placeholder=""
-                           data-placeholder="ui_subHolderNoCode"/>
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back();">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <h1 class="title title_color" data-i18n="ui_TaskPostRecord"></h1>
+            </header>
+            <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="searchDaiban"></label>
+                        <input type="search" id="searchDaiban" placeholder="" data-placeholder="ui_subHolderNoCode" />
+                    </div>
+                </div>
+            </div>
+            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div id="list-container" class="list-block">
+                    <!--                <div class="card" id="">-->
+                    <!--                    <div class="item-content item-link">-->
+                    <!--                        <div class="item-inner row no-gutter">-->
+                    <!--                            <div>-->
+                    <!--                                <p class="subName limit-length"><i class="icon icon-subIcon"></i>云平台演示箱</p>-->
+                    <!--                                <p>任务单号：R1923183424</p>-->
+                    <!--                                <p>任务类型：抢修</p>-->
+                    <!--                                <p>发布时间：2019-12-23 06:00:00</p>-->
+                    <!--                            </div>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                </div>-->
+                </div>
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
                 </div>
             </div>
         </div>
-        <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
-             data-distance="100">
-            <div class="pull-to-refresh-layer">
-                <div class="preloader"></div>
-                <div class="pull-to-refresh-arrow"></div>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <div id="postTime">
+                    <label><span data-i18n="ui_postTime"></span></label><br>
+                    <p class="buttons-row">
+                        <a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                </div>
+                <div id="startTime">
+                    <label><span data-i18n="ui_planStarttime"></span></label><br>
+                    <p class="buttons-row">
+                        <a href="#" class="button" id="today1"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday1"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth1"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth1"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                    <input type="text" id="dateStart1" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                    <input type="text" id="dateEnd1" placeholder="" data-placeholder="ui_endTime" readonly />
+                </div>
+                <div id="finishTime">
+                    <label><span data-i18n="ui_plandonetime"></span></label><br>
+                    <p class="buttons-row">
+                        <a href="#" class="button" id="today2"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday2"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth2"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth2"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                    <input type="text" id="dateStart2" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                    <input type="text" id="dateEnd2" placeholder="" data-placeholder="ui_endTime" readonly />
+                </div>
+                <div>
+                    <label><span data-i18n="ui_timeRank"></span></label><br>
+                    <select id="timeRank">
+                        <option value="" data-i18n="ui_timeRank0"></option>
+                        <option value="createASC" data-i18n="ui_timeRank1"></option>
+                        <option value="createDESC" data-i18n="ui_timeRank2"></option>
+                        <option value="planASC" data-i18n="ui_timeRank3"></option>
+                        <option value="planDESC" data-i18n="ui_timeRank4"></option>
+                        <option value="DeadlineASC" data-i18n="ui_timeRank5"></option>
+                        <option value="DeadlineDESC" data-i18n="ui_timeRank6"></option>
+                    </select>
+                </div>
+                <div>
+                    <label><span data-i18n="ui_taskType"></span></label><br>
+                    <select id="taskType">
+                        <option value="" data-i18n="ui_All"></option>
+                        <option value="1" data-i18n="ui_xunjian"></option>
+                        <option value="3" data-i18n="ui_xiaoque"></option>
+                        <option value="5" data-i18n="ui_xiaojing"></option>
+                        <option value="6" data-i18n="ui_qiangxiu"></option>
+                    </select>
+                </div>
+                <div>
+                    <label><span data-i18n="ui_charger"></span></label><input id="chargeSelect" type="text" />
+                </div>
+                <div>
+                    <label><span data-i18n="ui_worker"></span></label><input id="doSelect" type="text" />
+                </div>
             </div>
-            <div id="list-container" class="list-block">
-<!--                <div class="card" id="">-->
-<!--                    <div class="item-content item-link">-->
-<!--                        <div class="item-inner row no-gutter">-->
-<!--                            <div>-->
-<!--                                <p class="subName limit-length"><i class="icon icon-subIcon"></i>云平台演示箱</p>-->
-<!--                                <p>任务单号：R1923183424</p>-->
-<!--                                <p>任务类型：抢修</p>-->
-<!--                                <p>发布时间：2019-12-23 06:00:00</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-            </div>
-            <div class="infinite-scroll-preloader">
-                <div class="preloader"></div>
+            <div class="btnBar row no-gutter">
+                <div class="col-33"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-33"><a href="#" class="button button-big button-fill button-reset"
+                        data-i18n="ui_resetclear"></a>
+                </div>
+                <div class="col-33"><a href="#" class="button button-big button-fill button-success"
+                        id="searchBtn"><span data-i18n="ui_query"></span></a></div>
             </div>
         </div>
     </div>
-    <div class="panel-overlay"></div>
-    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-        <div class="content-block">
-            <div id="postTime">
-                <label><span data-i18n="ui_postTime"></span></label><br>
-                <p class="buttons-row">
-                    <a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
-                    <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
-                    <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
-                    <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
-                </p>
-                <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime"
-                       readonly/> -
-                <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime"
-                       readonly/>
-            </div>
-            <div id="startTime">
-                <label><span data-i18n="ui_planStarttime"></span></label><br>
-                <p class="buttons-row">
-                    <a href="#" class="button" id="today1"><span data-i18n="ui_today"></span></a>
-                    <a href="#" class="button" id="yestoday1"><span data-i18n="ui_yday"></span></a>
-                    <a href="#" class="button" id="thisMonth1"><span data-i18n="ui_curr"></span></a>
-                    <a href="#" class="button" id="lastMonth1"><span data-i18n="ui_Uult"></span></a>
-                </p>
-                <input type="text" id="dateStart1" placeholder="" data-placeholder="ui_startTime"
-                       readonly/> -
-                <input type="text" id="dateEnd1" placeholder="" data-placeholder="ui_endTime"
-                       readonly/>
-            </div>
-            <div id="finishTime">
-                <label><span data-i18n="ui_plandonetime"></span></label><br>
-                <p class="buttons-row">
-                    <a href="#" class="button" id="today2"><span data-i18n="ui_today"></span></a>
-                    <a href="#" class="button" id="yestoday2"><span data-i18n="ui_yday"></span></a>
-                    <a href="#" class="button" id="thisMonth2"><span data-i18n="ui_curr"></span></a>
-                    <a href="#" class="button" id="lastMonth2"><span data-i18n="ui_Uult"></span></a>
-                </p>
-                <input type="text" id="dateStart2" placeholder="" data-placeholder="ui_startTime"
-                       readonly/> -
-                <input type="text" id="dateEnd2" placeholder="" data-placeholder="ui_endTime"
-                       readonly/>
-            </div>
-            <div>
-                <label><span data-i18n="ui_timeRank"></span></label><br>
-                <select id="timeRank">
-                    <option value="" data-i18n="ui_timeRank0"></option>
-                    <option value="createASC" data-i18n="ui_timeRank1"></option>
-                    <option value="createDESC" data-i18n="ui_timeRank2"></option>
-                    <option value="planASC" data-i18n="ui_timeRank3"></option>
-                    <option value="planDESC" data-i18n="ui_timeRank4"></option>
-                    <option value="DeadlineASC" data-i18n="ui_timeRank5"></option>
-                    <option value="DeadlineDESC" data-i18n="ui_timeRank6"></option>
-                </select>
-            </div>
-            <div>
-                <label><span data-i18n="ui_taskType"></span></label><br>
-                <select id="taskType">
-                    <option value="" data-i18n="ui_All"></option>
-                    <option value="1" data-i18n="ui_xunjian"></option>
-                    <option value="3" data-i18n="ui_xiaoque"></option>
-                    <option value="5" data-i18n="ui_xiaojing"></option>
-                    <option value="6" data-i18n="ui_qiangxiu"></option>
-                </select>
-            </div>
-            <div>
-                <label><span data-i18n="ui_charger"></span></label><input id="chargeSelect" type="text"/>
-            </div>
-            <div>
-                <label><span data-i18n="ui_worker"></span></label><input id="doSelect" type="text"/>
-            </div>
-        </div>
-        <div class="btnBar row no-gutter">
-            <div class="col-33"><a href="#"
-                                   class="button button-big button-fill button-cancel close-panel"><span
-                    data-i18n="ui_cancel"></span></a>
-            </div>
-            <div class="col-33"><a href="#"
-                                   class="button button-big button-fill button-reset" data-i18n="ui_resetclear"></a>
-            </div>
-            <div class="col-33"><a href="#" class="button button-big button-fill button-success"
-                                   id="searchBtn"><span data-i18n="ui_query"></span></a></div>
-        </div>
-    </div>
-</div>
-<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
-<script src="libs/language.js"></script>
-<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
-<script src="libs/tools.js"></script>
-<script type='text/javascript' src='js/taskPostHistory.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/language.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script src="libs/tools.js"></script>
+    <script type='text/javascript' src='js/taskPostHistory.js' charset='utf-8'></script>
 </body>
 
 </html>
