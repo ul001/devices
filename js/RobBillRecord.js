@@ -259,14 +259,17 @@ function goToDetail(taskId) {
  }
 }
 
-//function goToHistoryDetail(taskId){
-//    localStorage.setItem("taskID", taskId);
-//    if (isAndroid) {
-//      android.goToIn();
-//    } else {
-//      window.location.href = "missionDetail.html";
-//    }
-//}
+function goToHistoryDetail(taskId){
+    localStorage.setItem("robTaskId", taskId);
+    localStorage.setItem("userlatitude", lat);
+    localStorage.setItem("userlongitude", lon);
+    localStorage.setItem("postTask", "true");
+    if(isAndroid){
+        android.goToInHtml("RobBillLocation.html");
+    }else{
+        window.location.href = "RobBillLocation.html";
+    }
+}
 
 //获取定位
 if (isIOS) {
