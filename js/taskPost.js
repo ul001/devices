@@ -8,7 +8,28 @@ var qiangdan = Substation.GetQueryString("type");
 if (qiangdan == "7") {
     $("#selectType").val(7);
     $(".title_color").text(Operation['ui_postRobBill']);
-    $(".qiang").hide();
+    $(".qiang").remove();
+}else{
+    $("#qiangOption").remove();
+}
+
+function listSubPeople(subId){
+    Substation.getDataByAjaxMain("/main/getDefaultInfoByfSubId",{fSubid:subId},function(data){
+        if(data.substation.defaultChargenameList!=undefined){
+            chargerUser = [];
+            $.each(data.substation.defaultChargenameList,function(){
+                chargerUser.push({userId:this.fUserid,userName:this.fUsername});
+                listPeople("charger",chargerUser);
+            });
+        }
+        if(data.substation.defaultUsernameList!=undefined){
+            workerUser = [];
+            $.each(data.substation.defaultUsernameList,function(){
+                workerUser.push({userId:this.fUserid,userName:this.fUsername});
+                listPeople("worker",workerUser);
+            });
+        }
+    });
 }
 
 //mainPage
@@ -292,10 +313,9 @@ function getPersonList(gid) {
             fCoaccountno: gid
         }, function (data) {
             if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
+                $(".personUl").show();
                 //修改单选
                 $("#selectAll").hide();
-
-                $(".personUl").show();
                 var html = "";
                 $(data.data.list).each(function () {
                     html += "<li>\n" +
@@ -374,7 +394,19 @@ function addChangeListener() {
     var thisUserid = $(this).attr("id");
     var thisUsername = $(this).attr("data-name");
     if (thisUserid != undefined) {
-        if (peopleType == "charger" || peopleType == "substation") {
+        if(peopleType=="substation"){
+            if ($(this).prop("checked")) {
+                selectUserList = [{
+                    userId: thisUserid,
+                    userName: thisUsername
+                }];
+                $("input[name='my-checkbox']").attr("checked", false);
+                $(this).prop("checked", true);
+                listSubPeople(thisUserid);
+            } else {
+                selectUserList = [];
+            }
+        }else if (peopleType == "charger") {
             if ($(this).prop("checked")) {
                 selectUserList = [{
                     userId: thisUserid,
