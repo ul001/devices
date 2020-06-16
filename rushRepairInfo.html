@@ -1,177 +1,257 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="libs/light7.min.css">
-    <link rel="stylesheet" href="libs/light7-swiper.min.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/alarmCleanInfo.css">
-</head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/alarmCleanInfo.css" />
+  </head>
 
-<body>
+  <body>
     <div class="page-group">
-        <div class="page">
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left click_btn back_btn">
-                    <span class="icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </a>
-                <h1 class="title title_color"><span data-i18n="ui_ImplementDetail"></span></h1>
-                <a class="button button-link button-nav pull-right click_btn" id="saveData" onclick="saveFormData()">
-                    <span data-i18n="ui_save"></span>
-                </a>
-            </header>
-            <div class="content">
-                <div class="list-block">
-                    <form id="form1" method="post" enctype="multipart/form-data">
-                        <ul>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_taskid"></span>：</div>
-                                        <div class="item-input">
-                                            <!--                                            <input type="text" id="taskNumber" value="" readonly>-->
-                                            <div class="item-label" id="taskNumber"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="showDiv item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_Subname"></span></div>
-                                        <div class="item-input">
-                                            <div class="item-label" id="missionName"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label" data-i18n="ui_SubVideo"></div>
-                                        <div class="item-input">
-                                            <div class="item-label" style="display:flex;">
-                                                <img src="img/video_watch.png" style="height:1.2rem;" id="jumpVideo">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_alarmTaskContent"></span>：
-                                        </div>
-                                        <div class="item-input">
-                                            <!--                                            <input type="text" id="taskNumber" value="" readonly>-->
-                                            <div class="item-label" id="taskContent"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="createTime" style="display:none;">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_createTime"></span></div>
-                                        <div class="item-input">
-                                            <input type="text" id="fCreateTime" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="align-top">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span class="blueColor"
-                                                data-i18n="ui_RectifyPhoto"></span></div>
-                                        <div class="item-input">
-                                            <div class="custom_img">
-                                                <div class="upload_img_wrap">
-                                                    <div id="imgBox"><img class="upload_img" src="img/upload_img.png" />
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    style="display: none;width: 100%;height: 100vh;position: relative;">
-                                                    <div style="display: none;" id="inputBox">
-                                                        <input type="file" name="myfiles" data-id="1" title="请选择图片"
-                                                            id="file1"
-                                                            accept="image/png,image/jpg,image/gif,image/JPEG" />
-                                                    </div>
-                                                    <input style="display:none" type="submit" id="sub" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label blueColor"><span class="blueColor"
-                                                data-i18n="ui_processExplain"></span></div>
-                                        <div class="item-input">
-                                            <input type="text" id="fSolveresult" name="fSolveResult" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label blueColor"><span class="blueColor"
-                                                data-i18n="ui_Situation"></span></div>
-                                        <div class="item-input">
-                                            <select id="fState" name="fState">
-                                                <option value="0" data-i18n="ui_defectState0"></option>
-                                                <option value="2" data-i18n="ui_defectState2"></option>
-                                                <option value="3" data-i18n="ui_defectState3"></option>
-                                                <option value="4" data-i18n="ui_defectState4"></option>
-                                                <option value="5" data-i18n="ui_defectState5"></option>
-                                                <option value="1" data-i18n="ui_defectState1"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="solvePerson" style="display:none;">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_dealPerson"></span></div>
-                                        <div class="item-input">
-                                            <input type="text" readonly id="fSolvename" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="solvePerson" style="display:none;">
-                                <div class="item-content">
-                                    <div class="item-inner">
-                                        <div class="item-title label"><span data-i18n="ui_dealTime"></span></div>
-                                        <div class="item-input">
-                                            <input type="text" readonly id="fSolvetime" value="">
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </form>
-                </div>
-            </div>
+      <div class="page">
+        <header class="bar bar-nav bar_color">
+          <a class="button button-link button-nav pull-left click_btn back_btn">
+            <span class="icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color">
+            <span data-i18n="ui_ImplementDetail"></span>
+          </h1>
+          <a
+            class="button button-link button-nav pull-right click_btn"
+            id="saveData"
+            onclick="saveFormData()"
+          >
+            <span data-i18n="ui_save"></span>
+          </a>
+        </header>
+        <div class="content">
+          <div class="list-block">
+            <form id="form1" method="post" enctype="multipart/form-data">
+              <ul>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span data-i18n="ui_taskid"></span>：
+                      </div>
+                      <div class="item-input">
+                        <!--                                            <input type="text" id="taskNumber" value="" readonly>-->
+                        <div class="item-label" id="taskNumber"></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="showDiv item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span data-i18n="ui_Subname"></span>
+                      </div>
+                      <div class="item-input">
+                        <div class="item-label" id="missionName"></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div
+                        class="item-title label"
+                        data-i18n="ui_SubVideo"
+                      ></div>
+                      <div class="item-input">
+                        <div class="item-label" style="display:flex;">
+                          <img
+                            src="img/video_watch.png"
+                            style="height:1.2rem;"
+                            id="jumpVideo"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span data-i18n="ui_alarmTaskContent"></span>：
+                      </div>
+                      <div class="item-input">
+                        <!--                                            <input type="text" id="taskNumber" value="" readonly>-->
+                        <div class="item-label" id="taskContent"></div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="createTime" style="display:none;">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span data-i18n="ui_createTime"></span>
+                      </div>
+                      <div class="item-input">
+                        <input type="text" id="fCreateTime" value="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="align-top">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span
+                          class="blueColor"
+                          data-i18n="ui_RectifyPhoto"
+                        ></span>
+                      </div>
+                      <div class="item-input">
+                        <div class="custom_img">
+                          <div class="upload_img_wrap">
+                            <div id="imgBox">
+                              <img
+                                class="upload_img"
+                                src="img/upload_img.png"
+                              />
+                            </div>
+                          </div>
+                          <div
+                            style="display: none;width: 100%;height: 100vh;position: relative;"
+                          >
+                            <div style="display: none;" id="inputBox">
+                              <input
+                                type="file"
+                                name="myfiles"
+                                data-id="1"
+                                title="请选择图片"
+                                id="file1"
+                                accept="image/png,image/jpg,image/gif,image/JPEG"
+                              />
+                            </div>
+                            <input
+                              style="display:none"
+                              type="submit"
+                              id="sub"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label blueColor">
+                        <span
+                          class="blueColor"
+                          data-i18n="ui_processExplain"
+                        ></span>
+                      </div>
+                      <div class="item-input">
+                        <input
+                          type="text"
+                          id="fSolveresult"
+                          name="fSolveResult"
+                          value=""
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label blueColor">
+                        <span class="blueColor" data-i18n="ui_Situation"></span>
+                      </div>
+                      <div class="item-input">
+                        <select id="fState" name="fState">
+                          <option
+                            value="0"
+                            data-i18n="ui_defectState0"
+                          ></option>
+                          <option
+                            value="2"
+                            data-i18n="ui_defectState2"
+                          ></option>
+                          <option
+                            value="3"
+                            data-i18n="ui_defectState3"
+                          ></option>
+                          <option
+                            value="4"
+                            data-i18n="ui_defectState4"
+                          ></option>
+                          <option
+                            value="5"
+                            data-i18n="ui_defectState5"
+                          ></option>
+                          <option
+                            value="1"
+                            data-i18n="ui_defectState1"
+                          ></option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="solvePerson" style="display:none;">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span data-i18n="ui_dealPerson"></span>
+                      </div>
+                      <div class="item-input">
+                        <input type="text" readonly id="fSolvename" value="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="solvePerson" style="display:none;">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span data-i18n="ui_dealTime"></span>
+                      </div>
+                      <div class="item-input">
+                        <input type="text" readonly id="fSolvetime" value="" />
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script
+      type="text/javascript"
+      src="libs/jquery-1.12.4.min.js"
+      charset="utf-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="libs/light7.min.js"
+      charset="utf-8"
+    ></script>
     <script src="libs/language.js"></script>
-    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script
+      type="text/javascript"
+      src="libs/light7-swiper.min.js"
+      charset="utf-8"
+    ></script>
     <script src="libs/tools.js"></script>
     <script src="js/rushRepairInfo.js"></script>
-</body>
-
+  </body>
 </html>
