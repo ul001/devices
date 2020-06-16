@@ -22,13 +22,11 @@
     border-radius: 0.8rem;
     padding: 0.2rem;
     /* border: 1px solid #01ADA8; */
-
 }
 
 .line {
     border: #F2A515;
 }
-
 
 #distanceFrom {
     position: fixed;
