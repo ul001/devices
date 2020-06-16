@@ -263,7 +263,7 @@ function getNetData() {
                 var userList = data.orderTaskDetail.userids;
                 subDetail = data.orderTaskDetail;
                 var strVar;
-                if (userList.length > 0) {
+                if (userList && userList.length > 0) {
                     var namelist = [];
                     $.each(userList, function (i, value) {
                         namelist.push(value.userName);
@@ -328,14 +328,16 @@ function getNetData() {
                 subLon = subDetail.fLongitude;
                 loadScript();
                 //判断按钮显隐
-                if (userList.length > 0) {
+                if (userList && userList.length > 0) {
                     $(".popBottomBtn").hide();
                 } else if (isOwnPostTask == "true") {
                     $(".popBottomBtn").hide();
                 } else {
                     $(".popBottomBtn").show();
-                }
 
+                }
+                localStorage.removeItem("postTask");
+                // localStorage.setItem("postTask", "false");
                 //跳转视频
                 $("#jumpVideo").click(function () {
                     if (isAndroid) {
