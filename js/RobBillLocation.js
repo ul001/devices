@@ -10,6 +10,7 @@ $(".click_btn").click(function () {
     }
 });
 
+
 //选人
 var peopleType = "";
 var subList = [];
@@ -17,13 +18,19 @@ var selectUserList = [];
 var workerUser = [];
 
 //巡检的变电所id
-var missionsubid = "10100002";
+var missionsubid = "";
 // var missionsubname = "X变电所";
 var subDetail;
 var taskid = localStorage.getItem("robTaskId");
 if (!taskid) {
     taskid = 967;
 }
+//是否是我发布的
+var isOwnPostTask = localStorage.getItem("postTask");
+//先隐藏
+$(".popBottomBtn").hide();
+
+
 var selectSubid = localStorage.getItem("fSubid");
 // var subName = "";
 var lng = 0;
@@ -253,8 +260,46 @@ function getNetData() {
         "fTaskid=" + taskid,
         function (data) {
             if (data.hasOwnProperty("orderTaskDetail")) {
+                var userList = data.orderTaskDetail.userids;
                 subDetail = data.orderTaskDetail;
-                strVar = `<p class="subName limit-length">${subDetail.fSubName}</p>
+                var strVar;
+                if (userList.length > 0) {
+                    var namelist = [];
+                    $.each(userList, function (i, value) {
+                        namelist.push(value.userName);
+                    });
+                    var showUsers = namelist.join(",");
+                    strVar = `<p class="subName limit-length">${subDetail.fSubName}</p>
+                        <p class="missionNo row" style="color:#ADB2C1;">
+                            <span class="col-85" style="margin-left:0rem;">${
+                              Operation["ui_RobTaskNo"]
+                            }${subDetail.fTasknumber}</span>
+                            <img class="col-15" src="img/video_watch.png" style="height: 0.9rem;width: 1.5rem;"
+                                id="jumpVideo">
+                        </p>
+                        <p class="missionList">${
+                          Operation["ui_RobTaskInitiator"]
+                        }${subDetail.fTaskcreateusername}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobReleasetime"]
+                        }${subDetail.fTaskcreatedate}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobTaskContent"]
+                        }${subDetail.fTaskcontent}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobPlanStartTime"]
+                        }${subDetail.fStartdate}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobPlanDeadlineTime"]
+                        }${subDetail.fDeadlinedate}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobPrincipal"]
+                        }${subDetail.fTaskchargername}</p>
+                        <p class="missionList">${
+                          Operation["ui_RobExecutor"]
+                        }${showUsers}</p>`;
+                } else {
+                    strVar = `<p class="subName limit-length">${subDetail.fSubName}</p>
                         <p class="missionNo row" style="color:#ADB2C1;">
                             <span class="col-85" style="margin-left:0rem;">${
                               Operation["ui_RobTaskNo"]
@@ -277,10 +322,19 @@ function getNetData() {
                         <p class="missionList">${
                           Operation["ui_RobPlanDeadlineTime"]
                         }${subDetail.fDeadlinedate}</p>`;
+                }
                 $("#taskDetail").html(strVar);
                 subLat = subDetail.fLatitude;
                 subLon = subDetail.fLongitude;
                 loadScript();
+                //判断按钮显隐
+                if (userList.length > 0) {
+                    $(".popBottomBtn").hide();
+                } else if (isOwnPostTask == "true") {
+                    $(".popBottomBtn").hide();
+                } else {
+                    $(".popBottomBtn").show();
+                }
 
                 //跳转视频
                 $("#jumpVideo").click(function () {
