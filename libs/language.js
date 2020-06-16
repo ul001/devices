@@ -117,7 +117,7 @@ function getZhLanguage() {
     ui_executionprompt: "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
     //报警
     ui_Alarm: "报警",
-
+    ui_TaskPostRecord: "任务发布记录",
     //patrolContent
     ui_Subinspection: "变电所巡检",
     ui_selectSub: "选择设备分组",
@@ -394,6 +394,8 @@ function getZhLanguage() {
     ui_postDefectClean: "发布消缺任务",
     //抢单
     ui_noRobBill: "未抢单",
+    ui_MyRobBill: "我的抢单",
+    ui_MySendRob: "我发布的",
     ui_hadRobBill: "已抢单",
     //任务列表筛选
     ui_postTime: "发布时间",
@@ -828,6 +830,7 @@ function getEnLanguage() {
     ui_subscribe: "Subscribe",
     ui_successfully: "Successfully",
     ui_identify: "Identify standard",
+    ui_TaskPostRecord: "任务发布记录",
     //报警详情页
     ui_happenTime: "HappenTime:",
     ui_alarmDetail: "Alarm details",
@@ -951,6 +954,8 @@ function getEnLanguage() {
     ui_postDefectClean: "Post defectClean tasks",
     //抢单
     ui_noRobBill: "Unsold",
+    ui_MyRobBill: "MyBills",
+    ui_MySendRob: "MyPubilsh",
     ui_hadRobBill: "Orders grabbed",
     //任务列表筛选
     ui_postTime: "release time",
