@@ -109,6 +109,9 @@ Substation.getDataByAjax(url, problemParam, function (data) {
           }
         } else if (isAndroid) {
           menuId = android.getMenuId();
+          if(menuId==undefined || menuId==null){
+            menuId = "342";
+          }
         }
       } catch (e) {menuId = "2391"}
       Substation.getDataByAjax("/getSubinfoVoByPid", {
