@@ -9,6 +9,7 @@ if (qiangdan == "7") {
     $("#selectType").val(7);
     $(".title_color").text(Operation['ui_postRobBill']);
     $(".qiang").remove();
+    $("#postHistory").remove();
 }else{
     $("#qiangOption").remove();
 }
