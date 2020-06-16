@@ -69,6 +69,9 @@ function addPushButton(param) {
       menuId = storage.fmenuId;
     } else if (isAndroid) {
       menuId = android.getMenuId();
+      if(menuId==undefined || menuId==null){
+        menuId = "342";
+      }
     }
   } catch (e) {menuId="342";}
   Substation.getDataByAjaxNoLoading(
