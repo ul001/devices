@@ -20,6 +20,25 @@ var chargerUser = [];
 var workerUser = [];
 $(".peopleList").hide();
 
+listSubPeople();
+
+function listSubPeople(){
+    Substation.getDataByAjaxMain("/main/getDefaultInfoByfSubId",{fSubid:selectSubId},function(data){
+        if(data.substation.defaultChargenameList!=undefined){
+            $.each(data.substation.defaultChargenameList,function(){
+                chargerUser.push({userId:this.fUserid,userName:this.fUsername});
+                listPeople("charger",chargerUser);
+            });
+        }
+        if(data.substation.defaultUsernameList!=undefined){
+            $.each(data.substation.defaultUsernameList,function(){
+                workerUser.push({userId:this.fUserid,userName:this.fUsername});
+                listPeople("worker",workerUser);
+            });
+        }
+    });
+}
+
 //mainPage
 function listPeople(thisType, userList) {
     var html = "";
