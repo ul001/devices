@@ -28,7 +28,7 @@ window.addEventListener(
 );
 
 $(".buttons-tab .tab-link").click(function () {
- typeId = $(".tab-link.button.active").attr("name");
+ typeId = $(this).attr("name");
  getFirstPage(typeId);
 });
 
@@ -77,88 +77,139 @@ $(document).on("refresh", ".pull-to-refresh-content", function (e) {
 //初始化页面接口
 function addItems(number, clickNum) {
  var text = "";
- var url = "/getUnGrabbedOrderTaskList";
  var searchStr = $("#searchDaiban").val();
  if (!searchStr) {
      searchStr = "";
  }
+ var url = "";
+  var params = {};
  if (clickNum == 1) {
-     var params = {
-         pageNo: pageNum,
-         pageSize: number,
-         userlongitude: lon,
-         userlatitude: lat
-     };
-     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-             var listDom = "#listtab" + clickNum;
-             if (pageNum == 1) {
-                 $(listDom).empty();
-             }
-             var thisList = data.orderList;
-             if (thisList.length > 0) {
-                 var html = "";
-                 $(thisList).each(function () {
-                     var distance = this.userDistance;
-                     if (distance == undefined) {
-                         distance = "";
-                     } else {
-                         distance = Number(distance);
-                         if (distance >= 1000) {
-                             distance = (distance / 1000).toFixed(2) + "km";
-                         } else {
-                             distance = distance.toFixed(2) + "m";
-                         }
-                     }
-                     html += `<div class="card" onclick="goToDetail('${this.fTaskid}')">
-                                 <div class="card-content">
-                                     <div class="card-content-inner">
-                                         <div class="row" style="margin-left:0;">
-                                            <p class="subName limit-length col-85">${this.fSubName}</p>
-                                            <p class="col-15" style="text-align:right;"><span class="showType">${Operation['ui_RobBill']}</span></p>
-                                         </div>
-                                         <p class="row"><span class="col-66"><span style="color:gray;">${Operation['ui_TaskContent']}</span>${this.fTaskcontent}</span>
-                                             <span class="col-33"
-                                                   style="color:#ADB2C1;text-align: right;">${distance}</span></p>
-                                         <p class="row"><span class="col-50 showTime">${Operation['ui_StarPlanTime']+this.fStartdate.substring(0,10)}</span>
-                                             <span class="col-50 showTime">${Operation['ui_endPlanTime']+this.fDeadlinedate.substring(0,10)}</span></p>
-                                     </div>
-                                 </div>
-                             </div>`;
-                 });
-                 $(listDom).html(html);
-                 pageNum++;
-             } else {
-                 $.detachInfiniteScroll($(".infinite-scroll"));
-                 $(".infinite-scroll-preloader").html(
-                     "<span class='bottomTip'>--" +
-                     Operation["ui_nomoredata"] +
-                     "--</span>"
-                 );
-                 return;
-             }
-             if (thisList.length < itemsPerLoad) {
-                 $.detachInfiniteScroll($(".infinite-scroll"));
-                 $(".infinite-scroll-preloader").html(
-                     "<span class='bottomTip'>--" +
-                     Operation["ui_nomoredata"] +
-                     "--</span>"
-                 );
-                 return;
-             }
-         },
-         function (errorCode) {
-             if (errorCode == 0) {
-                 $.detachInfiniteScroll($(".infinite-scroll"));
-                 $(".infinite-scroll-preloader").html(
-                     "--" + Operation["ui_neterror"] + "--"
-                 );
-             } else {
-                 $.detachInfiniteScroll($(".infinite-scroll"));
-                 $(".infinite-scroll-preloader").html("");
-             }
-             return;
-         }
-     );
+     url = "/getUnGrabbedOrderTaskList";
+     params = {pageNo: pageNum,
+               pageSize: number,
+               userlongitude: lon,
+               userlatitude: lat};
+ }else if(clickNum == 2){
+     url = "/getGrabbedOrderTaskList";
+      params = {pageNo: pageNum,
+                pageSize: number,
+                userlongitude: lon,
+                userlatitude: lat};
+ }else if(clickNum==3){
+    url = "/getTaskListCreatedByMe";
+      params = {pageNo: pageNum,
+                pageSize: number,
+                fTasktypeid:7};
+ }
+ if(clickNum==1||clickNum==2){
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
+              var listDom = "#listtab" + clickNum;
+              if (pageNum == 1) {
+                  $(listDom).empty();
+              }
+              var thisList = data.orderList;
+              if (thisList.length > 0) {
+                  var html = "";
+                  $(thisList).each(function () {
+                      var distance = this.userDistance;
+                      if (distance == undefined) {
+                          distance = "";
+                      } else {
+                          distance = Number(distance);
+                          if (distance >= 1000) {
+                              distance = (distance / 1000).toFixed(2) + "km";
+                          } else {
+                              distance = distance.toFixed(2) + "m";
+                          }
+                      }
+                      html += `<div class="card" onclick="goToDetail('${this.fTaskid}')">
+                                  <div class="card-content">
+                                      <div class="card-content-inner">
+                                          <div class="row" style="margin-left:0;">
+                                             <p class="subName limit-length col-80">${this.fSubName}</p>
+                                             <p class="col-20" style="text-align:right;"><span class="showType">${Operation['ui_RobBill']}</span></p>
+                                          </div>
+                                          <p class="row"><span class="col-66"><span style="color:gray;">${Operation['ui_TaskContent']}</span>${this.fTaskcontent}</span>
+                                              <span class="col-33"
+                                                    style="color:#ADB2C1;text-align: right;">${distance}</span></p>
+                                          <p class="row"><span class="col-50 showTime">${Operation['ui_StarPlanTime']+this.fStartdate.substring(0,10)}</span>
+                                              <span class="col-50 showTime">${Operation['ui_endPlanTime']+this.fDeadlinedate.substring(0,10)}</span></p>
+                                      </div>
+                                  </div>
+                              </div>`;
+                  });
+                  $(listDom).html(html);
+                  pageNum++;
+              } else {
+                  $.detachInfiniteScroll($(".infinite-scroll"));
+                  $(".infinite-scroll-preloader").html(
+                      "<span class='bottomTip'>--" +
+                      Operation["ui_nomoredata"] +
+                      "--</span>"
+                  );
+                  return;
+              }
+              if (thisList.length < itemsPerLoad) {
+                  $.detachInfiniteScroll($(".infinite-scroll"));
+                  $(".infinite-scroll-preloader").html(
+                      "<span class='bottomTip'>--" +
+                      Operation["ui_nomoredata"] +
+                      "--</span>"
+                  );
+                  return;
+              }
+          },
+          function (errorCode) {
+              if (errorCode == 0) {
+                  $.detachInfiniteScroll($(".infinite-scroll"));
+                  $(".infinite-scroll-preloader").html(
+                      "--" + Operation["ui_neterror"] + "--"
+                  );
+              } else {
+                  $.detachInfiniteScroll($(".infinite-scroll"));
+                  $(".infinite-scroll-preloader").html("");
+              }
+              return;
+          }
+      );
+ }else if(clickNum==3){
+    Substation.postDataByAjaxNoLoading(url, params, function (data) {
+        if (data.pageInfo.list.length > 0) {
+            var listDom = "#listtab" + clickNum;
+            if (pageNum == 1) {
+                $(listDom).empty();
+            }
+            var html = '';
+            $(data.pageInfo.list).each(function () {
+                  html += `<div class="card" onclick="goToHistoryDetail('${this.fTaskid}')">
+                              <div class="card-content">
+                                  <div class="card-content-inner">
+                                      <div class="row" style="margin-left:0;">
+                                         <p class="subName limit-length col-80">${this.fSubName}</p>
+                                         <p class="col-20" style="text-align:right;"><span class="showType">${Operation['ui_RobBill']}</span></p>
+                                      </div>
+                                      <p class="row"><span class="col-66"><span style="color:gray;">${Operation['ui_TaskContent']}</span>${this.fTaskcontent}</span>
+                                          <span class="col-33"
+                                                style="color:#ADB2C1;text-align: right;"></span></p>
+                                      <p class="row"><span class="col-50 showTime">${Operation['ui_StarPlanTime']+this.fStartdate.substring(0,10)}</span>
+                                          <span class="col-50 showTime">${Operation['ui_endPlanTime']+this.fDeadlinedate.substring(0,10)}</span></p>
+                                  </div>
+                              </div>
+                          </div>`;
+            });
+            $(listDom).append(html);
+            pageNum++;
+        }else {
+            $.detachInfiniteScroll($('.infinite-scroll'));
+            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
+            return;
+        }
+        if (data.pageInfo.list.length < itemsPerLoad) {
+            $.detachInfiniteScroll($('.infinite-scroll'));
+            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
+            return;
+        }
+    });
  }
 }
 
@@ -207,6 +258,15 @@ function goToDetail(taskId) {
     window.location.href = "RobBillLocation.html";
  }
 }
+
+//function goToHistoryDetail(taskId){
+//    localStorage.setItem("taskID", taskId);
+//    if (isAndroid) {
+//      android.goToIn();
+//    } else {
+//      window.location.href = "missionDetail.html";
+//    }
+//}
 
 //获取定位
 if (isIOS) {
