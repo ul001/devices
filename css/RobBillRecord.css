@@ -91,6 +91,12 @@ i.icon.icon-contactphone {
     left: 6px;
 }
 
+i.icon.icon-Refresh {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/refresh.png);
+}
+
 /*
 .canBoom{
     background:url(../img/i-commitAll.png) right 1rem top no-repeat;
