@@ -3,10 +3,10 @@ var selectSubId = localStorage.getItem("fSubid");
 var selectAlarmId = localStorage.getItem("alarmEventlogid");
 var selectProblemId = localStorage.getItem("problemId");
 var isProblem = 0;
-if(selectProblemId!=undefined){
+if(selectProblemId!=undefined && selectProblemId!=null){
     isProblem = 1;
     $(".title.title_color").text(Operation['ui_defectPost']);
-}else if(selectAlarmId!=undefined){
+}else if(selectAlarmId!=undefined && selectAlarmId!=null){
     isProblem = 0;
     $(".title.title_color").text(Operation['ui_alarmCleanPost']);
 }
@@ -206,7 +206,7 @@ function postTask() {
         subIds: selectSubId,
 //        fAlarmeventlogid: selectAlarmId
     };
-    if(isProblem = 1){
+    if(isProblem == 1){
         params['fTasktypeid'] = 3;
         params['fDeviceproblemid'] = selectProblemId;
     }else{
