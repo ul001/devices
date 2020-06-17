@@ -53,6 +53,9 @@ var subLat;
 //是否执行人
 var temp = false;
 var fTaskandalarmeventid = "";
+//判断后续
+var isChangeReturnCount = 0;
+var userList = [];
 
 function getNetData() {
     Substation.getDataByAjax("/selectTaskByTaskId", "taskId=" + taskID, function (
@@ -63,7 +66,7 @@ function getNetData() {
         }
 
         taskInfo = data.taskInfo;
-        var userList = data.taskUserList;
+        userList = data.taskUserList;
         if (taskInfo != null && taskInfo != undefined) {
             subLon = taskInfo.fLongitude;
             subLat = taskInfo.fLatitude;
@@ -111,8 +114,7 @@ function getNetData() {
             } else {
                 $("#TotalDefect").html("-");
             }
-            //判断后续
-            var isChangeReturnCount = 0;
+
             if (userList != undefined && userList.length > 0) {
                 $(userList).each(function () {
                     if (this.fUserid == loginUserid) {
@@ -153,7 +155,7 @@ function getNetData() {
                         '                                    <div class="item-inner">';
                     text +=
                         '                                        <div class="item-title label row no-gutter" style="display:flex;align-items:center;">' +
-                        '<div class="limit-length" style="max-width:80%;">'+this.userName +'</div>'+
+                        '<div class="limit-length" style="max-width:80%;">' + this.userName + '</div>' +
                         "<img class='callPhone' onclick=\"callPhone('" + this.fUserphone + "')\" style='margin-left:0.1rem;width:1rem;' src='img/call.png'>" +
                         "</div>";
                     text +=
@@ -440,6 +442,10 @@ function getLocAndCheckIn(loc) {
 //执行任务按钮事件
 $(".doDetail").click(function () {
     if (!upLoadClicktag) {
+        return;
+    }
+    if (!temp && !(isChangeReturnCount == userList.length)) {
+        $.toast("执行人尚未提交任务");
         return;
     }
     upLoadClicktag = false;

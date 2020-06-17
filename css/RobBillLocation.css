@@ -65,7 +65,7 @@
         margin-left: 2.5%;
         height: 1.8rem;
         line-height: 1.8rem;
-        border:0;
+        border: 0;
     }
 
     #cancel {
@@ -93,6 +93,13 @@
     }
 
     .popBottomBtn {
+        position: absolute;
+        bottom: 1rem;
+        margin: 0.4rem;
+        width: 95%;
+    }
+
+    .popBottomBtn2 {
         position: absolute;
         bottom: 1rem;
         margin: 0.4rem;
