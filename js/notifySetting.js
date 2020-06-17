@@ -11,11 +11,11 @@ try{
         isOpenBoxInApp = android.getSPItem("showMsgInApp");
     }
 }catch(e){
-    isOpenBoxInApp = "true";
+    isOpenBoxInApp = "false";
 };
-$("#isShowInApp").prop("checked",true);
-if (isOpenBoxInApp == 'false') {
-    $("#isShowInApp").removeAttr("checked");
+$("#isShowInApp").removeAttr("checked");
+if (isOpenBoxInApp == 'true') {
+    $("#isShowInApp").prop("checked",true);
 }
 
 Substation.getDataByAjax(
