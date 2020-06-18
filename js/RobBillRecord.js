@@ -7,122 +7,143 @@ var pageNum = 1;
 var typeId = 1;
 
 $(".back_btn").click(function () {
- if (isIOS) {
-     localStorage.removeItem("missionTypeid");
-     localStorage.removeItem("taskID");
-     window.webkit.messageHandlers.goBackiOS.postMessage("");
- } else {
-     android.goBack();
- }
+    if (isIOS) {
+        localStorage.removeItem("missionTypeid");
+        localStorage.removeItem("taskID");
+        window.webkit.messageHandlers.goBackiOS.postMessage("");
+    } else {
+        android.goBack();
+    }
 });
 
 window.addEventListener(
- "pageshow",
- function (event) {
-     if (localStorage.getItem("need-refresh") == "true") {
-         localStorage.removeItem("need-refresh");
-         location.reload();
-     }
- },
- false
+    "pageshow",
+    function (event) {
+        if (localStorage.getItem("need-refresh") == "true") {
+            localStorage.removeItem("need-refresh");
+            window.location.reload();
+        }
+    },
+    false
 );
 
+// window.addEventListener("pageshow", function (e) {
+//     // ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
+//     var u = navigator.userAgent,
+//         app = navigator.appVersion;
+//     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+//     if (e.persisted && isIOS) {
+//         var needUpdate = localStorage.getItem("need-update");
+//         if (needUpdate) {
+//             localStorage.removeItem("need-update");
+//             window.location.reload();
+//         }
+//         window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
+//     }
+// });
+
 $(".buttons-tab .tab-link").click(function () {
- typeId = $(this).attr("name");
- getFirstPage(typeId);
+    typeId = $(this).attr("name");
+    getFirstPage(typeId);
 });
 
 //上拉加载
 $(document).on("infinite", ".infinite-scroll", function () {
- // 如果正在加载，则退出
- if (loading) return;
+    // 如果正在加载，则退出
+    if (loading) return;
 
- // 设置flag
- loading = true;
+    // 设置flag
+    loading = true;
 
- setTimeout(function () {
-     loading = false;
-     var tabName = $(".tab-link.button.active").attr("name");
-     addItems(itemsPerLoad, tabName);
-     // $.pullToRefreshDone(".pull-to-refresh-content");
- }, 1000);
+    setTimeout(function () {
+        loading = false;
+        var tabName = $(".tab-link.button.active").attr("name");
+        addItems(itemsPerLoad, tabName);
+        // $.pullToRefreshDone(".pull-to-refresh-content");
+    }, 1000);
 });
 
 function getFirstPage(clickNum) {
- var num = "#tab" + clickNum;
- var list = "#listtab" + clickNum;
- $(list).empty();
- $(num + " .infinite-scroll-preloader").html(
-     '<div class="preloader"></div>'
- );
- pageNum = 1;
- addItems(itemsPerLoad, clickNum);
- // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
- loading = false;
- // $.initPullToRefresh($('.pull-to-refresh-layer'));
- $.attachInfiniteScroll($(".infinite-scroll"));
+    var num = "#tab" + clickNum;
+    var list = "#listtab" + clickNum;
+    $(list).empty();
+    $(num + " .infinite-scroll-preloader").html(
+        '<div class="preloader"></div>'
+    );
+    pageNum = 1;
+    addItems(itemsPerLoad, clickNum);
+    // $('.infinite-scroll-preloader').html('<div class="list-container"></div>');
+    loading = false;
+    // $.initPullToRefresh($('.pull-to-refresh-layer'));
+    $.attachInfiniteScroll($(".infinite-scroll"));
 }
 
 //下拉刷新
 $(document).on("refresh", ".pull-to-refresh-content", function (e) {
- setTimeout(function () {
-     pageNum = 1;
-     var tabName = $(".tab-link.button.active").attr("name");
-     getFirstPage(tabName);
-     // done
-     $.pullToRefreshDone(".pull-to-refresh-content");
- }, 2000);
+    setTimeout(function () {
+        pageNum = 1;
+        var tabName = $(".tab-link.button.active").attr("name");
+        getFirstPage(tabName);
+        // done
+        $.pullToRefreshDone(".pull-to-refresh-content");
+    }, 2000);
 });
 
 //初始化页面接口
 function addItems(number, clickNum) {
- var text = "";
- var searchStr = $("#searchDaiban").val();
- if (!searchStr) {
-     searchStr = "";
- }
- var url = "";
-  var params = {};
- if (clickNum == 1) {
-     url = "/getUnGrabbedOrderTaskList";
-     params = {pageNo: pageNum,
-               pageSize: number,
-               userlongitude: lon,
-               userlatitude: lat};
- }else if(clickNum == 2){
-     url = "/getGrabbedOrderTaskList";
-      params = {pageNo: pageNum,
-                pageSize: number,
-                userlongitude: lon,
-                userlatitude: lat};
- }else if(clickNum==3){
-    url = "/getTaskListCreatedByMe";
-      params = {pageNo: pageNum,
-                pageSize: number,
-                fTasktypeid:7};
- }
- if(clickNum==1||clickNum==2){
-    Substation.getDataByAjaxNoLoading(url, params, function (data) {
-              var listDom = "#listtab" + clickNum;
-              if (pageNum == 1) {
-                  $(listDom).empty();
-              }
-              var thisList = data.orderList;
-              if (thisList.length > 0) {
-                  var html = "";
-                  $(thisList).each(function () {
-                      var distance = this.userDistance;
-                      if (distance == undefined) {
-                          distance = "";
-                      } else {
-                          distance = Number(distance);
-                          if (distance >= 1000) {
-                              distance = (distance / 1000).toFixed(2) + "km";
-                          } else {
-                              distance = distance.toFixed(2) + "m";
-                          }
-                      }
-                      html += `<div class="card" onclick="goToDetail('${this.fTaskid}')">
+    var text = "";
+    var searchStr = $("#searchDaiban").val();
+    if (!searchStr) {
+        searchStr = "";
+    }
+    var url = "";
+    var params = {};
+    if (clickNum == 1) {
+        url = "/getUnGrabbedOrderTaskList";
+        params = {
+            pageNo: pageNum,
+            pageSize: number,
+            userlongitude: lon,
+            userlatitude: lat
+        };
+    } else if (clickNum == 2) {
+        url = "/getGrabbedOrderTaskList";
+        params = {
+            pageNo: pageNum,
+            pageSize: number,
+            userlongitude: lon,
+            userlatitude: lat
+        };
+    } else if (clickNum == 3) {
+        url = "/getTaskListCreatedByMe";
+        params = {
+            pageNo: pageNum,
+            pageSize: number,
+            fTasktypeid: 7
+        };
+    }
+    if (clickNum == 1 || clickNum == 2) {
+        Substation.getDataByAjaxNoLoading(url, params, function (data) {
+                var listDom = "#listtab" + clickNum;
+                if (pageNum == 1) {
+                    $(listDom).empty();
+                }
+                var thisList = data.orderList;
+                if (thisList.length > 0) {
+                    var html = "";
+                    $(thisList).each(function () {
+                        var distance = this.userDistance;
+                        if (distance == undefined) {
+                            distance = "";
+                        } else {
+                            distance = Number(distance);
+                            if (distance >= 1000) {
+                                distance = (distance / 1000).toFixed(2) + "km";
+                            } else {
+                                distance = distance.toFixed(2) + "m";
+                            }
+                        }
+                        html += `<div class="card" onclick="goToDetail('${this.fTaskid}')">
                                   <div class="card-content">
                                       <div class="card-content-inner">
                                           <div class="row" style="margin-left:0;">
@@ -137,51 +158,51 @@ function addItems(number, clickNum) {
                                       </div>
                                   </div>
                               </div>`;
-                  });
-                  $(listDom).html(html);
-                  pageNum++;
-              } else {
-                  $.detachInfiniteScroll($(".infinite-scroll"));
-                  $(".infinite-scroll-preloader").html(
-                      "<span class='bottomTip'>--" +
-                      Operation["ui_nomoredata"] +
-                      "--</span>"
-                  );
-                  return;
-              }
-              if (thisList.length < itemsPerLoad) {
-                  $.detachInfiniteScroll($(".infinite-scroll"));
-                  $(".infinite-scroll-preloader").html(
-                      "<span class='bottomTip'>--" +
-                      Operation["ui_nomoredata"] +
-                      "--</span>"
-                  );
-                  return;
-              }
-          },
-          function (errorCode) {
-              if (errorCode == 0) {
-                  $.detachInfiniteScroll($(".infinite-scroll"));
-                  $(".infinite-scroll-preloader").html(
-                      "--" + Operation["ui_neterror"] + "--"
-                  );
-              } else {
-                  $.detachInfiniteScroll($(".infinite-scroll"));
-                  $(".infinite-scroll-preloader").html("");
-              }
-              return;
-          }
-      );
- }else if(clickNum==3){
-    Substation.postDataByAjaxNoLoading(url, params, function (data) {
-        if (data.pageInfo.list.length > 0) {
-            var listDom = "#listtab" + clickNum;
-            if (pageNum == 1) {
-                $(listDom).empty();
+                    });
+                    $(listDom).html(html);
+                    pageNum++;
+                } else {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html(
+                        "<span class='bottomTip'>--" +
+                        Operation["ui_nomoredata"] +
+                        "--</span>"
+                    );
+                    return;
+                }
+                if (thisList.length < itemsPerLoad) {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html(
+                        "<span class='bottomTip'>--" +
+                        Operation["ui_nomoredata"] +
+                        "--</span>"
+                    );
+                    return;
+                }
+            },
+            function (errorCode) {
+                if (errorCode == 0) {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html(
+                        "--" + Operation["ui_neterror"] + "--"
+                    );
+                } else {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html("");
+                }
+                return;
             }
-            var html = '';
-            $(data.pageInfo.list).each(function () {
-                  html += `<div class="card" onclick="goToHistoryDetail('${this.fTaskid}')">
+        );
+    } else if (clickNum == 3) {
+        Substation.postDataByAjaxNoLoading(url, params, function (data) {
+            if (data.pageInfo.list.length > 0) {
+                var listDom = "#listtab" + clickNum;
+                if (pageNum == 1) {
+                    $(listDom).empty();
+                }
+                var html = '';
+                $(data.pageInfo.list).each(function () {
+                    html += `<div class="card" onclick="goToHistoryDetail('${this.fTaskid}')">
                               <div class="card-content">
                                   <div class="card-content-inner">
                                       <div class="row" style="margin-left:0;">
@@ -196,41 +217,41 @@ function addItems(number, clickNum) {
                                   </div>
                               </div>
                           </div>`;
-            });
-            $(listDom).append(html);
-            pageNum++;
-        }else {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
-            return;
-        }
-        if (data.pageInfo.list.length < itemsPerLoad) {
-            $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
-            return;
-        }
-    });
- }
+                });
+                $(listDom).append(html);
+                pageNum++;
+            } else {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
+                return;
+            }
+            if (data.pageInfo.list.length < itemsPerLoad) {
+                $.detachInfiniteScroll($('.infinite-scroll'));
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
+                return;
+            }
+        });
+    }
 }
 
 $("#searchDaiban").bind("keydown", function (event) {
- if (event.keyCode == 13) {
-     getFirstPage(tabName);
-     document.activeElement.blur();
- }
+    if (event.keyCode == 13) {
+        getFirstPage(tabName);
+        document.activeElement.blur();
+    }
 });
 
 $(".searchbar-cancel").click(function () {
- $("#searchDaiban").val("");
- getFirstPage(tabName);
+    $("#searchDaiban").val("");
+    getFirstPage(tabName);
 });
 
 $(".overButton").click(function () {
- if(isAndroid){
-    android.goToInHtml("taskPost.html?type=7");
- }else{
-    window.location.href = "taskPost.html?type=7";
- }
+    if (isAndroid) {
+        android.goToInHtml("taskPost.html?type=7");
+    } else {
+        window.location.href = "taskPost.html?type=7";
+    }
 });
 
 //记住状态
@@ -249,24 +270,24 @@ $(".overButton").click(function () {
 //    console.log(fDistance);
 
 function goToDetail(taskId) {
- localStorage.setItem("robTaskId", taskId);
- localStorage.setItem("userlatitude", lat);
- localStorage.setItem("userlongitude", lon);
- if(isAndroid){
-    android.goToInHtml("RobBillLocation.html");
- }else{
-    window.location.href = "RobBillLocation.html";
- }
+    localStorage.setItem("robTaskId", taskId);
+    localStorage.setItem("userlatitude", lat);
+    localStorage.setItem("userlongitude", lon);
+    if (isAndroid) {
+        android.goToInHtml("RobBillLocation.html");
+    } else {
+        window.location.href = "RobBillLocation.html";
+    }
 }
 
-function goToHistoryDetail(taskId){
+function goToHistoryDetail(taskId) {
     localStorage.setItem("robTaskId", taskId);
     localStorage.setItem("userlatitude", lat);
     localStorage.setItem("userlongitude", lon);
     localStorage.setItem("postTask", "true");
-    if(isAndroid){
+    if (isAndroid) {
         android.goToInHtml("RobBillLocation.html");
-    }else{
+    } else {
         window.location.href = "RobBillLocation.html";
     }
 }
@@ -275,26 +296,26 @@ function goToHistoryDetail(taskId){
 if (isIOS) {
     window.webkit.messageHandlers.getLocation.postMessage("");
     loc = localStorage.getItem("locationStrJS");
-} else if(isAndroid){
-    if(android.getGPSUse()){
+} else if (isAndroid) {
+    if (android.getGPSUse()) {
         loc = android.getLocation();
         getLocAndCheckIn(loc);
     }
-}else{
+} else {
     getFirstPage(typeId);
 }
 
 function getLocAndCheckIn(loc) {
     if (loc == undefined || !loc.length) {
-//        $.hidePreloader();
+        //        $.hidePreloader();
         $.toast(Operation["ui_localErrorTip"]);
         return;
     } else if (loc == "-1") {
-//        $.hidePreloader();
+        //        $.hidePreloader();
         $.toast(Operation["ui_gpsTip"]);
         return;
     } else {
-//        $.hidePreloader();
+        //        $.hidePreloader();
     }
     if (loc != "" && loc != null) {
         var array = loc.split(";");
@@ -304,7 +325,7 @@ function getLocAndCheckIn(loc) {
         if (addr == null || addr == "null") {
             addr = "";
         }
-//        alert(lat+","+lon+","+addr);
+        //        alert(lat+","+lon+","+addr);
     }
     getFirstPage(typeId);
 }
