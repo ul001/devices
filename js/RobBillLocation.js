@@ -937,6 +937,7 @@ function publishRobTask() {
             },
             function (data) {
                 $.toast("抢单成功！");
+                localStorage.setItem("need-refresh", "true");
                 $.router.back();
             }
         );

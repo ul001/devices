@@ -5,29 +5,40 @@ var chargerUser = [];
 var workerUser = [];
 $(".peopleList").hide();
 var qiangdan = Substation.GetQueryString("type");
+
+var selectType;
 if (qiangdan == "7") {
+    selectType = 7;
     $("#selectType").val(7);
     $(".title_color").text(Operation['ui_postRobBill']);
     $(".qiang").remove();
     $("#postHistory").remove();
-}else{
+} else {
     $("#qiangOption").remove();
 }
 
-function listSubPeople(subId){
-    Substation.getDataByAjaxMain("/main/getDefaultInfoByfSubId",{fSubid:subId},function(data){
-        if(data.substation.defaultChargenameList!=undefined){
+function listSubPeople(subId) {
+    Substation.getDataByAjaxMain("/main/getDefaultInfoByfSubId", {
+        fSubid: subId
+    }, function (data) {
+        if (data.substation.defaultChargenameList != undefined) {
             chargerUser = [];
-            $.each(data.substation.defaultChargenameList,function(){
-                chargerUser.push({userId:this.fUserid,userName:this.fUsername});
-                listPeople("charger",chargerUser);
+            $.each(data.substation.defaultChargenameList, function () {
+                chargerUser.push({
+                    userId: this.fUserid,
+                    userName: this.fUsername
+                });
+                listPeople("charger", chargerUser);
             });
         }
-        if(data.substation.defaultUsernameList!=undefined){
+        if (data.substation.defaultUsernameList != undefined) {
             workerUser = [];
-            $.each(data.substation.defaultUsernameList,function(){
-                workerUser.push({userId:this.fUserid,userName:this.fUsername});
-                listPeople("worker",workerUser);
+            $.each(data.substation.defaultUsernameList, function () {
+                workerUser.push({
+                    userId: this.fUserid,
+                    userName: this.fUsername
+                });
+                listPeople("worker", workerUser);
             });
         }
     });
@@ -163,7 +174,9 @@ function postTask() {
     var startTime = $("#dateStart").val();
     var completeTime = $("#dateEnd").val();
     var taskContent = $("#taskContent").val();
-    var selectType = $("#selectType").val();
+    // if ($("#selectType").val() != undefined) {
+    selectType = $("#selectType").val();
+    // }
     if (subList.length == 0) {
         $.toast(Operation['ui_substation'] + Operation['ui_notEmpty']);
         return;
@@ -194,7 +207,7 @@ function postTask() {
     var params = {};
     if (qiangdan == "7") {
         params = {
-            fTasktypeid: selectType,
+            fTasktypeid: qiangdan,
             fStartdate: startTime + " 00:00:00",
             fDeadlinedate: completeTime + " 23:59:59",
             fTaskcontent: taskContent,
@@ -203,6 +216,7 @@ function postTask() {
         Substation.postDataByAjax("/releaseOrderTask", params, function (data) {
             if (data.code == "200") {
                 $.alert(Operation['ui_postSuccess'], function () {
+                    localStorage.setItem("need-refresh", "true");
                     window.history.back();
                 });
             }
@@ -395,7 +409,7 @@ function addChangeListener() {
     var thisUserid = $(this).attr("id");
     var thisUsername = $(this).attr("data-name");
     if (thisUserid != undefined) {
-        if(peopleType=="substation"){
+        if (peopleType == "substation") {
             if ($(this).prop("checked")) {
                 selectUserList = [{
                     userId: thisUserid,
@@ -407,7 +421,7 @@ function addChangeListener() {
             } else {
                 selectUserList = [];
             }
-        }else if (peopleType == "charger") {
+        } else if (peopleType == "charger") {
             if ($(this).prop("checked")) {
                 selectUserList = [{
                     userId: thisUserid,
