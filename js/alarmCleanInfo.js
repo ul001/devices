@@ -642,11 +642,11 @@ function saveFormData() {
             $(this).remove();
         }
     });
-    if ($(".fileInput").length > 6) {
+    if ($(".fileInput").length > 3) {
         $.toast(Operation["ui_uploadPicTip"]);
         return;
     }
-    if ($(".RectificationPIC").length + $(".fileInput").length > 6) {
+    if ($(".RectificationPIC").length + $(".fileInput").length > 3) {
         $.toast(Operation["ui_uploadPicTip"]);
         return;
     }
