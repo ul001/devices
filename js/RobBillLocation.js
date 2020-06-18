@@ -29,7 +29,7 @@ if (!taskid) {
 var isOwnPostTask = localStorage.getItem("postTask");
 //先隐藏
 $(".popBottomBtn").hide();
-
+$(".popBottomBtn2").hide();
 
 var selectSubid = localStorage.getItem("fSubid");
 // var subName = "";
@@ -47,6 +47,7 @@ var myLat = localStorage.getItem("userlatitude");
 var myLon = localStorage.getItem("userlongitude");
 var p1;
 var p2;
+var missionType = "";
 
 // function setMap() {
 //     Substation.getDataByAjax(
@@ -223,6 +224,16 @@ function drive() {
     driving.search(p1, p2);
 }
 
+function pushTaskDetails() {
+    localStorage.setItem("missionType", missionType);
+    localStorage.setItem("taskID", taskid);
+    if (isAndroid) {
+        android.goToIn();
+    } else {
+        window.location.href = "missionDetail.html";
+    }
+}
+
 function loadScript() {
     var script = document.createElement("script");
     script.src =
@@ -327,15 +338,19 @@ function getNetData() {
                 subLat = subDetail.fLatitude;
                 subLon = subDetail.fLongitude;
                 loadScript();
+                missionType = subDetail.fTaskstateid;
                 //判断按钮显隐
                 if (userList && userList.length > 0) {
                     $(".popBottomBtn").hide();
+                    $(".popBottomBtn2").show();
                 } else if (isOwnPostTask == "true") {
                     $(".popBottomBtn").hide();
+                    $(".popBottomBtn2").show();
                 } else {
                     $(".popBottomBtn").show();
 
                 }
+
                 localStorage.removeItem("postTask");
                 // localStorage.setItem("postTask", "false");
                 //跳转视频
