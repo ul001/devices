@@ -3,10 +3,10 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 $(".click_btn").click(function () {
-    if (isIOS) {
-        window.history.back();
-    } else {
+    if(isAndroid) {
         android.goBack();
+    }else {
+        window.history.back();
     }
 });
 
@@ -938,7 +938,12 @@ function publishRobTask() {
             function (data) {
                 $.toast("抢单成功！");
                 localStorage.setItem("need-refresh", "true");
-                $.router.back();
+                if(isAndroid) {
+                    android.goBack();
+                    android.refresh();
+                } else {
+                    window.history.back();
+                }
             }
         );
     }
