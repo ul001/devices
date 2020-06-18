@@ -202,7 +202,7 @@ function savePhoto() {
     }
   });
   if ($(".fileInput").length > 6) {
-    $.toast("最多上传6张图片");
+    $.toast(Operation['ui_morethansixpic']);
     return;
   }
   var params = new FormData($("#upBox")[0]);

@@ -794,14 +794,14 @@ function saveFormData() {
             $(this).remove();
         }
     });
-    if ($(".fileInput").length > 6) {
-        $.toast(Operation['ui_morethansixpic']);
+    if ($(".fileInput").length > 3) {
+        $.toast(Operation['ui_uploadPicTip']);
         return;
     }
-    if ($(".imgContainer").length + $(".fileInput").length > 6) {
-        $.toast(Operation['ui_morethansixpic']);
-        return;
-    }
+//    if ($(".imgContainer").length + $(".fileInput").length > 6) {
+//        $.toast(Operation['ui_uploadPicTip']);
+//        return;
+//    }
     if ($("input:checkbox").length > 0) {
         if ($("input:checkbox:checked").length == 0) {
             $.toast(Operation['ui_selectDefectLoc']);

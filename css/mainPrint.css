@@ -326,7 +326,7 @@
 
 .CustomReport .messageContent {
   text-indent: 2em;
-  max-height: 14rem;
+  max-height: 30rem;
   overflow: auto;
 }
 
