@@ -35,6 +35,7 @@ $("#carryOut").attr("name", "false");
 var taskID = localStorage.getItem("taskID");
 //巡检单id
 var placeCheckFormId;
+var haveResult = true;
 //巡检的变电所id
 var missionsubid;
 //任务类型 fTasktypeid
@@ -54,6 +55,9 @@ function getNetData() {
         function (data) {
             if (data.hasOwnProperty("placeCheckFormId")) {
                 placeCheckFormId = data.placeCheckFormId;
+            }
+            if(data.hasOwnProperty("haveResult")){
+                haveResult = data.haveResult=="true";
             }
             /*                if(data.taskInfo.fTaskstateid==2){
                                         $("#checkIn").removeClass("col-33");
@@ -200,7 +204,11 @@ function getNetData() {
                     localStorage.setItem("taskID", taskID);
                     if (missionTypeid == 1) {
                         //巡检任务
-                        window.location.href = "patrolContent.html";
+                        if(haveResult){
+                            window.location.href = "patrolContent.html";
+                        }else{
+                            $.toast(Operation['ui_noFormResult']);
+                        }
                     } else if (missionTypeid == 2) {
                         //现场交接任务
                         window.location.href = "missionScene.html";
