@@ -194,7 +194,7 @@ function postTask() {
         $.toast(Operation['ui_timeSelectError']);
         return;
     }
-    if ($("#selectType").val() == 6) {
+    if ($("#selectType").val() == 6 || $("#selectType").val()==7) {
         if (taskContent == "" || taskContent == undefined) {
             $.toast(Operation['ui_alarmTaskContent'] + Operation['ui_notEmpty']);
         }
