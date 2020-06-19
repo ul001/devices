@@ -48,6 +48,7 @@ var p1;
 var p2;
 var missionType = "";
 
+//返回按钮事件
 $(".suibian").click(function() {
   if (isPush == "1") {
     //推送详情点击返回事件
@@ -66,22 +67,7 @@ $(".suibian").click(function() {
   }
 });
 
-// function setMap() {
-//     Substation.getDataByAjax(
-//         "/getSubInfoByfSubid", {
-//             fSubid: subDetail.fSubid
-//         },
-//         function (data) {
-//             if (data.subInfo != undefined) {
-//                 // subName = subDetail.fSubName;
-//                 // lng = data.subInfo.fLongitude;
-//                 // lat = data.subInfo.fLatitude;
-//                 loadScript();
-//             }
-//         }
-//     );
-// }
-
+//地图初始化并默认查询行车路线
 function initialize() {
   map = new BMap.Map("container");
   // 添加带有定位的导航控件
@@ -137,6 +123,7 @@ function initialize() {
   $("#clickPopup").click();
 }
 
+//查询步行
 function walk() {
   map = new BMap.Map("container");
   // 添加带有定位的导航控件
@@ -189,6 +176,7 @@ function walk() {
   walking.search(p1, p2);
 }
 
+//查询驾车
 function drive() {
   map = new BMap.Map("container");
   // 添加带有定位的导航控件
@@ -251,6 +239,7 @@ function pushTaskDetails() {
   }
 }
 
+//初始化地图
 function loadScript() {
   var script = document.createElement("script");
   script.src =
@@ -261,6 +250,7 @@ function loadScript() {
 //声明一个控制点击的变量
 var upLoadClicktag = true;
 
+//从推送消息点击跳转
 function getOwnLocation() {
   if (jumpId) {
     //获取定位
@@ -278,6 +268,7 @@ function getOwnLocation() {
   }
 }
 
+//获取定位后初始化地图+查询行车路线
 function getLocAndCheckIn(loc) {
   if (loc == undefined || !loc.length) {
     //        $.hidePreloader();
@@ -300,11 +291,10 @@ function getLocAndCheckIn(loc) {
     }
     //        alert(lat+","+lon+","+addr);
   }
-
-  loadScript();
-  drive();
-
-  // initialize();
+  if (mylat && myLon) {
+    loadScript();
+  } else {
+  }
 }
 
 // deviceProblemSum: 0
