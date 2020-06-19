@@ -3,14 +3,6 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
-$(".suibian").click(function () {
-    if (isAndroid) {
-        android.goBack();
-    } else {
-        window.history.back();
-    }
-});
-
 
 //选人
 var peopleType = "";
@@ -26,6 +18,13 @@ var taskid = localStorage.getItem("robTaskId");
 if (!taskid) {
     taskid = 967;
 }
+var jumpId = Substation.GetQueryString("jumpId");
+var isPush = "0";
+if (jumpId != undefined && jumpId != null && jumpId != "") {
+    taskID = jumpId;
+    isPush = "1";
+}
+
 //是否是我发布的
 var isOwnPostTask = localStorage.getItem("postTask");
 //先隐藏
@@ -49,6 +48,24 @@ var myLon = localStorage.getItem("userlongitude");
 var p1;
 var p2;
 var missionType = "";
+
+$(".suibian").click(function () {
+    if (isPush == "1") {
+        //推送详情点击返回事件
+        if (isAndroid) {
+            android.goBack();
+        } else if (isIOS) {
+            window.webkit.messageHandlers.goBackiOS.postMessage("");
+            //            window.history.back();
+        }
+    } else {
+        if (isAndroid) {
+            android.goBack();
+        } else {
+            window.history.back();
+        }
+    }
+});
 
 // function setMap() {
 //     Substation.getDataByAjax(
@@ -238,12 +255,58 @@ function pushTaskDetails() {
 function loadScript() {
     var script = document.createElement("script");
     script.src =
-        "http://api.map.baidu.com/api?v=3.0&ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb&callback=initialize";
+        "http://api.map.baidu.com/api?v=3.0&ak=XWWTK5DwIWdF6stShGYzMgDTDLfHwsM4&callback=initialize";
     document.body.appendChild(script);
 }
 
 //声明一个控制点击的变量
 var upLoadClicktag = true;
+
+function getOwnLocation() {
+    if (jumpId) {
+        //获取定位
+        if (isIOS) {
+            window.webkit.messageHandlers.getLocation.postMessage("");
+            loc = localStorage.getItem("locationStrJS");
+        } else if (isAndroid) {
+            if (android.getGPSUse()) {
+                loc = android.getLocation();
+                getLocAndCheckIn(loc);
+            }
+        }
+    } else {
+        $.toast("无法获取抢单详情，抢单ID为空");
+    }
+}
+
+function getLocAndCheckIn(loc) {
+    if (loc == undefined || !loc.length) {
+        //        $.hidePreloader();
+        $.toast(Operation["ui_localErrorTip"]);
+        return;
+    } else if (loc == "-1") {
+        //        $.hidePreloader();
+        $.toast(Operation["ui_gpsTip"]);
+        return;
+    } else {
+        //        $.hidePreloader();
+    }
+    if (loc != "" && loc != null) {
+        var array = loc.split(";");
+        mylat = array[0];
+        myLon = array[1];
+        addr = array[2];
+        if (addr == null || addr == "null") {
+            addr = "";
+        }
+        //        alert(lat+","+lon+","+addr);
+    }
+
+    loadScript();
+
+
+    // initialize();
+}
 
 // deviceProblemSum: 0
 // deviceProblemUnresolved: 0
@@ -338,7 +401,13 @@ function getNetData() {
                 $("#taskDetail").html(strVar);
                 subLat = subDetail.fLatitude;
                 subLon = subDetail.fLongitude;
-                loadScript();
+                if (jumpId) {
+                    getOwnLocation();
+                } else {
+                    loadScript();
+                }
+
+
                 missionType = subDetail.fTaskstateid;
                 //判断按钮显隐
                 if (userList && userList.length > 0) {

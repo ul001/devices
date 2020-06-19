@@ -3,26 +3,30 @@ var taskId = localStorage.getItem("taskID");
 var goTemp = localStorage.getItem("goBackToList");
 localStorage.removeItem("goBackToList");
 var needUpdate = localStorage.getItem("need-update");
-if (needUpdate == "true") {
-    localStorage.removeItem("need-update");
-    location.reload();
+
+if (isAndroid) {
+    if (needUpdate == "true") {
+        localStorage.removeItem("need-update");
+        location.reload();
+    }
+} else {
+    window.addEventListener('pageshow', function (e) {
+        //ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
+        var u = navigator.userAgent,
+            app = navigator.appVersion;
+        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+        if (e.persisted && isIOS) {
+            var needUpdateios = localStorage.getItem("need-update");
+            if (needUpdateios == "true") {
+                localStorage.removeItem("need-update");
+                window.location.reload();
+            }
+        }
+    });
 }
+
 var scrollYM = localStorage.getItem("scrollY");
 localStorage.setItem("need-refresh", "true");
-
-/*window.addEventListener('pageshow', function (e) {
-    //ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-    if (e.persisted && isIOS) {
-        // var needUpdate = localStorage.getItem("need-update");
-        // if (needUpdate) {
-        //     localStorage.removeItem("need-update");
-        window.location.reload();
-        // }
-    }
-});*/
 
 var param;
 var urlinfo = window.location.href; //获取url 
@@ -68,34 +72,34 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                 var stateStr = "-";
                 switch (this.fState) {
                     case "0":
-                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                        stateStr = "<span class=\"redColor\">" + Operation['ui_defectState0'] + "</span>";
                         break;
                     case "2":
-                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState2']+"</span>";
+                        stateStr = "<span class=\"redColor\">" + Operation['ui_defectState2'] + "</span>";
                         break;
                     case "3":
-                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState3']+"</span>";
+                        stateStr = "<span class=\"redColor\">" + Operation['ui_defectState3'] + "</span>";
                         break;
                     case "4":
-                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState4']+"</span>";
+                        stateStr = "<span class=\"redColor\">" + Operation['ui_defectState4'] + "</span>";
                         break;
                     case "5":
-                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState5']+"</span>";
+                        stateStr = "<span class=\"redColor\">" + Operation['ui_defectState5'] + "</span>";
                         break;
                     case "1":
-                        stateStr = "<span class=\"button-success\">"+Operation['ui_defectState1']+"</span>";
+                        stateStr = "<span class=\"button-success\">" + Operation['ui_defectState1'] + "</span>";
                         break;
                     default:
-                        stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                        stateStr = "<span class=\"redColor\">" + Operation['ui_defectState0'] + "</span>";
                         break;
                 }
                 var solveUser = "";
                 if (this.fSolvedUserName != undefined) {
-                    solveUser = "<p>"+Operation['ui_solvePerson'] + this.fSolvedUserName + "</p>";
+                    solveUser = "<p>" + Operation['ui_solvePerson'] + this.fSolvedUserName + "</p>";
                 }
                 var solveTime = "";
                 if (this.fUpdateDate != undefined) {
-                    solveTime = "<p>"+Operation['ui_solvedTime'] + this.fUpdateDate + "</p>";
+                    solveTime = "<p>" + Operation['ui_solvedTime'] + this.fUpdateDate + "</p>";
                 }
                 $(".card-content").append("<div class=\"card-content-inner row no-gutter\" id=\"" + this.fDeviceproblemid + "\">\n" +
                     "                        <div class=\"col-10\">\n" +
@@ -103,7 +107,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
                     "                        </div>\n" +
                     "                        <div class=\"col-85\">\n" +
                     "                            <p class=\"boldText\">" + Operation['ui_Devname'] + (this.fdeviceinfoName == undefined ? "-" : this.fdeviceinfoName) + "</p>\n" +
-//                    "                            <p>" + Operation['ui_classPath'] + (this.fDeviceNamePath == undefined ? "-" : this.fDeviceNamePath) + "</p>\n" +
+                    //                    "                            <p>" + Operation['ui_classPath'] + (this.fDeviceNamePath == undefined ? "-" : this.fDeviceNamePath) + "</p>\n" +
                     "                            <p>" + Operation['ui_Description'] + (this.fDeviceproblemdes == undefined ? "-" : this.fDeviceproblemdes) + "</p>\n" +
                     "                            <p>" + Operation['ui_detriment'] + (this.fProblemharm == undefined ? " - " : this.fProblemharm) + " </p>\n" +
                     "                            <p>" + Operation['ui_Specificlocation'] + problemStr + "</p>\n" +
@@ -122,20 +126,20 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
             //声明一个控制点击的变量
             var upLoadClicktag = true;
             $(".card-content-inner").click(function () {
-                if(!upLoadClicktag){
+                if (!upLoadClicktag) {
                     return;
                 }
                 upLoadClicktag = false;
-                setTimeout(function() {
+                setTimeout(function () {
                     upLoadClicktag = true;
                 }, 1000);
                 var proId = $(this).attr("id");
-//                var dataTree = $(this).attr("data-tree");
+                //                var dataTree = $(this).attr("data-tree");
                 //                var target_roll_height = $(this).offset().top-$(".content").offset().top+$(".content").scrollTop();
                 var target_roll_height = $(".content").scrollTop();
                 //记录滚动位置
                 localStorage.setItem("scrollY", target_roll_height);
-//                localStorage.setItem("clickTree", dataTree);
+                //                localStorage.setItem("clickTree", dataTree);
                 window.location.href = "defectInfo.html?fDeviceproblemid=" + proId + "&taskProblem=1";
             });
             var missionTypeId = localStorage.getItem("missionTypeid");
@@ -144,7 +148,7 @@ Substation.getDataByAjax("/getListByTaskidAndfSubid", param, function (data) {
             } else {
                 if (data.imgName == null || data.imgName == "") {
                     //消缺任务 无签名
-                    $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">'+Operation['ui_customerSign']+'</a></p>');
+                    $(".card-footer").html('<p style="width:100%;"><a href="#" id="goToWrite" class="button button-fill" style="height:1.6rem;line-height:1.6rem;">' + Operation['ui_customerSign'] + '</a></p>');
                     $("#goToWrite").click(function () {
                         window.location.href = "draw.html";
                     });

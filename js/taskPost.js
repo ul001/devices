@@ -11,7 +11,7 @@ if (qiangdan == "7") {
     selectType = 7;
     $("#selectType").val(7);
     $(".title_color").text(Operation['ui_postRobBill']);
-    $(".qiang").remove();
+    $(".qiang").hide();
     $("#postHistory").remove();
 } else {
     $("#qiangOption").remove();
@@ -194,9 +194,10 @@ function postTask() {
         $.toast(Operation['ui_timeSelectError']);
         return;
     }
-    if ($("#selectType").val() == 6 || $("#selectType").val()==7) {
+    if ($("#selectType").val() == 6 || $("#selectType").val() == 7) {
         if (taskContent == "" || taskContent == undefined) {
             $.toast(Operation['ui_alarmTaskContent'] + Operation['ui_notEmpty']);
+            return;
         }
     }
     var subIds = [];
