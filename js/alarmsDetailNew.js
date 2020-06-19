@@ -93,7 +93,7 @@ function addItems(number, lastIndex) {
         }
     }
     //    }
-    Substation.getDataByAjaxNoLoading(url, params, function (data) {
+    Substation.postDataByAjaxNoLoading(url, params, function (data) {
             var datadic = data.alarmEventLogList;
             var messgeInfo = data.tDtMessInfoType;
             if (messgeInfo != undefined) {
@@ -338,7 +338,7 @@ function confirmAlarmEvents(logidList) {
         },
         function (data) {
             manageCard();
-//            getFirstPage();
+            //            getFirstPage();
         },
         function (errorCode) {
             // if (errorCode == 0) {

@@ -2,10 +2,11 @@ var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-$(".click_btn").click(function () {
-    if(isAndroid) {
+
+$(".suibian").click(function () {
+    if (isAndroid) {
         android.goBack();
-    }else {
+    } else {
         window.history.back();
     }
 });
@@ -938,7 +939,7 @@ function publishRobTask() {
             function (data) {
                 $.toast("抢单成功！");
                 localStorage.setItem("need-refresh", "true");
-                if(isAndroid) {
+                if (isAndroid) {
                     android.goBack();
                     android.refresh();
                 } else {
