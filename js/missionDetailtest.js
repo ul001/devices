@@ -32,6 +32,7 @@ if (jumpId != undefined && jumpId != null && jumpId != "") {
 }
 //巡检单id
 var placeCheckFormId;
+var haveResult = true;
 //巡检的变电所id
 var missionsubid;
 var missionsubname;
@@ -64,7 +65,9 @@ function getNetData() {
         if (data.hasOwnProperty("placeCheckFormId")) {
             placeCheckFormId = data.placeCheckFormId;
         }
-
+        if(data.hasOwnProperty("haveResult")){
+            haveResult = data.haveResult=="true";
+        }
         taskInfo = data.taskInfo;
         userList = data.taskUserList;
         if (taskInfo != null && taskInfo != undefined) {
@@ -444,10 +447,6 @@ $(".doDetail").click(function () {
     if (!upLoadClicktag) {
         return;
     }
-    if (!temp && !(isChangeReturnCount == userList.length)) {
-        $.toast("执行人尚未提交任务");
-        return;
-    }
     upLoadClicktag = false;
     setTimeout(function () {
         upLoadClicktag = true;
@@ -468,7 +467,12 @@ $(".doDetail").click(function () {
                 window.location.href = "patrolContent.html";
             });
         } else {
-            window.location.href = "patrolContent.html";
+            //巡检任务
+            if(haveResult){
+                window.location.href = "patrolContent.html";
+            }else{
+                $.toast(Operation['ui_noFormResult']);
+            }
         }
     } else if (missionTypeid == 2) {
         //现场交接任务
