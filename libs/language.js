@@ -361,6 +361,7 @@ function getZhLanguage() {
     ui_Title: "标题",
     ui_selectRealPerson: "已选择的人员",
     ui_postAlarmClean: "发布消警任务",
+    ui_Eventtypes: "事件类型",
     //发布消警
     ui_alarmCleanPost: "报警派单",
     ui_charger: "负责人",
@@ -869,6 +870,7 @@ function getEnLanguage() {
     ui_fConfirmstatus: "ConfirmStatus:",
     ui_fConfirmuserid: "ConfirmuserName:",
     ui_fConfirmtime: "ConfirmTime:",
+    ui_Eventtypes: "Event Type",
     //设备分类
     ui_devicesort: "Device Sort",
     ui_classPath: "ClassPath:",

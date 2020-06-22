@@ -10,42 +10,42 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <link rel="stylesheet" href="libs/light7.min.css">
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
-    <link rel="stylesheet" href="css/general.css"/>
+    <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/alarmsDetailNew.css">
 </head>
 
 <body>
-<div class="page-group">
-    <div class="page">
-        <header class="bar bar-nav bar_color">
-            <a class="button button-link button-nav pull-left click_btn back_btn">
-                <span class="icon icon-left"></span>
-                <span data-i18n="ui_back"></span>
-            </a>
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
 
-            <a class="button button-link button-nav pull-right open-panel">
-                <i class="icon icon-selectSome"></i>
-            </a>
-            <a class="button button-link button-nav pull-right click_btn manager_btn">
-                <span data-i18n="ui_manager"></span>
-            </a>
-            <h1 class="title title_color"><span id="titleName"></span><i id="clearAlarm" class="icon icon-clearAlarm"></i></h1>
-        </header>
-        <nav id="bar-footer" class="bar" style="display:none;">
-            <a href="#" class="button bg-green" onclick="selectConfirm()"><span
-                    data-i18n="ui_hasComfirm"></span></a>
-        </nav>
-        <!--            <div class="bar bar-header-secondary">
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <a class="button button-link button-nav pull-right click_btn manager_btn">
+                    <span data-i18n="ui_manager"></span>
+                </a>
+                <h1 class="title title_color"><span id="titleName"></span><i id="clearAlarm"
+                        class="icon icon-clearAlarm"></i></h1>
+            </header>
+            <nav id="bar-footer" class="bar" style="display:none;">
+                <a href="#" class="button bg-green" onclick="selectConfirm()"><span
+                        data-i18n="ui_hasComfirm"></span></a>
+            </nav>
+            <!--            <div class="bar bar-header-secondary">
             <a href="#" class="button">一键已读</a>
         </div>-->
-        <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55"
-             data-distance="100">
-            <div class="pull-to-refresh-layer">
-                <div class="preloader"></div>
-                <div class="pull-to-refresh-arrow"></div>
-            </div>
-            <div class="list-container list-block">
-                <!-- <div class="card" id="1">
+            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div class="list-container list-block">
+                    <!-- <div class="card" id="1">
                     <label class="label-checkbox item-content item-link">
                         <input type="checkbox" name="my-checkbox">
                         <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
@@ -113,35 +113,35 @@
                         </div>
                     </label>
                 </div> -->
-            </div>
-            <!-- preloader -->
-            <div class="infinite-scroll-preloader">
-                <div class="preloader"></div>
+                </div>
+                <!-- preloader -->
+                <div class="infinite-scroll-preloader">
+                    <div class="preloader"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div id="showDiv" class="list-block">
-        <ul>
-            <li class="item-content" id="confirmed">
-                <div class="item-inner">
-                    <div class="item-title"><span data-i18n="ui_MarkConfirmed"></span></div>
-                </div>
-            </li>
-            <li class="item-content" id="unConfirm">
-                <div class="item-inner">
-                    <div class="item-title"><span data-i18n="ui_MarkUnconfirmed"></span></div>
-                </div>
-            </li>
-            <li class="item-content" id="manage">
-                <div class="item-inner">
-                    <div class="item-title"><span data-i18n="ui_manager"></span></div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="panel-overlay"></div>
-    <!-- About Popup -->
-    <!--        <div class="popup popup-about">
+        <div id="showDiv" class="list-block">
+            <ul>
+                <li class="item-content" id="confirmed">
+                    <div class="item-inner">
+                        <div class="item-title"><span data-i18n="ui_MarkConfirmed"></span></div>
+                    </div>
+                </li>
+                <li class="item-content" id="unConfirm">
+                    <div class="item-inner">
+                        <div class="item-title"><span data-i18n="ui_MarkUnconfirmed"></span></div>
+                    </div>
+                </li>
+                <li class="item-content" id="manage">
+                    <div class="item-inner">
+                        <div class="item-title"><span data-i18n="ui_manager"></span></div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="panel-overlay"></div>
+        <!-- About Popup -->
+        <!--        <div class="popup popup-about">
             <div class="content-block">
                 <div class="content-block-title">选择报警类型</div>
                 <div class="list-block media-list">
@@ -154,32 +154,32 @@
                         id="commitBtn">确定</a></div>
             </div>
         </div>-->
-    <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-        <div class="content-block">
-            <div>
-                <p class="buttons-row"><a href="#" class="button" id="today"><span
-                        data-i18n="ui_today"></span></a>
-                    <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
-                    <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
-                    <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
-                </p>
-            </div>
-            <div>
-                <label><span data-i18n="ui_timeSelect"></span></label><br>
-                <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime"
-                       readonly/> -
-                <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime"
-                       readonly/>
-            </div>
-            <div>
-                <label><span data-i18n="ui_alarmConfirm"></span></label><br>
-                <select id="fState">
-                    <option value="" data-i18n="ui_All"></option>
-                    <option value="1" data-i18n="ui_alarmConfirmed"></option>
-                    <option value="0" data-i18n="ui_alarmUnconfirmed"></option>
-                </select>
-            </div>
-            <!--            <div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <div>
+                    <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                </div>
+                <div>
+                    <label><span data-i18n="ui_timeSelect"></span></label><br>
+                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
+                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                </div>
+                <div>
+                    <label><span data-i18n="ui_alarmConfirm"></span></label><br>
+                    <select id="fState">
+                        <option value="" data-i18n="ui_All"></option>
+                        <option value="1" data-i18n="ui_alarmConfirmed"></option>
+                        <option value="0" data-i18n="ui_alarmUnconfirmed"></option>
+                    </select>
+                </div>
+                <div>
+                    <label><span data-i18n="ui_Eventtypes"></span></label><input id="Eventtype" type="text" />
+                </div>
+                <!--            <div>
                 <label>紧急程度</label><br>
                 <select id="dangerType">
                     <option value="">全部</option>
@@ -188,40 +188,37 @@
                     <option value="紧急">紧急</option>
                 </select>
             </div>-->
-            <div>
-                <label><span data-i18n="ui_Substationname"></span></label><br>
-                <div class="searchbar">
-                    <div class="search-input">
-                        <label class="icon icon-search" for="search"></label>
-                        <input type="search" id='search' placeholder=''
-                               data-placeholder="ui_enterkeywords"/><i
-                            class="icon icon-clear"></i>
+                <div>
+                    <label><span data-i18n="ui_Substationname"></span></label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
+                                class="icon icon-clear"></i>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="list-block">
-                <ul id="listContainer">
+                <div class="list-block">
+                    <ul id="listContainer">
 
-                </ul>
+                    </ul>
+                </div>
             </div>
-        </div>
-        <div class="btnBar row no-gutter">
-            <div class="col-50"><a href="#"
-                                   class="button button-big button-fill button-cancel close-panel"><span
-                    data-i18n="ui_cancel"></span></a>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a></div>
             </div>
-            <div class="col-50"><a href="#" class="button button-big button-fill"
-                                   id="searchBtn"><span
-                    data-i18n="ui_query"></span></a></div>
         </div>
     </div>
-</div>
-<script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-<script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
-<script src="libs/language.js"></script>
-<script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
-<script src="libs/tools.js"></script>
-<script src="js/alarmsDetailNew.js"></script>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/language.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/alarmsDetailNew.js"></script>
 </body>
 
 </html>

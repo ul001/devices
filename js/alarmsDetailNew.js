@@ -79,6 +79,8 @@ function addItems(number, lastIndex) {
     var dateStartVal = $("#dateStart").val();
     var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
+    var eventtype = $("#Eventtype").val();
+
     if (dateStartVal != "") {
         params['fStarttime'] = dateStartVal + " 00:00:00";
     }
@@ -91,6 +93,9 @@ function addItems(number, lastIndex) {
         } else {
             params['fConfirmstatus'] = false;
         }
+    }
+    if (eventtype != "") {
+        params['searchKey'] = eventtype;
     }
     //    }
     Substation.postDataByAjaxNoLoading(url, params, function (data) {
