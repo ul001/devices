@@ -427,7 +427,7 @@ function getZhLanguage() {
     ui_RobPlanDeadlineTime: "计划完成时间：",
     ui_RobPrincipal: "任务负责人：",
     ui_RobExecutor: "任务执行人：",
-    ui_noFormResult:"该任务巡检单数据为空！",
+    ui_noFormResult: "该任务巡检单数据为空，暂无巡检结果！",
 
     //code码
     code_200: "请求成功，插入成功",
@@ -1002,7 +1002,7 @@ function getEnLanguage() {
     ui_RobPlanDeadlineTime: "Deadline Time：",
     ui_RobPrincipal: "Principal：",
     ui_RobExecutor: "Executor：",
-    ui_noFormResult:"The data of this task inspection list is empty!",
+    ui_noFormResult: "The data of this task inspection list is empty!",
 
     //code码
     code_200: "Request succeeds, insert success",

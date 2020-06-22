@@ -148,7 +148,7 @@ function addItems(number, clickNum) {
                                       <div class="card-content-inner">
                                           <div class="row" style="margin-left:0;">
                                              <p class="subName limit-length col-80">${this.fSubName}</p>
-                                             <p class="col-20" style="text-align:right;"><span class="showType">${Operation['ui_RobBill']}</span></p>
+                                             <p class="col-20 showRobImg" style="text-align:right;"><span class="showType">${Operation['ui_RobBill']}</span></p>
                                           </div>
                                           <p class="row"><span class="col-66"><span style="color:gray;">${Operation['ui_TaskContent']}</span>${this.fTaskcontent}</span>
                                               <span class="col-33"
@@ -161,6 +161,7 @@ function addItems(number, clickNum) {
                     });
                     $(listDom).html(html);
                     pageNum++;
+                    clickNum == 1 ? $(".showRobImg").show() : $(".showRobImg").hide();
                 } else {
                     $.detachInfiniteScroll($(".infinite-scroll"));
                     $(".infinite-scroll-preloader").html(
@@ -179,6 +180,7 @@ function addItems(number, clickNum) {
                     );
                     return;
                 }
+
             },
             function (errorCode) {
                 if (errorCode == 0) {
@@ -192,6 +194,7 @@ function addItems(number, clickNum) {
                 }
                 return;
             }
+
         );
     } else if (clickNum == 3) {
         Substation.postDataByAjaxNoLoading(url, params, function (data) {
@@ -207,7 +210,7 @@ function addItems(number, clickNum) {
                                   <div class="card-content-inner">
                                       <div class="row" style="margin-left:0;">
                                          <p class="subName limit-length col-80">${this.fSubName}</p>
-                                         <p class="col-20" style="text-align:right;"><span class="showType">${Operation['ui_RobBill']}</span></p>
+                                         <p class="col-20 showRobImg" style="text-align:right;"><span class="showType">${Operation['ui_RobBill']}</span></p>
                                       </div>
                                       <p class="row"><span class="col-66"><span style="color:gray;">${Operation['ui_TaskContent']}</span>${this.fTaskcontent}</span>
                                           <span class="col-33"
@@ -220,6 +223,7 @@ function addItems(number, clickNum) {
                 });
                 $(listDom).append(html);
                 pageNum++;
+                clickNum == 1 ? $(".showRobImg").show() : $(".showRobImg").hide();
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
                 $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
@@ -231,7 +235,9 @@ function addItems(number, clickNum) {
                 return;
             }
         });
+
     }
+
 }
 
 $("#searchDaiban").bind("keydown", function (event) {
