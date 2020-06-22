@@ -289,7 +289,6 @@ function manageCard() {
         $("#bar-footer").removeClass("bar-footer");
         $(".open-panel").toggle();
         $(".label-checkbox.item-content").addClass("item-link");
-        addCardLongClick();
         $(".item-media").hide();
         $(".manager_btn").text(Operation['ui_manager']);
         html += '<span class="icon icon-left"></span>' + '<span>' + Operation['ui_back'] + '</span>';
@@ -298,8 +297,6 @@ function manageCard() {
         $("input[type='checkbox']:checked").removeAttr("checked").removeAttr("disabled");
     }
 }
-
-addCardLongClick();
 
 document.addEventListener("click", function () {
     $("#showDiv").hide();
@@ -421,7 +418,7 @@ var isMoving = false;
 var startY;
 
 function addCardLongClick() {
-    $(".item-link").on({
+    $(".item-link").unbind().on({
         touchstart: function (e) {
             isMoving = false;
             var thisCardId = $(this).parent(".card").attr("id");
@@ -487,17 +484,11 @@ function addCardLongClick() {
                     // window.location.href = encodeURI("alarmDetailView.html" + "?value=" + paramStr);
                     // localStorage.setItem("DetailParam", paramStr);
                     if (alarmeventlogid) {
-                        if (isIOS) {
-                            // var alarmParam = {
-                            //     alarmId: alarmeventlogid
-                            // };
-                            // localStorage.removeItem("need-update");
-                            // window.webkit.messageHandlers.pushAlarmDetail.postMessage(alarmParam);
-                            window.location.href = "alarmDetailView.html?alarmeventlogid=" + alarmeventlogid;
+                        if (isAndroid) {
+                            android.goToIn("alarmDetailView.html?alarmeventlogid=" + alarmeventlogid);
                         } else {
                             window.location.href = "alarmDetailView.html?alarmeventlogid=" + alarmeventlogid;
                         }
-
                     } else {
                         toast("数据异常，未获取到报警对应ID");
                     }
