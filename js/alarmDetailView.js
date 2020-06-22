@@ -55,7 +55,11 @@ $(".pull-left.click_btn").click(function() {
       window.webkit.messageHandlers.goBackiOS.postMessage("");
     }
   } else {
-    window.history.back();
+    if(isAndroid){
+        android.goBack();
+    }else{
+        window.history.back();
+    }
   }
 });
 
