@@ -20,7 +20,7 @@ if (!taskid) {
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
 if (jumpId != undefined && jumpId != null && jumpId != "") {
-  taskID = jumpId;
+  taskid = jumpId;
   isPush = "1";
 }
 
@@ -283,7 +283,7 @@ function getLocAndCheckIn(loc) {
   }
   if (loc != "" && loc != null) {
     var array = loc.split(";");
-    mylat = array[0];
+    myLat = array[0];
     myLon = array[1];
     addr = array[2];
     if (addr == null || addr == "null") {
@@ -291,7 +291,7 @@ function getLocAndCheckIn(loc) {
     }
     //        alert(lat+","+lon+","+addr);
   }
-  if (mylat && myLon) {
+  if (myLat && myLon) {
     loadScript();
   } else {
   }
