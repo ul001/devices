@@ -66,7 +66,7 @@ function getNetData() {
             placeCheckFormId = data.placeCheckFormId;
         }
         if(data.hasOwnProperty("haveResult")){
-            haveResult = data.haveResult=="true";
+            haveResult = data.haveResult==true;
         }
         taskInfo = data.taskInfo;
         userList = data.taskUserList;

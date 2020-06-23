@@ -57,7 +57,7 @@ function getNetData() {
                 placeCheckFormId = data.placeCheckFormId;
             }
             if(data.hasOwnProperty("haveResult")){
-                haveResult = data.haveResult=="true";
+                haveResult = data.haveResult==true;
             }
             /*                if(data.taskInfo.fTaskstateid==2){
                                         $("#checkIn").removeClass("col-33");
