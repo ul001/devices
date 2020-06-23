@@ -111,7 +111,7 @@ function removeImg(obj, index) {
         $(".imgContainer")
           .eq(i)
           .remove();
-        $("#file" + (i + 1)).remove();
+        $("#file" + index).remove();
       } else {
         //                if(confirm("确定要删除已保存的图片？")){
         $.confirm("确定要删除已保存的图片？", function () {
