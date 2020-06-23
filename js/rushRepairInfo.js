@@ -264,7 +264,7 @@ function removeImg(obj, index) {
                                         });*/
                 //                }
             }
-            imgNum--;
+//            imgNum--;
         }
     }
     //$(".upload_img_length").html(imgNum);
