@@ -274,19 +274,18 @@ function loadPage() {
                 linkStr = "<li class=\"item-content item-link item-dis";
             }
             var thisCList = selectChildrenList(allGroupList, this.fSubdevicegroupid);
-            var num = thisCList.length;
-            if (num > 0) {
+            var num = 0;
+            if (thisCList.length > 0) {
                 getChildNum(thisCList);
             }
 
             function getChildNum(allList) {
                 $.each(allList, function (i, obj) {
-                    var thisCList = selectChildrenList(allList, obj.id);
+                    var thisCList = selectChildrenList(allGroupList, obj.id);
                     if (thisCList.length > 0) {
-                        num += thisCList.length;
                         getChildNum(thisCList);
                     } else {
-                        return false;
+                        num ++;
                     }
                 });
             }

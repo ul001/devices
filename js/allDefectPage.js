@@ -256,20 +256,8 @@ $('#searchBtn').click(function () {
     getFirstPage();
 });
 
-//$("#dateStart").calendar();
-//$("#dateEnd").calendar();
-$("#dateStart").click(function(){
-    $("#datePickStart").click();
-});
-$("#datePickStart").on("change",function(){
-    $("#dateStart").val($("#datePickStart").val());
-});
-$("#dateEnd").click(function(){
-    $("#datePickEnd").click();
-});
-$("#datePickEnd").on("change",function(){
-    $("#dateEnd").val($("#datePickEnd").val());
-});
+$("#dateStart").calendar();
+$("#dateEnd").calendar();
 $("#listContainer").hide();
 
 function getSomeSubstation(isAll) {
@@ -351,8 +339,6 @@ $("#today").click(function () {
     var todayVal = myDate.format("yyyy-MM-dd");
     $("#dateStart").val(todayVal);
     $("#dateEnd").val(todayVal);
-    $("#datePickStart").val(todayVal);
-    $("#datePickEnd").val(todayVal);
 });
 $("#yestoday").click(function () {
     var myDate = new Date();
@@ -360,8 +346,6 @@ $("#yestoday").click(function () {
     var yestodayVal = myDate.format("yyyy-MM-dd");
     $("#dateStart").val(yestodayVal);
     $("#dateEnd").val(yestodayVal);
-    $("#datePickStart").val(yestodayVal);
-    $("#datePickEnd").val(yestodayVal);
 });
 $("#thisMonth").click(function () {
     var myDate = new Date();
@@ -371,8 +355,6 @@ $("#thisMonth").click(function () {
     var lastDayVal = lastDay.format("yyyy-MM-dd");
     $("#dateStart").val(firstDayVal);
     $("#dateEnd").val(lastDayVal);
-    $("#datePickStart").val(firstDayVal);
-    $("#datePickEnd").val(lastDayVal);
 });
 $("#lastMonth").click(function () {
     var myDate = new Date();
@@ -382,8 +364,6 @@ $("#lastMonth").click(function () {
     var lastDayVal = lastDay.format("yyyy-MM-dd");
     $("#dateStart").val(firstDayVal);
     $("#dateEnd").val(lastDayVal);
-    $("#datePickStart").val(firstDayVal);
-    $("#datePickEnd").val(lastDayVal);
 });
 
 Date.prototype.format = function (fmt) { //author: meizz
