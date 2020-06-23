@@ -119,7 +119,7 @@ function removeImg(obj, index) {
                 });*/
                 //                }
             }
-            imgNum--;
+//            imgNum--;
             break;
         }
     }
