@@ -96,8 +96,14 @@ i.icon.icon-alarm {
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
 }
 
 #fState,
@@ -132,7 +138,7 @@ i.icon.icon-alarm {
 }
 
 .content-block {
-    height:100%;
+    height: 100%;
     color: #3d4145;
 }
 
@@ -178,11 +184,11 @@ i.icon.icon-alarm {
 
 #listContainer .item-inner {
     font-size: .7rem;
-    padding-right:0;
+    padding-right: 0;
 }
 
 #listContainer .item-content {
-    padding-left:0;
+    padding-left: 0;
 }
 
 .item-title::before {
@@ -229,9 +235,11 @@ i.icon.icon-alarm {
     background: #ccc;
     color: #3d4145;
 }
-#list-container .card{
-    margin:0.3rem;
+
+#list-container .card {
+    margin: 0.3rem;
 }
+
 .bar .button-nav.pull-right {
     margin-right: 0;
 }
