@@ -159,11 +159,11 @@ function addItems(number) {
                 });*/
                 var upLoadClicktag = true;
                 $(".card").unbind().click(function () {
-                    if(!upLoadClicktag){
+                    if (!upLoadClicktag) {
                         return;
                     }
                     upLoadClicktag = false;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         upLoadClicktag = true;
                     }, 1000);
                     var fPlacecheckformid = $(this).attr("id");
@@ -188,19 +188,19 @@ function addItems(number) {
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             if (data.placecheckformAllList.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
         },
         function (errorCode) {
             if (errorCode == 0) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
+                $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
             } else {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("");
@@ -222,7 +222,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
         loading = false;
         if (lastIndex >= maxItems) {
             $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
             return;
         }
         addItems(itemsPerLoad);
@@ -231,9 +231,9 @@ $(document).on('infinite', '.infinite-scroll', function () {
 });
 
 $('#searchBtn').click(function () {
-    var start = new Date($("#dateStart").val().replace(/-/g,'/'));
-    var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
-    if(start>end){
+    var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+    var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+    if (start > end) {
         $.toast(Operation['ui_dateselecttip']);
         return;
     }
@@ -259,19 +259,19 @@ $("#listContainer").hide();
 
 function getSomeSubstation(isAll) {
     var url = "/getSubListByLetter";
-    if(isAll==1){
+    if (isAll == 1) {
         url = "/getSubstationListByUser";
     }
-    var listObj=[];
+    var listObj = [];
     var searchKey = $("#search").val();
     var params = {
         key: searchKey
     }
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        if(isAll == 1){
+        if (isAll == 1) {
             listObj = data.list;
-        }else{
+        } else {
             listObj = data;
         }
         $(listObj).each(function () {
@@ -308,10 +308,10 @@ $('#search').on("input", function () {
     }
 });
 
-$('#search').on("focus",function(){
-    if($("#search").val().length>0){
+$('#search').on("focus", function () {
+    if ($("#search").val().length > 0) {
         $(".icon.icon-clear").show();
-    }else{
+    } else {
         $(".icon.icon-clear").hide();
     }
 });
@@ -327,6 +327,16 @@ $(".icon.icon-clear").click(function () {
 });
 getSomeSubstation(1);
 
+function changeCalendar(changeVal, element, UpElement) {
+    var child = document.getElementById(element);
+    child.remove()
+    var str = ' <input type="text" id="' + element + '" placeholder="" data-placeholder="ui_startTime" readonly />'
+    $("#" + UpElement).html(str);
+    $("#" + element).val(changeVal);
+    $("#" + element).calendar({
+        value: [changeVal]
+    });
+}
 //时间快捷按钮
 $(".buttons-row .button").click(function () {
     $(this).addClass("active").siblings().removeClass("active");
@@ -334,15 +344,18 @@ $(".buttons-row .button").click(function () {
 $("#today").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(todayVal);
-    $("#dateEnd").val(todayVal);
+    changeCalendar(todayVal, "dateStart", "selectStartTime");
+    changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
+
 $("#yestoday").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(yestodayVal);
-    $("#dateEnd").val(yestodayVal);
+    changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
+    // $("#dateStart").val(yestodayVal);
+    // $("#dateEnd").val(yestodayVal);
 });
 $("#thisMonth").click(function () {
     var myDate = new Date();
@@ -350,8 +363,10 @@ $("#thisMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
+    // $("#dateStart").val(firstDayVal);
+    // $("#dateEnd").val(lastDayVal);
 });
 $("#lastMonth").click(function () {
     var myDate = new Date();
@@ -359,9 +374,12 @@ $("#lastMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
+    // $("#dateStart").val(firstDayVal);
+    // $("#dateEnd").val(lastDayVal);
 });
+
 
 Date.prototype.format = function (fmt) { //author: meizz
     var o = {
