@@ -31,8 +31,14 @@ i.icon.icon-alarm {
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
 }
 
 #fState,
@@ -69,7 +75,7 @@ i.icon.icon-alarm {
 }
 
 .content-block {
-    height:100%;
+    height: 100%;
     color: #3d4145;
 }
 
@@ -120,11 +126,11 @@ i.icon.icon-selectSome {
 
 #listContainer .item-inner {
     font-size: .7rem;
-    padding-right:0;
+    padding-right: 0;
 }
 
 #listContainer .item-content {
-    padding-left:0;
+    padding-left: 0;
 }
 
 .item-title::before {
@@ -140,8 +146,8 @@ i.icon.icon-selectSome {
     margin: 0;
 }
 
-#listBlock{
-    height:calc(100% - 17rem);
+#listBlock {
+    height: calc(100% - 17rem);
 }
 
 .content-block .buttons-row .button {
@@ -174,9 +180,11 @@ i.icon.icon-selectSome {
     background: #ccc;
     color: #3d4145;
 }
-#list-container .card{
-    margin:0.3rem;
+
+#list-container .card {
+    margin: 0.3rem;
 }
+
 .bar .button-nav.pull-right {
     margin-right: 0;
 }
@@ -184,15 +192,19 @@ i.icon.icon-selectSome {
 .list-block .item-link .item-inner {
     background-position: 100% center;
 }
-.list-block .item-link p{
-    margin:0;
+
+.list-block .item-link p {
+    margin: 0;
 }
-.text-right{
-    text-align:right;
+
+.text-right {
+    text-align: right;
 }
+
 .list-block .item-inner.row {
     padding: 0 .7rem 0 0;
 }
+
 i.icon.icon-subIcon {
     width: 0.85rem;
     height: 0.85rem;

@@ -8,8 +8,8 @@
     align-items: center;
 }
 
-.list-container .card{
-    margin:0.3rem;
+.list-container .card {
+    margin: 0.3rem;
 }
 
 /*.card .content-padded{
@@ -37,8 +37,8 @@ i.icon.icon-subIcon {
     width: 0.85rem;
     height: 0.85rem;
     background-image: url(../img/i-jiancedian.png);
-    margin-bottom:.1rem;
-    margin-right:.1rem;
+    margin-bottom: .1rem;
+    margin-right: .1rem;
 }
 
 i.icon.icon-alarm {
@@ -80,8 +80,14 @@ i.icon.icon-alarm {
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
 }
 
 #fState,
@@ -190,7 +196,8 @@ i.icon.icon-selectSome {
     border-radius: initial;
 }
 
-#searchBtn,#commitBtn {
+#searchBtn,
+#commitBtn {
     background: #02A8A6;
 }
 
@@ -207,20 +214,25 @@ i.icon.icon-selectSome {
     background: #ccc;
     color: #3d4145;
 }
-#list-container .card{
-    margin:0.3rem;
+
+#list-container .card {
+    margin: 0.3rem;
 }
+
 .bar .button-nav.pull-right {
     margin-right: 0;
 }
-.list-block .item-title{
+
+.list-block .item-title {
     white-space: initial;
 }
-.content-block{
-    max-height:90%;
-    overflow:auto;
-    margin:0;
+
+.content-block {
+    max-height: 90%;
+    overflow: auto;
+    margin: 0;
 }
-.popup-btn{
-    min-height:2.4rem;
+
+.popup-btn {
+    min-height: 2.4rem;
 }

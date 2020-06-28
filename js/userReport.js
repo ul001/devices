@@ -1,11 +1,11 @@
 $('#fullpage').fullpage({
-		sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
-//		'navigation': true
+    sectionsColor: ['#1bbc9b', '#4BBFC3', '#7BAABE', '#f90'],
+    //		'navigation': true
 });
 $(".contacts-block").indexList();
 var selectSubid = "";
 var clickSubid = "";
-if(selectSubid==""||$("#dateStart").val()==""||$("#dateEnd").val()==""){
+if (selectSubid == "" || $("#dateStart").val() == "" || $("#dateEnd").val() == "") {
     $.toast("点击右上角按钮筛选！");
 }
 $('#searchBtn').click(function () {
@@ -25,7 +25,7 @@ $('#searchBtn').click(function () {
     getFirstPage();
 });
 
-Substation.getDataByAjaxMain("/main/testGlobalException?num=0",{},function(){
+Substation.getDataByAjaxMain("/main/testGlobalException?num=0", {}, function () {
 
 });
 
@@ -57,7 +57,7 @@ function getSomeSubstation() {
             $("#listContainer").hide();
             //            $("#subName").text(clickName);
         });
-    },function(errorcode){});
+    }, function (errorcode) {});
 }
 
 $('#search').bind('keydown', function (event) {
@@ -99,15 +99,15 @@ $(".buttons-row .button").click(function () {
 $("#today").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(todayVal);
-    $("#dateEnd").val(todayVal);
+    Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
 $("#yestoday").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(yestodayVal);
-    $("#dateEnd").val(yestodayVal);
+    Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
 });
 $("#thisMonth").click(function () {
     var myDate = new Date();
@@ -115,8 +115,8 @@ $("#thisMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 $("#lastMonth").click(function () {
     var myDate = new Date();
@@ -124,8 +124,8 @@ $("#lastMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 
 Date.prototype.format = function (fmt) { //author: meizz

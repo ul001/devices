@@ -81,8 +81,14 @@ i.icon.icon-alarm {
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
 }
 
 #fState,
@@ -120,7 +126,7 @@ i.icon.icon-alarm {
 
 .content-block {
     color: #3d4145;
-    height:100%;
+    height: 100%;
 }
 
 .content-block label {
@@ -140,11 +146,11 @@ i.icon.icon-alarm {
 
 #listContainer .item-inner {
     font-size: .7rem;
-    padding-right:0;
+    padding-right: 0;
 }
 
 #listContainer .item-content {
-    padding-left:0;
+    padding-left: 0;
 }
 
 .item-title::before {
@@ -253,25 +259,31 @@ i.icon.icon-fileSize {
     background-image: url(../img/i-fileSize.png);
 }
 
-i.icon.icon-file{
+i.icon.icon-file {
     width: 1.5rem;
     height: 1.5rem;
 }
-i.icon.icon-doc{
+
+i.icon.icon-doc {
     background-image: url(../img/i-word.png);
 }
-i.icon.icon-txt{
+
+i.icon.icon-txt {
     background-image: url(../img/i-txt.png);
 }
-i.icon.icon-xls{
+
+i.icon.icon-xls {
     background-image: url(../img/i-excel.png);
 }
-i.icon.icon-ppt{
+
+i.icon.icon-ppt {
     background-image: url(../img/i-ppt.png);
 }
-i.icon.icon-pdf{
+
+i.icon.icon-pdf {
     background-image: url(../img/i-pdf.png);
 }
-i.icon.icon-default{
+
+i.icon.icon-default {
     background-image: url(../img/i-file.png);
 }

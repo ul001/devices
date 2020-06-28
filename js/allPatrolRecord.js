@@ -327,16 +327,6 @@ $(".icon.icon-clear").click(function () {
 });
 getSomeSubstation(1);
 
-function changeCalendar(changeVal, element, UpElement) {
-    var child = document.getElementById(element);
-    child.remove()
-    var str = ' <input type="text" id="' + element + '" placeholder="" data-placeholder="ui_startTime" readonly />'
-    $("#" + UpElement).html(str);
-    $("#" + element).val(changeVal);
-    $("#" + element).calendar({
-        value: [changeVal]
-    });
-}
 //时间快捷按钮
 $(".buttons-row .button").click(function () {
     $(this).addClass("active").siblings().removeClass("active");
@@ -344,18 +334,18 @@ $(".buttons-row .button").click(function () {
 $("#today").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    changeCalendar(todayVal, "dateStart", "selectStartTime");
-    changeCalendar(todayVal, "dateEnd", "selectEndTime");
+    Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
 
 $("#yestoday").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    changeCalendar(yestodayVal, "dateStart", "selectStartTime");
-    changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
-    // $("#dateStart").val(yestodayVal);
-    // $("#dateEnd").val(yestodayVal);
+    Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
+    // Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    // Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
 });
 $("#thisMonth").click(function () {
     var myDate = new Date();
@@ -363,10 +353,10 @@ $("#thisMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    changeCalendar(firstDayVal, "dateStart", "selectStartTime");
-    changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
-    // $("#dateStart").val(firstDayVal);
-    // $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
+    // Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    // Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 $("#lastMonth").click(function () {
     var myDate = new Date();
@@ -374,10 +364,10 @@ $("#lastMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    changeCalendar(firstDayVal, "dateStart", "selectStartTime");
-    changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
-    // $("#dateStart").val(firstDayVal);
-    // $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
+    // Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    // Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 
 

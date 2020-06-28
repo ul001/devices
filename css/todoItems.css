@@ -40,9 +40,10 @@ i.icon.icon-contactphone {
     margin-left: 0.2rem;
     border-radius: 1.0rem;
 }
-.hasBoom{
-    background:url(../img/i-hasCommit.png) right 1rem top no-repeat;
-    background-size:3.2rem;
+
+.hasBoom {
+    background: url(../img/i-hasCommit.png) right 1rem top no-repeat;
+    background-size: 3.2rem;
 }
 
 i.icon.icon-selectSome {
@@ -64,7 +65,7 @@ i.icon.icon-selectSome {
 #dateStart2,
 #dateEnd2,
 #taskType,
-#timeRank{
+#timeRank {
     border-radius: 0.25rem;
     border: 0.05rem solid #CCCCCC;
     height: 1.5rem;
@@ -76,14 +77,24 @@ i.icon.icon-selectSome {
 #dateStart1,
 #dateEnd1,
 #dateStart2,
-#dateEnd2
- {
+#dateEnd2 {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
 }
 
-#taskType,#timeRank{
+#selectStartTime,
+#selectEndTime,
+#selectStartTime1,
+#selectEndTime1,
+#selectStartTime2,
+#selectEndTime2 {
+    float: left;
+    width: 46%;
+}
+
+#taskType,
+#timeRank {
     width: 100%;
 }
 
@@ -121,28 +132,30 @@ i.icon.icon-selectSome {
     background-color: #02A8A6;
 }
 
-.content-block .buttons-row{
-    margin:.3rem 0;
+.content-block .buttons-row {
+    margin: .3rem 0;
 }
 
-#panel-right-demo .content-block{
-    height:calc(100% - 5.9rem);
-    overflow:auto;
+#panel-right-demo .content-block {
+    height: calc(100% - 5.9rem);
+    overflow: auto;
 }
 
-#chargeSelect,#doSelect{
+#chargeSelect,
+#doSelect {
     border-radius: 0.25rem;
     border: 0.05rem solid #CCCCCC;
     height: 1.5rem;
     margin: 0.1rem 0 0.5rem 0;
-    width:100%;
+    width: 100%;
     padding-left: 0.25rem;
 }
 
-.button.button-fill.button-reset{
-    background-color:#DCDCDC;
+.button.button-fill.button-reset {
+    background-color: #DCDCDC;
     color: #3d4145;
 }
+
 /*
 .canBoom{
     background:url(../img/i-commitAll.png) right 1rem top no-repeat;

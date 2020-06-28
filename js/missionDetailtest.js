@@ -65,8 +65,8 @@ function getNetData() {
         if (data.hasOwnProperty("placeCheckFormId")) {
             placeCheckFormId = data.placeCheckFormId;
         }
-        if(data.hasOwnProperty("haveResult")){
-            haveResult = data.haveResult==true;
+        if (data.hasOwnProperty("haveResult")) {
+            haveResult = data.haveResult == true;
         }
         taskInfo = data.taskInfo;
         userList = data.taskUserList;
@@ -468,9 +468,9 @@ $(".doDetail").click(function () {
             });
         } else {
             //巡检任务
-            if(haveResult){
+            if (haveResult) {
                 window.location.href = "patrolContent.html";
-            }else{
+            } else {
                 $.toast(Operation['ui_noFormResult']);
             }
         }

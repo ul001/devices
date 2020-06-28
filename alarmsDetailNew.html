@@ -22,7 +22,6 @@
                     <span class="icon icon-left"></span>
                     <span data-i18n="ui_back"></span>
                 </a>
-
                 <a class="button button-link button-nav pull-right open-panel">
                     <i class="icon icon-selectSome"></i>
                 </a>
@@ -165,8 +164,13 @@
                 </div>
                 <div>
                     <label><span data-i18n="ui_timeSelect"></span></label><br>
-                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly /> -
-                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                    <div id="selectStartTime">
+                        <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly />
+                    </div>
+                    <div style="margin: 0.25rem;float: left;">-</div>
+                    <div id="selectEndTime">
+                        <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                    </div>
                 </div>
                 <div>
                     <label><span data-i18n="ui_alarmConfirm"></span></label><br>
