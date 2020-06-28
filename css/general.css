@@ -133,14 +133,3 @@ select {
 .searchbar .searchbar-cancel{
     visibility:hidden;
 }
-
-/*input[type=date] {
-    background-color:transparent;
-    FILTER: alpha(opacity=0); *//*androd*//*
-*//*    appearance:none;  *//**//*下拉框去掉右侧图标*//**//*
-    -moz-appearance:none;
-    -webkit-appearance:none;*//*
-}*/
-
-/*
-input[type=date]::-webkit-clear-button{ display: none; }*/
