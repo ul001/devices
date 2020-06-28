@@ -80,61 +80,61 @@ function addItems(number) {
                 }
                 $(data.taskAndRushRepairList.list).each(function () {
                     var stateStr = "";
-                    switch (this.fState+"") {
+                    switch (this.fState + "") {
                         case "0":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState0'] + "</span>";
                             break;
                         case "2":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState2']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState2'] + "</span>";
                             break;
                         case "3":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState3']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState3'] + "</span>";
                             break;
                         case "4":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState4']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState4'] + "</span>";
                             break;
                         case "5":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState5']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState5'] + "</span>";
                             break;
                         case "1":
-                            stateStr = "<span class=\"button-success\">"+Operation['ui_defectState1']+"</span>";
+                            stateStr = "<span class=\"button-success\">" + Operation['ui_defectState1'] + "</span>";
                             break;
                         default:
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState0'] + "</span>";
                             break;
                     }
-                    html += "<div class=\"card\" id=\""+this.fTaskandrushrepairid+"\">\n" +
-                            "    <div class=\"item-content item-link\">\n" +
-                            "        <div class=\"item-inner row no-gutter\">\n" +
-                            "            <div>\n" +
-                            "                <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>"+Substation.removeUndefined(this.fSubname)+"\n" +
-                            "                </p>\n" +
-                            "                <p>"+Operation['ui_TaskContent']+Substation.removeUndefined(this.fTaskcontent)+"</p>\n" +
-                            "                <p>"+Operation['ui_dealState']+stateStr+"</p>\n" +
-                            "                <p>"+Operation['ui_createTime']+Substation.removeUndefined(this.fCreatetime)+"</p>\n" +
-                            "            </div>\n" +
-//                            "            <div class=\"col-30\">\n" +
-////                            "                <p class=\"text-right\">发生时间:</p>\n" +
-//                            "                <p class=\"text-right\">"+Substation.removeUndefined(this.fCreatetime)+"</p>\n" +
-//                            "            </div>\n" +
-                            "        </div>\n" +
-                            "    </div>\n" +
-                            "</div>";
+                    html += "<div class=\"card\" id=\"" + this.fTaskandrushrepairid + "\">\n" +
+                        "    <div class=\"item-content item-link\">\n" +
+                        "        <div class=\"item-inner row no-gutter\">\n" +
+                        "            <div>\n" +
+                        "                <p class=\"subName limit-length\"><i class=\"icon icon-subIcon\"></i>" + Substation.removeUndefined(this.fSubname) + "\n" +
+                        "                </p>\n" +
+                        "                <p>" + Operation['ui_TaskContent'] + Substation.removeUndefined(this.fTaskcontent) + "</p>\n" +
+                        "                <p>" + Operation['ui_dealState'] + stateStr + "</p>\n" +
+                        "                <p>" + Operation['ui_createTime'] + Substation.removeUndefined(this.fCreatetime) + "</p>\n" +
+                        "            </div>\n" +
+                        //                            "            <div class=\"col-30\">\n" +
+                        ////                            "                <p class=\"text-right\">发生时间:</p>\n" +
+                        //                            "                <p class=\"text-right\">"+Substation.removeUndefined(this.fCreatetime)+"</p>\n" +
+                        //                            "            </div>\n" +
+                        "        </div>\n" +
+                        "    </div>\n" +
+                        "</div>";
                 });
                 $('#list-container').append(html);
                 //声明一个控制点击的变量
                 var upLoadClicktag = true;
                 $(".card").unbind().click(function () {
-                    if(!upLoadClicktag){
+                    if (!upLoadClicktag) {
                         return;
                     }
                     upLoadClicktag = false;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         upLoadClicktag = true;
                     }, 200);
                     var clickId = $(this).attr("id");
-//                    var clickTree = $(this).attr("value");
-//                    localStorage.setItem("clickTree", clickTree);
+                    //                    var clickTree = $(this).attr("value");
+                    //                    localStorage.setItem("clickTree", clickTree);
                     /*params['subName']=$("#search").val();
                     localStorage.setItem("saveParam",JSON.stringify(params));*/
                     localStorage.setItem("canClick", false);
@@ -142,25 +142,25 @@ function addItems(number) {
                         localStorage.setItem("repairId", clickId);
                         android.goToIn();
                     } else {
-                        window.location.href = "rushRepairInfo.html?repairId="+clickId;
+                        window.location.href = "rushRepairInfo.html?repairId=" + clickId;
                     }
                 });
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             if (data.taskAndRushRepairList.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
         },
         function (errorCode) {
             if (errorCode == 0) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
+                $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
             } else {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("");
@@ -195,9 +195,9 @@ $(document).on('infinite', '.infinite-scroll', function () {
 });
 
 $('#searchBtn').click(function () {
-    var start = new Date($("#dateStart").val().replace(/-/g,'/'));
-    var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
-    if(start>end){
+    var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+    var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+    if (start > end) {
         $.toast(Operation['ui_dateselecttip']);
         return;
     }
@@ -223,19 +223,19 @@ $("#listContainer").hide();
 
 function getSomeSubstation(isAll) {
     var url = "/getSubListByLetter";
-    if(isAll==1){
+    if (isAll == 1) {
         url = "/getSubstationListByUser";
     }
-    var listObj=[];
+    var listObj = [];
     var searchKey = $("#search").val();
     var params = {
         key: searchKey
     }
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        if(isAll == 1){
+        if (isAll == 1) {
             listObj = data.list;
-        }else{
+        } else {
             listObj = data;
         }
         $(listObj).each(function () {
@@ -272,10 +272,10 @@ $('#search').on("input", function () {
     }
 });
 
-$('#search').on("focus",function(){
-    if($("#search").val().length>0){
+$('#search').on("focus", function () {
+    if ($("#search").val().length > 0) {
         $(".icon.icon-clear").show();
-    }else{
+    } else {
         $(".icon.icon-clear").hide();
     }
 });
@@ -298,15 +298,15 @@ $(".buttons-row .button").click(function () {
 $("#today").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(todayVal);
-    $("#dateEnd").val(todayVal);
+    Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
 $("#yestoday").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(yestodayVal);
-    $("#dateEnd").val(yestodayVal);
+    Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
 });
 $("#thisMonth").click(function () {
     var myDate = new Date();
@@ -314,8 +314,8 @@ $("#thisMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 $("#lastMonth").click(function () {
     var myDate = new Date();
@@ -323,8 +323,8 @@ $("#lastMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 
 Date.prototype.format = function (fmt) { //author: meizz

@@ -695,15 +695,15 @@ jQuery(document).ready(function () {
   $("#today").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(todayVal);
-    $("#dateEnd").val(todayVal);
+    Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
   });
   $("#yestoday").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(yestodayVal);
-    $("#dateEnd").val(yestodayVal);
+    Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
   });
   $("#thisMonth").click(function () {
     var myDate = new Date();
@@ -711,8 +711,8 @@ jQuery(document).ready(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
   });
   $("#lastMonth").click(function () {
     var myDate = new Date();
@@ -720,22 +720,23 @@ jQuery(document).ready(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
   });
-
+  //1
   $("#today1").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart1").val(todayVal);
-    $("#dateEnd1").val(todayVal);
+    Substation.changeCalendar(todayVal, "dateStart1", "selectStartTime1");
+    Substation.changeCalendar(todayVal, "dateEnd1", "selectEndTime1");
+
   });
   $("#yestoday1").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart1").val(yestodayVal);
-    $("#dateEnd1").val(yestodayVal);
+    Substation.changeCalendar(yestodayVal, "dateStart1", "selectStartTime1");
+    Substation.changeCalendar(yestodayVal, "dateEnd1", "selectEndTime1");
   });
   $("#thisMonth1").click(function () {
     var myDate = new Date();
@@ -743,8 +744,8 @@ jQuery(document).ready(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart1").val(firstDayVal);
-    $("#dateEnd1").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart1", "selectStartTime1");
+    Substation.changeCalendar(lastDayVal, "dateEnd1", "selectEndTime1");
   });
   $("#lastMonth1").click(function () {
     var myDate = new Date();
@@ -752,22 +753,22 @@ jQuery(document).ready(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart1").val(firstDayVal);
-    $("#dateEnd1").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart1", "selectStartTime1");
+    Substation.changeCalendar(lastDayVal, "dateEnd1", "selectEndTime1");
   });
-
+  //2
   $("#today2").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart2").val(todayVal);
-    $("#dateEnd2").val(todayVal);
+    Substation.changeCalendar(todayVal, "dateStart2", "selectStartTime2");
+    Substation.changeCalendar(todayVal, "dateEnd2", "selectEndTime2");
   });
   $("#yestoday2").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart2").val(yestodayVal);
-    $("#dateEnd2").val(yestodayVal);
+    Substation.changeCalendar(yestodayVal, "dateStart2", "selectStartTime2");
+    Substation.changeCalendar(yestodayVal, "dateEnd2", "selectEndTime2");
   });
   $("#thisMonth2").click(function () {
     var myDate = new Date();
@@ -775,8 +776,8 @@ jQuery(document).ready(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart2").val(firstDayVal);
-    $("#dateEnd2").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart2", "selectStartTime2");
+    Substation.changeCalendar(lastDayVal, "dateEnd2", "selectEndTime2");
   });
   $("#lastMonth2").click(function () {
     var myDate = new Date();
@@ -784,8 +785,8 @@ jQuery(document).ready(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart2").val(firstDayVal);
-    $("#dateEnd2").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart2", "selectStartTime2");
+    Substation.changeCalendar(lastDayVal, "dateEnd2", "selectEndTime2");
   });
 
   Date.prototype.format = function (fmt) { //author: meizz

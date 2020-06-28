@@ -87,8 +87,13 @@
                 </div>
                 <div>
                     <label><span data-i18n="ui_timeSelect"></span></label><br>
-                    <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly/> -
-                    <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly/>
+                    <div id="selectStartTime">
+                        <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly />
+                    </div>
+                    <div style="margin: 0.25rem;float: left;"> - </div>
+                    <div id="selectEndTime">
+                        <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                    </div>
                 </div>
                 <div>
                     <label><span data-i18n="ui_Defectstate"></span></label><br>

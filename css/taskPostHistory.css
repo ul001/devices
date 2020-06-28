@@ -45,7 +45,7 @@ i.icon.icon-alarm {
 }
 
 .content-block {
-    height:100%;
+    height: 100%;
     color: #3d4145;
 }
 
@@ -96,11 +96,11 @@ i.icon.icon-selectSome {
 
 #listContainer .item-inner {
     font-size: .7rem;
-    padding-right:0;
+    padding-right: 0;
 }
 
 #listContainer .item-content {
-    padding-left:0;
+    padding-left: 0;
 }
 
 .item-title::before {
@@ -116,8 +116,8 @@ i.icon.icon-selectSome {
     margin: 0;
 }
 
-#listBlock{
-    height:calc(100% - 17rem);
+#listBlock {
+    height: calc(100% - 17rem);
 }
 
 .content-block .buttons-row .button {
@@ -150,9 +150,11 @@ i.icon.icon-selectSome {
     background: #ccc;
     color: #3d4145;
 }
-#list-container .card{
-    margin:0.3rem;
+
+#list-container .card {
+    margin: 0.3rem;
 }
+
 .bar .button-nav.pull-right {
     margin-right: 0;
 }
@@ -160,15 +162,19 @@ i.icon.icon-selectSome {
 .list-block .item-link .item-inner {
     background-position: 100% center;
 }
-.list-block .item-link p{
-    margin:0;
+
+.list-block .item-link p {
+    margin: 0;
 }
-.text-right{
-    text-align:right;
+
+.text-right {
+    text-align: right;
 }
+
 .list-block .item-inner.row {
     padding: 0 .7rem 0 0;
 }
+
 i.icon.icon-subIcon {
     width: 0.85rem;
     height: 0.85rem;
@@ -195,21 +201,22 @@ i.icon.icon-subIcon {
     margin: 0;
 }
 
-#panel-right-demo .content-block{
-    height:calc(100% - 5.9rem);
-    overflow:auto;
+#panel-right-demo .content-block {
+    height: calc(100% - 5.9rem);
+    overflow: auto;
 }
 
-#panel-right-demo .content-block .buttons-row{
-    margin:.3rem 0;
+#panel-right-demo .content-block .buttons-row {
+    margin: .3rem 0;
 }
 
-#panel-right-demo input,select{
+#panel-right-demo input,
+select {
     border-radius: 0.25rem;
     border: 0.05rem solid #CCCCCC;
     height: 1.5rem;
     margin: 0.1rem 0 0.5rem 0;
-    width:100%;
+    width: 100%;
     padding-left: 0.25rem;
 }
 
@@ -218,9 +225,19 @@ i.icon.icon-subIcon {
 #dateStart1,
 #dateEnd1,
 #dateStart2,
-#dateEnd2{
-    width: 46% !important;
+#dateEnd2 {
+    width: 100% !important;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime,
+#selectStartTime1,
+#selectEndTime1,
+#selectStartTime2,
+#selectEndTime2 {
+    float: left;
+    width: 46%;
 }
 
 .showImg {
@@ -229,11 +246,11 @@ i.icon.icon-subIcon {
     border-radius: 1.0rem;
 }
 
-.card .item-content{
-    padding-left:0;
+.card .item-content {
+    padding-left: 0;
 }
 
-.button.button-fill.button-reset{
-    background-color:#DCDCDC;
+.button.button-fill.button-reset {
+    background-color: #DCDCDC;
     color: #3d4145;
 }
