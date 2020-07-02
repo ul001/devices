@@ -6,21 +6,21 @@ function getFirstPage() {
   $("#list-container").empty();
   pageNum = 1;
   addItems(itemsPerLoad);
-  $('.infinite-scroll-preloader').html('<div class="preloader"></div>');
+  $(".infinite-scroll-preloader").html('<div class="preloader"></div>');
   loading = false;
-  $.attachInfiniteScroll($('.infinite-scroll'));
+  $.attachInfiniteScroll($(".infinite-scroll"));
 }
 
-$(document).on('refresh', '.pull-to-refresh-content', function (e) {
-  setTimeout(function () {
+$(document).on("refresh", ".pull-to-refresh-content", function(e) {
+  setTimeout(function() {
     getFirstPage();
     // done
-    $.pullToRefreshDone('.pull-to-refresh-content');
+    $.pullToRefreshDone(".pull-to-refresh-content");
   }, 2000);
 });
 
 function addItems(number) {
-  var html = '';
+  var html = "";
   var url = "/getTaskListCreatedByMe";
   var searchKey = $("#searchDaiban").val();
   var fCreatest = $("#dateStart").val();
@@ -35,47 +35,47 @@ function addItems(number) {
   var orderby = $("#timeRank").val();
   var params = {
     pageNo: pageNum,
-    pageSize: number,
+    pageSize: number
   };
   if (searchKey != "" && searchKey != null) {
-    params['searchKey'] = searchKey;
+    params["searchKey"] = searchKey;
   }
   if (fCreatest != "" && fCreatest != null) {
-    params['fCreatest'] = fCreatest + " 00:00:00";
+    params["fCreatest"] = fCreatest + " 00:00:00";
   }
   if (fCreateet != "" && fCreateet != null) {
-    params['fCreateet'] = fCreateet + " 23:59:59";
+    params["fCreateet"] = fCreateet + " 23:59:59";
   }
   if (fPlanst != "" && fPlanst != null) {
-    params['fPlanst'] = fPlanst + " 00:00:00";
+    params["fPlanst"] = fPlanst + " 00:00:00";
   }
   if (fPlanet != "" && fPlanet != null) {
-    params['fPlanet'] = fPlanet + " 23:59:59";
+    params["fPlanet"] = fPlanet + " 23:59:59";
   }
   if (fDeadlinest != "" && fDeadlinest != null) {
-    params['fDeadlinest'] = fDeadlinest + " 00:00:00";
+    params["fDeadlinest"] = fDeadlinest + " 00:00:00";
   }
   if (fDeadlineet != "" && fDeadlineet != null) {
-    params['fDeadlineet'] = fDeadlineet + " 23:59:59";
+    params["fDeadlineet"] = fDeadlineet + " 23:59:59";
   }
   if (fTasktypeid != "" && fTasktypeid != null) {
-    params['fTasktypeid'] = fTasktypeid;
+    params["fTasktypeid"] = fTasktypeid;
   }
   if (chargername != "" && chargername != null) {
-    params['chargername'] = chargername;
+    params["chargername"] = chargername;
   }
   if (executername != "" && executername != null) {
-    params['executername'] = executername;
+    params["executername"] = executername;
   }
   if (orderby != "" && orderby != null) {
-    params['orderby'] = orderby;
+    params["orderby"] = orderby;
   }
-  Substation.postDataByAjaxNoLoading(url, params, function (data) {
+  Substation.postDataByAjaxNoLoading(url, params, function(data) {
     if (data.pageInfo.list.length > 0) {
       if (pageNum == 1) {
         $("#list-container").empty();
       }
-      $(data.pageInfo.list).each(function () {
+      $(data.pageInfo.list).each(function() {
         var imgSrc = "";
         if (this.fTasktypeid == 2) {
           //现场
@@ -108,29 +108,33 @@ function addItems(number) {
                              </div>
                          </div>`;
       });
-      $('#list-container').append(html);
+      $("#list-container").append(html);
       pageNum++;
     } else {
-      $.detachInfiniteScroll($('.infinite-scroll'));
-      $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
+      $.detachInfiniteScroll($(".infinite-scroll"));
+      $(".infinite-scroll-preloader").html(
+        "<span class='bottomTip'>--" + Operation["ui_nomoredata"] + "--</span>"
+      );
       return;
     }
     if (data.pageInfo.list.length < itemsPerLoad) {
-      $.detachInfiniteScroll($('.infinite-scroll'));
-      $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
+      $.detachInfiniteScroll($(".infinite-scroll"));
+      $(".infinite-scroll-preloader").html(
+        "<span class='bottomTip'>--" + Operation["ui_nomoredata"] + "--</span>"
+      );
       return;
     }
   });
 }
 
-$("#searchDaiban").bind("keydown", function (event) {
+$("#searchDaiban").bind("keydown", function(event) {
   if (event.keyCode == 13) {
     getFirstPage();
     document.activeElement.blur();
   }
 });
 
-$(".searchbar-cancel").click(function () {
+$(".searchbar-cancel").click(function() {
   $("#searchDaiban").val("");
   getFirstPage();
 });
@@ -144,14 +148,14 @@ function goToDetail(taskId) {
   }
 }
 
-$(document).on('infinite', '.infinite-scroll', function () {
+$(document).on("infinite", ".infinite-scroll", function() {
   // 如果正在加载，则退出
   if (loading) return;
 
   // 设置flag
   loading = true;
 
-  setTimeout(function () {
+  setTimeout(function() {
     loading = false;
     addItems(itemsPerLoad);
   }, 1000);
@@ -167,23 +171,26 @@ $("#dateStart2").calendar();
 $("#dateEnd2").calendar();
 
 //时间快捷按钮
-$(".buttons-row .button").click(function () {
-  $(this).addClass("active").siblings().removeClass("active");
+$(".buttons-row .button").click(function() {
+  $(this)
+    .addClass("active")
+    .siblings()
+    .removeClass("active");
 });
-$("#today").click(function () {
+$("#today").click(function() {
   var myDate = new Date();
   var todayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
-$("#yestoday").click(function () {
+$("#yestoday").click(function() {
   var myDate = new Date();
   myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
   var yestodayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
 });
-$("#thisMonth").click(function () {
+$("#thisMonth").click(function() {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
@@ -192,7 +199,7 @@ $("#thisMonth").click(function () {
   Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
-$("#lastMonth").click(function () {
+$("#lastMonth").click(function() {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
@@ -202,15 +209,14 @@ $("#lastMonth").click(function () {
   Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 
-$("#today1").click(function () {
+$("#today1").click(function() {
   var myDate = new Date();
   var todayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(todayVal, "dateStart1", "selectStartTime1");
   Substation.changeCalendar(todayVal, "dateEnd1", "selectEndTime1");
-
 });
 
-$("#yestoday1").click(function () {
+$("#yestoday1").click(function() {
   var myDate = new Date();
   myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
   var yestodayVal = myDate.format("yyyy-MM-dd");
@@ -218,7 +224,7 @@ $("#yestoday1").click(function () {
   Substation.changeCalendar(yestodayVal, "dateEnd1", "selectEndTime1");
 });
 
-$("#thisMonth1").click(function () {
+$("#thisMonth1").click(function() {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
@@ -228,7 +234,7 @@ $("#thisMonth1").click(function () {
   Substation.changeCalendar(lastDayVal, "dateEnd1", "selectEndTime1");
 });
 
-$("#lastMonth1").click(function () {
+$("#lastMonth1").click(function() {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
@@ -238,14 +244,14 @@ $("#lastMonth1").click(function () {
   Substation.changeCalendar(lastDayVal, "dateEnd1", "selectEndTime1");
 });
 
-$("#today2").click(function () {
+$("#today2").click(function() {
   var myDate = new Date();
   var todayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(todayVal, "dateStart2", "selectStartTime2");
   Substation.changeCalendar(todayVal, "dateEnd2", "selectEndTime2");
 });
 
-$("#yestoday2").click(function () {
+$("#yestoday2").click(function() {
   var myDate = new Date();
   myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
   var yestodayVal = myDate.format("yyyy-MM-dd");
@@ -253,7 +259,7 @@ $("#yestoday2").click(function () {
   Substation.changeCalendar(yestodayVal, "dateEnd2", "selectEndTime2");
 });
 
-$("#thisMonth2").click(function () {
+$("#thisMonth2").click(function() {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
@@ -263,7 +269,7 @@ $("#thisMonth2").click(function () {
   Substation.changeCalendar(lastDayVal, "dateEnd2", "selectEndTime2");
 });
 
-$("#lastMonth2").click(function () {
+$("#lastMonth2").click(function() {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
@@ -273,7 +279,8 @@ $("#lastMonth2").click(function () {
   Substation.changeCalendar(lastDayVal, "dateEnd2", "selectEndTime2");
 });
 
-Date.prototype.format = function (fmt) { //author: meizz
+Date.prototype.format = function(fmt) {
+  //author: meizz
   var o = {
     "M+": this.getMonth() + 1, //月份
     "d+": this.getDate(), //日
@@ -281,40 +288,70 @@ Date.prototype.format = function (fmt) { //author: meizz
     "m+": this.getMinutes(), //分
     "s+": this.getSeconds(), //秒
     "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-    "S": this.getMilliseconds() //毫秒
+    S: this.getMilliseconds() //毫秒
   };
   if (/(y+)/.test(fmt))
-    fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    fmt = fmt.replace(
+      RegExp.$1,
+      (this.getFullYear() + "").substr(4 - RegExp.$1.length)
+    );
   for (var k in o)
     if (new RegExp("(" + k + ")").test(fmt))
-      fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+      );
   return fmt;
-}
+};
 
-$('#searchBtn').click(function () {
-  var start = new Date($("#dateStart").val().replace(/-/g, '/'));
-  var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+$("#searchBtn").click(function() {
+  var start = new Date(
+    $("#dateStart")
+      .val()
+      .replace(/-/g, "/")
+  );
+  var end = new Date(
+    $("#dateEnd")
+      .val()
+      .replace(/-/g, "/")
+  );
   if (start > end) {
-    $.toast(Operation['ui_dateselecttip']);
+    $.toast(Operation["ui_dateselecttip"]);
     return;
   }
-  var start1 = new Date($("#dateStart1").val().replace(/-/g, '/'));
-  var end1 = new Date($("#dateEnd1").val().replace(/-/g, '/'));
+  var start1 = new Date(
+    $("#dateStart1")
+      .val()
+      .replace(/-/g, "/")
+  );
+  var end1 = new Date(
+    $("#dateEnd1")
+      .val()
+      .replace(/-/g, "/")
+  );
   if (start1 > end1) {
-    $.toast(Operation['ui_dateselecttip']);
+    $.toast(Operation["ui_dateselecttip"]);
     return;
   }
-  var start2 = new Date($("#dateStart2").val().replace(/-/g, '/'));
-  var end2 = new Date($("#dateEnd2").val().replace(/-/g, '/'));
+  var start2 = new Date(
+    $("#dateStart2")
+      .val()
+      .replace(/-/g, "/")
+  );
+  var end2 = new Date(
+    $("#dateEnd2")
+      .val()
+      .replace(/-/g, "/")
+  );
   if (start2 > end2) {
-    $.toast(Operation['ui_dateselecttip']);
+    $.toast(Operation["ui_dateselecttip"]);
     return;
   }
   $(".close-panel").click();
   getFirstPage();
 });
 
-$(".button-reset").click(function () {
+$(".button-reset").click(function() {
   $("#dateStart").val("");
   $("#dateEnd").val("");
   $("#dateStart1").val("");
@@ -325,7 +362,9 @@ $(".button-reset").click(function () {
   $("#chargeSelect").val("");
   $("#doSelect").val("");
   $("#timeRank").val("");
-  $(".buttons-row").find($(".active")).removeClass("active");
+  $(".buttons-row")
+    .find($(".active"))
+    .removeClass("active");
 });
 
 $.init();
