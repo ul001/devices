@@ -845,7 +845,7 @@ function getEnLanguage() {
     ui_subscribe: "Subscribe",
     ui_successfully: "Successfully",
     ui_identify: "Identify standard",
-    ui_TaskPostRecord: "任务发布记录",
+    ui_TaskPostRecord: "TaskPostRecord",
     //报警详情页
     ui_happenTime: "HappenTime:",
     ui_alarmDetail: "Alarm details",
