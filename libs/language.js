@@ -230,7 +230,7 @@ function getZhLanguage() {
     ui_chargeReturnTip: "确定要驳回该任务吗？",
     //missionmanage
     ui_meter: "米",
-    ui_noStartTimeTraceTip: "该执行人尚未开启任务，无法查询其轨迹。",
+    ui_noStartTimeTraceTip: "该执行人未开启轨迹服务，无法查询其轨迹。",
     ui_defectAdvice1: "待客户答复",
     ui_defectAdvice2: "同意处理",
     ui_defectAdvice3: "其他",
@@ -815,7 +815,7 @@ function getEnLanguage() {
     ui_chargeReturnTip: "Are you sure to reject the task?",
     //missionmanage
     ui_meter: "meters",
-    ui_noStartTimeTraceTip: "The executor has not started the task and cannot query its track.",
+    ui_noStartTimeTraceTip: "The executor has not open the trajectory service and cannot query its track.",
     ui_defectAdvice1: "Pending customer response",
     ui_defectAdvice2: "Consent to deal",
     ui_defectAdvice3: "Others",
