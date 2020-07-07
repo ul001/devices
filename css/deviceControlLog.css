@@ -1,6 +1,4 @@
-.card-content-inner {
-
-}
+.card-content-inner {}
 
 .list-container .card-log {
     position: relative;
@@ -8,11 +6,11 @@
     font-size: .7rem;
     background: #fff;
     border-radius: .3rem;
-    padding:.3rem 1rem;
+    padding: .3rem 1rem;
 }
 
-.card-top{
-    border-bottom:1px solid LightGreen;
+.card-top {
+    border-bottom: 1px solid LightGreen;
 }
 
 /*筛选*/
@@ -30,8 +28,14 @@
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
 }
 
 #fState,

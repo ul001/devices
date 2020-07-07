@@ -12,8 +12,14 @@
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
 }
 
 #fState,
@@ -139,9 +145,11 @@ i.icon.icon-selectSome {
     background: #ccc;
     color: #3d4145;
 }
-#list-container .card{
-    margin:0.3rem;
+
+#list-container .card {
+    margin: 0.3rem;
 }
+
 .bar .button-nav.pull-right {
     margin-right: 0;
 }

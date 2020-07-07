@@ -93,25 +93,25 @@ function addItems(number, lastIndex) {
                     var stateStr = "-";
                     switch (this.fState) {
                         case "0":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState0'] + "</span>";
                             break;
                         case "2":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState2']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState2'] + "</span>";
                             break;
                         case "3":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState3']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState3'] + "</span>";
                             break;
                         case "4":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState4']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState4'] + "</span>";
                             break;
                         case "5":
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState5']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState5'] + "</span>";
                             break;
                         case "1":
-                            stateStr = "<span class=\"button-success\">"+Operation['ui_defectState1']+"</span>";
+                            stateStr = "<span class=\"button-success\">" + Operation['ui_defectState1'] + "</span>";
                             break;
                         default:
-                            stateStr = "<span class=\"redColor\">"+Operation['ui_defectState0']+"</span>";
+                            stateStr = "<span class=\"redColor\">" + Operation['ui_defectState0'] + "</span>";
                             break;
                     }
                     /*var solveUser = "";
@@ -123,10 +123,10 @@ function addItems(number, lastIndex) {
                         solveTime="<p>处理时间："+this.fUpdateDate+"</p>";
                     }*/
                     var deviceName = this.fdeviceinfoName;
-                    if(deviceName==undefined){
+                    if (deviceName == undefined) {
                         deviceName = this.treePathName;
                     }
-                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" data-id=\""+this.fSubid+"\">\n" +
+                    html += "<div class=\"card\" id=\"" + this.fDeviceproblemid + "\" data-id=\"" + this.fSubid + "\">\n" +
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"card-content-inner row no-gutter\">\n" +
                         /*"                            <div class=\"col-10\">\n" +
@@ -158,21 +158,21 @@ function addItems(number, lastIndex) {
                 //声明一个控制点击的变量
                 var upLoadClicktag = true;
                 $(".card").unbind().click(function () {
-                    if(!upLoadClicktag){
+                    if (!upLoadClicktag) {
                         return;
                     }
                     upLoadClicktag = false;
-                    setTimeout(function() {
+                    setTimeout(function () {
                         upLoadClicktag = true;
                     }, 1000);
                     var clickId = $(this).attr("id");
                     var subId = $(this).attr("data-id");
-//                    var clickTree = $(this).attr("value");
-//                    localStorage.setItem("clickTree", clickTree);
+                    //                    var clickTree = $(this).attr("value");
+                    //                    localStorage.setItem("clickTree", clickTree);
                     /*params['subName']=$("#search").val();
                     localStorage.setItem("saveParam",JSON.stringify(params));*/
                     localStorage.setItem("canClick", false);
-                    localStorage.setItem("fSubid",subId);
+                    localStorage.setItem("fSubid", subId);
                     if (isAndroid) {
                         localStorage.setItem("fDeviceproblemid", clickId);
                         android.goToIn();
@@ -183,19 +183,19 @@ function addItems(number, lastIndex) {
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             if (data.tDevDeviceproblemList.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
         },
         function (errorCode) {
             if (errorCode == 0) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
+                $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
             } else {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("");
@@ -234,9 +234,9 @@ $(document).on('infinite', '.infinite-scroll', function () {
 });
 
 $('#searchBtn').click(function () {
-    var start = new Date($("#dateStart").val().replace(/-/g,'/'));
-    var end = new Date($("#dateEnd").val().replace(/-/g,'/'));
-    if(start>end){
+    var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+    var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+    if (start > end) {
         $.toast(Operation['ui_dateselecttip']);
         return;
     }
@@ -262,19 +262,19 @@ $("#listContainer").hide();
 
 function getSomeSubstation(isAll) {
     var url = "/getSubListByLetter";
-    if(isAll==1){
+    if (isAll == 1) {
         url = "/getSubstationListByUser";
     }
-    var listObj=[];
+    var listObj = [];
     var searchKey = $("#search").val();
     var params = {
         key: searchKey
     }
     $("#listContainer").empty();
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-        if(isAll == 1){
+        if (isAll == 1) {
             listObj = data.list;
-        }else{
+        } else {
             listObj = data;
         }
         $(listObj).each(function () {
@@ -311,10 +311,10 @@ $('#search').on("input", function () {
     }
 });
 
-$('#search').on("focus",function(){
-    if($("#search").val().length>0){
+$('#search').on("focus", function () {
+    if ($("#search").val().length > 0) {
         $(".icon.icon-clear").show();
-    }else{
+    } else {
         $(".icon.icon-clear").hide();
     }
 });
@@ -337,15 +337,15 @@ $(".buttons-row .button").click(function () {
 $("#today").click(function () {
     var myDate = new Date();
     var todayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(todayVal);
-    $("#dateEnd").val(todayVal);
+    Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
 $("#yestoday").click(function () {
     var myDate = new Date();
     myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
     var yestodayVal = myDate.format("yyyy-MM-dd");
-    $("#dateStart").val(yestodayVal);
-    $("#dateEnd").val(yestodayVal);
+    Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
 });
 $("#thisMonth").click(function () {
     var myDate = new Date();
@@ -353,8 +353,8 @@ $("#thisMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 $("#lastMonth").click(function () {
     var myDate = new Date();
@@ -362,8 +362,8 @@ $("#lastMonth").click(function () {
     var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
     var firstDayVal = firstDay.format("yyyy-MM-dd");
     var lastDayVal = lastDay.format("yyyy-MM-dd");
-    $("#dateStart").val(firstDayVal);
-    $("#dateEnd").val(lastDayVal);
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 
 Date.prototype.format = function (fmt) { //author: meizz

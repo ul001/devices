@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="libs/light7.min.css">
-    <link rel="stylesheet" href="libs/light7-swiper.min.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/patrolRecord.css">
-</head>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/patrolRecord.css" />
+  </head>
 
-<body>
+  <body>
     <div class="page-group">
-        <div class="page" id="router1">
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
-                    <span class="icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </a>
-                <a class="button button-link button-nav pull-right open-panel">
-                    <i class="icon icon-selectSome"></i>
-                </a>
-                <h1 class="title title_color">
-                    <!--                <p class="limit-length" id="titleContent"><span id="subname">所有变电所</span>巡检记录</p>-->
-                    <span data-i18n="ui_Patrolrecord"></span>
-                </h1>
-            </header>
-            <!--        <div class="bar bar-header-secondary" style="line-height:2.2rem">
+      <div class="page" id="router1">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn back_btn"
+            onclick="window.history.back()"
+          >
+            <span class="icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <a class="button button-link button-nav pull-right open-panel">
+            <i class="icon icon-selectSome"></i>
+          </a>
+          <h1 class="title title_color">
+            <!--                <p class="limit-length" id="titleContent"><span id="subname">所有变电所</span>巡检记录</p>-->
+            <span data-i18n="ui_Patrolrecord"></span>
+          </h1>
+        </header>
+        <!--        <div class="bar bar-header-secondary" style="line-height:2.2rem">
             <p class="limit-length"><i class="icon icon-sub"></i><span id="subName"></span></p>
         </div>-->
-            <div class="content pull-to-refresh-content infinite-scroll" data-ptr-distance="55" data-distance="100">
-                <div class="pull-to-refresh-layer">
-                    <div class="preloader"></div>
-                    <div class="pull-to-refresh-arrow"></div>
-                </div>
-                <div id="list-container">
-                    <!--                <div class="card">
+        <div
+          class="content pull-to-refresh-content infinite-scroll"
+          data-ptr-distance="55"
+          data-distance="100"
+        >
+          <div class="pull-to-refresh-layer">
+            <div class="preloader"></div>
+            <div class="pull-to-refresh-arrow"></div>
+          </div>
+          <div id="list-container">
+            <!--                <div class="card">
                     <div class="card-content">
                         <div class="card-content-inner row no-gutter">
                             <div class="col-10">
@@ -75,41 +81,63 @@
                         </div>
                     </div>
                 </div>-->
-                </div>
-                <div class="infinite-scroll-preloader">
-                    <div class="preloader"></div>
-                </div>
-            </div>
+          </div>
+          <div class="infinite-scroll-preloader">
+            <div class="preloader"></div>
+          </div>
         </div>
-        <div class="panel-overlay"></div>
-        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
-            <div class="content-block">
-                <div>
-                    <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
-                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
-                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
-                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a></p>
-                </div>
-                <div>
-                    <label><span data-i18n="ui_timeSelect"></span></label><br>
-                    <div id="selectStartTime">
-                        <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly />
-                    </div>
-                    <div style="margin: 0.25rem;float: left;"> - </div>
-                    <div id="selectEndTime">
-                        <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
-                    </div>
-                </div>
-                <div>
-                    <label><span data-i18n="ui_taskstate"></span></label><br>
-                    <select id="fState">
-                        <option value="" data-i18n="ui_All"></option>
-                        <option value="1" data-i18n="ui_todo"></option>
-                        <option value="2" data-i18n="ui_doing"></option>
-                        <option value="3" data-i18n="ui_done"></option>
-                    </select>
-                </div>
-                <!--            <div>
+      </div>
+      <div class="panel-overlay"></div>
+      <div class="panel panel-right panel-reveal" id="panel-right-demo">
+        <div class="content-block">
+          <div>
+            <p class="buttons-row">
+              <a href="#" class="button" id="today"
+                ><span data-i18n="ui_today"></span
+              ></a>
+              <a href="#" class="button" id="yestoday"
+                ><span data-i18n="ui_yday"></span
+              ></a>
+              <a href="#" class="button" id="thisMonth"
+                ><span data-i18n="ui_curr"></span
+              ></a>
+              <a href="#" class="button" id="lastMonth"
+                ><span data-i18n="ui_Uult"></span
+              ></a>
+            </p>
+          </div>
+          <div>
+            <label><span data-i18n="ui_timeSelect"></span></label><br />
+            <div id="selectStartTime">
+              <input
+                type="text"
+                id="dateStart"
+                placeholder=""
+                data-placeholder="ui_startTime"
+                readonly
+              />
+            </div>
+            <div style="margin: 0.25rem;float: left;">-</div>
+            <div id="selectEndTime">
+              <input
+                type="text"
+                id="dateEnd"
+                placeholder=""
+                data-placeholder="ui_endTime"
+                readonly
+              />
+            </div>
+          </div>
+          <div>
+            <label><span data-i18n="ui_taskstate"></span></label><br />
+            <select id="fState">
+              <option value="" data-i18n="ui_All"></option>
+              <option value="1" data-i18n="ui_todo"></option>
+              <option value="2" data-i18n="ui_doing"></option>
+              <option value="3" data-i18n="ui_done"></option>
+            </select>
+          </div>
+          <!--            <div>
                 <label>紧急程度</label><br>
                 <select id="dangerType">
                     <option value="">全部</option>
@@ -118,19 +146,23 @@
                     <option value="紧急">紧急</option>
                 </select>
             </div>-->
-                <div>
-                    <label><span data-i18n="ui_Substationname"></span></label><br>
-                    <div class="searchbar">
-                        <div class="search-input">
-                            <label class="icon icon-search" for="search"></label>
-                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
-                                class="icon icon-clear"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="list-block">
-                    <ul id="listContainer">
-                        <!--<li class="item-content" data-id="">
+          <div>
+            <label><span data-i18n="ui_Substationname"></span></label><br />
+            <div class="searchbar">
+              <div class="search-input">
+                <label class="icon icon-search" for="search"></label>
+                <input
+                  type="search"
+                  id="search"
+                  placeholder=""
+                  data-placeholder="ui_enterkeywords"
+                /><i class="icon icon-clear"></i>
+              </div>
+            </div>
+          </div>
+          <div class="list-block">
+            <ul id="listContainer">
+              <!--<li class="item-content" data-id="">
                         <div class="item-inner">
                             <div class="item-title">所有变电所</div>
                         </div>
@@ -145,7 +177,7 @@
                             <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
                         </div>
                     </li>-->
-                        <!--<li class="item-content">
+              <!--<li class="item-content">
                         <div class="item-inner">
                             <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
                         </div>
@@ -170,24 +202,42 @@
                             <div class="item-title">安科瑞E楼变电所江苏金蝶单</div>
                         </div>
                     </li>-->
-                    </ul>
-                </div>
-            </div>
-            <div class="btnBar row no-gutter">
-                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
-                            data-i18n="ui_cancel"></span></a>
-                </div>
-                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
-                            data-i18n="ui_query"></span></a></div>
-            </div>
+            </ul>
+          </div>
         </div>
+        <div class="btnBar row no-gutter">
+          <div class="col-50">
+            <a
+              href="#"
+              class="button button-big button-fill button-cancel close-panel"
+              ><span data-i18n="ui_cancel"></span
+            ></a>
+          </div>
+          <div class="col-50">
+            <a href="#" class="button button-big button-fill" id="searchBtn"
+              ><span data-i18n="ui_query"></span
+            ></a>
+          </div>
+        </div>
+      </div>
     </div>
-    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script
+      type="text/javascript"
+      src="libs/jquery-1.12.4.min.js"
+      charset="utf-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="libs/light7.min.js"
+      charset="utf-8"
+    ></script>
     <script src="libs/language.js"></script>
-    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script
+      type="text/javascript"
+      src="libs/light7-swiper.min.js"
+      charset="utf-8"
+    ></script>
     <script src="libs/tools.js"></script>
     <script src="js/allPatrolRecord.js"></script>
-</body>
-
+  </body>
 </html>

@@ -2103,7 +2103,16 @@ var Substation = {
       return pass;
     }
   },
-
+  changeCalendar: function (changeVal, element, UpElement) {
+    var child = document.getElementById(element);
+    child.remove()
+    var str = ' <input type="text" id="' + element + '" placeholder="" data-placeholder="ui_startTime" readonly />'
+    $("#" + UpElement).html(str);
+    $("#" + element).val(changeVal);
+    $("#" + element).calendar({
+      value: [changeVal]
+    });
+  },
 };
 
 function showToast(str) {
