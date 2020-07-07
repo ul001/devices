@@ -130,8 +130,14 @@ i.icon.icon-alarm {
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
+}
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
 }
 
 #fState,
@@ -472,9 +478,9 @@ a {
     text-indent: 2em;
 }
 
-.imgBox{
+.imgBox {
     width: auto;
     height: auto;
-    padding:.5rem .5rem 0 .5rem;
+    padding: .5rem .5rem 0 .5rem;
     max-height: 4.5rem;
 }

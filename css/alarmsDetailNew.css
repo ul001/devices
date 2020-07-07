@@ -87,9 +87,16 @@ i.icon.icon-clearAlarm {
 #dateStart,
 #dateEnd {
     padding-left: 0.25rem;
-    width: 46%;
+    width: 100%;
     font-size: 0.75rem;
 }
+
+#selectStartTime,
+#selectEndTime {
+    float: left;
+    width: 46%;
+}
+
 
 #fState,
 #dangerType,
