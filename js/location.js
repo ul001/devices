@@ -73,23 +73,25 @@
       });
       map.addControl(navigationControl);
       var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
-          {"input" : "suggestId"
-          ,"location" : map,
+          {"input" : "suggestId",
+          "location" : map,
           "onSearchComplete":function(data){
-              var indexs = data.Qq.length;
+              var indexs = data.getNumPois();
               var html = "";
               if(indexs>0){
                   for(var i=0;i<indexs;i++){
                       var _value = data.getPoi(i);
-                      var value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
-                      html += `<li class="item-content item-link" onclick="getMyPlace('${value}','${_value.business}')">
-                                  <div class="item-inner">
-                                      <div class="item-title-row">
-                                          <div class="item-title">${_value.business}</div>
-                                      </div>
-                                      <div class="item-subtitle">${_value.province +  _value.city +  _value.district +  _value.street}</div>
-                                  </div>
-                              </li>`;
+                      if(_value!=null && _value!=undefined){
+                            var value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+                            html += `<li class="item-content item-link" onclick="getMyPlace('${value}','${_value.business}')">
+                                        <div class="item-inner">
+                                            <div class="item-title-row">
+                                                <div class="item-title">${_value.business}</div>
+                                            </div>
+                                            <div class="item-subtitle">${_value.province +  _value.city +  _value.district +  _value.street}</div>
+                                        </div>
+                                    </li>`;
+                      }
                   }
                   $("#results").show();
               }else{
