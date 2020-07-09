@@ -246,8 +246,8 @@ function getNetData() {
                         '                                    <div class="item-inner">';
                     text +=
                         '<div class="item-title label row no-gutter" style="display:flex;align-items:center;">' +
-                        '<div class="limit-length" style="max-width:80%;">'+this.userName +'</div>'+
-                        "<img class='callPhone' onclick=\"callPhone('"+this.fUserphone+"')\" style='margin-left:0.3rem;width:1rem;' src='img/call.png'>" +
+                        '<div class="limit-length" style="width:80%;">'+this.userName +'</div>'+
+                        "<img class='callPhone' onclick=\"callPhone('"+this.fUserphone+"')\" style='margin-left:0.3rem;margin-right:0.5rem;width:1rem;' src='img/call.png'>" +
                         "</div>";
                     text +=
                         '                                        <div class="item-input">';
