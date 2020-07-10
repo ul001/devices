@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>版本更新功能</title>
@@ -11,34 +10,68 @@
     <link rel="stylesheet" href="libs/light7.min.css" />
     <link rel="stylesheet" href="libs/light7-swiper.min.css" />
     <link rel="stylesheet" href="css/general.css" />
+    <!-- <link rel="stylesheet" href="libs/hivideo/hivideo.css" /> -->
     <!--    <link rel="stylesheet" href="css/versionIntroduce.css"/>-->
+  </head>
 
-</head>
-
-<body>
+  <body>
     <div class="page-group">
-        <div class="page">
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
-                    <span class="icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </a>
-                <h1 class="title title_color" data-i18n="ui_versionLog">
-                </h1>
-            </header>
-            <div class="content" style="background:#fff;">
-                <div class="content-block">
-                    <p id="updateLog"></p>
-                </div>
-            </div>
+      <div class="page">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn back_btn"
+            onclick="window.history.back()"
+          >
+            <span class="icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color" data-i18n="ui_versionLog"></h1>
+        </header>
+        <div class="content" style="background:#fff;">
+          <div class="content-block">
+            <p id="updateLog"></p>
+          </div>
+          <video
+            controls
+            autoplay
+            loop
+            preload="auto"
+            poster="img/popup-img.png"
+            webkit-playsinline="true"
+            playsinline="true"
+            x5-video-player-type="h5"
+            x5-video-player-fullscreen="true"
+            x-webkit-airplay="allow"
+            x5-video-orientation="portraint"
+            style="object-fit:fill"
+          >
+            <source
+              src="http://192.168.112.233:8080/web_manage/upload/video.mp4"
+              type="video/mp4"
+            />
+            <!-- <source src="video.ogg" type="video/ogg; codecs=dirac, speex" /> -->
+            <p>你的浏览器不支持 <code>video</code> 标签.</p>
+          </video>
         </div>
+      </div>
     </div>
-    <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
-    <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
+    <script
+      type="text/javascript"
+      src="libs/jquery-1.12.4.min.js"
+      charset="utf-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="libs/light7.min.js"
+      charset="utf-8"
+    ></script>
     <script src="libs/language.js"></script>
-    <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
+    <script
+      type="text/javascript"
+      src="libs/light7-swiper.min.js"
+      charset="utf-8"
+    ></script>
     <script src="libs/tools.js"></script>
     <script src="js/versionHistoryView.js"></script>
-</body>
-
+  </body>
 </html>
