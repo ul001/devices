@@ -159,7 +159,7 @@ i.icon.icon-alarm {
 
 .list-block {
     margin: 0;
-    height: calc(100% - 13rem);
+    height: calc(100% - 7.5rem);
 }
 
 .list-block .item-title.label {
