@@ -13,7 +13,7 @@ if (jumpId != undefined && jumpId != null && jumpId != "") {
     isPush = "1";
 }
 
-if (historyLog) {
+if (isPush == "0" && historyLog) {
     //配置说明
     historyLog = JSON.parse(historyLog);
     var reg = new RegExp("<br>", "g"); //g,表示全部替换。
