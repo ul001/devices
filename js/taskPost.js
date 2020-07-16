@@ -219,6 +219,7 @@ function postTask() {
                 $.alert(Operation['ui_postSuccess'], function () {
                     if(isAndroid){
                         android.refresh();
+                        android.goBack();
                     }else{
                         localStorage.setItem("need-refresh", "true");
                         window.history.back();
