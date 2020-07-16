@@ -21,7 +21,7 @@ if (isPush == "0" && historyLog) {
     $("#updateLog").html(historyLog);
     //配置视频
     document.getElementById("videoplay").src = videoSrc;
-    document.getElementById("videoplay").play();
+//    document.getElementById("videoplay").play();
 } else {
     getData();
 }
