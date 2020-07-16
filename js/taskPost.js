@@ -217,8 +217,12 @@ function postTask() {
         Substation.postDataByAjax("/releaseOrderTask", params, function (data) {
             if (data.code == "200") {
                 $.alert(Operation['ui_postSuccess'], function () {
-                    localStorage.setItem("need-refresh", "true");
-                    window.history.back();
+                    if(isAndroid){
+                        android.refresh();
+                    }else{
+                        localStorage.setItem("need-refresh", "true");
+                        window.history.back();
+                    }
                 });
             }
         });
