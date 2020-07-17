@@ -18,9 +18,15 @@ if (isPush == "0" && historyLog) {
     historyLog = JSON.parse(historyLog);
     var reg = new RegExp("<br>", "g"); //g,表示全部替换。
     historyLog.replace(reg, "/n");
-    $("#updateLog").html(historyLog);
     //配置视频
-    document.getElementById("videoplay").src = videoSrc;
+    if(videoSrc==undefined || videoSrc=="" || videoSrc==null){
+        $("#videoRoom").remove();
+        $("#updateLog").css("height","calc(100% - 10px)");
+    }else{
+        document.getElementById("videoplay").src = videoSrc;
+        document.getElementById("videoplay").play();
+    }
+    $("#updateLog").html(historyLog);
 //    document.getElementById("videoplay").play();
 } else {
     getData();
@@ -58,10 +64,15 @@ function getData() {
                             // historyLog = JSON.parse(historyLog);
                             var reg = new RegExp("<br>", "g"); //g,表示全部替换。
                             historyLog.replace(reg, "/n");
-                            $("#updateLog").html(historyLog);
                             //配置视频
-                            document.getElementById("videoplay").src = videoSrc;
-                            document.getElementById("videoplay").play();
+                            if(videoSrc==undefined || videoSrc=="" || videoSrc==null){
+                                $("#videoRoom").remove();
+                                $("#updateLog").css("height","calc(100% - 10px)");
+                            }else{
+                                document.getElementById("videoplay").src = videoSrc;
+                                document.getElementById("videoplay").play();
+                            }
+                            $("#updateLog").html(historyLog);
                         }
                     }
                 } else if (data.code == "5000") {
@@ -97,10 +108,6 @@ $(".back_btn").click(function () {
             window.webkit.messageHandlers.goBackiOS.postMessage("");
         }
     } else {
-        if (isAndroid) {
-            android.goBack();
-        } else {
-            window.history.back();
-        }
+        window.history.back();
     }
 });

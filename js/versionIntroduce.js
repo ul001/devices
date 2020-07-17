@@ -80,8 +80,12 @@ function addClick() {
         var thisLog = $(this).attr("data-str");
         localStorage.setItem("updateLog", thisLog);
         var url = $(this).attr("data-str2");
-        localStorage.setItem("videoUrl", videoUrl + url);
-        console.log(thisLog);
+        if(url=="undefined" || url==undefined || url=="" || url==null){
+            localStorage.removeItem("videoUrl");
+        }else{
+            localStorage.setItem("videoUrl", videoUrl + url);
+        }
+//        console.log(thisLog);
         window.location.href = "versionHistoryView.html";
     });
 }
