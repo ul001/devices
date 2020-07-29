@@ -1,4 +1,4 @@
-$(".back_btn").click(function() {
+$(".back_btn").click(function () {
   if (isAndroid) {
     android.goBack();
   } else {
@@ -20,9 +20,8 @@ var myPp;
 
 var markersArr = [];
 Substation.getDataByAjax(
-  "/getSubstationListByUser?pageNo=1&pageSize=999",
-  {},
-  function(data) {
+  "/getSubstationListByUser?pageNo=1&pageSize=999", {},
+  function (data) {
     if (data.list != undefined) {
       markersArr = data.list;
       loadScript();
@@ -43,12 +42,20 @@ function initialize() {
     var marker = new BMap.Marker(point, {
       icon: icon
     });
+
     map.addOverlay(marker);
     marker.setLabel(label);
+    if ($("#showOrHide").attr("name") === "Showsubname") {
+      label.hide();
+      // marker.addEventListener("mouseover", AddShowEvent);
+      // marker.addEventListener("mouseout", AddHideEvent);
+    } else {
+      label.show();
+    }
     addClickHandler(marker, markDetail);
   }
 
-  markersArr.forEach(function(marker) {
+  markersArr.forEach(function (marker) {
     var point = new BMap.Point(marker.fLongitude, marker.fLatitude);
     var label = new BMap.Label(marker.fSubname, {
       offset: new BMap.Size(40, -10)
@@ -68,7 +75,7 @@ function initialize() {
 
   //点击静态marker
   function addClickHandler(marker, markDetail) {
-    marker.addEventListener("click", function() {
+    marker.addEventListener("click", function () {
       if (isAndroid) {
         android.goBack();
       } else {
@@ -106,7 +113,7 @@ function initialize() {
     //建立一个自动完成的对象
     input: "suggestId",
     location: map,
-    onSearchComplete: function(data) {
+    onSearchComplete: function (data) {
       var indexs = data.getNumPois();
       var html = "";
       if (indexs > 0) {
@@ -167,37 +174,39 @@ function loadScript() {
 //声明一个控制点击的变量
 var upLoadClicktag = true;
 
-function saveLocation() {
-  if (!upLoadClicktag) {
-    return;
+function showOrHide() {
+  if ($("#showOrHide").attr("name") === "Showsubname") {
+    $("#showOrHide").attr("name", "Hidesubname");
+    // language.common.eleSelect($("#showOrHide"));
+    $("#showOrHide").addClass('isClick');
+    var markers = map.getOverlays();
+    $.each(markers, function (key, val) {
+      var label = val.getLabel();
+      if (label === null)
+        return;
+      label.show();
+    });
+  } else {
+    $("#showOrHide").attr("name", "Showsubname");
+    // language.common.eleSelect($("#showOrHide"));
+    $("#showOrHide").removeClass('isClick');
+    var markers = map.getOverlays();
+    $.each(markers, function (key, val) {
+      var label = val.getLabel();
+      if (label === null)
+        return;
+      label.hide();
+
+    });
   }
-  return;
-  upLoadClicktag = false;
-  var params = {
-    fSubid: selectSubid,
-    fLongitude: myPp.lng,
-    fLatitude: myPp.lat,
-    fAddress: dizhi
-  };
-  Substation.postDataByAjax("/updateSubstationLocation", params, function(
-    data
-  ) {
-    if (data.code == 200) {
-      $.toast(Operation["ui_savesuccess"]);
-      upLoadClicktag = true;
-      setTimeout(function() {
-        if (isAndroid) {
-          android.goBack();
-        } else {
-          window.history.back();
-        }
-      }, 1000);
-    }
-  });
-  //alert(selectSubid + "\n" + "lng:" + lng + "\nlat:" + lat);
+  // if (!upLoadClicktag) {
+  //   return;
+  // }
+  // return;
+
 }
 
-$("#suggestId").bind("keydown", function(event) {
+$("#suggestId").bind("keydown", function (event) {
   if (event.keyCode == 13) {
     //            local.search($("#suggestId").val());
     //            $("#results").show();
@@ -206,7 +215,7 @@ $("#suggestId").bind("keydown", function(event) {
   }
 });
 
-$(".searchbar-cancel").click(function() {
+$(".searchbar-cancel").click(function () {
   $("#suggestId").val("");
   $("#results").hide();
 });
@@ -215,7 +224,7 @@ function getMyPlace(value, name) {
   myValue = value;
   setPlace();
   $("#suggestId").val(name);
-  setTimeout(function() {
+  setTimeout(function () {
     $("#results").hide();
   }, 500);
 }
@@ -228,7 +237,7 @@ function setPlace() {
     var marker = new BMap.Marker(pp);
     marker.setLabel(lable);
     map.addOverlay(marker); //添加标注
-    geoc.getLocation(pp, function(rs) {
+    geoc.getLocation(pp, function (rs) {
       var addComp = rs.addressComponents;
       dizhi =
         addComp.province +
