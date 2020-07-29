@@ -17,10 +17,7 @@
   float: right;
   overflow: auto;
   border: 1px solid #eee;
-  /*height:70px;*/
-  /* height: 3rem; */
-  height: 11rem;
-  /*min-height:10px;*/
+  height: 10.8rem;
 }
 
 .List2 img {

@@ -1089,8 +1089,8 @@ var CustomReport = (function () {
                 // $("#live" + num).html("");
                 // $("#live" + num).html(firstStr);
 
-                if (parentNum > 0) {
-                    for (var k = 0; k < parentNum; k++) {
+                if (itemlength > 0) {
+                    for (var k = 0; k < itemlength; k++) {
                         var Str = "";
                         for (var i = 0; i < 1; i++) {
                             var index = k + i;
