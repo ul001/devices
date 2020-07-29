@@ -268,6 +268,7 @@ function getZhLanguage() {
     //
     ui_MessageType: "消息类型",
     ui_WhenAppOpen: "应用打开时",
+    ui_openPosition: "是否开启持续定位并上传定位",
     ui_WhenAppClose: "应用未打开",
     ui_dangerLevel1: "一般",
     ui_dangerLevel2: "重大",
@@ -302,6 +303,7 @@ function getZhLanguage() {
     ui_allSelect: "全部订阅",
     ui_allNoSelect: "全部退订",
     ui_selectNotifyTitle: "消息通知",
+    ui_lastUploadingPosition: "持续定位",
     //照明
     ui_lightingDetail: "照明详情",
     ui_hasComfirm: "确认",
@@ -838,6 +840,7 @@ function getEnLanguage() {
     //
     ui_MessageType: "Message Type",
     ui_WhenAppOpen: "When App Open",
+    ui_openPosition: "Enable continuous positioning and upload positioning",
     ui_WhenAppClose: "When App Close",
     ui_dangerLevel1: "General",
     ui_dangerLevel2: "Major",
@@ -877,6 +880,7 @@ function getEnLanguage() {
     ui_allSelect: "Subscribe all",
     ui_allNoSelect: "Unsubscribe all",
     ui_selectNotifyTitle: "Notification",
+    ui_lastUploadingPosition: "lastUploadingPosition",
     //照明
     ui_lightingDetail: "Lighting details",
     ui_hasComfirm: "Confirm",

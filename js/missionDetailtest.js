@@ -19,6 +19,45 @@ try {
     isUseTrace = "0";
 }
 
+// //根据jQuery选择器找到需要加载ystep的容器
+// //loadStep 方法可以初始化ystep
+// $(".ystep1").loadStep({
+//     //ystep的外观大小
+//     //可选值：small,large
+//     size: "large",
+//     //ystep配色方案
+//     //可选值：green,blue
+//     color: "green",
+//     //ystep中包含的步骤
+//     steps: [{
+//         //步骤名称
+//         title: "发起",
+//         //步骤内容(鼠标移动到本步骤节点时，会提示该内容)
+//         content: "实名用户/公益组织发起项目"
+//     }, {
+//         title: "签到",
+//         content: "乐捐平台工作人员审核项目"
+//     }, {
+//         title: "执行",
+//         content: "乐捐项目上线接受公众募款"
+//     }, {
+//         title: "审核",
+//         content: "项目执行者线下开展救护行动"
+//     }, {
+//         title: "结束",
+//         content: "项目执行者公示善款使用报告"
+//     }]
+// });
+
+// //跳转到下一个步骤
+// //$(".ystep1").nextStep();
+// //跳转到上一个步骤
+// //$(".ystep1").prevStep();
+// //跳转到指定步骤
+// $(".ystep1").setStep(2);
+// //获取当前在第几步
+// //$(".ystep1").getStep();
+
 var upLoadClicktag = true;
 
 //任务id

@@ -41,20 +41,21 @@ var allGroupList = [];
 if (getSaveList != null && getSaveList != "") {
   allGroupList = JSON.parse(getSaveList);
 }
-if (allGroupList != null && allGroupList != "" && allGroupList.length > 0) {
-  loadPage();
-} else {
-  Substation.getDataByAjax(
-    "/subDeviceTreeSelectHideOrShow",
-    {
-      fSubid: selectSubid
-    },
-    function(data) {
-      allGroupList = data.subDeviceGroupList;
-      loadPage();
-    }
-  );
-}
+// if (allGroupList != null && allGroupList != "" && allGroupList.length > 0) {
+//   loadPage();
+// } else {
+Substation.getDataByAjax(
+  "/subDeviceTreeSelectHideOrShowForCharger",
+  {
+    fSubid: selectSubid,
+    fPlacecheckformid: fPlacecheckformid
+  },
+  function(data) {
+    allGroupList = data.subDeviceGroupList;
+    loadPage();
+  }
+);
+// }
 
 function loadPage() {
   var clickNum = 0;
@@ -392,12 +393,14 @@ function loadPage() {
       }
       var classCss = "";
       if (num == 0) {
-        if (this.taskFinishFlag == "0") {
+        if (this.fenzuTotal == "0") {
         } else {
           classCss = " finished";
         }
       } else {
-        var finishRadio = Number(this.taskFinishFlag) / num;
+        var finishRadio = this.fenzuTotal;
+        // var finishRadio = Number(this.fenzujindu) / num;
+        // var finishRadio = this.fenzujindu;
         if (finishRadio < 1 && finishRadio > 0) {
           classCss = " halfFinished";
         } else if (finishRadio == 1) {
@@ -785,7 +788,7 @@ function saveThisPage() {
         var needChange = true;
         $.each(allGroupList, function(i, obj) {
           if (thisGroupid == obj.id) {
-            if (obj.taskFinishFlag == "0") {
+            if (obj.fenzuTotal == "0") {
               needChange = true;
             } else {
               needChange = false;
@@ -819,7 +822,8 @@ function saveThisPage() {
 function changeListVal(thisId) {
   $.each(allGroupList, function(i, obj) {
     if (obj.id == thisId) {
-      allGroupList[i].taskFinishFlag = Number(obj.taskFinishFlag) + 1 + "";
+      // allGroupList[i].taskFinishFlag = Number(obj.taskFinishFlag) + 1 + "";
+      allGroupList[i].fenzuTotal = Number(obj.fenzuTotal) + 1 + "";
       return false;
     }
   });
