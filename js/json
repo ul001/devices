@@ -1,258 +1,59 @@
-URL: http://116.236.149.162:8090/SubstationWEBV2/authority/pageCustomList?fSubid=10100001&fTemplateid=130
-{
-    "code": 200,
-    "msg": "ok",
-    "data": [
-        {
-            "fId": 85,
-            "fSubid": "10100001",
-            "fTemplateid": "130",
-            "fPagejson": "[{\"name\":\"%E4%BF%A1%E6%81%AF%E4%B8%80\",\"value\":[{\"type\":\"date\",\"name\":\"%E4%BF%A1%E6%81%AF%E4%B8%80\",\"value\":\"2019-08-03\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"123\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"inpName\":\"\",\"inpType\":true,\"type\":\"input\",\"name\":\"%E5%BF%85%E5%A1%AB%E9%A1%B9\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D\"},{\"type\":\"radio\",\"name\":\"%E6%96%B0%E5%A2%9E%E5%8D%95%E9%80%89\",\"value\":\"no\"},{\"type\":\"select\",\"name\":\"%E6%96%B0%E5%A2%9E%E5%88%97%E8%A1%A8\",\"value\":\"%5B%7B%22opName%22%3A%22%E9%80%89%E9%A1%B91%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E9%80%89%E9%A1%B92%22%2C%22opType%22%3Atrue%7D%2C%7B%22opName%22%3A%22123%22%2C%22opType%22%3Afalse%7D%5D\"},{\"type\":\"date\",\"name\":\"%E6%96%B0%E5%A2%9E%E6%97%A5%E6%9C%9F\",\"value\":\"\"}]},{\"name\":\"%E4%BF%A1%E6%81%AF%E4%BA%8C\",\"value\":[{\"type\":\"radio\",\"name\":\"%E4%BF%A1%E6%81%AF%E4%BA%8C\",\"value\":\"yes\"},{\"type\":\"radio\",\"name\":\"12\",\"value\":\"yes\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E6%96%87%E6%9C%AC%E6%96%B0%E5%A2%9E\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"type\":\"radio\",\"name\":\"%E5%8D%95%E9%80%89%E6%96%B0%E5%A2%9E\",\"value\":\"yes\"},{\"type\":\"select\",\"name\":\"%E5%88%97%E8%A1%A8%E6%96%B0%E5%A2%9E\",\"value\":\"%5B%7B%22opName%22%3A%22%E9%80%89%E9%A1%B9%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E9%80%89%E9%A1%B9%E4%BA%8C%22%2C%22opType%22%3Atrue%7D%5D\"},{\"type\":\"date\",\"name\":\"%E6%97%A5%E6%9C%9F%E6%96%B0%E5%A2%9E\",\"value\":\"\"}]}]",
-            "fPagename": "%E9%A1%B5%E9%9D%A2%E5%BC%95%E6%93%8E1"
-        },
-        {
-            "fId": 93,
-            "fSubid": "10100001",
-            "fTemplateid": "130",
-            "fPagejson": "[{\"name\":\"%E4%BF%A1%E6%81%AF%E4%B8%80\",\"value\":[{\"type\":\"date\",\"name\":\"%E4%BF%A1%E6%81%AF%E4%B8%80\",\"value\":\"2019-08-03\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"123\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"inpName\":\"\",\"inpType\":true,\"type\":\"input\",\"name\":\"%E5%BF%85%E5%A1%AB%E9%A1%B9\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Atrue%7D\"},{\"type\":\"radio\",\"name\":\"%E6%96%B0%E5%A2%9E%E5%8D%95%E9%80%89\",\"value\":\"no\"},{\"type\":\"select\",\"name\":\"%E6%96%B0%E5%A2%9E%E5%88%97%E8%A1%A8\",\"value\":\"%5B%7B%22opName%22%3A%22%E9%80%89%E9%A1%B91%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E9%80%89%E9%A1%B92%22%2C%22opType%22%3Atrue%7D%2C%7B%22opName%22%3A%22123%22%2C%22opType%22%3Afalse%7D%5D\"},{\"type\":\"date\",\"name\":\"%E6%96%B0%E5%A2%9E%E6%97%A5%E6%9C%9F\",\"value\":\"\"}]},{\"name\":\"%E4%BF%A1%E6%81%AF%E4%BA%8C\",\"value\":[{\"type\":\"radio\",\"name\":\"%E4%BF%A1%E6%81%AF%E4%BA%8C\",\"value\":\"yes\"},{\"type\":\"radio\",\"name\":\"12\",\"value\":\"yes\"},{\"inpName\":\"\",\"inpType\":false,\"type\":\"input\",\"name\":\"%E6%96%87%E6%9C%AC%E6%96%B0%E5%A2%9E\",\"value\":\"%7B%22inpName%22%3A%22%22%2C%22inpType%22%3Afalse%7D\"},{\"type\":\"radio\",\"name\":\"%E5%8D%95%E9%80%89%E6%96%B0%E5%A2%9E\",\"value\":\"yes\"},{\"type\":\"select\",\"name\":\"%E5%88%97%E8%A1%A8%E6%96%B0%E5%A2%9E\",\"value\":\"%5B%7B%22opName%22%3A%22%E9%80%89%E9%A1%B9%22%2C%22opType%22%3Afalse%7D%2C%7B%22opName%22%3A%22%E9%80%89%E9%A1%B9%E4%BA%8C%22%2C%22opType%22%3Atrue%7D%5D\"},{\"type\":\"date\",\"name\":\"%E6%97%A5%E6%9C%9F%E6%96%B0%E5%A2%9E\",\"value\":\"\"}]}]",
-            "fPagename": "%E9%A1%B5%E9%9D%A2%E5%BC%95%E6%93%8E1"
-        }
-    ]
-}
+allWord: "dianqigufenyouxiangongsilou"
 
-//登录接口返回字段json
-data = {
-		authorization = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzUyNjU2ODYsInVzZXJuYW1lIjoibmFuYXlhIn0.QYcO45eHM8olf3opHtUSOwZbNTMcX6NG9H7OtDuuF20";
-		userId = 312;
-		versionURL = "fileVersion/v3/H5";
-		versionURL2 = "fileVersion/v3/H5-2";
-		webAPIInfo = {
-			fId = 23
-			fLastupdatetime = "2019-11-14";
-			fState = "1";
-			fVersion = "v3";
-		};
-	};
-	msg = "Login success";
-}
+fAddress: "上海市上海市嘉定区育绿路253"
 
-//照片新格式
-<__NSDictionaryM 0x282660be0> {
-	UIImagePickerControllerCropRect = NSRect: {{0, 116}, {3025, 3025}};
-	UIImagePickerControllerEditedImage = <UIImage:0x281ef9a70 anonymous {828, 828}>, scale = 1;
-	UIImagePickerControllerMediaMetadata = {
-		DPIHeight = 72
-		DPIWidth = 72;
-		Orientation = 6;
-		kCGImageDestinationICCProfile = {length = 548, bytes = 0x00000224 6170706c 04000000 6d6e7472 ... 000003dc 0000c06e };
-		{Exif} = {
-			ApertureValue = 1.6959938131099;
-			BrightnessValue = 2.40210794022583;
-			ColorSpace = 65535;
-			DateTimeDigitized = "2019:12:02 13:51:42";
-			DateTimeOriginal = "2019:12:02 13:51:42";
-			ExifVersion = "0232";
-			ExposureBiasValue = 0;
-			ExposureMode = 0;
-			ExposureProgram = 2;
-			ExposureTime = 0.01666666666666667;
-			FNumber = 1.8;
-			Flash = 24;
-			FocalLenIn35mmFilm = 26;
-			FocalLength = 4.25;
-			ISOSpeedRatings = [
-				200
-			];
-			LensMake = "Apple";
-			LensModel = "iPhone 11 back dual wide camera 4.25mm f/1.8";
-			LensSpecification = [
-				1.539999961853027,
-				4.25,
-				1.8,
-				2.400000095367432
-			];
-			MeteringMode = 5
-			OffsetTime = "+08:00";
-			OffsetTimeDigitized = "+08:00";
-			OffsetTimeOriginal = "+08:00";
-			PixelXDimension = 4032;
-			PixelYDimension = 3024;
-			SceneType = 1;
-			SensingMethod = 2;
-			ShutterSpeedValue = 5.915717986355797;
-			SubjectArea = [
-				2003,
-				1505,
-				2112,
-				1264
-			];
-			SubsecTimeDigitized = "570";
-			SubsecTimeOriginal = "570";
-			WhiteBalance = 0;
-		};
-		{MakerApple} = {
-			1 = 11;
-			12 = [
-				2.6015625,
-				25.7734375
-			];
-			13 = 3;
-			14 = 0;
-			15 = 2;
-			16 = 1;
-			2 = {length = 512, bytes = 0x6a006f00 62006000 d4001501 fe00e400 ... a600a600 a600a700 };
-			20 = 10;
-			23 = 38797312;
-			25 = 2;
-			3 = {
-				epoch = 0;
-				flags = 1;
-				timescale = 1000000000
-				value = 16037997685500;
-			};
-			31 = 0;
-			32 = "9384D65C-6BB7-403A-AC59-1E57DCD93F16";
-			33 = 0;
-			35 = [
-				8,
-				268435497
-			];
-			37 = 4234;
-			38 = 3;
-			39 = 35.69021987915039;
-			4 = 1;
-			40 = 1;
-			43 = "2EA2B2A8-0F3E-41A0-8CD3-6B6F6E5B245B";
-			5 = 203;
-			6 = 199;
-			7 = 1;
-			8 = [
-				-0.1186364218592644,
-				-0.4139962792396545,
-				-0.888681948184967
-			]
-		};
-		{TIFF} = {
-			DateTime = "2019:12:02 13:51:42";
-			Make = "Apple"
-			Model = "iPhone 11";
-			ResolutionUnit = 2;
-			Software = "13.2.2";
-			XResolution = 72;
-			YResolution = 72;
-		};
-	};
-	UIImagePickerControllerMediaType = "public.image";
-	UIImagePickerControllerOriginalImage = <UIImage:0x281ef99e0 anonymous {3024, 4032}>, scale = 1
-}
+fApplycapacity: 300
 
-//灯光列表
- "list": [
-            {
-                "fSubid": 10100001,
-                "fMetercode": "12",
-                "fFuncid": "13",
-                "fGatewayid": "10100001002",
-                "fComid": "C1",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT1",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}",
-                "deviceValue": 0,
-                "deviceValueExplain": "分闸"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "120",
-                "fFuncid": "13",
-                "fGatewayid": "10100001001",
-                "fComid": "11",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT2",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "121",
-                "fFuncid": "13",
-                "fGatewayid": "10100001001",
-                "fComid": "1",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT3",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "122",
-                "fFuncid": "13",
-                "fGatewayid": "10100001001",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT4",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "123",
-                "fFuncid": "13",
-                "fGatewayid": "10100001001",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT5",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "123456",
-                "fFuncid": "123456",
-                "fGatewayid": "10100001001",
-                "fComid": "",
-                "fDevicetype": "照明",
-                "fDevicename": "123456",
-                "fStatedesc": "{\"0\": \"11\", \"1\": \"11\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "1234561",
-                "fFuncid": "123456",
-                "fGatewayid": "10100001001",
-                "fComid": "",
-                "fDevicetype": "照明",
-                "fDevicename": "1234561",
-                "fStatedesc": "{\"0\": \"11\", \"1\": \"11\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "124",
-                "fFuncid": "13",
-                "fGatewayid": "10100001001",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT6",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "125",
-                "fFuncid": "13",
-                "fGatewayid": "10100001001",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT7",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
-            },
-            {
-                "fSubid": 10100001,
-                "fMetercode": "126",
-                "fFuncid": "13",
-                "fGatewayid": "10100001001",
-                "fFuncname": "11",
-                "fDevicetype": "照明",
-                "fDevicename": "TESTLIGHT8",
-                "fStatedesc": "{\"0\": \"分闸\", \"1\": \"合闸\"}"
-            }
-        ],
-        "firstPage": 1,
-        "prePage": 0,
+fConfigtypeid: 2
+
+fContacts: "徐永亮"
+
+fContactsPhone: "17629665216"
+
+fDefaultcharger: "1"
+
+fDefaultexecutor: "311,105"
+
+fDoor: false
+
+fInstalledcapacity: 500
+
+fLatitude: 31.34996039
+
+fLongitude: 121.30713886
+
+fPhoneofalarm: "17701736604;19921940127;13651805743"
+
+fPhoneofoperation: ""
+
+fSmog: false
+
+fSubgroupid: 3
+
+fSubid: 10100001
+
+fSubname: "电气股份有限公司E楼"
+
+fTransformernum: 1
+
+fVisionlive: "db4057b52a374a46a13d861ed3d64237|683946436;lskdjflsdakjfkldsjffffffffffffff|555;b86082143a864f618d6d09fbbaa1fe9f|683946443"
+
+fVoltageoftrans: "10/0.4kV"
+
+fVoltagestep: 10
+
+fWaterin: false
+
+f_EpiFPrice: 1.222
+
+f_EpiGPrice: 0.364
+
+f_EpiJPrice: 0
+
+f_EpiPPrice: 0.752
+
+f_PartnerSubNo: "BPD00045"
+
+firstWord: "DQGFYXGSL"
+
+substationImg: "a67c9494ec594e55ac4fdbc0b7ad2717.ai"
