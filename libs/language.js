@@ -8,6 +8,7 @@ function getZhLanguage() {
     ui_address: "地址",
     ui_photo: "照片",
     ui_location: "位置",
+    ui_unRoblocation: "未抢单位置",
     ui_selectSub: "选择变电所",
     ui_subHolder: "请输入变电所名称或编号",
     ui_subHolderNoCode: "请输入任务单号/任务内容/变电所名称",
@@ -87,7 +88,8 @@ function getZhLanguage() {
     ui_findTime: "发现时间：",
     // selectPhoto
     ui_photo: "照片",
-    ui_location: "位置",
+
+
     //todoItem
     ui_taskType: "任务类型",
     ui_taskTypeSelect: "任务类型筛选",
@@ -587,6 +589,7 @@ function getEnLanguage() {
     ui_address: "Address",
     ui_photo: "Photo",
     ui_location: "Location",
+    ui_unRoblocation: "Unrob Location",
     ui_selectSub: "Select a substation",
     ui_subHolder: "Please enter the substation name or number",
     ui_subHolderNoCode: "Please enter the task number/task content/substation name",
@@ -665,7 +668,7 @@ function getEnLanguage() {
     ui_findTime: "FindTime:",
     // selectPhoto
     ui_photo: "Photo",
-    ui_location: "Location",
+
     //todoItem
     ui_taskType: "TaskType",
     ui_taskTypeSelect: "TaskTypeSelect",
