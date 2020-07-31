@@ -115,6 +115,12 @@
     width: 28%;
 }
 
+i.icon.icon-Refresh {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/refresh.png);
+}
+
 /* #addVarContan126 .row {
     justify-content: center;
     display: flex;
