@@ -825,4 +825,15 @@ function callPhone(phoneNum) {
     }
 }
 
+function gotoMissionTimeAxis() {
+    //    var taskID = localStorage.getItem("taskID");
+    localStorage.setItem("subLat", subLat);
+    localStorage.setItem("subLon", subLon);
+    if (isAndroid) {
+        android.goToInHtml("missionTimeAxis.html");
+    } else {
+        window.location.href = "missionTimeAxis.html";
+    }
+}
+
 $.init();
