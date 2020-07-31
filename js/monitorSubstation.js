@@ -77,7 +77,7 @@ function initialize() {
   function addClickHandler(marker, markDetail) {
     marker.addEventListener("click", function () {
       if (isAndroid) {
-        android.goBack();
+        android.clickSubstation(markDetail.fSubid,markDetail.fSubname);
       } else {
         window.history.back();
         window.webkit.messageHandlers.goBackSubPage.postMessage(markDetail);
