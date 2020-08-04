@@ -8,7 +8,7 @@ $(".showlist").empty();
 var isOpenBoxInApp = localStorage.getItem("alwaysUploadPosition");
 try {
     if (isAndroid) {
-        isOpenBoxInApp = android.getSPItem("showMsgInApp");
+        isOpenBoxInApp = android.getSPItem("alwaysUploadPosition");
     }
 } catch (e) {
     isOpenBoxInApp = "false";
