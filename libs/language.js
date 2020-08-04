@@ -16,6 +16,7 @@ function getZhLanguage() {
     ui_loading: "正在加载...",
     ui_back: "返回",
     ui_cancel: "取消",
+    ui_finish: "完成",
     ui_neterror: "网络异常",
     ui_confirm: "确定",
     ui_changeToggleName: "切换名称显隐",
@@ -95,6 +96,7 @@ function getZhLanguage() {
     ui_taskTypeSelect: "任务类型筛选",
     //taskDetail
     ui_taskDetail: "任务详情",
+    ui_taskDetailTimeAxis: "任务进展",
     ui_taskNumber: "任务单号:",
     ui_tasktyper: "任务类型:",
     ui_Subname: "变电所名称:",
@@ -597,6 +599,7 @@ function getEnLanguage() {
     ui_loading: "Loading...",
     ui_back: "Back",
     ui_cancel: "Cancel",
+    ui_finish: "Finish",
     ui_confirm: "confirm",
     ui_changeToggleName: "ToggleName",
     ui_All: "ALL",
@@ -674,6 +677,7 @@ function getEnLanguage() {
     ui_taskTypeSelect: "TaskTypeSelect",
     //taskDetail
     ui_taskDetail: "Task Detail",
+    ui_taskDetailTimeAxis: "Task Progress",
     ui_taskNumber: "TaskNum:",
     ui_tasktyper: "TaskType:",
     ui_Subname: "Substation:",
