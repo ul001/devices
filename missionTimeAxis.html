@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>任务详情时间轴</title>
-    <meta
-      name="viewport"
-      content="initial-scale=1, maximum-scale=1,user-scalable=no"
-    />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
     <link rel="shortcut icon" href="/favicon.ico" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -16,301 +14,202 @@
     <link rel="stylesheet" href="css/general.css" />
     <link rel="stylesheet" href="css/RobBillLocation.css" />
     <link href="css/missionTimeAxis.css" type="text/css" rel="stylesheet" />
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="page-group">
-      <div class="page page-current" id="mainPage">
-        <header class="bar bar-nav bar_color">
-          <a
-            class="button button-link button-nav pull-left external click_btn suibian"
-          >
-            <span class="icon icon-left"></span>
-            <span data-i18n="ui_back"></span>
-          </a>
-          <!-- <a class="button button-link button-nav pull-right open-popup" id="clickPop" data-popup=".popup-about">
+        <div class="page page-current" id="mainPage">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left external click_btn suibian">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <!-- <a class="button button-link button-nav pull-right open-popup" id="clickPop" data-popup=".popup-about">
                     <span class="icon icon-menu" style="color:white"></span>
                 </a> -->
-          <!-- <p class="buttons-row">
+                <!-- <p class="buttons-row">
                     <a href="#" class="button buttonTab active">步行</a><a href="#" class="button buttonTab">驾车</a><a
                         href="#" class="button buttonTab">公交</a>
                 </p> -->
-          <h1 class="title title_color">
-            <span data-i18n="ui_RobBillDetails"></span>
-          </h1>
-        </header>
-        <div class="content">
-          <div id="container" style="width:100%;height:100%"></div>
-        </div>
-        <div id="control">
-          <div onclick="walk()" class="button button-link buttonTab">
-            <img
-              class="col-15"
-              src="img/buxing.png"
-              style="height:1rem;vertical-align:middle;"
-            /><span data-i18n="ui_walk"></span>
-          </div>
-          <div onclick="drive()" class="button button-link buttonTab">
-            <img
-              class="col-15"
-              src="img/jiache.png"
-              style="height:1rem;vertical-align:middle;"
-            /><span data-i18n="ui_drive"></span>
-          </div>
-          <div onclick="navigation()" class="button button-link buttonTab">
-            <img
-              class="col-15"
-              src="img/daohang.png"
-              style="height:1rem;vertical-align:middle;"
-            /><span data-i18n="ui_navigation"></span>
-          </div>
-        </div>
-        <div class="bottomUp">
-          <a
-            class="button open-popup"
-            id="clickPopup"
-            data-popup=".popup-about"
-            style="border:white"
-            ><img
-              class="col-15"
-              src="img/xiangshangjiantou.png"
-              style="height:1rem;"
-          /></a>
-        </div>
-      </div>
-      <div id="page1" class="page">
-        <header class="bar bar-nav bar_color">
-          <a
-            class="button button-link button-nav pull-left click_btn"
-            onclick="clickSelectPersonBack();"
-          >
-            <span class=" icon icon-left"></span>
-            <span data-i18n="ui_back"></span>
-          </a>
-          <h1 class="title title_color">
-            <span data-i18n="ui_selectPeople"></span
-            ><span id="peopleType"></span>
-          </h1>
-        </header>
-        <div class="bar bar-header-secondary">
-          <div class="searchbar">
-            <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
-            <div class="search-input">
-              <label class="icon icon-search" for="searchUser"></label>
-              <input
-                type="search"
-                id="searchUser"
-                placeholder=""
-                data-placeholder="ui_selectUser"
-              />
+                <h1 class="title title_color">
+                    <span data-i18n="ui_taskDetailTimeAxis"></span>
+                </h1>
+            </header>
+            <div class="content">
+                <div id="container" style="width:100%;height:100%"></div>
             </div>
-          </div>
-        </div>
-        <nav class="bar bar-footer">
-          <span id="showSelected"
-            ><span data-i18n="ui_hasSelected"></span>:</span
-          >
-          <a
-            href="#"
-            class="button bg-primary col-33"
-            onclick="saveSelectedPeople()"
-            data-i18n="ui_confirm"
-          ></a>
-        </nav>
-        <div class="content">
-          <div class="list-block">
-            <ul id="classList">
-              <li id="subClass">
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title"></div>
-                  </div>
+            <div id="control">
+                <div onclick="walk()" class="button button-link buttonTab">
+                    <img class="col-15" src="img/buxing.png" style="height:1rem;vertical-align:middle;" /><span
+                        data-i18n="ui_walk"></span>
                 </div>
-              </li>
-              <li id="peopleClass">
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title">
-                      <span data-id="-1" data-i18n="ui_organization"></span>
-                      <!--<i class="icon icon-right"></i>
+                <div onclick="drive()" class="button button-link buttonTab">
+                    <img class="col-15" src="img/jiache.png" style="height:1rem;vertical-align:middle;" /><span
+                        data-i18n="ui_drive"></span>
+                </div>
+                <div onclick="navigation()" class="button button-link buttonTab">
+                    <img class="col-15" src="img/daohang.png" style="height:1rem;vertical-align:middle;" /><span
+                        data-i18n="ui_navigation"></span>
+                </div>
+            </div>
+            <div class="bottomUp">
+                <a class="button open-popup" id="clickPopup" data-popup=".popup-about" style="border:white"><img
+                        class="col-15" src="img/xiangshangjiantou.png" style="height:1rem;" /></a>
+            </div>
+        </div>
+        <div id="page1" class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="clickSelectPersonBack();">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_selectPeople"></span><span id="peopleType"></span>
+                </h1>
+            </header>
+            <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="searchUser"></label>
+                        <input type="search" id="searchUser" placeholder="" data-placeholder="ui_selectUser" />
+                    </div>
+                </div>
+            </div>
+            <nav class="bar bar-footer">
+                <span id="showSelected"><span data-i18n="ui_hasSelected"></span>:</span>
+                <a href="#" class="button bg-primary col-33" onclick="saveSelectedPeople()" data-i18n="ui_confirm"></a>
+            </nav>
+            <div class="content">
+                <div class="list-block">
+                    <ul id="classList">
+                        <li id="subClass">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="peopleClass">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <span data-id="-1" data-i18n="ui_organization"></span>
+                                        <!--<i class="icon icon-right"></i>
                                     <span class="preClass">安科瑞运维小组</span><i class="icon icon-right"></i>
                                     <span>运维测试</span>-->
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-
-            <ul class="classUl"></ul>
-            <ul class="personUl" id="selectAll">
-              <li>
-                <label class="label-checkbox item-content" data-id="10100001">
-                  <input type="checkbox" name="my-checkbox" />
-                  <div class="item-media">
-                    <i class="icon icon-form-checkbox"></i>
-                  </div>
-                  <div class="item-inner">
-                    <div class="item-title" data-i18n="ui_SelectAll"></div>
-                  </div>
-                </label>
-              </li>
-            </ul>
-            <ul class="personUl" id="personListUl"></ul>
-          </div>
-        </div>
-      </div>
-      <div id="page2" class="page">
-        <header class="bar bar-nav bar_color">
-          <a
-            class="button button-link button-nav pull-left click_btn"
-            onclick="$.router.back();"
-          >
-            <span class=" icon icon-left"></span>
-            <span data-i18n="ui_back"></span>
-          </a>
-          <h1 class="title title_color">
-            <span data-i18n="ui_hasSelected"></span
-            ><span id="numberShow">3</span
-            ><span data-i18n="ui_personNum"></span>
-          </h1>
-          <a
-            class="button button-link button-nav pull-right click_btn"
-            data-i18n="ui_confirm"
-            onclick="$.router.back();"
-          >
-          </a>
-        </header>
-        <div class="content">
-          <div class="list-block">
-            <ul id="selectedUl"></ul>
-          </div>
-        </div>
-      </div>
-      <div class="popup popup-about" style="display: none;">
-        <div class="content native-scroll">
-          <div class="content-inner">
-            <p>
-              <a class="button close-popup" id="clickDown"
-                ><img
-                  class="col-15"
-                  src="img/xiangxiajiantou.png"
-                  style="height:1rem;"
-              /></a>
-            </p>
-            <div class="content-block" id="taskDetail">
-              <div class="demo">
-                <div class="history">
-                  <div class="history-date">
-                    <ul class="history-ul">
-                      <li>
-                        <h3>10:08<span>12/10/08</span></h3>
-                        <dl>
-                          <dt>
-                            发布任务<span
-                              >张三发布了上海嘉定变电所的巡检任务</span
-                            >
-                          </dt>
-                        </dl>
-                      </li>
-                      <li>
-                        <h3>11:12<span>12/10/11</span></h3>
-                        <dl>
-                          <dt>任务已开启<span>李四于11:12分开启任务</span></dt>
-                          <!-- <A href="http://www.jq22.com/" target="_blank">http://www.jq22.com/</A> -->
-                        </dl>
-                      </li>
-                      <li>
-                        <h3>11:23<span>12/10/11</span></h3>
-                        <dl>
-                          <dt>任务已签到<span>李四于11:23分签到</span></dt>
-                        </dl>
-                      </li>
-                      <li>
-                        <h3>15:23<span>12/10/11</span></h3>
-                        <dl>
-                          <dt>
-                            执行人提交任务<span
-                              >李四于15:23分完成任务并提交，等待审核</span
-                            >
-                          </dt>
-                        </dl>
-                      </li>
-                      <li class="green">
-                        <h3>08:01<span>12/10/12</span></h3>
-                        <dl>
-                          <dt>
-                            通过审核，任务完成<span
-                              >负责人通过审核，任务已完成</span
-                            >
-                          </dt>
-                        </dl>
-                      </li>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
-                  </div>
-                  <!-- <div class="history-date">
-                                    <ul>
-                                        <h2 class="date02">
-                                            <a href="#nogo">2010年</a>
-                                        </h2>
+
+                    <ul class="classUl"></ul>
+                    <ul class="personUl" id="selectAll">
+                        <li>
+                            <label class="label-checkbox item-content" data-id="10100001">
+                                <input type="checkbox" name="my-checkbox" />
+                                <div class="item-media">
+                                    <i class="icon icon-form-checkbox"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_SelectAll"></div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                    <ul class="personUl" id="personListUl"></ul>
+                </div>
+            </div>
+        </div>
+        <div id="page2" class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="$.router.back();">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_hasSelected"></span><span id="numberShow">3</span><span
+                        data-i18n="ui_personNum"></span>
+                </h1>
+                <a class="button button-link button-nav pull-right click_btn" data-i18n="ui_confirm"
+                    onclick="$.router.back();">
+                </a>
+            </header>
+            <div class="content">
+                <div class="list-block">
+                    <ul id="selectedUl"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="popup popup-about" style="display: none;">
+            <div class="content native-scroll">
+                <div class="content-inner">
+                    <p>
+                        <a class="button close-popup" id="clickDown"><img class="col-15" src="img/xiangxiajiantou.png"
+                                style="height:1rem;" /></a>
+                    </p>
+                    <div class="content-block" id="taskDetail">
+                        <div class="demo">
+                            <div class="history">
+                                <div class="history-date">
+                                    <ul class="history-ul">
                                         <li>
-                                            <h3>
-                                                12.13<span>2010</span>
-                                            </h3>
+                                            <h3>10:08<span>12/10/08</span></h3>
                                             <dl>
                                                 <dt>
-                                                    升级极速内核到7.0<span>提升浏览器速度、增强安全性</span>
+                                                    发布任务<span>张三发布了上海嘉定变电所的巡检任务</span>
                                                 </dt>
                                             </dl>
                                         </li>
                                         <li>
-                                            <h3>
-                                                10.20<span>2010</span>
-                                            </h3>
+                                            <h3>11:12<span>12/10/11</span></h3>
                                             <dl>
-                                                <dt>
-                                                    升级极速内核到6.0<span>新增360帐户，同步网络收藏夹</span>
-                                                </dt>
+                                                <dt>任务已开启<span>李四于11:12分开启任务</span></dt>
+                                                <!-- <A href="http://www.jq22.com/" target="_blank">http://www.jq22.com/</A> -->
                                             </dl>
                                         </li>
                                         <li>
-                                            <h3>
-                                                09.15<span>2010</span>
-                                            </h3>
+                                            <h3>11:23<span>12/10/11</span></h3>
+                                            <dl>
+                                                <dt>任务已签到<span>李四于11:23分签到</span></dt>
+                                            </dl>
+                                        </li>
+                                        <li>
+                                            <h3>15:23<span>12/10/11</span></h3>
                                             <dl>
                                                 <dt>
-                                                    首款双核安全浏览器 - 360极速浏览器发布
-                                                    <span>
-                                                        首个包含沙箱、系统级防注入、完整多进程隔离架构等安全机制的双核浏览器<br>
-                                                        <br>
-                                                    </span>
+                                                    执行人提交任务<span>李四于15:23分完成任务并提交，等待审核</span>
                                                 </dt>
-                                                <br>
-                                                <br>
-                                                <br>
-                                                <br>
+                                            </dl>
+                                        </li>
+                                        <li class="green">
+                                            <h3>08:01<span>12/10/12</span></h3>
+                                            <dl>
+                                                <dt>
+                                                    通过审核，任务完成<span>负责人通过审核，任务已完成</span>
+                                                </dt>
                                             </dl>
                                         </li>
                                     </ul>
-                                </div> -->
-                </div>
-              </div>
-            </div>
-            <!-- <div class="popBottomBtn">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="popBottomBtn">
               <a
                 class="button open-popup sureBtn"
                 data-popup=".popup-services"
                 data-i18n="ui_RobBill"
               ></a>
             </div> -->
-            <div class="popBottomBtn2">
-              <a class="button sureBtn" onclick="pushTaskDetails()"
-                ><span data-i18n="ui_seeDetail"></span
-              ></a>
+                    <div class="popBottomBtn2">
+                        <a class="button sureBtn" onclick="pushTaskDetails()"><span data-i18n="ui_seeDetail"></span></a>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <!-- <div class="popup popup-services">
+        <!-- <div class="popup popup-services">
             <div class="content native-scroll">
                 <div class="content-inner">
                     <div class="content-block">
@@ -340,27 +239,16 @@
             </div>
         </div> -->
     </div>
-    <script
-      type="text/javascript"
-      src="libs/jquery-1.12.4.min.js"
-      charset="utf-8"
-    ></script>
-    <script
-      type="text/javascript"
-      src="libs/light7.min.js"
-      charset="utf-8"
-    ></script>
+    <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
     <script src="libs/language.js"></script>
-    <script
-      type="text/javascript"
-      src="libs/light7-swiper.min.js"
-      charset="utf-8"
-    ></script>
+    <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
     <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=Ysaj307vcP9KgGcn8w2qqaxIdybbBG6d"></script>-->
     <script type="text/javascript" src="libs/tools.js" charset="utf-8"></script>
     <script type="text/javascript" src="js/missionTimeAxis.js"></script>
     <!-- <script type='text/javascript' src="js/RobBillLocation.js" charset="utf-8"></script> -->
-  </body>
+</body>
+
 </html>
 
 <!-- <head>

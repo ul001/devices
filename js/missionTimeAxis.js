@@ -230,8 +230,8 @@ function drive() {
 }
 
 function pushTaskDetails() {
-    localStorage.setItem("missionType", missionType);
-    localStorage.setItem("taskID", taskid);
+    // localStorage.setItem("missionType", missionType);
+    // localStorage.setItem("taskID", taskid);
     // if (isAndroid) {
     //     android.goToIn();
     // } else {
@@ -259,20 +259,20 @@ var upLoadClicktag = true;
 
 //从推送消息点击跳转
 function getOwnLocation() {
-    if (jumpId) {
-        //获取定位
-        if (isIOS) {
-            window.webkit.messageHandlers.getLocation.postMessage("");
-            loc = localStorage.getItem("locationStrJS");
-        } else if (isAndroid) {
-            if (android.getGPSUse()) {
-                loc = android.getLocation();
-                getLocAndCheckIn(loc);
-            }
+    // if (jumpId) {
+    //获取定位
+    if (isIOS) {
+        window.webkit.messageHandlers.getLocation.postMessage("");
+        loc = localStorage.getItem("locationStrJS");
+    } else if (isAndroid) {
+        if (android.getGPSUse()) {
+            loc = android.getLocation();
+            getLocAndCheckIn(loc);
         }
-    } else {
-        $.toast("无法获取抢单详情，抢单ID为空");
     }
+    // } else {
+    //     $.toast("无法获取抢单详情，抢单ID为空");
+    // }
 }
 
 //获取定位后初始化地图+查询行车路线
@@ -303,103 +303,52 @@ function getLocAndCheckIn(loc) {
     } else {}
 }
 
-// deviceProblemSum: 0
-// deviceProblemUnresolved: 0
-// fConfigtypeid: 3
-// fDeadlinedate: "2020-06-20 23:59:59"
-// fLatitude: "31.34996039"
-// fLongitude: "121.30713886"
-// fStartdate: "2020-06-12 00:00:00"
-// fSubName: "电气股份有限公司E楼"
-// fSubid: 10100001
-// fTaskcontent: "发布抢单任务测试2"
-// fTaskcreatedate: "2020-06-11 10:02:34"
-// fTaskcreateuserid: 311
-// fTaskcreateusername: "吴小龙"
-// fTaskcreateuserphone: "17715879373"
-// fTaskid: 967
-// fTaskname: "电气股份有限公司E楼"
-// fTasknumber: "R2006110001"
-// fTaskstateid: 1
-// fTasktypeexplain: "抢单"
-// fTasktypeid: 7
-// taskStateId: 1
 function getNetData() {
     Substation.getDataByAjax(
         "/getOrderTaskDetailByfTaskid",
         "fTaskid=" + taskid,
         function (data) {
-            //     if (data.hasOwnProperty("orderTaskDetail")) {
-            //         var userList = data.orderTaskDetail.userids;
-            //         subDetail = data.orderTaskDetail;
-            //         var strVar;
-            //         if (userList && userList.length > 0) {
-            //             var namelist = [];
-            //             $.each(userList, function (i, value) {
-            //                 namelist.push(value.userName);
-            //             });
-            //             var showUsers = namelist.join(",");
-            //             strVar = `<p class="subName limit-length">${subDetail.fSubName}</p>
-            //                 <p class="missionNo row" style="color:#ADB2C1;">
-            //                     <span class="col-85" style="margin-left:0rem;">${
-            //                       Operation["ui_RobTaskNo"]
-            //                     }${subDetail.fTasknumber}</span>
-            //                     <img class="col-15" src="img/video_watch.png" style="height: 0.9rem;width: 1.5rem;"
-            //                         id="jumpVideo">
-            //                 </p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobTaskInitiator"]
-            //                 }${subDetail.fTaskcreateusername}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobReleasetime"]
-            //                 }${subDetail.fTaskcreatedate}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobTaskContent"]
-            //                 }${subDetail.fTaskcontent}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobPlanStartTime"]
-            //                 }${subDetail.fStartdate}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobPlanDeadlineTime"]
-            //                 }${subDetail.fDeadlinedate}</p>
-            //                 <p class="missionList">${Operation["ui_RobPrincipal"]}${
-            //     subDetail.fTaskchargername
-            //   }</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobExecutor"]
-            //                 }${showUsers}</p>`;
-            //         } else {
-            //             strVar = `<p class="subName limit-length">${subDetail.fSubName}</p>
-            //                 <p class="missionNo row" style="color:#ADB2C1;">
-            //                     <span class="col-85" style="margin-left:0rem;">${
-            //                       Operation["ui_RobTaskNo"]
-            //                     }${subDetail.fTasknumber}</span>
-            //                     <img class="col-15" src="img/video_watch.png" style="height: 0.9rem;width: 1.5rem;"
-            //                         id="jumpVideo">
-            //                 </p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobTaskInitiator"]
-            //                 }${subDetail.fTaskcreateusername}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobReleasetime"]
-            //                 }${subDetail.fTaskcreatedate}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobTaskContent"]
-            //                 }${subDetail.fTaskcontent}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobPlanStartTime"]
-            //                 }${subDetail.fStartdate}</p>
-            //                 <p class="missionList">${
-            //                   Operation["ui_RobPlanDeadlineTime"]
-            //                 }${subDetail.fDeadlinedate}</p>`;
-            //         }
-            //         $("#taskDetail").html(strVar);
-            //         subLat = subDetail.fLatitude;
-            //         subLon = subDetail.fLongitude;
-            //         if (jumpId) {
-            //             getOwnLocation();
-            //         } else {
-            loadScript();
+            $(".demo").empty();
+            var strVar = "";
+            strVar += "<div class=\"history\">";
+            strVar += "   <div class=\"history-date\">";
+            strVar += "      <ul class=\"history-ul\">";
+            strVar += "      <\/ul>";
+            strVar += "   <\/div>";
+            strVar += "<\/div>";
+            $(".demo").append(strVar);
+
+            for (let index = 0; index < 5; index++) {
+                // const element = array[index];
+                var strVar = "";
+                if (index == 4) {
+                    strVar += "<li class=\"green\">";
+                    strVar += "                                            <h3>08:01<span>12\/10\/12<\/span><\/h3>";
+                    strVar += "                                            <dl>";
+                    strVar += "                                                <dt>";
+                    strVar += "                                                    通过审核，任务完成<span>负责人通过审核，任务已完成<\/span>";
+                    strVar += "                                                <\/dt>";
+                    strVar += "                                            <\/dl>";
+                    strVar += "                                        <\/li>";
+                } else {
+                    strVar += " <li>";
+                    strVar += "                                            <h3>10:08<span>12\/10\/08<\/span><\/h3>";
+                    strVar += "                                            <dl>";
+                    strVar += "                                                <dt>";
+                    strVar += "                                                    发布任务<span>张三发布了上海嘉定变电所的巡检任务<\/span>";
+                    strVar += "                                                <\/dt>";
+                    strVar += "                                            <\/dl>";
+                    strVar += "                                        <\/li>";
+                }
+
+
+                $(".history-ul").append(strVar);
+            }
+
+
+            getOwnLocation();
+
+            // loadScript();
             $(".popBottomBtn2").show();
             //         }
 
