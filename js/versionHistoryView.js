@@ -19,15 +19,15 @@ if (isPush == "0" && historyLog) {
     var reg = new RegExp("<br>", "g"); //g,表示全部替换。
     historyLog.replace(reg, "/n");
     //配置视频
-    if(videoSrc==undefined || videoSrc=="" || videoSrc==null){
+    if (videoSrc == undefined || videoSrc == "" || videoSrc == null) {
         $("#videoRoom").remove();
-        $("#updateLog").css("height","calc(100% - 10px)");
-    }else{
+        $("#updateLog").css("height", "calc(100% - 10px)");
+    } else {
         document.getElementById("videoplay").src = videoSrc;
         document.getElementById("videoplay").play();
     }
     $("#updateLog").html(historyLog);
-//    document.getElementById("videoplay").play();
+    //    document.getElementById("videoplay").play();
 } else {
     getData();
 }
@@ -65,10 +65,10 @@ function getData() {
                             var reg = new RegExp("<br>", "g"); //g,表示全部替换。
                             historyLog.replace(reg, "/n");
                             //配置视频
-                            if(videoSrc==undefined || videoSrc=="" || videoSrc==null){
+                            if (videoSrc == undefined || videoSrc == "" || videoSrc == null) {
                                 $("#videoRoom").remove();
-                                $("#updateLog").css("height","calc(100% - 10px)");
-                            }else{
+                                $("#updateLog").css("height", "calc(100% - 10px)");
+                            } else {
                                 document.getElementById("videoplay").src = videoSrc;
                                 document.getElementById("videoplay").play();
                             }

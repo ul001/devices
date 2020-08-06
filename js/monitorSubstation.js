@@ -1,4 +1,4 @@
-$(".back_btn").click(function () {
+$(".back_btn").click(function() {
   if (isAndroid) {
     android.goBack();
   } else {
@@ -59,8 +59,9 @@ function getLocAndCheckIn(loc) {
 
 function getFirstPage() {
   Substation.getDataByAjax(
-    "/getSubstationListByUser?pageNo=1&pageSize=999", {},
-    function (data) {
+    "/getSubstationListByUser?pageNo=1&pageSize=999",
+    {},
+    function(data) {
       if (data.list != undefined) {
         markersArr = data.list;
         loadScript();
@@ -69,13 +70,12 @@ function getFirstPage() {
   );
 }
 
-
 function initialize() {
   map = new BMap.Map("l-map");
-  if (!lat) {
+  if (!lat || lat == null || lat == undefined) {
     lat = markersArr[0].fLatitude;
   }
-  if (!lon) {
+  if (!lon || lon == null || lon == undefined) {
     lon = markersArr[0].fLongitude;
   }
   myPp = new BMap.Point(lon, lat);
@@ -102,7 +102,7 @@ function initialize() {
     addClickHandler(marker, markDetail);
   }
 
-  markersArr.forEach(function (marker) {
+  markersArr.forEach(function(marker) {
     var point = new BMap.Point(marker.fLongitude, marker.fLatitude);
     var label = new BMap.Label(marker.fSubname, {
       offset: new BMap.Size(40, -10)
@@ -122,9 +122,9 @@ function initialize() {
 
   //点击静态marker
   function addClickHandler(marker, markDetail) {
-    marker.addEventListener("click", function () {
+    marker.addEventListener("click", function() {
       if (isAndroid) {
-        android.clickSubstation(markDetail.fSubid,markDetail.fSubname);
+        android.clickSubstation(markDetail.fSubid, markDetail.fSubname);
       } else {
         window.history.back();
         window.webkit.messageHandlers.goBackSubPage.postMessage(markDetail);
@@ -160,7 +160,7 @@ function initialize() {
     //建立一个自动完成的对象
     input: "suggestId",
     location: map,
-    onSearchComplete: function (data) {
+    onSearchComplete: function(data) {
       var indexs = data.getNumPois();
       var html = "";
       if (indexs > 0) {
@@ -225,35 +225,31 @@ function showOrHide() {
   if ($("#showOrHide").attr("name") === "Showsubname") {
     $("#showOrHide").attr("name", "Hidesubname");
     // language.common.eleSelect($("#showOrHide"));
-    $("#showOrHide").addClass('isClick');
+    $("#showOrHide").addClass("isClick");
     var markers = map.getOverlays();
-    $.each(markers, function (key, val) {
+    $.each(markers, function(key, val) {
       var label = val.getLabel();
-      if (label === null)
-        return;
+      if (label === null) return;
       label.show();
     });
   } else {
     $("#showOrHide").attr("name", "Showsubname");
     // language.common.eleSelect($("#showOrHide"));
-    $("#showOrHide").removeClass('isClick');
+    $("#showOrHide").removeClass("isClick");
     var markers = map.getOverlays();
-    $.each(markers, function (key, val) {
+    $.each(markers, function(key, val) {
       var label = val.getLabel();
-      if (label === null)
-        return;
+      if (label === null) return;
       label.hide();
-
     });
   }
   // if (!upLoadClicktag) {
   //   return;
   // }
   // return;
-
 }
 
-$("#suggestId").bind("keydown", function (event) {
+$("#suggestId").bind("keydown", function(event) {
   if (event.keyCode == 13) {
     //            local.search($("#suggestId").val());
     //            $("#results").show();
@@ -262,7 +258,7 @@ $("#suggestId").bind("keydown", function (event) {
   }
 });
 
-$(".searchbar-cancel").click(function () {
+$(".searchbar-cancel").click(function() {
   $("#suggestId").val("");
   $("#results").hide();
 });
@@ -271,7 +267,7 @@ function getMyPlace(value, name) {
   myValue = value;
   setPlace();
   $("#suggestId").val(name);
-  setTimeout(function () {
+  setTimeout(function() {
     $("#results").hide();
   }, 500);
 }
@@ -284,7 +280,7 @@ function setPlace() {
     var marker = new BMap.Marker(pp);
     marker.setLabel(lable);
     map.addOverlay(marker); //添加标注
-    geoc.getLocation(pp, function (rs) {
+    geoc.getLocation(pp, function(rs) {
       var addComp = rs.addressComponents;
       dizhi =
         addComp.province +
