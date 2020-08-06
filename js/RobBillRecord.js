@@ -304,7 +304,7 @@ function goToMonitorRobBill() {
   localStorage.setItem("userlatitude", lat);
   localStorage.setItem("userlongitude", lon);
   if (isAndroid) {
-    android.goToInHtml("MonitorRobBill.html");
+    android.goToInHtml("monitorRobBill.html");
   } else {
     window.location.href = "monitorRobBill.html";
   }
