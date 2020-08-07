@@ -96,7 +96,7 @@ function getZhLanguage() {
     ui_taskTypeSelect: "任务类型筛选",
     //taskDetail
     ui_taskDetail: "任务详情",
-    ui_taskDetailTimeAxis: "任务进展",
+    ui_taskDetailTimeAxis: "任务进度",
     ui_taskNumber: "任务单号:",
     ui_tasktyper: "任务类型:",
     ui_Subname: "变电所名称:",
