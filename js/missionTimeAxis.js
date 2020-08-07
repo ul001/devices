@@ -12,8 +12,10 @@ var workerUser = [];
 //巡检的变电所id
 var missionsubid = "";
 // var missionsubname = "X变电所";
-var subDetail;
-var taskid = localStorage.getItem("robTaskId");
+// var subDetail;
+var subName = localStorage.getItem("subName");
+var missionTypeName = localStorage.getItem("missionTypeName");
+var taskid = localStorage.getItem("taskID");
 if (!taskid) {
     taskid = 967;
 }
@@ -37,8 +39,8 @@ var lat = 0;
 var dizhi = "";
 var map;
 //变电所
-var subLat = localStorage.getItem("subLat");;
-var subLon = localStorage.getItem("subLon");;
+var subLat = localStorage.getItem("subLat");
+var subLon = localStorage.getItem("subLon");
 // var subLat = 36.919141;
 // var subLon = 117.508328;
 //我的位置
@@ -304,83 +306,245 @@ function getLocAndCheckIn(loc) {
 }
 
 function getNetData() {
-    Substation.getDataByAjax(
-        "/getOrderTaskDetailByfTaskid",
-        "fTaskid=" + taskid,
-        function (data) {
-            $(".demo").empty();
+    Substation.getDataByAjax("/getTaskTimeLine", "taskId=" + taskid, function (
+        data
+    ) {
+        $(".demo").empty();
+        var strVar = "";
+        strVar += '<div class="history">';
+        strVar += '   <div class="history-date">';
+        strVar += '      <ul class="history-ul">';
+        strVar += "      </ul>";
+        strVar += "   </div>";
+        strVar += "</div>";
+        $(".demo").append(strVar);
+
+        if (data.hasOwnProperty("taskTimeLine")) {
+            var lineData = data.taskTimeLine;
             var strVar = "";
-            strVar += "<div class=\"history\">";
-            strVar += "   <div class=\"history-date\">";
-            strVar += "      <ul class=\"history-ul\">";
-            strVar += "      <\/ul>";
-            strVar += "   <\/div>";
-            strVar += "<\/div>";
-            $(".demo").append(strVar);
-
-            for (let index = 0; index < 5; index++) {
-                // const element = array[index];
-                var strVar = "";
-                if (index == 4) {
-                    strVar += "<li class=\"green\">";
-                    strVar += "                                            <h3>08:01<span>12\/10\/12<\/span><\/h3>";
-                    strVar += "                                            <dl>";
-                    strVar += "                                                <dt>";
-                    strVar += "                                                    通过审核，任务完成<span>负责人通过审核，任务已完成<\/span>";
-                    strVar += "                                                <\/dt>";
-                    strVar += "                                            <\/dl>";
-                    strVar += "                                        <\/li>";
-                } else {
-                    strVar += " <li>";
-                    strVar += "                                            <h3>10:08<span>12\/10\/08<\/span><\/h3>";
-                    strVar += "                                            <dl>";
-                    strVar += "                                                <dt>";
-                    strVar += "                                                    发布任务<span>张三发布了上海嘉定变电所的巡检任务<\/span>";
-                    strVar += "                                                <\/dt>";
-                    strVar += "                                            <\/dl>";
-                    strVar += "                                        <\/li>";
-                }
-
+            //发布任务
+            if (lineData.hasOwnProperty("taskPost")) {
+                var timeY = lineData.taskPost.doTime.substring(2, 10);
+                var timeS = lineData.taskPost.doTime.substring(11, 16);
+                strVar += " <li>";
+                strVar +=
+                    "                                            <h3>" +
+                    timeS +
+                    "<span>" +
+                    timeY +
+                    "</span></h3>";
+                strVar += "                                            <dl>";
+                strVar += "                                                <dt>";
+                strVar +=
+                    "                                                    发布任务<span>" +
+                    lineData.taskPost.fUserName + "发布了" + subName + "的" + missionTypeName +
+                    "任务</span>";
+                strVar += "                                                </dt>";
+                strVar += "                                            </dl>";
+                strVar += "                                        </li>";
 
                 $(".history-ul").append(strVar);
             }
+            //任务开启
+            if (lineData.hasOwnProperty("taskStart")) {
+                //时间值
+                var timeY = lineData.taskStart.firstTime.substring(2, 10);
+                var timeS = lineData.taskStart.firstTime.substring(11, 16);
+                //人list
+                var startList = lineData.taskStart.list;
+                //需要给出time
+                // $(".history-ul").append('<li class="taskStart"></li>');
+                var showStr = "";
+                $(startList).each(function () {
+                    if (this.doTime.length > 0) {
+                        showStr +=
+                            this.fUserName +
+                            "于" +
+                            this.doTime.substring(11, 16) +
+                            "开启任务；";
+                    }
+                });
 
+                var strVar = "";
+                strVar += " <li>";
+                strVar +=
+                    "                                            <h3>" +
+                    timeS +
+                    "<span>" +
+                    timeY +
+                    "</span></h3>";
+                strVar += "                                            <dl>";
+                strVar += "                                                <dt>";
+                strVar +=
+                    "                                                    任务已开启<span>" +
+                    showStr +
+                    "</span>";
+                strVar += "                                                </dt>";
+                strVar += "                                            </dl>";
+                strVar += "                                        </li>";
 
-            getOwnLocation();
+                // $(".taskStart").append(strVar);
+                $(".history-ul").append(strVar);
+            }
+            //任务签到
+            if (lineData.hasOwnProperty("taskSign")) {
+                //时间值
+                var timeY = lineData.taskSign.firstTime.substring(2, 10);
+                var timeS = lineData.taskSign.firstTime.substring(11, 16);
+                //人list
+                var startList = lineData.taskSign.list;
+                //需要给出time
+                // $(".history-ul").append('<li class="taskStart"></li>');
+                var showStr = "";
+                $(startList).each(function () {
+                    if (this.doTime.length > 0) {
+                        showStr +=
+                            this.fUserName +
+                            "于" +
+                            this.doTime.substring(11, 16) +
+                            "签到；";
+                    }
+                });
 
-            // loadScript();
-            $(".popBottomBtn2").show();
-            //         }
+                var strVar = "";
+                strVar += " <li>";
+                strVar +=
+                    "                                            <h3>" +
+                    timeS +
+                    "<span>" +
+                    timeY +
+                    "</span></h3>";
+                strVar += "                                            <dl>";
+                strVar += "                                                <dt>";
+                strVar +=
+                    "                                                    任务已签到<span>" +
+                    showStr +
+                    "</span>";
+                strVar += "                                                </dt>";
+                strVar += "                                            </dl>";
+                strVar += "                                        </li>";
 
-            //         missionType = subDetail.fTaskstateid;
-            //         //判断按钮显隐
-            //         if (userList && userList.length > 0) {
-            //             $(".popBottomBtn").hide();
-            //             $(".popBottomBtn2").show();
-            //         } else if (isOwnPostTask == "true") {
-            //             $(".popBottomBtn").hide();
-            //             $(".popBottomBtn2").show();
-            //         } else {
-            //             $(".popBottomBtn").show();
-            //         }
+                // $(".taskStart").append(strVar);
+                $(".history-ul").append(strVar);
+            }
+            //任务执行提交
+            if (lineData.hasOwnProperty("taskUpload")) {
+                //时间值
+                var timeY = lineData.taskUpload.firstTime.substring(2, 10);
+                var timeS = lineData.taskUpload.firstTime.substring(11, 16);
+                //人list
+                var startList = lineData.taskUpload.list;
+                //需要给出time
+                // $(".history-ul").append('<li class="taskStart"></li>');
+                var showStr = "";
+                $(startList).each(function () {
+                    if (this.doTime.length > 0) {
+                        showStr +=
+                            this.fUserName +
+                            "于" +
+                            this.doTime.substring(11, 16) +
+                            "完成任务并提交；";
+                    }
+                });
 
-            //         localStorage.removeItem("postTask");
-            //         // localStorage.setItem("postTask", "false");
-            //         //跳转视频
-            //         $("#jumpVideo").click(function () {
-            //             if (isAndroid) {
-            //                 android.videoWatch(subDetail.fSubid);
-            //             } else if (isIOS) {
-            //                 var subParam = {
-            //                     Subid: subDetail.fSubid,
-            //                     Subname: subDetail.fSubName
-            //                 };
-            //                 window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
-            //             }
-            //         });
-            //     }
+                var strVar = "";
+                strVar += " <li>";
+                strVar +=
+                    "                                            <h3>" +
+                    timeS +
+                    "<span>" +
+                    timeY +
+                    "</span></h3>";
+                strVar += "                                            <dl>";
+                strVar += "                                                <dt>";
+                strVar +=
+                    "                                                    执行人提交任务<span>" +
+                    showStr +
+                    "</span>";
+                strVar += "                                                </dt>";
+                strVar += "                                            </dl>";
+                strVar += "                                        </li>";
+
+                // $(".taskStart").append(strVar);
+                $(".history-ul").append(strVar);
+            }
+            //任务结束
+            if (lineData.hasOwnProperty("taskFinish")) {
+                var timeY = lineData.taskFinish.doTime.substring(2, 10);
+                var timeS = lineData.taskFinish.doTime.substring(11, 16);
+                var strVar = "";
+                strVar += " <li>";
+                strVar +=
+                    "                                            <h3>" +
+                    timeS +
+                    "<span>" +
+                    timeY +
+                    "</span></h3>";
+                strVar += "                                            <dl>";
+                strVar += "                                                <dt>";
+                strVar +=
+                    "                                                    通过审核，任务完成<span>" +
+                    lineData.taskPost.fUserName +
+                    "通过审核，任务已结束</span>";
+                strVar += "                                                </dt>";
+                strVar += "                                            </dl>";
+                strVar += "                                        </li>";
+
+                $(".history-ul").append(strVar);
+            }
         }
-    );
+
+        // for (let index = 0; index < 5; index++) {
+        //   // const element = array[index];
+        //   var strVar = "";
+        //   strVar += " <li>";
+        //   strVar +=
+        //     "                                            <h3>10:08<span>12/10/08</span></h3>";
+        //   strVar += "                                            <dl>";
+        //   strVar += "                                                <dt>";
+        //   strVar +=
+        //     "                                                    发布任务<span>张三发布了上海嘉定变电所的巡检任务</span>";
+        //   strVar += "                                                </dt>";
+        //   strVar += "                                            </dl>";
+        //   strVar += "                                        </li>";
+        // }
+        //给最后一个li添加绿色效果
+        $("ul li:last-child").attr("class", "green");
+
+        getOwnLocation();
+
+        // loadScript();
+        $(".popBottomBtn2").show();
+        //         }
+
+        //         missionType = subDetail.fTaskstateid;
+        //         //判断按钮显隐
+        //         if (userList && userList.length > 0) {
+        //             $(".popBottomBtn").hide();
+        //             $(".popBottomBtn2").show();
+        //         } else if (isOwnPostTask == "true") {
+        //             $(".popBottomBtn").hide();
+        //             $(".popBottomBtn2").show();
+        //         } else {
+        //             $(".popBottomBtn").show();
+        //         }
+
+        //         localStorage.removeItem("postTask");
+        //         // localStorage.setItem("postTask", "false");
+        //         //跳转视频
+        //         $("#jumpVideo").click(function () {
+        //             if (isAndroid) {
+        //                 android.videoWatch(subDetail.fSubid);
+        //             } else if (isIOS) {
+        //                 var subParam = {
+        //                     Subid: subDetail.fSubid,
+        //                     Subname: subDetail.fSubName
+        //                 };
+        //                 window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+        //             }
+        //         });
+        //     }
+    });
 }
 
 getNetData();
@@ -413,12 +577,12 @@ function navigation() {
         subLon != ""
     ) {
         if (isAndroid) {
-            android.goToMap(subLat, subLon, subDetail.fSubName);
+            android.goToMap(subLat, subLon, subName);
         } else if (isIOS) {
             var locParam = {
                 Latitude: subLat,
                 Longitude: subLon,
-                locName: subDetail.fSubName
+                locName: subName
             };
             window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
         }
@@ -558,12 +722,12 @@ function getPersonList(gid) {
                         '        <input type="checkbox" name="my-checkbox" id="' +
                         this.fUserid +
                         '" data-name="' +
-                        Substation.removeUndefined(this.fUsername) +
+                        Substation.removeUndefined(this.fUserName) +
                         '">\n' +
                         '        <div class="item-media"><i class="icon icon-form-checkbox"></i></div>\n' +
                         '        <div class="item-inner">\n' +
                         '            <div class="item-title">' +
-                        Substation.removeUndefined(this.fUsername) +
+                        Substation.removeUndefined(this.fUserName) +
                         "</div>\n" +
                         "        </div>\n" +
                         "    </label>\n" +
@@ -696,7 +860,7 @@ function showPage2List() {
             '">' +
             Operation["ui_remove"] +
             "\n" +
-            "                </span>\n" +
+            "                </lineData.taskPost.fUserName>\n" +
             "            </div>\n" +
             "        </div>\n" +
             "    </div>\n" +
@@ -935,32 +1099,6 @@ $("#cancel").on("click", function () {
     $.popup(".popup-about");
 });
 
-//发布抢单任务
-function publishRobTask() {
-    if (selectUserList.length && subDetail) {
-        var userIds = [];
-        $(selectUserList).each(function (i, obj) {
-            userIds.push(obj.userId);
-        });
-        var userStrs = userIds.join(",");
-        Substation.getDataByAjax(
-            "/achieveOrderTask", {
-                fTaskid: taskid,
-                userIds: userStrs
-            },
-            function (data) {
-                $.toast("抢单成功！");
-                localStorage.setItem("need-refresh", "true");
-                if (isAndroid) {
-                    android.goBack();
-                    android.refresh();
-                } else {
-                    window.history.back();
-                }
-            }
-        );
-    }
-}
 
 //解决键盘遮挡问题
 var h = $(window).height();

@@ -77,6 +77,7 @@ var missionsubid;
 var missionsubname;
 //任务类型 fTasktypeid
 var missionTypeid;
+var missionTypeName;
 //任务负责人 fTaskchargerid
 var taskchargerid;
 //任务单号
@@ -114,6 +115,7 @@ function getNetData() {
             subLat = taskInfo.fLatitude;
             missionsubid = taskInfo.fSubid;
             missionsubname = taskInfo.fSubName;
+            localStorage.setItem("subName", missionsubname);
             if (taskInfo.hasOwnProperty("fTaskandalarmeventid")) {
                 fTaskandalarmeventid = taskInfo.fTaskandalarmeventid;
             }
@@ -123,6 +125,8 @@ function getNetData() {
             $("#missionId").html(taskInfo.fTasknumber);
             TaskNumber = taskInfo.fTasknumber;
             $("#missionType").html(taskInfo.fTasktypeexplain);
+            missionTypeName = taskInfo.fTasktypeexplain;
+            localStorage.setItem("missionTypeName", missionTypeName);
             $("#missionName").html(taskInfo.fTaskname);
             $("#createName").html(taskInfo.fTaskcreateusername);
             $("#createCall").attr("onclick", "callPhone('" + taskInfo.fTaskcreateuserphone + "')");
@@ -827,6 +831,8 @@ function callPhone(phoneNum) {
 
 function gotoMissionTimeAxis() {
     //    var taskID = localStorage.getItem("taskID");
+    // localStorage.setItem("subName", missionsubname);
+    // localStorage.setItem("missionTypeName", missionTypeName);
     localStorage.setItem("subLat", subLat);
     localStorage.setItem("subLon", subLon);
     if (isAndroid) {
