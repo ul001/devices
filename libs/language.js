@@ -155,6 +155,8 @@ function getZhLanguage() {
     ui_Remark: "任务备注:",
     ui_trajectory: "轨迹追踪:",
     ui_Trackquery: "轨迹查询",
+    ui_Track: "轨迹",
+    ui_progress: "进度",
     //文档分类
     ui_FileList: "文档分类",
     //变电所消缺单
@@ -745,6 +747,8 @@ function getEnLanguage() {
     ui_Remark: "Remarks",
     ui_trajectory: "Trajectory",
     ui_Trackquery: "TrackQuery",
+    ui_Track: "Track",
+    ui_progress: "Progress",
     //文档分类
     ui_FileList: "File List",
     //变电所消缺单

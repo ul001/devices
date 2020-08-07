@@ -188,11 +188,13 @@ function getNetData() {
                             Operation["ui_submitted"] +
                             "</span>";
                         if (isUseTrace == "1") {
-                            taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
+                            // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
+                            taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
                         }
                         isChangeReturnCount++;
                     } else {}
-
+                    taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;color:#02AB93;border-color:#02AB93;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ")\">" + Operation['ui_progress'] + '</a>';
+                    // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;color:#02AB93;border-color:#02AB93;\" onClick=\"gotoMissionTimeAxis()\">" + Operation['ui_progress'] + '</a>';
                     var text = "";
                     text += "<li>";
                     text +=
@@ -829,7 +831,7 @@ function callPhone(phoneNum) {
     }
 }
 
-function gotoMissionTimeAxis() {
+function gotoMissionTimeAxis(userid) {
     //    var taskID = localStorage.getItem("taskID");
     // localStorage.setItem("subName", missionsubname);
     // localStorage.setItem("missionTypeName", missionTypeName);
@@ -841,5 +843,6 @@ function gotoMissionTimeAxis() {
         window.location.href = "missionTimeAxis.html";
     }
 }
+
 
 $.init();
