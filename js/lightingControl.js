@@ -371,7 +371,9 @@ $("#openLight").click(function () {
     $(".footer_btn").addClass("noclick");
     Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
       if (data.code == 200) {
-        $.toast(Operation['ui_sendSuccess']);
+        if(data.data.a!=undefined){
+            $.alert(data.data.a);
+        }
         $(this)
           .addClass("active")
           .siblings()
