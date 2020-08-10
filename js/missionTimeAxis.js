@@ -61,11 +61,11 @@ $(".suibian").click(function () {
             //            window.history.back();
         }
     } else {
-        if (isAndroid) {
-            android.goBack();
-        } else {
-            window.history.back();
-        }
+        // if (isAndroid) {
+        //     android.goBack();
+        // } else {
+        window.history.back();
+        // }
     }
 });
 
@@ -239,13 +239,13 @@ function pushTaskDetails() {
     // } else {
     //     window.location.href = "missionDetail.html";
     // }
-    localStorage.setItem("need-refresh", "true");
-    if (isAndroid) {
-        android.goBack();
-        android.refresh();
-    } else {
-        window.history.back();
-    }
+    // localStorage.setItem("need-refresh", "true");
+    // if (isAndroid) {
+    //     android.goBack();
+    //     android.refresh();
+    // } else {
+    window.history.back();
+    // }
 }
 
 //初始化地图
