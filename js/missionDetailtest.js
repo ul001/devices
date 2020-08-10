@@ -837,11 +837,12 @@ function gotoMissionTimeAxis(userid) {
     // localStorage.setItem("missionTypeName", missionTypeName);
     localStorage.setItem("subLat", subLat);
     localStorage.setItem("subLon", subLon);
-    // if (isAndroid) {
-    //     android.goToInHtml("missionTimeAxis.html");
-    // } else {
-    window.location.href = "missionTimeAxis.html";
-    // }
+    if (isAndroid) {
+        // android.goToInHtml("missionTimeAxis.html");
+        android.goToInAxis();
+    } else {
+        window.location.href = "missionTimeAxis.html";
+    }
 }
 
 
