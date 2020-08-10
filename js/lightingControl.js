@@ -91,6 +91,9 @@ function addItems(number, lastIndex) {
         if (pageNum == 1) {
           $(".content-list").empty();
         }
+        var datashowdic = JSON.parse(data.list[0].fStatedesc);
+        $("#closeLight").text(datashowdic['0']);
+        $("#openLight").text(datashowdic["1"]);
         $(data.list).each(function () {
           var deviceValue = this.deviceValue;
           if (deviceValue == "0" || deviceValue == "1") {
@@ -203,11 +206,11 @@ $(".button_bar .button").click(function () {
   var showClass = $(this).attr("id");
   $(".list-item").hide();
   $("." + showClass).show();
-  if (showClass == "light_opening") {
-    $(".footer_btn").text(Operation['ui_CloseLight']);
-  } else if (showClass == "light_closed") {
-    $(".footer_btn").text(Operation['ui_OpenLight']);
-  }
+  // if (showClass == "light_opening") {
+  //   $(".footer_btn").text(Operation['ui_CloseLight']);
+  // } else if (showClass == "light_closed") {
+  //   $(".footer_btn").text(Operation['ui_OpenLight']);
+  // }
 });
 
 var canClick = 1;
@@ -371,8 +374,8 @@ $("#openLight").click(function () {
     $(".footer_btn").addClass("noclick");
     Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
       if (data.code == 200) {
-        if(data.data.a!=undefined){
-            $.alert(data.data.a);
+        if (data.data.a != undefined) {
+          $.alert(data.data.a);
         }
         $(this)
           .addClass("active")

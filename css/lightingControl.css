@@ -95,18 +95,18 @@ label.label-checkbox i.icon-form-checkbox {
     float: right;
 }
 
-.content .footer_bar .button {
+.footer_bar .button {
     color: #01ADA8;
     border-color: #01ADA8;
 }
 
-.content .footer_bar .button.noclick.active {
+.footer_bar .button.noclick.active {
     color: #fff;
     background: #D6D6D6;
     border-color: #D6D6D6;
 }
 
-.content .footer_bar .button.active {
+.footer_bar .button.active {
     color: #fff;
     background: #01ADA8;
 }
