@@ -13,11 +13,11 @@ function initContent() {
         var strArr = "";
         if (data.list != undefined && data.list.length && data.list.length > 0) {
             $(data.list).each(function () {
-                var thisStatus = "<span class='normalStatus'>"+Operation['ui_normal']+"</span>";
-                var imgStr= "<img src=\"img/arcm300t.png\">";
-                if(this.meterStatus=="1"){
-                    thisStatus = "<span class='alarmStatus'>"+Operation['ui_Alarm']+"</span>";
-                    imgStr= "<img src=\"img/arcm300Talarm.png\">"
+                var thisStatus = "<span class='normalStatus'>" + Operation['ui_normal'] + "</span>";
+                var imgStr = "<img src=\"img/arcm300t.png\">";
+                if (this.meterStatus == "1") {
+                    thisStatus = "<span class='alarmStatus'>" + Operation['ui_Alarm'] + "</span>";
+                    imgStr = "<img src=\"img/arcm300Talarm.png\">"
                 }
                 strArr += "<label class=\"list-item label-checkbox light_opening\" data-id=\"" + this.meterCode + "\">\n" +
                     "                        <div class=\"row\">\n" +
@@ -28,11 +28,11 @@ function initContent() {
                     "                        </div>\n" +
                     "                        <div class=\"row no-gutter\">\n" +
                     "                        <div class=\"col-40\">\n" +
-                    "                            "+imgStr+"\n" +
+                    "                            " + imgStr + "\n" +
                     "                        </div>\n" +
                     "                        <div class=\"col-60\">\n" +
-                          "                            <p class='right-float limit-length' style='margin-top:.3rem;'>"+Operation['ui_deviceId']+"："+this.meterCode+"</p>\n" +
-                          "                            <p class='right-float'>"+thisStatus+"</p>\n" +
+                    "                            <p class='right-float limit-length' style='margin-top:.3rem;'>" + Operation['ui_deviceId'] + "：" + this.meterCode + "</p>\n" +
+                    "                            <p class='right-float'>" + thisStatus + "</p>\n" +
                     "                        </div>\n" +
                     "                        </div>\n" +
                     "                    </label>";
@@ -41,7 +41,7 @@ function initContent() {
             if (isControl == 0) {
                 $(".item-media").hide();
                 $(".label-title").removeClass("col-85").addClass("col-100");
-                $(".list-item").on("click",goToDetail);
+                $(".list-item").on("click", goToDetail);
             } else {
                 $(".label-title").removeClass("col-100").addClass("col-85");
             }
@@ -65,7 +65,7 @@ function controlClick() {
         $(".button_bar").toggle();
         $(".footer_btn").toggle();
         $("input:checkbox").removeAttr("disabled");
-        $(".list-item").off("click",goToDetail);
+        $(".list-item").off("click", goToDetail);
     } else {
         isControl = 0;
         $("#back_btn").html('<span class="icon icon-left"></span>' + '<span>' + Operation['ui_back'] + '</span>');
@@ -79,7 +79,7 @@ function controlClick() {
         $(".footer_btn").toggle();
         $("input:checkbox").prop("disabled", "disabled");
         $("input:checkbox").removeAttr("checked");
-        $(".list-item").on("click",goToDetail);
+        $(".list-item").on("click", goToDetail);
     }
 }
 
@@ -122,132 +122,133 @@ $("#back_btn").on("click", goBack);
 var canclick = 1;
 //复位
 $("#reset").click(function () {
-    if(canclick==1){
+    if (canclick == 1) {
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
             controlJson.push({
                 "meterCode": metercode,
-                "substationId":subObj.subId,
+                "substationId": subObj.subId,
                 "type": "reset",
                 "value": "1"
             });
         });
-        if(controlJson.length==0){
+        if (controlJson.length == 0) {
             $.toast(Operation['ui_selectNo']);
             return;
         }
-        setTimeout(function(){
+        setTimeout(function () {
             canclick = 1;
             $(".footer_btn").removeClass("noclick");
-        },15000);
+        }, 15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-            if(data.data.a!=undefined){
+            if (data.data.a != undefined) {
                 $.alert(data.data.a);
             }
         });
-    }else{
+        
+    } else {
         $.alert(Operation['ui_operateAllTip']);
     }
 });
 
 //分闸
 $("#DO").click(function () {
-    if(canclick==1){
+    if (canclick == 1) {
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
             controlJson.push({
                 "meterCode": metercode,
-                "substationId":subObj.subId,
+                "substationId": subObj.subId,
                 "type": "DO",
                 "value": "1"
             });
         });
-        if(controlJson.length==0){
+        if (controlJson.length == 0) {
             $.toast(Operation['ui_selectNo']);
             return;
         }
-        setTimeout(function(){
+        setTimeout(function () {
             canclick = 1;
             $(".footer_btn").removeClass("noclick");
-        },15000);
+        }, 15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-            if(data.data.a!=undefined){
+            if (data.data.a != undefined) {
                 $.alert(data.data.a);
             }
         });
-    }else{
+    } else {
         $.alert(Operation['ui_operateAllTip']);
     }
 });
 
 //消音
 $("#silent").click(function () {
-    if(canclick==1){
+    if (canclick == 1) {
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
             controlJson.push({
                 "meterCode": metercode,
-                "substationId":subObj.subId,
+                "substationId": subObj.subId,
                 "type": "silent",
                 "value": "1"
             });
         });
-        if(controlJson.length==0){
+        if (controlJson.length == 0) {
             $.toast(Operation['ui_selectNo']);
             return;
         }
-        setTimeout(function(){
+        setTimeout(function () {
             canclick = 1;
             $(".footer_btn").removeClass("noclick");
-        },15000);
+        }, 15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-            if(data.data.a!=undefined){
+            if (data.data.a != undefined) {
                 $.alert(data.data.a);
             }
         });
-    }else{
+    } else {
         $.alert(Operation['ui_operateAllTip']);
     }
 });
 
 //自检
 $("#check").click(function () {
-    if(canclick==1){
+    if (canclick == 1) {
         var controlJson = [];
         $(".selectBox:checked").each(function (i, obj) {
             var metercode = $(obj).attr("data-id");
             controlJson.push({
                 "meterCode": metercode,
-                "substationId":subObj.subId,
+                "substationId": subObj.subId,
                 "type": "check",
                 "value": "1"
             });
         });
-        if(controlJson.length==0){
+        if (controlJson.length == 0) {
             $.toast(Operation['ui_selectNo']);
             return;
         }
-        setTimeout(function(){
+        setTimeout(function () {
             canclick = 1;
             $(".footer_btn").removeClass("noclick");
-        },15000);
+        }, 15000);
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax("/sendMeterControlDemandHTTP", JSON.stringify(controlJson), function (data) {
-            if(data.data.a!=undefined){
+            if (data.data.a != undefined) {
                 $.alert(data.data.a);
             }
         });
-    }else{
+    } else {
         $.alert(Operation['ui_operateAllTip']);
     }
 });

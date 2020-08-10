@@ -1,33 +1,39 @@
-.content-list{
-    padding:0.2rem;
-    font-size:.75rem;
+.content-list {
+    padding: 0.2rem;
+    font-size: .75rem;
 }
-.content-list .list-item{
-    width:48%;
-    background:#fff;
-    margin:1%;
+
+.content-list .list-item {
+    width: 48%;
+    background: #fff;
+    margin: 1%;
     float: left;
     border-radius: 0.2rem;
     overflow: hidden;
-    padding:0.2rem;
+    padding: 0.2rem;
 }
-.content-list .list-item .row{
-    overflow:hidden;
+
+.content-list .list-item .row {
+    overflow: hidden;
 }
-.content-list .right-bottom{
+
+.content-list .right-bottom {
     position: absolute;
     right: 0;
     bottom: 0;
 }
-.content-list .img_text{
-    position:relative;
-    text-align:center;
+
+.content-list .img_text {
+    position: relative;
+    text-align: center;
 }
-.content-list .button{
-    padding:initial;
+
+.content-list .button {
+    padding: initial;
 }
+
 .content-list .label-title {
-    height:2.2rem;
+    height: 2.2rem;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
@@ -35,53 +41,72 @@
     -webkit-box-orient: vertical;
     display: -webkit-box;
 }
-.content .button_bar{
-    padding:.5rem 2rem .1rem 2rem;
-}
-.content .button_bar .button{
-    color:#01ADA8;
-    border-color:#01ADA8;
+
+.content .button_bar {
+    padding: .5rem 2rem .1rem 2rem;
 }
 
-.content .button_bar .button.active{
-    color:#fff;
-    background:#01ADA8;
+.content .button_bar .button {
+    color: #01ADA8;
+    border-color: #01ADA8;
 }
 
-.content-list .button{
-    color:#01ADA8;
-    border-color:#01ADA8;
+.content .button_bar .button.active {
+    color: #fff;
+    background: #01ADA8;
 }
 
-label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkbox, label.label-checkbox input[type=radio]:checked+.item-media i.icon-form-checkbox {
+.content-list .button {
+    color: #01ADA8;
+    border-color: #01ADA8;
+}
+
+label.label-checkbox input[type=checkbox]:checked+.item-media i.icon-form-checkbox,
+label.label-checkbox input[type=radio]:checked+.item-media i.icon-form-checkbox {
     background-color: #01ADA8;
     border: none;
 }
 
 label.label-checkbox i.icon-form-checkbox {
-    width:.9rem;
-    height:.9rem;
+    width: .9rem;
+    height: .9rem;
 }
 
-.footer_bar{
+.footer_bar {
     display: flex;
     justify-content: center;
     position: fixed;
     bottom: 1rem;
-    width:100%;
+    width: 100%;
 }
 
-.footer_bar .footer_btn{
-    background:#01ADA8;
-    width:66%;
+.footer_bar .footer_btn {
+    background: #01ADA8;
+    width: 40%;
 }
 
-.content .footer_bar .footer_btn.noclick{
-    color:#fff;
-    background:#D6D6D6;
-    border-color:#D6D6D6;
+.content .footer_bar .footer_btn.noclick {
+    color: #fff;
+    background: #D6D6D6;
+    border-color: #D6D6D6;
 }
 
-.content-list .row .view_detail{
-    float:right;
+.content-list .row .view_detail {
+    float: right;
+}
+
+.content .footer_bar .button {
+    color: #01ADA8;
+    border-color: #01ADA8;
+}
+
+.content .footer_bar .button.noclick.active {
+    color: #fff;
+    background: #D6D6D6;
+    border-color: #D6D6D6;
+}
+
+.content .footer_bar .button.active {
+    color: #fff;
+    background: #01ADA8;
 }

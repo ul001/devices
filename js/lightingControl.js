@@ -93,10 +93,10 @@ function addItems(number, lastIndex) {
         }
         $(data.list).each(function () {
           var deviceValue = this.deviceValue;
-          if (deviceValue == "0") {
+          if (deviceValue == "0" || deviceValue == "1") {
             html = '<label class="list-item label-checkbox light_closed">';
-          } else if (deviceValue == "1") {
-            html = '<label class="list-item label-checkbox light_opening">';
+            // } else if (deviceValue == "1") {
+            // html = '<label class="list-item label-checkbox light_opening">';
           } else {
             html = '<label class="list-item label-checkbox no_device">';
           }
@@ -118,16 +118,16 @@ function addItems(number, lastIndex) {
             "</span>";
           html += "                            </div>";
           html += '                            <div class="img_text">';
-          if (deviceValue == "0") {
-            html +=
-              '                                <img src="img/lightClose.png">';
-          } else if (deviceValue == "1") {
-            html +=
-              '                                <img src="img/lightsort.png">';
-          } else {
-            html +=
-              '                                <img src="img/noDevice.png">';
-          }
+          // if (deviceValue == "0") {
+          html +=
+            '                                <img src="img/lightClose.png">';
+          // } else if (deviceValue == "1") {
+          //   html +=
+          //     '                                <img src="img/lightsort.png">';
+          // } else {
+          //   html +=
+          //     '                                <img src="img/noDevice.png">';
+          // }
           html +=
             '                                <span class="right-bottom">' +
             (this.deviceValueExplain ? this.deviceValueExplain : "无设备") +
@@ -211,52 +211,156 @@ $(".button_bar .button").click(function () {
 });
 
 var canClick = 1;
-$(".footer_btn").click(function () {
+// $(".footer_btn").click(function () {
+//   if (canClick == 1) {
+//     var arr = [];
+//     var controlUrl = "/sendBulbControlDemandHTTP";
+//     var controlparam = {};
+//     if ($(".footer_btn").text == Operation['ui_CloseLight']) {
+//       $("input[type=checkbox]:checked").each(function (e) {
+//         // if ($('input[type=checkbox]:checked').val()) {
+//         controlparam = {
+//           fSubid: subid,
+//           fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
+//             $("input[type=checkbox]:checked").attr("datagatewayid") : "",
+//           fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
+//             $("input[type=checkbox]:checked").attr("datametercode") : "",
+//           fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
+//             $("input[type=checkbox]:checked").attr("datafuncid") : "",
+//           fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
+//             $("input[type=checkbox]:checked").attr("datacomid") : "",
+//           fValue: "0"
+//         };
+//         arr.push(controlparam);
+//       });
+//     } else {
+//       $("input[type=checkbox]:checked").each(function (e) {
+//         // if ($('input[type=checkbox]:checked').val()) {
+//         controlparam = {
+//           fSubid: subid,
+//           fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
+//             $("input[type=checkbox]:checked").attr("datagatewayid") : "",
+//           fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
+//             $("input[type=checkbox]:checked").attr("datametercode") : "",
+//           fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
+//             $("input[type=checkbox]:checked").attr("datafuncid") : "",
+//           fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
+//             $("input[type=checkbox]:checked").attr("datacomid") : "",
+//           fValue: "1"
+//         };
+//         arr.push(controlparam);
+//       });
+//     }
+//     // var param = {
+//     //   tEtControlDemandList: JSON.stringify(arr)
+//     // };
+//     if (arr.length == 0) {
+//       $.toast(Operation['ui_selectNo']);
+//       return;
+//     }
+//     var param = JSON.stringify(arr);
+//     setTimeout(function () {
+//       canClick = 1;
+//       $(".footer_btn").removeClass("noclick");
+//     }, 15000);
+//     canClick = 0;
+//     $(".footer_btn").addClass("noclick");
+//     Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
+//       if (data.code == 200) {
+//         $.toast(Operation['ui_sendSuccess']);
+//         $(this)
+//           .addClass("active")
+//           .siblings()
+//           .removeClass("active");
+//       }
+//     });
+//     // var logList = arr.join(','); //数组转成为字符串
+//     // confirmAlarmEvents(logList);
+//   } else {
+//     $.alert(Operation['ui_operateAllTip']);
+//   }
+// });
+
+$("#closeLight").click(function () {
   if (canClick == 1) {
     var arr = [];
     var controlUrl = "/sendBulbControlDemandHTTP";
     var controlparam = {};
-    if ($(".footer_btn").text == Operation['ui_CloseLight']) {
-      $("input[type=checkbox]:checked").each(function (e) {
-        // if ($('input[type=checkbox]:checked').val()) {
-        controlparam = {
-          fSubid: subid,
-          fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
-            $("input[type=checkbox]:checked").attr("datagatewayid") : "",
-          fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
-            $("input[type=checkbox]:checked").attr("datametercode") : "",
-          fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
-            $("input[type=checkbox]:checked").attr("datafuncid") : "",
-          fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
-            $("input[type=checkbox]:checked").attr("datacomid") : "",
-          fValue: "0"
-        };
-        arr.push(controlparam);
-      });
-    } else {
-      $("input[type=checkbox]:checked").each(function (e) {
-        // if ($('input[type=checkbox]:checked').val()) {
-        controlparam = {
-          fSubid: subid,
-          fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
-            $("input[type=checkbox]:checked").attr("datagatewayid") : "",
-          fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
-            $("input[type=checkbox]:checked").attr("datametercode") : "",
-          fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
-            $("input[type=checkbox]:checked").attr("datafuncid") : "",
-          fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
-            $("input[type=checkbox]:checked").attr("datacomid") : "",
-          fValue: "1"
-        };
-        arr.push(controlparam);
-      });
-    }
+    $("input[type=checkbox]:checked").each(function (e) {
+      // if ($('input[type=checkbox]:checked').val()) {
+      controlparam = {
+        fSubid: subid,
+        fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
+          $("input[type=checkbox]:checked").attr("datagatewayid") : "",
+        fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
+          $("input[type=checkbox]:checked").attr("datametercode") : "",
+        fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
+          $("input[type=checkbox]:checked").attr("datafuncid") : "",
+        fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
+          $("input[type=checkbox]:checked").attr("datacomid") : "",
+        fValue: "0"
+      };
+      arr.push(controlparam);
+    });
+
     // var param = {
     //   tEtControlDemandList: JSON.stringify(arr)
     // };
-    if(arr.length==0){
-        $.toast(Operation['ui_selectNo']);
-        return;
+    if (arr.length == 0) {
+      $.toast(Operation['ui_selectNo']);
+      return;
+    }
+    var param = JSON.stringify(arr);
+    setTimeout(function () {
+      canClick = 1;
+      $(".footer_btn").removeClass("noclick");
+    }, 15000);
+    canClick = 0;
+    $(".footer_btn").addClass("noclick");
+    Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
+      if (data.code == 200) {
+        $.toast(Operation['ui_sendSuccess']);
+        $(this)
+          .addClass("active")
+          .siblings()
+          .removeClass("active");
+      }
+    });
+    // var logList = arr.join(','); //数组转成为字符串
+    // confirmAlarmEvents(logList);
+  } else {
+    $.alert(Operation['ui_operateAllTip']);
+  }
+});
+
+$("#openLight").click(function () {
+  if (canClick == 1) {
+    var arr = [];
+    var controlUrl = "/sendBulbControlDemandHTTP";
+    var controlparam = {};
+    $("input[type=checkbox]:checked").each(function (e) {
+      // if ($('input[type=checkbox]:checked').val()) {
+      controlparam = {
+        fSubid: subid,
+        fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
+          $("input[type=checkbox]:checked").attr("datagatewayid") : "",
+        fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
+          $("input[type=checkbox]:checked").attr("datametercode") : "",
+        fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
+          $("input[type=checkbox]:checked").attr("datafuncid") : "",
+        fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
+          $("input[type=checkbox]:checked").attr("datacomid") : "",
+        fValue: "1"
+      };
+      arr.push(controlparam);
+    });
+
+    // var param = {
+    //   tEtControlDemandList: JSON.stringify(arr)
+    // };
+    if (arr.length == 0) {
+      $.toast(Operation['ui_selectNo']);
+      return;
     }
     var param = JSON.stringify(arr);
     setTimeout(function () {
