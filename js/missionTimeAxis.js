@@ -301,6 +301,7 @@ function getLocAndCheckIn(loc) {
         //        alert(lat+","+lon+","+addr);
     }
     if (myLat && myLon) {
+        alert(myLat + "," + myLon + "," + addr);
         loadScript();
     } else {}
 }

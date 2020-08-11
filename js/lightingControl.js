@@ -16,11 +16,11 @@ var lightList = [];
 
 function controlClick() {
   if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
-    $("#back_btn").text(Operation['ui_SelectAll']);
+    $("#back_btn").text(Operation["ui_SelectAll"]);
     $("#back_btn")
       .off("click")
       .on("click", selectAll);
-    $("#control_btn").text(Operation['ui_cancel']);
+    $("#control_btn").text(Operation["ui_cancel"]);
     $("#record_btn").toggle();
     $("#light_opening").click();
     $(".label-title")
@@ -30,17 +30,19 @@ function controlClick() {
     $(".button_bar").toggle();
     $(".footer_btn").toggle();
     $("input:checkbox").removeAttr("disabled");
+    $(".list-item").hide();
+    $(".light_closed").show();
   } else {
     $("#back_btn").html(
       '<span class="icon icon-left"></span>' +
-      "<span>" +
-      Operation["ui_back"] +
-      "</span>"
+        "<span>" +
+        Operation["ui_back"] +
+        "</span>"
     );
     $("#back_btn")
       .off("click")
       .on("click", goBack);
-    $("#control_btn").text(Operation['ui_control']);
+    $("#control_btn").text(Operation["ui_control"]);
     $("#record_btn").toggle();
     $(".label-title")
       .removeClass("col-60")
@@ -51,6 +53,8 @@ function controlClick() {
     $(".footer_btn").toggle();
     $("input:checkbox").prop("disabled", "disabled");
     $("input:checkbox").removeAttr("checked");
+    $(".light_closed").hide();
+    $(".list-item").show();
   }
 }
 
@@ -65,8 +69,8 @@ function getFirstPage() {
 }
 
 //下拉刷新
-$(document).on("refresh", ".pull-to-refresh-content", function (e) {
-  setTimeout(function () {
+$(document).on("refresh", ".pull-to-refresh-content", function(e) {
+  setTimeout(function() {
     // done
     $.pullToRefreshDone(".pull-to-refresh-content");
   }, 2000);
@@ -78,23 +82,23 @@ function addItems(number, lastIndex) {
   var params = {};
 
   params = {
-    fSubid: subid,
+    fSubid: subid
     //    pageNo: pageNum,
     //    pageSize: number
   };
   Substation.getDataByAjaxNoLoading(
     url,
     params,
-    function (data) {
+    function(data) {
       // var datadic = data.alarmEventLogList;
       if (data.hasOwnProperty("list") && data.list.length > 0) {
         if (pageNum == 1) {
           $(".content-list").empty();
         }
         var datashowdic = JSON.parse(data.list[0].fStatedesc);
-        $("#closeLight").text(datashowdic['0']);
+        $("#closeLight").text(datashowdic["0"]);
         $("#openLight").text(datashowdic["1"]);
-        $(data.list).each(function () {
+        $(data.list).each(function() {
           var deviceValue = this.deviceValue;
           if (deviceValue == "0" || deviceValue == "1") {
             html = '<label class="list-item label-checkbox light_closed">';
@@ -105,14 +109,23 @@ function addItems(number, lastIndex) {
           }
           html += '                            <div class="row">';
           html +=
-            '                                <input type="checkbox" name="my-checkbox" datametercode="' + this.fMetercode +
+            '                                <input type="checkbox" name="my-checkbox" datametercode="' +
+            this.fMetercode +
             '" datafuncid="' +
             this.fFuncid +
             '" datagatewayid="' +
             this.fGatewayid +
             '" datacomid="' +
             this.fComid +
-            '" datafDeivcename="' + this.fDevicename + '"  datadeviceValue="' + this.deviceValue + '" datadeviceValueExplain="' + this.deviceValueExplain + '" datafDevicetype="' + this.fDevicetype + '">';
+            '" datafDeivcename="' +
+            this.fDevicename +
+            '"  datadeviceValue="' +
+            this.deviceValue +
+            '" datadeviceValueExplain="' +
+            this.deviceValueExplain +
+            '" datafDevicetype="' +
+            this.fDevicetype +
+            '">';
           html +=
             '                                <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>';
           html +=
@@ -140,21 +153,21 @@ function addItems(number, lastIndex) {
           $(".content-list").append(html);
           lightList.push(this);
 
-          $(".list-item").click(function (deviceValue) {
+          $(".list-item").click(function(deviceValue) {
             if ($(".footer_btn").is(":hidden")) {
               // fSubname
               var value = $(this).find("input");
               var Subname = subObj.subName;
               param = {
-                "fSubname": Subname ? Subname : "",
-                "fMetercode": value.attr("datametercode"),
-                "datafuncid": value.attr("datafuncid"),
-                "datagatewayid": value.attr("datagatewayid"),
-                "datacomid": value.attr("datacomid"),
-                "datafDeivcename": value.attr("datafDeivcename"),
-                "deviceValue": value.attr("datadeviceValue"),
-                "datadeviceValueExplain": value.attr("datadeviceValueExplain"),
-                "datafDevicetype": value.attr("datafDevicetype"),
+                fSubname: Subname ? Subname : "",
+                fMetercode: value.attr("datametercode"),
+                datafuncid: value.attr("datafuncid"),
+                datagatewayid: value.attr("datagatewayid"),
+                datacomid: value.attr("datacomid"),
+                datafDeivcename: value.attr("datafDeivcename"),
+                deviceValue: value.attr("datadeviceValue"),
+                datadeviceValueExplain: value.attr("datadeviceValueExplain"),
+                datafDevicetype: value.attr("datafDevicetype")
               };
               localStorage.setItem("lightingDetail", JSON.stringify(param));
               window.location.href = "lightingDetail.html";
@@ -170,14 +183,11 @@ function addItems(number, lastIndex) {
         //                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
         //                Substation.getDataByAjaxNoLoading("/close", {}, function () {});
         pageNum++;
-
-
-
       }
       //复选框初始化
       $(".selectAlarms").toggle();
     },
-    function (errorCode) {
+    function(errorCode) {
       if (errorCode == 0) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
@@ -194,11 +204,11 @@ function addItems(number, lastIndex) {
 
 addItems(itemsPerLoad, 0);
 
-$("#control_btn").click(function () {
+$("#control_btn").click(function() {
   controlClick();
 });
 
-$(".button_bar .button").click(function () {
+$(".button_bar .button").click(function() {
   $(this)
     .addClass("active")
     .siblings()
@@ -284,23 +294,27 @@ var canClick = 1;
 //   }
 // });
 
-$("#closeLight").click(function () {
+$("#closeLight").click(function() {
   if (canClick == 1) {
     var arr = [];
     var controlUrl = "/sendBulbControlDemandHTTP";
     var controlparam = {};
-    $("input[type=checkbox]:checked").each(function (e) {
+    $("input[type=checkbox]:checked").each(function(e) {
       // if ($('input[type=checkbox]:checked').val()) {
       controlparam = {
         fSubid: subid,
-        fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
-          $("input[type=checkbox]:checked").attr("datagatewayid") : "",
-        fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
-          $("input[type=checkbox]:checked").attr("datametercode") : "",
-        fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
-          $("input[type=checkbox]:checked").attr("datafuncid") : "",
-        fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
-          $("input[type=checkbox]:checked").attr("datacomid") : "",
+        fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid")
+          ? $("input[type=checkbox]:checked").attr("datagatewayid")
+          : "",
+        fMetercode: $("input[type=checkbox]:checked").attr("datametercode")
+          ? $("input[type=checkbox]:checked").attr("datametercode")
+          : "",
+        fFuncid: $("input[type=checkbox]:checked").attr("datafuncid")
+          ? $("input[type=checkbox]:checked").attr("datafuncid")
+          : "",
+        fComid: $("input[type=checkbox]:checked").attr("datacomid")
+          ? $("input[type=checkbox]:checked").attr("datacomid")
+          : "",
         fValue: "0"
       };
       arr.push(controlparam);
@@ -310,19 +324,19 @@ $("#closeLight").click(function () {
     //   tEtControlDemandList: JSON.stringify(arr)
     // };
     if (arr.length == 0) {
-      $.toast(Operation['ui_selectNo']);
+      $.toast(Operation["ui_selectNo"]);
       return;
     }
     var param = JSON.stringify(arr);
-    setTimeout(function () {
+    setTimeout(function() {
       canClick = 1;
       $(".footer_btn").removeClass("noclick");
     }, 15000);
     canClick = 0;
     $(".footer_btn").addClass("noclick");
-    Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
+    Substation.postDataWithRawByAjax(controlUrl, param, function(data) {
       if (data.code == 200) {
-        $.toast(Operation['ui_sendSuccess']);
+        $.toast(Operation["ui_sendSuccess"]);
         $(this)
           .addClass("active")
           .siblings()
@@ -332,27 +346,31 @@ $("#closeLight").click(function () {
     // var logList = arr.join(','); //数组转成为字符串
     // confirmAlarmEvents(logList);
   } else {
-    $.alert(Operation['ui_operateAllTip']);
+    $.alert(Operation["ui_operateAllTip"]);
   }
 });
 
-$("#openLight").click(function () {
+$("#openLight").click(function() {
   if (canClick == 1) {
     var arr = [];
     var controlUrl = "/sendBulbControlDemandHTTP";
     var controlparam = {};
-    $("input[type=checkbox]:checked").each(function (e) {
+    $("input[type=checkbox]:checked").each(function(e) {
       // if ($('input[type=checkbox]:checked').val()) {
       controlparam = {
         fSubid: subid,
-        fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid") ?
-          $("input[type=checkbox]:checked").attr("datagatewayid") : "",
-        fMetercode: $("input[type=checkbox]:checked").attr("datametercode") ?
-          $("input[type=checkbox]:checked").attr("datametercode") : "",
-        fFuncid: $("input[type=checkbox]:checked").attr("datafuncid") ?
-          $("input[type=checkbox]:checked").attr("datafuncid") : "",
-        fComid: $("input[type=checkbox]:checked").attr("datacomid") ?
-          $("input[type=checkbox]:checked").attr("datacomid") : "",
+        fGatewayid: $("input[type=checkbox]:checked").attr("datagatewayid")
+          ? $("input[type=checkbox]:checked").attr("datagatewayid")
+          : "",
+        fMetercode: $("input[type=checkbox]:checked").attr("datametercode")
+          ? $("input[type=checkbox]:checked").attr("datametercode")
+          : "",
+        fFuncid: $("input[type=checkbox]:checked").attr("datafuncid")
+          ? $("input[type=checkbox]:checked").attr("datafuncid")
+          : "",
+        fComid: $("input[type=checkbox]:checked").attr("datacomid")
+          ? $("input[type=checkbox]:checked").attr("datacomid")
+          : "",
         fValue: "1"
       };
       arr.push(controlparam);
@@ -362,17 +380,17 @@ $("#openLight").click(function () {
     //   tEtControlDemandList: JSON.stringify(arr)
     // };
     if (arr.length == 0) {
-      $.toast(Operation['ui_selectNo']);
+      $.toast(Operation["ui_selectNo"]);
       return;
     }
     var param = JSON.stringify(arr);
-    setTimeout(function () {
+    setTimeout(function() {
       canClick = 1;
       $(".footer_btn").removeClass("noclick");
     }, 15000);
     canClick = 0;
     $(".footer_btn").addClass("noclick");
-    Substation.postDataWithRawByAjax(controlUrl, param, function (data) {
+    Substation.postDataWithRawByAjax(controlUrl, param, function(data) {
       if (data.code == 200) {
         if (data.data.a != undefined) {
           $.alert(data.data.a);
@@ -386,20 +404,20 @@ $("#openLight").click(function () {
     // var logList = arr.join(','); //数组转成为字符串
     // confirmAlarmEvents(logList);
   } else {
-    $.alert(Operation['ui_operateAllTip']);
+    $.alert(Operation["ui_operateAllTip"]);
   }
 });
 
-$("#record_btn").click(function () {
+$("#record_btn").click(function() {
   window.location.href = "deviceControlLog.html?type=light";
 });
 
 function selectAll() {
-  if ($("#back_btn").text() == Operation['ui_SelectAll']) {
-    $("#back_btn").text(Operation['ui_UnselectAll']);
+  if ($("#back_btn").text() == Operation["ui_SelectAll"]) {
+    $("#back_btn").text(Operation["ui_UnselectAll"]);
     $(".list-item:visible input:checkbox").prop("checked", "checked");
   } else {
-    $("#back_btn").text(Operation['ui_SelectAll']);
+    $("#back_btn").text(Operation["ui_SelectAll"]);
     $(".list-item:visible input:checkbox").removeAttr("checked");
   }
 }
