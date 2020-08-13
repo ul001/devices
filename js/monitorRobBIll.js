@@ -61,7 +61,6 @@ function initialize() {
         }
         addClickHandler(marker, markDetail);
     }
-
     markersArr.forEach(function (marker) {
         var point = new BMap.Point(marker.fLongitude, marker.fLatitude);
         var label = new BMap.Label(marker.fTaskname, {
@@ -79,18 +78,32 @@ function initialize() {
         // 调用编写自定义函数,创建标注
         addMarker(point, label, marker);
     });
-
+    var marker = new BMap.Marker(new BMap.Point(lon,lat));  // 创建标注
+    map.addOverlay(marker);
+	var label = new BMap.Label("我的位置", {
+        offset: new BMap.Size(25, -15)
+    });
+    label.setStyle({
+        maxWidth: "none",
+        fontSize: "15px",
+        padding: "5px",
+        border: "none",
+        color: "#fff",
+        background: "#ff8355",
+        borderRadius: "5px"
+    });
+	marker.setLabel(label);
     //点击静态marker
     function addClickHandler(marker, markDetail) {
         marker.addEventListener("click", function () {
             localStorage.setItem("robTaskId", markDetail.fTaskid);
             localStorage.setItem("userlatitude", lat);
             localStorage.setItem("userlongitude", lon);
-            if (isAndroid) {
-                android.goToInHtml("RobBillLocation.html");
-            } else {
-                window.location.href = "RobBillLocation.html";
-            }
+//            if (isAndroid) {
+//                android.goToInHtml("RobBillLocation.html");
+//            } else {
+                window.location.href = "RobBillLocation.html?isLocJump=1";
+//            }
         });
     }
     // var marker = new BMap.Marker(myPp); // 创建标注
