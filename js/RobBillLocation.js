@@ -14,10 +14,11 @@ var missionsubid = "";
 // var missionsubname = "X变电所";
 var subDetail;
 var taskid = localStorage.getItem("robTaskId");
-if (!taskid) {
-  taskid = 967;
-}
+//if (!taskid) {
+//  taskid = 967;
+//}
 var jumpId = Substation.GetQueryString("jumpId");
+var isLocJump = Substation.GetQueryString("isLocJump");
 var isPush = "0";
 if (jumpId != undefined && jumpId != null && jumpId != "") {
   taskid = jumpId;
@@ -53,14 +54,22 @@ $(".suibian").click(function() {
   if (isPush == "1") {
     //推送详情点击返回事件
     if (isAndroid) {
-      android.goBack();
+      if (isLocJump != undefined && isLocJump != null && isLocJump != "") {
+        window.history.back();
+      }else{
+        android.goBack();
+      }
     } else if (isIOS) {
       window.webkit.messageHandlers.goBackiOS.postMessage("");
       //            window.history.back();
     }
   } else {
     if (isAndroid) {
-      android.goBack();
+        if (isLocJump != undefined && isLocJump != null && isLocJump != "") {
+            window.history.back();
+        }else{
+          android.goBack();
+        }
     } else {
       window.history.back();
     }
