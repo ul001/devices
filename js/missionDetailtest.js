@@ -834,7 +834,7 @@ function callPhone(phoneNum) {
 function gotoMissionTimeAxis(userid) {
     //    var taskID = localStorage.getItem("taskID");
     // localStorage.setItem("subName", missionsubname);
-    // localStorage.setItem("missionTypeName", missionTypeName);
+    localStorage.setItem("timeUserId", userid);
     localStorage.setItem("subLat", subLat);
     localStorage.setItem("subLon", subLon);
     // if (isAndroid) {
