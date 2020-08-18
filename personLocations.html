@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>我的位置</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <style type="text/css"></style>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/location.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="router3">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left external click_btn back_btn">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a class="button button-link button-nav pull-right click_btn" name="Hidesubname" id="showOrHide"
+                    onclick="showOrHide()">
+                    <span data-i18n="ui_changeToggleName"></span>
+                </a>
+                <h1 class="title title_color"><span data-i18n="ui_location"></span></h1>
+            </header>
+            <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="suggestId"></label>
+                        <input type="search" id="suggestId" placeholder="" data-placeholder="ui_enterkeywords" />
+                    </div>
+                </div>
+            </div>
+            <div class="content">
+                <!--                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:100%;height:auto; display:none;"></div>-->
+                <!--                <div id="container" style="width:100%;height:100%"></div>-->
+                <div id="l-map"></div>
+                <!--                <div id="r-result">请输入:<input type="text" id="suggestId" size="20" value="百度" style="width:150px;" /></div>-->
+                <div id="results" class="list-block media-list" style="display:none;">
+                    <ul id="list-container">
+                        <!--                        <li class="item-content item-link">-->
+                        <!--                            <div class="item-inner">-->
+                        <!--                                <div class="item-title-row">-->
+                        <!--                                    <div class="item-title">安科瑞</div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="item-subtitle">子标题</div>-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                        <!--                        <li class="item-content item-link">-->
+                        <!--                            <div class="item-inner">-->
+                        <!--                                <div class="item-title-row">-->
+                        <!--                                    <div class="item-title">安科瑞</div>-->
+                        <!--                                </div>-->
+                        <!--                                <div class="item-subtitle">子标题</div>-->
+                        <!--                            </div>-->
+                        <!--                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/language.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <!--    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XWWTK5DwIWdF6stShGYzMgDTDLfHwsM4"></script>-->
+    <script type='text/javascript' src="libs/tools.js" charset="utf-8"></script>
+    <script type='text/javascript' src="js/personLocations.js" charset="utf-8"></script>
+</body>
+
+</html>
