@@ -4,7 +4,7 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTcyMzU0MTcsInVzZXJuYW1lIjoiYWRtaW4ifQ.fXAECWh_iXTl1ewPyJyDeb2kJ2PKP21oone5NQHdWNM";
+var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTgyMzU1NTEsInVzZXJuYW1lIjoiYWRtaW4ifQ.n9HX3eq5EHp77MWqJb3z8GKxOA2aYVO6O8BOWJCfYSk";
 var ipAddress = "http://116.236.149.165:8090/";
 var userId = "315";
 //语言字段传参
@@ -17,24 +17,24 @@ var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓�
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 //判断数组中是否包含某字符串
 try {
-  if (isIOS) {
-    //ios系统的处理
-    window.webkit.messageHandlers.iOS.postMessage(null);
-    var storage = localStorage.getItem("accessToken");
-    // storage = storage ? JSON.parse(storage):[];
-    storage = JSON.parse(storage);
-    baseUrlFromAPP = storage.baseurl;
-    tokenFromAPP = storage.token;
-    ipAddress = storage.ipAddress;
-    userId = storage.userID;
-    languageOption = storage.languageType;
-  } else {
-    baseUrlFromAPP = android.getBaseUrl();
-    tokenFromAPP = android.getToken();
-    ipAddress = android.getIpAddress();
-    userId = android.getUserid();
-    languageOption = android.postLanguage();
-  }
+  // if (isIOS) {
+  //   //ios系统的处理
+  //   window.webkit.messageHandlers.iOS.postMessage(null);
+  //   var storage = localStorage.getItem("accessToken");
+  //   // storage = storage ? JSON.parse(storage):[];
+  //   storage = JSON.parse(storage);
+  //   baseUrlFromAPP = storage.baseurl;
+  //   tokenFromAPP = storage.token;
+  //   ipAddress = storage.ipAddress;
+  //   userId = storage.userID;
+  //   languageOption = storage.languageType;
+  // } else {
+  //   baseUrlFromAPP = android.getBaseUrl();
+  //   tokenFromAPP = android.getToken();
+  //   ipAddress = android.getIpAddress();
+  //   userId = android.getUserid();
+  //   languageOption = android.postLanguage();
+  // }
 } catch (e) {
   languageOption = "zh";
 }
