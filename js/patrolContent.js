@@ -102,6 +102,7 @@ function loadPage() {
             }
             var tempStr = "";
             var num = 0;
+            var clickDeviceId = $(".tab.active").attr("id");
             $(tempJson.checkInfo).each(function () {
               num++;
               if (this.type == "radio") {
@@ -152,10 +153,16 @@ function loadPage() {
                   "\n" +
                   "                                                </div>\n" +
                   "                                            </label>\n" +
+                  '<button class="pushtoDetail" style="position:absolute;margin-left:1rem;width:3rem;color:#01ADA8;border:1px solid #01ADA8;border-radius:1rem;" id="pushDetailBtn' +
+                  this.code +
+                  '">详情</button>' +
                   "                                        </div>\n" +
                   "                                    </div>\n" +
                   "                                </div>\n" +
                   "                            </div>\n";
+                // $("#pushDetailBtn" + this.code).click(function () {
+
+                // });
               } else if (this.type == "input") {
                 var thisInputName = this.name;
                 if (this.value == "true") {
@@ -187,6 +194,9 @@ function loadPage() {
               }
               tempStr += inputStr;
             });
+
+
+
             if (canClick == "false") {
               if (thisValueJson.length > 0) {
                 $(".buttons-tab").append(
@@ -237,6 +247,10 @@ function loadPage() {
             //给模板赋值
             if (thisValueJson.length > 0) {
               $(thisValueJson).each(function () {
+                // htmlbutton =
+                //   '<button style="z-index:120;position: absolute;opacity: 0.5;" id="clickBtnEvent"' +
+                //   this.code +
+                //   ' type="button"></button>';
                 if (this.type == "radio") {
                   $(
                     "input[name='" +
@@ -245,6 +259,21 @@ function loadPage() {
                     this.value +
                     "']"
                   ).attr("checked", true);
+
+                  var code = $(
+                    "input[name='" +
+                    (obj.fSubdeviceinfoid + "" + this.code) +
+                    "'][value='" +
+                    this.value +
+                    "']"
+                  ).attr("data-code");
+                  if (this.value == "yes") {
+                    //显示缺陷详情按钮
+                    $("#pushDetailBtn" + code).show();
+                  }
+                  // else {
+                  //   $("#pushDetailBtn" + code).hide();
+                  // }
                 } else {
                   $(
                     "#" +
@@ -271,6 +300,19 @@ function loadPage() {
                 $("#popShow").text(Operation["ui_identify"] + "：" + tipStr);
                 //                        $(".open-popover").click();
               });
+
+            $(".pushtoDetail").unbind().click(
+              function () {
+                var thisRadio = $(this).prevAll().find(":radio:checked");
+                var clickDeviceId = $(".tab.active").attr("id");
+                var radioName = thisRadio.attr("name");
+                var deviceItemCode = thisRadio.attr("data-code");
+                if (thisRadio.val() == "yes") {
+                  localStorage.setItem("defectJson", thisRadio.attr("data-json"));
+                  window.location.href = "defectPage.html?fSubdeviceinfoid=" + clickDeviceId;
+                }
+              }
+            );
           });
           if (canClick == "false") {
             if ($(".buttons-tab").html().length == 0) {
@@ -551,6 +593,21 @@ function loadPage() {
         );
         $.router.loadPage("#page2");
         loadPage2();
+        //显示缺陷详情按钮
+        $("#pushDetailBtn" + $(this).attr("data-code")).show();
+        //是 的时候添加事件  否的时候删除事件
+        // //是的时候添加按钮
+        // $(
+        //   "input[name='" +
+        //     (obj.fSubdeviceinfoid + "" + this.code) +
+        //     "'][value='" +
+        //     $(this).val() +
+        //     "']"
+        // ).after(htmlbutton);
+        // //是的事件
+        // $("#clickBtnEvent" + this.code).click(function() {
+        //   $.alert(Operation["ui_noDeviceRecord"]);
+        // });
       } else {
         $.confirm(
           Operation["ui_noSaveWantDelete"],
@@ -567,6 +624,7 @@ function loadPage() {
                 $.toast(Operation["ui_delsuccess"]);
                 saveThisPage();
                 localStorage.setItem("need-refresh", "true");
+                $("#pushDetailBtn" + $(this).attr("data-code")).hide();
               }
             );
           },
