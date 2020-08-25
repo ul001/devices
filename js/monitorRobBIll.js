@@ -41,7 +41,7 @@ function initialize() {
     map = new BMap.Map("l-map");
     myPp = new BMap.Point(lon, lat);
     geoc = new BMap.Geocoder();
-    map.centerAndZoom(myPp, 15);
+    map.centerAndZoom(myPp, 8);
     map.clearOverlays(); //清除地图上所有覆盖物
     map.addControl(new BMap.NavigationControl());
     // 编写自定义函数,创建标注

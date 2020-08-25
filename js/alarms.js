@@ -43,13 +43,14 @@ function loadMenu() {
   $(".infinite-scroll-preloader").html('<div class="preloader"></div>');
   var isEnglish = 0;
   if (languageOption == "en") {
-      isEnglish = 1;
+    isEnglish = 1;
   } else {
-      isEnglish = 0;
+    isEnglish = 0;
   }
   Substation.getDataByAjaxNoLoading(
-    "/getMessInfoType",
-    {"english": isEnglish},
+    "/getMessInfoType", {
+      "english": isEnglish
+    },
     function (data) {
       if (
         data.hasOwnProperty("tDtMessInfoType") &&
