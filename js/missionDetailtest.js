@@ -372,12 +372,14 @@ $("#startTask").click(function () {
             //开启轨迹
             try {
                 if (isIOS) {
+
                     localStorage.setItem("need-refresh", "true");
                     var isOpen = localStorage.isOpenTrack;
                     if (isOpen == "false") {
                         $.confirm(
                             Operation["ui_openTraceTip"],
                             function () {
+                                trailStart();
                                 var taskDIC = {
                                     fTaskNumber: TaskNumber
                                 };
@@ -385,6 +387,7 @@ $("#startTask").click(function () {
                                     taskDIC
                                 );
                                 location.reload();
+
                             },
                             function () {
                                 location.reload();
@@ -401,8 +404,10 @@ $("#startTask").click(function () {
                         $.confirm(
                             Operation["ui_openTraceTip"],
                             function () {
+                                trailStart();
                                 android.startTrace(TaskNumber);
                                 location.reload();
+
                             },
                             function () {
                                 location.reload();
@@ -422,6 +427,12 @@ $("#startTask").click(function () {
         }
     });
 });
+
+function trailStart() {
+    Substation.getDataByAjax("/trailStart", "taskId=" + taskID, function (data) {
+
+    });
+}
 
 //现场签到
 $("#taskIn").click(function () {
