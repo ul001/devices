@@ -1,41 +1,51 @@
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fDeviceproblemdes"
 
 户外隔离刀闸有闪络抢火或放电现象
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fProblemtype"
 
 工具类
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fProblemlevel"
 
 一般
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fProblemharm"
 
 致使刀闸
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fResolution"
 
 停电修复
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fTimelimit"
 
 1天以内
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fProblemlocation"
 
 A相动触头;A相静触头;A相绝缘子;B相动触头;B相静触头;B相绝缘子;C相动触头;C相静触头;C相绝缘子,A相动触头;A相静触头
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fPlacecheckformid"
 
 386
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fSubdeviceinfoid"
 
--1
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+100420
+------WebKitFormBoundaryXK4jLexyfAlkPDcw
 Content-Disposition: form-data; name="fDeviceitem"
 
 
-------WebKitFormBoundaryqZRZcbgQfjZDX4AD--
+------WebKitFormBoundaryXK4jLexyfAlkPDcw--
+
+
+////////////////////////////////////
+386
+------WebKitFormBoundaryx95JABLcuzoRjwFo
+Content-Disposition: form-data; name="fSubdeviceinfoid"
+
+195
+------WebKitFormBoundaryx95JABLcuzoRjwFo
+Content-Disposition: form-data; name="fDeviceitem"
