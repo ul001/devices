@@ -1,102 +1,41 @@
-{
-    "code": 200,
-    "msg": "ok",
-    "data": {
-        "orderList": [
-            {
-                "fTaskid": 967,
-                "fSubid": 10100001,
-                "fLongitude": "121.30713886",
-                "fLatitude": "31.34996039",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-21 07:59:59",
-                "fStartdate": "2020-06-12 08:00:00",
-                "fTaskcontent": "发布抢单任务测试2",
-                "fTaskstateid": 2,
-                "taskStateId": 2,
-                "fTaskcreatedate": "2020-06-11 18:02:34",
-                "fTaskcreateuserid": 311,
-                "fTaskname": "电气股份有限公司E楼",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "电气股份有限公司E楼",
-                "fTaskstartdate": "2020-07-01 00:26:50",
-                "fTasknumber": "R2006110001",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "67.7"
-            },
-            {
-                "fTaskid": 981,
-                "fSubid": 10100052,
-                "fLongitude": "121.00000000",
-                "fLatitude": "30.00000000",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-16 07:59:59",
-                "fStartdate": "2020-06-15 08:00:00",
-                "fTaskcontent": "测试3",
-                "fTaskstateid": 2,
-                "taskStateId": 2,
-                "fTaskcreatedate": "2020-06-15 23:40:01",
-                "fTaskcreateuserid": 1,
-                "fTaskname": "嘉定变电所",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "嘉定变电所",
-                "fTaskstartdate": "2020-06-15 23:42:05",
-                "fTasknumber": "R2006150007",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "153125.69999999998"
-            },
-            {
-                "fTaskid": 974,
-                "fSubid": 10100002,
-                "fLongitude": "116.31872260",
-                "fLatitude": "39.99664964",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-15 07:59:59",
-                "fStartdate": "2020-06-13 08:00:00",
-                "fTaskcontent": "抢单",
-                "fTaskstateid": 1,
-                "taskStateId": 1,
-                "fTaskcreatedate": "2020-06-12 17:40:06",
-                "fTaskcreateuserid": 315,
-                "fTaskname": "清华大学光华路校区",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "清华大学光华路校区",
-                "fTasknumber": "R2006120004",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "1062488.5999999999"
-            },
-            {
-                "fTaskid": 1015,
-                "fSubid": 10100002,
-                "fLongitude": "116.31872260",
-                "fLatitude": "39.99664964",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-25 07:59:59",
-                "fStartdate": "2020-06-22 08:00:00",
-                "fTaskcontent": "抢单",
-                "fTaskstateid": 1,
-                "taskStateId": 1,
-                "fTaskcreatedate": "2020-06-22 17:36:49",
-                "fTaskcreateuserid": 315,
-                "fTaskname": "清华大学光华路校区",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "清华大学光华路校区",
-                "fTasknumber": "R2006220001",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "1062488.5999999999"
-            }
-        ]
-    }
-}
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fDeviceproblemdes"
+
+户外隔离刀闸有闪络抢火或放电现象
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fProblemtype"
+
+工具类
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fProblemlevel"
+
+一般
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fProblemharm"
+
+致使刀闸
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fResolution"
+
+停电修复
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fTimelimit"
+
+1天以内
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fProblemlocation"
+
+A相动触头;A相静触头;A相绝缘子;B相动触头;B相静触头;B相绝缘子;C相动触头;C相静触头;C相绝缘子,A相动触头;A相静触头
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fPlacecheckformid"
+
+386
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fSubdeviceinfoid"
+
+-1
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD
+Content-Disposition: form-data; name="fDeviceitem"
+
+
+------WebKitFormBoundaryqZRZcbgQfjZDX4AD--
