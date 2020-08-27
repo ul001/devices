@@ -23,6 +23,8 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
+var pushfDeviceproblemid;
+
 if (canClick == "false") {
   $("#saveBtn").css("display", "none");
 }
@@ -293,6 +295,11 @@ function loadPage() {
                   ).val(this.value);
                 }
               });
+            } else {
+              //没有值则全隐藏
+              $(
+                ".pushtoDetail"
+              ).hide();
             }
             $(".tab-link.button")
               .unbind()
@@ -317,8 +324,14 @@ function loadPage() {
                   .prevAll()
                   .find(":radio:checked");
                 var clickDeviceId = $(".tab.active").attr("id");
-                var radioName = thisRadio.attr("name");
-                var deviceItemCode = thisRadio.attr("data-code");
+                var radioName = $(this).attr("name");
+                var deviceItemCode = $(this).attr("data-code");
+                // var clickDeviceId = $(".tab.active").attr("id");
+                // var radioName = thisRadio.attr("name");
+                // var deviceItemCode = thisRadio.attr("data-code");
+                clickDeviceInfoId = clickDeviceId;
+                clickRadioName = radioName;
+                itemCode = deviceItemCode;
                 if (thisRadio.val() == "yes") {
                   var params = {
                     fPlacecheckformid: fPlacecheckformid,
@@ -331,7 +344,8 @@ function loadPage() {
                     function (data) {
                       if (data != "" && data != null) {
                         localStorage.setItem("clickPids", JSON.stringify(pids));
-                        localStorage.setItem("fDeviceproblemid", data);
+                        // localStorage.setItem("fDeviceproblemid", data);
+                        pushfDeviceproblemid = data;
                         localStorage.setItem(
                           "defectJson",
                           thisRadio.attr("data-json")
@@ -627,7 +641,8 @@ function loadPage() {
         loadPage2();
 
         //显示缺陷详情按钮
-        $("button[name='" + clickRadioName + "']").show();
+        // $("button[name='" + clickRadioName + "']").show();
+
         // $("#pushDetailBtn" + $(this).attr("data-code")).show();
         //是 的时候添加事件  否的时候删除事件
         // //是的时候添加按钮
@@ -860,7 +875,7 @@ function loadPage3(fDeviceproblemid) {
   defectPositionVal = defectPosition;
   var fSubdeviceinfoid = clickDeviceInfoId;
   if (clickDeviceInfoId == -1) {
-    clickDeviceInfoId = $(".tab.active").attr("id");;
+    clickDeviceInfoId = $(".tab.active").attr("id");
   }
   $("#inputBox").html("");
   $("#imgBox").html('<img class="upload_img" src="img/upload_img.png"/>');
@@ -945,7 +960,7 @@ function loadPage3(fDeviceproblemid) {
       var defectPositionValArray = defectPositionVal.split(";");
       $(defectPositionArray).each(function (index, obj) {
         $("#defectPosition").append(
-          '<input type="checkbox" disabled value="' +
+          '<input type="checkbox" value="' +
           obj +
           '" id="' +
           index +
@@ -1320,6 +1335,9 @@ function saveFormData() {
   params.append("fPlacecheckformid", fPlacecheckformid);
   params.append("fSubdeviceinfoid", clickDeviceInfoId);
   params.append("fDeviceitem", itemCode);
+  if (pushfDeviceproblemid != "" && pushfDeviceproblemid != undefined) {
+    params.append("fDeviceproblemid", pushfDeviceproblemid);
+  }
   Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (
     data
   ) {
@@ -1333,6 +1351,7 @@ function saveFormData() {
       setTimeout(function () {
         $.router.back();
         saveThisPage();
+        $("button[name='" + clickRadioName + "']").show();
       }, 1000);
     }
   });
@@ -1393,6 +1412,12 @@ $("#backBtn").click(function () {
     window.history.back();
   }
 });
+
+//内联返回
+$(".back").click(function () {
+  localStorage.setItem("need-refresh", "true");
+  $.router.back();
+})
 
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {
