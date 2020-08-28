@@ -38,8 +38,8 @@ function getFirstPage() {
   $.attachInfiniteScroll($(".infinite-scroll"));
 }
 
-$(document).on("refresh", ".pull-to-refresh-content", function(e) {
-  setTimeout(function() {
+$(document).on("refresh", ".pull-to-refresh-content", function (e) {
+  setTimeout(function () {
     getFirstPage();
     // done
     $.pullToRefreshDone(".pull-to-refresh-content");
@@ -101,7 +101,7 @@ function addItems(number, lastIndex) {
   Substation.postDataByAjaxNoLoading(
     url,
     params,
-    function(data) {
+    function (data) {
       var datadic = data.alarmEventLogList;
       var messgeInfo = data.tDtMessInfoType;
       if (messgeInfo != undefined) {
@@ -119,7 +119,7 @@ function addItems(number, lastIndex) {
         if (pageNum == 1) {
           $(".list-container").empty();
         }
-        $(datadic.list).each(function() {
+        $(datadic.list).each(function () {
           if (this.fConfirmstatus) {
             html +=
               '<div class="card hasConfirmed" id="' +
@@ -189,8 +189,8 @@ function addItems(number, lastIndex) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
           "<span class='bottomTip'>--" +
-            Operation["ui_nomoredata"] +
-            "--</span>"
+          Operation["ui_nomoredata"] +
+          "--</span>"
         );
         return;
       }
@@ -198,15 +198,15 @@ function addItems(number, lastIndex) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
           "<span class='bottomTip'>--" +
-            Operation["ui_nomoredata"] +
-            "--</span>"
+          Operation["ui_nomoredata"] +
+          "--</span>"
         );
         return;
       }
       //复选框初始化
       $(".selectAlarms").toggle();
     },
-    function(errorCode) {
+    function (errorCode) {
       if (errorCode == 0) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
@@ -225,14 +225,14 @@ addItems(itemsPerLoad, 0);
 
 var lastIndex = 10;
 
-$(document).on("infinite", ".infinite-scroll", function() {
+$(document).on("infinite", ".infinite-scroll", function () {
   // 如果正在加载，则退出
   if (loading) return;
 
   // 设置flag
   loading = true;
 
-  setTimeout(function() {
+  setTimeout(function () {
     loading = false;
     if (lastIndex >= maxItems) {
       $.detachInfiniteScroll($(".infinite-scroll"));
@@ -333,18 +333,18 @@ function manageCard() {
   }
 }
 
-document.addEventListener("click", function() {
+document.addEventListener("click", function () {
   $("#showDiv").hide();
 });
 
 //点击确认
-$("#confirmed").on("click", function() {
+$("#confirmed").on("click", function () {
   var thisId = $("#showDiv").attr("data-id");
   setAlarmEventConfirmed(thisId, "1");
 });
 
 //未确认
-$("#unConfirm").on("click", function() {
+$("#unConfirm").on("click", function () {
   var thisId = $("#showDiv").attr("data-id");
   setAlarmEventConfirmed(thisId, "0");
 });
@@ -353,7 +353,7 @@ $("#manage").on("click", manageCard);
 //多选确定事件
 function selectConfirm() {
   var arr = [];
-  $("input[type=checkbox]:checked").each(function(i, obj) {
+  $("input[type=checkbox]:checked").each(function (i, obj) {
     if ($(obj).val()) {
       var num = obj.value;
       arr.push(num);
@@ -371,15 +371,14 @@ function confirmAlarmEvents(logidList) {
   var url = "/confirmAlarmEvents";
 
   Substation.getDataByAjaxNoLoading(
-    url,
-    {
+    url, {
       logidList: logidList
     },
-    function(data) {
+    function (data) {
       manageCard();
       //            getFirstPage();
     },
-    function(errorCode) {
+    function (errorCode) {
       // if (errorCode == 0) {
       //     $.detachInfiniteScroll($(".infinite-scroll"));
       //     $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
@@ -398,15 +397,14 @@ function setAlarmEventConfirmed(logid, confirmType) {
     //确认
     url = "/confirmAlarmEvents";
     Substation.getDataByAjaxNoLoading(
-      url,
-      {
+      url, {
         logidList: logid
       },
-      function(data) {
+      function (data) {
         $("#" + logid).addClass("hasConfirmed");
         getFirstPage();
       },
-      function(errorCode) {
+      function (errorCode) {
         // if (errorCode == 0) {
         //     $.detachInfiniteScroll($(".infinite-scroll"));
         //     $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
@@ -421,15 +419,14 @@ function setAlarmEventConfirmed(logid, confirmType) {
     //未确认
     url = "/setAlarmEventUnConfirmed";
     Substation.getDataByAjaxNoLoading(
-      url,
-      {
+      url, {
         fAlarmeventlogid: logid
       },
-      function(data) {
+      function (data) {
         $("#" + logid).removeClass("hasConfirmed");
         getFirstPage();
       },
-      function(errorCode) {
+      function (errorCode) {
         // if (errorCode == 0) {
         //     $.detachInfiniteScroll($(".infinite-scroll"));
         //     $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
@@ -444,17 +441,16 @@ function setAlarmEventConfirmed(logid, confirmType) {
 }
 
 //一键确认
-$("#clearAlarm").click(function() {
-  $.confirm(Operation["ui_selectTip"], function() {
+$("#clearAlarm").click(function () {
+  $.confirm(Operation["ui_selectTip"], function () {
     Substation.getDataByAjaxNoLoading(
-      "/oneClickConfirmAlarmEvents",
-      {
+      "/oneClickConfirmAlarmEvents", {
         fMessinfotypeid: clickID
       },
-      function(data) {
+      function (data) {
         getFirstPage();
       },
-      function(errorCode) {}
+      function (errorCode) {}
     );
   });
 });
@@ -467,13 +463,13 @@ function addCardLongClick() {
   $(".item-link")
     .unbind()
     .on({
-      touchstart: function(e) {
+      touchstart: function (e) {
         isMoving = false;
         var thisCardId = $(this)
           .parent(".card")
           .attr("id");
         longClick = 0;
-        timeOutEvent = setTimeout(function() {
+        timeOutEvent = setTimeout(function () {
           longClick = 1;
           var touch = e.originalEvent.targetTouches[0];
           var screenWidth = $(window).width();
@@ -498,7 +494,7 @@ function addCardLongClick() {
         }, 1000);
         startY = e.originalEvent.changedTouches[0].pageY;
       },
-      touchmove: function(e) {
+      touchmove: function (e) {
         clearTimeout(timeOutEvent);
         timeOutEvent = 0;
         var moveEndY = e.originalEvent.changedTouches[0].pageY;
@@ -516,7 +512,7 @@ function addCardLongClick() {
           e.preventDefault();
         }
       },
-      touchend: function(e) {
+      touchend: function (e) {
         clearTimeout(timeOutEvent);
         if (timeOutEvent != 0 && longClick == 0) {
           //点击
@@ -528,7 +524,7 @@ function addCardLongClick() {
               .attr("id");
             var paramStr = "";
             var alarmeventlogid = "";
-            $.each(alarmDetailList, function(index, value) {
+            $.each(alarmDetailList, function (index, value) {
               if (value["fAlarmeventlogid"] == thisCardId) {
                 alarmeventlogid = thisCardId;
                 paramStr = JSON.stringify(value);
@@ -559,16 +555,16 @@ function addCardLongClick() {
     });
 }
 
-$("#searchBtn").click(function() {
+$("#searchBtn").click(function () {
   var start = new Date(
     $("#dateStart")
-      .val()
-      .replace(/-/g, "/")
+    .val()
+    .replace(/-/g, "/")
   );
   var end = new Date(
     $("#dateEnd")
-      .val()
-      .replace(/-/g, "/")
+    .val()
+    .replace(/-/g, "/")
   );
   if (start > end) {
     $.toast(Operation["ui_dateselecttip"]);
@@ -607,29 +603,29 @@ function getSomeSubstation(isAll) {
     key: searchKey
   };
   $("#listContainer").empty();
-  Substation.getDataByAjaxNoLoading(url, params, function(data) {
+  Substation.getDataByAjaxNoLoading(url, params, function (data) {
     if (isAll == 1) {
       listObj = data.list;
     } else {
       listObj = data;
     }
-    $(listObj).each(function() {
+    $(listObj).each(function () {
       $("#listContainer").append(
         '<li class="item-content" data-id="' +
-          this.fSubid +
-          '">' +
-          '<div class="item-inner">' +
-          '<div class="item-title">' +
-          this.fSubname +
-          "</div>" +
-          "</div>" +
-          "</li>"
+        this.fSubid +
+        '">' +
+        '<div class="item-inner">' +
+        '<div class="item-title">' +
+        this.fSubname +
+        "</div>" +
+        "</div>" +
+        "</li>"
       );
     });
     $("#listContainer").show();
     $("#listContainer .item-content")
       .unbind()
-      .click(function() {
+      .click(function () {
         clickSubid = $(this).attr("data-id");
         var clickName = $(this)
           .find(".item-title")
@@ -642,14 +638,14 @@ function getSomeSubstation(isAll) {
   });
 }
 
-$("#search").bind("keydown", function(event) {
+$("#search").bind("keydown", function (event) {
   if (event.keyCode == 13) {
     getSomeSubstation();
     document.activeElement.blur();
   }
 });
 
-$("#search").on("input", function() {
+$("#search").on("input", function () {
   if ($("#search").val().length > 0) {
     $(".icon.icon-clear").show();
   } else {
@@ -657,7 +653,7 @@ $("#search").on("input", function() {
   }
 });
 
-$("#search").on("focus", function() {
+$("#search").on("focus", function () {
   if ($("#search").val().length > 0) {
     $(".icon.icon-clear").show();
   } else {
@@ -665,33 +661,33 @@ $("#search").on("focus", function() {
   }
 });
 
-$(".icon.icon-clear").click(function() {
+$(".icon.icon-clear").click(function () {
   $("#search").val("");
   getSomeSubstation(1);
   $(this).hide();
 });
 
 //时间快捷按钮
-$(".buttons-row .button").click(function() {
+$(".buttons-row .button").click(function () {
   $(this)
     .addClass("active")
     .siblings()
     .removeClass("active");
 });
-$("#today").click(function() {
+$("#today").click(function () {
   var myDate = new Date();
   var todayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
-$("#yestoday").click(function() {
+$("#yestoday").click(function () {
   var myDate = new Date();
   myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
   var yestodayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
 });
-$("#thisMonth").click(function() {
+$("#thisMonth").click(function () {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
@@ -700,7 +696,7 @@ $("#thisMonth").click(function() {
   Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
-$("#lastMonth").click(function() {
+$("#lastMonth").click(function () {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
@@ -710,7 +706,7 @@ $("#lastMonth").click(function() {
   Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 
-Date.prototype.format = function(fmt) {
+Date.prototype.format = function (fmt) {
   //author: meizz
   var o = {
     "M+": this.getMonth() + 1, //月份
@@ -735,7 +731,7 @@ Date.prototype.format = function(fmt) {
   return fmt;
 };
 
-$("#dateStart,#dateEnd").click(function() {
+$("#dateStart,#dateEnd").click(function () {
   $(".buttons-row")
     .find($(".active"))
     .removeClass("active");
@@ -743,7 +739,7 @@ $("#dateStart,#dateEnd").click(function() {
 
 //解决键盘遮挡问题
 var h = $(window).height();
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   if ($(window).height() < h) {
     $(".btnBar").hide();
   }
@@ -754,7 +750,7 @@ window.addEventListener("resize", function() {
     document.activeElement.tagName == "INPUT" ||
     document.activeElement.tagName == "TEXTAREA"
   ) {
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       document.activeElement.scrollIntoViewIfNeeded();
     }, 0);
   }
