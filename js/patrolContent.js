@@ -1347,6 +1347,7 @@ function saveFormData() {
         "checked",
         true
       );
+      pushfDeviceproblemid = "";
       localStorage.setItem("need-refresh", "true");
       setTimeout(function () {
         $.router.back();
@@ -1415,6 +1416,7 @@ $("#backBtn").click(function () {
 
 //内联返回
 $(".back").click(function () {
+  pushfDeviceproblemid = "";
   localStorage.setItem("need-refresh", "true");
   $.router.back();
 })

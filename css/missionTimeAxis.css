@@ -109,6 +109,10 @@ body {
     font: normal 18px/16px Arial
 }
 
+.showChargeMission {
+    font: normal 0.6rem Arial;
+}
+
 .history-date ul li h3 span {
     display: block;
     color: #d0d0d0;
@@ -307,8 +311,9 @@ body {
 }
 
 .popBottomBtn2 {
-    position: absolute;
-    bottom: 1rem;
+    display: flex;
+    position: fixed;
+    bottom: 0rem;
     margin: 0.4rem;
     width: 95%;
 }
