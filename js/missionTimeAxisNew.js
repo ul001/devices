@@ -50,9 +50,15 @@ var p1;
 var p2;
 var missionType = "";
 var userID = localStorage.getItem("timeUserId");
+var ischargePerson = Substation.GetQueryString("ischargePerson");
+
+if (userID && userID != undefined && userID != 'undefined' && userID.length > 0) {
+    $("#control").hide();
+}
 
 //返回按钮事件
 $(".suibian").click(function () {
+    localStorage.removeItem("timeUserId");
     if (isPush == "1") {
         //推送详情点击返回事件
         if (isAndroid) {
@@ -72,58 +78,151 @@ $(".suibian").click(function () {
 
 //地图初始化并默认查询行车路线
 function initialize() {
-    map = new BMap.Map("container");
-    // 添加带有定位的导航控件
-    var navigationControl = new BMap.NavigationControl({
-        // 靠左上角位置
-        anchor: BMAP_ANCHOR_TOP_LEFT,
-        // LARGE类型
-        type: BMAP_NAVIGATION_CONTROL_LARGE,
-        // 启用显示定位
-        enableGeolocation: true
-    });
-    map.addControl(navigationControl);
-    // 百度地图API功能
-    // map = new BMap.Map("allmap");
-    map.centerAndZoom(new BMap.Point(subLon, subLat), 11);
-    //先经度，再纬度
-    p1 = new BMap.Point(myLon, myLat);
-    p2 = new BMap.Point(subLon, subLat);
-    var opts = {
-        position: p2, // 指定文本标注所在的地理位置
-        offset: new BMap.Size(30, -30) //设置文本偏移量
-    };
-    var output = "驾车时间：";
-    var searchComplete = function (results) {
-        if (!results || JSON.stringify(results) == "{}") {
-            return;
+    if (userID && userID != undefined && userID != 'undefined' && userID.length > 0) {
+        // $("#control").hide();
+        var useID = localStorage.getItem("YYUserId");
+        var fTrackstarttime = localStorage.getItem("YYStartTime");
+        var fTrackendtime = localStorage.getItem("YYEndTime");
+        var path = [];
+
+        var urlReg = /[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+\.?/;
+        var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
+        var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+        //判断数组中是否包含某字符串
+        if (isIOS) {
+            //ios系统的处理
+            window.webkit.messageHandlers.iOS.postMessage(null);
+            var storage = localStorage.getItem("accessToken");
+            storage = JSON.parse(storage);
+            baseUrlFromAPP = storage.baseurl;
+        } else {
+            baseUrlFromAPP = android.getBaseUrl();
         }
-        // if (driving.getStatus() != BMAP_STATUS_SUCCESS) {
-        //     return;
-        // }
-        var plan = results.getPlan(0);
-        output += plan.getDuration(true) + "\n"; //获取时间
-        output += "总路程为：";
-        output += plan.getDistance(true) + "\n"; //获取距离
-        var label = new BMap.Label(output, opts); // 创建文本标注对象
-        label.setStyle({
-            color: "red",
-            fontSize: "12px",
-            height: "20px",
-            lineHeight: "20px",
-            fontFamily: "微软雅黑"
+        baseUrlFromAPP = baseUrlFromAPP.replace(/http:\/\//g, "");
+        baseUrlFromAPP = baseUrlFromAPP.replace(/https:\/\//g, "");
+        var realUrlArr = baseUrlFromAPP.split('/');
+        baseUrlFromAPP = realUrlArr[0];
+        var newrealArr = baseUrlFromAPP.split('.');
+        var baseNew = newrealArr.join('-');
+        if (baseNew.search(":") != -1) {
+            newrealArr = baseNew.split(':');
+            baseNew = newrealArr.join('_');
+        }
+        // baseUrlFromAPP = baseUrlFromAPP.replace(/./g, '-');
+        // var baseUrl = (baseUrlFromAPP.replace(/:/g, '_')).split('.');
+        var params = "ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb" + "&service_id=219626" +
+            "&entity_name=" + baseNew + '-' + useID +
+            "&start_time=" + fTrackstarttime +
+            "&end_time=" + fTrackendtime +
+            "&is_processed=1";
+        $.ajax({
+            type: "GET",
+            url: "http://yingyan.baidu.com/api/v3/track/gettrack",
+            data: params,
+            dataType: 'jsonp',
+            beforeSend: function (request) {
+                request.setRequestHeader("Access-Control-Allow-Origin", '*');
+            },
+            success: function (data) {
+                if (data.status === 0) {
+                    map = new BMap.Map("container");
+                    map.centerAndZoom(new BMap.Point(data.start_point.longitude, data.start_point.latitude), 11);
+                    // map.enableScrollWheelZoom(true);
+                    path.push(data.start_point);
+                    $.each(data.points, function (i, val) {
+                        path.push(val);
+                    });
+                    path.push(data.end_point);
+                    //标记起点
+                    var startpoint = new BMap.Point(data.start_point.longitude, data.start_point.latitude);
+                    var marker1 = new BMap.Marker(startpoint);
+                    map.addOverlay(marker1); // 将标注添加到地图中
+                    var label = new BMap.Label("起点", {
+                        offset: new BMap.Size(20, -10)
+                    });
+                    marker1.setLabel(label);
+                    //标记终点
+                    var endpoint = new BMap.Point(data.end_point.longitude, data.end_point.latitude);
+                    var marker2 = new BMap.Marker(endpoint);
+                    map.addOverlay(marker2); // 将标注添加到地图中
+                    var label2 = new BMap.Label("终点", {
+                        offset: new BMap.Size(20, -10)
+                    });
+                    marker2.setLabel(label2);
+                } else {
+                    alert(data.message)
+                }
+
+                var point = [];
+                for (var i = 0; i < path.length; i++) {
+                    point.push(new BMap.Point(path[i].longitude, path[i].latitude));
+                }
+                var polyline = new BMap.Polyline(point, {
+                    strokeColor: "red",
+                    strokeWeight: 4,
+                    strokeOpacity: 0.5
+                });
+                map.addOverlay(polyline);
+            }
         });
-        map.addOverlay(label);
-    };
-    var driving = new BMap.DrivingRoute(map, {
-        renderOptions: {
-            map: map,
-            autoViewport: true
-        },
-        onSearchComplete: searchComplete
-    });
-    driving.search(p1, p2);
-    $("#clickPopup").click();
+
+        $("#clickPopup").click();
+
+    } else {
+        map = new BMap.Map("container");
+        // 添加带有定位的导航控件
+        var navigationControl = new BMap.NavigationControl({
+            // 靠左上角位置
+            anchor: BMAP_ANCHOR_TOP_LEFT,
+            // LARGE类型
+            type: BMAP_NAVIGATION_CONTROL_LARGE,
+            // 启用显示定位
+            enableGeolocation: true
+        });
+        map.addControl(navigationControl);
+        // 百度地图API功能
+        // map = new BMap.Map("allmap");
+        map.centerAndZoom(new BMap.Point(subLon, subLat), 11);
+        //先经度，再纬度
+        p1 = new BMap.Point(myLon, myLat);
+        p2 = new BMap.Point(subLon, subLat);
+        var opts = {
+            position: p2, // 指定文本标注所在的地理位置
+            offset: new BMap.Size(30, -30) //设置文本偏移量
+        };
+        var output = "驾车时间：";
+        var searchComplete = function (results) {
+            if (!results || JSON.stringify(results) == "{}") {
+                return;
+            }
+            // if (driving.getStatus() != BMAP_STATUS_SUCCESS) {
+            //     return;
+            // }
+            var plan = results.getPlan(0);
+            output += plan.getDuration(true) + "\n"; //获取时间
+            output += "总路程为：";
+            output += plan.getDistance(true) + "\n"; //获取距离
+            var label = new BMap.Label(output, opts); // 创建文本标注对象
+            label.setStyle({
+                color: "red",
+                fontSize: "12px",
+                height: "20px",
+                lineHeight: "20px",
+                fontFamily: "微软雅黑"
+            });
+            map.addOverlay(label);
+        };
+        var driving = new BMap.DrivingRoute(map, {
+            renderOptions: {
+                map: map,
+                autoViewport: true
+            },
+            onSearchComplete: searchComplete
+        });
+        driving.search(p1, p2);
+        $("#clickPopup").click();
+    }
+
 }
 
 //查询步行
@@ -329,78 +428,125 @@ function getNetData() {
         $(".demo").append(strVar);
 
         if (data.length > 0) {
-            var lineData = data;
-            $(lineData).each(function () {
-                var strVar = "";
-                var timeY = this.F_TimeTitle.substring(0, 5);
-                var timeS = this.F_TimeTitle.substring(8, 17);
-                strVar += " <li>";
-                strVar +=
-                    "                                            <h3>" +
-                    timeS +
-                    "<span>" +
-                    timeY +
-                    "</span></h3>";
-                strVar += "                                            <dl>";
-                strVar += "                                                <dt>";
-                strVar += this.F_Done;
-                strVar += "                                                </dt>";
-                strVar += "                                            </dl>";
-                strVar += "                                        </li>";
-                $(".history-ul").append(strVar);
-            });
+            if (ischargePerson == 1) {
+                if (userID && userID != undefined && userID != 'undefined' && userID.length > 0) {
+                    var lineData = data;
+                    //个人
+                    $(lineData).each(function () {
+                        var strVar = "";
+                        var timeY = this.F_TimeTitle.substring(8, 17);
+                        var timeS = this.F_TimeTitle.substring(0, 5);
+                        strVar += " <li>";
+                        strVar +=
+                            "                                            <h3>" +
+                            timeS +
+                            "<span>" +
+                            timeY +
+                            "</span></h3>";
+                        strVar += "                                            <dl>";
+                        strVar += "                                                <dt>";
+                        strVar += this.F_Done;
+                        strVar += "                                                </dt>";
+                        strVar += "                                            </dl>";
+                        strVar += "                                        </li>";
+                        $(".history-ul").append(strVar);
+                    });
+                } else {
+                    //总任务
+                    var lineData = data;
+                    $(lineData).each(function () {
+                        var strVar = "";
+                        strVar += " <li>";
+                        strVar +=
+                            '                                            <h3 style="font: normal 0.6rem Arial;">' +
+                            this.F_TimeTitle +
+                            "</h3>";
+                        strVar += "                                            <dl>";
+                        strVar += "                                                <dt style=\"font: 16px/22px 微软雅黑;\">";
+                        strVar += this.F_Done;
+                        strVar += "                                                </dt>";
+                        strVar += "                                            </dl>";
+                        strVar += "                                        </li>";
+                        $(".history-ul").append(strVar);
+                    });
+                }
+            } else {
+                var lineData = data;
+                //个人
+                $(lineData).each(function () {
+                    var strVar = "";
+                    var timeY = this.F_TimeTitle.substring(8, 17);
+                    var timeS = this.F_TimeTitle.substring(0, 5);
+                    strVar += " <li>";
+                    strVar +=
+                        "                                            <h3>" +
+                        timeS +
+                        "<span>" +
+                        timeY +
+                        "</span></h3>";
+                    strVar += "                                            <dl>";
+                    strVar += "                                                <dt>";
+                    strVar += this.F_Done;
+                    strVar += "                                                </dt>";
+                    strVar += "                                            </dl>";
+                    strVar += "                                        </li>";
+                    $(".history-ul").append(strVar);
+                });
+            }
+
+            // for (let index = 0; index < 5; index++) {
+            //   // const element = array[index];
+            //   var strVar = "";
+            //   strVar += " <li>";
+            //   strVar +=
+            //     "                                            <h3>10:08<span>12/10/08</span></h3>";
+            //   strVar += "                                            <dl>";
+            //   strVar += "                                                <dt>";
+            //   strVar +=
+            //     "                                                    发布任务<span>张三发布了上海嘉定变电所的巡检任务</span>";
+            //   strVar += "                                                </dt>";
+            //   strVar += "                                            </dl>";
+            //   strVar += "                                        </li>";
+            // }
+            //给最后一个li添加绿色效果
+            $("ul li:last-child").attr("class", "green");
+
+            getOwnLocation();
+
+            // loadScript();
+            $(".popBottomBtn2").show();
+            //         }
+
+            //         missionType = subDetail.fTaskstateid;
+            //         //判断按钮显隐
+            //         if (userList && userList.length > 0) {
+            //             $(".popBottomBtn").hide();
+            //             $(".popBottomBtn2").show();
+            //         } else if (isOwnPostTask == "true") {
+            //             $(".popBottomBtn").hide();
+            //             $(".popBottomBtn2").show();
+            //         } else {
+            //             $(".popBottomBtn").show();
+            //         }
+
+            //         localStorage.removeItem("postTask");
+            //         // localStorage.setItem("postTask", "false");
+            //         //跳转视频
+            //         $("#jumpVideo").click(function () {
+            //             if (isAndroid) {
+            //                 android.videoWatch(subDetail.fSubid);
+            //             } else if (isIOS) {
+            //                 var subParam = {
+            //                     Subid: subDetail.fSubid,
+            //                     Subname: subDetail.fSubName
+            //                 };
+            //                 window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+            //             }
+            //         });
+            //     }
+        } else {
+            getOwnLocation();
         }
-
-        // for (let index = 0; index < 5; index++) {
-        //   // const element = array[index];
-        //   var strVar = "";
-        //   strVar += " <li>";
-        //   strVar +=
-        //     "                                            <h3>10:08<span>12/10/08</span></h3>";
-        //   strVar += "                                            <dl>";
-        //   strVar += "                                                <dt>";
-        //   strVar +=
-        //     "                                                    发布任务<span>张三发布了上海嘉定变电所的巡检任务</span>";
-        //   strVar += "                                                </dt>";
-        //   strVar += "                                            </dl>";
-        //   strVar += "                                        </li>";
-        // }
-        //给最后一个li添加绿色效果
-        $("ul li:last-child").attr("class", "green");
-
-        getOwnLocation();
-
-        // loadScript();
-        $(".popBottomBtn2").show();
-        //         }
-
-        //         missionType = subDetail.fTaskstateid;
-        //         //判断按钮显隐
-        //         if (userList && userList.length > 0) {
-        //             $(".popBottomBtn").hide();
-        //             $(".popBottomBtn2").show();
-        //         } else if (isOwnPostTask == "true") {
-        //             $(".popBottomBtn").hide();
-        //             $(".popBottomBtn2").show();
-        //         } else {
-        //             $(".popBottomBtn").show();
-        //         }
-
-        //         localStorage.removeItem("postTask");
-        //         // localStorage.setItem("postTask", "false");
-        //         //跳转视频
-        //         $("#jumpVideo").click(function () {
-        //             if (isAndroid) {
-        //                 android.videoWatch(subDetail.fSubid);
-        //             } else if (isIOS) {
-        //                 var subParam = {
-        //                     Subid: subDetail.fSubid,
-        //                     Subname: subDetail.fSubName
-        //                 };
-        //                 window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
-        //             }
-        //         });
-        //     }
     });
 }
 
