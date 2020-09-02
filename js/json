@@ -1,102 +1,85 @@
-{
-    "code": 200,
-    "msg": "ok",
-    "data": {
-        "orderList": [
-            {
-                "fTaskid": 967,
-                "fSubid": 10100001,
-                "fLongitude": "121.30713886",
-                "fLatitude": "31.34996039",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-21 07:59:59",
-                "fStartdate": "2020-06-12 08:00:00",
-                "fTaskcontent": "发布抢单任务测试2",
-                "fTaskstateid": 2,
-                "taskStateId": 2,
-                "fTaskcreatedate": "2020-06-11 18:02:34",
-                "fTaskcreateuserid": 311,
-                "fTaskname": "电气股份有限公司E楼",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "电气股份有限公司E楼",
-                "fTaskstartdate": "2020-07-01 00:26:50",
-                "fTasknumber": "R2006110001",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "67.7"
-            },
-            {
-                "fTaskid": 981,
-                "fSubid": 10100052,
-                "fLongitude": "121.00000000",
-                "fLatitude": "30.00000000",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-16 07:59:59",
-                "fStartdate": "2020-06-15 08:00:00",
-                "fTaskcontent": "测试3",
-                "fTaskstateid": 2,
-                "taskStateId": 2,
-                "fTaskcreatedate": "2020-06-15 23:40:01",
-                "fTaskcreateuserid": 1,
-                "fTaskname": "嘉定变电所",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "嘉定变电所",
-                "fTaskstartdate": "2020-06-15 23:42:05",
-                "fTasknumber": "R2006150007",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "153125.69999999998"
-            },
-            {
-                "fTaskid": 974,
-                "fSubid": 10100002,
-                "fLongitude": "116.31872260",
-                "fLatitude": "39.99664964",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-15 07:59:59",
-                "fStartdate": "2020-06-13 08:00:00",
-                "fTaskcontent": "抢单",
-                "fTaskstateid": 1,
-                "taskStateId": 1,
-                "fTaskcreatedate": "2020-06-12 17:40:06",
-                "fTaskcreateuserid": 315,
-                "fTaskname": "清华大学光华路校区",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "清华大学光华路校区",
-                "fTasknumber": "R2006120004",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "1062488.5999999999"
-            },
-            {
-                "fTaskid": 1015,
-                "fSubid": 10100002,
-                "fLongitude": "116.31872260",
-                "fLatitude": "39.99664964",
-                "fConfigtypeid": 3,
-                "fTasktypeid": 7,
-                "fDeadlinedate": "2020-06-25 07:59:59",
-                "fStartdate": "2020-06-22 08:00:00",
-                "fTaskcontent": "抢单",
-                "fTaskstateid": 1,
-                "taskStateId": 1,
-                "fTaskcreatedate": "2020-06-22 17:36:49",
-                "fTaskcreateuserid": 315,
-                "fTaskname": "清华大学光华路校区",
-                "fTasktypeexplain": "抢单",
-                "fTaskchargerid": 1,
-                "fSubName": "清华大学光华路校区",
-                "fTasknumber": "R2006220001",
-                "deviceProblemSum": 0,
-                "deviceProblemUnresolved": 0,
-                "userDistance": "1062488.5999999999"
-            }
-        ]
-    }
-}
+Object = $1
+
+distance: 7813.9717136322
+
+end_point: {longitude: 121.30663939445, latitude: 31.350137235653, loc_time: 1586478868}
+
+message: "成功"
+
+//数组
+points: Array (33)
+0 Object
+
+create_time: "2020-04-10 08:04:27"
+
+direction: 330
+
+height: 7
+
+latitude: 31.372063334846
+
+loc_time: 1586476978
+
+locate_mode: "网络定位"
+
+longitude: 121.2537491395
+
+radius: 65
+
+speed: 1.193518
+
+“Object”原型
+1 {loc_time: 1586477008, latitude: 31.372140975114, longitude: 121.25369710931, create_time: "2020-04-10 08:04:27", direction: 272, …}
+2 {loc_time: 1586477038, latitude: 31.372151275587, longitude: 121.2534032249, create_time: "2020-04-10 08:04:27", direction: 234, …}
+3 {loc_time: 1586477068, latitude: 31.371886536787, longitude: 121.25296366843, create_time: "2020-04-10 08:06:28", direction: 75, …}
+4 {loc_time: 1586477098, latitude: 31.371960642773, longitude: 121.25331139437, create_time: "2020-04-10 08:06:28", direction: 110, …}
+5 {loc_time: 1586477128, latitude: 31.371716322379, longitude: 121.25408515885, create_time: "2020-04-10 08:06:28", direction: 151, …}
+6 {loc_time: 1586477158, latitude: 31.369960128649, longitude: 121.25518930431, create_time: "2020-04-10 08:06:28", direction: 81, …}
+7 {loc_time: 1586477188, latitude: 31.370189801818, longitude: 121.25705697924, create_time: "2020-04-10 08:08:29", direction: 65, …}
+8 {loc_time: 1586477368, latitude: 31.373233805231, longitude: 121.26486714374, create_time: "2020-04-10 08:10:29", direction: 62, …}
+9 {loc_time: 1586477428, latitude: 31.373867788491, longitude: 121.26629441203, create_time: "2020-04-10 08:10:29", direction: 57, …}
+10 {loc_time: 1586477548, latitude: 31.376656044754, longitude: 121.27140137121, create_time: "2020-04-10 08:12:29", direction: 39, …}
+11 {loc_time: 1586477638, latitude: 31.376764765442, longitude: 121.27150774956, create_time: "2020-04-10 08:14:29", direction: 234, …}
+12 {loc_time: 1586477728, latitude: 31.376736335541, longitude: 121.27146117521, create_time: "2020-04-10 08:16:30", direction: 65, …}
+13 {loc_time: 1586477788, latitude: 31.377506651349, longitude: 121.27341558753, create_time: "2020-04-10 08:16:30", direction: 70, …}
+14 {loc_time: 1586477848, latitude: 31.378857107163, longitude: 121.2779394688, create_time: "2020-04-10 08:18:30", direction: 75, …}
+15 {loc_time: 1586477878, latitude: 31.379505499578, longitude: 121.28085933038, create_time: "2020-04-10 08:18:30", direction: 78, …}
+16 {loc_time: 1586477938, latitude: 31.379920312772, longitude: 121.28333272353, create_time: "2020-04-10 08:20:30", direction: 130, …}
+17 {loc_time: 1586477968, latitude: 31.377954793743, longitude: 121.28606642714, create_time: "2020-04-10 08:20:30", direction: 152, …}
+18 {loc_time: 1586477998, latitude: 31.375454483769, longitude: 121.28755884388, create_time: "2020-04-10 08:20:30", direction: 97, …}
+19 {loc_time: 1586478028, latitude: 31.375248323163, longitude: 121.28931491274, create_time: "2020-04-10 08:20:30", direction: 124, …}
+20 {loc_time: 1586478058, latitude: 31.374326932348, longitude: 121.29090227352, create_time: "2020-04-10 08:22:30", direction: 160, …}
+21 {loc_time: 1586478088, latitude: 31.369733180553, longitude: 121.29278045086, create_time: "2020-04-10 08:22:30", direction: 152, …}
+22 {loc_time: 1586478298, latitude: 31.353292995925, longitude: 121.30264118283, create_time: "2020-04-10 08:26:31", direction: 155, …}
+23 {loc_time: 1586478358, latitude: 31.349795253769, longitude: 121.3044764905, create_time: "2020-04-10 08:26:31", direction: 91, …}
+24 {loc_time: 1586478388, latitude: 31.349781824834, longitude: 121.30526748374, create_time: "2020-04-10 08:26:31", direction: 70, …}
+25 {loc_time: 1586478418, latitude: 31.350322063737, longitude: 121.30700843826, create_time: "2020-04-10 08:28:31", direction: 155, …}
+26 {loc_time: 1586478448, latitude: 31.35028063726, longitude: 121.3070300359, create_time: "2020-04-10 08:28:31", direction: 155, …}
+27 {loc_time: 1586478478, latitude: 31.349982368351, longitude: 121.30675711632, create_time: "2020-04-10 08:28:31", direction: 125, …}
+28 {loc_time: 1586478718, latitude: 31.349864317473, longitude: 121.30695345734, create_time: "2020-04-10 08:32:31", direction: 305, …}
+29 {loc_time: 1586478748, latitude: 31.349982368351, longitude: 121.30675711632, create_time: "2020-04-10 08:32:31", direction: 125, …}
+30 {loc_time: 1586478808, latitude: 31.349864317473, longitude: 121.30695345734, create_time: "2020-04-10 08:34:31", direction: 247, …}
+31 {loc_time: 1586478838, latitude: 31.349758679272, longitude: 121.30664926611, create_time: "2020-04-10 08:34:31", direction: 358, …}
+32 {loc_time: 1586478868, latitude: 31.350137235653, longitude: 121.30663939445, create_time: "2020-04-10 08:34:31", direction: 358, …}
+
+“Array”原型
+
+size: 33
+
+start_point: Object
+
+latitude: 31.372063334846
+
+loc_time: 1586476978
+
+longitude: 121.2537491395
+
+“Object”原型
+
+status: 0
+
+toll_distance: 0
+
+total: 33
+
+“Object”原型
