@@ -175,10 +175,18 @@ function addItems(number, lastIndex) {
             }
           });
         });
-        $(".item-media").hide();
-        $("input:checkbox").prop("disabled", "disabled");
+        if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
+            $(".item-media").hide();
+            $("input:checkbox").prop("disabled", "disabled");
+        }else{
+            $(".label-title")
+              .removeClass("col-60")
+              .removeClass("col-100")
+              .addClass("col-75");
+            $(".item-media").show();
+        }
         //addClick();
-        $(".item-media").hide();
+//        $(".item-media").hide();
         //保存记录
         //                params['subName'] = $("#search").val();
         //                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
