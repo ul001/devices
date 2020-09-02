@@ -129,9 +129,15 @@ function getNetData() {
             localStorage.setItem("missionTypeName", missionTypeName);
             $("#missionName").html(taskInfo.fTaskname);
             $("#createName").html(taskInfo.fTaskcreateusername);
-            $("#createCall").attr("onclick", "callPhone('" + taskInfo.fTaskcreateuserphone + "')");
+            $("#createCall").attr(
+                "onclick",
+                "callPhone('" + taskInfo.fTaskcreateuserphone + "')"
+            );
             $("#chargerName").html(taskInfo.fTaskchargername);
-            $("#chargerCall").attr("onclick", "callPhone('" + taskInfo.fTaskchargerphone + "')");
+            $("#chargerCall").attr(
+                "onclick",
+                "callPhone('" + taskInfo.fTaskchargerphone + "')"
+            );
             $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
             $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
             //任务开始时间
@@ -187,14 +193,35 @@ function getNetData() {
                             "<span style='color:springgreen;'>" +
                             Operation["ui_submitted"] +
                             "</span>";
-                        if (isUseTrace == "1") {
-                            // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
-                            taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
-                        }
+                        // if (isUseTrace == "1") {
+                        //     taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_progress'] + '</a>';
+                        //     // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
+                        //     // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
+                        // }
                         isChangeReturnCount++;
                     } else {}
-                    taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;color:#02AB93;border-color:#02AB93;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ")\">" + Operation['ui_progress'] + '</a>';
-                    // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;color:#02AB93;border-color:#02AB93;\" onClick=\"gotoMissionTimeAxis()\">" + Operation['ui_progress'] + '</a>';
+                    if (isUseTrace == "1") {
+                        taskStateName +=
+                            '<a href="#" class="button" style="width:55%;display:inline-block;float:right;" onClick="gotoMissionTimeAxis(' +
+                            this.fUserid +
+                            ",'" +
+                            this.fTaskstarttime +
+                            "','" +
+                            this.fCreatetime +
+                            "')\">" +
+                            Operation["ui_progress"] +
+                            "</a>";
+                        // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
+                    } else {
+                        taskStateName +=
+                            '<a href="#" class="button" style="width:55%;display:inline-block;float:right;" onClick="gotoMissionTimeAxis(' +
+                            this.fUserid +
+                            ',"","")">' +
+                            Operation["ui_progress"] +
+                            "</a>";
+                    }
+                    // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;color:#02AB93;border-color:#02AB93;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ",\"\",\"\")\">" + Operation['ui_progress'] + '</a>';
+
                     var text = "";
                     text += "<li>";
                     text +=
@@ -203,8 +230,12 @@ function getNetData() {
                         '                                    <div class="item-inner">';
                     text +=
                         '                                        <div class="item-title label row no-gutter" style="display:flex;align-items:center;">' +
-                        '<div class="limit-length" style="width:80%;">' + this.userName + '</div>' +
-                        "<img class='callPhone' onclick=\"callPhone('" + this.fUserphone + "')\" style='margin-left:0.3rem;margin-right:0.5rem;width:1rem;' src='img/call.png'>" +
+                        '<div class="limit-length" style="width:80%;">' +
+                        this.userName +
+                        "</div>" +
+                        "<img class='callPhone' onclick=\"callPhone('" +
+                        this.fUserphone +
+                        "')\" style='margin-left:0.3rem;margin-right:0.5rem;width:1rem;' src='img/call.png'>" +
                         "</div>";
                     text +=
                         '                                        <div class="item-input">';
@@ -228,7 +259,10 @@ function getNetData() {
             //按钮显隐判断
             if (temp) {
                 $("#addVarContain124").show();
-                if (thisUser.fTaskstarttime == undefined && thisUser.fTaskstateid == "1") {
+                if (
+                    thisUser.fTaskstarttime == undefined &&
+                    thisUser.fTaskstateid == "1"
+                ) {
                     $("#startTask").show();
                 } else if (thisUser.fTaskstateid == "2") {
                     if (thisUser.fSignintime == undefined) {
@@ -264,26 +298,23 @@ function getNetData() {
                 if (loginUserid == taskchargerid) {
                     //负责人按钮
                     if (taskInfo.fTaskfinishdate == undefined) {
-
                         //根据提交数配置
                         if (isChangeReturnCount == userList.length) {
-                            $("#chargeTask").css('width', '28%');
-                            $("#chargeSubmit").css('width', '28%');
-                            $("#chargeTask span").text(Operation['ui_chargeTask']);
-                            $("#chargeSubmit span").text(Operation['ui_chargeSubmit']);
+                            $("#chargeTask").css("width", "28%");
+                            $("#chargeSubmit").css("width", "28%");
+                            $("#chargeTask span").text(Operation["ui_chargeTask"]);
+                            $("#chargeSubmit span").text(Operation["ui_chargeSubmit"]);
                             $("#chargeTask").show();
                             $("#chargeReturn").show();
                             $("#chargeSubmit").show();
                         } else {
-                            $("#chargeTask").css('width', '40%');
-                            $("#chargeSubmit").css('width', '40%');
-                            $("#chargeTask span").text(Operation['ui_doingDetail']);
-                            $("#chargeSubmit span").text(Operation['ui_taskSubmit']);
+                            $("#chargeTask").css("width", "40%");
+                            $("#chargeSubmit").css("width", "40%");
+                            $("#chargeTask span").text(Operation["ui_doingDetail"]);
+                            $("#chargeSubmit span").text(Operation["ui_taskSubmit"]);
                             $("#chargeTask").show();
                             $("#chargeSubmit").show();
-
                         }
-
                     } else {
                         $("#doDetail").show();
                     }
@@ -378,6 +409,7 @@ $("#startTask").click(function () {
                         $.confirm(
                             Operation["ui_openTraceTip"],
                             function () {
+                                trailStart();
                                 var taskDIC = {
                                     fTaskNumber: TaskNumber
                                 };
@@ -401,6 +433,7 @@ $("#startTask").click(function () {
                         $.confirm(
                             Operation["ui_openTraceTip"],
                             function () {
+                                trailStart();
                                 android.startTrace(TaskNumber);
                                 location.reload();
                             },
@@ -422,6 +455,12 @@ $("#startTask").click(function () {
         }
     });
 });
+
+function trailStart() {
+    Substation.getDataByAjax("/trailStart", "taskId=" + taskID, function (
+        data
+    ) {});
+}
 
 //现场签到
 $("#taskIn").click(function () {
@@ -516,7 +555,7 @@ $(".doDetail").click(function () {
             if (haveResult) {
                 window.location.href = "patrolContent.html";
             } else {
-                $.toast(Operation['ui_noFormResult']);
+                $.toast(Operation["ui_noFormResult"]);
             }
         }
     } else if (missionTypeid == 2) {
@@ -530,11 +569,14 @@ $(".doDetail").click(function () {
         //消警任务
         //        localStorage.setItem("alarmeventlogid", fTaskandalarmeventid);
         //        localStorage.setItem("missionTypeid", missionTypeid);
-        window.location.href = "alarmCleanInfo.html?alarmeventlogid=" + fTaskandalarmeventid;
+        window.location.href =
+            "alarmCleanInfo.html?alarmeventlogid=" + fTaskandalarmeventid;
     } else if (missionTypeid == 6) {
-        window.location.href = "rushRepairInfo.html?repairId=" + fTaskandalarmeventid;
+        window.location.href =
+            "rushRepairInfo.html?repairId=" + fTaskandalarmeventid;
     } else if (missionTypeid == 7) {
-        window.location.href = "rushRepairInfo.html?repairId=" + fTaskandalarmeventid;
+        window.location.href =
+            "rushRepairInfo.html?repairId=" + fTaskandalarmeventid;
     }
 });
 
@@ -574,13 +616,17 @@ $("#submitTask").click(function () {
                         //android关闭轨迹
                         var isOpen = android.getTrackOpen();
                         if (isOpen == "true") {
-                            $.confirm(Operation["ui_endTraceTip"], function () {
-                                android.stopTrace();
-                                location.reload();
-                            }, function () {
-                                android.stopTrace();
-                                location.reload();
-                            });
+                            $.confirm(
+                                Operation["ui_endTraceTip"],
+                                function () {
+                                    android.stopTrace();
+                                    location.reload();
+                                },
+                                function () {
+                                    android.stopTrace();
+                                    location.reload();
+                                }
+                            );
                         } else {
                             android.stopTrace();
                             location.reload();
@@ -594,12 +640,16 @@ $("#submitTask").click(function () {
                         //ios关闭轨迹
                         var isOpen = localStorage.isOpenTrack;
                         if (isOpen == "true") {
-                            $.confirm(Operation["ui_endTraceTip"], function () {
-                                window.webkit.messageHandlers.closeTrackFunc.postMessage("");
-                                location.reload();
-                            }, function () {
-                                location.reload();
-                            });
+                            $.confirm(
+                                Operation["ui_endTraceTip"],
+                                function () {
+                                    window.webkit.messageHandlers.closeTrackFunc.postMessage("");
+                                    location.reload();
+                                },
+                                function () {
+                                    location.reload();
+                                }
+                            );
                         } else {
                             window.webkit.messageHandlers.closeTrackFunc.postMessage("");
                             location.reload();
@@ -629,7 +679,6 @@ $("#chargeReturn").click(function () {
             fTaskid: taskID
         };
         Substation.getDataByAjax("/rejectTasksubmit", param, function (data) {
-
             if (isAndroid) {
                 try {
                     android.removeSPItem(taskID);
@@ -712,8 +761,8 @@ $("#clickManager").click(function () {
         upLoadClicktag = true;
     }, 1000);
     /*    localStorage.setItem("fSubname", "执行情况");
-          localStorage.setItem("missionSubid", missionsubid);
-          localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
+            localStorage.setItem("missionSubid", missionsubid);
+            localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
     localStorage.setItem("taskID", taskID);
     if (missionState != "3") {
         localStorage.setItem("hiddenBtn", "NO");
@@ -733,14 +782,14 @@ function selectTrace(getUserid, startTime, endTime) {
         upLoadClicktag = true;
     }, 1000);
     if (startTime != "undefined" && startTime != "") {
-        startTime = startTime.replace(/-/g, '/');
+        startTime = startTime.replace(/-/g, "/");
         startTime = new Date(startTime).getTime() / 1000;
         if (endTime == "undefined" || endTime == "") {
             endTime = startTime + 86400;
         } else {
-            endTime = endTime.replace(/-/g, '/');
+            endTime = endTime.replace(/-/g, "/");
             endTime = new Date(endTime).getTime() / 1000;
-            if ((endTime - startTime) > 86400) {
+            if (endTime - startTime > 86400) {
                 endTime = startTime + 86400;
             }
         }
@@ -749,19 +798,24 @@ function selectTrace(getUserid, startTime, endTime) {
             android.showThisTrace(getUserid, startTime, endTime);
         } else if (isIOS) {
             var yydic = {
-                "entityName": getUserid,
-                "startTime": startTime,
-                "endTime": endTime
+                entityName: getUserid,
+                startTime: startTime,
+                endTime: endTime
             };
             window.webkit.messageHandlers.pushYYGJView.postMessage(yydic);
         }
     } else {
-        $.alert(Operation['ui_noStartTimeTraceTip']);
+        $.alert(Operation["ui_noStartTimeTraceTip"]);
     }
 }
 
 $("#goMap").click(function () {
-    if (subLat != undefined && subLat != "" && subLon != undefined && subLon != "") {
+    if (
+        subLat != undefined &&
+        subLat != "" &&
+        subLon != undefined &&
+        subLon != ""
+    ) {
         if (isAndroid) {
             android.goToMap(subLat, subLon, missionsubname);
         } else if (isIOS) {
@@ -773,7 +827,7 @@ $("#goMap").click(function () {
             window.webkit.messageHandlers.pushMapSelect.postMessage(locParam);
         }
     } else {
-        $.toast(Operation['ui_nolocation']);
+        $.toast(Operation["ui_nolocation"]);
     }
 });
 
@@ -825,25 +879,56 @@ function callPhone(phoneNum) {
         android.callPhone(phoneNum);
     } else {
         var param = {
-            "phone": phoneNum
+            phone: phoneNum
         };
         window.webkit.messageHandlers.takePhone.postMessage(param);
     }
 }
 
-function gotoMissionTimeAxis(userid) {
+function gotoMissionTimeAxis(userid, startTime, endTime) {
     //    var taskID = localStorage.getItem("taskID");
     // localStorage.setItem("subName", missionsubname);
-    localStorage.setItem("timeUserId", userid);
-    localStorage.setItem("subLat", subLat);
-    localStorage.setItem("subLon", subLon);
-    // if (isAndroid) {
+    if (startTime != undefined && startTime != "") {
+        startTime = startTime.replace(/-/g, "/");
+        startTime = new Date(startTime).getTime() / 1000;
+        if (endTime == "undefined" || endTime == "") {
+            endTime = startTime + 86400;
+        } else {
+            endTime = endTime.replace(/-/g, "/");
+            endTime = new Date(endTime).getTime() / 1000;
+            if (endTime - startTime > 86400) {
+                endTime = startTime + 86400;
+            }
+        }
 
-    //     android.goToInAxis();
-    // } else {
-    window.location.href = "missionTimeAxis.html";
+        localStorage.setItem("timeUserId", userid);
+        localStorage.setItem("subLat", subLat);
+        localStorage.setItem("subLon", subLon);
+        localStorage.setItem("YYUserId", userid);
+        localStorage.setItem("YYStartTime", startTime);
+        localStorage.setItem("YYEndTime", endTime);
+        // if (isAndroid) {
+        var chargePerson = 0;
+        if (loginUserid == taskchargerid) {
+            chargePerson = 1;
+        }
+        //     android.goToInAxis();
+        // } else {
+        window.location.href =
+            "missionTimeAxis.html?ischargePerson=" + chargePerson;
+    } else {
+        // if (isAndroid) {
+        var chargePerson = 0;
+        if (loginUserid == taskchargerid) {
+            chargePerson = 1;
+        }
+        //     android.goToInAxis();
+        // } else {
+        window.location.href =
+            "missionTimeAxis.html?ischargePerson=" + chargePerson;
+    }
+
     // }
 }
-
 
 $.init();

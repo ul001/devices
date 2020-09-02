@@ -3,33 +3,43 @@ var typename = localStorage.getItem("titleName");
 //localStorage.removeItem("typeId");
 //localStorage.removeItem("titleName");
 $(".title.title_color").text(typename);
-$(".showlist").empty();
-Substation.getDataByAjax("/selectByMessInfoTypeId", {
-    fMessinfotypeid: typeid
-}, function (data) {
-    if (data.tDtMessInfoType != undefined && data.tDtMessInfoType.length > 0) {
-        var strVar = "";
-        $(data.tDtMessInfoType).each(function (i, obj) {
-            var checkVal = "";
-            if (this.flag == true) {
-                checkVal = " checked=true";
-            }
-            strVar += "<li>\n" +
-                "   <div class=\"item-content\">\n" +
-                "       <div class=\"item-inner\">\n" +
-                "          <div class=\"item-title label\">" + obj.fMessinfoexplain + "</div>\n" +
-                "       <div class='item-input'><label class='label-switch'>\n" +
-                "          <input class=\"cbselect\" type=\"checkbox\" name=\"checkbox\" data-code=\"" + obj.fMessinfocode + "\"" + checkVal + ">\n" +
-                "          <div class='imgSelect'></div>\n" +
-                "       </label></div>\n" +
-                "       </div>\n" +
-                "   </div>\n" +
-                "</li>";
-        });
-        $(".showlist").append(strVar);
-        $(".cbselect").off("change", changeFunction).on("change", changeFunction);
-    }
-});
+
+
+
+
+function selectByMessInfo() {
+    $(".showlist").empty();
+    var searchkey = $("#search").val();
+    Substation.getDataByAjax("/selectByMessInfoTypeId", {
+        fMessinfotypeid: typeid,
+        searchKey: searchkey
+    }, function (data) {
+        if (data.tDtMessInfoType != undefined && data.tDtMessInfoType.length > 0) {
+            var strVar = "";
+            $(data.tDtMessInfoType).each(function (i, obj) {
+                var checkVal = "";
+                if (this.flag == true) {
+                    checkVal = " checked=true";
+                }
+                strVar += "<li>\n" +
+                    "   <div class=\"item-content\">\n" +
+                    "       <div class=\"item-inner\">\n" +
+                    "          <div class=\"item-title label\">" + obj.fMessinfoexplain + "</div>\n" +
+                    "       <div class='item-input'><label class='label-switch'>\n" +
+                    "          <input class=\"cbselect\" type=\"checkbox\" name=\"checkbox\" data-code=\"" + obj.fMessinfocode + "\"" + checkVal + ">\n" +
+                    "          <div class='imgSelect'></div>\n" +
+                    "       </label></div>\n" +
+                    "       </div>\n" +
+                    "   </div>\n" +
+                    "</li>";
+            });
+            $(".showlist").append(strVar);
+            $(".cbselect").off("change", changeFunction).on("change", changeFunction);
+        }
+    });
+}
+
+selectByMessInfo();
 
 function changeFunction() {
     var params = {};
@@ -79,3 +89,15 @@ function manageSelect() {
         $(".pull-left.click_btn").toggle();
     }
 }
+
+$('#search').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+        selectByMessInfo();
+        document.activeElement.blur();
+    }
+});
+
+$(".searchbar-cancel").click(function () {
+    $("#search").val("");
+    selectByMessInfo();
+});

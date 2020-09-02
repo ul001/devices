@@ -4,7 +4,8 @@
  * @description 存放常用工具类
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
-var tokenFromAPP = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTcyMzU0MTcsInVzZXJuYW1lIjoiYWRtaW4ifQ.fXAECWh_iXTl1ewPyJyDeb2kJ2PKP21oone5NQHdWNM";
+var tokenFromAPP =
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTgyMzU1NTEsInVzZXJuYW1lIjoiYWRtaW4ifQ.n9HX3eq5EHp77MWqJb3z8GKxOA2aYVO6O8BOWJCfYSk";
 var ipAddress = "http://116.236.149.165:8090/";
 var userId = "315";
 //语言字段传参
@@ -87,7 +88,7 @@ var Substation = {
       //      var script = document.createElement("script");
       //      script.src = "libs/cn.min.js";
       //      document.body.appendChild(script);
-      $("head").append("<script src=\"libs/cn.min.js\"></script>");
+      $("head").append('<script src="libs/cn.min.js"></script>');
     }
     this.loadLanguageData();
     //    document.body.appendChild(script);
@@ -95,19 +96,19 @@ var Substation = {
 
   loadLanguagePro: function () {
     $.i18n.properties({
-      name: 'strings', //资源文件名称
-      path: 'i18n/', //资源文件路径
-      mode: 'both', //用Map的方式使用资源文件中的值
+      name: "strings", //资源文件名称
+      path: "i18n/", //资源文件路径
+      mode: "both", //用Map的方式使用资源文件中的值
       language: languageOption,
       //       async: true,
       cache: false,
-      encoding: 'UTF-8',
+      encoding: "UTF-8",
       callback: function () {
         $("[data-i18n]").each(function () {
           $(this).html($.i18n.prop($(this).data("i18n")));
         });
         $("[data-placeholder]").each(function () {
-          $(this).attr('placeholder', $.i18n.prop($(this).data("placeholder")));
+          $(this).attr("placeholder", $.i18n.prop($(this).data("placeholder")));
         });
       }
     });
@@ -118,42 +119,53 @@ var Substation = {
       $(this).html(Operation[$(this).data("i18n")]);
     });
     $("[data-placeholder]").each(function () {
-      $(this).attr('placeholder', Operation[$(this).data("placeholder")]);
+      $(this).attr("placeholder", Operation[$(this).data("placeholder")]);
     });
   },
 
   showCodeTips: function (code) {
-    if (Operation['code_' + code] == undefined || Operation['code_' + code] == null) {
-      $.alert(Operation['code_other']);
+    if (
+      Operation["code_" + code] == undefined ||
+      Operation["code_" + code] == null
+    ) {
+      $.alert(Operation["code_other"]);
     } else {
-      $.alert(Operation['code_' + code]);
+      $.alert(Operation["code_" + code]);
     }
   },
 
   loadGroupList: function (successCallback) {
-    Substation.getDataByAjax("/selectSubDeviceGroupList", {
-      fSubid: selectSubid
-    }, function (data) {
-      var thisTemids = [];
-      var thisList = data.subdevicegroupList;
-      $(thisList).each(function () {
-        if (this.hasOwnProperty("fPagedesigntemplateid")) {
-          thisTemids.push(this);
-        }
-      });
-      var devicelist = [];
-      $(data.deviceList).each(function (index, obj) {
-        $(thisTemids).each(function () {
-          if (this.fSubdevicegroupid == obj.fSubdevicegroupid) {
-            devicelist.push(this);
-            return false;
+    Substation.getDataByAjax(
+      "/selectSubDeviceGroupList", {
+        fSubid: selectSubid
+      },
+      function (data) {
+        var thisTemids = [];
+        var thisList = data.subdevicegroupList;
+        $(thisList).each(function () {
+          if (this.hasOwnProperty("fPagedesigntemplateid")) {
+            thisTemids.push(this);
           }
         });
-      });
-      Substation.addState(devicelist, thisList, 'fSubdevicegroupid', 'fParentid');
-      //        localStorage.setItem("subDeviceGroupTree",JSON.stringify(thisList));
-      successCallback(thisList);
-    });
+        var devicelist = [];
+        $(data.deviceList).each(function (index, obj) {
+          $(thisTemids).each(function () {
+            if (this.fSubdevicegroupid == obj.fSubdevicegroupid) {
+              devicelist.push(this);
+              return false;
+            }
+          });
+        });
+        Substation.addState(
+          devicelist,
+          thisList,
+          "fSubdevicegroupid",
+          "fParentid"
+        );
+        //        localStorage.setItem("subDeviceGroupTree",JSON.stringify(thisList));
+        successCallback(thisList);
+      }
+    );
   },
 
   getDeviceGroupListByPid: function (pid, successCallback) {
@@ -187,8 +199,8 @@ var Substation = {
         return false;
       }
     });
-    arrList[firstIndex]['fSortnum'] = secordNum;
-    arrList[secordIndex]['fSortnum'] = firstNum;
+    arrList[firstIndex]["fSortnum"] = secordNum;
+    arrList[secordIndex]["fSortnum"] = firstNum;
     swapArr(arrList, firstIndex, secordIndex);
 
     function swapArr(arr, index1, index2) {
@@ -215,7 +227,7 @@ var Substation = {
       $(deviceList).each(function (index, obj) {
         $(list).each(function () {
           if (obj[thisid] == this[thisid]) {
-            this['state'] = "true";
+            this["state"] = "true";
           }
           if (this[thisid] == obj[pid]) {
             lastdids.push(this);
@@ -234,17 +246,13 @@ var Substation = {
         ip: ipAddress,
         exceptionMessage: jsonStr
       },
-      success: function (data) {
-
-      },
-      error: function () {
-
-      }
+      success: function (data) {},
+      error: function () {}
     });
   },
 
   getDataByAjax: function (url, params, successCallback) {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -256,7 +264,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast(Operation['ui_nodata']);
+          $.toast(Operation["ui_nodata"]);
           return;
         } else {
           if (data.code == "200") {
@@ -272,16 +280,16 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
+          $.toast(Operation["ui_neterror"]);
         } else {
-          $.toast(Operation['code_fail']);
+          $.toast(Operation["code_fail"]);
         }
       }
     });
   },
 
   getDataByAjaxMain: function (url, params, successCallback) {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     $.ajax({
       type: "GET",
       url: ipAddress + "/SubstationWEBV2" + url,
@@ -293,7 +301,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast(Operation['ui_nodata']);
+          $.toast(Operation["ui_nodata"]);
           return;
         } else {
           if (data.code == "200") {
@@ -309,9 +317,9 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
+          $.toast(Operation["ui_neterror"]);
         } else {
-          $.toast(Operation['code_fail']);
+          $.toast(Operation["code_fail"]);
         }
       }
     });
@@ -319,7 +327,7 @@ var Substation = {
 
   //部分接口无Data但返回code码
   getDataByAjaxAllData: function (url, params, successCallback) {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -331,7 +339,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast(Operation['ui_nodata']);
+          $.toast(Operation["ui_nodata"]);
           return;
         } else {
           if (data.code == "200") {
@@ -347,15 +355,20 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
+          $.toast(Operation["ui_neterror"]);
         } else {
-          $.toast(Operation['code_fail']);
+          $.toast(Operation["code_fail"]);
         }
       }
     });
   },
 
-  getDataByAjaxNoLoading: function (url, params, successCallback, errorCallback) {
+  getDataByAjaxNoLoading: function (
+    url,
+    params,
+    successCallback,
+    errorCallback
+  ) {
     $.ajax({
       type: "GET",
       url: baseUrlFromAPP + url,
@@ -366,7 +379,7 @@ var Substation = {
       },
       success: function (data) {
         if (data == undefined) {
-          $.toast(Operation['ui_nodata']);
+          $.toast(Operation["ui_nodata"]);
           return;
         } else {
           if (data.code == "200") {
@@ -382,15 +395,20 @@ var Substation = {
       error: function (data) {
         errorCallback(data.status);
         if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
+          $.toast(Operation["ui_neterror"]);
         } else {
-          $.toast(Operation['code_fail']);
+          $.toast(Operation["code_fail"]);
         }
       }
     });
   },
 
-  postDataByAjaxNoLoading: function (url, params, successCallback, errorCallback) {
+  postDataByAjaxNoLoading: function (
+    url,
+    params,
+    successCallback,
+    errorCallback
+  ) {
     $.ajax({
       type: "POST",
       url: baseUrlFromAPP + url,
@@ -401,7 +419,7 @@ var Substation = {
       },
       success: function (data) {
         if (data == undefined) {
-          $.toast(Operation['ui_nodata']);
+          $.toast(Operation["ui_nodata"]);
           return;
         } else {
           if (data.code == "200") {
@@ -417,16 +435,16 @@ var Substation = {
       error: function (data) {
         errorCallback(data.status);
         if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
+          $.toast(Operation["ui_neterror"]);
         } else {
-          $.toast(Operation['code_fail']);
+          $.toast(Operation["code_fail"]);
         }
       }
     });
   },
 
   postDataByAjax: function (url, params, successCallback) {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     $.ajax({
       url: baseUrlFromAPP + url,
       type: "POST",
@@ -438,7 +456,7 @@ var Substation = {
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast(Operation['ui_nodata']);
+          $.toast(Operation["ui_nodata"]);
           return;
         } else {
           if (data.code == 200) {
@@ -454,16 +472,16 @@ var Substation = {
       error: function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
+          $.toast(Operation["ui_neterror"]);
         } else {
-          $.toast(Operation['code_fail']);
+          $.toast(Operation["code_fail"]);
         }
       }
     });
   },
 
   postDataWithRawByAjax: function (url, params, successCallback) {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     $.ajax({
       url: baseUrlFromAPP + url,
       type: "POST",
@@ -472,20 +490,20 @@ var Substation = {
       dataType: "JSON",
       beforeSend: function (request) {
         request.setRequestHeader("Authorization", tokenFromAPP);
-        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader("Content-Type", "application/json");
         // request.setRequestHeader('Content-Type', 'multipart/form-data');
         // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
       },
       success: function (data) {
         $.hidePreloader();
         if (data == undefined) {
-          $.toast(Operation['ui_nodata']);
+          $.toast(Operation["ui_nodata"]);
           return;
         } else {
           if (data.code == 200) {
             successCallback(data);
           } else if (data.code == "5000") {
-            $.toast(Operation['ui_datanoreturn']);
+            $.toast(Operation["ui_datanoreturn"]);
           } else {
             Substation.showCodeTips(data.code);
           }
@@ -493,18 +511,20 @@ var Substation = {
       },
       error: function (data) {
         $.hidePreloader();
-        $.toast(Operation['ui_datanoreturn']);
+        $.toast(Operation["ui_datanoreturn"]);
       },
-      complete: function (XMLHttpRequest, status) { //请求完成后最终执行参数
-        if (status == 'timeout') { //超时,status还有success,error等值的情况
-          $.toast(Operation['ui_overtime']);
+      complete: function (XMLHttpRequest, status) {
+        //请求完成后最终执行参数
+        if (status == "timeout") {
+          //超时,status还有success,error等值的情况
+          $.toast(Operation["ui_overtime"]);
         }
       }
     });
   },
 
   postFormDataByAjax: function (url, params, successCallback) {
-    $.showPreloader(Operation['ui_loading']);
+    $.showPreloader(Operation["ui_loading"]);
     $.ajax({
         url: baseUrlFromAPP + url,
         type: "POST",
@@ -532,9 +552,9 @@ var Substation = {
       .fail(function (data) {
         $.hidePreloader();
         if (data.status == 0) {
-          $.toast(Operation['ui_neterror']);
+          $.toast(Operation["ui_neterror"]);
         } else {
-          $.toast(Operation['code_fail']);
+          $.toast(Operation["code_fail"]);
         }
       });
   },
@@ -623,7 +643,6 @@ var Substation = {
         }
       }
 
-
       function detailData(fCircuitids, fCircuitname) {
         var circuitData;
         $("#fCircuitname").html(fCircuitname);
@@ -644,7 +663,6 @@ var Substation = {
           .click(function () {
             var select = $(this)[0].id;
             showDetailTable(fCircuitids, circuitData, select);
-
           });
 
         $("#myModaldetail").on("hide.bs.modal", function () {
@@ -2105,14 +2123,17 @@ var Substation = {
   },
   changeCalendar: function (changeVal, element, UpElement) {
     var child = document.getElementById(element);
-    child.remove()
-    var str = ' <input type="text" id="' + element + '" placeholder="" data-placeholder="ui_startTime" readonly />'
+    child.remove();
+    var str =
+      ' <input type="text" id="' +
+      element +
+      '" placeholder="" data-placeholder="ui_startTime" readonly />';
     $("#" + UpElement).html(str);
     $("#" + element).val(changeVal);
     $("#" + element).calendar({
       value: [changeVal]
     });
-  },
+  }
 };
 
 function showToast(str) {

@@ -15,7 +15,7 @@ var imgNum1 = 0;
 var imgNum = 0;
 var fDeviceproblemid = Substation.GetQueryString("fDeviceproblemid");
 var androidProblemid = localStorage.getItem("fDeviceproblemid");
-if (androidProblemid != null && androidProblemid != undefined) {
+if (androidProblemid != null && androidProblemid != undefined && isAndroid) {
   fDeviceproblemid = androidProblemid;
   $(".back_btn").click(function () {
     android.goBack();
@@ -109,11 +109,13 @@ Substation.getDataByAjax(url, problemParam, function (data) {
           }
         } else if (isAndroid) {
           menuId = android.getMenuId();
-          if(menuId==undefined || menuId==null){
+          if (menuId == undefined || menuId == null) {
             menuId = "342";
           }
         }
-      } catch (e) {menuId = "2391"}
+      } catch (e) {
+        menuId = "2391"
+      }
       Substation.getDataByAjax("/getSubinfoVoByPid", {
         pid: menuId
       }, function (data) {
@@ -358,7 +360,7 @@ function removeImg(obj, index) {
                         });*/
         //                }
       }
-//      imgNum--;
+      //      imgNum--;
     }
   }
   //$(".upload_img_length").html(imgNum);
