@@ -205,7 +205,22 @@ function addItems(number, lastIndex) {
 addItems(itemsPerLoad, 0);
 
 $("#control_btn").click(function () {
-  controlClick();
+  if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
+    $.prompt(Operation["ui_needInputPwd"], Operation["ui_pleaseInputPwd"], function (value) {
+      var pwdstr = $.md5(value);
+      Substation.postDataByAjax(
+        "/verifySePassword", {
+          sePassword: pwdstr
+        },
+        function (data) {
+          controlClick();
+        }
+      );
+    });
+  } else {
+    controlClick();
+  }
+
 });
 
 $(".button_bar .button").click(function () {
