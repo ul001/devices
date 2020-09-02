@@ -100,13 +100,13 @@ function creatView(dataParam) {
         sb += '                            <li class="item-content">';
         sb += '                                <div class="item-inner">';
         sb +=
-          '                                    <div class="item-title label">' +
-          Operation["ui_SubVideo"] +
-          "</div>";
+            '                                    <div class="item-title label">' +
+            Operation["ui_SubVideo"] +
+            "</div>";
         sb +=
-          '                                    <div class="item-after">' +
-          '<img src="img/video_watch.png" class="videoWatch" onclick="jumpVideo()">' +
-          "</div>";
+            '                                    <div class="item-after">' +
+            '<img src="img/video_watch.png" class="videoWatch" onclick="jumpVideo()">' +
+            "</div>";
         sb += "                                </div>";
         sb += "                            </li>";
         sb += '                            <li class="item-content">';
@@ -589,7 +589,7 @@ function removeImg(obj, index) {
                                         });*/
                 //                }
             }
-//            imgNum--;
+            //            imgNum--;
         }
     }
     //$(".upload_img_length").html(imgNum);
@@ -669,15 +669,15 @@ function saveFormData() {
 
 //跳转视频
 function jumpVideo() {
-  if (isAndroid) {
-    android.videoWatch(params.fSubid);
-  } else if (isIOS) {
-    var subParam = {
-      Subid: params.fSubid,
-      Subname: params.fSubname
-    };
-    window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
-  }
+    if (isAndroid) {
+        android.videoWatch(params.fSubid);
+    } else if (isIOS) {
+        var subParam = {
+            Subid: params.fSubid,
+            Subname: params.fSubname
+        };
+        window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
+    }
 }
 
 //解决键盘遮挡问题

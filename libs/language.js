@@ -12,7 +12,10 @@ function getZhLanguage() {
     ui_unRoblocation: "未抢单位置",
     ui_selectSub: "选择变电所",
     ui_subHolder: "请输入变电所名称或编号",
+    ui_notifSearch: "请输入报警类别名称",
     ui_subHolderNoCode: "请输入任务单号/任务内容/变电所名称",
+    ui_pleaseInputPwd: "请输入二级密码",
+    ui_needInputPwd: "需输入二级密码才能控制设备",
     //通用
     ui_loading: "正在加载...",
     ui_back: "返回",
@@ -598,7 +601,10 @@ function getEnLanguage() {
     ui_unRoblocation: "Unrob Location",
     ui_selectSub: "Select a substation",
     ui_subHolder: "Please enter the substation name or number",
+    ui_notifSearch: "Please enter the Alarm name",
     ui_subHolderNoCode: "Please enter the task number/task content/substation name",
+    ui_pleaseInputPwd: "Please input a password",
+    ui_needInputPwd: "Secondary password is required to control the device",
     //通用
     ui_loading: "Loading...",
     ui_back: "Back",

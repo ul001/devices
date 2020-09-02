@@ -414,10 +414,10 @@ if (userID && userID != undefined && userID != 'undefined' && userID.length > 0)
 }
 // userID
 function getNetData() {
+    $(".demo").empty();
     Substation.getDataByAjax("/getTaskTimeLine", params, function (
         data
     ) {
-        $(".demo").empty();
         var strVar = "";
         strVar += '<div class="history">';
         strVar += '   <div class="history-date">';
@@ -545,6 +545,14 @@ function getNetData() {
             //         });
             //     }
         } else {
+            var strVar = "";
+            strVar += '<div class="history">';
+            strVar += '   <div class="history-date">';
+            strVar += '      <p style="width: 100%;display: flex;align-items: center;justify-content: center;font-size: 0.8rem;">--暂无数据--';
+            strVar += "      </p>";
+            strVar += "   </div>";
+            strVar += "</div>";
+            $(".demo").append(strVar);
             getOwnLocation();
         }
     });
