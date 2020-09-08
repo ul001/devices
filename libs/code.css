@@ -1,0 +1,88 @@
+.checkCode {
+    width: 435px;
+}
+
+.checkCode .modal-header {
+    border: 0;
+}
+
+.checkCode .modal-body {
+    height: 260px;
+    padding-left: 30px;
+}
+
+.codeDiv {
+    margin-top: 1rem;
+}
+
+.checkCode .codeDiv {
+    margin-bottom: 15px;
+}
+
+#canvas {
+    float: right;
+    margin-right: 0.1rem;
+    display: inline-block;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#btnSendCode {
+    width: 4.4rem;
+    height: 1.6rem;
+    padding: 0 5px;
+    font-size: 0.6rem;
+    text-align: center;
+    background: rgb(140, 212, 245);
+    margin-right: 0.1rem;
+    color: #fff;
+    border: 0;
+}
+
+.checkCode .sendInput {
+    width: 220px;
+    height: 40px;
+    background: none;
+    padding-left: 5px;
+    border: 1px solid #e1e5e8;
+    border-radius: 0;
+    outline: none;
+    text-align: left;
+}
+
+#phoneInput {
+    width: 11rem;
+}
+
+#checkBtn {
+    height: 40px;
+    width: 200px;
+    background: rgb(140, 212, 245);
+    margin-right: 100px;
+    color: #fff;
+    border: 0;
+}
+
+/* .icon {
+    float: left;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #e1e5e8;
+    background-color: #f8f9fb;
+} */
+
+.codePhoneImg {
+    background: url("../img/phoneIcon.png") no-repeat 50% 50%;
+    background-size: 30px 30px;
+}
+
+.codeCanvasImg {
+    background: url("../img/canvasIcon.png") no-repeat 50% 50%;
+    background-size: 30px 30px;
+}
+
+.codeMsgImg {
+    background: url("../img/msgIcon.png") no-repeat 50% 50%;
+    background-size: 30px 30px;
+}

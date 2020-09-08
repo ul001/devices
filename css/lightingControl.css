@@ -110,3 +110,233 @@ label.label-checkbox i.icon-form-checkbox {
     color: #fff;
     background: #01ADA8;
 }
+
+/*
+modelcss
+
+*/
+
+/*é˜´å½±*/
+.right-main {
+    background-color: #F5F9FD;
+}
+
+#refreshSuccess {
+    color: #e81515;
+    visibility: hidden;
+    position: absolute;
+    margin: 8px 10px 0 0;
+}
+
+.selectAll {
+    margin-right: 10px;
+    font-weight: normal;
+}
+
+.details {
+    position: relative;
+    float: right;
+    border: 1px solid #eee;
+    cursor: pointer;
+    padding: 3px 5px;
+    border-radius: 3px;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    vertical-align: -5px;
+    margin-right: 5px !important;
+}
+
+.pull-right input[type="checkbox"] {
+    margin-top: 8px !important;
+}
+
+.selectNav {
+    width: 100%;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.row-remote {
+    float: left;
+}
+
+.Container {
+    height: calc(100% - 45px);
+    overflow: auto;
+}
+
+.Container .lightList {
+    background-color: #FFF;
+    width: 330px;
+    border-radius: 5px;
+    padding: 10px;
+    height: calc(23% - 10px);
+    margin: 0 10px 10px 0;
+    float: left;
+    border: 1px solid #eee;
+}
+
+.Container .lightList .lightOpen {
+    width: 50%;
+    height: 80%;
+    margin: 0 auto;
+    background: url("../image/lightOpen.png") center bottom no-repeat;
+    background-size: auto 90%;
+}
+
+.Container .lightList .lightClose {
+    width: 50%;
+    height: 80%;
+    margin: 0 auto;
+    background: url("../image/lightClose.png") center bottom no-repeat;
+    background-size: auto 90%;
+}
+
+.Container .lightList .noDevice {
+    width: 50%;
+    height: 80%;
+    margin: 0 auto;
+    background: url("../image/noDevice.png") center bottom no-repeat;
+    background-size: auto 90%;
+}
+
+.Container .lightList .state {
+    margin-top: -20px;
+}
+
+#myModal .modal-content {
+    width: 500px;
+    margin-top: 30%;
+}
+
+#myModal .modal-body {
+    height: 200px;
+}
+
+#myModal label {
+    width: 130px;
+    position: relative;
+    line-height: 34px;
+    font-weight: normal;
+    float: left;
+    text-align: right;
+}
+
+#myModal select {
+    width: 250px;
+    padding: 6px 3px;
+    border-radius: 3px;
+}
+
+#myModal1 .modal-content {
+    width: 760px;
+    margin-left: calc(50% - 380px);
+    margin-top: 20%;
+}
+
+#myModal1 .modal-body {
+    height: 500px;
+}
+
+#myModal1 .even-down {
+    float: left;
+}
+
+#myModal1 .even-down label {
+    position: relative;
+    line-height: 34px;
+    font-weight: normal;
+    float: left;
+}
+
+#myModal1 #btnsearch {
+    float: left;
+}
+
+#myModal1 #tab-content {
+    margin-top: 5px;
+    height: calc(100% - 97px);
+    clear: both;
+}
+
+#myModal1 .energy-date {
+    padding: 0 5px;
+}
+
+#myModal1 #showLog {
+    position: absolute;
+    padding-top: 15px;
+}
+
+#myModal1 #eventPage {
+    margin: 10px 0;
+}
+
+.btn {
+    margin: 0 10px 0 0;
+    float: right;
+    color: #FFF;
+    width: 80px;
+}
+
+.btn:hover {
+    color: #FFF;
+}
+
+.blue .btn {
+    background-color: #3db3ff;
+}
+
+.green .btn {
+    background-color: #01ada8;
+}
+
+.dark .Container .lightList {
+    border: 0;
+    background-color: rgba(34, 51, 136, 0.61);
+}
+
+.dark .btn {
+    border: 1px solid #4477dd;
+    background-color: rgba(34, 51, 136, 0.61);
+}
+
+.dark .details {
+    border-color: #4477dd;
+}
+
+.dark .Container .lightList .lightClose {
+    background: url("../image/lightClose-Dark.png") center bottom no-repeat;
+    background-size: auto 90%;
+}
+
+.dark .Container .lightList .noDevice {
+    background: url("../image/noDevice-Dark.png") center bottom no-repeat;
+    background-size: auto 90%;
+}
+
+@media (max-width: 1366px) {
+    .Container .lightList {
+        width: 275px;
+        height: calc(23% - 5px);
+    }
+
+    #myModal .modal-content {
+        margin-top: 0;
+    }
+
+    #myModal1 #tab-content {
+        height: calc(100% - 75px);
+    }
+
+    #myModal1 .modal-content {
+        margin-top: 0;
+    }
+
+    #myModal1 .modal-body {
+        height: 480px;
+    }
+}

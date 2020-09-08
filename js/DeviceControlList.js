@@ -98,10 +98,10 @@ jQuery(document).ready(function () {
                         if (this.fCode == "lightingControl") {
                             sb +=
                                 '                                <img class="imgBox" src="img/lightsort.png">';
-                        } else if(this.fCode == "arcmControl"){
+                        } else if (this.fCode == "arcmControl") {
                             sb +=
                                 '                                <img class="imgBox" src="img/yibiaosort.png">';
-                        } else if(this.fCode == "cameraControl"){
+                        } else if (this.fCode == "cameraControl") {
                             sb +=
                                 '                                <img class="imgBox" src="img/camera.png">';
                         }
@@ -129,20 +129,20 @@ jQuery(document).ready(function () {
                             if (!selectSubid || selectSubid == "" || selectSubid == undefined) {
                                 return;
                             } else {
-                                var thisTitleName = $($("#"+clickId).find(".label-title")[0]).text();
+                                var thisTitleName = $($("#" + clickId).find(".label-title")[0]).text();
                                 if (clickId == "lightingControl") {
-                                    localStorage.setItem("controlClassTitle",thisTitleName);
+                                    localStorage.setItem("controlClassTitle", thisTitleName);
                                     window.location.href = "lightingControl.html?fSubid=" + selectSubid;
-                                } else if(clickId == "arcmControl"){
-                                    localStorage.setItem("controlClassTitle",thisTitleName);
+                                } else if (clickId == "arcmControl") {
+                                    localStorage.setItem("controlClassTitle", thisTitleName);
                                     window.location.href = "arcm300TControl.html?fSubid=" + selectSubid;
-                                } else if(clickId == "cameraControl"){
+                                } else if (clickId == "cameraControl") {
                                     if (isAndroid) {
                                         android.videoWatch(selectSubid);
                                     } else if (isIOS) {
                                         var subParam = {
-                                          Subid: selectSubid,
-                                          Subname: clickName
+                                            Subid: selectSubid,
+                                            Subname: clickName
                                         };
                                         window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
                                     }
@@ -203,7 +203,7 @@ jQuery(document).ready(function () {
                     $("#listContainer").empty();
                     //            $("#subName").text(clickName);
                 });
-        },function(errorcode){});
+        }, function (errorcode) {});
     }
 
     $("#search").bind("keydown", function (event) {
@@ -280,13 +280,13 @@ jQuery(document).ready(function () {
         $("#outTip").hide();
     }
 
-//    $("#lightControl").click(function () {
-//        var clickTitle = $(this).find(".label-title")[0].text();
-//        window.location.href = "lightingControl.html";
-//    });
-//
-//    $("#arcm300TControl").click(function () {
-//        var clickTitle = $(this).find(".label-title")[0].text();
-//        window.location.href = "arcm300TControl.html";
-//    });
+    //    $("#lightControl").click(function () {
+    //        var clickTitle = $(this).find(".label-title")[0].text();
+    //        window.location.href = "lightingControl.html";
+    //    });
+    //
+    //    $("#arcm300TControl").click(function () {
+    //        var clickTitle = $(this).find(".label-title")[0].text();
+    //        window.location.href = "arcm300TControl.html";
+    //    });
 });
