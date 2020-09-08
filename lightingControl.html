@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="libs/light7-swiper.min.css" />
   <link rel="stylesheet" href="css/general.css" />
   <link rel="stylesheet" href="css/lightingControl.css" />
+  <link rel="stylesheet" href="libs/code.css" />
 </head>
 
 <body>
@@ -30,10 +31,12 @@
           <span data-i18n="ui_record"></span>
         </a>
         <h1 class="title title_color">
-          <p class="limit-length" id="titleContent"><span data-i18n="ui_Lightingcontrol"></span></p>
+          <p class="limit-length" id="titleContent">
+            <span data-i18n="ui_Lightingcontrol"></span>
+          </p>
         </h1>
       </header>
-      <div class="content pull-to-refresh-content">
+      <div class="content pull-to-refresh-content" id="changePull">
         <div class="pull-to-refresh-layer">
           <div class="preloader"></div>
           <div class="pull-to-refresh-arrow"></div>
@@ -106,10 +109,43 @@
             <!--                </div>-->
             <!--              </label>-->
           </div>
-
-        </div>
-
       </div>
+      <!-- 短信验证码校验 -->
+      <!-- <div class="modal fade open-slider-modal" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog checkCode" role="document">
+          <div class="modal-content modal-w">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+              <h4>短信验证</h4>
+            </div>
+            <div class="modal-body">
+              <div class="outContain">
+                <div class="codeDiv">
+                  <input id="phoneInput" type="text" class="sendInput" value="15151853872" disabled autocomplete="off" />
+                  <span class="icon codePhoneImg"></span>
+                  <label class="errorInfo"></label>
+                </div>
+                <div class="codeDiv">
+                  <input id="canvasInput" type="text" class="sendInput" placeholder="请输入验证码(不区分大小写)" autocomplete="off" />
+                  <span class="icon codeCanvasImg"></span>
+                  <canvas id="canvas" width="100" height="38"></canvas>
+                </div>
+      
+                <div class="codeDiv">
+                  <input id="code" class="sendInput" type="text" placeholder="请输入短信验证码" autocomplete="off" />
+                  <span class="icon codeMsgImg"></span>
+                  <input id="btnSendCode" type="button" class="btn btn-default" disabled value="获取验证码" />
+                </div>
+                <button class="btn" id="checkBtn" disabled>验证</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="add-a"></div>
+      </div>
+      </div> -->
       <div class="footer_bar">
         <!-- <span href="#" class="footer_btn button button-fill button-big" style="display:none;"><span
                       data-i18n="ui_CloseLight"></span></span> -->
@@ -127,6 +163,7 @@
   <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="libs/tools.js" charset="utf-8"></script>
   <script type="text/javascript" src="js/lightingControl.js" charset="utf-8"></script>
+  <script type="text/javascript" src="libs/code.js" charset="utf-8"></script>
 </body>
 
 </html>
