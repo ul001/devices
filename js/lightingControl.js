@@ -14,6 +14,8 @@ var itemsPerLoad = 10;
 var pageNum = 1;
 var lightList = [];
 
+var msgId = '';
+
 function controlClick() {
   if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
     $("#back_btn").text(Operation["ui_SelectAll"]);
@@ -32,6 +34,8 @@ function controlClick() {
     $("input:checkbox").removeAttr("disabled");
     $(".list-item").hide();
     $(".light_closed").show();
+    //屏蔽下拉菜单
+    $(".pull-to-refresh-layer").hide();
   } else {
     $("#back_btn").html(
       '<span class="icon icon-left"></span>' +
@@ -55,6 +59,8 @@ function controlClick() {
     $("input:checkbox").removeAttr("checked");
     $(".light_closed").hide();
     $(".list-item").show();
+    //屏蔽下拉菜单
+    $(".pull-to-refresh-layer").show();
   }
 }
 
@@ -176,17 +182,17 @@ function addItems(number, lastIndex) {
           });
         });
         if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
-            $(".item-media").hide();
-            $("input:checkbox").prop("disabled", "disabled");
-        }else{
-            $(".label-title")
-              .removeClass("col-60")
-              .removeClass("col-100")
-              .addClass("col-75");
-            $(".item-media").show();
+          $(".item-media").hide();
+          $("input:checkbox").prop("disabled", "disabled");
+        } else {
+          $(".label-title")
+            .removeClass("col-60")
+            .removeClass("col-100")
+            .addClass("col-75");
+          $(".item-media").show();
         }
         //addClick();
-//        $(".item-media").hide();
+        //        $(".item-media").hide();
         //保存记录
         //                params['subName'] = $("#search").val();
         //                localStorage.setItem("saveAlarmParam", JSON.stringify(params));
@@ -214,23 +220,113 @@ function addItems(number, lastIndex) {
 addItems(itemsPerLoad, 0);
 
 $("#control_btn").click(function () {
-  // if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
-  //   $.prompt(Operation["ui_needInputPwd"], Operation["ui_pleaseInputPwd"], function (value) {
-  //     var pwdstr = $.md5(value);
-  //     Substation.postDataByAjax(
-  //       "/verifySePassword", {
-  //         sePassword: pwdstr
-  //       },
-  //       function (data) {
-  //         controlClick();
-  //       }
-  //     );
-  //   });
-  // } else {
-  controlClick();
-  // }
-
+  if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
+    // $("#myModal2").show();
+    Substation.getDataByAjaxNoLoading("/getControlValidType", {}, function (data) {
+      if (data) {
+        if (data.validType == "sms") {
+          var sb = '                <div class="outContain" style="width: auto;">';
+          sb += '                  <div class="codeDiv">';
+          sb += '                    <input id="phoneInput" type="text" class="sendInput" value="15151853872" disabled';
+          sb += '                      autocomplete="off">';
+          sb += '                    <span class="icon codePhoneImg"></span>';
+          sb += '                    <label class="errorInfo"></label>';
+          sb += '                  </div>';
+          sb += '                  <div class="codeDiv">';
+          sb += '                    <input id="canvasInput" type="text" class="sendInput" placeholder="请输入验证码"';
+          sb += '                      autocomplete="off" style="width:6.2rem;">';
+          // sb += '                    <span class="icon codeCanvasImg"></span>';
+          sb += '                    <canvas id="canvas" width="100" height="38"></canvas>';
+          sb += '                  </div>';
+          sb += '';
+          sb += '                  <div class="codeDiv">';
+          sb += '                    <input id="code" class="sendInput" type="text" placeholder="请输入短信验证码" autocomplete="off" style="width:6.2rem;"/>';
+          sb += '                    <span class="icon codeMsgImg"></span>';
+          sb += '                    <input id="btnSendCode" type="button" class="btn btn-default" disabled value="获取验证码" />';
+          sb += '                  </div>';
+          // sb += '                  <button class="btn" id="checkBtn" disabled>验证</button>';
+          sb += '                </div>';
+          // sb += '      </div>';
+          var modal = $.modal({
+            title: '手机动态验证码',
+            text: '需要通过手机动态验证码才能控制设备。',
+            afterText: sb,
+            buttons: [{
+                text: '取消'
+              },
+              {
+                text: '验证',
+                bold: true,
+                onClick: function () {
+                  var code = $("#code").val();
+                  Substation.getDataByAjaxNoLoading("/checkSMSValid", {
+                    code: code,
+                    msgId: msgId
+                  }, function (data) {
+                    console.log(data);
+                    if (data == true) {
+                      controlClick();
+                    } else {
+                      if (data.msg) {
+                        $.toast(data.msg);
+                      } else {
+                        $.toast("验证失败");
+                      }
+                    }
+                    // sendCommand();
+                  })
+                }
+              },
+            ]
+          })
+          showModel2(data.userPhone);
+          // $.swiper($(modal).find('.swiper-container'), {
+          //   pagination: '.swiper-pagination'
+          // });
+        } else {
+          showSecPasswordPrompt();
+        }
+        //   }
+        // });
+      }
+    });
+  } else {
+    controlClick();
+  }
 });
+
+function showModel2(userPhone) {
+  $("#phoneInput").val(userPhone);
+  $.codeDraw($('#canvas'), $('#canvasInput'), function () {
+    $.countInterval($("#phoneInput"), $("#btnSendCode"), function () {
+      Substation.getDataByAjaxNoLoading("/sendSMSValid", {}, function (data) {
+        msgId = data;
+        // $("#checkBtn").removeAttr('disabled');
+        // $("#checkBtn").unbind('click').on('click', function () {
+        //   var code = $("#code").val();
+        //   Substation.getDataByAjaxNoLoading("/checkSMSValid", {}, function (data) {
+        //     // sendCommand();
+        //   })
+        // })
+      });
+    })
+  })
+}
+
+//二级密码
+function showSecPasswordPrompt() {
+  $.prompt(Operation["ui_needInputPwd"], Operation["ui_pleaseInputPwd"], function (value) {
+    var pwdstr = $.md5(value);
+    Substation.postDataByAjax(
+      "/verifySePassword", {
+        sePassword: pwdstr
+      },
+      function (data) {
+        controlClick();
+      }
+    );
+  });
+}
 
 $(".button_bar .button").click(function () {
   $(this)
@@ -361,6 +457,8 @@ $("#closeLight").click(function () {
           .addClass("active")
           .siblings()
           .removeClass("active");
+        //返回
+        controlClick();
       }
     });
     // var logList = arr.join(','); //数组转成为字符串
@@ -415,6 +513,8 @@ $("#openLight").click(function () {
           .addClass("active")
           .siblings()
           .removeClass("active");
+        //返回
+        controlClick();
       }
     });
     // var logList = arr.join(','); //数组转成为字符串
