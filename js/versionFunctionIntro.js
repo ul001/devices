@@ -85,9 +85,9 @@ function addClick() {
         }
         //        console.log(thisLog);
         if (isAndroid) {
-            var historyLog = JSON.parse(thisLog);
-            var reg = new RegExp("<br>", "g"); //g,表示全部替换。
-            historyLog.replace(reg, "/n");
+            var historyLog = thisLog;
+            // var reg = new RegExp("<br>", "g"); //g,表示全部替换。
+            // historyLog.replace(reg, "/n");
             android.goToDetailView(videoUrl + url, historyLog);
         } else {
             window.location.href = "verionFunDetails.html";
