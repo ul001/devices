@@ -320,13 +320,13 @@ $("#suggestId").bind("keydown", function (event) {
           if (data.length > 0 && data.length < 10) {
             var html = "";
             data.forEach(function (value) {
+              var address = (value.F_Address != 'null') ? value.F_Address : "未知";
               html += `<li class="item-content item-link" onclick="searchPlace('${value.F_Longitude}','${value.F_Latitude}','${value.F_UserName}')">
                                       <div class="item-inner">
                                           <div class="item-title-row">
                                               <div class="item-title">${value.F_UserName}</div>
                                           </div>
-                                           <div class="item-subtitle">${value.F_Address}</div>
-           
+                                           <div class="item-subtitle">${address}</div>
                                       </div>
                                   </li>`;
             });
