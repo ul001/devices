@@ -272,6 +272,7 @@ function getZhLanguage() {
     ui_selectTip: "是否将该类报警全部标为已确认？",
     //版本历史
     ui_updateHistory: "版本历史",
+    ui_updateFunction: "功能介绍短视频",
     ui_version: "版本",
     ui_mainUpdate: "主要更新",
     ui_updateTime: "更新时间：",
@@ -721,6 +722,7 @@ function getEnLanguage() {
     ui_MarkUnconfirmed: "MarkUnconfirmed",
     //版本历史
     ui_updateHistory: "Version History",
+    ui_updateFunction: "Function Introduct",
     ui_version: "Version ",
     ui_mainUpdate: " major update",
     ui_updateTime: "Updated:",

@@ -10,10 +10,8 @@ var videoUrl;
 function getData() {
     $.ajax({
         type: "GET",
-        url: "http://116.236.149.165:8090/SubstationWEBV2/sys/getAndroidVersionHistory",
-        data: {
-            fId: appId
-        },
+        url: "http://116.236.149.165:8090/SubstationWEBV2/sys/listFunctionInstruction",
+        data: {},
         beforeSend: function (request) {
             // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
             //                        request.setRequestHeader("Authorization", tokenFromAPP);
@@ -32,12 +30,12 @@ function getData() {
                         videoUrl = 'http://116.236.149.165:8090/' + data.data.fileURL + '/';
                         if (data.data.list != undefined && data.data.list.length > 0) {
                             $(data.data.list).each(function () {
-                                $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='" + JSON.stringify(this.fUpdatelog) + "'  data-str2=" + this.fDemofile + ">\n" +
+                                $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='" + this.fFilename + "'  data-str2=" + this.fFilecode + ">\n" +
+                                    ' <div class="item-media"><img src="img/i-shipin.png" style="width: 1rem;"></div>' +
                                     "                        <div class=\"item-inner\">\n" +
                                     "                            <div class=\"item-title-row\">\n" +
-                                    "                                <div class=\"item-title\">" + Operation['ui_version'] + this.fVersion + Operation['ui_mainUpdate'] + "</div>\n" +
+                                    "                                <div class=\"item-title\">" + this.fFilename + "</div>\n" +
                                     "                            </div>\n" +
-                                    "                            <div class=\"item-subtitle\">" + Operation['ui_updateTime'] + "<span class=\"blueColor\">" + this.fUpdatetime.substring(0, 10) + "</span></div>\n" +
                                     "                        </div>\n" +
                                     "                    </li>");
                                 // $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='" + JSON.stringify(this.fUpdatelog.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>')) + "'>\n" +
@@ -92,7 +90,7 @@ function addClick() {
             historyLog.replace(reg, "/n");
             android.goToDetailView(videoUrl + url, historyLog);
         } else {
-            window.location.href = "versionHistoryView.html";
+            window.location.href = "verionFunDetails.html";
         }
     });
 }

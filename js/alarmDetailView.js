@@ -27,11 +27,10 @@ function loadMenu() {
   }
   $.showPreloader(Operation["ui_loading"]);
   Substation.getDataByAjaxNoLoading(
-    "/getAlarmEventLogById",
-    {
+    "/getAlarmEventLogById", {
       fAlarmeventlogid: alarmeventlogid
     },
-    function(data) {
+    function (data) {
       if (data.hasOwnProperty("alarmEventLogById") && data.alarmEventLogById) {
         creatView(data.alarmEventLogById);
       } else {
@@ -39,13 +38,13 @@ function loadMenu() {
       }
       $.hidePreloader();
     },
-    function(errorcode) {
+    function (errorcode) {
       $.hidePreloader();
     }
   );
 }
 
-$(".pull-left.click_btn").click(function() {
+$(".pull-left.click_btn").click(function () {
   if (isPush == "1") {
     //推送详情点击返回事件
     if (isAndroid) {
@@ -55,10 +54,10 @@ $(".pull-left.click_btn").click(function() {
       window.webkit.messageHandlers.goBackiOS.postMessage("");
     }
   } else {
-    if(isAndroid){
-        android.goBack();
-    }else{
-        window.history.back();
+    if (isAndroid) {
+      android.goBack();
+    } else {
+      window.history.back();
     }
   }
 });
@@ -73,26 +72,27 @@ function addPushButton(param) {
       menuId = storage.fmenuId;
     } else if (isAndroid) {
       menuId = android.getMenuId();
-      if(menuId==undefined || menuId==null){
+      if (menuId == undefined || menuId == null) {
         menuId = "342";
       }
     }
-  } catch (e) {menuId="342";}
+  } catch (e) {
+    menuId = "342";
+  }
   Substation.getDataByAjaxNoLoading(
-    "/getSubinfoVoByPid",
-    {
+    "/getSubinfoVoByPid", {
       pid: menuId
     },
-    function(data) {
+    function (data) {
       if (data.hasOwnProperty("menuList") && data.menuList.length > 0) {
-        $(data.menuList).each(function() {
+        $(data.menuList).each(function () {
           if (this.fCode == "pushAlarmClean") {
             var showstr =
               '<div class="bottomDiv"><a class="button button-bottom button-fill" id="carryOut">' +
               Operation["ui_postAlarmClean"] +
               "</a></div>";
             $("#yaoxin").append(showstr);
-            $("#carryOut").click(function() {
+            $("#carryOut").click(function () {
               localStorage.setItem("fSubid", param.fSubid);
               localStorage.setItem("alarmEventlogid", param.fAlarmeventlogid);
               window.location.href = "alarmCleanPost.html";
