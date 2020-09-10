@@ -1,0 +1,18 @@
+#control {
+    position: absolute;
+    right: 0rem;
+    top: 4.5rem;
+}
+
+.buttonTab {
+    margin: 0.5rem;
+    padding: 0 0.5rem 0 0.5rem;
+    color: #02A8A6;
+    border: #02A8A6;
+    border-radius: 1rem;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.4);
+    /* font: 16px/14px Tahoma, Verdana, sans-serif; */
+    text-align: center;
+    color: #fefefe;
+    background-color: #02A8A6;
+}
