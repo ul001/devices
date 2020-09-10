@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>我的位置</title>
+    <title>人员定位</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <link rel="shortcut icon" href="/favicon.ico">
     <style type="text/css"></style>
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/location.css">
+    <link rel="stylesheet" href="css/personLocations.css">
 </head>
 
 <body>
@@ -67,6 +68,20 @@
                         <!--                            </div>-->
                         <!--                        </li>-->
                     </ul>
+                </div>
+            </div>
+            <div id="control">
+                <div onclick="walk()" class="button button-link buttonTab walkBtn" id="WalkBtn">
+                    <img class="col-15" src="img/buxing.png" style="height:1rem;vertical-align:middle;" /><span
+                        id="Walk" data-i18n="ui_show"></span>
+                </div>
+                <div onclick="drive()" class="button button-link buttonTab DriveBtn" id="DriveBtn">
+                    <img class="col-15" src="img/jiache.png" style="height:1rem;vertical-align:middle;" /><span
+                        id="Drive" data-i18n="ui_show"></span>
+                </div>
+                <div onclick="substation()" class="button button-link buttonTab SubstationBtn" id="SubstationBtn">
+                    <img class="col-15" src="img/daohang.png" style="height:1rem;vertical-align:middle;" /><span
+                        id="Substation" data-i18n="ui_show"></span>
                 </div>
             </div>
         </div>

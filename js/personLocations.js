@@ -20,6 +20,11 @@ var myPp;
 var markersArr = [];
 var markerPerArr = [];
 
+//用于控制显隐
+var personArr = [];
+var carArr = [];
+var subArr = [];
+
 //获取定位
 if (isIOS) {
   window.webkit.messageHandlers.getLocation.postMessage("");
@@ -82,6 +87,60 @@ function getPersonsPage() {
   });
 }
 
+//人显隐
+function walk() {
+  var text = $("#Walk").html();
+  if (text == Operation["ui_show"]) {
+    $("#Walk").html(Operation["ui_hide"]);
+    $("#WalkBtn").css("background-color", "lightgrey");
+    personArr.forEach(function (marker) {
+      marker.hide();
+    });
+  } else {
+    $("#Walk").html(Operation["ui_show"]);
+    $("#WalkBtn").css("background-color", "#02A8A6");
+    personArr.forEach(function (marker) {
+      marker.show();
+    });
+  }
+}
+
+//车
+function drive() {
+  var text = $("#Drive").html();
+  if (text == Operation["ui_show"]) {
+    $("#Drive").html(Operation["ui_hide"]);
+    $("#DriveBtn").css("background-color", "lightgrey");
+    personArr.forEach(function (marker) {
+      marker.hide();
+    });
+  } else {
+    $("#Drive").html(Operation["ui_show"]);
+    $("#DriveBtn").css("background-color", "#02A8A6");
+    personArr.forEach(function (marker) {
+      marker.show();
+    });
+  }
+}
+
+//变电所
+function substation() {
+  var text = $("#Substation").html();
+  if (text == Operation["ui_show"]) {
+    $("#Substation").html(Operation["ui_hide"]);
+    $("#SubstationBtn").css("background-color", "lightgrey");
+    subArr.forEach(function (marker) {
+      marker.hide();
+    });
+  } else {
+    $("#Substation").html(Operation["ui_show"]);
+    $("#SubstationBtn").css("background-color", "#02A8A6");
+    subArr.forEach(function (marker) {
+      marker.show();
+    });
+  }
+}
+
 function initialize() {
   map = new BMap.Map("l-map");
   if (!lat || lat == null || lat == undefined) {
@@ -101,9 +160,11 @@ function initialize() {
     var marker = new BMap.Marker(point, {
       icon: icon
     });
-    map.addOverlay(marker);
     marker.setAnimation(BMAP_ANIMATION_BOUNCE);
     marker.setLabel(label);
+    map.addOverlay(marker);
+    //添加变电所marker
+    subArr.push(marker);
     if ($("#showOrHide").attr("name") === "Showsubname") {
       label.hide();
       // marker.addEventListener("mouseover", AddShowEvent);
@@ -120,9 +181,11 @@ function initialize() {
     //     icon: icon
     // });
     var marker = new BMap.Marker(point);
-    map.addOverlay(marker);
     marker.setAnimation(BMAP_ANIMATION_BOUNCE);
     marker.setLabel(label);
+    map.addOverlay(marker);
+    //添加人员marker
+    personArr.push(marker);
     if ($("#showOrHide").attr("name") === "Showsubname") {
 
       label.hide();
