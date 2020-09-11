@@ -71,12 +71,12 @@ function getFirstPage() {
 
 function initialize() {
   map = new BMap.Map("l-map");
-  if (!lat || lat == null || lat == undefined) {
-    lat = markersArr[0].fLatitude;
-  }
-  if (!lon || lon == null || lon == undefined) {
-    lon = markersArr[0].fLongitude;
-  }
+  // if (!lat || lat == null || lat == undefined) {
+  lat = markersArr[0].fLatitude;
+  // }
+  // if (!lon || lon == null || lon == undefined) {
+  lon = markersArr[0].fLongitude;
+  // }
   myPp = new BMap.Point(lon, lat);
   geoc = new BMap.Geocoder();
   map.centerAndZoom(myPp, 8);
