@@ -19,6 +19,7 @@ var lon;
 var myPp;
 var markersArr = [];
 var markerPerArr = [];
+var markerCarArr = [];
 
 //用于控制显隐
 var personArr = [];
@@ -81,11 +82,31 @@ function getPersonsPage() {
   Substation.getDataByAjax("/getUserLocationList", {}, function (data) {
     if (data != undefined) {
       markerPerArr = data;
+      getCarPage();
+    }
+  });
+}
+
+function getCarPage() {
+  Substation.postDataByAjax("/getCarLocationList", {}, function (data) {
+    if (data != undefined) {
+      markerCarArr = data.data;
       //绘制点
       loadScript();
     }
   });
 }
+
+$("#fState").change(function (params) {
+  var stateVal = $("#fState").val();
+  if (stateVal == 2) {
+    $("#search").attr("placeholder", "输入车辆关键字...");
+  } else if (stateVal == 3) {
+    $("#search").attr("placeholder", "输入变电所关键字...");
+  } else {
+    $("#search").attr("placeholder", "输入人员关键字...");
+  }
+});
 
 //人显隐
 function walk() {
@@ -111,13 +132,13 @@ function drive() {
   if (text == Operation["ui_show"]) {
     $("#Drive").html(Operation["ui_hide"]);
     $("#DriveBtn").css("background-color", "lightgrey");
-    personArr.forEach(function (marker) {
+    carArr.forEach(function (marker) {
       marker.hide();
     });
   } else {
     $("#Drive").html(Operation["ui_show"]);
     $("#DriveBtn").css("background-color", "#02A8A6");
-    personArr.forEach(function (marker) {
+    carArr.forEach(function (marker) {
       marker.show();
     });
   }
@@ -163,6 +184,7 @@ function initialize() {
     marker.setAnimation(BMAP_ANIMATION_BOUNCE);
     marker.setLabel(label);
     map.addOverlay(marker);
+    // marker.customData('searchId':'');
     //添加变电所marker
     subArr.push(marker);
     if ($("#showOrHide").attr("name") === "Showsubname") {
@@ -175,15 +197,25 @@ function initialize() {
     addClickHandler(marker, markDetail);
   }
 
+  //添加人物点
   function addPersonMarker(point, label, markDetail) {
-    // var icon = new BMap.Icon("img/i-baiduBiaozhu.png", new BMap.Size(50, 50));
-    // var marker = new BMap.Marker(point, {
-    //     icon: icon
-    // });
-    var marker = new BMap.Marker(point);
+    var icon = "";
+    //活跃度
+    if (markDetail.F_IsActive == 1) {
+      icon = new BMap.Icon("img/i-personP.png", new BMap.Size(40, 40));
+    } else {
+      icon = new BMap.Icon("img/i-personPgrey.png", new BMap.Size(40, 40));
+    }
+    var marker = new BMap.Marker(point, {
+      icon: icon
+    });
     marker.setAnimation(BMAP_ANIMATION_BOUNCE);
     marker.setLabel(label);
     map.addOverlay(marker);
+    //marker添加id
+    marker.customData = {
+      'userID': markDetail.F_UserID
+    };
     //添加人员marker
     personArr.push(marker);
     if ($("#showOrHide").attr("name") === "Showsubname") {
@@ -198,11 +230,42 @@ function initialize() {
     // addClickHandler(marker, markDetail);
   }
 
+  //添加车点
+  function addCarMarker(point, label, markDetail) {
+    var icon = "";
+    //车活跃度
+    if (markDetail.online == 1) {
+      icon = new BMap.Icon("img/i-car.png", new BMap.Size(52, 26));
+    } else {
+      icon = new BMap.Icon("img/i-cargrey.png", new BMap.Size(52, 26));
+    }
+    var marker = new BMap.Marker(point, {
+      icon: icon
+    });
+    marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+    marker.setLabel(label);
+    map.addOverlay(marker);
+    //marker添加车id
+    marker.customData = {
+      'carID': markDetail.carInfo.fCarid
+    };
+    //添车marker
+    carArr.push(marker);
+    if ($("#showOrHide").attr("name") === "Showsubname") {
+      label.hide();
+      // marker.addEventListener("mouseover", AddShowEvent);
+      // marker.addEventListener("mouseout", AddHideEvent);
+    } else {
+      label.show();
+    }
+    // addClickHandler(marker, markDetail);
+  }
+
   //地图标记
   markersArr.forEach(function (marker) {
     var point = new BMap.Point(marker.fLongitude, marker.fLatitude);
     var label = new BMap.Label(marker.fSubname, {
-      offset: new BMap.Size(20, -10)
+      offset: new BMap.Size(30, -10)
     });
     label.setStyle({
       maxWidth: "none",
@@ -221,7 +284,7 @@ function initialize() {
   markerPerArr.forEach(function (marker) {
     var point = new BMap.Point(marker.F_Longitude, marker.F_Latitude);
     var label = new BMap.Label(marker.F_UserName, {
-      offset: new BMap.Size(20, -10)
+      offset: new BMap.Size(33, -10)
     });
     label.setStyle({
       maxWidth: "none",
@@ -234,6 +297,25 @@ function initialize() {
     });
     // 调用编写自定义函数,创建标注
     addPersonMarker(point, label, marker);
+  });
+
+  //che标记
+  markerCarArr.forEach(function (marker) {
+    var point = new BMap.Point(marker.lonc, marker.latc);
+    var label = new BMap.Label(marker.carInfo.fCarname, {
+      offset: new BMap.Size(33, -10)
+    });
+    label.setStyle({
+      maxWidth: "none",
+      fontSize: "15px",
+      padding: "5px",
+      border: "none",
+      color: "#fff",
+      background: "#1E90FF",
+      borderRadius: "5px"
+    });
+    // 调用编写自定义函数,创建标注
+    addCarMarker(point, label, marker);
   });
 
   //点击静态marker
@@ -335,6 +417,18 @@ function loadScript() {
   document.body.appendChild(script);
 }
 
+$("#picker").picker({
+  toolbarTemplate: '<header class="bar bar-nav">\
+  <button class="button button-link pull-left">按钮</button>\
+  <button class="button button-link pull-right close-picker">确定</button>\
+  <h1 class="title">标题</h1>\
+  </header>',
+  cols: [{
+    textAlign: 'center',
+    values: ['iPhone 4', 'iPhone 4S', 'iPhone 5', 'iPhone 5S', 'iPhone 6', 'iPhone 6 Plus', 'iPad 2', 'iPad Retina', 'iPad Air', 'iPad mini', 'iPad mini 2', 'iPad mini 3']
+  }]
+});
+
 //声明一个控制点击的变量
 var upLoadClicktag = true;
 
@@ -371,20 +465,83 @@ function showOrHide() {
 }
 
 //搜索按钮点击
-$("#suggestId").bind("keydown", function (event) {
+$("#search").bind("keydown", function (event) {
   if (event.keyCode == 13) {
-    var searchKey = $("#suggestId").val();
-    Substation.getDataByAjax(
-      "/getUserLocationList", {
+    var searchKey = $("#search").val();
+    var stateVal = $("#fState").val();
+    if (stateVal == 2) {
+      //搜车
+      Substation.postDataByAjax("/getCarLocationList", {
         search: searchKey
-      },
-      function (data) {
+      }, function (data) {
         if (data != undefined) {
-          if (data.length > 0 && data.length < 10) {
+          if (data.data.length > 0) {
             var html = "";
-            data.forEach(function (value) {
-              var address = (value.F_Address != 'null') ? value.F_Address : "未知";
-              html += `<li class="item-content item-link" onclick="searchPlace('${value.F_Longitude}','${value.F_Latitude}','${value.F_UserName}')">
+            data.data.forEach(function (value, index) {
+              html += `<li class="item-content item-link" onclick="searchPlace('${value.lonc}','${value.latc}','${value.carInfo.fCarname}','${value.carId}')">
+                                      <div class="item-inner">
+                                          <div class="item-title-row">
+                                              <div class="item-title">${value.carInfo.fCarname}</div>
+                                          </div>
+                                           <div class="item-subtitle">${value.carInfo.fCarlicense}</div>
+                                      </div>
+                                  </li>`;
+              if (index > 10) {
+                return;
+              }
+            });
+            $("#results").show();
+          } else {
+            $("#results").hide();
+          }
+          $("#list-container").html(html);
+        }
+      });
+    } else if (stateVal == 3) {
+      //搜变电所
+      Substation.getDataByAjax(
+        "/getSubstationListByUser?pageNo=1&pageSize=999", {
+          search: searchKey
+        },
+        function (data) {
+          if (data != undefined) {
+            if (data.list.length > 0) {
+              var html = "";
+              data.list.forEach(function (value, index) {
+                var address = (value.fAddress != 'null') ? value.fAddress : "未知";
+                html += `<li class="item-content item-link" onclick="searchPlace('${value.fLongitude}','${value.fLatitude}','${value.fSubname}','${value.fSubid}')">
+                                      <div class="item-inner">
+                                          <div class="item-title-row">
+                                              <div class="item-title">${value.fSubname}</div>
+                                          </div>
+                                           <div class="item-subtitle">${address}</div>
+                                      </div>
+                                  </li>`;
+                if (index > 10) {
+                  return;
+                }
+              });
+              $("#results").show();
+            } else {
+              $("#results").hide();
+            }
+            $("#list-container").html(html);
+          }
+        }
+      );
+    } else {
+      //搜人
+      Substation.getDataByAjax(
+        "/getUserLocationList", {
+          search: searchKey
+        },
+        function (data) {
+          if (data != undefined) {
+            if (data.length > 0) {
+              var html = "";
+              data.forEach(function (value, index) {
+                var address = (value.F_Address != 'null') ? value.F_Address : "未知";
+                html += `<li class="item-content item-link" onclick="searchPlace('${value.F_Longitude}','${value.F_Latitude}','${value.F_UserName}','${value.F_UserID}')">
                                       <div class="item-inner">
                                           <div class="item-title-row">
                                               <div class="item-title">${value.F_UserName}</div>
@@ -392,87 +549,30 @@ $("#suggestId").bind("keydown", function (event) {
                                            <div class="item-subtitle">${address}</div>
                                       </div>
                                   </li>`;
-            });
-            // for (var i = 0; i < data.length; i++) {
-            //   var _value = data;
-            //   if (_value != null && _value != undefined) {
-            //     var value =
-            //       _value.province +
-            //       _value.city +
-            //       _value.district +
-            //       _value.street +
-            //       _value.business;
-            //     html += `<li class="item-content item-link" onclick="getMyPlace('${value}','${
-            //       _value.business
-            //     }')">
-            //                           <div class="item-inner">
-            //                               <div class="item-title-row">
-            //                                   <div class="item-title">${
-            //                                     _value.business
-            //                                   }</div>
-            //                               </div>
-            //                               <div class="item-subtitle">${_value.province +
-            //                                 _value.city +
-            //                                 _value.district +
-            //                                 _value.street}</div>
-            //                           </div>
-            //                       </li>`;
-            //   }
-            // }
-            $("#results").show();
-          } else {
-            $("#results").hide();
+                if (index > 10) {
+                  return;
+                }
+              });
+              $("#results").show();
+            } else {
+              $("#results").hide();
+            }
+            $("#list-container").html(html);
           }
-          $("#list-container").html(html);
         }
-        // markersArr.forEach(function(marker) {
-        //   if (marker.fAddress.search(searchKey) != -1) {
-        //     var point = new BMap.Point(marker.fLongitude, marker.fLatitude);
-
-        //     map.centerAndZoom(point, 15);
-        //     var marker = new BMap.Marker(point); // 创建标注
-        //     map.addOverlay(marker);
-        //     marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
-        //     // if ($("#showOrHide").attr("name") === "Showsubname") {
-        //     //     label.hide();
-        //     // } else {
-        //     //     label.show();
-        //     // }
-        //     // addClickHandler(marker, markDetail);
-        //   }
-
-        // var point = new BMap.Point(marker.fLongitude, marker.fLatitude);
-        // var label = new BMap.Label(marker.fSubname, {
-        //     offset: new BMap.Size(40, -10)
-        // });
-        // label.setStyle({
-        //     maxWidth: "none",
-        //     fontSize: "15px",
-        //     padding: "5px",
-        //     border: "none",
-        //     color: "#fff",
-        //     background: "#ff8355",
-        //     borderRadius: "5px"
-        // });
-        // // 调用编写自定义函数,创建标注
-        // addMarker(point, label, marker);
-      }
-    );
-    //            local.search($("#suggestId").val());
-    //            $("#results").show();
-    //            $("#l-map").addClass("search-map");
-    // document.activeElement.blur();
+      );
+    }
   }
 });
 
 //搜索按钮取消
-$(".searchbar-cancel").click(function () {
+$("#searchCancel").click(function () {
   $("#suggestId").val("");
   $("#results").hide();
 });
 
-function searchPlace(longitude, latitude, name) {
-  setPersonPlace(longitude, latitude);
+function searchPlace(longitude, latitude, name, userID) {
+  setPersonPlace(longitude, latitude, userID);
   $("#suggestId").val(name);
   setTimeout(function () {
     $("#results").hide();
@@ -488,30 +588,37 @@ function getMyPlace(value, name) {
   }, 500);
 }
 
-function setPersonPlace(longitude, latitude) {
+function setPersonPlace(longitude, latitude, userID) {
+
+
   var pp = new BMap.Point(longitude, latitude);
   // var pp = local.getResults().getPoi(0).point; //获取第一个智能搜索的结果
   map.centerAndZoom(pp, 18);
-  var marker = new BMap.Marker(pp);
-  marker.setLabel(lable);
-  map.addOverlay(marker); //添加标注
-  marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-  // geoc.getLocation(pp, function(rs) {
-  //   var addComp = rs.addressComponents;
-  //   dizhi =
-  //     addComp.province +
-  //     addComp.city +
-  //     addComp.district +
-  //     addComp.street +
-  //     addComp.streetNumber;
+  // var marker = new BMap.Marker(pp);
+  // marker.setLabel(lable);
+  // map.addOverlay(marker); //添加标注
+  // marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+  //人员标记
+  // markerPerArr.forEach(function (marker) {
+  //   marker.addEventListener(e) {
+  //     console.log(e.target.customData.userID);
+  //   }
+  // var point = new BMap.Point(marker.F_Longitude, marker.F_Latitude);
+  // var label = new BMap.Label(marker.F_UserName, {
+  //   offset: new BMap.Size(33, -10)
   // });
-  // myPp = pp;
-  // }
-  // var local = new BMap.LocalSearch(map, {
-  //   //智能搜索
-  //   onSearchComplete: personFun
+  // label.setStyle({
+  //   maxWidth: "none",
+  //   fontSize: "15px",
+  //   padding: "5px",
+  //   border: "none",
+  //   color: "#fff",
+  //   background: "#3CB371",
+  //   borderRadius: "5px"
   // });
-  // local.search(myValue);
+  // // 调用编写自定义函数,创建标注
+  // addPersonMarker(point, label, marker);
+  // });
 }
 
 function setPlace() {
