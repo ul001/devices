@@ -29,16 +29,19 @@ try {
     ipAddress = storage.ipAddress;
     userId = storage.userID;
     languageOption = storage.languageType;
+    localStorage.setItem("ImagePath", ipAddress);
   } else {
     baseUrlFromAPP = android.getBaseUrl();
     tokenFromAPP = android.getToken();
     ipAddress = android.getIpAddress();
     userId = android.getUserid();
     languageOption = android.postLanguage();
+    localStorage.setItem("ImagePath", ipAddress);
   }
 } catch (e) {
   languageOption = "zh";
 }
+
 
 //取消回车事件
 $(document).keydown(function (event) {
