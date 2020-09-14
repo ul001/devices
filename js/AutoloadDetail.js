@@ -124,7 +124,7 @@ var CustomerDevice = (function () {
             );
 
             if (data != undefined) {
-                showPageInfo(data, select);
+                showPageInfo(data, select, selectInfo.fPreviewfiles);
             }
             addEdit();
         };
@@ -291,7 +291,7 @@ var CustomerDevice = (function () {
                                 val.fDevicejson != "undefined"
                             ) {
                                 //填充数据
-                                showPageInfo(val.fDevicejson, select);
+                                showPageInfo(val.fDevicejson, select, val);
                             }
                         });
                     } else {
@@ -526,7 +526,7 @@ var CustomerDevice = (function () {
         }
 
         //根据真实数据填充
-        function showPageInfo(data, parent) {
+        function showPageInfo(data, parent, realImgData) {
             var pageInfo = JSON.parse(data);
             pageInfo.forEach(function (val, i) {
                 val.value.forEach(function (value) {
@@ -582,8 +582,8 @@ var CustomerDevice = (function () {
                             var arr = [];
                             var savedInfo = [];
 
-                            if (data.fRealimg !== undefined) {
-                                savedInfo = JSON.parse(data.fRealimg);
+                            if (realImgData.fRealimg !== undefined) {
+                                savedInfo = JSON.parse(realImgData.fRealimg);
                             } else {
                                 if (selectInfo.fPreviewfiles !== undefined) {
                                     savedInfo = JSON.parse(selectInfo.fPreviewfiles);
@@ -1133,54 +1133,62 @@ jQuery(document).ready(function () {
                     var name = $(select).text();
                     var type = $(select).attr("name");
                     var value;
-                    switch (type) {
-                        case "input":
-                            value = $(val)
-                                .find($(".valueInput"))
-                                .val();
-                            // value = $(val).children().children(".item-input").val();
-                            // var row = {};
-                            // row.inpName = $(val).find($(".valueInput")).val();
-                            // row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
-                            // value = JSON.stringify(row);
-                            break;
-                        case "radio":
-                            value = $(val)
-                                .children()
-                                .find($("input:checked"))
-                                .val();
-                            break;
-                        case "select":
-                            value = $(val)
-                                .find("select option:selected")
-                                .val();
-                            // value = $(val).children().children("select").val();
-                            break;
-                        case "date":
-                            // value = $(val).children().children(".dateTime").val();
-                            if ($(val).find($(".dateTime"))) {
-                                value = $(val)
-                                    .find($(".dateTime"))
-                                    .val();
-                            }
-                            if ($(val).find($(".datetime-local"))) {
-                                try {
-                                    value = $(val)
-                                        .find($(".datetime-local"))
-                                        .val()
-                                        .replace("T", " ");
-                                } catch (e) {}
-                            }
-                            break;
-                        case "image":
+                    if (type == "image") {
+                        var imgList = $(val).children(".fl");
+                        $.each(imgList, function (index, val) {
                             value = 'image';
                             name = "image";
-                            break;
+                            row.type = type;
+                            row.name = /*encodeURIComponent*/ name;
+                            row.value = /*encodeURIComponent*/ value;
+                            fPagejson[key].value.push(row);
+                        });
+                    } else {
+                        switch (type) {
+                            case "input":
+                                value = $(val)
+                                    .find($(".valueInput"))
+                                    .val();
+                                // value = $(val).children().children(".item-input").val();
+                                // var row = {};
+                                // row.inpName = $(val).find($(".valueInput")).val();
+                                // row.inpType = JSON.parse($(val).find($(".valueInput")).attr("name"));
+                                // value = JSON.stringify(row);
+                                break;
+                            case "radio":
+                                value = $(val)
+                                    .children()
+                                    .find($("input:checked"))
+                                    .val();
+                                break;
+                            case "select":
+                                value = $(val)
+                                    .find("select option:selected")
+                                    .val();
+                                // value = $(val).children().children("select").val();
+                                break;
+                            case "date":
+                                // value = $(val).children().children(".dateTime").val();
+                                if ($(val).find($(".dateTime"))) {
+                                    value = $(val)
+                                        .find($(".dateTime"))
+                                        .val();
+                                }
+                                if ($(val).find($(".datetime-local"))) {
+                                    try {
+                                        value = $(val)
+                                            .find($(".datetime-local"))
+                                            .val()
+                                            .replace("T", " ");
+                                    } catch (e) {}
+                                }
+                                break;
+                        }
+                        row.type = type;
+                        row.name = /*encodeURIComponent*/ name;
+                        row.value = /*encodeURIComponent*/ value;
+                        fPagejson[key].value.push(row);
                     }
-                    row.type = type;
-                    row.name = /*encodeURIComponent*/ name;
-                    row.value = /*encodeURIComponent*/ value;
-                    fPagejson[key].value.push(row);
                 });
             });
             var deviceinfoid = $(".active[role='presentation']").attr("name");
