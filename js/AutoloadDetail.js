@@ -19,7 +19,6 @@ var CustomerDevice = (function () {
         var deviceGroupId = localStorage.getItem("fDeviceGroupId");
 
         // deviceGroupId = 41;
-
         // var selectInfo = localStorage.getItem("fFunctionfield");
         // var selectInfo = JSON.parse(localStorage.getItem("fFunctionfield"));
         // selectInfo.id = tempId;
@@ -286,6 +285,7 @@ var CustomerDevice = (function () {
                                 $("#addVarContain" + count),
                                 count
                             );
+                            getDeviceInfo();
                             if (
                                 val.fDevicejson != undefined &&
                                 val.fDevicejson != "undefined"
@@ -293,9 +293,7 @@ var CustomerDevice = (function () {
                                 //填充数据
                                 showPageInfo(val.fDevicejson, select);
                             }
-                            // getDeviceInfo();
                         });
-
                     } else {
                         $("#delete").attr("disabled", true);
                         $("#copy").attr("disabled", true);
@@ -322,7 +320,7 @@ var CustomerDevice = (function () {
                 // 如果没有设备id，为未保存设备，只出始化页面，无数据
                 var index = $(".active[role='presentation']").attr("name");
                 if (index === "") {
-                    alert("当前设备未保存！")
+                    // alert("当前设备未保存！")
                     // creatInfo(newJson);
 
                     var savedInfo = [],
@@ -339,15 +337,14 @@ var CustomerDevice = (function () {
                     $.initFile($("#upImage"), function (list) {
                         fileList = list
                     }, arr)
-
                 } else {
                     // 存在设备id,则根据id查询设备信息并显示
-                    index = parseInt(index)
-                    Substation.Common.requestDataByGET("authority/getDeviceDetailById", "fSubdeviceinfoid=" + index, function (data) {
-                        var newValue = data.data.deviceDetail
-                        curNodeInfo = newValue;
-                        creatInfo(newJson, newValue);
-                    })
+                    // index = parseInt(index)
+                    // Substation.Common.requestDataByGET("authority/getDeviceDetailById", "fSubdeviceinfoid=" + index, function (data) {
+                    //     var newValue = data.data.deviceDetail
+                    //     curNodeInfo = newValue;
+                    //     creatInfo(newJson, newValue);
+                    // })
                 }
             }
         }
@@ -418,80 +415,80 @@ var CustomerDevice = (function () {
         // });
 
         // 点击一个节点
-        //        function onClick(treeNode) {
-        //            // $("body").showLoading();
-        //            Substation.getDataByAjax(
-        //                "/pageCustomList",
-        //                "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id,
-        //                function (data) {
-        //                    // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
-        //                    curNodeInfo = data;
-        //                    // 如果有设备信息
-        //                    if (data.length > 0) {
-        //                        $.each(data, function (key, val) {
-        //                            count++;
-        //                            var name = "addModal" + val.fId;
-        //                            var string ="";
-        //                            var containStr ="";
-        //                            if (key == 0) {
-        //                                // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
-        //                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
-        //                                // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
-        //                                //     '<div id="addVarContain' + count + '"></div>' +
-        //                                //     '</div>';
-        //                                string =
-        //                                    ' <a role="presentation" href="#' +
-        //                                    name +
-        //                                    '" class="tab-link active button" name="' +
-        //                                    val.fId +
-        //                                    '">' +
-        //                                    decodeURIComponent(val.fPagename) +
-        //                                    "</a>";
-        //                                containStr =
-        //                                    '<div role="tabpanel" class="tab active" id="' +
-        //                                    name +
-        //                                    '"> <div class="content-block tab-pane active" id="addVarContain' +
-        //                                    count +
-        //                                    '"></div></div>';
-        //                            } else {
-        //                                // var string = '<li role="presentation" name="' + val.fId + '">' +
-        //                                //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
-        //                                // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
-        //                                //     '<div id="addVarContain' + count + '"></div>' +
-        //                                //     '</div>';
-        //                                string =
-        //                                    ' <a role="presentation" href="#' +
-        //                                    name +
-        //                                    '" class="tab-link active button" name="' +
-        //                                    val.fId +
-        //                                    '">' +
-        //                                    decodeURIComponent(val.fPagename) +
-        //                                    "</a>";
-        //                                containStr =
-        //                                    '<div role="tabpanel" class="tab active" id="' +
-        //                                    name +
-        //                                    '"> <div class="content-block tab-pane" id="addVarContain' +
-        //                                    count +
-        //                                    '"></div></div>';
-        //                            }
-        //                            $("#addDataUL").append(string);
-        //                            $(".tab-content").append(containStr);
-        //                            if (val.fPagejson != undefined && val.fPagejson != "undefined") {
-        //                                creatInfo(val.fPagejson, $("#addVarContain" + count), count);
-        //                            }
-        //                        });
-        //                    } else {
-        //                        $("#delete").attr("disabled", true);
-        //                        $("#copy").attr("disabled", true);
-        //                        $("#save").attr("disabled", true);
-        //                        $("#container-info")
-        //                            .html("暂无相关信息！")
-        //                            .css("text-align", "center");
-        //                    }
-        //                    $("body").hideLoading();
-        //                }
-        //            );
-        //        }
+        // function onClick(treeNode) {
+        //     // $("body").showLoading();
+        //     Substation.getDataByAjax(
+        //         "/pageCustomList",
+        //         "fSubid=" + $.cookie("stationId") + "&fTemplateid=" + treeNode.id,
+        //         function (data) {
+        //             // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
+        //             curNodeInfo = data;
+        //             // 如果有设备信息
+        //             if (data.length > 0) {
+        //                 $.each(data, function (key, val) {
+        //                     count++;
+        //                     var name = "addModal" + val.fId;
+        //                     var string = "";
+        //                     var containStr = "";
+        //                     if (key == 0) {
+        //                         // var string = '<li role="presentation" class="active" name="' + val.fId + '">' +
+        //                         //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+        //                         // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
+        //                         //     '<div id="addVarContain' + count + '"></div>' +
+        //                         //     '</div>';
+        //                         string =
+        //                             ' <a role="presentation" href="#' +
+        //                             name +
+        //                             '" class="tab-link active button" name="' +
+        //                             val.fId +
+        //                             '">' +
+        //                             decodeURIComponent(val.fPagename) +
+        //                             "</a>";
+        //                         containStr =
+        //                             '<div role="tabpanel" class="tab active" id="' +
+        //                             name +
+        //                             '"> <div class="content-block tab-pane active" id="addVarContain' +
+        //                             count +
+        //                             '"></div></div>';
+        //                     } else {
+        //                         // var string = '<li role="presentation" name="' + val.fId + '">' +
+        //                         //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
+        //                         // var containStr = '<div role="tabpanel" class="tab-pane" id="' + name + '">' +
+        //                         //     '<div id="addVarContain' + count + '"></div>' +
+        //                         //     '</div>';
+        //                         string =
+        //                             ' <a role="presentation" href="#' +
+        //                             name +
+        //                             '" class="tab-link active button" name="' +
+        //                             val.fId +
+        //                             '">' +
+        //                             decodeURIComponent(val.fPagename) +
+        //                             "</a>";
+        //                         containStr =
+        //                             '<div role="tabpanel" class="tab active" id="' +
+        //                             name +
+        //                             '"> <div class="content-block tab-pane" id="addVarContain' +
+        //                             count +
+        //                             '"></div></div>';
+        //                     }
+        //                     $("#addDataUL").append(string);
+        //                     $(".tab-content").append(containStr);
+        //                     if (val.fPagejson != undefined && val.fPagejson != "undefined") {
+        //                         creatInfo(val.fPagejson, $("#addVarContain" + count), count);
+        //                     }
+        //                 });
+        //             } else {
+        //                 $("#delete").attr("disabled", true);
+        //                 $("#copy").attr("disabled", true);
+        //                 $("#save").attr("disabled", true);
+        //                 $("#container-info")
+        //                     .html("暂无相关信息！")
+        //                     .css("text-align", "center");
+        //             }
+        //             $("body").hideLoading();
+        //         }
+        //     );
+        // }
 
         // 显示已有信息
         // < div id = "tab1"
@@ -793,34 +790,34 @@ var CustomerDevice = (function () {
                     // imgAdd
                 case "image":
                     string =
-                        '<div class="showDiv z_photo upimg-div">' +
-                        '<label class="nameInputInfo" name="image">' +
+                        '<li><div class="showDiv z_photo upimg-div"><div class="item-inner" style="display: block;">' +
+                        '<label class="nameInputInfo item-title" name="image">' +
                         '<span class="compareName"></span>' +
                         "</label>" +
                         '<section class="z_file">' +
                         '<img class="add-img" src="img/chooseImg.png">' +
                         '<input type="file" id="upImage" class="nameInput file" data-device="devImg" name="image">' +
                         "</section>" +
-                        "</div>";
+                        "</div></div></li>";
                     break;
                     // instructionAdd
-                    // case "instruction":
-                    //     if (selectInfo.fInstruction !== undefined && selectInfo.fInstruction !== "") {
-                    //         string = '<div class="showDiv">' +
-                    //             '<label class="nameInputInfo" name="instruction" data-file="' + selectInfo.fInstruction + '">' +
-                    //             '<span class="compareName">资料：</span>' +
-                    //             '</label>' +
-                    //             '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="' + val.value + '(点击下载)" onclick="fileDown(this)" data-name="' + val.value + '">' +
-                    //             '</div>';
-                    //     } else {
-                    //         string = '<div class="showDiv">' +
-                    //             '<label class="nameInputInfo" name="instruction">' +
-                    //             '<span class="compareName">资料：</span>' +
-                    //             '</label>' +
-                    //             '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="无" disabled>' +
-                    //             '</div>';
-                    //     }
-                    //     break;
+                case "instruction":
+                    if (selectInfo.fInstruction !== undefined && selectInfo.fInstruction !== "") {
+                        string = '<li><div class="showDiv"><div class="item-inner">' +
+                            '<label class="nameInputInfo" name="instruction" data-file="' + selectInfo.fInstruction + '">' +
+                            '<span class="compareName">资料：</span>' +
+                            '</label>' +
+                            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="' + val.value + '" onclick="fileDown(this)" data-name="' + val.value + '">' +
+                            '</div></div></li>';
+                    } else {
+                        string = '<li><div class="showDiv"><div class="item-inner">' +
+                            '<label class="nameInputInfo" name="instruction">' +
+                            '<span class="compareName">资料：</span>' +
+                            '</label>' +
+                            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="无" disabled>' +
+                            '</div></div></li>';
+                    }
+                    break;
             }
             $(select).append(string);
             if (val.type == "date") {
@@ -1122,10 +1119,11 @@ jQuery(document).ready(function () {
                     name: /*encodeURIComponent*/ text,
                     value: []
                 });
-                var infoList = $(val)
-                    .children()
-                    .children()
-                    .children(".showDiv");
+                if (text)
+                    var infoList = $(val)
+                        .children()
+                        .children()
+                        .children(".showDiv");
                 $.each(infoList, function (index, val) {
                     var row = {};
                     // var select = $(val).children(".nameInputInfo");
@@ -1175,7 +1173,7 @@ jQuery(document).ready(function () {
                             }
                             break;
                         case "image":
-                            value = "image";
+                            value = 'image';
                             name = "image";
                             break;
                     }
@@ -1309,6 +1307,7 @@ jQuery(document).ready(function () {
     $("#myModal").on("shown.bs.modal", function () {
         Substation.DOMOperator.pagenation("main/getSubstationListByUser", 1, 8);
     });
+
     $("#myModal").on("hide.bs.modal", function () {
         $("#tableSubName").html("");
         $(".substationlist").val("");
