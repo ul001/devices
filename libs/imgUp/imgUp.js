@@ -58,7 +58,6 @@
                     continue
                 }
 
-
                 var imgUrl;
 
                 // 如果是已保存的远程图片，则进行转码
@@ -67,6 +66,13 @@
 
                     creatImg(imgUrl)
                 } else {
+                    // var reader = new FileReader();
+                    // reader.readAsDataURL(fileList[i]);
+                    // reader.onloadend = function () {
+                    //     // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
+                    //     imgUrl = reader.result;
+                    //     files.push(fileList[0]);
+                    // };
                     imgUrl = window.URL.createObjectURL(fileList[i]);
                     files.push(fileList[0]);
                 }
@@ -80,17 +86,15 @@
                     event.preventDefault();
                     event.stopPropagation();
                     delParent = $(this).parent();
-                    confirm("是否要删除此图片？", "", function (isConfirm) {
-                        if (isConfirm) {
+                    $.confirm('是否要删除此图片?',
+                        function () {
                             var url = $(delParent).attr('data-index')
                             var index;
-
                             for (var i = 0; i < files.length; i++) {
                                 if (files[i].name === url) {
                                     index = i
                                 }
                             }
-
                             files.splice(index, 1)
                             delParent.remove();
                             var numUp = imgContainer.find(".up-section").length;
@@ -98,8 +102,31 @@
                                 $(select).parent().show();
                             }
                             success(files)
+                        },
+                        function () {
+
                         }
-                    });
+                    );
+                    // confirm("是否要删除此图片？", "", function (isConfirm) {
+
+                    //     if (isConfirm) {
+                    //         var url = $(delParent).attr('data-index')
+                    //         var index;
+
+                    //         for (var i = 0; i < files.length; i++) {
+                    //             if (files[i].name === url) {
+                    //                 index = i
+                    //             }
+                    //         }
+                    //         files.splice(index, 1)
+                    //         delParent.remove();
+                    //         var numUp = imgContainer.find(".up-section").length;
+                    //         if (numUp < 3) {
+                    //             $(select).parent().show();
+                    //         }
+                    //         success(files)
+                    //     }
+                    // });
                 });
                 $img0.attr("src", "img/removeImg.png").appendTo($section);
                 var $img = $("<img class='up-img'>");
@@ -123,10 +150,10 @@
 
                 ctx.drawImage(img, 0, 0, 190, 190);
 
-                var base64 = canvas.toDataURL('image/png', 1.0);
+                var a = imgUrl.split('/');
+                var name = a[a.length - 1];
 
-                var a = imgUrl.split('/')
-                var name = a[a.length - 1]
+                var base64 = canvas.toDataURL('image/png');
 
                 files.push(dataURLtoFile(base64, name));
 
