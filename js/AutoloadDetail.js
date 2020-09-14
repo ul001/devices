@@ -8,6 +8,8 @@ var CustomerDevice = (function () {
         var selectInfo;
         var count = 100;
         var curNodeInfo;
+        var imagePath; //图片路径
+        var fileList = []; //设备图片
         var subid = localStorage.getItem("fSubid");
         //查询模板fPagedesigntemplateid 用父级的fParentid查模板
         // 用父级的fParentid查模板
@@ -42,6 +44,15 @@ var CustomerDevice = (function () {
             return curNodeInfo;
         };
 
+        // 获取当前选中节点图片信息
+        this.getFilelist = function () {
+            return fileList;
+        };
+
+        this.getDeviceInfo = function () {
+            getDeviceInfo()
+        }
+
         // 新增一个设备
         this.addModal = function (data, tabName) {
             // 取消选中tabpanel
@@ -69,7 +80,7 @@ var CustomerDevice = (function () {
             var containStr =
                 '<div role="tabpanel" class="tab pull-to-refresh-content active" id="' +
                 name +
-                '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
+                '"><div class="pull-to-refresh-layer"></div><div class="content-block tab-pane active" id="addVarContain' +
                 count +
                 '"></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
@@ -94,6 +105,25 @@ var CustomerDevice = (function () {
             // var json = JSON.parse(selectInfo.fFunctionfield);
             var select = $("#addVarContain" + count);
             creatInfo(selectInfo.fFunctionfield, select, count);
+
+            // 如果所选设备有模板图片
+            var savedInfo = [],
+                arr = [];
+            if (selectInfo.fPreviewfiles !== undefined) {
+                savedInfo = JSON.parse(selectInfo.fPreviewfiles);
+            }
+            $.each(savedInfo, function (i, val) {
+                arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + "/" + val);
+            });
+
+            $.initFile(
+                $("#upImage"),
+                function (list) {
+                    fileList = list;
+                },
+                arr
+            );
+
             if (data != undefined) {
                 showPageInfo(data, select);
             }
@@ -102,27 +132,33 @@ var CustomerDevice = (function () {
 
         //添加编辑按钮事件
         function addEdit() {
-            $(".icon-edit").unbind().click(function (e) {
-                var thisSpan = $(this).prev();
-                var thisDeviceId = $(this).parent().attr("name");
-                $.prompt(Operation['ui_rename'], function (value) {
-                    if (thisDeviceId == undefined) {
-                        thisSpan.text(value);
-                    } else {
-                        Substation.postDataByAjax("/updateDevice", {
-                            fSubdeviceinfoid: thisDeviceId,
-                            fDevicename: value
-                        }, function (data) {
-                            $.toast(Operation['ui_renamesuccess']);
+            $(".icon-edit")
+                .unbind()
+                .click(function (e) {
+                    var thisSpan = $(this).prev();
+                    var thisDeviceId = $(this)
+                        .parent()
+                        .attr("name");
+                    $.prompt(Operation["ui_rename"], function (value) {
+                        if (thisDeviceId == undefined) {
                             thisSpan.text(value);
-                        });
-                    }
+                        } else {
+                            Substation.postDataByAjax(
+                                "/updateDevice", {
+                                    fSubdeviceinfoid: thisDeviceId,
+                                    fDevicename: value
+                                },
+                                function (data) {
+                                    $.toast(Operation["ui_renamesuccess"]);
+                                    thisSpan.text(value);
+                                }
+                            );
+                        }
+                    });
+                    $(".modal-text-input").val(thisSpan.text());
+                    //                $(".modal-text-input").select();
+                    e.stopPropagation();
                 });
-                $(".modal-text-input").val(thisSpan.text());
-                //                $(".modal-text-input").select();
-                e.stopPropagation();
-            });
-
         }
 
         // 初始化获取信息
@@ -155,6 +191,7 @@ var CustomerDevice = (function () {
                 "/selectDeviceList",
                 "subDeviceGroupId=" + deviceGroupId,
                 function (data) {
+                    imagePath = data.filePath;
                     //赋模板
                     selectInfo = data.template;
                     // Substation.Common.getDataByAjax("authority/pageCustomList", "fSubid=" + subid + "&fTemplateid=" + tempId, function (data) {
@@ -172,6 +209,21 @@ var CustomerDevice = (function () {
                     // 如果有设备信息
                     if (data.deviceList.length > 0) {
                         $.each(data.deviceList, function (key, val) {
+                            var savedInfo = [],
+                                arr = [];
+
+                            // 如果存在设备实例模板
+                            if (selectInfo.fPreviewfiles !== undefined) {
+                                savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+                            }
+                            $.each(savedInfo, function (i, val) {
+                                arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + '/' + val)
+                            })
+
+                            $.initFile($("#upImage"), function (list) {
+                                fileList = list
+                            }, arr)
+
                             count++;
                             var name = "addModal" + val.fSubdeviceinfoid;
                             //  var string = ' <a role="presentation" href="#' + name + '" class="tab-link active button" id="tab' + name + '">' + text + '</a>';
@@ -196,7 +248,7 @@ var CustomerDevice = (function () {
                                 containStr =
                                     '<div role="tabpanel" class="tab pull-to-refresh-content" id="' +
                                     name +
-                                    '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
+                                    '"><div class="pull-to-refresh-layer"></div><div class="content-block tab-pane active" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             } else {
@@ -218,7 +270,7 @@ var CustomerDevice = (function () {
                                 containStr =
                                     '<div role="tabpanel" class="tab pull-to-refresh-content" id="' +
                                     name +
-                                    '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane" id="addVarContain' +
+                                    '"><div class="pull-to-refresh-layer"></div><div class="content-block tab-pane" id="addVarContain' +
                                     count +
                                     '"></div></div>';
                             }
@@ -229,7 +281,11 @@ var CustomerDevice = (function () {
                             }
                             //创建模板
                             var select = $("#addVarContain" + count);
-                            creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
+                            creatInfo(
+                                selectInfo.fFunctionfield,
+                                $("#addVarContain" + count),
+                                count
+                            );
                             if (
                                 val.fDevicejson != undefined &&
                                 val.fDevicejson != "undefined"
@@ -237,18 +293,63 @@ var CustomerDevice = (function () {
                                 //填充数据
                                 showPageInfo(val.fDevicejson, select);
                             }
+                            // getDeviceInfo();
                         });
+
                     } else {
                         $("#delete").attr("disabled", true);
                         $("#copy").attr("disabled", true);
                         $("#save").attr("disabled", true);
                         $("#container-info")
-                            .html(Operation['ui_nodata']+"！")
+                            .html(Operation["ui_nodata"] + "！")
                             .css("text-align", "center");
                     }
                     addEdit();
                 }
             );
+        }
+
+        function getDeviceInfo() {
+            // 如果设备存在模板
+            if (selectInfo.fFunctionfield !== undefined) {
+                // 先根据模板构造页面
+                var json = JSON.parse(selectInfo.fFunctionfield);
+                var newJson = JSON.stringify(json.deviceInfo);
+
+                var checkJson = JSON.stringify(json.checkInfo);
+                // showCheckInfo(checkJson)
+
+                // 如果没有设备id，为未保存设备，只出始化页面，无数据
+                var index = $(".active[role='presentation']").attr("name");
+                if (index === "") {
+                    alert("当前设备未保存！")
+                    // creatInfo(newJson);
+
+                    var savedInfo = [],
+                        arr = [];
+
+                    // 如果存在设备实例模板
+                    if (selectInfo.fPreviewfiles !== undefined) {
+                        savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+                    }
+                    $.each(savedInfo, function (i, val) {
+                        arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + '/' + val)
+                    })
+
+                    $.initFile($("#upImage"), function (list) {
+                        fileList = list
+                    }, arr)
+
+                } else {
+                    // 存在设备id,则根据id查询设备信息并显示
+                    index = parseInt(index)
+                    Substation.Common.requestDataByGET("authority/getDeviceDetailById", "fSubdeviceinfoid=" + index, function (data) {
+                        var newValue = data.data.deviceDetail
+                        curNodeInfo = newValue;
+                        creatInfo(newJson, newValue);
+                    })
+                }
+            }
         }
 
         function getData() {
@@ -430,26 +531,37 @@ var CustomerDevice = (function () {
         //根据真实数据填充
         function showPageInfo(data, parent) {
             var pageInfo = JSON.parse(data);
-            pageInfo.forEach(function (val,i) {
+            pageInfo.forEach(function (val, i) {
                 val.value.forEach(function (value) {
                     var name = decodeURIComponent(value.name);
-                    var prevLable = $(parent).children(".baseInfoDiv[name='"+val.name+"']").find(".item-title:contains('" + name + "')");
+                    var prevLable = $(parent)
+                        .children(".baseInfoDiv[name='" + val.name + "']")
+                        .find(".item-title:contains('" + name + "')");
                     var info = decodeURIComponent(value.value);
                     switch (value.type) {
                         case "input":
-                            $(prevLable).next("div").find("input").val(decodeURIComponent(value.value));
+                            $(prevLable)
+                                .next("div")
+                                .find("input")
+                                .val(decodeURIComponent(value.value));
                             break;
                         case "radio":
                             if (info == "yes") {
-                                $(prevLable).next("input[value='yes']").attr("checked", true);
+                                $(prevLable)
+                                    .next("input[value='yes']")
+                                    .attr("checked", true);
                             }
                             if (info == "no") {
-                                $(prevLable).next("input[value='no']").attr("checked", true);
+                                $(prevLable)
+                                    .next("input[value='no']")
+                                    .attr("checked", true);
                             }
                             break;
                         case "select":
                             var selectOption = decodeURIComponent(value.value);
-                            var options = $(prevLable).next("select").children("option");
+                            var options = $(prevLable)
+                                .next("select")
+                                .children("option");
                             var select = $(prevLable).next("select");
                             $.each(options, function (key, value2) {
                                 if (value2.innerHTML == selectOption) {
@@ -459,14 +571,45 @@ var CustomerDevice = (function () {
                             });
                             break;
                         case "date":
-                            $(prevLable).next($(".dateTime")).val(value.value);
-                            try{
-                                $(prevLable).next($(".datetime-local")).val(value.value.replace(" ","T"));
-                            }catch(e){}
+                            $(prevLable)
+                                .next($(".dateTime"))
+                                .val(value.value);
+                            try {
+                                $(prevLable)
+                                    .next($(".datetime-local"))
+                                    .val(value.value.replace(" ", "T"));
+                            } catch (e) {}
+                            break;
+                            // imgAdd
+                        case "image":
+                            var arr = [];
+                            var savedInfo = [];
+
+                            if (data.fRealimg !== undefined) {
+                                savedInfo = JSON.parse(data.fRealimg);
+                            } else {
+                                if (selectInfo.fPreviewfiles !== undefined) {
+                                    savedInfo = JSON.parse(selectInfo.fPreviewfiles);
+                                }
+                            }
+
+                            $.each(savedInfo, function (i, val) {
+                                arr.push(
+                                    localStorage.getItem("ImagePath") + "/" + imagePath + "/" + val
+                                );
+                            });
+
+                            $.initFile(
+                                $("#upImage"),
+                                function (list) {
+                                    fileList = list;
+                                },
+                                arr
+                            );
                             break;
                     }
-                })
-            })
+                });
+            });
             // console.log(pageInfo);
         }
 
@@ -528,14 +671,18 @@ var CustomerDevice = (function () {
                             count +
                             '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' +
                             count +
-                            '">'+Operation['ui_yes']+'</label>' +
+                            '">' +
+                            Operation["ui_yes"] +
+                            "</label>" +
                             '<input type="radio" id="operationNo' +
                             count +
                             '" name="operation' +
                             count +
                             '" value="no"><label style="margin-right: 10px" for="operationNo' +
                             count +
-                            '">'+Operation['ui_no']+'</label>' +
+                            '">' +
+                            Operation["ui_no"] +
+                            "</label>" +
                             "</div></div></li>";
                     }
                     if (val.value == "no") {
@@ -555,14 +702,18 @@ var CustomerDevice = (function () {
                             count +
                             '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' +
                             count +
-                            '">'+Operation['ui_yes']+'</label>' +
+                            '">' +
+                            Operation["ui_yes"] +
+                            "</label>" +
                             '<input type="radio" id="operationNo' +
                             count +
                             '" name="operation' +
                             count +
                             '" value="no" checked><label style="margin-right: 10px" for="operationNo' +
                             count +
-                            '">'+Operation['ui_no']+'</label>' +
+                            '">' +
+                            Operation["ui_no"] +
+                            "</label>" +
                             "</div></div></li>";
                     }
                     break;
@@ -573,7 +724,12 @@ var CustomerDevice = (function () {
                         // if (opval.opType == true) {
                         //     opString += "<option selected>" + opval.opName + "</option>";
                         // } else {
-                        opString += '<option value=' + opval.opName + '>' + opval.opName + "</option>";
+                        opString +=
+                            "<option value=" +
+                            opval.opName +
+                            ">" +
+                            opval.opName +
+                            "</option>";
                         // }
                     });
                     opString += "</select>";
@@ -601,24 +757,29 @@ var CustomerDevice = (function () {
                     // string = '<div class="showDiv">' +
                     //     '<label class="nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' + ':' +
                     //     '<input type="text" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '">';
-                    if(val.value=="devInstall"){
-                        string ='<li><div class="showDiv item-content"><div class="item-inner">' +
+                    if (val.value == "devInstall") {
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" style="width:initial;" name="date">' +
                             decodeURIComponent(val.name) +
                             "</label>" +
                             '<input type="datetime-local" class="daycalendarBox' +
                             count +
                             ' datetime-local" style="text-align:end;" min="2010-01-01T00:00" max="2050-01-01T00:00" value=""/></div></div></li>';
-                    }else if(val.value=="devicewarranty"){
-                        string ='<li><div class="showDiv item-content"><div class="item-inner">' +
+                    } else if (val.value == "devicewarranty") {
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" name="date">' +
                             decodeURIComponent(val.name) +
                             "</label>" +
                             '<input type="number" class="daycalendarBox' +
                             count +
-                            ' dateTime" value="">'+Operation['ui_month']+'</div></div></li>';
-                    }else{
-                        string ='<li><div class="showDiv item-content"><div class="item-inner">' +
+                            ' dateTime" value="">' +
+                            Operation["ui_month"] +
+                            "</div></div></li>";
+                    } else {
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" name="date">' +
                             decodeURIComponent(val.name) +
                             "</label>" +
@@ -629,6 +790,37 @@ var CustomerDevice = (function () {
                             '"></div></div></li>';
                     }
                     break;
+                    // imgAdd
+                case "image":
+                    string =
+                        '<div class="showDiv z_photo upimg-div">' +
+                        '<label class="nameInputInfo" name="image">' +
+                        '<span class="compareName"></span>' +
+                        "</label>" +
+                        '<section class="z_file">' +
+                        '<img class="add-img" src="img/chooseImg.png">' +
+                        '<input type="file" id="upImage" class="nameInput file" data-device="devImg" name="image">' +
+                        "</section>" +
+                        "</div>";
+                    break;
+                    // instructionAdd
+                    // case "instruction":
+                    //     if (selectInfo.fInstruction !== undefined && selectInfo.fInstruction !== "") {
+                    //         string = '<div class="showDiv">' +
+                    //             '<label class="nameInputInfo" name="instruction" data-file="' + selectInfo.fInstruction + '">' +
+                    //             '<span class="compareName">资料：</span>' +
+                    //             '</label>' +
+                    //             '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="' + val.value + '(点击下载)" onclick="fileDown(this)" data-name="' + val.value + '">' +
+                    //             '</div>';
+                    //     } else {
+                    //         string = '<div class="showDiv">' +
+                    //             '<label class="nameInputInfo" name="instruction">' +
+                    //             '<span class="compareName">资料：</span>' +
+                    //             '</label>' +
+                    //             '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="无" disabled>' +
+                    //             '</div>';
+                    //     }
+                    //     break;
             }
             $(select).append(string);
             if (val.type == "date") {
@@ -649,7 +841,7 @@ jQuery(document).ready(function () {
     var lastClickNum = localStorage.getItem("clickNum");
     $("#goBackLastPid").click(function () {
         /*window.location.href =
-            "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
+                "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
         localStorage.setItem("pid", jumpPid);
         localStorage.setItem("clickNum", lastClickNum);
         if (isAndroid) {
@@ -663,7 +855,10 @@ jQuery(document).ready(function () {
 
     //解决键盘遮挡问题
     window.addEventListener("resize", function () {
-        if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        if (
+            document.activeElement.tagName == "INPUT" ||
+            document.activeElement.tagName == "TEXTAREA"
+        ) {
             window.setTimeout(function () {
                 document.activeElement.scrollIntoViewIfNeeded();
             }, 0);
@@ -716,16 +911,16 @@ jQuery(document).ready(function () {
     var upLoadClicktag = true;
     // 新增按钮
     $("#Add").on("click", function () {
-        if(!upLoadClicktag){
+        if (!upLoadClicktag) {
             return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
             upLoadClicktag = true;
         }, 500);
         var info = customerDevice.getselectInfo();
         if (info.fFunctionfield == undefined) {
-            $.toast(Operation['ui_nodevice']);
+            $.toast(Operation["ui_nodevice"]);
             return;
         }
 
@@ -739,7 +934,7 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fDevicenamepath", clickGroupTree);
         formdata.append("fSubdevicegroupid", deviceGroupId);
-        formdata.append("fDevicename", /*encodeURIComponent*/ (fDevicename));
+        formdata.append("fDevicename", /*encodeURIComponent*/ fDevicename);
         // formdata.append("fPagejson", json);
         if (newJson != undefined) {
             formdata.append("fPagejson", newJson);
@@ -760,7 +955,7 @@ jQuery(document).ready(function () {
         // );
         $("#addDataUL").scrollLeft(10000);
         $("#save").removeAttr("disabled");
-        $.prompt(Operation['ui_deviceName'], function (value) {
+        $.prompt(Operation["ui_deviceName"], function (value) {
             $(".tab-link.active span").text(value);
             $("#addDataUL").scrollLeft(10000);
         });
@@ -770,21 +965,21 @@ jQuery(document).ready(function () {
 
     // 复制按钮
     $("#copy").on("click", function () {
-        if(!upLoadClicktag){
+        if (!upLoadClicktag) {
             return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
             upLoadClicktag = true;
         }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast(Operation['ui_cannotcopy']);
+            $.toast(Operation["ui_cannotcopy"]);
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
         if (selectId === undefined) {
-            $.toast(Operation['ui_nosave']);
+            $.toast(Operation["ui_nosave"]);
             return;
         }
         var info = customerDevice.getselectInfo();
@@ -796,7 +991,7 @@ jQuery(document).ready(function () {
         var json;
         var selectDevice = $(".active[role='presentation']").attr("name");
         $.each(nodeInfo, function (key, val) {
-            if (selectDevice == (val.fSubdeviceinfoid).toString()) {
+            if (selectDevice == val.fSubdeviceinfoid.toString()) {
                 json = val.fDevicejson;
                 return false;
             }
@@ -814,11 +1009,14 @@ jQuery(document).ready(function () {
         var url = "/addDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                $.toast(Operation['ui_copyFail']);
+                $.toast(Operation["ui_copyFail"]);
             } else {
                 customerDevice.addModal(json, deviceName);
-                $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
-                $.toast(Operation['ui_copySuccess']);
+                $(".active[role='presentation']").attr(
+                    "name",
+                    data.data.fSubdeviceinfoid
+                );
+                $.toast(Operation["ui_copySuccess"]);
                 $("#addDataUL").scrollLeft(10000);
             }
         });
@@ -826,16 +1024,16 @@ jQuery(document).ready(function () {
 
     // 删除按钮
     $("#delete").on("click", function () {
-        if(!upLoadClicktag){
+        if (!upLoadClicktag) {
             return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
             upLoadClicktag = true;
         }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast(Operation['ui_cannotdel']);
+            $.toast(Operation["ui_cannotdel"]);
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
@@ -858,47 +1056,50 @@ jQuery(document).ready(function () {
             return;
         }
         var name = $(".active[role='presentation']").text();
-        $.confirm(Operation['ui_suredel'] + name + Operation['ui_question'], function () {
-            Substation.getDataByAjaxAllData(
-                "/deleteDevice",
-                "deleteId=" + selectId,
-                function (data) {
-                    if (data.code == 200) {
-                        $.toast(Operation['ui_delsuccess']);
-                        var id = $(".active[role='presentation']").attr("href");
-                        var prevLi = $(".active[role='presentation']").prev();
-                        var nextLi = $(".active[role='presentation']").next();
-                        // var prevLi = $(".active[role='presentation']");
-                        $(".active[role='presentation']").remove();
-                        $(id).remove();
-                        if (prevLi != undefined && prevLi.length > 0) {
-                            //TODO: 如有其它tab则选中它
-                            prevLi.click();
-                            // $(prevLi).tab("show");
-                            // $("a", $(prevLi)).tab("show");
+        $.confirm(
+            Operation["ui_suredel"] + name + Operation["ui_question"],
+            function () {
+                Substation.getDataByAjaxAllData(
+                    "/deleteDevice",
+                    "deleteId=" + selectId,
+                    function (data) {
+                        if (data.code == 200) {
+                            $.toast(Operation["ui_delsuccess"]);
+                            var id = $(".active[role='presentation']").attr("href");
+                            var prevLi = $(".active[role='presentation']").prev();
+                            var nextLi = $(".active[role='presentation']").next();
+                            // var prevLi = $(".active[role='presentation']");
+                            $(".active[role='presentation']").remove();
+                            $(id).remove();
+                            if (prevLi != undefined && prevLi.length > 0) {
+                                //TODO: 如有其它tab则选中它
+                                prevLi.click();
+                                // $(prevLi).tab("show");
+                                // $("a", $(prevLi)).tab("show");
+                            } else {
+                                nextLi.click();
+                            }
                         } else {
-                            nextLi.click();
+                            $.toast(Operation["ui_delFail"]);
                         }
-                    } else {
-                        $.toast(Operation['ui_delFail']);
                     }
-                }
-            );
-        });
+                );
+            }
+        );
     });
 
     // 保存按钮点击
     $("#save").on("click", function () {
-        if(!upLoadClicktag){
+        if (!upLoadClicktag) {
             return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
             upLoadClicktag = true;
         }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast(Operation['ui_nosave']);
+            $.toast(Operation["ui_nosave"]);
             return;
         }
         var isTrue = true;
@@ -918,10 +1119,13 @@ jQuery(document).ready(function () {
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
                 fPagejson.push({
-                    name: /*encodeURIComponent*/ (text),
+                    name: /*encodeURIComponent*/ text,
                     value: []
                 });
-                var infoList = $(val).children().children().children('.showDiv');
+                var infoList = $(val)
+                    .children()
+                    .children()
+                    .children(".showDiv");
                 $.each(infoList, function (index, val) {
                     var row = {};
                     // var select = $(val).children(".nameInputInfo");
@@ -933,7 +1137,9 @@ jQuery(document).ready(function () {
                     var value;
                     switch (type) {
                         case "input":
-                            value = $(val).find($(".valueInput")).val();
+                            value = $(val)
+                                .find($(".valueInput"))
+                                .val();
                             // value = $(val).children().children(".item-input").val();
                             // var row = {};
                             // row.inpName = $(val).find($(".valueInput")).val();
@@ -941,27 +1147,41 @@ jQuery(document).ready(function () {
                             // value = JSON.stringify(row);
                             break;
                         case "radio":
-                            value = $(val).children().find($("input:checked")).val();
+                            value = $(val)
+                                .children()
+                                .find($("input:checked"))
+                                .val();
                             break;
                         case "select":
-                            value = $(val).find('select option:selected').val();
+                            value = $(val)
+                                .find("select option:selected")
+                                .val();
                             // value = $(val).children().children("select").val();
                             break;
                         case "date":
                             // value = $(val).children().children(".dateTime").val();
-                            if($(val).find($(".dateTime"))){
-                                value = $(val).find($(".dateTime")).val();
+                            if ($(val).find($(".dateTime"))) {
+                                value = $(val)
+                                    .find($(".dateTime"))
+                                    .val();
                             }
-                            if($(val).find($(".datetime-local"))){
-                                try{
-                                    value = $(val).find($(".datetime-local")).val().replace("T"," ");
-                                }catch(e){}
+                            if ($(val).find($(".datetime-local"))) {
+                                try {
+                                    value = $(val)
+                                        .find($(".datetime-local"))
+                                        .val()
+                                        .replace("T", " ");
+                                } catch (e) {}
                             }
+                            break;
+                        case "image":
+                            value = "image";
+                            name = "image";
                             break;
                     }
                     row.type = type;
-                    row.name = /*encodeURIComponent*/ (name);
-                    row.value = /*encodeURIComponent*/ (value);
+                    row.name = /*encodeURIComponent*/ name;
+                    row.value = /*encodeURIComponent*/ value;
                     fPagejson[key].value.push(row);
                 });
             });
@@ -997,7 +1217,7 @@ jQuery(document).ready(function () {
         var info = customerDevice.getselectInfo();
 
         if (info.fFunctionfield == undefined) {
-            $.alert(Operation['ui_devicetemplate']);
+            $.alert(Operation["ui_devicetemplate"]);
             return;
         }
 
@@ -1015,6 +1235,12 @@ jQuery(document).ready(function () {
         formdata.append("fDevicename", deviceName);
         // formdata.append("fDevicename", encodeURIComponent(fDevicename));
         // formdata.append("fPagejson", json);
+        //添加图片
+        var fileList = customerDevice.getFilelist();
+        $.each(fileList, function (i, item) {
+            formdata.append("realImgs", item);
+        });
+
         if (newJson != undefined) {
             var json = JSON.stringify(fDevicejson);
             formdata.append("fDevicejson", json);
@@ -1026,7 +1252,7 @@ jQuery(document).ready(function () {
 
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                $.toast(Operation['ui_addFail']);
+                $.toast(Operation["ui_addFail"]);
             } else {
                 // customerDevice.addModal();
                 $(".active[role='presentation']").attr(
@@ -1034,7 +1260,7 @@ jQuery(document).ready(function () {
                     data.data.fSubdeviceinfoid
                 );
                 $("#save").removeAttr("disabled");
-                $.toast(Operation['ui_savesuccess']);
+                $.toast(Operation["ui_savesuccess"]);
                 setTimeout(function () {
                     customerDevice.reNewCurNodeInfo();
                 }, 2000);
@@ -1042,9 +1268,7 @@ jQuery(document).ready(function () {
                 // upData(fDevicejson);
             }
         });
-
     }
-
 
     function upData(fPagejson) {
         // var json = JSON.stringify(fPagejson);
@@ -1063,10 +1287,17 @@ jQuery(document).ready(function () {
         formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fSubdeviceinfoid", fId);
         formdata.append("fDevicejson", json);
+        // imgAdd
+        var fileList = customerDevice.getFilelist();
+
+        $.each(fileList, function (i, item) {
+            formdata.append("realImgs", item);
+        });
+
         var url = "/updateDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.code == 200) {
-                $.toast(Operation['ui_savesuccess']);
+                $.toast(Operation["ui_savesuccess"]);
                 setTimeout(function () {
                     customerDevice.reNewCurNodeInfo();
                 }, 2000);
