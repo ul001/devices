@@ -2,168 +2,170 @@
 <html>
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title></title>
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <link rel="stylesheet" href="libs/light7.min.css" />
-  <link rel="stylesheet" href="libs/light7-swiper.min.css" />
-  <link rel="stylesheet" href="css/general.css" />
-  <link rel="stylesheet" href="css/lightingControl.css" />
-  <link rel="stylesheet" href="libs/code.css" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <link rel="shortcut icon" href="/favicon.ico"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <link rel="stylesheet" href="libs/light7.min.css"/>
+    <link rel="stylesheet" href="libs/light7-swiper.min.css"/>
+    <link rel="stylesheet" href="css/general.css"/>
+    <link rel="stylesheet" href="css/lightingControl.css"/>
+    <link rel="stylesheet" href="libs/code.css"/>
 </head>
 
 <body>
-  <div class="page-group">
+<div class="page-group">
     <div class="page">
-      <header class="bar bar-nav bar_color">
-        <a id="back_btn" class="button button-link button-nav pull-left external click_btn">
-          <span class="icon icon-left"></span>
-          <span data-i18n="ui_back"></span>
-        </a>
-        <a id="control_btn" class="button button-link button-nav pull-right click_btn">
-          <span data-i18n="ui_control"></span>
-        </a>
-        <a id="record_btn" class="button button-link button-nav pull-right click_btn">
-          <span data-i18n="ui_record"></span>
-        </a>
-        <h1 class="title title_color">
-          <p class="limit-length" id="titleContent">
-            <span data-i18n="ui_Lightingcontrol"></span>
-          </p>
-        </h1>
-      </header>
-      <div class="content pull-to-refresh-content" id="changePull">
-        <div class="pull-to-refresh-layer">
-          <div class="preloader"></div>
-          <div class="pull-to-refresh-arrow"></div>
-        </div>
-        <div id="container">
-          <!-- <div class="row button_bar" style="display:none;">
-            <a id="light_opening" href="#" class="col-50 button active">
-              <span data-i18n=""><span data-i18n="ui_Closing"></span></span>
+        <header class="bar bar-nav bar_color">
+            <a id="back_btn" class="button button-link button-nav pull-left external click_btn">
+                <span class="icon icon-left"></span>
+                <span data-i18n="ui_back"></span>
             </a>
-            <a id="light_closed" href="#" class="col-50 button">
-              <span data-i18n=""><span data-i18n="ui_Opening"></span></span>
+            <a id="control_btn" class="button button-link button-nav pull-right click_btn">
+                <span data-i18n="ui_control"></span>
             </a>
-          </div> -->
-          <div class="content-list">
-            <!--              <label class="list-item label-checkbox light_opening" data-id="1">-->
-            <!--                <div class="row">-->
-            <!--                  <input type="checkbox" name="my-checkbox" />-->
-            <!--                  <div class="item-media col-15">-->
-            <!--                    <i class="icon icon-form-checkbox"></i>-->
-            <!--                  </div>-->
-            <!--                  <span class="label-title col-100"-->
-            <!--                    >南楼变电所一楼一层照名控制</span-->
-            <!--                  >-->
-            <!--                </div>-->
-            <!--                <div class="img_text">-->
-            <!--                  <img src="img/lightClose.png" />-->
-            <!--                  <span class="right-bottom">合闸</span>-->
-            <!--                </div>-->
-            <!--              </label>-->
-            <!--              <label class="list-item label-checkbox no_device" data-id="2">-->
-            <!--                <div class="row">-->
-            <!--                  <input type="checkbox" name="my-checkbox" />-->
-            <!--                  <div class="item-media col-15">-->
-            <!--                    <i class="icon icon-form-checkbox"></i>-->
-            <!--                  </div>-->
-            <!--                  <span class="label-title col-75">南楼一层</span>-->
-            <!--                </div>-->
-            <!--                <div class="img_text">-->
-            <!--                  <img src="img/noDevice.png" />-->
-            <!--                  <span class="right-bottom">无设备</span>-->
-            <!--                </div>-->
-            <!--              </label>-->
-            <!--              <label class="list-item label-checkbox light_closed" data-id="3">-->
-            <!--                <div class="row">-->
-            <!--                  <input type="checkbox" name="my-checkbox" />-->
-            <!--                  <div class="item-media col-15">-->
-            <!--                    <i class="icon icon-form-checkbox"></i>-->
-            <!--                  </div>-->
-            <!--                  <span class="label-title col-75">南楼一层照明</span>-->
-            <!--                </div>-->
-            <!--                <div class="img_text">-->
-            <!--                  <img src="img/lightClose.png" />-->
-            <!--                  <span class="right-bottom">分闸</span>-->
-            <!--                </div>-->
-            <!--              </label>-->
-            <!--              <label class="list-item label-checkbox light_opening" data-id="4">-->
-            <!--                <div class="row">-->
-            <!--                  <input type="checkbox" name="my-checkbox" />-->
-            <!--                  <div class="item-media col-15">-->
-            <!--                    <i class="icon icon-form-checkbox"></i>-->
-            <!--                  </div>-->
-            <!--                  <span class="label-title col-75"-->
-            <!--                    >南楼变电所一楼一层照名控制</span-->
-            <!--                  >-->
-            <!--                  <a href="#" class="view_detail col-25 button">详情</a>-->
-            <!--                </div>-->
-            <!--                <div class="img_text">-->
-            <!--                  <img src="img/lightClose.png" />-->
-            <!--                  <span class="right-bottom">合闸</span>-->
-            <!--                </div>-->
-            <!--              </label>-->
-          </div>
-      </div>
-      <!-- 短信验证码校验 -->
-      <!-- <div class="modal fade open-slider-modal" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog checkCode" role="document">
-          <div class="modal-content modal-w">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-              <h4>短信验证</h4>
+            <a id="record_btn" class="button button-link button-nav pull-right click_btn">
+                <span data-i18n="ui_record"></span>
+            </a>
+            <h1 class="title title_color">
+                <p class="limit-length" id="titleContent">
+                    <span data-i18n="ui_Lightingcontrol"></span>
+                </p>
+            </h1>
+        </header>
+        <div class="content pull-to-refresh-content" id="changePull">
+            <div class="pull-to-refresh-layer">
+                <div class="preloader"></div>
+                <div class="pull-to-refresh-arrow"></div>
             </div>
-            <div class="modal-body">
-              <div class="outContain">
-                <div class="codeDiv">
-                  <input id="phoneInput" type="text" class="sendInput" value="15151853872" disabled autocomplete="off" />
-                  <span class="icon codePhoneImg"></span>
-                  <label class="errorInfo"></label>
+            <div id="container">
+                <!-- <div class="row button_bar" style="display:none;">
+                  <a id="light_opening" href="#" class="col-50 button active">
+                    <span data-i18n=""><span data-i18n="ui_Closing"></span></span>
+                  </a>
+                  <a id="light_closed" href="#" class="col-50 button">
+                    <span data-i18n=""><span data-i18n="ui_Opening"></span></span>
+                  </a>
+                </div> -->
+                <div class="content-list">
+                    <!--              <label class="list-item label-checkbox light_opening" data-id="1">-->
+                    <!--                <div class="row">-->
+                    <!--                  <input type="checkbox" name="my-checkbox" />-->
+                    <!--                  <div class="item-media col-15">-->
+                    <!--                    <i class="icon icon-form-checkbox"></i>-->
+                    <!--                  </div>-->
+                    <!--                  <span class="label-title col-100"-->
+                    <!--                    >南楼变电所一楼一层照名控制</span-->
+                    <!--                  >-->
+                    <!--                </div>-->
+                    <!--                <div class="img_text">-->
+                    <!--                  <img src="img/lightClose.png" />-->
+                    <!--                  <span class="right-bottom">合闸</span>-->
+                    <!--                </div>-->
+                    <!--              </label>-->
+                    <!--              <label class="list-item label-checkbox no_device" data-id="2">-->
+                    <!--                <div class="row">-->
+                    <!--                  <input type="checkbox" name="my-checkbox" />-->
+                    <!--                  <div class="item-media col-15">-->
+                    <!--                    <i class="icon icon-form-checkbox"></i>-->
+                    <!--                  </div>-->
+                    <!--                  <span class="label-title col-75">南楼一层</span>-->
+                    <!--                </div>-->
+                    <!--                <div class="img_text">-->
+                    <!--                  <img src="img/noDevice.png" />-->
+                    <!--                  <span class="right-bottom">无设备</span>-->
+                    <!--                </div>-->
+                    <!--              </label>-->
+                    <!--              <label class="list-item label-checkbox light_closed" data-id="3">-->
+                    <!--                <div class="row">-->
+                    <!--                  <input type="checkbox" name="my-checkbox" />-->
+                    <!--                  <div class="item-media col-15">-->
+                    <!--                    <i class="icon icon-form-checkbox"></i>-->
+                    <!--                  </div>-->
+                    <!--                  <span class="label-title col-75">南楼一层照明</span>-->
+                    <!--                </div>-->
+                    <!--                <div class="img_text">-->
+                    <!--                  <img src="img/lightClose.png" />-->
+                    <!--                  <span class="right-bottom">分闸</span>-->
+                    <!--                </div>-->
+                    <!--              </label>-->
+                    <!--              <label class="list-item label-checkbox light_opening" data-id="4">-->
+                    <!--                <div class="row">-->
+                    <!--                  <input type="checkbox" name="my-checkbox" />-->
+                    <!--                  <div class="item-media col-15">-->
+                    <!--                    <i class="icon icon-form-checkbox"></i>-->
+                    <!--                  </div>-->
+                    <!--                  <span class="label-title col-75"-->
+                    <!--                    >南楼变电所一楼一层照名控制</span-->
+                    <!--                  >-->
+                    <!--                  <a href="#" class="view_detail col-25 button">详情</a>-->
+                    <!--                </div>-->
+                    <!--                <div class="img_text">-->
+                    <!--                  <img src="img/lightClose.png" />-->
+                    <!--                  <span class="right-bottom">合闸</span>-->
+                    <!--                </div>-->
+                    <!--              </label>-->
                 </div>
-                <div class="codeDiv">
-                  <input id="canvasInput" type="text" class="sendInput" placeholder="请输入验证码(不区分大小写)" autocomplete="off" />
-                  <span class="icon codeCanvasImg"></span>
-                  <canvas id="canvas" width="100" height="38"></canvas>
+            </div>
+            <!-- 短信验证码校验 -->
+            <!-- <div class="modal fade open-slider-modal" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog checkCode" role="document">
+                <div class="modal-content modal-w">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4>短信验证</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="outContain">
+                      <div class="codeDiv">
+                        <input id="phoneInput" type="text" class="sendInput" value="15151853872" disabled autocomplete="off" />
+                        <span class="icon codePhoneImg"></span>
+                        <label class="errorInfo"></label>
+                      </div>
+                      <div class="codeDiv">
+                        <input id="canvasInput" type="text" class="sendInput" placeholder="请输入验证码(不区分大小写)" autocomplete="off" />
+                        <span class="icon codeCanvasImg"></span>
+                        <canvas id="canvas" width="100" height="38"></canvas>
+                      </div>
+
+                      <div class="codeDiv">
+                        <input id="code" class="sendInput" type="text" placeholder="请输入短信验证码" autocomplete="off" />
+                        <span class="icon codeMsgImg"></span>
+                        <input id="btnSendCode" type="button" class="btn btn-default" disabled value="获取验证码" />
+                      </div>
+                      <button class="btn" id="checkBtn" disabled>验证</button>
+                    </div>
+                  </div>
                 </div>
-      
-                <div class="codeDiv">
-                  <input id="code" class="sendInput" type="text" placeholder="请输入短信验证码" autocomplete="off" />
-                  <span class="icon codeMsgImg"></span>
-                  <input id="btnSendCode" type="button" class="btn btn-default" disabled value="获取验证码" />
-                </div>
-                <button class="btn" id="checkBtn" disabled>验证</button>
               </div>
+              <div class="add-a"></div>
             </div>
-          </div>
+            </div> -->
         </div>
-        <div class="add-a"></div>
-      </div>
-      </div> -->
-      <div class="footer_bar">
-        <!-- <span href="#" class="footer_btn button button-fill button-big" style="display:none;"><span
-                      data-i18n="ui_CloseLight"></span></span> -->
-        <a id="closeLight" href="#" class="footer_btn col-30 button button-big active" style="display:none;"
-          data-i18n="ui_CloseLight"></a>
-        <a id="openLight" href="#" class="footer_btn col-30 button  button-big active"
-          style="display:none;margin-left: 1rem;" data-i18n="ui_OpenLight"></a>
-      </div>
+        <div class="footer_bar">
+            <!-- <span href="#" class="footer_btn button button-fill button-big" style="display:none;"><span
+                          data-i18n="ui_CloseLight"></span></span> -->
+            <a id="closeLight" href="#" class="footer_btn col-30 button button-big active"
+               style="display:none;"
+               data-i18n="ui_CloseLight"></a>
+            <a id="openLight" href="#" class="footer_btn col-30 button  button-big active"
+               style="display:none;margin-left: 1rem;" data-i18n="ui_OpenLight"></a>
+        </div>
     </div>
-  </div>
-  <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="libs/jquery.md5.js" charset="utf-8"></script>
-  <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
-  <script src="libs/language.js"></script>
-  <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="libs/tools.js" charset="utf-8"></script>
-  <script type="text/javascript" src="js/lightingControl.js" charset="utf-8"></script>
-  <script type="text/javascript" src="libs/code.js" charset="utf-8"></script>
+</div>
+<script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="libs/jquery.md5.js" charset="utf-8"></script>
+<script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
+<script src="libs/language.js"></script>
+<script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="libs/tools.js" charset="utf-8"></script>
+<script type="text/javascript" src="js/lightingControl.js" charset="utf-8"></script>
+<script type="text/javascript" src="libs/code.js" charset="utf-8"></script>
 </body>
 
 </html>
