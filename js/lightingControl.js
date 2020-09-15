@@ -35,7 +35,7 @@ function controlClick() {
     $(".list-item").hide();
     $(".light_closed").show();
     //屏蔽下拉菜单
-    $(".pull-to-refresh-layer").hide();
+//    $(".pull-to-refresh-layer").hide();
   } else {
     $("#back_btn").html(
       '<span class="icon icon-left"></span>' +
@@ -60,7 +60,7 @@ function controlClick() {
     $(".light_closed").hide();
     $(".list-item").show();
     //屏蔽下拉菜单
-    $(".pull-to-refresh-layer").show();
+//    $(".pull-to-refresh-layer").show();
   }
 }
 
@@ -190,6 +190,8 @@ function addItems(number, lastIndex) {
             .removeClass("col-100")
             .addClass("col-75");
           $(".item-media").show();
+          $(".list-item").hide();
+          $(".light_closed").show();
         }
         //addClick();
         //        $(".item-media").hide();
