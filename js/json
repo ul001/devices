@@ -109,3 +109,24 @@ firstWord: "YHJRYYQDYXGS"
 substationImg: "a67c9494ec594e55ac4fdbc0b7ad2717.ai"
 
 “Object”原型
+
+
+iamgeData
+
+fCreatetime: "2020-09-15 09:18:00"
+
+fDevicejson: "[{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"image\"}, {\"name\": \"编号及名称\", \"type\": \"input\", \"value\": \"\"}]}…"
+
+fDevicename: "测试图片"
+
+fDevicenamepath: "测试1"
+
+fRealimg: "{\"file0\": \"4c10f6cf76b84ecf9302badfd5a1b129.png\"}"
+
+fSubdevicegroupid: 4672
+
+fSubdeviceinfoid: 1333
+
+fSubid: 10100001
+
+fUserid: 1
