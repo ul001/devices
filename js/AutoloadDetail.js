@@ -2,6 +2,8 @@ var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+var allImages = []; //所有已有图片
+var nowImages = []; //当前图片
 
 var CustomerDevice = (function () {
     function _customerDevice() {
@@ -125,6 +127,7 @@ var CustomerDevice = (function () {
 
             if (data != undefined) {
                 showPageInfo(data, select, selectInfo.fPreviewfiles);
+
             }
             addEdit();
         };
@@ -285,7 +288,7 @@ var CustomerDevice = (function () {
                                 $("#addVarContain" + count),
                                 count
                             );
-                            getDeviceInfo();
+
                             if (
                                 val.fDevicejson != undefined &&
                                 val.fDevicejson != "undefined"
@@ -293,6 +296,9 @@ var CustomerDevice = (function () {
                                 //填充数据
                                 showPageInfo(val.fDevicejson, select, val);
                             }
+                            //图片加入数组
+                            allImages.push(val);
+                            getDeviceInfo(val);
                         });
                     } else {
                         $("#delete").attr("disabled", true);
@@ -307,46 +313,68 @@ var CustomerDevice = (function () {
             );
         }
 
-        function getDeviceInfo() {
+        function getDeviceInfo(val) {
             // 如果设备存在模板
-            if (selectInfo.fFunctionfield !== undefined) {
-                // 先根据模板构造页面
-                var json = JSON.parse(selectInfo.fFunctionfield);
-                var newJson = JSON.stringify(json.deviceInfo);
+            // if (selectInfo.fFunctionfield !== undefined) {
+            // 先根据模板构造页面
+            // var json = JSON.parse(selectInfo.fFunctionfield);
+            // var newJson = JSON.stringify(json.deviceInfo);
+            // var checkJson = JSON.stringify(json.checkInfo);
+            // showCheckInfo(checkJson)
+            var savedInfo = [],
+                arr = [];
 
-                var checkJson = JSON.stringify(json.checkInfo);
-                // showCheckInfo(checkJson)
-
-                // 如果没有设备id，为未保存设备，只出始化页面，无数据
-                var index = $(".active[role='presentation']").attr("name");
-                if (index === "") {
-                    // alert("当前设备未保存！")
-                    // creatInfo(newJson);
-
-                    var savedInfo = [],
-                        arr = [];
-
-                    // 如果存在设备实例模板
-                    if (selectInfo.fPreviewfiles !== undefined) {
-                        savedInfo = JSON.parse(selectInfo.fPreviewfiles)
-                    }
-                    $.each(savedInfo, function (i, val) {
-                        arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + '/' + val)
-                    })
-
-                    $.initFile($("#upImage"), function (list) {
-                        fileList = list
-                    }, arr)
-                } else {
-                    // 存在设备id,则根据id查询设备信息并显示
-                    // index = parseInt(index)
-                    // Substation.Common.requestDataByGET("authority/getDeviceDetailById", "fSubdeviceinfoid=" + index, function (data) {
-                    //     var newValue = data.data.deviceDetail
-                    //     curNodeInfo = newValue;
-                    //     creatInfo(newJson, newValue);
-                    // })
+            if (val.fRealimg !== undefined) {
+                savedInfo = JSON.parse(val.fRealimg);
+            } else {
+                if (selectInfo.fPreviewfiles !== undefined) {
+                    savedInfo = JSON.parse(selectInfo.fPreviewfiles);
                 }
             }
+            $.each(savedInfo, function (i, val) {
+                arr.push(
+                    localStorage.getItem("ImagePath") + "/" + imagePath + "/" + val
+                );
+            });
+
+            $.initFile(
+                $("#upImage"),
+                function (list) {
+                    fileList = list;
+                },
+                arr
+            );
+
+
+            // 如果没有设备id，为未保存设备，只出始化页面，无数据
+            // var index = $(".active[role='presentation']").attr("name");
+            // if (index === "") {
+            //     // alert("当前设备未保存！")
+            //     // creatInfo(newJson);
+
+
+
+            //     // 如果存在设备实例模板
+            //     if (selectInfo.fPreviewfiles !== undefined) {
+            //         savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+            //     }
+            //     $.each(savedInfo, function (i, val) {
+            //         arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + '/' + val)
+            //     })
+
+            //     $.initFile($("#upImage"), function (list) {
+            //         fileList = list
+            //     }, arr)
+            // } else {
+            // 存在设备id,则根据id查询设备信息并显示
+            // index = parseInt(index)
+            // Substation.Common.requestDataByGET("authority/getDeviceDetailById", "fSubdeviceinfoid=" + index, function (data) {
+            //     var newValue = data.data.deviceDetail
+            //     curNodeInfo = newValue;
+            //     creatInfo(newJson, newValue);
+            // })
+            // }
+            // }
         }
 
         function getData() {
@@ -409,6 +437,16 @@ var CustomerDevice = (function () {
             $("a[role='presentation']").remove(); //清空原有信息
         }
 
+        //点击某个tab
+        $(document).on('click', '#addDataUL a', function () {
+            var clickNum = this.name;
+            $.each(allImages, function (index, val) {
+                if (clickNum == val.fSubdeviceinfoid) {
+                    getDeviceInfo(val);
+                }
+            });
+
+        })
         // 是否显示全部树结构
         // $("#showAllNodes").change(function () {
         //     getData();
@@ -527,6 +565,7 @@ var CustomerDevice = (function () {
 
         //根据真实数据填充
         function showPageInfo(data, parent, realImgData) {
+
             var pageInfo = JSON.parse(data);
             pageInfo.forEach(function (val, i) {
                 val.value.forEach(function (value) {
@@ -584,9 +623,11 @@ var CustomerDevice = (function () {
 
                             if (realImgData.fRealimg !== undefined) {
                                 savedInfo = JSON.parse(realImgData.fRealimg);
+
                             } else {
                                 if (selectInfo.fPreviewfiles !== undefined) {
                                     savedInfo = JSON.parse(selectInfo.fPreviewfiles);
+
                                 }
                             }
 
