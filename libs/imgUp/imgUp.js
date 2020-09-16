@@ -64,7 +64,7 @@
                 if (type === "saved") {
                     imgUrl = fileList[i]
 
-                    creatImg(imgUrl)
+                    // creatImg(imgUrl)
                 } else {
                     // var reader = new FileReader();
                     // reader.readAsDataURL(fileList[i]);
@@ -138,13 +138,21 @@
         function creatImg(imgUrl) {
 
             var img = new Image();
-            img.src = imgUrl;
-            img.crossOrigin = 'anonymous'; //跨域
+            img.src = imgUrl + '?v=' + Math.random();
+            // img.setAttribute("crossOrigin", "Anonymous");
+            // img.crossOrigin = 'anonymous'; //跨域
+            img.crossOrigin = '*'; //跨域
+            // img.onload = function () {
+            //     let base64ImageSrc = getBase64Image(img);
 
-            var canvas = document.createElement("canvas");
-            var ctx = canvas.getContext("2d");
+            //     files.push(dataURLtoFile(base64, name));
 
+            //     success(files)
+            // }
             img.onload = function () {
+
+                var canvas = document.createElement("canvas");
+                var ctx = canvas.getContext("2d");
                 canvas.width = 190;
                 canvas.height = 190;
 
@@ -153,12 +161,37 @@
                 var a = imgUrl.split('/');
                 var name = a[a.length - 1];
 
-                var base64 = canvas.toDataURL('image/png');
-
-                files.push(dataURLtoFile(base64, name));
+                // var base64 = canvas.toDataURL('image/png');
+                files.push(dataURLtoFile(canvas.toDataURL('image/png'), name));
 
                 success(files)
             }
+        }
+
+        function getBase64Image(image) {
+            let canvas = document.createElement('canvas');
+            canvas.width = 190;
+            canvas.height = 190;
+            let ctx = canvas.getContext('2d')
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height)
+            // let ext = image.src.substring(image.src.lastIndexOf('.') + 1).toLowerCase()
+            let dataURL = canvas.toDataURL('image/png');
+            return dataURL
+        }
+
+        // base64转file
+        function dataURLtoFile(dataurl, filename) {
+            var arr = dataurl.split(",");
+            var mine = arr[0].match(/:(.*?);/)[1];
+            var bstr = atob(arr[1]);
+            var n = bstr.length;
+            var u8arr = new Uint8Array(n);
+            while (n--) {
+                u8arr[n] = bstr.charCodeAt(n)
+            }
+            return new File([u8arr], filename, {
+                type: mine
+            });
         }
     }
 
@@ -186,19 +219,6 @@
         return arrFiles;
     }
 
-    // base64转file
-    function dataURLtoFile(dataurl, filename) {
-        var arr = dataurl.split(",");
-        var mine = arr[0].match(/:(.*?);/)[1];
-        var bstr = atob(arr[1]);
-        var n = bstr.length;
-        var u8arr = new Uint8Array(n);
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n)
-        }
-        return new File([u8arr], filename, {
-            type: mine
-        });
-    }
+
 
 })(jQuery);

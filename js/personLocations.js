@@ -100,11 +100,11 @@ function getCarPage() {
 $("#fState").change(function (params) {
   var stateVal = $("#fState").val();
   if (stateVal == 2) {
-    $("#search").attr("placeholder", "输入车辆关键字...");
+    $("#search").attr("placeholder", "输入车辆简称或者车牌号...");
   } else if (stateVal == 3) {
-    $("#search").attr("placeholder", "输入变电所关键字...");
+    $("#search").attr("placeholder", "输入站点名称...");
   } else {
-    $("#search").attr("placeholder", "输入人员关键字...");
+    $("#search").attr("placeholder", "输入人员姓名...");
   }
 });
 

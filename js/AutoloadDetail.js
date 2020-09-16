@@ -3,6 +3,7 @@ var u = navigator.userAgent,
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 var imagePath;
+var upLoadClicktag = true;
 
 var CustomerDevice = (function () {
     function _customerDevice() {
@@ -44,10 +45,11 @@ var CustomerDevice = (function () {
             return curNodeInfo;
         };
 
-        // 获取当前选中节点信息
+        // 获取
         this.getFilelist = function () {
             return fileList;
         };
+
 
         // 新增一个设备
         this.addModal = function (data, tabName) {
@@ -100,11 +102,28 @@ var CustomerDevice = (function () {
             //创建模板
             // var json = JSON.parse(selectInfo.fFunctionfield);
             var select = $("#addVarContain" + count);
-            creatInfo(selectInfo.fFunctionfield, select, count);
+            creatInfo(selectInfo.fFunctionfield, select, count, name);
             if (data != undefined) {
-                showPageInfo(data, select);
+                showPageInfo(data, select, name);
+            } else {
+                //新增模板图片
+                var savedInfo = [],
+                    arr = [];
+                // 如果所选设备有模板图片
+                if (selectInfo.fPreviewfiles !== undefined) {
+                    savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+                }
+                $.each(savedInfo, function (i, val) {
+                    arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + '/' + val)
+                })
+                var imgid = name.substr(8);
+                $.initFile($("#upImage" + imgid), function (list) {
+                    fileList = list
+                }, arr)
+                addEdit();
             }
-            addEdit();
+
+
         };
 
         //添加编辑按钮事件
@@ -240,13 +259,13 @@ var CustomerDevice = (function () {
                             }
                             //创建模板
                             var select = $("#addVarContain" + count);
-                            creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count);
+                            creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count, name);
                             if (
                                 val.fDevicejson != undefined &&
                                 val.fDevicejson != "undefined"
                             ) {
                                 //填充数据
-                                showPageInfo(val.fDevicejson, select);
+                                showPageInfo(val.fDevicejson, select, name);
                             }
                         });
                     } else {
@@ -261,6 +280,31 @@ var CustomerDevice = (function () {
                 }
             );
         }
+
+        //点击Tab 切换图片数据
+        $(document).on('click', '#addDataUL a', function (data) {
+            $.each(curNodeInfo, function (i, val) {
+                if (data.currentTarget.name == val.fSubdeviceinfoid) {
+                    var savedInfo = [],
+                        arr = [];
+                    // 如果存在设备实例模板
+                    if (val.fRealimg !== undefined) {
+                        savedInfo = JSON.parse(val.fRealimg)
+                    } else {
+                        if (selectInfo.fPreviewfiles !== undefined) {
+                            savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+                        }
+                    }
+                    $.each(savedInfo, function (i, val) {
+                        arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + '/' + val)
+                    })
+
+                    $.initFile($("#upImage" + val.fSubdeviceinfoid), function (list) {
+                        fileList = list
+                    }, arr)
+                }
+            })
+        })
 
         function getData() {
             // $("body").showLoading();
@@ -412,7 +456,7 @@ var CustomerDevice = (function () {
         // id = "addVarContain123" >
         //     <
         //     div class = "content-block-title" > 信息一 < /div>
-        function creatInfo(data, select, count) {
+        function creatInfo(data, select, count, name) {
             if (data != "") {
                 var info = JSON.parse(data);
                 if (info != undefined) {
@@ -431,7 +475,7 @@ var CustomerDevice = (function () {
                         // $(select).append('<div class="content-block-title">' + decodeURIComponent(val.name) +
                         //     '</div><div id="' + id + '" class="list-block baseInfoDiv" name="' + decodeURIComponent(val.name) + '"><ul></ul></div>');
                         $.each(val.value, function (key, value) {
-                            showInfo(value, $("#" + id + " .selectUl"));
+                            showInfo(value, $("#" + id + " .selectUl"), name);
                         });
                     });
                 }
@@ -439,8 +483,9 @@ var CustomerDevice = (function () {
         }
 
         //根据真实数据填充
-        function showPageInfo(data, parent) {
+        function showPageInfo(data, parent, name) {
             var pageInfo = JSON.parse(data);
+            var imgid = name.substr(8);
             pageInfo.forEach(function (val, i) {
                 val.value.forEach(function (value) {
                     var name = decodeURIComponent(value.name);
@@ -492,7 +537,7 @@ var CustomerDevice = (function () {
                                 arr.push(localStorage.getItem("ImagePath") + "/" + imagePath + '/' + val)
                             })
 
-                            $.initFile($("#upImage"), function (list) {
+                            $.initFile($("#upImage" + imgid), function (list) {
                                 fileList = list
                             }, arr)
                             break;
@@ -502,9 +547,11 @@ var CustomerDevice = (function () {
             // console.log(pageInfo);
         }
 
-        function showInfo(val, select) {
+
+        function showInfo(val, select, name) {
             count++;
             var string;
+            var imgid = name.substr(8);
             // var functionfield = JSON.parse(selectInfo.fFunctionfield);
             // var info = functionfield.deviceInfo;
             switch (val.type) {
@@ -663,13 +710,13 @@ var CustomerDevice = (function () {
                     break;
                     // imgAdd
                 case "image":
-                    string = '<li><div class="showDiv z_photo upimg-div"><div class="item-inner">' +
-                        '<label class="nameInputInfo" name="image">' +
+                    string = '<li><div class="showDiv z_photo upimg-div"><div class="item-inner" style="display: block;">' +
+                        '<label class="nameInputInfo item-title" name="image">' +
                         '<span class="compareName"></span>' +
                         '</label>' +
                         '<section class="z_file">' +
-                        '<img class="add-img" src="app/image/chooseImg.png">' +
-                        '<input type="file" id="upImage" class="nameInput file" data-device="devImg" name="image">' +
+                        '<img class="add-img" src="img/chooseImg.png">' +
+                        '<input type="file" id="upImage' + imgid + '" class="nameInput file" data-device="devImg" name="image">' +
                         '</section>' +
                         '</div></div></li>';
                     break;
@@ -680,7 +727,8 @@ var CustomerDevice = (function () {
                             '<label class="item-title label nameInputInfo" name="instruction" data-file="' + selectInfo.fInstruction + '">' +
                             '<span class="compareName">资料：</span>' +
                             '</label>' +
-                            '<input type="button" class="nameInput" id="fileClick" data-device="devInstruction" name="instruction" value="' + val.value + '(点击预览)" onclick="downloadFile(this)" data-name="' + val.value + '">' +
+                            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '(点击预览)" onclick="downloadFile(this)" data-name="' + val.value + '">' +
+                            // '<input type="button" class="nameInput" id="fileClick' + imgid + '" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '(点击预览)" onclick="downloadFile(this)" data-name="' + val.value + '">' +
                             '</div>';
                     } else {
                         string = '<li><div class="showDiv"><div class="item-inner">' +
@@ -697,6 +745,17 @@ var CustomerDevice = (function () {
             if (val.type == "date") {
                 // initDate($(".daycalendarBox" + count));
             }
+
+            // $("#fileClick" + imgid).click(function (select) {
+            //     var fileName = $(select).parent().children('.nameInputInfo').attr("data-file")
+            //     var name = $(select).attr("data-name")
+            //     alert('正在导出...', '', '', {
+            //         type: 'export',
+            //         showConfirmButton: false
+            //     });
+            //     var formdata = new FormData();
+            //     formdata.append("fileName", fileName);
+            // });
         }
     }
 
@@ -712,32 +771,6 @@ jQuery(document).ready(function () {
     var jumpPid = localStorage.getItem("pid");
     var lastClickNum = localStorage.getItem("clickNum");
 
-    var upLoadClicktag = true;
-
-    function downloadFile(file) {
-        var fileName = $(file).parent().children('.nameInputInfo').attr("data-file")
-        if (!upLoadClicktag) {
-            return;
-        }
-        upLoadClicktag = false;
-        setTimeout(function () {
-            upLoadClicktag = true;
-        }, 1000);
-        if (isAndroid) {
-            android.openFile(
-                Substation.ipAddressFromAPP + imagePath + "/" + fileName
-            );
-        } else {
-            if (filecode != undefined && filepath != undefined) {
-                var dic = {
-                    'fFilepath': imagePath,
-                    'fFilecode': fileName,
-                    'fFilename': fileName
-                };
-                window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
-            }
-        }
-    }
 
     // $("#fileClick").click(function (select) {
     //     var fileName = $(select).parent().children('.nameInputInfo').attr("data-file")
@@ -816,7 +849,6 @@ jQuery(document).ready(function () {
     var Subname = localStorage.getItem("fSubname");
     $("#titleContent").html(Subname);
 
-    var upLoadClicktag = true;
     // 新增按钮
     $("#Add").on("click", function () {
         if (!upLoadClicktag) {
@@ -1061,6 +1093,10 @@ jQuery(document).ready(function () {
                                 } catch (e) {}
                             }
                             break;
+                        case "image":
+                            value = 'image';
+                            name = "image"
+                            break;
                     }
                     row.type = type;
                     row.name = /*encodeURIComponent*/ (name);
@@ -1137,6 +1173,13 @@ jQuery(document).ready(function () {
             console.log("信息错误！");
             return;
         }
+        // imgAdd
+        var fileList = customerDevice.getFilelist();
+
+        $.each(fileList, function (i, item) {
+            formdata.append("realImgs", item);
+        });
+
         var url = "/addDevice";
 
         Substation.postFormDataByAjax(url, formdata, function (data) {
@@ -1178,6 +1221,13 @@ jQuery(document).ready(function () {
         formdata.append("fSubdevicegroupid", deviceGroupId);
         formdata.append("fSubdeviceinfoid", fId);
         formdata.append("fDevicejson", json);
+        // imgAdd
+        var fileList = customerDevice.getFilelist();
+
+        $.each(fileList, function (i, item) {
+            formdata.append("realImgs", item);
+        });
+
         var url = "/updateDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.code == 200) {
@@ -1248,3 +1298,28 @@ jQuery(document).ready(function () {
     }
     // $.init();
 });
+
+function downloadFile(file) {
+    var fileName = $(file).parent().children('.nameInputInfo').attr("data-file")
+    if (!upLoadClicktag) {
+        return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function () {
+        upLoadClicktag = true;
+    }, 1000);
+    if (isAndroid) {
+        android.openFile(
+            Substation.ipAddressFromAPP + imagePath + "/" + fileName
+        );
+    } else {
+        if (fileName) {
+            var dic = {
+                'fFilepath': imagePath,
+                'fFilecode': fileName,
+                'fFilename': fileName
+            };
+            window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
+        }
+    }
+}
