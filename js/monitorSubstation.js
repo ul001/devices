@@ -20,42 +20,42 @@ var myPp;
 var markersArr = [];
 
 //获取定位
-if (isIOS) {
-  window.webkit.messageHandlers.getLocation.postMessage("");
-  loc = localStorage.getItem("locationStrJS");
-} else if (isAndroid) {
-  if (android.getGPSUse()) {
-    loc = android.getLocation();
-    getLocAndCheckIn(loc);
-  }
-} else {
-  getFirstPage(typeId);
-}
+// if (isIOS) {
+//   window.webkit.messageHandlers.getLocation.postMessage("");
+//   loc = localStorage.getItem("locationStrJS");
+// } else if (isAndroid) {
+//   if (android.getGPSUse()) {
+//     loc = android.getLocation();
+//     getLocAndCheckIn(loc);
+//   }
+// } else {
+getFirstPage();
+// }
 
-function getLocAndCheckIn(loc) {
-  if (loc == undefined || !loc.length) {
-    //        $.hidePreloader();
-    $.toast(Operation["ui_localErrorTip"]);
-    return;
-  } else if (loc == "-1") {
-    //        $.hidePreloader();
-    $.toast(Operation["ui_gpsTip"]);
-    return;
-  } else {
-    //        $.hidePreloader();
-  }
-  if (loc != "" && loc != null) {
-    var array = loc.split(";");
-    lat = array[0];
-    lon = array[1];
-    addr = array[2];
-    if (addr == null || addr == "null") {
-      addr = "";
-    }
-    //        alert(lat+","+lon+","+addr);
-  }
-  getFirstPage();
-}
+// function getLocAndCheckIn(loc) {
+//   if (loc == undefined || !loc.length) {
+//     //        $.hidePreloader();
+//     $.toast(Operation["ui_localErrorTip"]);
+//     return;
+//   } else if (loc == "-1") {
+//     //        $.hidePreloader();
+//     $.toast(Operation["ui_gpsTip"]);
+//     return;
+//   } else {
+//     //        $.hidePreloader();
+//   }
+//   if (loc != "" && loc != null) {
+//     var array = loc.split(";");
+//     lat = array[0];
+//     lon = array[1];
+//     addr = array[2];
+//     if (addr == null || addr == "null") {
+//       addr = "";
+//     }
+//     //        alert(lat+","+lon+","+addr);
+//   }
+//   getFirstPage();
+// }
 
 function getFirstPage() {
   Substation.getDataByAjax(
