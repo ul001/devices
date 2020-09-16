@@ -130,3 +130,50 @@ fSubdeviceinfoid: 1333
 fSubid: 10100001
 
 fUserid: 1
+
+
+{
+    "code": 200,
+    "msg": "ok",
+    "data": {
+        "deviceList": [
+            {
+                "fSubdeviceinfoid": 1338,
+                "fSubid": 10100001,
+                "fSubdevicegroupid": 4672,
+                "fDevicejson": "[{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"image\"}, {\"name\": \"编号及名称：\", \"type\": \"input\", \"value\": \"321\"}]}, {\"name\": \"测试\", \"value\": [{\"name\": \"序号：\", \"type\": \"input\", \"value\": \"123\"}]}, {\"name\": \"设备电子资料\", \"value\": [{\"name\": \"资料：\", \"type\": \"instruction\"}, {\"name\": \"123：\", \"type\": \"input\", \"value\": \"111\"}]}, {\"name\": \"设备试验周期\", \"value\": [{\"name\": \"安装时间\", \"type\": \"date\", \"value\": \"\"}, {\"name\": \"质保期\", \"type\": \"date\", \"value\": \"\"}]}]",
+                "fDevicename": "测试1-new",
+                "fCreatetime": "2020-09-15 14:40:29",
+                "fUserid": 1,
+                "fDevicenamepath": "测试1",
+                "fSubdevicewarranty": 0,
+                "fRealimg": "{\"file0\": \"7abdde9ae5d64d9c85df5b9c97bae574.png\", \"file1\": \"374d148d9a7a4b008664bc90894d8420.png\", \"file2\": \"f1b9bc9ab1434cdb86b9bf05dc27d8d9.png\"}"
+            },
+            {
+                "fSubdeviceinfoid": 1339,
+                "fSubid": 10100001,
+                "fSubdevicegroupid": 4672,
+                "fDevicejson": "[{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"image\"}, {\"name\": \"编号及名称：\", \"type\": \"input\", \"value\": \"\"}]}, {\"name\": \"测试\", \"value\": [{\"name\": \"序号：\", \"type\": \"input\", \"value\": \"\"}]}, {\"name\": \"设备电子资料\", \"value\": [{\"name\": \"资料：\", \"type\": \"instruction\"}, {\"name\": \"123：\", \"type\": \"input\", \"value\": \"\"}]}, {\"name\": \"设备试验周期\", \"value\": [{\"name\": \"安装时间\", \"type\": \"date\", \"value\": \"\"}, {\"name\": \"质保期\", \"type\": \"date\", \"value\": \"\"}]}]",
+                "fDevicename": "测试1-new2",
+                "fCreatetime": "2020-09-15 15:46:21",
+                "fUserid": 1,
+                "fDevicenamepath": "测试1",
+                "fRealimg": "{\"file0\": \"143e11dd283a406fa520f27094c68983.png\", \"file1\": \"2d58af4d4930485e85e343fb7a7530a2.png\"}"
+            }
+        ],
+        "template": {
+            "fPagedesigntemplateid": 295,
+            "id": 295,
+            "fDesigntemplatename": "测试1",
+            "name": "测试1",
+            "fParentid": -1,
+            "pId": -1,
+            "fSortnum": 153,
+            "fFunctionfield": "{\"checkInfo\": [{\"code\": \"1600063242760\", \"name\": \"1\", \"type\": \"radio\", \"value\": \"no\", \"suggest\": \"\", \"deadline\": \"\", \"dangerous\": \"\", \"dangerType\": \"紧急\", \"dangerCategory\": \"工具类\", \"defectPosition\": \"\", \"identification\": \"\"}, {\"code\": \"1600063243200\", \"name\": \"2\", \"type\": \"radio\", \"value\": \"no\", \"suggest\": \"\", \"deadline\": \"\", \"dangerous\": \"\", \"dangerType\": \"紧急\", \"dangerCategory\": \"工具类\", \"defectPosition\": \"\", \"identification\": \"\"}, {\"code\": \"1600063243225\", \"name\": \"3\", \"type\": \"radio\", \"value\": \"no\", \"suggest\": \"\", \"deadline\": \"\", \"dangerous\": \"\", \"dangerType\": \"紧急\", \"dangerCategory\": \"工具类\", \"defectPosition\": \"\", \"identification\": \"\"}], \"deviceInfo\": [{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"devImage\"}, {\"name\": \"编号及名称\", \"type\": \"input\", \"value\": false}]}, {\"name\": \"测试\", \"value\": [{\"name\": \"序号\", \"type\": \"input\", \"value\": false}]}, {\"name\": \"设备电子资料\", \"value\": [{\"name\": \"instruction\", \"type\": \"instruction\", \"value\": \"java virtual vm.txt\"}, {\"name\": \"123\", \"type\": \"input\", \"value\": false}]}, {\"name\": \"设备试验周期\", \"value\": [{\"name\": \"安装时间\", \"type\": \"date\", \"value\": \"\"}, {\"name\": \"质保期\", \"type\": \"date\", \"value\": \"\"}]}]}",
+            "fPreviewfiles": "{\"file0\": \"5b8c421afe624ac981cbc08488a0acd0.png\", \"file1\": \"4314f9600b1a4d638b723633cabeca79.png\"}",
+            "fInstruction": "29bcec7dd63d47f0a451d3cfa003dce8.txt",
+            "fInstructionorig": "java virtual vm.txt"
+        },
+        "filePath": "fileVersion/pageCustom"
+    }
+}
