@@ -18,9 +18,9 @@ function getZhLanguage() {
     ui_subHolderNoCode: "请输入任务单号/任务内容/变电所名称",
     ui_pleaseInputPwd: "请输入二级密码",
     ui_needInputPwd: "需输入二级密码才能控制设备",
-    ui_searchPerson: "搜人",
-    ui_searchCar: "搜车",
-    ui_searchSubstation: "搜站",
+    ui_searchPerson: "人员",
+    ui_searchCar: "车辆",
+    ui_searchSubstation: "站点",
     //通用
     ui_loading: "正在加载...",
     ui_back: "返回",
