@@ -114,7 +114,7 @@ var CustomerDevice = (function () {
                     savedInfo = JSON.parse(selectInfo.fPreviewfiles)
                 }
                 $.each(savedInfo, function (i, val) {
-                    arr.push(Substation.ipAddressFromAPP + "/" + imagePath + '/' + val)
+                    arr.push(Substation.ipAddressFromAPP + imagePath + '/' + val)
                 })
                 var imgid = name.substr(8);
                 $.initFile($("#upImage" + imgid), function (list) {
@@ -296,7 +296,7 @@ var CustomerDevice = (function () {
                         }
                     }
                     $.each(savedInfo, function (i, val) {
-                        arr.push(Substation.ipAddressFromAPP + "/" + imagePath + '/' + val)
+                        arr.push(Substation.ipAddressFromAPP + imagePath + '/' + val)
                     })
 
                     $.initFile($("#upImage" + val.fSubdeviceinfoid), function (list) {
@@ -534,7 +534,7 @@ var CustomerDevice = (function () {
                             }
 
                             $.each(savedInfo, function (i, val) {
-                                arr.push(Substation.ipAddressFromAPP + "/" + imagePath + '/' + val)
+                                arr.push(Substation.ipAddressFromAPP + imagePath + '/' + val)
                             })
 
                             $.initFile($("#upImage" + imgid), function (list) {
@@ -1310,7 +1310,7 @@ function downloadFile(file) {
     }, 1000);
     if (isAndroid) {
         android.openFile(
-            Substation.ipAddressFromAPP + "/" + imagePath + "/" + fileName
+            Substation.ipAddressFromAPP + imagePath + "/" + fileName
         );
     } else {
         if (fileName) {
