@@ -562,6 +562,43 @@ var Substation = {
       });
   },
 
+  postFormForImgDataByAjax: function (url, params, successCallback) {
+    $.showPreloader(Operation["ui_loading"]);
+    $.ajax({
+        url: baseUrlFromAPP + url,
+        type: "POST",
+        data: params,
+        // dataType: "JSON",
+        // cache: false,
+        // processData: false,
+        // contentType: false,
+        beforeSend: function (request) {
+          request.setRequestHeader("Authorization", tokenFromAPP);
+          // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+        }
+      })
+      .done(function (data) {
+        $.hidePreloader();
+        // if (data.code == 200) {
+        //   successCallback(data);
+        // } else 
+        if (data.code == "5000") {
+          Substation.showCodeTips(data.code);
+          Substation.reportError(JSON.stringify(data.data.stackTrace));
+        } else {
+          // Substation.showCodeTips(data.code);
+        }
+      })
+      .fail(function (data) {
+        $.hidePreloader();
+        // if (data.status == 0) {
+        //   $.toast(Operation["ui_neterror"]);
+        // } else {
+        //   $.toast(Operation["code_fail"]);
+        // }
+      });
+  },
+
   Common: {
     addHead: function () {
       // return "http://192.168.255.20:8080/SubstationWEBV2/";

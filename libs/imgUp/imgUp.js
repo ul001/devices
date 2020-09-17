@@ -5,7 +5,7 @@
         fileSize: 1024 * 1024 * 10
     };
 
-    $.initFile = function (select, success, savedInfo, subdeviceinfoid) {
+    $.initFile = function (select, success, savedInfo, subdeviceinfoid, isTemplate) {
         var files = [];
         var imgContainer = $(select).parents(".z_photo");
         imgContainer.find(".up-section").remove();
@@ -98,63 +98,67 @@
                         $.confirm(
                             "是否要删除此图片?",
                             function () {
-                                var subdeviceinfoid = $(delParent).find(".up-img").attr("name");
-                                if (subdeviceinfoid) {
-                                    var stringResult = $(delParent).find(".up-img").attr("src").split('/');
-                                    var url = "/deleteDeviceImgById";
-                                    var param = {
-                                        "fSubdeviceinfoid": subdeviceinfoid,
-                                        "filename": stringResult.pop()
-                                    };
-                                    Substation.postFormDataByAjax(url, param, function (data) {
-
-                                    });
-                                }
-
-                                var url = $(delParent).attr("data-index");
-                                var index;
-                                for (var i = 0; i < files.length; i++) {
-                                    if (files[i].name === url) {
-                                        index = i;
+                                if (isTemplate == true) {
+                                    var url = $(delParent).attr("data-index");
+                                    var index;
+                                    for (var i = 0; i < files.length; i++) {
+                                        if (files[i].name === url) {
+                                            index = i;
+                                        }
                                     }
+                                    files.splice(index, 1);
+                                    delParent.remove();
+                                    var numUp = imgContainer.find(".up-section").length;
+                                    if (numUp < 3) {
+                                        $(select)
+                                            .parent()
+                                            .show();
+                                    }
+                                    success(files);
+                                } else {
+                                    var subdeviceinfoid = $(delParent).find(".up-img").attr("name");
+                                    if (subdeviceinfoid) {
+                                        var stringResult = $(delParent).find(".up-img").attr("src").split('/');
+                                        var string = stringResult[stringResult.length - 1];
+                                        var url = "/deleteDeviceImgById";
+                                        var param = {
+                                            "fSubdeviceinfoid": subdeviceinfoid,
+                                            "filename": string.toString()
+                                        };
+                                        Substation.postFormForImgDataByAjax(url, param, function (data) {
+
+                                        });
+                                    }
+                                    var url = $(delParent).attr("data-index");
+                                    var index;
+                                    for (var i = 0; i < files.length; i++) {
+                                        if (files[i].name === url) {
+                                            index = i;
+                                        }
+                                    }
+                                    files.splice(index, 1);
+                                    delParent.remove();
+                                    var numUp = imgContainer.find(".up-section").length;
+                                    if (numUp < 3) {
+                                        $(select)
+                                            .parent()
+                                            .show();
+                                    }
+                                    success(files);
                                 }
-                                files.splice(index, 1);
-                                delParent.remove();
-                                var numUp = imgContainer.find(".up-section").length;
-                                if (numUp < 3) {
-                                    $(select)
-                                        .parent()
-                                        .show();
-                                }
-                                success(files);
+
+
                             },
                             function () {}
                         );
-                        // confirm("是否要删除此图片？", "", function (isConfirm) {
 
-                        //     if (isConfirm) {
-                        //         var url = $(delParent).attr('data-index')
-                        //         var index;
-
-                        //         for (var i = 0; i < files.length; i++) {
-                        //             if (files[i].name === url) {
-                        //                 index = i
-                        //             }
-                        //         }
-                        //         files.splice(index, 1)
-                        //         delParent.remove();
-                        //         var numUp = imgContainer.find(".up-section").length;
-                        //         if (numUp < 3) {
-                        //             $(select).parent().show();
-                        //         }
-                        //         success(files)
-                        //     }
-                        // });
                     });
                 $img0.attr("src", "img/removeImg.png").appendTo($section);
-                var $img = $('<img class="up-img" name=' + subdeviceinfoid + '>');
+                var $img = $('<img class="up-img" name=' + subdeviceinfoid + ' onclick="imgDisplay(this)">');
                 $img.attr("src", imgUrl);
                 $img.appendTo($section);
+
+
             }
         }
 
@@ -247,4 +251,21 @@
         }
         return arrFiles;
     }
+
+
 })(jQuery);
+
+function imgDisplay(obj) {
+    var src = $(obj).attr("src");
+    var imgHtml =
+        '<div style="width: 100%;height: 100vh;overflow: auto;background: rgba(0,0,0,0.5);text-align: center;position: fixed;top: 0;left: 0;z-index: 2000;display: flex;justify-content: center;    align-items: center;"><img onclick="closePicture(this)" src=' +
+        src +
+        ' style="margin-top: 100px;width: 96%;margin-bottom: 100px;"/><p style="font-size: 50px;position: fixed;top: 30px;right: 30px;color: white;cursor: pointer;" onclick="closePicture(this)">×</p></div>';
+    $("body").append(imgHtml);
+}
+
+function closePicture(obj) {
+    $(obj)
+        .parent("div")
+        .remove();
+}

@@ -117,9 +117,10 @@ var CustomerDevice = (function () {
                     arr.push(Substation.ipAddressFromAPP + imagePath + '/' + val)
                 })
                 var imgid = name.substr(8);
+                //新增必然是模板图片 传true
                 $.initFile($("#upImage" + imgid), function (list) {
                     fileList = list
-                }, arr, imgid)
+                }, arr, imgid, true)
                 addEdit();
             }
 
