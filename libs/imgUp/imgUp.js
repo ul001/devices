@@ -98,24 +98,7 @@
                         $.confirm(
                             "是否要删除此图片?",
                             function () {
-                                if (isTemplate == true) {
-                                    var url = $(delParent).attr("data-index");
-                                    var index;
-                                    for (var i = 0; i < files.length; i++) {
-                                        if (files[i].name === url) {
-                                            index = i;
-                                        }
-                                    }
-                                    files.splice(index, 1);
-                                    delParent.remove();
-                                    var numUp = imgContainer.find(".up-section").length;
-                                    if (numUp < 3) {
-                                        $(select)
-                                            .parent()
-                                            .show();
-                                    }
-                                    success(files);
-                                } else {
+                                if (type === "saved") {
                                     var subdeviceinfoid = $(delParent).find(".up-img").attr("name");
                                     if (subdeviceinfoid) {
                                         var stringResult = $(delParent).find(".up-img").attr("src").split('/');
@@ -145,6 +128,24 @@
                                             .show();
                                     }
                                     success(files);
+                                } else {
+                                    var url = $(delParent).attr("data-index");
+                                    var index;
+                                    for (var i = 0; i < files.length; i++) {
+                                        if (files[i].name === url) {
+                                            index = i;
+                                        }
+                                    }
+                                    files.splice(index, 1);
+                                    delParent.remove();
+                                    var numUp = imgContainer.find(".up-section").length;
+                                    if (numUp < 3) {
+                                        $(select)
+                                            .parent()
+                                            .show();
+                                    }
+                                    success(files);
+
                                 }
 
 
