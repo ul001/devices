@@ -433,35 +433,52 @@ $("#picker").picker({
 var upLoadClicktag = true;
 
 function showOrHide() {
-  if ($("#showOrHide").attr("name") === "Showsubname") {
-    $("#showOrHide").attr("name", "Hidesubname");
-    // language.common.eleSelect($("#showOrHide"));
-    $("#showOrHide").addClass("isClick");
+  var text = $("#showOrHide").html();
+  if (text == Operation["ui_show"]) {
+    $("#showOrHide").html(Operation["ui_hide"]);
+    $("#showOrHideBtn").css("background-color", "lightgrey");
     var markers = map.getOverlays();
-    $("#showOrHide").empty();
-    $("#showOrHide").html('<i class="icon icon-changeShowP"></i>');
-    $.each(markers, function (key, val) {
-      var label = val.getLabel();
-      if (label === null) return;
-      label.show();
-    });
-  } else {
-    $("#showOrHide").attr("name", "Showsubname");
-    // language.common.eleSelect($("#showOrHide"));
-    $("#showOrHide").removeClass("isClick");
-    var markers = map.getOverlays();
-    $("#showOrHide").empty();
-    $("#showOrHide").html('<i class="icon icon-changeHideP"></i>');
     $.each(markers, function (key, val) {
       var label = val.getLabel();
       if (label === null) return;
       label.hide();
     });
+  } else {
+    $("#showOrHide").html(Operation["ui_show"]);
+    $("#showOrHideBtn").css("background-color", "#02A8A6");
+    var markers = map.getOverlays();
+    $.each(markers, function (key, val) {
+      var label = val.getLabel();
+      if (label === null) return;
+      label.show();
+    });
   }
-  // if (!upLoadClicktag) {
-  //   return;
+  // if ($("#showOrHide").attr("name") === "Showsubname") {
+  //   $("#showOrHide").attr("name", "Hidesubname");
+  //   // language.common.eleSelect($("#showOrHide"));
+  //   $("#showOrHide").addClass("isClick");
+  //   var markers = map.getOverlays();
+  //   $("#showOrHide").empty();
+  //   $("#showOrHide").html('<i class="icon icon-changeShowP"></i>');
+  //   $.each(markers, function (key, val) {
+  //     var label = val.getLabel();
+  //     if (label === null) return;
+  //     label.show();
+  //   });
+  // } else {
+  //   $("#showOrHide").attr("name", "Showsubname");
+  //   // language.common.eleSelect($("#showOrHide"));
+  //   $("#showOrHide").removeClass("isClick");
+  //   var markers = map.getOverlays();
+  //   $("#showOrHide").empty();
+  //   $("#showOrHide").html('<i class="icon icon-changeHideP"></i>');
+  //   $.each(markers, function (key, val) {
+  //     var label = val.getLabel();
+  //     if (label === null) return;
+  //     label.hide();
+  //   });
   // }
-  // return;
+
 }
 
 //搜索按钮点击
@@ -471,6 +488,7 @@ $("#search").bind("keydown", function (event) {
     var stateVal = $("#fState").val();
     if (stateVal == 2) {
       //搜车
+
       Substation.postDataByAjax("/getCarLocationList", {
         search: searchKey
       }, function (data) {
@@ -590,10 +608,18 @@ function getMyPlace(value, name) {
 
 function setPersonPlace(longitude, latitude, userID) {
 
-
   var pp = new BMap.Point(longitude, latitude);
   // var pp = local.getResults().getPoi(0).point; //获取第一个智能搜索的结果
   map.centerAndZoom(pp, 18);
+  personArr.forEach(function (marker) {
+    var p = marker.getPosition(); //获取marker的位置
+    // alert("marker的位置是" + p.lng + "," + p.lat);
+    if (p.lng == longitude && p.lat == latitude) {
+      // marker.setAnimation(BMAP_ANIMATION_BOUNCE); //跳动的动画
+      map.addOverlay(marker);
+    }
+  });
+
   // var marker = new BMap.Marker(pp);
   // marker.setLabel(lable);
   // map.addOverlay(marker); //添加标注

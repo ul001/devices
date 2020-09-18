@@ -26,6 +26,28 @@
     width: 60%;
 }
 
+#fState {
+    width: 3rem;
+    height: 1.5rem;
+    /* appearance: none; */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: url("../img/arrowdown.png") no-repeat 2.1rem center;
+    background-size: 15%;
+    font-size: 0.7rem;
+    font-family: Microsoft YaHei;
+    color: #666;
+    outline: none;
+    padding-left: 0.3rem;
+    border: 1px solid #b4b4b4;
+}
+
+.imgIcon {
+    height: 0.9rem;
+    vertical-align: middle;
+    padding-right: 0.2rem;
+}
+
 #searchCancel {
     display: table;
     margin-left: 0.3rem;
