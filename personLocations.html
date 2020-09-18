@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>人员定位</title>
+  <title>地图定位</title>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
   <link rel="shortcut icon" href="/favicon.ico" />
   <style type="text/css"></style>
@@ -28,27 +28,27 @@
         <a class="button button-link button-nav pull-right open-panel" onclick="getFirstPage()">
           <i class="icon icon-Refresh"></i>
         </a>
-        <a class="button button-link button-nav pull-right click_btn" name="Hidesubname" id="showOrHide"
+        <!-- <a class="button button-link button-nav pull-right click_btn" name="Hidesubname" id="showOrHide"
           onclick="showOrHide()">
           <i class="icon icon-changeShowP"></i>
-        </a>
+        </a> -->
         <h1 class="title title_color">
           <span data-i18n="ui_location"></span>
         </h1>
       </header>
       <div class="bar bar-header-secondary row">
-        <div class="col-15" style="margin-top: 0.25rem;margin-left:0.5rem;">
+        <div class="col-15" style="margin-top: 0.29rem;margin-left:0.5rem;">
           <select id="fState">
             <option value="1" data-i18n="ui_searchPerson"></option>
             <option value="2" data-i18n="ui_searchCar"></option>
             <option value="3" data-i18n="ui_searchSubstation"></option>
           </select>
         </div>
-        <div class="search-input col-70">
+        <div class="search-input col-70" style="margin-left: 1.5rem">
           <input type="search" id="search" style="height:1.5rem" placeholder="输入人员关键字..."
             data-placeholder="ui_enterkeywords" />
         </div>
-        <a class="button button-fill button-primary col-15" id="searchCancel">取消</a>
+        <a class="button button-fill button-primary col-15" style="height:1.4rem" id="searchCancel">取消</a>
         <!-- <a class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a> -->
       </div>
       <!-- <div class="bar bar-header-secondary col-80">
@@ -88,16 +88,20 @@
       </div>
       <div id="control">
         <div onclick="walk()" class="button button-link buttonTab walkBtn" id="WalkBtn">
-          <img class="col-15" src="img/buxing.png" style="height:1rem;vertical-align:middle;" /><span id="Walk"
-            data-i18n="ui_show"></span>
+          <img class="col-15 imgIcon" src="img/mapImg01.png" style="height:1rem;vertical-align:middle;" /><span
+            id="Walk" data-i18n="ui_show"></span>
         </div>
         <div onclick="drive()" class="button button-link buttonTab DriveBtn" id="DriveBtn">
-          <img class="col-15" src="img/jiache.png" style="height:1rem;vertical-align:middle;" /><span id="Drive"
-            data-i18n="ui_show"></span>
+          <img class="col-15 imgIcon" src="img/mapImg02.png" style="height:1rem;vertical-align:middle;" /><span
+            id="Drive" data-i18n="ui_show"></span>
         </div>
         <div onclick="substation()" class="button button-link buttonTab SubstationBtn" id="SubstationBtn">
-          <img class="col-15" src="img/i-substationP.png" style="height:1rem;vertical-align:middle;" /><span
+          <img class="col-15 imgIcon" src="img/mapImg03.png" style="height:1rem;vertical-align:middle;" /><span
             id="Substation" data-i18n="ui_show"></span>
+        </div>
+        <div onclick="showOrHide()" class="button button-link buttonTab showOrHideBtn" id="showOrHideBtn">
+          <img class="col-15 imgIcon" src="img/mapImg04.png" style="height:1rem;vertical-align:middle;" /><span
+            id="showOrHide" data-i18n="ui_show"></span>
         </div>
       </div>
     </div>
