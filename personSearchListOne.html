@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/versionIntroduce.css" />
+
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="window.history.back()">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color" data-i18n="ui_search"></h1>
+            </header>
+            <div class="bar bar-header-secondary row">
+                <div class="col-20" style="margin-top: 0.29rem;">
+                    <select id="fState">
+                        <option value="1" data-i18n="ui_searchPerson"></option>
+                        <option value="2" data-i18n="ui_searchCar"></option>
+                        <option value="3" data-i18n="ui_searchSubstation"></option>
+                    </select>
+                </div>
+                <div class="search-input col-80">
+                    <input type="search" id="search" style="height:1.5rem" placeholder="在此输入搜索内容..."
+                        data-placeholder="ui_enterkeywords" />
+                </div>
+                <!-- <a class="button button-fill button-primary col-15" style="height:1.4rem" id="searchCancel">取消</a> -->
+                <!-- <a class="button button-fill button-primary col-15"><span class="icon icon-search"></span></a> -->
+            </div>
+            <div class="content">
+                <div class="list-block media-list">
+                    <ul class="list-container">
+                        <!--                    <li class="item-content item-link update-li">-->
+                        <!--                        <div class="item-inner">-->
+                        <!--                            <div class="item-title-row">-->
+                        <!--                                <div class="item-title">企业用电运维云平台1.1.1主要更新</div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="item-subtitle">更新时间：<span class="blueColor">2019-07-16</span></div>-->
+                        <!--                        </div>-->
+                        <!--                    </li>-->
+                        <!--                    <li class="item-content item-link update-li">-->
+                        <!--                        <div class="item-inner">-->
+                        <!--                            <div class="item-title-row">-->
+                        <!--                                <div class="item-title">企业用电运维云平台1.1.2主要更新</div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="item-subtitle">更新时间：<span class="blueColor">2019-07-16</span></div>-->
+                        <!--                        </div>-->
+                        <!--                    </li>-->
+                        <!--                    <li class="item-content item-link update-li">-->
+                        <!--                        <div class="item-inner">-->
+                        <!--                            <div class="item-title-row">-->
+                        <!--                                <div class="item-title">企业用电运维云平台1.1.3主要更新</div>-->
+                        <!--                            </div>-->
+                        <!--                            <div class="item-subtitle">更新时间：<span class="blueColor">2019-07-16</span></div>-->
+                        <!--                        </div>-->
+                        <!--                    </li>-->
+                    </ul>
+                </div>
+                <div id="noDataDiv" style="text-align:center;display:none;">--<span data-i18n="ui_nomoredata"></span>--
+                </div>
+                <!--          <div class="card">-->
+                <!--            <div class="card-content">-->
+                <!--              <div class="card-content-inner row no-gutter">-->
+                <!--                &lt;!&ndash; <div class="col-10">-->
+                <!--                                    <i class="icon icon-week"></i>-->
+                <!--                                </div> &ndash;&gt;-->
+                <!--                <div class="col-95">-->
+                <!--                  <p class="subName">企业用电运维云平台1.3.0主要更新</p>-->
+                <!--                  <p>-->
+                <!--                    版本更新时间：<span class="blueColor">2019-07-16</span>-->
+                <!--                  </p>-->
+                <!--                </div>-->
+                <!--                <div class="col-5">-->
+                <!--                  <i class="icon icon-right"></i>-->
+                <!--                </div>-->
+                <!--              </div>-->
+                <!--            </div>-->
+                <!--          </div>-->
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
+    <script src="libs/language.js"></script>
+    <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/personSearchListOne.js"></script>
+</body>
+
+</html>

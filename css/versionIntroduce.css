@@ -1,16 +1,32 @@
-.update-li .item-title{
-    font-size:.7rem;
+.update-li .item-title {
+    font-size: .7rem;
 }
 
-.update-li .item-subtitle{
-    font-size:.6rem;
+.update-li .item-subtitle {
+    font-size: .6rem;
 }
 
-.content .list-block{
-    margin:0;
+.content .list-block {
+    margin: 0;
 }
 
-.list-block.media-list .item-inner{
-    padding-top:.3rem;
-    padding-bottom:.3rem;
+.list-block.media-list .item-inner {
+    padding-top: .3rem;
+    padding-bottom: .3rem;
+}
+
+#fState {
+    width: 3rem;
+    height: 1.5rem;
+    /* appearance: none; */
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: url("../img/arrowdown.png") no-repeat 2.1rem center;
+    background-size: 15%;
+    font-size: 0.7rem;
+    font-family: Microsoft YaHei;
+    color: #666;
+    outline: none;
+    padding-left: 0.3rem;
+    border: 1px solid #b4b4b4;
 }
