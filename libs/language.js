@@ -21,6 +21,7 @@ function getZhLanguage() {
     ui_searchPerson: "人员",
     ui_searchCar: "车辆",
     ui_searchSubstation: "站点",
+    ui_search: "搜索列表",
     //通用
     ui_loading: "正在加载...",
     ui_back: "返回",
@@ -613,6 +614,7 @@ function getEnLanguage() {
     ui_subHolderNoCode: "Please enter the task number/task content/substation name",
     ui_pleaseInputPwd: "Please input a password",
     ui_needInputPwd: "Secondary password is required to control the device",
+    ui_search: "Search List",
     //通用
     ui_loading: "Loading...",
     ui_back: "Back",
