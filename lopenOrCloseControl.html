@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/lightingControl.css" />
+    <link rel="stylesheet" href="libs/code.css" />
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a id="back_btn" class="button button-link button-nav pull-left external click_btn">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a id="control_btn" class="button button-link button-nav pull-right click_btn">
+                    <span data-i18n="ui_control"></span>
+                </a>
+                <a id="record_btn" class="button button-link button-nav pull-right click_btn">
+                    <span data-i18n="ui_record"></span>
+                </a>
+                <h1 class="title title_color">
+                    <p class="limit-length" id="titleContent">
+                        <span data-i18n="ui_Lightingcontrol"></span>
+                    </p>
+                </h1>
+            </header>
+            <div class="content pull-to-refresh-content" id="changePull">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div id="container">
+                    <div class="content-list">
+                    </div>
+                </div>
+            </div>
+            <div class="footer_bar">
+                <a id="closeLight" href="#" class="footer_btn col-30 button button-big active" style="display:none;"
+                    data-i18n="ui_Opening"></a>
+                <a id="openLight" href="#" class="footer_btn col-30 button  button-big active"
+                    style="display:none;margin-left: 1rem;" data-i18n="ui_Closing"></a>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/jquery.md5.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
+    <script src="libs/language.js"></script>
+    <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/tools.js" charset="utf-8"></script>
+    <script type="text/javascript" src="js/lopenOrCloseControl.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/code.js" charset="utf-8"></script>
+</body>
+
+</html>

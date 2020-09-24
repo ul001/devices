@@ -104,6 +104,15 @@ jQuery(document).ready(function () {
                         } else if (this.fCode == "cameraControl") {
                             sb +=
                                 '                                <img class="imgBox" src="img/camera.png">';
+                        } else if (this.fCode == "FanControl") {
+                            sb +=
+                                '                                <img class="imgBox" src="img/FanControl.png">';
+                        } else if (this.fCode == "SVGControl") {
+                            sb +=
+                                '                                <img class="imgBox" src="img/SvgControl.png">';
+                        } else if (this.fCode == "AirControl") {
+                            sb +=
+                                '                                <img class="imgBox" src="img/airContol.png">';
                         }
                         sb += "                            </div>";
                         sb += '                            <div class="row">';
@@ -146,6 +155,18 @@ jQuery(document).ready(function () {
                                         };
                                         window.webkit.messageHandlers.pushVideoListVC.postMessage(subParam);
                                     }
+                                } else if (clickId == "FanControl") {
+                                    //风机
+                                    localStorage.setItem("controlClassTitle", thisTitleName);
+                                    window.location.href = "lopenOrCloseControl.html?fSubid=" + selectSubid + "&deviceType=05004";
+                                } else if (clickId == "SVGControl") {
+                                    //SVG
+                                    localStorage.setItem("controlClassTitle", thisTitleName);
+                                    window.location.href = "lopenOrCloseControl.html?fSubid=" + selectSubid + "&deviceType=05002";
+                                } else if (clickId == "AirControl") {
+                                    //空调
+                                    localStorage.setItem("controlClassTitle", thisTitleName);
+                                    window.location.href = "lopenOrCloseControl.html?fSubid=" + selectSubid + "&deviceType=05003";
                                 }
                             }
                         });

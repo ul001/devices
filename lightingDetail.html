@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="libs/light7-swiper.min.css">
     <link rel="stylesheet" href="css/general.css">
     <link rel="stylesheet" href="css/alarmDetailView.css">
+    <link rel="stylesheet" href="css/lightingDetail.css">
 </head>
 
 <body>
@@ -194,10 +195,31 @@
                     </div> -->
                 </div>
             </div>
+            <!-- 风控 -->
+            <div class="footer_bar" id="FanControl">
+                <a id="open" href="#" class="footer_btn col-50 button button-big active" data-i18n="ui_Opening"></a>
+                <a id="close" href="#" class="footer_btn col-50 button button-big active" data-i18n="ui_Closing"
+                    style="margin-left:1rem"></a>
+            </div>
+            <!-- 冷控 -->
+            <div class="footer_bar2" id="AirCoolControl">
+                <a id="reset" href="#" class="footer_btn col-50 button button-big active"
+                    data-i18n="ui_openRefrigeration"></a>
+                <a id="DO" href="#" class="footer_btn col-50 button button-big active" data-i18n="ui_closeRefrigeration"
+                    style="margin-left:1rem"></a>
+            </div>
+            <!-- 热控 -->
+            <div class="footer_bar" id="AirHotControl">
+                <a id="silent" href="#" class="footer_btn col-50 button button-big active"
+                    data-i18n="ui_openHeating"></a>
+                <a id="check" href="#" class="footer_btn col-50 button button-big active" data-i18n="ui_closeHeating"
+                    style="margin-left:1rem"></a>
+            </div>
         </div>
     </div>
     <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
     <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script type="text/javascript" src="libs/jquery.md5.js" charset="utf-8"></script>
     <script src="libs/language.js"></script>
     <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
     <script src="libs/tools.js"></script>

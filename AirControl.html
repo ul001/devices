@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ARCM300T控制</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="libs/light7.min.css">
+    <link rel="stylesheet" href="libs/light7-swiper.min.css">
+    <link rel="stylesheet" href="css/general.css">
+    <link rel="stylesheet" href="css/arcm300TControl.css">
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page">
+            <header class="bar bar-nav bar_color">
+                <a id="back_btn" class="button button-link button-nav pull-left external click_btn">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a id="control_btn" class="button button-link button-nav pull-right click_btn">
+                    <span data-i18n="ui_control"></span>
+                </a>
+                <a id="record_btn" class="button button-link button-nav pull-right click_btn">
+                    <span id="controlLog" data-i18n="ui_record"></span>
+                </a>
+                <h1 class="title title_color"></h1>
+            </header>
+            <div class="content pull-to-refresh-content">
+                <div class="pull-to-refresh-layer">
+                    <div class="preloader"></div>
+                    <div class="pull-to-refresh-arrow"></div>
+                </div>
+                <div id="container">
+                    <!--                <div class="row button_bar" style="display:none;">-->
+                    <!--                    <a id="light_opening" href="#" class="col-50 button active">-->
+                    <!--                        <span data-i18n="">合闸</span>-->
+                    <!--                    </a>-->
+                    <!--                    <a id="light_closed" href="#" class="col-50 button">-->
+                    <!--                        <span data-i18n="">分闸</span>-->
+                    <!--                    </a>-->
+                    <!--                    &lt;!&ndash;                    <a id="no_device" href="#" class="col-33 button">&ndash;&gt;-->
+                    <!--                    &lt;!&ndash;                        <span data-i18n="">无设备</span>&ndash;&gt;-->
+                    <!--                    &lt;!&ndash;                    </a>&ndash;&gt;-->
+                    <!--                </div>-->
+                    <div class="content-list">
+                        <!--                    <label class="list-item label-checkbox light_opening" data-id="1">-->
+                        <!--                        <div class="row">-->
+                        <!--                            <input type="checkbox" name="my-checkbox">-->
+                        <!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+                        <!--                            <span class="label-title col-75">南楼变电所一楼一层照名控制</span>-->
+                        <!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="img_text">-->
+                        <!--                            <img src="img/arcm300t.png">-->
+                        <!--                            <span class="right-bottom">合闸</span>-->
+                        <!--                        </div>-->
+                        <!--                    </label>-->
+                        <!--                    <label class="list-item label-checkbox no_device" data-id="2">-->
+                        <!--                        <div class="row">-->
+                        <!--                            <input type="checkbox" name="my-checkbox">-->
+                        <!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+                        <!--                            <span class="label-title col-75">南楼一层</span>-->
+                        <!--                            &lt;!&ndash;                            <a href="#" class="view_detail col-25 button">详情</a>&ndash;&gt;-->
+                        <!--                        </div>-->
+                        <!--                        <div class="img_text">-->
+                        <!--                            <img src="img/arcm300t.png">-->
+                        <!--                            <div class="right-bottom">无设备</div>-->
+                        <!--                        </div>-->
+                        <!--                    </label>-->
+                        <!--                    <label class="list-item label-checkbox light_closed" data-id="3">-->
+                        <!--                        <div class="row">-->
+                        <!--                            <input type="checkbox" name="my-checkbox">-->
+                        <!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+                        <!--                            <span class="label-title col-75">南楼一层照明</span>-->
+                        <!--                            &lt;!&ndash;                            <a href="#" class="view_detail col-25 button">详情</a>&ndash;&gt;-->
+                        <!--                        </div>-->
+                        <!--                        <div class="img_text">-->
+                        <!--                            <img src="img/arcm300t.png">-->
+                        <!--                            <span class="right-bottom">分闸</span>-->
+                        <!--                        </div>-->
+                        <!--                    </label>-->
+                        <!--                    <label class="list-item label-checkbox light_opening" data-id="4">-->
+                        <!--                        <div class="row">-->
+                        <!--                            <input type="checkbox" name="my-checkbox">-->
+                        <!--                            <div class="item-media col-15"><i class="icon icon-form-checkbox"></i></div>-->
+                        <!--                            <span class="label-title col-75">南楼变电所一楼一层照名控制</span>-->
+                        <!--                            <a href="#" class="view_detail col-25 button">详情</a>-->
+                        <!--                        </div>-->
+                        <!--                        <div class="img_text">-->
+                        <!--                            <img src="img/arcm300t.png">-->
+                        <!--                            <span class="right-bottom">合闸</span>-->
+                        <!--                        </div>-->
+                        <!--                    </label>-->
+                    </div>
+                </div>
+            </div>
+            <div class="row footer_bar">
+                <a id="reset" href="#" class="footer_btn col-20 button active" data-i18n="ui_reset"></a>
+                <a id="DO" href="#" class="footer_btn col-20 button active" data-i18n="ui_DO"></a>
+                <a id="silent" href="#" class="footer_btn col-20 button active" data-i18n="ui_silent"></a>
+                <a id="check" href="#" class="footer_btn col-20 button active" data-i18n="ui_check"></a>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type="text/javascript" src="libs/jquery.md5.js" charset="utf-8"></script>
+    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script src="libs/language.js"></script>
+    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script type='text/javascript' src="libs/tools.js" charset="utf-8"></script>
+    <script type='text/javascript' src="js/AirControl.js" charset="utf-8"></script>
+
+</body>
+
+</html>
