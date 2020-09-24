@@ -339,6 +339,10 @@ function getZhLanguage() {
     ui_operateTip: "请勿频繁操作!",
     ui_operateAllTip: "控制指令发送时间间隔为15秒，请勿频繁操作！",
     ui_noDeviceList: "无设备列表",
+    ui_openRefrigeration: "制冷开机",
+    ui_closeRefrigeration: "制冷关机",
+    ui_openHeating: "制热开机",
+    ui_closeHeating: "制热关机",
     //    设备控制记录
     ui_operateLog: "操作记录",
     ui_operatePerson: "操作人员",
@@ -933,6 +937,10 @@ function getEnLanguage() {
     ui_operateTip: "Do not operate frequently!",
     ui_operateAllTip: "The control command sending interval is 15 seconds, please do not operate frequently!",
     ui_noDeviceList: "No device list",
+    ui_openRefrigeration: "OpenRefrigeration",
+    ui_closeRefrigeration: "CloseRefrigeration",
+    ui_openHeating: "OpenHeating",
+    ui_closeHeating: "CloseHeating",
     //    设备控制记录
     ui_operateLog: "Operation record",
     ui_operatePerson: "Operator",
