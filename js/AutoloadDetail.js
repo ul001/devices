@@ -728,8 +728,8 @@ var CustomerDevice = (function () {
                             '<label class="item-title label nameInputInfo" name="instruction" data-file="' + selectInfo.fInstruction + '">' +
                             '<span class="compareName">资料：</span>' +
                             '</label>' +
-                            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '(点击预览)" onclick="downloadFile(this)" data-name="' + val.value + '">' +
-                            // '<input type="button" class="nameInput" id="fileClick' + imgid + '" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '(点击预览)" onclick="downloadFile(this)" data-name="' + val.value + '">' +
+                            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '" onclick="downloadFile(this)" data-name="' + val.value + '">' +
+                            // '<input type="button" class="nameInput" id="fileClick' + imgid + '" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '" onclick="downloadFile(this)" data-name="' + val.value + '">' +
                             '</div>';
                     } else {
                         string = '<li><div class="showDiv"><div class="item-inner">' +
