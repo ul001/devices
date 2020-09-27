@@ -5,9 +5,9 @@
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
 var tokenFromAPP =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1OTgyMzU1NTEsInVzZXJuYW1lIjoiYWRtaW4ifQ.n9HX3eq5EHp77MWqJb3z8GKxOA2aYVO6O8BOWJCfYSk";
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDAzOTkxMjcsInVzZXJuYW1lIjoiYWRtaW4ifQ.xbf638ySRWPmDgI_a5UaCRAgbSPLynZF8_zvkpGp8cM";
 var ipAddress = "http://116.236.149.165:8090/";
-var userId = "315";
+var userId = "1";
 //语言字段传参
 var languageOption = "zh";
 
@@ -127,6 +127,7 @@ var Substation = {
   },
 
   showCodeTips: function (code) {
+    if(code=="422"||code=="420"){return;}
     if (
       Operation["code_" + code] == undefined ||
       Operation["code_" + code] == null
