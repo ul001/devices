@@ -35,7 +35,7 @@ function controlClick() {
     $(".list-item").hide();
     $(".light_closed").show();
     //屏蔽下拉菜单
-//    $(".pull-to-refresh-layer").hide();
+    //    $(".pull-to-refresh-layer").hide();
   } else {
     $("#back_btn").html(
       '<span class="icon icon-left"></span>' +
@@ -60,8 +60,12 @@ function controlClick() {
     $(".light_closed").hide();
     $(".list-item").show();
     //屏蔽下拉菜单
-//    $(".pull-to-refresh-layer").show();
+    //    $(".pull-to-refresh-layer").show();
   }
+}
+
+function refreshLightData() {
+  getFirstPage();
 }
 
 function getFirstPage() {
