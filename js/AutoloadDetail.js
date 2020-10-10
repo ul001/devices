@@ -489,9 +489,13 @@ var CustomerDevice = (function () {
             var imgid = name.substr(8);
             pageInfo.forEach(function (val, i) {
                 val.value.forEach(function (value) {
-                    var name = decodeURIComponent(value.name);
+                    var name = value.name;
+                    if (name.length > 1) {
+                        //暂时容错网页保存的：:
+                        name = name.substr(0, name.length - 1);
+                    }
                     var prevLable = $(parent).children(".baseInfoDiv[name='" + val.name + "']").find(".item-title:contains('" + name + "')");
-                    var info = decodeURIComponent(value.value);
+                    var info = value.value;
                     switch (value.type) {
                         case "input":
                             $(prevLable).next("div").find("input").val(decodeURIComponent(value.value));
@@ -566,7 +570,7 @@ var CustomerDevice = (function () {
                         //  + info.inpType + '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' + '</div>';
                         string =
                             '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" name="input">' +
-                            decodeURIComponent(val.name) +
+                            val.name +
                             '</div> <div class="item-input">' +
                             '<input type="text" id="input' +
                             count +
@@ -580,7 +584,7 @@ var CustomerDevice = (function () {
                     if (info == false) {
                         string =
                             '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" name="input">' +
-                            decodeURIComponent(val.name) +
+                            val.name +
                             '</div> <div class="item-input">' +
                             '<input type="text" class="valueInput" value="' +
                             //                            info.inpName +
