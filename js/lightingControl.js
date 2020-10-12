@@ -13,8 +13,9 @@ try {
 var itemsPerLoad = 10;
 var pageNum = 1;
 var lightList = [];
-
 var msgId = '';
+
+subid = "10100001";
 
 function controlClick() {
   if (!$(".footer_btn").length || $(".footer_btn").is(":hidden")) {
