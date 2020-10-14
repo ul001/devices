@@ -317,7 +317,7 @@ $("#reset").click(function () {
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax(
-            "/sendMeterControlDemandHTTP",
+            "/send310ControlDemandHTTP",
             JSON.stringify(controlJson),
             function (data) {
                 if (data.data.a != undefined) {
@@ -354,7 +354,7 @@ $("#DO").click(function () {
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax(
-            "/sendMeterControlDemandHTTP",
+            "/send310ControlDemandHTTP",
             JSON.stringify(controlJson),
             function (data) {
                 if (data.data.a != undefined) {
@@ -391,7 +391,7 @@ $("#He").click(function () {
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax(
-            "/sendMeterControlDemandHTTP",
+            "/send310ControlDemandHTTP",
             JSON.stringify(controlJson),
             function (data) {
                 if (data.data.a != undefined) {
@@ -404,49 +404,39 @@ $("#He").click(function () {
     }
 });
 
-//跳转控制时间
+//跳转设定时间
 $("#pushTime").click(function () {
-    var controlJson = [];
-    $(".selectBox:checked").each(function (i, obj) {
-        var metercode = $(obj).attr("data-id");
-        controlJson.push({
-            meterCode: metercode,
-            substationId: subObj.subId,
-            type: "DO",
-            openTime: '',
-            closeTime: '',
-            value: "2"
+    if (canclick == 1) {
+        var controlJson = [];
+        $(".selectBox:checked").each(function (i, obj) {
+            var metercode = $(obj).attr("data-id");
+            controlJson.push({
+                meterCode: metercode,
+                substationId: subObj.subId,
+                type: "DO",
+                openTime: '',
+                closeTime: '',
+                value: "2"
+            });
         });
-    });
-    var meterCode = $(this).attr("data-id");
-    localStorage.setItem("meterCode", meterCode);
-    localStorage.setItem("controlJsonArr", controlJson);
-    window.location.href = "arcm310SelectTime.html";
-    // if (canclick == 1) {
-    //     var controlJson = [];
-    //     $(".selectBox:checked").each(function (i, obj) {
-    //         var metercode = $(obj).attr("data-id");
-    //         controlJson.push({
-    //             meterCode: metercode,
-    //             substationId: subObj.subId,
-    //             type: "DO",
-    //             value: "1"
-    //         });
-    //     });
-    //     if (controlJson.length == 0) {
-    //         $.toast(Operation["ui_selectNo"]);
-    //         return;
-    //     }
-    //     setTimeout(function () {
-    //         canclick = 1;
-    //         $(".footer_btn").removeClass("noclick");
-    //     }, 30000);
-    //     canclick = 0;
-    //     $(".footer_btn").addClass("noclick");
+        if (controlJson.length == 0) {
+            $.toast(Operation["ui_selectNo"]);
+            return;
+        }
 
-    // } else {
-    //     $.alert(Operation["ui_operateAllTipOf30"]);
-    // }
+        setTimeout(function () {
+            canclick = 1;
+            $(".footer_btn").removeClass("noclick");
+        }, 30000);
+        canclick = 0;
+        $(".footer_btn").addClass("noclick");
+        var meterCode = $(this).attr("data-id");
+        localStorage.setItem("meterCode", meterCode);
+        localStorage.setItem("controlJsonArr", JSON.stringify(controlJson));
+        window.location.href = "arcm310SelectTime.html";
+    } else {
+        $.alert(Operation["ui_operateAllTipOf30"]);
+    }
 });
 
 //消音
@@ -473,7 +463,7 @@ $("#silent").click(function () {
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax(
-            "/sendMeterControlDemandHTTP",
+            "/send310ControlDemandHTTP",
             JSON.stringify(controlJson),
             function (data) {
                 if (data.data.a != undefined) {
@@ -510,7 +500,7 @@ $("#check").click(function () {
         canclick = 0;
         $(".footer_btn").addClass("noclick");
         Substation.postDataWithRawByAjax(
-            "/sendMeterControlDemandHTTP",
+            "/send310ControlDemandHTTP",
             JSON.stringify(controlJson),
             function (data) {
                 if (data.data.a != undefined) {
@@ -530,7 +520,7 @@ function goToDetail() {
 }
 
 $("#controlLog").click(function () {
-    window.location.href = "deviceControlLog.html?type=arcm300T";
+    window.location.href = "deviceControlLog.html?type=arcm310";
 });
 
 $.init();
