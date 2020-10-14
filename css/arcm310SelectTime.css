@@ -1,0 +1,98 @@
+.label-switch {
+    float: right;
+}
+
+.buttons-tab {
+    background: #fff;
+    border-bottom: 0px;
+}
+
+.list-block {
+    margin: 0;
+}
+
+.content .list-block .item-content {
+    line-height: 1.6rem;
+}
+
+.content {
+    background-color: #fafafa;
+}
+
+.content-block-title {
+    padding: .05rem
+}
+
+.list-block .item-title.label {
+    width: 75%;
+}
+
+.label-switch input[type=checkbox]:checked+.imgSelect {
+    background-image: url(../img/selectNo2.png);
+}
+
+
+.buttons-tab .active .showPic {
+    background-image: url(../img/selectedYes1.png);
+}
+
+.buttons-row .active .showPic {
+    background-image: url(../img/selectedYes1.png);
+}
+
+.showPic {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/selectNo1.png);
+    background-size: cover;
+    /* opacity: 0; */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.showClose {
+    display: inline-block;
+    margin-top: 0.1rem;
+}
+
+.imgSelect {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/selectYes2.png);
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 0.5rem;
+}
+
+.content-block {
+    padding: 0;
+    margin: 0;
+}
+
+.buttons-tab .button.active {
+    color: #01ADA8;
+    border: 0px;
+}
+
+.buttons-row .button.active {
+    color: #01ADA8;
+    background-color: #fff;
+    border: 0px;
+    border-color: #fff;
+    height: 2rem;
+    padding-top: 0.4rem;
+}
+
+.buttons-row .button {
+    color: #01ADA8;
+    background-color: #fff;
+    border: 0px;
+    border-color: #fff;
+    height: 2rem;
+    padding-top: 0.4rem;
+}
+
+.item-subtitle {
+    margin-left: 0.3rem;
+}

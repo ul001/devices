@@ -50,6 +50,7 @@ var p1;
 var p2;
 var missionType = "";
 var userID = localStorage.getItem("timeUserId");
+localStorage.removeItem("timeUserId");
 var ischargePerson = Substation.GetQueryString("ischargePerson");
 
 if (userID && userID != undefined && userID != 'undefined' && userID.length > 0) {
@@ -58,7 +59,6 @@ if (userID && userID != undefined && userID != 'undefined' && userID.length > 0)
 
 //返回按钮事件
 $(".suibian").click(function () {
-    localStorage.removeItem("timeUserId");
     if (isPush == "1") {
         //推送详情点击返回事件
         if (isAndroid) {
