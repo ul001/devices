@@ -127,7 +127,9 @@ var Substation = {
   },
 
   showCodeTips: function (code) {
-    if(code=="422"||code=="420"){return;}
+    if (code == "422" || code == "420") {
+      return;
+    }
     if (
       Operation["code_" + code] == undefined ||
       Operation["code_" + code] == null
@@ -470,6 +472,44 @@ var Substation = {
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
             Substation.showCodeTips(data.code);
+          }
+        }
+      },
+      error: function (data) {
+        $.hidePreloader();
+        if (data.status == 0) {
+          $.toast(Operation["ui_neterror"]);
+        } else {
+          $.toast(Operation["code_fail"]);
+        }
+      }
+    });
+  },
+
+  postDataByAjaxForCarLoc: function (url, params, successCallback) {
+    $.showPreloader(Operation["ui_loading"]);
+    $.ajax({
+      url: baseUrlFromAPP + url,
+      type: "POST",
+      data: params,
+      beforeSend: function (request) {
+        request.setRequestHeader("Authorization", tokenFromAPP);
+        // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
+      },
+      success: function (data) {
+        $.hidePreloader();
+        if (data == undefined) {
+          $.toast(Operation["ui_nodata"]);
+          return;
+        } else {
+          if (data.code == 200) {
+            successCallback(data);
+          } else if (data.code == "5000") {
+            Substation.showCodeTips(data.code);
+            Substation.reportError(JSON.stringify(data.data.stackTrace));
+          } else {
+            Substation.showCodeTips(data.code);
+            successCallback(data);
           }
         }
       },
