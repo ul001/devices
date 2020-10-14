@@ -217,10 +217,10 @@ function postTask() {
         Substation.postDataByAjax("/releaseOrderTask", params, function (data) {
             if (data.code == "200") {
                 $.alert(Operation['ui_postSuccess'], function () {
-                    if(isAndroid){
+                    if (isAndroid) {
                         android.refresh();
                         android.goBack();
-                    }else{
+                    } else {
                         localStorage.setItem("need-refresh", "true");
                         window.history.back();
                     }
