@@ -36,7 +36,7 @@ $(".title.title_color").text(historyLog);
 function getData() {
     $.ajax({
         type: "GET",
-        url: "http://116.236.149.165:8090/SubstationWEBV2/sys/listFunctionInstruction",
+        url: "http://www.acrelcloud.cn/SubstationWEBV2/sys/listFunctionInstructionForServer",
         data: {},
         beforeSend: function (request) {
             // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
@@ -52,7 +52,7 @@ function getData() {
                     if (data.data == null || data.data == "" || data.data == undefined) {
 
                     } else {
-                        videoUrl = 'http://116.236.149.165:8090/' + data.data.fileURL + '/';
+                        videoUrl = 'http://www.acrelcloud.cn/' + data.data.fileURL + '/';
                         if (data.data.list != undefined && data.data.list.length > 0) {
                             var showDate = data.data.list[0];
                             historyLog = showDate.fUpdatelog;

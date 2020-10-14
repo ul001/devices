@@ -10,7 +10,7 @@ var videoUrl;
 function getData() {
     $.ajax({
         type: "GET",
-        url: "http://116.236.149.165:8090/SubstationWEBV2/sys/getAndroidVersionHistory",
+        url: "http://www.acrelcloud.cn/SubstationWEBV2/sys/getVersionHistory",
         data: {
             fId: appId
         },
@@ -29,7 +29,7 @@ function getData() {
                     if (data.data == null || data.data == "" || data.data == undefined) {
                         $("#noDataDiv").show();
                     } else {
-                        videoUrl = 'http://116.236.149.165:8090/' + data.data.fileURL + '/';
+                        videoUrl = 'http://www.acrelcloud.cn/' + data.data.fileURL + '/';
                         if (data.data.list != undefined && data.data.list.length > 0) {
                             $(data.data.list).each(function () {
                                 $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='" + JSON.stringify(this.fUpdatelog) + "'  data-str2=" + this.fDemofile + ">\n" +
