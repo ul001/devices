@@ -69,6 +69,28 @@
     background: #01ADA8;
 }
 
+.content .footer_bar2 .button {
+    color: #01ADA8;
+    border-color: #01ADA8;
+}
+
+.button.active,
+.button.active:active {
+    color: #01ADA8;
+    border-color: #01ADA8;
+}
+
+.content .footer_bar2 .button.noclick.active {
+    color: #fff;
+    background: #D6D6D6;
+    border-color: #D6D6D6;
+}
+
+.content .footer_bar2 .button.active {
+    color: #fff;
+    background: #01ADA8;
+}
+
 .content-list .button {
     color: #01ADA8;
     border-color: #01ADA8;
@@ -94,6 +116,18 @@ label.label-checkbox i.icon-form-checkbox {
 }
 
 .footer_bar .footer_btn {
+    display: none;
+}
+
+.footer_bar2 {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 3rem;
+    width: 104%;
+}
+
+.footer_bar2 .footer_btn {
     display: none;
 }
 

@@ -8,7 +8,8 @@ $("input:checkbox").prop("disabled", "disabled");
 function initContent() {
   Substation.getDataByAjax(
     "/selectByStationId", {
-      stationId: subObj.subId
+      stationId: subObj.subId,
+      meterType: '1,2'
     },
     function (data) {
       $(".content-list").empty();

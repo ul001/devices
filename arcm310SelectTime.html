@@ -16,35 +16,138 @@
 </head>
 
 <body>
-    <div class="content">
-        <p>其他内容区域</p>
-
-        <div class="content-block">
-            <div class="buttons-row">
-                <a href="#tab1-1" class="tab-link active button">单次</a>
-                <a href="#tab1-2" class="tab-link button">每天</a>
+    <div class="page-group">
+        <div id="page-tab" class="page page-current">
+            <header class="bar bar-nav bar_color">
+                <a id="back_btn" class="button button-link button-nav pull-left external click_btn" onclick="goBack()">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <!-- <a id="control_btn" class="button button-link button-nav pull-right click_btn">
+                    <span data-i18n="ui_control"></span>
+                </a>
+                <a id="record_btn" class="button button-link button-nav pull-right click_btn">
+                    <span id="controlLog" data-i18n="ui_record"></span>
+                </a> -->
+                <h1 class="title title_color">定时合闸参数下发</h1>
+            </header>
+            <div class="bar bar-standard bar-footer">
+                <!-- 提交按钮 -->
+                <a href="#" class="button button-fill button-success" style="background-color: #01ADA8;">提交</a>
             </div>
-            <div class="tabs">
-                <div id="tab1-1" class="tab active list-block">
-                    <ul class="list-container">
-                        <li class="item-content">
-                            <div class="item-media"><i class="icon icon-f7"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">开始时间：</div>
-                                <div class="item-after"><input type="datetime-local" class="datetime-local"
-                                        value="2020年7月12日">
+            <div class="content native-scroll">
+                <div class="buttons-tab">
+                    <div href="#tab1" class="tab-link button active">
+                        <div class="showPic"></div>
+                        <div class="showClose">关闭定时器</div>
+                    </div>
+                    <div href="#tab2" class="tab-link button">
+                        <div class="showPic"></div>
+                        <div class="showClose">开启定时器</div>
+                    </div>
+                </div>
+                <div class="tabs">
+                    <div id="tab1" class="tab active">
+                        <div class="content-block">
+
+                        </div>
+                    </div>
+                    <div id="tab2" class="tab">
+                        <div class="content-block">
+                            <div class="buttons-row">
+                                <div href="#tab1-1" class="tab-link button active">
+                                    <div class="showPic"></div>
+                                    <div class="showClose">单次</div>
+                                </div>
+                                <div href="#tab1-2" class="tab-link button">
+                                    <div class="showPic"></div>
+                                    <div class="showClose">每次</div>
                                 </div>
                             </div>
-                        </li>
-                        <li class="item-content item-link">
-                            <div class="item-media"><i class="icon icon-device"></i></div>
-                            <div class="item-inner">
-                                <div class="item-title">结束时间：</div>
+                            <div class="tabs">
+                                <div id="tab1-1" class="tab list-block active">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title"><input id="dateTimeOpen1"
+                                                            type="datetime-local" class="datetime-local" step="01"
+                                                            min="2020-01-01T00:00" max="2050-01-01T00:00" value="">
+                                                    </div>
+                                                    <div class="item-subtitle">分闸</div>
+                                                </div>
+                                                <div class="item-after">
+                                                    <label class="label-switch">
+                                                        <input class="cbselect" type="checkbox" name="checkbox"
+                                                            id="isShowInApp">
+                                                        <div class="imgSelect"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title"><input id="dateTimeClose1"
+                                                            type="datetime-local" class="datetime-local" step="01"
+                                                            min="2020-01-01T00:00" max="2050-01-01T00:00" value="">
+                                                    </div>
+                                                    <div class="item-subtitle">合闸</div>
+                                                </div>
+                                                <div class="item-after">
+                                                    <label class="label-switch">
+                                                        <input class="cbselect" type="checkbox" name="checkbox"
+                                                            id="isShowInApp">
+                                                        <div class="imgSelect"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="tab list-block" id="tab1-2">
+                                    <ul>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title">
+                                                        <input id="dateTimeOpen2" type="time" class="datetime-local"
+                                                            min="2020-01-01T00:00" max="2050-01-01T00:00" value="">
+                                                    </div>
+                                                    <div class="item-subtitle">分闸</div>
+                                                </div>
+                                                <div class="item-after">
+                                                    <label class="label-switch">
+                                                        <input class="cbselect" type="checkbox" name="checkbox"
+                                                            id="isShowInApp">
+                                                        <div class="imgSelect"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="item-content">
+                                            <div class="item-inner">
+                                                <div class="item-title-row">
+                                                    <div class="item-title"><input type="time" class="datetime-local"
+                                                            value="选择时间"></div>
+                                                    <div class="item-subtitle">合闸</div>
+                                                </div>
+                                                <div class="item-after">
+                                                    <label class="label-switch">
+                                                        <input class="cbselect" type="checkbox" name="checkbox"
+                                                            id="isShowInApp">
+                                                        <div class="imgSelect"></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
+
                 </div>
-                <p class="tab" id="tab1-2">This is tab 1-2 content</p>
             </div>
         </div>
     </div>
