@@ -864,7 +864,8 @@ var CustomReport = (function () {
             $("#eventTable" + num).bootstrapTable({
                 data: neweventData,
                 columns: columns,
-                height: 180
+                height: 445
+                //180
             });
         }
 
@@ -932,7 +933,8 @@ var CustomReport = (function () {
             $("#sigeveDiv" + num).bootstrapTable({
                 data: sigData,
                 columns: columns,
-                height: 180
+                height: 445
+                //180
             });
 
             var sigeventstring =
