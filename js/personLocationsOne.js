@@ -88,10 +88,12 @@ function getPersonsPage() {
 }
 
 function getCarPage() {
-    Substation.postDataByAjax("/getCarLocationList", {}, function (data) {
+    Substation.postDataByAjaxForCarLoc("/getCarLocationList", {}, function (data) {
         if (data != undefined) {
             markerCarArr = data.data;
             //绘制点
+            loadScript();
+        } else if (data.code == 422 || data.code == 420) {
             loadScript();
         }
     });
@@ -253,12 +255,9 @@ function initialize() {
         carArr.push(marker);
         if ($("#showOrHide").attr("name") === "Showsubname") {
             label.hide();
-            // marker.addEventListener("mouseover", AddShowEvent);
-            // marker.addEventListener("mouseout", AddHideEvent);
         } else {
             label.show();
         }
-        // addClickHandler(marker, markDetail);
     }
 
     //地图标记
@@ -329,21 +328,7 @@ function initialize() {
         //   }
         // });
     }
-    // var marker = new BMap.Marker(myPp); // 创建标注
-    // lable = new BMap.Label(subName, {
-    //     offset: new BMap.Size(0, -32)
-    // });
-    // lable.setStyle({
-    //     maxWidth: 'none',
-    //     fontSize: '15px',
-    //     padding: '5px',
-    //     border: 'none',
-    //     color: '#fff',
-    //     background: '#ff8355',
-    //     borderRadius: '5px'
-    // });
-    // marker.setLabel(lable);
-    // map.addOverlay(marker);
+
     // 添加带有定位的导航控件
     var navigationControl = new BMap.NavigationControl({
         // 靠左上角位置
@@ -354,60 +339,6 @@ function initialize() {
         //        enableGeolocation: true
     });
     map.addControl(navigationControl);
-    // var ac = new BMap.Autocomplete({
-    //     //建立一个自动完成的对象
-    //     input: "suggestId",
-    //     location: map,
-    //     onSearchComplete: function (data) {
-    //         var indexs = data.getNumPois();
-    //         var html = "";
-    //         if (indexs > 0) {
-    //             for (var i = 0; i < indexs; i++) {
-    //                 var _value = data.getPoi(i);
-    //                 if (_value != null && _value != undefined) {
-    //                     var value =
-    //                         _value.province +
-    //                         _value.city +
-    //                         _value.district +
-    //                         _value.street +
-    //                         _value.business;
-    //                     html += `<li class="item-content item-link" onclick="getMyPlace('${value}','${
-    //           _value.business
-    //         }')">
-    //                                     <div class="item-inner">
-    //                                         <div class="item-title-row">
-    //                                             <div class="item-title">${
-    //                                               _value.business
-    //                                             }</div>
-    //                                         </div>
-    //                                         <div class="item-subtitle">${_value.province +
-    //                                           _value.city +
-    //                                           _value.district +
-    //                                           _value.street}</div>
-    //                                     </div>
-    //                                 </li>`;
-    //                 }
-    //             }
-    //             $("#results").show();
-    //         } else {
-    //             $("#results").hide();
-    //         }
-    //         $("#list-container").html(html);
-    //     }
-    // });
-
-    //      marker.enableDragging();
-    //      marker.addEventListener("dragend", function(e) {
-    //          lng = e.point.lng;
-    //          lat = e.point.lat;
-    //          geoc.getLocation(e.point, function(rs){
-    //              var addComp = rs.addressComponents;
-    //              dizhi = addComp.city + addComp.district + addComp.street + addComp.streetNumber;
-    //              //lable.setContent(dizhi);
-    //              marker.setLabel(lable);
-    //          //alert("当前位置：" + e.point.lng + ", " + e.point.lat);
-    //          });
-    //      });
 }
 
 function loadScript() {
@@ -453,31 +384,7 @@ function showOrHide() {
             label.show();
         });
     }
-    // if ($("#showOrHide").attr("name") === "Showsubname") {
-    //   $("#showOrHide").attr("name", "Hidesubname");
-    //   // language.common.eleSelect($("#showOrHide"));
-    //   $("#showOrHide").addClass("isClick");
-    //   var markers = map.getOverlays();
-    //   $("#showOrHide").empty();
-    //   $("#showOrHide").html('<i class="icon icon-changeShowP"></i>');
-    //   $.each(markers, function (key, val) {
-    //     var label = val.getLabel();
-    //     if (label === null) return;
-    //     label.show();
-    //   });
-    // } else {
-    //   $("#showOrHide").attr("name", "Showsubname");
-    //   // language.common.eleSelect($("#showOrHide"));
-    //   $("#showOrHide").removeClass("isClick");
-    //   var markers = map.getOverlays();
-    //   $("#showOrHide").empty();
-    //   $("#showOrHide").html('<i class="icon icon-changeHideP"></i>');
-    //   $.each(markers, function (key, val) {
-    //     var label = val.getLabel();
-    //     if (label === null) return;
-    //     label.hide();
-    //   });
-    // }
+
 
 }
 
@@ -486,115 +393,6 @@ $("#search").click(function () {
     localStorage.setItem("SearchVal", stateVal);
     window.location.href = "personSearchListOne.html";
 });
-
-//搜索按钮点击
-// $("#search").bind("keydown", function (event) {
-
-//     if (event.keyCode == 13) {
-//         var searchKey = $("#search").val();
-//         var stateVal = $("#fState").val();
-//         if (stateVal == 2) {
-//             //搜车
-
-//             Substation.postDataByAjax("/getCarLocationList", {
-//                 search: searchKey
-//             }, function (data) {
-//                 if (data != undefined) {
-//                     if (data.data.length > 0) {
-//                         var html = "";
-//                         data.data.forEach(function (value, index) {
-//                             html += `<li class="item-content item-link" onclick="searchPlace('${value.lonc}','${value.latc}','${value.carInfo.fCarname}','${value.carId}')">
-//                                       <div class="item-inner">
-//                                           <div class="item-title-row">
-//                                               <div class="item-title">${value.carInfo.fCarname}</div>
-//                                           </div>
-//                                            <div class="item-subtitle">${value.carInfo.fCarlicense}</div>
-//                                       </div>
-//                                   </li>`;
-//                             if (index > 10) {
-//                                 return;
-//                             }
-//                         });
-//                         $("#results").show();
-//                     } else {
-//                         $("#results").hide();
-//                     }
-//                     $("#list-container").html(html);
-//                 }
-//             });
-//         } else if (stateVal == 3) {
-//             //搜变电所
-//             Substation.getDataByAjax(
-//                 "/getSubstationListByUser?pageNo=1&pageSize=999", {
-//                     search: searchKey
-//                 },
-//                 function (data) {
-//                     if (data != undefined) {
-//                         if (data.list.length > 0) {
-//                             var html = "";
-//                             data.list.forEach(function (value, index) {
-//                                 var address = (value.fAddress != 'null') ? value.fAddress : "未知";
-//                                 html += `<li class="item-content item-link" onclick="searchPlace('${value.fLongitude}','${value.fLatitude}','${value.fSubname}','${value.fSubid}')">
-//                                       <div class="item-inner">
-//                                           <div class="item-title-row">
-//                                               <div class="item-title">${value.fSubname}</div>
-//                                           </div>
-//                                            <div class="item-subtitle">${address}</div>
-//                                       </div>
-//                                   </li>`;
-//                                 if (index > 10) {
-//                                     return;
-//                                 }
-//                             });
-//                             $("#results").show();
-//                         } else {
-//                             $("#results").hide();
-//                         }
-//                         $("#list-container").html(html);
-//                     }
-//                 }
-//             );
-//         } else {
-//             //搜人
-//             Substation.getDataByAjax(
-//                 "/getUserLocationList", {
-//                     search: searchKey
-//                 },
-//                 function (data) {
-//                     if (data != undefined) {
-//                         if (data.length > 0) {
-//                             var html = "";
-//                             data.forEach(function (value, index) {
-//                                 var address = (value.F_Address != 'null') ? value.F_Address : "未知";
-//                                 html += `<li class="item-content item-link" onclick="searchPlace('${value.F_Longitude}','${value.F_Latitude}','${value.F_UserName}','${value.F_UserID}')">
-//                                       <div class="item-inner">
-//                                           <div class="item-title-row">
-//                                               <div class="item-title">${value.F_UserName}</div>
-//                                           </div>
-//                                            <div class="item-subtitle">${address}</div>
-//                                       </div>
-//                                   </li>`;
-//                                 if (index > 10) {
-//                                     return;
-//                                 }
-//                             });
-//                             $("#results").show();
-//                         } else {
-//                             $("#results").hide();
-//                         }
-//                         $("#list-container").html(html);
-//                     }
-//                 }
-//             );
-//         }
-//     }
-// });
-
-//搜索按钮取消
-// $("#searchCancel").click(function () {
-//     $("#suggestId").val("");
-//     $("#results").hide();
-// });
 
 function searchPlace(longitude, latitude, name, userID) {
     setPersonPlace(longitude, latitude, userID);
@@ -627,31 +425,6 @@ function setPersonPlace(longitude, latitude, userID) {
         }
     });
 
-    // var marker = new BMap.Marker(pp);
-    // marker.setLabel(lable);
-    // map.addOverlay(marker); //添加标注
-    // marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-    //人员标记
-    // markerPerArr.forEach(function (marker) {
-    //   marker.addEventListener(e) {
-    //     console.log(e.target.customData.userID);
-    //   }
-    // var point = new BMap.Point(marker.F_Longitude, marker.F_Latitude);
-    // var label = new BMap.Label(marker.F_UserName, {
-    //   offset: new BMap.Size(33, -10)
-    // });
-    // label.setStyle({
-    //   maxWidth: "none",
-    //   fontSize: "15px",
-    //   padding: "5px",
-    //   border: "none",
-    //   color: "#fff",
-    //   background: "#3CB371",
-    //   borderRadius: "5px"
-    // });
-    // // 调用编写自定义函数,创建标注
-    // addPersonMarker(point, label, marker);
-    // });
 }
 
 function setPlace() {

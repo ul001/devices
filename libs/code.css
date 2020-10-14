@@ -26,10 +26,11 @@
     border: 1px solid #ccc;
     background-color: #fff;
     cursor: pointer;
+    margin-top: -0.4rem;
 }
 
 #btnSendCode {
-    width: 4.4rem;
+    width: 4.6rem;
     height: 1.6rem;
     padding: 0 5px;
     font-size: 0.6rem;
@@ -52,7 +53,8 @@
 }
 
 #phoneInput {
-    width: 11rem;
+    width: 11.2rem;
+    margin-left: 0.3rem;
 }
 
 #checkBtn {
