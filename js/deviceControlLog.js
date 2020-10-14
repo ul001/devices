@@ -13,6 +13,8 @@ try {
 var selectSubid = subObj.subId;
 if (deviceType == "arcm300T") {
   loadUrl = "/getARCMControlLogList";
+} else if (deviceType == "arcm310") {
+  loadUrl = "/getARCM310ControlLogList";
 } else {
   loadUrl = "/getControlLogList";
 }
@@ -27,22 +29,22 @@ function getFirstPage() {
   $.attachInfiniteScroll($(".infinite-scroll"));
 }
 
-$(document).on("refresh", ".pull-to-refresh-content", function(e) {
-  setTimeout(function() {
+$(document).on("refresh", ".pull-to-refresh-content", function (e) {
+  setTimeout(function () {
     getFirstPage();
     // done
     $.pullToRefreshDone(".pull-to-refresh-content");
   }, 2000);
 });
 
-$(document).on("infinite", ".infinite-scroll", function() {
+$(document).on("infinite", ".infinite-scroll", function () {
   // 如果正在加载，则退出
   if (loading) return;
 
   // 设置flag
   loading = true;
 
-  setTimeout(function() {
+  setTimeout(function () {
     loading = false;
     addItems(itemsPerLoad);
   }, 1000);
@@ -58,7 +60,7 @@ function addItems(number) {
   var dateStartVal = $("#dateStart").val();
   var dateEndVal = $("#dateEnd").val();
   var controlPerson = $("#search").val();
-  if (deviceType == "arcm300T") {
+  if (deviceType == "arcm300T" || deviceType == "arcm310") {
     if (dateStartVal != "") {
       params["startTime"] = dateStartVal + " 00:00:00";
     }
@@ -108,7 +110,7 @@ function addItems(number) {
   Substation.postDataByAjaxNoLoading(
     loadUrl,
     params,
-    function(data) {
+    function (data) {
       if (
         deviceType == "light" ||
         deviceType == "05002" ||
@@ -120,7 +122,7 @@ function addItems(number) {
           $(".list-container").empty();
         }
         if (dataSrc.list != undefined && dataSrc.list.length > 0) {
-          $(dataSrc.list).each(function() {
+          $(dataSrc.list).each(function () {
             var controlStr = "";
             switch (this.fControltype) {
               case "reset":
@@ -146,39 +148,39 @@ function addItems(number) {
             }
             $(".list-container").append(
               '<div class="card-log">' +
-                '<div class="card-top">' +
-                '<div class="lightGrayColor">' +
-                Operation["ui_operating"] +
-                "（" +
-                Operation["ui_logTime"] +
-                "：" +
-                Substation.removeUndefined(this.fOperatetime) +
-                "）</div>" +
-                '<div class="blackColor">' +
-                Substation.removeUndefined(this.fOperatername) +
-                Operation["ui_logTowards"] +
-                Substation.removeUndefined(this.fDevicename) +
-                "（" +
-                Substation.removeUndefined(this.fMetercode) +
-                "）" +
-                Operation["ui_logDoing"] +
-                Substation.removeUndefined(this.deviceValueExplain) +
-                Operation["ui_logOperate"] +
-                "</div>" +
-                "</div>" +
-                '<div class="card-bottom">' +
-                '<div class="lightGrayColor">' +
-                Operation["ui_result"] +
-                "（" +
-                Operation["ui_logTime"] +
-                "：" +
-                askTime +
-                "）</div>" +
-                '<div class="blackColor">' +
-                askResult +
-                "</div>" +
-                "</div>" +
-                "</div>"
+              '<div class="card-top">' +
+              '<div class="lightGrayColor">' +
+              Operation["ui_operating"] +
+              "（" +
+              Operation["ui_logTime"] +
+              "：" +
+              Substation.removeUndefined(this.fOperatetime) +
+              "）</div>" +
+              '<div class="blackColor">' +
+              Substation.removeUndefined(this.fOperatername) +
+              Operation["ui_logTowards"] +
+              Substation.removeUndefined(this.fDevicename) +
+              "（" +
+              Substation.removeUndefined(this.fMetercode) +
+              "）" +
+              Operation["ui_logDoing"] +
+              Substation.removeUndefined(this.deviceValueExplain) +
+              Operation["ui_logOperate"] +
+              "</div>" +
+              "</div>" +
+              '<div class="card-bottom">' +
+              '<div class="lightGrayColor">' +
+              Operation["ui_result"] +
+              "（" +
+              Operation["ui_logTime"] +
+              "：" +
+              askTime +
+              "）</div>" +
+              '<div class="blackColor">' +
+              askResult +
+              "</div>" +
+              "</div>" +
+              "</div>"
             );
           });
           pageNum++;
@@ -186,8 +188,8 @@ function addItems(number) {
           $.detachInfiniteScroll($(".infinite-scroll"));
           $(".infinite-scroll-preloader").html(
             "<span class='bottomTip'>--" +
-              Operation["ui_nomoredata"] +
-              "--</span>"
+            Operation["ui_nomoredata"] +
+            "--</span>"
           );
           return;
         }
@@ -195,18 +197,18 @@ function addItems(number) {
           $.detachInfiniteScroll($(".infinite-scroll"));
           $(".infinite-scroll-preloader").html(
             "<span class='bottomTip'>--" +
-              Operation["ui_nomoredata"] +
-              "--</span>"
+            Operation["ui_nomoredata"] +
+            "--</span>"
           );
           return;
         }
-      } else if (deviceType == "arcm300T") {
+      } else if (deviceType == "arcm300T" || deviceType == "arcm310") {
         var dataSrc = data.pageInfo;
         if (pageNum == 1) {
           $(".list-container").empty();
         }
         if (dataSrc.list != undefined && dataSrc.list.length > 0) {
-          $(dataSrc.list).each(function() {
+          $(dataSrc.list).each(function () {
             var controlStr = "";
             switch (this.fControltype) {
               case "reset":
@@ -232,39 +234,39 @@ function addItems(number) {
             }
             $(".list-container").append(
               '<div class="card-log">' +
-                '<div class="card-top">' +
-                '<div class="lightGrayColor">' +
-                Operation["ui_operating"] +
-                "（" +
-                Operation["ui_logTime"] +
-                "：" +
-                Substation.removeUndefined(this.fSendtime) +
-                "）</div>" +
-                '<div class="blackColor">' +
-                Substation.removeUndefined(this.fUsername) +
-                Operation["ui_logTowards"] +
-                Substation.removeUndefined(this.meterInfoname) +
-                "（" +
-                Substation.removeUndefined(this.fMeterserialnumber) +
-                "）" +
-                Operation["ui_logDoing"] +
-                controlStr +
-                Operation["ui_logOperate"] +
-                "</div>" +
-                "</div>" +
-                '<div class="card-bottom">' +
-                '<div class="lightGrayColor">' +
-                Operation["ui_result"] +
-                "（" +
-                Operation["ui_logTime"] +
-                "：" +
-                askTime +
-                "）</div>" +
-                '<div class="blackColor">' +
-                askResult +
-                "</div>" +
-                "</div>" +
-                "</div>"
+              '<div class="card-top">' +
+              '<div class="lightGrayColor">' +
+              Operation["ui_operating"] +
+              "（" +
+              Operation["ui_logTime"] +
+              "：" +
+              Substation.removeUndefined(this.fSendtime) +
+              "）</div>" +
+              '<div class="blackColor">' +
+              Substation.removeUndefined(this.fUsername) +
+              Operation["ui_logTowards"] +
+              Substation.removeUndefined(this.meterInfoname) +
+              "（" +
+              Substation.removeUndefined(this.fMeterserialnumber) +
+              "）" +
+              Operation["ui_logDoing"] +
+              controlStr +
+              Operation["ui_logOperate"] +
+              "</div>" +
+              "</div>" +
+              '<div class="card-bottom">' +
+              '<div class="lightGrayColor">' +
+              Operation["ui_result"] +
+              "（" +
+              Operation["ui_logTime"] +
+              "：" +
+              askTime +
+              "）</div>" +
+              '<div class="blackColor">' +
+              askResult +
+              "</div>" +
+              "</div>" +
+              "</div>"
             );
           });
           pageNum++;
@@ -272,8 +274,8 @@ function addItems(number) {
           $.detachInfiniteScroll($(".infinite-scroll"));
           $(".infinite-scroll-preloader").html(
             "<span class='bottomTip'>--" +
-              Operation["ui_nomoredata"] +
-              "--</span>"
+            Operation["ui_nomoredata"] +
+            "--</span>"
           );
           return;
         }
@@ -281,14 +283,14 @@ function addItems(number) {
           $.detachInfiniteScroll($(".infinite-scroll"));
           $(".infinite-scroll-preloader").html(
             "<span class='bottomTip'>--" +
-              Operation["ui_nomoredata"] +
-              "--</span>"
+            Operation["ui_nomoredata"] +
+            "--</span>"
           );
           return;
         }
       }
     },
-    function(errorCode) {
+    function (errorCode) {
       if (errorCode == 0) {
         $.detachInfiniteScroll($(".infinite-scroll"));
         $(".infinite-scroll-preloader").html(
@@ -305,16 +307,16 @@ function addItems(number) {
 
 addItems(itemsPerLoad);
 
-$("#searchBtn").click(function() {
+$("#searchBtn").click(function () {
   var start = new Date(
     $("#dateStart")
-      .val()
-      .replace(/-/g, "/")
+    .val()
+    .replace(/-/g, "/")
   );
   var end = new Date(
     $("#dateEnd")
-      .val()
-      .replace(/-/g, "/")
+    .val()
+    .replace(/-/g, "/")
   );
   if (start > end) {
     $.toast(Operation["ui_dateselecttip"]);
@@ -353,26 +355,26 @@ function formatDate(timestamp) {
 }
 
 //时间快捷按钮
-$(".buttons-row .button").click(function() {
+$(".buttons-row .button").click(function () {
   $(this)
     .addClass("active")
     .siblings()
     .removeClass("active");
 });
-$("#today").click(function() {
+$("#today").click(function () {
   var myDate = new Date();
   var todayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
 });
-$("#yestoday").click(function() {
+$("#yestoday").click(function () {
   var myDate = new Date();
   myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
   var yestodayVal = myDate.format("yyyy-MM-dd");
   Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
 });
-$("#thisMonth").click(function() {
+$("#thisMonth").click(function () {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
@@ -381,7 +383,7 @@ $("#thisMonth").click(function() {
   Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
   Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
-$("#lastMonth").click(function() {
+$("#lastMonth").click(function () {
   var myDate = new Date();
   var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
   var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
@@ -391,7 +393,7 @@ $("#lastMonth").click(function() {
   Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
 });
 
-Date.prototype.format = function(fmt) {
+Date.prototype.format = function (fmt) {
   //author: meizz
   var o = {
     "M+": this.getMonth() + 1, //月份
@@ -418,7 +420,7 @@ Date.prototype.format = function(fmt) {
 
 //解决键盘遮挡问题
 var h = $(window).height();
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   if ($(window).height() < h) {
     $(".btnBar").hide();
   }
@@ -429,7 +431,7 @@ window.addEventListener("resize", function() {
     document.activeElement.tagName == "INPUT" ||
     document.activeElement.tagName == "TEXTAREA"
   ) {
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       document.activeElement.scrollIntoViewIfNeeded();
     }, 0);
   }

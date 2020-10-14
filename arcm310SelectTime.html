@@ -33,15 +33,16 @@
             </header>
             <div class="bar bar-standard bar-footer">
                 <!-- 提交按钮 -->
-                <a href="#" class="button button-fill button-success" style="background-color: #01ADA8;">提交</a>
+                <a href="#" id="submitBtn" class="button button-fill button-success"
+                    style="background-color: #01ADA8;">提交</a>
             </div>
             <div class="content native-scroll">
                 <div class="buttons-tab">
-                    <div href="#tab1" class="tab-link button active">
+                    <div href="#tab1" id="closeTime" class="tab-link button active">
                         <div class="showPic"></div>
                         <div class="showClose">关闭定时器</div>
                     </div>
-                    <div href="#tab2" class="tab-link button">
+                    <div href="#tab2" id="openTime" class="tab-link button">
                         <div class="showPic"></div>
                         <div class="showClose">开启定时器</div>
                     </div>
@@ -54,12 +55,12 @@
                     </div>
                     <div id="tab2" class="tab">
                         <div class="content-block">
-                            <div class="buttons-row">
-                                <div href="#tab1-1" class="tab-link button active">
+                            <div class="buttons-row" style="height:3rem;">
+                                <div href="#tab1-1" id="once" class="tab-link button active">
                                     <div class="showPic"></div>
                                     <div class="showClose">单次</div>
                                 </div>
-                                <div href="#tab1-2" class="tab-link button">
+                                <div href="#tab1-2" id="anyway" class="tab-link button">
                                     <div class="showPic"></div>
                                     <div class="showClose">每次</div>
                                 </div>
@@ -79,7 +80,7 @@
                                                 <div class="item-after">
                                                     <label class="label-switch">
                                                         <input class="cbselect" type="checkbox" name="checkbox"
-                                                            id="isShowInApp">
+                                                            id="onceOpen">
                                                         <div class="imgSelect"></div>
                                                     </label>
                                                 </div>
@@ -97,7 +98,7 @@
                                                 <div class="item-after">
                                                     <label class="label-switch">
                                                         <input class="cbselect" type="checkbox" name="checkbox"
-                                                            id="isShowInApp">
+                                                            id="onceClose">
                                                         <div class="imgSelect"></div>
                                                     </label>
                                                 </div>
@@ -112,14 +113,14 @@
                                                 <div class="item-title-row">
                                                     <div class="item-title">
                                                         <input id="dateTimeOpen2" type="time" class="datetime-local"
-                                                            min="2020-01-01T00:00" max="2050-01-01T00:00" value="">
+                                                            value="" style="padding-top: 0.45rem;">
                                                     </div>
                                                     <div class="item-subtitle">分闸</div>
                                                 </div>
                                                 <div class="item-after">
                                                     <label class="label-switch">
                                                         <input class="cbselect" type="checkbox" name="checkbox"
-                                                            id="isShowInApp">
+                                                            id="anywayOpen">
                                                         <div class="imgSelect"></div>
                                                     </label>
                                                 </div>
@@ -128,14 +129,16 @@
                                         <li class="item-content">
                                             <div class="item-inner">
                                                 <div class="item-title-row">
-                                                    <div class="item-title"><input type="time" class="datetime-local"
-                                                            value="选择时间"></div>
+                                                    <div class="item-title">
+                                                        <input id="dateTimeClose2" type="time" class="datetime-local"
+                                                            value="" style="padding-top: 0.45rem;">
+                                                    </div>
                                                     <div class="item-subtitle">合闸</div>
                                                 </div>
                                                 <div class="item-after">
                                                     <label class="label-switch">
                                                         <input class="cbselect" type="checkbox" name="checkbox"
-                                                            id="isShowInApp">
+                                                            id="anywayClose">
                                                         <div class="imgSelect"></div>
                                                     </label>
                                                 </div>
