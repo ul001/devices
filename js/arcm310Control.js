@@ -1,33 +1,59 @@
 var subObj = JSON.parse(localStorage.getItem("subObj"));
 var titleName = localStorage.getItem("controlClassTitle");
-$(".title.title_color").text(titleName);
+//仪表点位ID
+var positionID = "";
+$("#mainTitle").text(titleName);
 var isControl = 0;
 $(".item-media").hide();
 $("input:checkbox").prop("disabled", "disabled");
 
 function initContent() {
-    Substation.getDataByAjax(
-        "/selectByStationId", {
+    var param;
+    if (positionID.length > 0) {
+        param = {
+            stationId: subObj.subId,
+            fPositionId: positionID,
+            meterType: '3'
+        }
+    } else {
+        param = {
             stationId: subObj.subId,
             meterType: '3'
-        },
+        }
+    }
+    Substation.getDataByAjax(
+        "/selectByStationId", param,
         function (data) {
             $(".content-list").empty();
             var strArr = "";
             if (data.list != undefined && data.list.length && data.list.length > 0) {
+                // meterCurrentValue: "{\"status\":\"0\",\"receiveTime\":\"2020-10-13 09:02:00\",\"timerStatus\":\"0\",\"switchStatus\":\"1\"}"
                 $(data.list).each(function () {
                     var thisStatus = "";
+                    var meterCurrentValue = JSON.parse(this.meterCurrentValue);
                     var imgStr = '<img src="img/arcm300t.png">';
+                    var timerStatus = "";
+                    var switchStatus = "";
                     if (this.meterStatus == "1") {
                         thisStatus =
                             "<span class='alarmStatus'>" + Operation["ui_Alarm"] + "</span>";
                         imgStr = '<img src="img/arcm300Talarm.png">';
-                    } else if (this.meterStatus == "0") {
+                    } else {
                         var thisStatus =
                             "<span class='normalStatus'>" +
                             Operation["ui_normal"] +
                             "</span>";
                         var imgStr = '<img src="img/arcm300t.png">';
+                    }
+                    if (meterCurrentValue.timerStatus == "0") {
+                        timerStatus = "<span class='alarmStatus'>未定时</span>";
+                    } else {
+                        timerStatus = "<span class='normalStatus'>已定时</span>";
+                    }
+                    if (meterCurrentValue.switchStatus == "0") {
+                        switchStatus = "<span class='alarmStatus'>分闸</span>";
+                    } else {
+                        switchStatus = "<span class='normalStatus'>合闸</span>";
                     }
                     var meterTypeName = '';
                     if (this.meterType == '1') {
@@ -36,10 +62,10 @@ function initContent() {
                         meterTypeName = "ADW300";
                     }
                     strArr +=
-                        '<label class="list-item label-checkbox light_opening" data-id="' +
+                        '<label class="list-item label-checkbox light_opening" style="height:7.2rem" data-id="' +
                         this.meterCode +
                         '">\n' +
-                        '                        <div class="row">\n' +
+                        '                        <div class="row no-gutter">\n' +
                         '                            <input class="selectBox" type="checkbox" name="my-checkbox" data-id="' +
                         this.meterCode +
                         '">\n' +
@@ -63,10 +89,12 @@ function initContent() {
                         "\n" +
                         "                        </div>\n" +
                         '                        <div class="col-60">\n' +
-                        "                            <p class='right-float limit-length' style='margin-top:.4rem;font-size:0.7rem;'>" + meterTypeName + "</p>\n" +
-                        "                            <p class='right-float'>" +
+
+                        "                            <p class='right-float' style='margin-top:.4rem;font-size:0.7rem;'>" + switchStatus + "</p>\n" +
+                        "                            <p class='right-float' style='margin-top:.4rem;font-size:0.7rem;'>" +
                         thisStatus +
                         "</p>\n" +
+                        "                            <p class='right-float' style='margin-top:.4rem;font-size:0.7rem;'>" + timerStatus + "</p>\n" +
                         "                        </div>\n" +
                         "                        </div>\n" +
                         "                    </label>";
@@ -100,6 +128,7 @@ function controlClick() {
             .on("click", selectAll);
         $("#control_btn").text(Operation["ui_cancel"]);
         $("#record_btn").toggle();
+        $("#select_btn").toggle();
         $("#light_opening").click();
         $(".label-title")
             .removeClass("col-100")
@@ -122,6 +151,7 @@ function controlClick() {
             .on("click", goBack);
         $("#control_btn").text(Operation["ui_control"]);
         $("#record_btn").toggle();
+        $("#select_btn").toggle();
         $(".label-title")
             .removeClass("col-85")
             .addClass("col-100");
@@ -513,6 +543,9 @@ $("#check").click(function () {
     }
 });
 
+
+
+
 function goToDetail() {
     var meterCode = $(this).attr("data-id");
     localStorage.setItem("meterCode", meterCode);
@@ -521,6 +554,349 @@ function goToDetail() {
 
 $("#controlLog").click(function () {
     window.location.href = "deviceControlLog.html?type=arcm310";
+});
+
+/*
+            Following is page1 page1 page1 page1 page1
+*/
+
+var thisGroupid = -1;
+var subList = [];
+var selectUserList = [];
+var chargerUser = [];
+var workerUser = [];
+var peopleType = "substation";
+
+//筛选事件新增
+$("#select_btn").click(function () {
+    // peopleType = $(this).attr("id");
+    $.router.loadPage("#page1");
+    $("#page1 .content").scrollTop(0);
+
+    // $("#peopleType").text(Operation['ui_substation']);
+    $("#searchUser").prop("placeholder", Operation['ui_selectPosTip']);
+
+    selectUserList = subList;
+
+    $("#peopleClass").hide();
+    $("#subClass").show();
+    //组织机构
+    Substation.getDataByAjax("/getCompanyListBypIdV2", {}, function (data) {
+        // $("#subClass .item-title").html('<span data-id="' + data.tBdCompany[0].fCoaccountno + '">' + Substation.removeUndefined(data.tBdCompany[0].fConame) + '</span>');
+        thisGroupid = data.tBdCompany[0].fCoaccountno;
+        getGroupClass(data.tBdCompany[0].fCoaccountno);
+    });
+
+    if (selectUserList.length > 0) {
+        $("#showSelected").html(Operation['ui_hasSelected'] + ":" + selectUserList.length + Operation['ui_personNum'] + "<i class='icon icon-up'></i>");
+        $("#showSelected").off("click", goToSelectedPage).on("click", goToSelectedPage);
+    } else {
+        $("#showSelected").html(Operation['ui_hasSelected'] + ":");
+        $("#showSelected").off("click", goToSelectedPage);
+    }
+});
+
+function getGroupClass(pid) {
+    $(".classUl").empty();
+    // $("#classList").show();
+    //隐藏平台机构
+    $("#classList").hide();
+
+    //组织机构
+    // Substation.getDataByAjax("/getCompanyListBypIdV2", {
+    //     fCoaccountno: pid
+    // }, function (data) {
+    //     if (data.hasOwnProperty("tBdCompany") && data.tBdCompany.length > 0) {
+    //         $(".classUl").show();
+    //         var html = "";
+    //         $(data.tBdCompany).each(function () {
+    //             html += "<li>\n" +
+    //                 "    <div class=\"item-content\">\n" +
+    //                 "        <div class=\"item-inner\">\n" +
+    //                 "            <div class=\"item-title\">" + Substation.removeUndefined(this.fConame) + "</div>\n" +
+    //                 "            <div class=\"item-after\">\n" +
+    //                 "                <span class=\"nextClass\" data-id=\"" + this.fCoaccountno + "\" data-name=\"" + Substation.removeUndefined(this.fConame) + "\">\n" +
+    //                 "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
+    //                 "                </span>\n" +
+    //                 "            </div>\n" +
+    //                 "        </div>\n" +
+    //                 "    </div>\n" +
+    //                 "</li>";
+    //         });
+    //         $(".classUl").html(html);
+    //         $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
+    //     } else {
+    //         $(".classUl").hide();
+    //     }
+    getPersonList(pid);
+    // });
+
+}
+
+function getPersonList() {
+    $("#personListUl").empty();
+    Substation.getDataByAjax("/getMeterPostionInfoListByfSubid", {
+        fSubid: subObj.subId
+    }, function (data) {
+        if (data.hasOwnProperty("resultList") && data.resultList.length > 0) {
+            $(".personUl").show();
+            //修改单选
+            $("#selectAll").hide();
+            var html = "";
+            $(data.resultList).each(function () {
+                html += "<li>\n" +
+                    "    <label class=\"label-checkbox item-content\">\n" +
+                    "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fPostionid + "\" data-name=\"" + Substation.removeUndefined(this.fPositionname) + "\">\n" +
+                    "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                    "        <div class=\"item-inner\">\n" +
+                    "            <div class=\"item-title\">" + Substation.removeUndefined(this.fPositionname) + "</div>\n" +
+                    "        </div>\n" +
+                    "    </label>\n" +
+                    "</li>"
+            });
+            $("#personListUl").html(html);
+            $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+            checkSelectPeople();
+        } else {
+            $(".personUl").hide();
+        }
+    });
+
+}
+
+//跳下级事件
+function nextClassClick() {
+    var clickPid = $(this).attr("data-id");
+    thisGroupid = clickPid;
+    $("#selectAll input[type='checkbox']").removeAttr("checked");
+    var clickName = $(this).attr("data-name");
+    $("#classList .item-title span").addClass("preClass");
+    $(".preClass").off("click", preClick).on("click", preClick);
+    $("#classList .item-title").append("<i class=\"icon icon-nextArrow\"></i><span data-id=\"" + clickPid + "\">" + clickName + "</span>")
+    $("#classList .item-title").scrollLeft(10000);
+    getGroupClass(clickPid);
+}
+
+//跳上级事件
+function preClick() {
+    var clickPid = $(this).attr("data-id");
+    thisGroupid = clickPid;
+    $("#selectAll input[type='checkbox']").removeAttr("checked");
+    $(this).removeClass("preClass");
+    $(this).nextAll().remove();
+    getGroupClass(clickPid);
+}
+
+//选人状态变化监听
+function addChangeListener() {
+    var thisUserid = $(this).attr("id");
+    var thisUsername = $(this).attr("data-name");
+    if (thisUserid != undefined) {
+        // if (peopleType == "substation") {
+        if ($(this).prop("checked")) {
+            selectUserList = [{
+                userId: thisUserid,
+                userName: thisUsername
+            }];
+            $("input[name='my-checkbox']").attr("checked", false);
+            $(this).prop("checked", true);
+            // listSubPeople(thisUserid);
+        } else {
+            selectUserList = [];
+        }
+        // } else if (peopleType == "charger") {
+        //     if ($(this).prop("checked")) {
+        //         selectUserList = [{
+        //             userId: thisUserid,
+        //             userName: thisUsername
+        //         }];
+        //         $("input[name='my-checkbox']").attr("checked", false);
+        //         $(this).prop("checked", true);
+        //     } else {
+        //         selectUserList = [];
+        //     }
+        // } else if (peopleType == "worker") {
+        //     if ($(this).prop("checked")) {
+        //         selectUserList.push({
+        //             userId: thisUserid,
+        //             userName: thisUsername
+        //         });
+        //     } else {
+        //         $(selectUserList).each(function (i, obj) {
+        //             if (obj.userId == thisUserid) {
+        //                 selectUserList.splice(i, 1);
+        //                 return false;
+        //             }
+        //         });
+        //         $("#selectAll input[type='checkbox']").removeAttr("checked");
+        //     }
+        // }
+        if (selectUserList.length > 0) {
+            $("#showSelected").html(Operation['ui_hasSelected'] + ":" + selectUserList.length + Operation['ui_personNum'] + "<i class='icon icon-up'></i>");
+            $("#showSelected").off("click", goToSelectedPage).on("click", goToSelectedPage);
+        } else {
+            $("#showSelected").html(Operation['ui_hasSelected'] + ":");
+            $("#showSelected").off("click", goToSelectedPage);
+        }
+    }
+}
+
+$("#selectAll").change(function () {
+    if ($("#selectAll input[type='checkbox']").prop("checked")) {
+        $("#personListUl input[type='checkbox']:not(:checked)").click();
+    } else {
+        $("#personListUl input[type='checkbox']:checked").click();
+    }
+});
+
+//选择的人员复选框选中
+function checkSelectPeople() {
+    $(selectUserList).each(function () {
+        $("#" + this.userId).prop("checked", true);
+    });
+}
+
+//跳转选择人列表
+function goToSelectedPage() {
+    $.router.loadPage("#page2");
+    showPage2List();
+}
+
+//点击确认
+function saveSelectedPeople() {
+    $.router.back();
+    positionID = selectUserList[0].userId;
+    subList = selectUserList;
+    $("#searchUser").val("");
+    initContent();
+    // listPeople(peopleType, selectUserList);
+}
+
+//模糊搜索
+function getSearchUser() {
+    $("#personListUl").empty();
+    $(".personUl").show();
+    $(".classUl").hide();
+    $("#classList").hide();
+    var typeStr = "";
+
+    typeStr = "type=\"checkbox\"";
+    $("#selectAll").hide();
+
+    Substation.getDataByAjax("/getMeterPostionInfoListByfSubid", {
+        searchey: $("#searchUser").val(),
+        fSubid: subObj.subId
+    }, function (data) {
+        var html = "";
+        $(data.resultList).each(function () {
+            html += "<li>\n" +
+                "    <label class=\"label-checkbox item-content\">\n" +
+                "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fPostionid + "\" data-name=\"" + Substation.removeUndefined(this.fPositionname) + "\">\n" +
+                "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                "        <div class=\"item-inner\">\n" +
+                "            <div class=\"item-title\">" + Substation.removeUndefined(this.fPositionname) + "(" + Substation.removeUndefined(this.fSubid) + ")</div>\n" +
+                "        </div>\n" +
+                "    </label>\n" +
+                "</li>";
+        });
+        $("#personListUl").html(html);
+        $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+        checkSelectPeople();
+    });
+
+}
+
+$('#searchUser').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+        if ($("#searchUser").val() != "") {
+            getSearchUser();
+            document.activeElement.blur();
+        }
+    }
+});
+
+$(".searchbar-cancel").click(function () {
+    $("#searchUser").val("");
+    getGroupClass(thisGroupid);
+});
+
+//page2
+function showPage2List() {
+    $("#page2 .content").scrollTop(0);
+    $("#selectedUl").empty();
+    var html = '';
+    $(selectUserList).each(function () {
+        html += "<li data-remove=\"" + this.userId + "\">\n" +
+            "    <div class=\"item-content\">\n" +
+            "        <div class=\"item-inner\">\n" +
+            "            <div class=\"item-title\">" + Substation.removeUndefined(this.userName) + "</div>\n" +
+            "            <div class=\"item-after\">\n" +
+            "                <span class=\"removeUser redColor\" data-id=\"" + this.userId + "\" data-name=\"" + Substation.removeUndefined(this.userName) + "\">" + Operation['ui_remove'] + "\n" +
+            "                </span>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</li>";
+    });
+    $("#numberShow").html(selectUserList.length);
+    $("#selectedUl").html(html);
+    $(".removeUser").off("click", removeUser).on("click", removeUser);
+}
+
+function removeUser() {
+    $("#selectAll input[type='checkbox']").removeAttr("checked");
+    var thisUserid = $(this).attr("data-id");
+    var thisUsername = $(this).attr("data-name");
+    $("li[data-remove='" + thisUserid + "']").remove();
+    $(selectUserList).each(function (i, obj) {
+        if (obj.userId == thisUserid) {
+            selectUserList.splice(i, 1);
+            return false;
+        }
+    });
+    $("#" + thisUserid).removeAttr("checked");
+    if (selectUserList.length > 0) {
+        $("#showSelected").html(Operation['ui_hasSelected'] + ":" + selectUserList.length + Operation['ui_personNum'] + "<i class='icon icon-up'></i>");
+        $("#showSelected").off("click", goToSelectedPage).on("click", goToSelectedPage);
+    } else {
+        $("#showSelected").html(Operation['ui_hasSelected'] + ":");
+        $("#showSelected").off("click", goToSelectedPage);
+    }
+    $("#numberShow").html(selectUserList.length);
+}
+
+$(".back_btn").click(function () {
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    if (isIOS) {
+        window.webkit.messageHandlers.goBackiOS.postMessage("");
+    } else {
+        android.goBack();
+    }
+});
+
+$("#postHistory").click(function () {
+    window.location.href = "taskPostHistory.html";
+});
+
+//解决键盘遮挡问题
+var h = $(window).height();
+window.addEventListener("resize", function () {
+    if ($(window).height() < h) {
+        $(".bar.bar-footer").hide();
+        $(".bar-footer~.content").css("bottom", "0");
+    }
+    if ($(window).height() >= h) {
+        $(".bar.bar-footer").show();
+        $(".bar-footer~.content").css("bottom", "2.2rem");
+    }
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
 });
 
 $.init();

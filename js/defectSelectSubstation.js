@@ -102,19 +102,19 @@ function addItems(number, lastIndex) {
                 pageNum++;
             } else {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
             if (data.list.length < itemsPerLoad) {
                 $.detachInfiniteScroll($('.infinite-scroll'));
-                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+                $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
                 return;
             }
         },
         function (errorCode) {
             if (errorCode == 0) {
                 $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html("--"+Operation['ui_neterror']+"--");
+                $(".infinite-scroll-preloader").html("--" + Operation['ui_neterror'] + "--");
             } else {
                 $.detachInfiniteScroll($(".infinite-scroll"));
                 $(".infinite-scroll-preloader").html("");
@@ -140,7 +140,7 @@ $(document).on('infinite', '.infinite-scroll', function () {
 
         if (lastIndex >= maxItems) {
             $.detachInfiniteScroll($('.infinite-scroll'));
-            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--"+Operation['ui_nomoredata']+"--</span>");
+            $('.infinite-scroll-preloader').html("<span class='bottomTip'>--" + Operation['ui_nomoredata'] + "--</span>");
             return;
         }
 
