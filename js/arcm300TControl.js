@@ -22,7 +22,7 @@ function initContent() {
             thisStatus =
               "<span class='alarmStatus'>" + Operation["ui_Alarm"] + "</span>";
             imgStr = '<img src="img/arcm300Talarm.png">';
-          } else if (this.meterStatus == "0") {
+          } else {
             var thisStatus =
               "<span class='normalStatus'>" +
               Operation["ui_normal"] +
