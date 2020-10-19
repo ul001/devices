@@ -82,7 +82,7 @@ function initContent() {
                         "</span>\n" +
                         // "                            <a href=\"#\" class=\"view_detail col-25 button\">详情</a>\n" +
 
-                        '                        <div class="row no-gutter">\n' +
+                        '                        <div class="row no-gutter" style="height:4.5rem;">\n' +
                         '                        <div class="col-40">\n' +
                         "                            " +
                         imgStr +
