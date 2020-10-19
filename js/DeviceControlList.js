@@ -20,8 +20,7 @@ jQuery(document).ready(function () {
     var selectSubid = "";
     var clickSubid = "";
     var clickName = "";
-    loadMenu();
-    getSomeSubstation(1);
+
     if (subObj != null && subObj != undefined) {
         selectSubid = subObj.subId;
         clickName = subObj.subName;
@@ -32,6 +31,8 @@ jQuery(document).ready(function () {
             .siblings()
             .removeClass("select");
     }
+    loadMenu();
+    getSomeSubstation(1);
     $("#outTip").click(function () {
         $("#outTip").hide();
     });
@@ -268,6 +269,34 @@ jQuery(document).ready(function () {
         getSomeSubstation(1);
     });
 
+    //筛选事件新增
+    $(".pull-right").click(function () {
+        peopleType = $(this).attr("id");
+        $.router.loadPage("#page1");
+        $("#page1 .content").scrollTop(0);
+
+        $("#peopleType").text(Operation['ui_substation']);
+        $("#searchUser").prop("placeholder", Operation['ui_selectSubTip']);
+        selectUserList = subList;
+
+        $("#peopleClass").hide();
+        $("#subClass").show();
+        //组织机构
+        Substation.getDataByAjax("/getCompanyListBypIdV2", {}, function (data) {
+            $("#subClass .item-title").html('<span data-id="' + data.tBdCompany[0].fCoaccountno + '">' + Substation.removeUndefined(data.tBdCompany[0].fConame) + '</span>');
+            thisGroupid = data.tBdCompany[0].fCoaccountno;
+            getGroupClass(data.tBdCompany[0].fCoaccountno);
+        });
+
+        if (selectUserList.length > 0) {
+            $("#showSelected").html(Operation['ui_hasSelected'] + ":" + selectUserList.length + Operation['ui_personNum'] + "<i class='icon icon-up'></i>");
+            $("#showSelected").off("click", goToSelectedPage).on("click", goToSelectedPage);
+        } else {
+            $("#showSelected").html(Operation['ui_hasSelected'] + ":");
+            $("#showSelected").off("click", goToSelectedPage);
+        }
+    });
+
     //解决键盘遮挡问题
     var h = $(window).height();
     window.addEventListener("resize", function () {
@@ -311,3 +340,375 @@ jQuery(document).ready(function () {
 
 
 });
+
+//mainPage
+function listPeople(thisType, userList) {
+    var html = "";
+    if (userList.length > 0) {
+        // $(userList).each(function () {
+        //     html += '<span class="common">' + Substation.removeUndefined(this.userName) + '<i data-type=\"' + thisType + '\" data-id=\"' + this.userId + '\" data-name=\"' + Substation.removeUndefined(this.userName) + '\" class="icon icon-close"></i></span>';
+        // });
+        // $(".peopleList." + thisType).html(html);
+        // $(".peopleList." + thisType).show();
+        $(userList).each(function () {
+            selectSubid = this.userId;
+            var subObj = {
+                subId: this.userId,
+                subName: this.userName
+            };
+            localStorage.setItem("subObj", JSON.stringify(subObj));
+            try {
+                if (isAndroid) {
+                    android.setSpItem("subObj", JSON.stringify(ubObj));
+                }
+            } catch (e) {}
+            clickSubid = "";
+            $("#subName").text(this.userName);
+        });
+        $(".icon.icon-close").off("click", addCloseFunction).on("click", addCloseFunction);
+    }
+}
+
+/*
+            Following is page1 page1 page1 page1 page1
+*/
+function listSubPeople(subId) {
+    Substation.getDataByAjaxMain("/main/getDefaultInfoByfSubId", {
+        fSubid: subId
+    }, function (data) {
+        if (data.substation.defaultChargenameList != undefined) {
+            chargerUser = [];
+            $.each(data.substation.defaultChargenameList, function () {
+                chargerUser.push({
+                    userId: this.fUserid,
+                    userName: this.fUsername
+                });
+                listPeople("charger", chargerUser);
+            });
+        }
+        if (data.substation.defaultUsernameList != undefined) {
+            workerUser = [];
+            $.each(data.substation.defaultUsernameList, function () {
+                workerUser.push({
+                    userId: this.fUserid,
+                    userName: this.fUsername
+                });
+                listPeople("worker", workerUser);
+            });
+        }
+    });
+}
+
+var thisGroupid = -1;
+var subList = [];
+var selectUserList = [];
+var chargerUser = [];
+var workerUser = [];
+var peopleType = "substation";
+
+function getGroupClass(pid) {
+    $(".classUl").empty();
+    $("#classList").show();
+    //组织机构
+    Substation.getDataByAjax("/getCompanyListBypIdV2", {
+        fCoaccountno: pid
+    }, function (data) {
+        if (data.hasOwnProperty("tBdCompany") && data.tBdCompany.length > 0) {
+            $(".classUl").show();
+            var html = "";
+            $(data.tBdCompany).each(function () {
+                html += "<li>\n" +
+                    "    <div class=\"item-content\">\n" +
+                    "        <div class=\"item-inner\">\n" +
+                    "            <div class=\"item-title\">" + Substation.removeUndefined(this.fConame) + "</div>\n" +
+                    "            <div class=\"item-after\">\n" +
+                    "                <span class=\"nextClass\" data-id=\"" + this.fCoaccountno + "\" data-name=\"" + Substation.removeUndefined(this.fConame) + "\">\n" +
+                    "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
+                    "                </span>\n" +
+                    "            </div>\n" +
+                    "        </div>\n" +
+                    "    </div>\n" +
+                    "</li>";
+            });
+            $(".classUl").html(html);
+            $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
+        } else {
+            $(".classUl").hide();
+        }
+        getPersonList(pid);
+    });
+
+}
+
+function getPersonList(gid) {
+    $("#personListUl").empty();
+    Substation.postDataByAjax("/getSubstationListBySubGroupId", {
+        fCoaccountno: gid
+    }, function (data) {
+        if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
+            $(".personUl").show();
+            //修改单选
+            $("#selectAll").hide();
+            var html = "";
+            $(data.data.list).each(function () {
+                html += "<li>\n" +
+                    "    <label class=\"label-checkbox item-content\">\n" +
+                    "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
+                    "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                    "        <div class=\"item-inner\">\n" +
+                    "            <div class=\"item-title\">" + Substation.removeUndefined(this.fSubname) + "</div>\n" +
+                    "        </div>\n" +
+                    "    </label>\n" +
+                    "</li>"
+            });
+            $("#personListUl").html(html);
+            $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+            checkSelectPeople();
+        } else {
+            $(".personUl").hide();
+        }
+    });
+
+}
+
+//跳下级事件
+function nextClassClick() {
+    var clickPid = $(this).attr("data-id");
+    thisGroupid = clickPid;
+    $("#selectAll input[type='checkbox']").removeAttr("checked");
+    var clickName = $(this).attr("data-name");
+    $("#classList .item-title span").addClass("preClass");
+    $(".preClass").off("click", preClick).on("click", preClick);
+    $("#classList .item-title").append("<i class=\"icon icon-nextArrow\"></i><span data-id=\"" + clickPid + "\">" + clickName + "</span>")
+    $("#classList .item-title").scrollLeft(10000);
+    getGroupClass(clickPid);
+}
+
+//跳上级事件
+function preClick() {
+    var clickPid = $(this).attr("data-id");
+    thisGroupid = clickPid;
+    $("#selectAll input[type='checkbox']").removeAttr("checked");
+    $(this).removeClass("preClass");
+    $(this).nextAll().remove();
+    getGroupClass(clickPid);
+}
+
+//选人状态变化监听
+function addChangeListener() {
+    var thisUserid = $(this).attr("id");
+    var thisUsername = $(this).attr("data-name");
+    if (thisUserid != undefined) {
+        // if (peopleType == "substation") {
+        if ($(this).prop("checked")) {
+            selectUserList = [{
+                userId: thisUserid,
+                userName: thisUsername
+            }];
+            $("input[name='my-checkbox']").attr("checked", false);
+            $(this).prop("checked", true);
+            listSubPeople(thisUserid);
+        } else {
+            selectUserList = [];
+        }
+        // } else if (peopleType == "charger") {
+        //     if ($(this).prop("checked")) {
+        //         selectUserList = [{
+        //             userId: thisUserid,
+        //             userName: thisUsername
+        //         }];
+        //         $("input[name='my-checkbox']").attr("checked", false);
+        //         $(this).prop("checked", true);
+        //     } else {
+        //         selectUserList = [];
+        //     }
+        // } else if (peopleType == "worker") {
+        //     if ($(this).prop("checked")) {
+        //         selectUserList.push({
+        //             userId: thisUserid,
+        //             userName: thisUsername
+        //         });
+        //     } else {
+        //         $(selectUserList).each(function (i, obj) {
+        //             if (obj.userId == thisUserid) {
+        //                 selectUserList.splice(i, 1);
+        //                 return false;
+        //             }
+        //         });
+        //         $("#selectAll input[type='checkbox']").removeAttr("checked");
+        //     }
+        // }
+        if (selectUserList.length > 0) {
+            $("#showSelected").html(Operation['ui_hasSelected'] + ":" + selectUserList.length + Operation['ui_personNum'] + "<i class='icon icon-up'></i>");
+            $("#showSelected").off("click", goToSelectedPage).on("click", goToSelectedPage);
+        } else {
+            $("#showSelected").html(Operation['ui_hasSelected'] + ":");
+            $("#showSelected").off("click", goToSelectedPage);
+        }
+    }
+}
+
+$("#selectAll").change(function () {
+    if ($("#selectAll input[type='checkbox']").prop("checked")) {
+        $("#personListUl input[type='checkbox']:not(:checked)").click();
+    } else {
+        $("#personListUl input[type='checkbox']:checked").click();
+    }
+});
+
+//选择的人员复选框选中
+function checkSelectPeople() {
+    $(selectUserList).each(function () {
+        $("#" + this.userId).prop("checked", true);
+    });
+}
+
+//跳转选择人列表
+function goToSelectedPage() {
+    $.router.loadPage("#page2");
+    showPage2List();
+}
+
+function saveSelectedPeople() {
+    $.router.back();
+    // if (peopleType == "charger") {
+    //     chargerUser = selectUserList;
+    // } else if (peopleType == "worker") {
+    //     workerUser = selectUserList;
+    // } else if (peopleType == "substation") {
+    subList = selectUserList;
+    // }
+    $("#searchUser").val("");
+    listPeople(peopleType, selectUserList);
+}
+
+//模糊搜索
+function getSearchUser() {
+    $("#personListUl").empty();
+    $(".personUl").show();
+    $(".classUl").hide();
+    $("#classList").hide();
+    var typeStr = "";
+    // if (peopleType == "charger" || peopleType == "substation") {
+    typeStr = "type=\"checkbox\"";
+    $("#selectAll").hide();
+    // } else if (peopleType == "worker") {
+    //     typeStr = "type=\"checkbox\"";
+    //     $("#selectAll").show();
+    // }
+    Substation.postDataByAjax("/getSubstationListBySubGroupId", {
+        search: $("#searchUser").val()
+    }, function (data) {
+        var html = "";
+        $(data.data.list).each(function () {
+            html += "<li>\n" +
+                "    <label class=\"label-checkbox item-content\">\n" +
+                "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
+                "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+                "        <div class=\"item-inner\">\n" +
+                "            <div class=\"item-title\">" + Substation.removeUndefined(this.fSubname) + "(" + Substation.removeUndefined(this.fSubid) + ")</div>\n" +
+                "        </div>\n" +
+                "    </label>\n" +
+                "</li>";
+        });
+        $("#personListUl").html(html);
+        $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+        checkSelectPeople();
+    });
+
+}
+
+$('#searchUser').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+        if ($("#searchUser").val() != "") {
+            getSearchUser();
+            document.activeElement.blur();
+        }
+    }
+});
+
+$(".searchbar-cancel").click(function () {
+    $("#searchUser").val("");
+    getGroupClass(thisGroupid);
+});
+
+//page2
+function showPage2List() {
+    $("#page2 .content").scrollTop(0);
+    $("#selectedUl").empty();
+    var html = '';
+    $(selectUserList).each(function () {
+        html += "<li data-remove=\"" + this.userId + "\">\n" +
+            "    <div class=\"item-content\">\n" +
+            "        <div class=\"item-inner\">\n" +
+            "            <div class=\"item-title\">" + Substation.removeUndefined(this.userName) + "</div>\n" +
+            "            <div class=\"item-after\">\n" +
+            "                <span class=\"removeUser redColor\" data-id=\"" + this.userId + "\" data-name=\"" + Substation.removeUndefined(this.userName) + "\">" + Operation['ui_remove'] + "\n" +
+            "                </span>\n" +
+            "            </div>\n" +
+            "        </div>\n" +
+            "    </div>\n" +
+            "</li>";
+    });
+    $("#numberShow").html(selectUserList.length);
+    $("#selectedUl").html(html);
+    $(".removeUser").off("click", removeUser).on("click", removeUser);
+}
+
+function removeUser() {
+    $("#selectAll input[type='checkbox']").removeAttr("checked");
+    var thisUserid = $(this).attr("data-id");
+    var thisUsername = $(this).attr("data-name");
+    $("li[data-remove='" + thisUserid + "']").remove();
+    $(selectUserList).each(function (i, obj) {
+        if (obj.userId == thisUserid) {
+            selectUserList.splice(i, 1);
+            return false;
+        }
+    });
+    $("#" + thisUserid).removeAttr("checked");
+    if (selectUserList.length > 0) {
+        $("#showSelected").html(Operation['ui_hasSelected'] + ":" + selectUserList.length + Operation['ui_personNum'] + "<i class='icon icon-up'></i>");
+        $("#showSelected").off("click", goToSelectedPage).on("click", goToSelectedPage);
+    } else {
+        $("#showSelected").html(Operation['ui_hasSelected'] + ":");
+        $("#showSelected").off("click", goToSelectedPage);
+    }
+    $("#numberShow").html(selectUserList.length);
+}
+
+$(".back_btn").click(function () {
+    var u = navigator.userAgent,
+        app = navigator.appVersion;
+    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    if (isIOS) {
+        window.webkit.messageHandlers.goBackiOS.postMessage("");
+    } else {
+        android.goBack();
+    }
+});
+
+$("#postHistory").click(function () {
+    window.location.href = "taskPostHistory.html";
+});
+
+//解决键盘遮挡问题
+var h = $(window).height();
+window.addEventListener("resize", function () {
+    if ($(window).height() < h) {
+        $(".bar.bar-footer").hide();
+        $(".bar-footer~.content").css("bottom", "0");
+    }
+    if ($(window).height() >= h) {
+        $(".bar.bar-footer").show();
+        $(".bar-footer~.content").css("bottom", "2.2rem");
+    }
+    if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        window.setTimeout(function () {
+            document.activeElement.scrollIntoViewIfNeeded();
+        }, 0);
+    }
+});
+
+$.init();

@@ -400,6 +400,7 @@ function getZhLanguage() {
     ui_alarmTaskContentTip: "请输入任务内容",
     //选人
     ui_selectPeople: "选择",
+    ui_selectPosition: "选择仪表点位",
     ui_selectUser: "请输入用户名或姓名进行搜索",
     ui_hasSelected: "已选择",
     ui_organization: "用户组",
@@ -413,6 +414,7 @@ function getZhLanguage() {
     ui_substation: "变电所",
     ui_taskPost: "发布任务",
     ui_selectSubTip: "请输入变电所名称或编号进行搜索",
+    ui_selectPosTip: "请输入仪表点位名称或编号进行搜索",
     ui_repairInfo: "抢修信息",
     ui_repairRecord: "抢修记录",
     ui_alarmCleanRecord: "消警记录",
@@ -1002,6 +1004,7 @@ function getEnLanguage() {
     ui_alarmTaskContentTip: "Please enter the task content",
     //选人
     ui_selectPeople: "Select",
+    ui_selectPosition: "Select instrument point",
     ui_selectUser: "Please enter a username or name to search",
     ui_hasSelected: "Selected",
     ui_organization: "Organization",
@@ -1015,6 +1018,7 @@ function getEnLanguage() {
     ui_substation: "Substation",
     ui_taskPost: "Post task",
     ui_selectSubTip: "Please enter the name or number of the substation to search",
+    ui_selectPosTip: "Please enter the instrument point name or number to search",
     ui_repairInfo: "Emergency repair information",
     ui_repairRecord: "RushRepair record",
     ui_alarmCleanRecord: "AlarmClear record",
