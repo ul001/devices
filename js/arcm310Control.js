@@ -45,15 +45,17 @@ function initContent() {
                             "</span>";
                         var imgStr = '<img src="img/arcm300t.png">';
                     }
-                    if (meterCurrentValue.timerStatus == "0") {
-                        timerStatus = "<span class='alarmStatus'>未定时</span>";
-                    } else {
-                        timerStatus = "<span class='normalStatus'>已定时</span>";
-                    }
-                    if (meterCurrentValue.switchStatus == "0") {
-                        switchStatus = "<span class='alarmStatus'>分闸</span>";
-                    } else {
-                        switchStatus = "<span class='normalStatus'>合闸</span>";
+                    if(meterCurrentValue!=null){
+                        if (meterCurrentValue.timerStatus == "0") {
+                            timerStatus = "<span class='alarmStatus'>未定时</span>";
+                        } else {
+                            timerStatus = "<span class='normalStatus'>已定时</span>";
+                        }
+                        if (meterCurrentValue.switchStatus == "0") {
+                            switchStatus = "<span class='alarmStatus'>分闸</span>";
+                        } else {
+                            switchStatus = "<span class='normalStatus'>合闸</span>";
+                        }
                     }
                     var meterTypeName = '';
                     if (this.meterType == '1') {
