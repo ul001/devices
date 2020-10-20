@@ -335,7 +335,8 @@ $("#reset").click(function () {
                 meterCode: metercode,
                 substationId: subObj.subId,
                 type: "reset",
-                value: "1"
+                value: "1",
+                meterType:"3"
             });
         });
         if (controlJson.length == 0) {
@@ -372,7 +373,8 @@ $("#DO").click(function () {
                 meterCode: metercode,
                 substationId: subObj.subId,
                 type: "DO",
-                value: "0"
+                value: "0",
+                meterType:"3"
             });
         });
         if (controlJson.length == 0) {
@@ -409,7 +411,8 @@ $("#He").click(function () {
                 meterCode: metercode,
                 substationId: subObj.subId,
                 type: "DO",
-                value: "1"
+                value: "1",
+                meterType:"3"
             });
         });
         if (controlJson.length == 0) {
@@ -448,7 +451,8 @@ $("#pushTime").click(function () {
                 type: "DO",
                 openTime: '',
                 closeTime: '',
-                value: "2"
+                value: "2",
+                meterType:"3"
             });
         });
         if (controlJson.length == 0) {
@@ -481,7 +485,8 @@ $("#silent").click(function () {
                 meterCode: metercode,
                 substationId: subObj.subId,
                 type: "silent",
-                value: "1"
+                value: "1",
+                meterType:"3"
             });
         });
         if (controlJson.length == 0) {
@@ -518,7 +523,8 @@ $("#check").click(function () {
                 meterCode: metercode,
                 substationId: subObj.subId,
                 type: "check",
-                value: "1"
+                value: "1",
+                meterType:"3"
             });
         });
         if (controlJson.length == 0) {
