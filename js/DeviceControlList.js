@@ -332,8 +332,11 @@
      //    $("#lastMonth").click();
 
      if (selectSubid == "") {
-         //  $(".pull-right").click();
+         //  
          $.toast(Operation["ui_subSelectTip"]);
+         setTimeout(function () {
+             $(".pull-right").click();
+         }, 100);
          // $("#outTip").hide();
      } else {
          $("#searchBtn").click();

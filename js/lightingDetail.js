@@ -111,7 +111,7 @@ function creatView(param) {
             sb += '                            </li>';
         }
         //fResult
-        if (param.hasOwnProperty('deviceValue')) {
+        if (param.hasOwnProperty('deviceValue') && devicetype != "05003") {
             sb += '                            <li class="item-content">';
             sb += '                                <div class="item-inner">';
             sb += '                                    <div class="item-title" data-i18n="ui_alarmParamId">' + Operation['ui_currentstate'] + '</div>';
@@ -269,14 +269,27 @@ function controlClick(val) {
         var fMetercode = paramDetail.fMetercode != 'undefined' ? paramDetail.fMetercode : "";
         var datafuncid = paramDetail.datafuncid != 'undefined' ? paramDetail.datafuncid : "";
         var datacomid = paramDetail.datacomid != 'undefined' ? paramDetail.datacomid : "";
-        controlparam = {
-            fSubid: subid,
-            fGatewayid: datagatewayid,
-            fMetercode: fMetercode,
-            fFuncid: datafuncid,
-            fComid: datacomid,
-            fValue: val
-        };
+
+        if (devicetype == "05003") {
+            controlparam = {
+                fSubid: subid,
+                fGatewayid: datagatewayid,
+                fMetercode: fMetercode,
+                fFuncid: 'airconditioner',
+                fComid: datacomid,
+                fValue: val
+            };
+        } else {
+            controlparam = {
+                fSubid: subid,
+                fGatewayid: datagatewayid,
+                fMetercode: fMetercode,
+                fFuncid: datafuncid,
+                fComid: datacomid,
+                fValue: val
+            };
+        }
+
         arr.push(controlparam);
         // var param = {
         //   tEtControlDemandList: JSON.stringify(arr)
