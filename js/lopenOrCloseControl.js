@@ -172,10 +172,14 @@ function addItems(number, lastIndex) {
                         html +=
                             '                                <img src="img/lightClose.png">';
                     }
-                    html +=
-                        '                                <span class="right-bottom">' +
-                        (this.deviceValueExplain ? this.deviceValueExplain : "无设备") +
-                        "</span>";
+                    if (devicetype == "05003") {
+                        //空调则不显示
+                    } else {
+                        html +=
+                            '                                <span class="right-bottom">' +
+                            (this.deviceValueExplain ? this.deviceValueExplain : "无设备") +
+                            "</span>";
+                    }
                     html += "                            </div>";
                     html += "                        </label>";
                     $(".content-list").append(html);
