@@ -202,6 +202,20 @@ function fillData() {
   // });
 }
 
+$("#postAnalysis").click(function () {
+  if (isAndroid) {
+    android.goToWebActivity(
+      titleName,
+      "alarmAnalysisRank.html"
+    );
+  } else if (isIOS) {
+    window.location.href = "alarmAnalysisRank.html";
+    window.webkit.messageHandlers.needHiddenTabbar.postMessage("YES");
+  } else {
+    window.location.href = "alarmAnalysisRank.html";
+  }
+})
+
 loadMenu();
 
 $.init();

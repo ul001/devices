@@ -10,6 +10,7 @@
 .sub_card .subName {
     font-weight: bold;
     margin: 0.4rem 0;
+    font-size: 0.75rem;
 }
 
 .sub_card button {
@@ -30,4 +31,20 @@ i.icon.icon-contactphone {
     width: 0.8rem;
     height: 0.8rem;
     background-image: url(../img/i-contactPhone.png);
+}
+
+.progress {
+    width: 8rem;
+    /* border: 1px solid #D4D4D4; */
+    background: #D4D4D4;
+    height: 0.5rem;
+    display: inline-flex;
+}
+
+.progressbar {
+    background: #488CD2;
+    float: left;
+    height: 100%;
+    text-align: center;
+    line-height: 150%;
 }

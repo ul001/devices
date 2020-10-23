@@ -132,6 +132,8 @@ function getZhLanguage() {
     ui_executionprompt: "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
     //报警
     ui_Alarm: "报警",
+    ui_AlarmAnalysis: "报警分析",
+    ui_AlarmAnalysisManager: "监测点管理",
     ui_TaskPostRecord: "任务发布记录",
     //patrolContent
     ui_Subinspection: "变电所巡检",
@@ -736,6 +738,8 @@ function getEnLanguage() {
     ui_executionprompt: "There is only one patrol sheet for a single task, one patrol sheet can only be saved by one person, and multiple people may overwrite each other.",
     //报警
     ui_Alarm: "Alarm",
+    ui_AlarmAnalysis: "AlarmAnalysis",
+    ui_AlarmAnalysisManager: "AnalysisManager",
     ui_alarmConfirm: "Confirm Status",
     ui_alarmConfirmed: "Confirmed",
     ui_alarmUnconfirmed: "Unconfirmed",
