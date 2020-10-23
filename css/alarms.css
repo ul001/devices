@@ -2,14 +2,23 @@
     background-color: red;
     color: white;
 }
-.icon.icon-alarm{
-    width:1rem;
-    height:1rem;
+
+.icon.icon-alarm {
+    width: 1rem;
+    height: 1rem;
     background-image: url(../img/alarmPic.png);
 }
-.list-block{
-    margin:0;
+
+.list-block {
+    margin: 0;
 }
-.item-content{
-    line-height:3rem;
+
+.item-content {
+    line-height: 3rem;
+}
+
+i.icon.icon-analysis {
+    width: 1rem;
+    height: 1rem;
+    background-image: url(../img/i-hAnalysis.png);
 }
