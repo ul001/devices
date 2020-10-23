@@ -127,17 +127,22 @@ function addItems(number, lastIndex) {
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"content-padded\">\n" +
                         "                            <div class=\"row  no-gutter sub_card\">\n" +
-                        "                                <div class=\"col-80\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
+                        "                                <div class=\"col-90\"  onClick=\"goToDevice(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
                         "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
                         //                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
-                        "                                    <p class=\"limit-length\">" + Operation['ui_address'] + "：" + Substation.removeUnDefinedStr(this.fAddress) + "</p>\n" +
-                        "                                </div>\n" +
-                        "                                <div class=\"col-20\">\n" +
-                        "                                    <button class='bg-primary external goPhoto' type=\"button\" onclick=\"goToPhoto(" + this.fSubid + ")\">" + Operation['ui_photo'] + "\n" +
-                        "                                    </button>\n" +
-                        "                                    <br>\n" +
-                        "                                    <button class='bg-primary external goLocation' onclick=\"goToLocation(" + this.fSubid + ")\" type=\"button\">" + Operation['ui_location'] + "\n" +
-                        "                                    </button>\n" +
+                        "                                        <div>报警处理率：" +
+                        "                                            <div class=\"progress\">" +
+                        "                                                <div class=\"progressbar\" style=\"width:40%;\"><\/div>" +
+                        "                                            <\/div>" +
+                        "                                            <span class=\"total\">40%<\/span>" +
+                        "                                        <\/div>" +
+                        "                                     <p style=\"margin: 0.4rem 0;\">告警数目：54<\/p>" +
+                        "                                <\/div>" +
+                        "                                <div class=\"col-10\">\n" +
+                        "                                        <button class=\"external goPhoto\" type=\"button\">" +
+                        "                                            <img class=\"upload_img\" src=\"img\/clear_alarm.png\" style=\"width:100%\" \/>" +
+                        "                                            <!-- url(..\/img\/clear_alarm.png) -->" +
+                        "                                        <\/button>" +
                         "                                </div>\n" +
                         "                            </div>\n" +
                         "                        </div>\n" +
@@ -209,11 +214,32 @@ $(".searchbar-cancel").click(function () {
 });
 
 $(".back_btn").click(function () {
-    if (isIOS) {
-        window.webkit.messageHandlers.goBackiOS.postMessage("");
-    } else {
+    if (isAndroid) {
         android.goBack();
+    } else if (isIOS) {
+        window.history.back();
+        window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
+    } else {
+        window.history.back();
     }
 });
+
+
+//开启一个定时器
+// function run() {
+//     var bar = document.getElementById("bar");
+//     var total = document.getElementById("total");
+//     bar.style.width = 60 + "%";
+//     total.innerHTML = bar.style.width;
+// bar.style.width = parseInt(bar.style.width) + 1 + "%";
+// total.innerHTML = bar.style.width;
+// if (bar.style.width == "100%") {
+//     window.clearTimeout(timeout);
+//     return;
+// }
+// var timeout = window.setTimeout("run()", 100);
+// }
+
+// run();
 
 $.init();
