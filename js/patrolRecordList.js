@@ -68,7 +68,7 @@ function addItems(number) {
         }
     }
     Substation.getDataByAjaxNoLoading("/getPlaceCheckFormList", params, function (data) {
-            if (data.placecheckformAllList.list.length > 0) {
+            if (data.hasOwnProperty("placecheckformAllList") && data.placecheckformAllList.list.length > 0) {
                 if (pageNum == 1) {
                     $("#list-container").empty();
                 }

@@ -105,6 +105,16 @@ var maxItems = 1000;
 var itemsPerLoad = 10;
 var pageNum = 1;
 
+$("#dateStart").calendar();
+$("#dateEnd").calendar();
+var myDate = new Date;
+var year = myDate.getFullYear(); //获取当前年
+var mon = myDate.getMonth() + 1; //获取当前月
+var date = myDate.getDate(); //获取当前日
+var nowDate = year + "-" + format0(mon) + "-" + format0(date);
+$("#dateStart").val(nowDate);
+$("#dateEnd").val(nowDate);
+
 function getFirstPage() {
     $(".list-container").empty();
     pageNum = 1;
@@ -126,14 +136,14 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 function addItems(number, lastIndex) {
     var html = '';
     var url = "/getSubstationAlarmLogNum";
-    var searchKey = $("#search").val();
+    // var searchKey = $("#search").val();
     var dateStartVal = $("#dateStart").val();
     var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
     var params = {
         pageNo: pageNum,
         pageSize: number,
-        key: searchKey
+        // key: searchKey
     }
     if (dateStartVal != "") {
         params["fStarttime"] = dateStartVal + " 00:00:00";
@@ -279,62 +289,14 @@ $("#searchBtn").click(function () {
     getFirstPage();
 });
 
-$("#dateStart").calendar();
-$("#dateEnd").calendar();
-$("#listContainer").hide();
-var myDate = new Date;
-var year = myDate.getFullYear(); //获取当前年
-var mon = myDate.getMonth() + 1; //获取当前月
-var date = myDate.getDate(); //获取当前日
-var nowDate = year + "-" + format0(mon) + "-" + format0(date);
-$("#dateStart").val(nowDate);
-$("#dateEnd").val(nowDate);
 
-// function getSomeSubstation(isAll) {
-//     var url = "/getSubListByLetter";
-//     if (isAll == 1) {
-//         url = "/getSubstationListByUser";
-//     }
-//     var listObj = [];
-//     var searchKey = $("#search").val();
-//     var params = {
-//         key: searchKey
-//     };
-//     $("#listContainer").empty();
-//     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-//         if (isAll == 1) {
-//             listObj = data.list;
-//         } else {
-//             listObj = data;
-//         }
-//         $(listObj).each(function () {
-//             $("#listContainer").append(
-//                 '<li class="item-content" data-id="' +
-//                 this.fSubid +
-//                 '">' +
-//                 '<div class="item-inner">' +
-//                 '<div class="item-title">' +
-//                 this.fSubname +
-//                 "</div>" +
-//                 "</div>" +
-//                 "</li>"
-//             );
-//         });
-//         $("#listContainer").show();
-//         $("#listContainer .item-content")
-//             .unbind()
-//             .click(function () {
-//                 clickSubid = $(this).attr("data-id");
-//                 var clickName = $(this)
-//                     .find(".item-title")
-//                     .text();
-//                 $("#search").val(clickName);
-//                 $("#listContainer").empty();
-//                 $("#listContainer").hide();
-//                 //            $("#subName").text(clickName);
-//             });
-//     });
-// }
+function format0(num) {
+    if (num < 10) {
+        return "0" + num;
+    } else {
+        return num;
+    }
+}
 
 $("#search").bind("keydown", function (event) {
     if (event.keyCode == 13) {
@@ -433,7 +395,6 @@ $(".back_btn").click(function () {
         window.history.back();
     }
 });
-
 
 //开启一个定时器
 // function run() {
