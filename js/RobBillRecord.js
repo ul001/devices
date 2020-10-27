@@ -129,8 +129,11 @@ function addItems(number, clickNum) {
         if (pageNum == 1) {
           $(listDom).empty();
         }
-        var thisList = data.orderList;
-        if (thisList.length > 0) {
+        var thisList;
+        if (data.hasOwnProperty("orderList")) {
+          thisList = data.orderList;
+        }
+        if (thisList != undefined && thisList != '' && thisList.length > 0) {
           var html = "";
           $(thisList).each(function () {
             var distance = this.userDistance;
@@ -215,7 +218,7 @@ function addItems(number, clickNum) {
     );
   } else if (clickNum == 3) {
     Substation.postDataByAjaxNoLoading(url, params, function (data) {
-      if (data.pageInfo.list.length > 0) {
+      if (data.hasOwnProperty("pageInfo") && data.pageInfo.list.length > 0) {
         var listDom = "#listtab" + clickNum;
         if (pageNum == 1) {
           $(listDom).empty();

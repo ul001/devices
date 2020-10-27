@@ -79,7 +79,7 @@ function addItems(number, lastIndex) {
     }
     //    }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            if (data.tDevDeviceproblemList.list.length > 0) {
+            if (data.hasOwnProperty("tDevDeviceproblemList") && data.tDevDeviceproblemList.list.length > 0) {
                 if (pageNum == 1) {
                     $("#list-container").empty();
                 }
