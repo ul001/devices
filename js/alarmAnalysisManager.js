@@ -126,6 +126,32 @@ var nowDate = year + "-" + format0(mon) + "-" + format0(date);
 $("#dateStart").val(nowDate);
 $("#dateEnd").val(nowDate);
 
+//一键确认
+$("#clearAlarm").click(function () {
+    $.confirm(Operation["ui_selectTip"], function () {
+        var url = "/oneClickConfirmSubAlarms";
+        var params = {
+            fSubid: subId
+        };
+        var dateStartVal = $("#dateStart").val();
+        var dateEndVal = $("#dateEnd").val();
+        if (dateStartVal != "") {
+            params["fStarttime"] = dateStartVal + " 00:00:00";
+        }
+        if (dateEndVal != "") {
+            params["fEndtime"] = dateEndVal + " 23:59:59";
+        }
+        Substation.getDataByAjaxNoLoading(url, params, function (data) {
+                $.toast("一键确认成功");
+                getFirstPage();
+            },
+            function (errorCode) {
+                $.toast("一键确认失败，errorCode:" + errorCode);
+                return;
+            });
+    });
+});
+
 function format0(num) {
     if (num < 10) {
         return "0" + num;
