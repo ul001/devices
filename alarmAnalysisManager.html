@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="libs/light7.min.css" />
     <link rel="stylesheet" href="libs/light7-swiper.min.css" />
     <link rel="stylesheet" href="css/general.css" />
-    <link rel="stylesheet" href="css/alarmAnalysisRank.css" />
+    <link rel="stylesheet" href="css/alarmAnalysisManager.css" />
 </head>
 
 <body>
@@ -22,7 +22,10 @@
                     <span class="icon icon-left"></span>
                     <span data-i18n="ui_back"></span>
                 </a>
-                <h1 class="title title_color" data-i18n="ui_AlarmAnalysis"></h1>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <h1 class="title title_color" data-i18n="ui_AlarmAnalysisManager"></h1>
             </header>
             <!-- <div class="bar bar-header-secondary">
                 <div class="searchbar">
@@ -39,36 +42,74 @@
                     <div class="pull-to-refresh-arrow"></div>
                 </div>
                 <div class="list-container">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="content-padded">
-                                <div class="row  no-gutter sub_card">
-                                    <div class="col-90">
-                                        <p class="subName">安科瑞变电所</p>
-                                        <div>报警处理率：
-                                            <div class="progress">
-                                                <div class="progressbar" style="width:40%;"></div>
-                                            </div>
-                                            <span class="total">40%</span>
-                                        </div>
-                                        <!-- <p><span>报警处理率</span> <span>138546486142</span></p> -->
-                                        <p style="margin: 0.4rem 0;">告警数目：54</p>
-                                    </div>
-                                    <div class="col-10">
-                                        <button class="external goPhoto" type="button">
-                                            <img class="upload_img" src="img/clear_alarm.png" style="width:100%" />
-                                            <!-- url(../img/clear_alarm.png) -->
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
                 <!-- preloader -->
                 <div class="infinite-scroll-preloader">
                     <div class="preloader"></div>
                 </div>
+            </div>
+        </div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <!-- <div>
+                    <p class="buttons-row"><a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                </div> -->
+
+                <div>
+                    <label><span data-i18n="ui_timeSelect"></span></label><br>
+                    <div id="selectStartTime">
+                        <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly />
+                    </div>
+                    <div style="margin: 0.25rem;float: left;">-</div>
+                    <div id="selectEndTime">
+                        <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                    </div>
+                </div>
+                <div>
+                    <!-- ui_AlarmUnused: "未使用",
+                     ui_AlarmUsed: "使用",
+                     ui_AlarmDebug: "调试",
+                     ui_AlarmTest: "检测", -->
+                    <label><span data-i18n="ui_alarmConfirm"></span></label><br>
+                    <select id="fState">
+                        <option value="-1" data-i18n="ui_All"></option>
+                        <option value="0" data-i18n="ui_AlarmUnused"></option>
+                        <option value="1" data-i18n="ui_AlarmUsed"></option>
+                        <option value="2" data-i18n="ui_AlarmDebug"></option>
+                        <option value="3" data-i18n="ui_AlarmTest"></option>
+                    </select>
+                </div>
+                <!-- <div>
+                    <label><span data-i18n="ui_Eventtypes"></span></label><input id="Eventtype" type="text" />
+                </div>
+                
+                <div>
+                    <label><span data-i18n="ui_Substationname"></span></label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
+                                class="icon icon-clear"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-block">
+                    <ul id="listContainer">
+
+                    </ul>
+                </div> -->
+            </div>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a></div>
             </div>
         </div>
     </div>
@@ -77,7 +118,7 @@
     <script src="libs/language.js"></script>
     <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
     <script src="libs/tools.js"></script>
-    <script src="js/alarmAnalysisRank.js"></script>
+    <script src="js/alarmAnalysisManager.js"></script>
 </body>
 
 </html>
