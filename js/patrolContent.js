@@ -1415,7 +1415,7 @@ $("#backBtn").click(function () {
 });
 
 //内联返回
-$(".back").click(function () {
+$("#page2Back").unbind().click(function () {
   pushfDeviceproblemid = "";
   localStorage.setItem("need-refresh", "true");
   $.router.back();
