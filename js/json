@@ -1,262 +1,115 @@
-{
-    "code": 200,
-    "msg": "ok",
-    "data": {
-        "alarmEventLogById": {
-            "fAlarmeventlogid": "2020102210424641519355090",
-            "fSubid": 10100015,
-            "fMessinfocode": "Switch/On",
-            "fMessinfotypeid": 3,
-            "fDevicecode": "T101001",
-            "fParamcode": "SWITCH",
-            "fValue": 1,
-            "fAlarmtype": "合闸",
-            "fAlarmdesc": "标签:SWITCH  类型:状态变化  当前值:1",
-            "fAlarmtime": "2020-10-22 10:42:25",
-            "fConfirmstatus": false,
-            "fSubname": "测试2",
-            "fMessInfoExplain": "断路器分闸报警",
-            "fMessInfoTypeExplain": "现场报警",
-            "fMessinfolevel": 1,
-            "fMessinfolevelexplain": "一般",
-            "fDevicename": "低压进线",
-            "fParamname": "开关",
-            "valueType": "合闸"
-        }
-    }
-}
-{
-    "code": 200,
-    "msg": "ok",
-    "data": {
-        "tDtMessInfoType": {
-            "fMessinfotypeid": 3,
-            "fMessinfotypeexplain": "现场报警"
-        },
-        "alarmEventLogList": {
+ "substationAlarmLogNum": {
+            "total": 13,
+            "list": [
+                {
+                    "fSubid": 10100001,
+                    "fSubname": "银和金融押运青岛有限公司",
+                    "fLongitude": 121.30713886,
+                    "fLatitude": 31.34996039,
+                    "fAddress": "上海市上海市嘉定区育绿路253",
+                    "fLognum": 11079,
+                    "fLogconfirmednum": 1012,
+                    "fLogconfirmedrate": 0.0913
+                },
+                {
+                    "fSubid": 10100021,
+                    "fSubname": "安科瑞测试常江测试自研网关4G",
+                    "fLongitude": 121.30084976,
+                    "fLatitude": 31.4147569,
+                    "fAddress": "上海市嘉定区育绿路253",
+                    "fLognum": 1650,
+                    "fLogconfirmednum": 212,
+                    "fLogconfirmedrate": 0.1285
+                },
+                {
+                    "fSubid": 10100116,
+                    "fSubname": "YW网关双网口冗余测试LZ",
+                    "fLongitude": 0,
+                    "fLatitude": 0,
+                    "fAddress": "0",
+                    "fLognum": 640,
+                    "fLogconfirmednum": 82,
+                    "fLogconfirmedrate": 0.1281
+                },
+                {
+                    "fSubid": 10100007,
+                    "fSubname": "云平台演示箱",
+                    "fLongitude": 120.76459326,
+                    "fLatitude": 31.61492218,
+                    "fAddress": "苏州市常熟市",
+                    "fLognum": 320,
+                    "fLogconfirmednum": 52,
+                    "fLogconfirmedrate": 0.1625
+                },
+                {
+                    "fSubid": 10100011,
+                    "fSubname": "测试变电所11",
+                    "fLongitude": -0.19791068,
+                    "fLatitude": 5.55548029,
+                    "fAddress": "Accra",
+                    "fLognum": 320,
+                    "fLogconfirmednum": 41,
+                    "fLogconfirmedrate": 0.1281
+                },
+                {
+                    "fSubid": 10100114,
+                    "fSubname": "云平台演示箱1号",
+                    "fLongitude": 121.311933,
+                    "fLatitude": 31.35325101,
+                    "fAddress": "上海市嘉定区育绿路253号",
+                    "fLognum": 320,
+                    "fLogconfirmednum": 41,
+                    "fLogconfirmedrate": 0.1281
+                },
+                {
+                    "fSubid": 10100117,
+                    "fSubname": "dst演示箱",
+                    "fLongitude": 121,
+                    "fLatitude": 31,
+                    "fAddress": "11",
+                    "fLognum": 320,
+                    "fLogconfirmednum": 41,
+                    "fLogconfirmedrate": 0.1281
+                },
+                {
+                    "fSubid": 10100119,
+                    "fSubname": "演示箱wxl",
+                    "fLongitude": 1,
+                    "fLatitude": 1,
+                    "fAddress": "1",
+                    "fLognum": 320,
+                    "fLogconfirmednum": 41,
+                    "fLogconfirmedrate": 0.1281
+                },
+                {
+                    "fSubid": 10100120,
+                    "fSubname": "云平台演示箱4",
+                    "fLongitude": 121.311933,
+                    "fLatitude": 31.35007445,
+                    "fAddress": "上海市嘉定区育绿路253号",
+                    "fLognum": 320,
+                    "fLogconfirmednum": 41,
+                    "fLogconfirmedrate": 0.1281
+                },
+                {
+                    "fSubid": 10100121,
+                    "fSubname": "安科瑞运维演示机柜",
+                    "fLongitude": 121.307139,
+                    "fLatitude": 31.349961,
+                    "fAddress": "马东工业区育绿路253号",
+                    "fLognum": 320,
+                    "fLogconfirmednum": 41,
+                    "fLogconfirmedrate": 0.1281
+                }
+            ],
             "pageNum": 1,
             "pageSize": 10,
             "size": 10,
             "startRow": 1,
             "endRow": 10,
-            "total": 46,
-            "pages": 5,
-            "list": [
-                {
-                    "fAlarmeventlogid": "2020102210424641519355090",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "Switch/On",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "SWITCH",
-                    "fValue": 1,
-                    "fAlarmtype": "合闸",
-                    "fAlarmdesc": "标签:SWITCH  类型:状态变化  当前值:1",
-                    "fAlarmtime": "2020-10-22 10:42:25",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "断路器分闸报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 1,
-                    "fMessinfolevelexplain": "一般",
-                    "fDevicename": "低压进线",
-                    "fParamname": "开关",
-                    "valueType": "合闸"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210424641542889105",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "Smog/Off",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "SMOG",
-                    "fValue": 0,
-                    "fAlarmtype": "无烟",
-                    "fAlarmdesc": "标签:SMOG  类型:状态变化  当前值:0",
-                    "fAlarmtime": "2020-10-22 10:42:14",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "烟雾恢复报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 2,
-                    "fMessinfolevelexplain": "紧急",
-                    "fDevicename": "低压进线",
-                    "fParamname": "烟雾",
-                    "valueType": "无烟"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210414230674890780",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "Smog/On",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "SMOG",
-                    "fValue": 1,
-                    "fAlarmtype": "有烟",
-                    "fAlarmdesc": "标签:SMOG  类型:状态变化  当前值:1",
-                    "fAlarmtime": "2020-10-22 10:41:22",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "烟雾有烟报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 2,
-                    "fMessinfolevelexplain": "紧急",
-                    "fDevicename": "低压进线",
-                    "fParamname": "烟雾",
-                    "valueType": "有烟"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210411077462864264",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "WaterIn/Off",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "WATERIN",
-                    "fValue": 0,
-                    "fAlarmtype": "没水",
-                    "fAlarmdesc": "标签:WATERIN  类型:状态变化  当前值:0",
-                    "fAlarmtime": "2020-10-22 10:41:01",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "水浸恢复报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 2,
-                    "fMessinfolevelexplain": "紧急",
-                    "fDevicename": "低压进线",
-                    "fParamname": "水浸",
-                    "valueType": "没水"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210403804034999822",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "WaterIn/On",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "WATERIN",
-                    "fValue": 1,
-                    "fAlarmtype": "有水",
-                    "fAlarmdesc": "标签:WATERIN  类型:状态变化  当前值:1",
-                    "fAlarmtime": "2020-10-22 10:40:20",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "水浸有水报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 2,
-                    "fMessinfolevelexplain": "紧急",
-                    "fDevicename": "低压进线",
-                    "fParamname": "水浸",
-                    "valueType": "有水"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210400774382093437",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "Door/Off",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "DOOR",
-                    "fValue": 0,
-                    "fAlarmtype": "关门",
-                    "fAlarmdesc": "标签:DOOR  类型:状态变化  当前值:0",
-                    "fAlarmtime": "2020-10-22 10:39:59",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "关门报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 1,
-                    "fMessinfolevelexplain": "一般",
-                    "fDevicename": "低压进线",
-                    "fParamname": "门禁",
-                    "valueType": "关门"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210393621279097316",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "Door/On",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "DOOR",
-                    "fValue": 1,
-                    "fAlarmtype": "开门",
-                    "fAlarmdesc": "标签:DOOR  类型:状态变化  当前值:1",
-                    "fAlarmtime": "2020-10-22 10:39:18",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "开门报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 1,
-                    "fMessinfolevelexplain": "一般",
-                    "fDevicename": "低压进线",
-                    "fParamname": "门禁",
-                    "valueType": "开门"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210390349327769360",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "Switch/Off",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "SWITCH",
-                    "fValue": 0,
-                    "fAlarmtype": "分闸",
-                    "fAlarmdesc": "标签:SWITCH  类型:状态变化  当前值:0",
-                    "fAlarmtime": "2020-10-22 10:38:36",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "断路器合闸报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 1,
-                    "fMessinfolevelexplain": "一般",
-                    "fDevicename": "低压进线",
-                    "fParamname": "开关",
-                    "valueType": "分闸"
-                },
-                {
-                    "fAlarmeventlogid": "2020102210375946246348510",
-                    "fSubid": 10100015,
-                    "fMessinfocode": "Switch/On",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101001",
-                    "fParamcode": "SWITCH",
-                    "fValue": 1,
-                    "fAlarmtype": "合闸",
-                    "fAlarmdesc": "标签:SWITCH  类型:状态变化  当前值:1",
-                    "fAlarmtime": "2020-10-22 10:37:54",
-                    "fConfirmstatus": false,
-                    "fSubname": "测试2",
-                    "fMessInfoExplain": "断路器分闸报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 1,
-                    "fMessinfolevelexplain": "一般",
-                    "fDevicename": "低压进线",
-                    "fParamname": "开关",
-                    "valueType": "合闸"
-                },
-                {
-                    "fAlarmeventlogid": "2020102111295602354146270",
-                    "fSubid": 10100012,
-                    "fMessinfocode": "Switch/On",
-                    "fMessinfotypeid": 3,
-                    "fDevicecode": "T101011",
-                    "fParamcode": "SWITCH",
-                    "fValue": 1,
-                    "fAlarmtype": "合闸",
-                    "fAlarmdesc": "设备9 标签:设备9 类型:状态变化 报警描述:光伏柜分闸 当前值:1",
-                    "fAlarmtime": "2020-10-21 11:29:53",
-                    "fConfirmstatus": false,
-                    "fSubname": "银和金融押运有限公司",
-                    "fMessInfoExplain": "断路器分闸报警",
-                    "fMessInfoTypeExplain": "现场报警",
-                    "fMessinfolevel": 1,
-                    "fMessinfolevelexplain": "一般",
-                    "fDevicename": "光伏并网柜",
-                    "fParamname": "开关",
-                    "valueType": "合闸"
-                }
-            ],
-            "firstPage": 1,
+            "pages": 2,
             "prePage": 0,
             "nextPage": 2,
-            "lastPage": 5,
             "isFirstPage": true,
             "isLastPage": false,
             "hasPreviousPage": false,
@@ -264,214 +117,9 @@
             "navigatePages": 8,
             "navigatepageNums": [
                 1,
-                2,
-                3,
-                4,
-                5
-            ]
+                2
+            ],
+            "navigateFirstPage": 1,
+            "navigateLastPage": 2
         }
     }
-}
-
-
-{
-      "heartTime": 1599721785664,
-      "exData": "s=0",
-      "lon": 116.152249,
-      "lonc": 116.163865,
-      "pointType": 1,
-      "dir": 289,
-      "speed": 44,
-      "carId": 117511,
-      "latc": 29.801756,
-      "staticTime": 1599721783000,
-      "online": 1,
-      "carInfo": {
-        "fCarid": "117511",
-        "fCoaccountno": "2",
-        "fUserid": 1,
-        "fUsername": "平台超管11",
-        "fUserphone": "18930698897",
-        "fConame": "上海安科瑞",
-        "fCarname": "巡检车2",
-        "fCarlicense": "苏BFH124",
-        "fCarboximei": "359510080011535"
-      },
-
-
-      {
-    "code": 200,
-    "msg": "ok",
-    "data": [
-        {
-            "F_UserName": "测试人丙",
-            "F_LoginName": "testNew",
-            "F_Latitude": "31.349717",
-            "F_IsActive": 0,
-            "F_Longitude": "121.30568",
-            "F_UserID": 79,
-            "F_Address": "中国上海市嘉定区马陆镇育绿路193号"
-        },
-        {
-            "F_UserName": "lxy",
-            "F_LoginName": "lxy",
-            "F_Latitude": "31.350179",
-            "F_IsActive": 0,
-            "F_Longitude": "121.306317",
-            "F_UserID": 97,
-            "F_Address": "中国上海市嘉定区马陆镇育绿路195号"
-        },
-        {
-
-
-allWord: "yinhejinrongyayunqingdaoyouxiangongsi"
-
-fAddress: "青岛市城阳区兴海路15号"
-
-fApplycapacity: 300
-
-fConfigtypeid: 2
-
-fContacts: "徐永亮"
-
-fContactsPhone: "17629665216"
-
-fDefaultcharger: "1"
-
-fDefaultexecutor: "311,105"
-
-fDoor: false
-
-fInstalledcapacity: 500
-
-fLatitude: 36.243643
-
-fLongitude: 120.368266
-
-fPhoneofalarm: "17701736604;19921940127;13651805743"
-
-fPhoneofoperation: ""
-
-fSmog: false
-
-fSubgroupid: 370200
-
-fSubid: 10100001
-
-fSubname: "银和金融押运青岛有限公司"
-
-fTransformernum: 1
-
-fVisionlive: "db4057b52a374a46a13d861ed3d64237|683946436;lskdjflsdakjfkldsjffffffffffffff|555;b86082143a864f618d6d09fbbaa1fe9f|683946443"
-
-fVoltageoftrans: "10/0.4kV"
-
-fVoltagestep: 10
-
-fWaterin: false
-
-f_EpiFPrice: 1.222
-
-f_EpiGPrice: 0.364
-
-f_EpiJPrice: 0
-
-f_EpiPPrice: 0.752
-
-f_PartnerSubNo: "BPD00045"
-
-firstWord: "YHJRYYQDYXGS"
-
-substationImg: "a67c9494ec594e55ac4fdbc0b7ad2717.ai"
-
-“Object”原型
-
-
-iamgeData
-
-fCreatetime: "2020-09-15 09:18:00"
-
-fDevicejson: "[{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"image\"}, {\"name\": \"编号及名称\", \"type\": \"input\", \"value\": \"\"}]}…"
-
-fDevicename: "测试图片"
-
-fDevicenamepath: "测试1"
-
-fRealimg: "{\"file0\": \"4c10f6cf76b84ecf9302badfd5a1b129.png\"}"
-
-fSubdevicegroupid: 4672
-
-fSubdeviceinfoid: 1333
-
-fSubid: 10100001
-
-fUserid: 1
-
-
-{
-    "code": 200,
-    "msg": "ok",
-    "data": {
-        "deviceList": [
-            {
-                "fSubdeviceinfoid": 1338,
-                "fSubid": 10100001,
-                "fSubdevicegroupid": 4672,
-                "fDevicejson": "[{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"image\"}, {\"name\": \"编号及名称：\", \"type\": \"input\", \"value\": \"321\"}]}, {\"name\": \"测试\", \"value\": [{\"name\": \"序号：\", \"type\": \"input\", \"value\": \"123\"}]}, {\"name\": \"设备电子资料\", \"value\": [{\"name\": \"资料：\", \"type\": \"instruction\"}, {\"name\": \"123：\", \"type\": \"input\", \"value\": \"111\"}]}, {\"name\": \"设备试验周期\", \"value\": [{\"name\": \"安装时间\", \"type\": \"date\", \"value\": \"\"}, {\"name\": \"质保期\", \"type\": \"date\", \"value\": \"\"}]}]",
-                "fDevicename": "测试1-new",
-                "fCreatetime": "2020-09-15 14:40:29",
-                "fUserid": 1,
-                "fDevicenamepath": "测试1",
-                "fSubdevicewarranty": 0,
-                "fRealimg": "{\"file0\": \"7abdde9ae5d64d9c85df5b9c97bae574.png\", \"file1\": \"374d148d9a7a4b008664bc90894d8420.png\", \"file2\": \"f1b9bc9ab1434cdb86b9bf05dc27d8d9.png\"}"
-            },
-            {
-                "fSubdeviceinfoid": 1339,
-                "fSubid": 10100001,
-                "fSubdevicegroupid": 4672,
-                "fDevicejson": "[{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"image\"}, {\"name\": \"编号及名称：\", \"type\": \"input\", \"value\": \"\"}]}, {\"name\": \"测试\", \"value\": [{\"name\": \"序号：\", \"type\": \"input\", \"value\": \"\"}]}, {\"name\": \"设备电子资料\", \"value\": [{\"name\": \"资料：\", \"type\": \"instruction\"}, {\"name\": \"123：\", \"type\": \"input\", \"value\": \"\"}]}, {\"name\": \"设备试验周期\", \"value\": [{\"name\": \"安装时间\", \"type\": \"date\", \"value\": \"\"}, {\"name\": \"质保期\", \"type\": \"date\", \"value\": \"\"}]}]",
-                "fDevicename": "测试1-new2",
-                "fCreatetime": "2020-09-15 15:46:21",
-                "fUserid": 1,
-                "fDevicenamepath": "测试1",
-                "fRealimg": "{\"file0\": \"143e11dd283a406fa520f27094c68983.png\", \"file1\": \"2d58af4d4930485e85e343fb7a7530a2.png\"}"
-            }
-        ],
-        "template": {
-            "fPagedesigntemplateid": 295,
-            "id": 295,
-            "fDesigntemplatename": "测试1",
-            "name": "测试1",
-            "fParentid": -1,
-            "pId": -1,
-            "fSortnum": 153,
-            "fFunctionfield": "{\"checkInfo\": [{\"code\": \"1600063242760\", \"name\": \"1\", \"type\": \"radio\", \"value\": \"no\", \"suggest\": \"\", \"deadline\": \"\", \"dangerous\": \"\", \"dangerType\": \"紧急\", \"dangerCategory\": \"工具类\", \"defectPosition\": \"\", \"identification\": \"\"}, {\"code\": \"1600063243200\", \"name\": \"2\", \"type\": \"radio\", \"value\": \"no\", \"suggest\": \"\", \"deadline\": \"\", \"dangerous\": \"\", \"dangerType\": \"紧急\", \"dangerCategory\": \"工具类\", \"defectPosition\": \"\", \"identification\": \"\"}, {\"code\": \"1600063243225\", \"name\": \"3\", \"type\": \"radio\", \"value\": \"no\", \"suggest\": \"\", \"deadline\": \"\", \"dangerous\": \"\", \"dangerType\": \"紧急\", \"dangerCategory\": \"工具类\", \"defectPosition\": \"\", \"identification\": \"\"}], \"deviceInfo\": [{\"name\": \"设备实例图片\", \"value\": [{\"name\": \"image\", \"type\": \"image\", \"value\": \"devImage\"}, {\"name\": \"编号及名称\", \"type\": \"input\", \"value\": false}]}, {\"name\": \"测试\", \"value\": [{\"name\": \"序号\", \"type\": \"input\", \"value\": false}]}, {\"name\": \"设备电子资料\", \"value\": [{\"name\": \"instruction\", \"type\": \"instruction\", \"value\": \"java virtual vm.txt\"}, {\"name\": \"123\", \"type\": \"input\", \"value\": false}]}, {\"name\": \"设备试验周期\", \"value\": [{\"name\": \"安装时间\", \"type\": \"date\", \"value\": \"\"}, {\"name\": \"质保期\", \"type\": \"date\", \"value\": \"\"}]}]}",
-            "fPreviewfiles": "{\"file0\": \"5b8c421afe624ac981cbc08488a0acd0.png\", \"file1\": \"4314f9600b1a4d638b723633cabeca79.png\"}",
-            "fInstruction": "29bcec7dd63d47f0a451d3cfa003dce8.txt",
-            "fInstructionorig": "java virtual vm.txt"
-        },
-        "filePath": "fileVersion/pageCustom"
-    }
-}
-
- Object
-
-fCreatetime: "2020-10-12 16:19:04"
-
-fParentid: "uPOCtlpzftgF1OtPI"
-
-fPositionname: "A楼点位5"
-
-fPostionid: "X1zM7iV7vvhCfkOMV"
-
-fSort: 1
-
-fSubid: 10100001
-
-fUserid: 1
-
-id: "X1zM7iV7vvhCfkOMV"
-
-name: "A楼点位5"
-
-pid: "uPOCtlpzftgF1OtPI"

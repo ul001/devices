@@ -1,75 +1,44 @@
-/*    function addClick(){
-        $(".card").click(function(){
-            localStorage.setItem("fSubid",10100001);
-            window.location.href="deviceClass.html";
-        });
-
-        $(".goPhoto").click(function(e) {
-            e.stopPropagation();
-            window.location.href = "selectPhoto.html";
-        });
-
-        $(".goLocation").click(function(e) {
-            e.stopPropagation();
-            window.location.href = "location.html";
-        });
-    }*/
 var u = navigator.userAgent,
     app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-
+var subid = localStorage.getItem("fSubid");
 var upLoadClicktag = true;
 
-window.addEventListener("pageshow", function (e) {
-    // ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
-    if (e.persisted && isIOS) {
-        var needUpdate = localStorage.getItem("need-update");
-        if (needUpdate) {
-            localStorage.removeItem("need-update");
-            window.location.reload();
-        }
-        // window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
-    }
-});
-
-function goToLocation(subid) {
-    if (!upLoadClicktag) {
-        return;
-    }
-    upLoadClicktag = false;
-    setTimeout(function () {
-        upLoadClicktag = true;
-    }, 1000);
-    localStorage.setItem("fSubid", subid);
-    if (isAndroid) {
-        android.goToIn3();
-        return;
-    }
-    window.location.href = "location.html";
-}
+// window.addEventListener("pageshow", function (e) {
+//     // ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
+//     var u = navigator.userAgent,
+//         app = navigator.appVersion;
+//     var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+//     if (e.persisted && isIOS) {
+//         var needUpdate = localStorage.getItem("need-update");
+//         if (needUpdate) {
+//             localStorage.removeItem("need-update");
+//             window.location.reload();
+//         }
+//         window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
+//     }
+// });
 
 function goToManager(subId, subname) {
-    if (!upLoadClicktag) {
-        return;
-    }
-    upLoadClicktag = false;
-    setTimeout(function () {
-        upLoadClicktag = true;
-    }, 1000);
-    localStorage.setItem("fSubid", subId);
-    localStorage.setItem("fSubname", subname);
-    if (isAndroid) {
-        android.goToIn();
-        return;
-    }
-    window.location.href = "alarmAnalysisManager.html";
+    // if (!upLoadClicktag) {
+    //     return;
+    // }
+    // upLoadClicktag = false;
+    // setTimeout(function () {
+    //     upLoadClicktag = true;
+    // }, 1000);
+    // localStorage.setItem("fSubid", subId);
+    // localStorage.setItem("fSubname", subname);
+    // if (isAndroid) {
+    //     android.goToIn();
+    //     return;
+    // }
+    // window.location.href = "alarmAnalysisManager.html";
 }
 
-function cleanAlarm(subId) {
+//点击修改管理按钮
+function changeManager(devicecode, messinfocode) {
     if (!upLoadClicktag) {
         return;
     }
@@ -77,27 +46,69 @@ function cleanAlarm(subId) {
     setTimeout(function () {
         upLoadClicktag = true;
     }, 1000);
-    var url = "/oneClickConfirmSubAlarms";
+    var buttons1 = [{
+            text: '请选择',
+            label: true
+        },
+        {
+            text: '未使用',
+            bold: true,
+            // color: 'danger',
+            onClick: function () {
+                // $.alert("设置'未使用'成功");
+                setDevicestate(devicecode, '0');
+            }
+        },
+        {
+            text: '使用',
+            bold: true,
+            // color: 'danger',
+            onClick: function () {
+                // $.alert("设置'使用'成功");
+                setDevicestate(devicecode, '1');
+            }
+        },
+        {
+            text: '调试',
+            bold: true,
+            // color: 'danger',
+            onClick: function () {
+                // $.alert("设置'调试'成功");
+                setDevicestate(devicecode, '2');
+            }
+        },
+        {
+            text: '监测',
+            bold: true,
+            onClick: function () {
+                // $.alert("设置'监测'成功");
+                setDevicestate(devicecode, '3');
+            }
+        }
+    ];
+    var buttons2 = [{
+        text: '取消',
+        bg: 'danger'
+    }];
+    var groups = [buttons1, buttons2];
+    $.actions(groups);
+}
+
+function setDevicestate(devicecode, state) {
+    var url = "/setMeterState";
     var params = {
-        fSubid: subId
+        fMetercode: devicecode,
+        fState: state,
+        fSubid: subid
     };
-    var dateStartVal = $("#dateStart").val();
-    var dateEndVal = $("#dateEnd").val();
-    if (dateStartVal != "") {
-        params["fStarttime"] = dateStartVal + " 00:00:00";
-    }
-    if (dateEndVal != "") {
-        params["fEndtime"] = dateEndVal + " 23:59:59";
-    }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            $.toast("一键确认成功");
+            $.toast("设置成功");
             getFirstPage();
         },
         function (errorCode) {
-            $.toast("一键确认失败，errorCode:" + errorCode);
+            $.toast("设置失败，errorCode:" + errorCode);
             return;
         });
-
 }
 
 var loading = false;
@@ -125,15 +136,16 @@ $(document).on('refresh', '.pull-to-refresh-content', function (e) {
 
 function addItems(number, lastIndex) {
     var html = '';
-    var url = "/getSubstationAlarmLogNum";
-    var searchKey = $("#search").val();
+    var url = "/getSubDeviceAlarmLogNum";
+    // var searchKey = $("#search").val();
     var dateStartVal = $("#dateStart").val();
     var dateEndVal = $("#dateEnd").val();
     var stateVal = $("#fState").val();
     var params = {
         pageNo: pageNum,
         pageSize: number,
-        key: searchKey
+        // key: searchKey,
+        fSubid: subid
     }
     if (dateStartVal != "") {
         params["fStarttime"] = dateStartVal + " 00:00:00";
@@ -142,39 +154,37 @@ function addItems(number, lastIndex) {
         params["fEndtime"] = dateEndVal + " 23:59:59";
     }
     if (stateVal != "") {
-        params["orderby"] = stateVal;
+        params["fState"] = stateVal;
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-            var listData = data.substationAlarmLogNum;
+            var listData = data.subDeviceAlarmLogNum;
             if (listData.hasOwnProperty("list") && listData.list.length > 0) {
                 if (pageNum == 1) {
                     $(".list-container").empty();
                 }
                 $(listData.list).each(function () {
-                    var showStr;
-                    if (this.fLognum > 0 && this.fLogconfirmednum > 0) {
-                        showStr = ((this.fLogconfirmednum / this.fLognum) * 100).toFixed(1) + '%';
+                    var titleColor = '#4682B4';
+                    if (this.fState == 1) {
+                        titleColor = '#4682B4';
                     } else {
-                        showStr = '0%';
+                        titleColor = 'red';
                     }
                     html += "<div class=\"card\">\n" +
                         "                    <div class=\"card-content\">\n" +
                         "                        <div class=\"content-padded\">\n" +
                         "                            <div class=\"row  no-gutter sub_card\">\n" +
-                        "                                <div class=\"col-90\"  onClick=\"goToManager(" + this.fSubid + ",'" + this.fSubname + "')\">\n" +
-                        "                                    <p class=\"subName limit-length\">" + this.fSubname + "</p>\n" +
-                        //                    "                                    <p><i class=\"icon icon-contact\"></i>" + Substation.removeUndefined(this.fContacts) + "  <i class=\"icon icon-contactphone\"></i>" + Substation.removeUndefined(this.fContactsPhone) + "</p>\n" +
-                        "                                        <div>" + Operation['ui_AlarmDealPer'] + "：" +
-                        "                                            <div class=\"progress\">" +
-                        "                                                <div class=\"progressbar\" style=\"width:" + showStr + ";\"><\/div>" +
-                        "                                            <\/div>" +
-                        "                                            <span class=\"total\">" + showStr + "<\/span>" +
-                        "                                        <\/div>" +
-                        "                                     <p style=\"margin: 0.4rem 0;\">" + Operation['ui_AlarmAnalysisSum'] + "：" + this.fLognum + "<\/p>" +
+                        "                                <div class=\"col-90\"  onClick=\"goToManager(" + this.fDevicecode + ",'" + this.fDevicename + "')\">\n" +
+                        "                                    <p class=\"subName limit-length\">" + this.fDevicename +
+                        "                                            <span style=\"color:" + titleColor + "\">(" + this.fStateExplain + ")<\/span>" +
+                        "                                    </p>\n" +
+                        "                                        <p>" + Operation['ui_AlarmAnalysisCount'] + "：" +
+                        "                                            <span style=\"color:red\">" + this.fLogNum + "<\/span>" +
+                        "                                        <\/p>" +
+                        "                                     <p style=\"margin: 0.4rem 0;\">" + Operation['ui_AlarmAnalysisType'] + "：" + this.fMessInfoExplain + "<\/p>" +
                         "                                <\/div>" +
                         "                                <div class=\"col-10\">\n" +
-                        "                                        <button class=\"external goPhoto\" type=\"button\" onClick=\"cleanAlarm('" + this.fSubid + "')\">" +
-                        "                                            <img class=\"upload_img\" src=\"img\/clear_alarm.png\" style=\"width:90%\" \/>" +
+                        "                                        <button class=\"external goPhoto\" type=\"button\" onClick=\"changeManager('" + this.fDevicecode + "','" + this.fMessinfotypeid + "')\">" +
+                        "                                            <img class=\"upload_img\" src=\"img\/i-hAnalysisRank.png\" style=\"width:60%\" \/>" +
                         "                                        <\/button>" +
                         "                                </div>\n" +
                         "                            </div>\n" +
@@ -282,59 +292,53 @@ $("#searchBtn").click(function () {
 $("#dateStart").calendar();
 $("#dateEnd").calendar();
 $("#listContainer").hide();
-var myDate = new Date;
-var year = myDate.getFullYear(); //获取当前年
-var mon = myDate.getMonth() + 1; //获取当前月
-var date = myDate.getDate(); //获取当前日
-var nowDate = year + "-" + format0(mon) + "-" + format0(date);
-$("#dateStart").val(nowDate);
-$("#dateEnd").val(nowDate);
+getSomeSubstation(1);
 
-// function getSomeSubstation(isAll) {
-//     var url = "/getSubListByLetter";
-//     if (isAll == 1) {
-//         url = "/getSubstationListByUser";
-//     }
-//     var listObj = [];
-//     var searchKey = $("#search").val();
-//     var params = {
-//         key: searchKey
-//     };
-//     $("#listContainer").empty();
-//     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-//         if (isAll == 1) {
-//             listObj = data.list;
-//         } else {
-//             listObj = data;
-//         }
-//         $(listObj).each(function () {
-//             $("#listContainer").append(
-//                 '<li class="item-content" data-id="' +
-//                 this.fSubid +
-//                 '">' +
-//                 '<div class="item-inner">' +
-//                 '<div class="item-title">' +
-//                 this.fSubname +
-//                 "</div>" +
-//                 "</div>" +
-//                 "</li>"
-//             );
-//         });
-//         $("#listContainer").show();
-//         $("#listContainer .item-content")
-//             .unbind()
-//             .click(function () {
-//                 clickSubid = $(this).attr("data-id");
-//                 var clickName = $(this)
-//                     .find(".item-title")
-//                     .text();
-//                 $("#search").val(clickName);
-//                 $("#listContainer").empty();
-//                 $("#listContainer").hide();
-//                 //            $("#subName").text(clickName);
-//             });
-//     });
-// }
+function getSomeSubstation(isAll) {
+    var url = "/getSubListByLetter";
+    if (isAll == 1) {
+        url = "/getSubstationListByUser";
+    }
+    var listObj = [];
+    var searchKey = $("#search").val();
+    var params = {
+        key: searchKey
+    };
+    $("#listContainer").empty();
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
+        if (isAll == 1) {
+            listObj = data.list;
+        } else {
+            listObj = data;
+        }
+        $(listObj).each(function () {
+            $("#listContainer").append(
+                '<li class="item-content" data-id="' +
+                this.fSubid +
+                '">' +
+                '<div class="item-inner">' +
+                '<div class="item-title">' +
+                this.fSubname +
+                "</div>" +
+                "</div>" +
+                "</li>"
+            );
+        });
+        $("#listContainer").show();
+        $("#listContainer .item-content")
+            .unbind()
+            .click(function () {
+                clickSubid = $(this).attr("data-id");
+                var clickName = $(this)
+                    .find(".item-title")
+                    .text();
+                $("#search").val(clickName);
+                $("#listContainer").empty();
+                $("#listContainer").hide();
+                //            $("#subName").text(clickName);
+            });
+    });
+}
 
 $("#search").bind("keydown", function (event) {
     if (event.keyCode == 13) {
@@ -366,12 +370,12 @@ $(".icon.icon-clear").click(function () {
 });
 
 //时间快捷按钮
-// $(".buttons-row .button").click(function () {
-//     $(this)
-//         .addClass("active")
-//         .siblings()
-//         .removeClass("active");
-// });
+$(".buttons-row .button").click(function () {
+    $(this)
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+});
 
 Date.prototype.format = function (fmt) {
     //author: meizz
@@ -428,28 +432,10 @@ $(".back_btn").click(function () {
         android.goBack();
     } else if (isIOS) {
         window.history.back();
-        window.webkit.messageHandlers.needHiddenTabbar.postMessage("NO");
     } else {
         window.history.back();
     }
 });
 
-
-//开启一个定时器
-// function run() {
-//     var bar = document.getElementById("bar");
-//     var total = document.getElementById("total");
-//     bar.style.width = 60 + "%";
-//     total.innerHTML = bar.style.width;
-// bar.style.width = parseInt(bar.style.width) + 1 + "%";
-// total.innerHTML = bar.style.width;
-// if (bar.style.width == "100%") {
-//     window.clearTimeout(timeout);
-//     return;
-// }
-// var timeout = window.setTimeout("run()", 100);
-// }
-
-// run();
 
 $.init();

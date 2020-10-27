@@ -33,22 +33,6 @@ i.icon.icon-contactphone {
     background-image: url(../img/i-contactPhone.png);
 }
 
-.progress {
-    width: 8rem;
-    /* border: 1px solid #D4D4D4; */
-    background: #D4D4D4;
-    height: 0.5rem;
-    display: inline-flex;
-}
-
-.progressbar {
-    background: #488CD2;
-    float: left;
-    height: 100%;
-    text-align: center;
-    line-height: 150%;
-}
-
 i.icon.icon-selectSome {
     width: 1rem;
     height: 1rem;
