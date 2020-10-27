@@ -100,7 +100,6 @@ function getZhLanguage() {
     // selectPhoto
     ui_photo: "照片",
 
-
     //todoItem
     ui_taskType: "任务类型",
     ui_taskTypeSelect: "任务类型筛选",
@@ -129,11 +128,25 @@ function getZhLanguage() {
     ui_register: "签到",
     ui_ImplementDetail: "执行明细",
     ui_attention: "注意！",
-    ui_executionprompt: "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
+    ui_executionprompt:
+      "单个任务仅一份巡检单，一份巡检单仅且只能一个人保存，多人同时保存可能相互覆盖。",
     //报警
     ui_Alarm: "报警",
     ui_AlarmAnalysis: "报警分析",
     ui_AlarmAnalysisManager: "监测点管理",
+    ui_AlarmDealPer: "报警处理率",
+    ui_AlarmAnalysisSum: "告警数目",
+    ui_AlarmAnalysisCount: "报警次数",
+    ui_AlarmAnalysisType: "报警类型",
+    ui_AlarmDealPositive: "报警处理率正序",
+    ui_AlarmDealReverse: "报警处理率反序",
+    ui_AlarmAnalysisPositive: "报警数正序",
+    ui_AlarmAnalysisReverse: "报警数反序",
+    ui_AlarmUnused: "未使用",
+    ui_AlarmUsed: "使用",
+    ui_AlarmDebug: "调试",
+    ui_AlarmTest: "检测",
+
     ui_TaskPostRecord: "任务发布记录",
     //patrolContent
     ui_Subinspection: "变电所巡检",
@@ -623,7 +636,8 @@ function getEnLanguage() {
     ui_selectSub: "Select a substation",
     ui_subHolder: "Please enter the substation name or number",
     ui_notifSearch: "Please enter the Alarm name",
-    ui_subHolderNoCode: "Please enter the task number/task content/substation name",
+    ui_subHolderNoCode:
+      "Please enter the task number/task content/substation name",
     ui_pleaseInputPwd: "Please input a password",
     ui_needInputPwd: "Secondary password is required to control the device",
     ui_search: "Search List",
@@ -735,11 +749,25 @@ function getEnLanguage() {
     ui_register: "Register",
     ui_ImplementDetail: "Execute Detail",
     ui_attention: "Attention",
-    ui_executionprompt: "There is only one patrol sheet for a single task, one patrol sheet can only be saved by one person, and multiple people may overwrite each other.",
+    ui_executionprompt:
+      "There is only one patrol sheet for a single task, one patrol sheet can only be saved by one person, and multiple people may overwrite each other.",
     //报警
     ui_Alarm: "Alarm",
+    ui_AlarmDealPer: "Alarm Rate",
+    ui_AlarmAnalysisSum: "Alarms Sum",
+    ui_AlarmAnalysisCount: "Alarms Count",
+    ui_AlarmAnalysisType: "Alarms Type",
     ui_AlarmAnalysis: "AlarmAnalysis",
     ui_AlarmAnalysisManager: "AnalysisManager",
+    ui_AlarmDealPositive: "DealPositive",
+    ui_AlarmDealReverse: "DealReverse",
+    ui_AlarmAnalysisPositive: "CountPositive",
+    ui_AlarmAnalysisReverse: "CountReverse",
+    ui_AlarmUnused: "Unused",
+    ui_AlarmUsed: "Used",
+    ui_AlarmDebug: "Debug",
+    ui_AlarmTest: "Test",
+
     ui_alarmConfirm: "Confirm Status",
     ui_alarmConfirmed: "Confirmed",
     ui_alarmUnconfirmed: "Unconfirmed",
@@ -758,17 +786,20 @@ function getEnLanguage() {
     //patrolContent
     ui_showOnlydevice: "Show only device",
     ui_DefectRegist: "Defect Regist",
-    ui_hasnosave: "The current patrol information has not been saved. Are you sure you want to leave?",
+    ui_hasnosave:
+      "The current patrol information has not been saved. Are you sure you want to leave?",
     ui_nodeviceInThis: "No devices under this group!",
     ui_noDeviceRecord: "No Device Record！",
     ui_morethansixpic: "Upload up Max Six pictures",
     ui_selectDefectLoc: "Please select defect location!",
     ui_uploadSuccess: "Upload Success",
     ui_noDefectRecord: "No Defect Record！",
-    ui_noSaveWantOut: "The message has not been saved. Are you sure you want to exit?",
+    ui_noSaveWantOut:
+      "The message has not been saved. Are you sure you want to exit?",
     ui_noSaveWantDelete: "Are you sure you want to delete the saved defect?",
     ui_fillrequireditems: "Please fill in the required items",
-    ui_gotowebpagedevice: "You can go to webpage device management -> device definition -> select(",
+    ui_gotowebpagedevice:
+      "You can go to webpage device management -> device definition -> select(",
     ui_patrolinformationadd: ")Group - > patrol information add patrol item",
     ui_Thefileformatmustbe: "The file format must be:png/jpg/jpeg",
     ui_defectPoision: "Defect location：",
@@ -821,7 +852,8 @@ function getEnLanguage() {
     ui_cannotdel: "No devices can be removed.",
     ui_suredel: "Are you sure to delete the device",
     ui_question: "?",
-    ui_devicetemplate: "No device template information, please go to the web page to add!",
+    ui_devicetemplate:
+      "No device template information, please go to the web page to add!",
     //todoitems
     ui_todo: "To-do",
     ui_doing: "Doing",
@@ -851,12 +883,15 @@ function getEnLanguage() {
     ui_openTaskTip: "Please start the task first!",
     ui_signinTip: "Please sign in first!",
     ui_openTraceTip: "Do you want to turn on track recording?",
-    ui_localErrorTip: "Unable to get location, check network and make sure location authorization.",
-    ui_gpsTip: "Timeout for obtaining location, it is recommended to turn on GPS positioning service.",
+    ui_localErrorTip:
+      "Unable to get location, check network and make sure location authorization.",
+    ui_gpsTip:
+      "Timeout for obtaining location, it is recommended to turn on GPS positioning service.",
     ui_signSuccessTip: "Sign in successfully!",
     ui_uploadTaskTip: "Are you sure to submit the task?",
     ui_uploadTaskSuccessTip: "Task submitted successfully!",
-    ui_endTraceTip: "This task is over. Do you want to turn off the track record?",
+    ui_endTraceTip:
+      "This task is over. Do you want to turn off the track record?",
     ui_plannedDone: "Complete on time",
     ui_overLimitDone: "Timeout completion",
     ui_unDone: "Unfinished",
@@ -866,7 +901,8 @@ function getEnLanguage() {
     ui_chargeReturnTip: "Are you sure to reject the task?",
     //missionmanage
     ui_meter: "meters",
-    ui_noStartTimeTraceTip: "The executor has not open the trajectory service and cannot query its track.",
+    ui_noStartTimeTraceTip:
+      "The executor has not open the trajectory service and cannot query its track.",
     ui_defectAdvice1: "Pending customer response",
     ui_defectAdvice2: "Consent to deal",
     ui_defectAdvice3: "Others",
@@ -882,7 +918,8 @@ function getEnLanguage() {
     ui_solvedTime: "Disappear time:",
     ui_customerSign: "Customer signature",
     ui_errorTitle: "Page is not responding",
-    ui_errorTip: "The page is not responding, please check the network connection.",
+    ui_errorTip:
+      "The page is not responding, please check the network connection.",
     //alarmsDetails
     ui_MeterName: "MeterName：",
     ui_EventType: "EventType：",
@@ -948,8 +985,10 @@ function getEnLanguage() {
     ui_normal: "normal",
     ui_deviceId: "Number",
     ui_operateTip: "Do not operate frequently!",
-    ui_operateAllTip: "The control command sending interval is 15 seconds, please do not operate frequently!",
-    ui_operateAllTipOf30: "The control command sending interval is 30 seconds, please do not operate frequently!",
+    ui_operateAllTip:
+      "The control command sending interval is 15 seconds, please do not operate frequently!",
+    ui_operateAllTipOf30:
+      "The control command sending interval is 30 seconds, please do not operate frequently!",
     ui_noDeviceList: "No device list",
     ui_openRefrigeration: "OpenRefrigeration",
     ui_closeRefrigeration: "CloseRefrigeration",
@@ -1021,8 +1060,10 @@ function getEnLanguage() {
     //发布任务
     ui_substation: "Substation",
     ui_taskPost: "Post task",
-    ui_selectSubTip: "Please enter the name or number of the substation to search",
-    ui_selectPosTip: "Please enter the instrument point name or number to search",
+    ui_selectSubTip:
+      "Please enter the name or number of the substation to search",
+    ui_selectPosTip:
+      "Please enter the instrument point name or number to search",
     ui_repairInfo: "Emergency repair information",
     ui_repairRecord: "RushRepair record",
     ui_alarmCleanRecord: "AlarmClear record",
@@ -1057,7 +1098,8 @@ function getEnLanguage() {
     ui_navigation: "Navi",
     ui_isSureRobBill: "Are you sure to rob the bill?",
     ui_pleaseSelectPerson: "Please select executor",
-    ui_nolocation: "The latitude and longitude of the substation have not been configured!",
+    ui_nolocation:
+      "The latitude and longitude of the substation have not been configured!",
     ui_resetclear: "Reset",
     ui_RobTaskNo: "Task No：",
     ui_RobTaskInitiator: "Task Initiator：",
@@ -1073,7 +1115,8 @@ function getEnLanguage() {
     code_200: "Request succeeds, insert success",
     code_201: "Primary foreign key exception",
     code_401: "The client needs to be authenticated, the client needs to log",
-    code_105: "New items are not allowed in the entry contains details of equipment or inspection equipment item details",
+    code_105:
+      "New items are not allowed in the entry contains details of equipment or inspection equipment item details",
     code_101: "Please delete the child",
     code_500: "Service Exception",
     code_1000: "Pagecustom database table data anomalies",
@@ -1082,7 +1125,8 @@ function getEnLanguage() {
     code_301: "File upload failed",
     code_302: "Please add a picture",
     code_303: "Delete failed, not this picture",
-    code_107: "New item type of business needs to be consistent with the parent service type",
+    code_107:
+      "New item type of business needs to be consistent with the parent service type",
     code_108: "Without this menu",
     code_109: "This menu is not initialized sort value",
     code_120: "There is no change in the menu",
@@ -1119,11 +1163,16 @@ function getEnLanguage() {
     code_318: "The current mission has a single inspection",
     code_319: "It is not responsible for the executor",
     code_320: "Currently exist under the user role and its subordinate role",
-    code_321: "The presence of the user currently subordinate user group and user group",
-    code_322: "The presence of substations under the current organization and its subordinate organizations",
-    code_323: "The presence of the organization and its subordinate role under the current organizational structure",
-    code_324: "User groups exist under the current organization and its subordinate organizations",
-    code_325: "Substation region exists under the current region and its subordinate",
+    code_321:
+      "The presence of the user currently subordinate user group and user group",
+    code_322:
+      "The presence of substations under the current organization and its subordinate organizations",
+    code_323:
+      "The presence of the organization and its subordinate role under the current organizational structure",
+    code_324:
+      "User groups exist under the current organization and its subordinate organizations",
+    code_325:
+      "Substation region exists under the current region and its subordinate",
     code_326: "H5 file upload failed",
     code_327: "Insert fails, the company name already exists",
     code_328: "Insert failed, please try again (Company Number repeat)",
@@ -1133,7 +1182,8 @@ function getEnLanguage() {
     code_332: "File size can not exceed 10M",
     code_333: "Failed to delete database records",
     code_334: "file does not exist",
-    code_335: "The user is disabled, please notify the administrator open permissions",
+    code_335:
+      "The user is disabled, please notify the administrator open permissions",
     code_336: "You can not disable the currently logged on user",
     code_700: "Refresh token",
     code_205: "The device already exists",
@@ -1158,7 +1208,8 @@ function getEnLanguage() {
     code_355: "admin role can not be deleted",
     code_356: "admin user login name can not be modified",
     code_357: "admin users can not delete",
-    code_358: "Deletion failed, please log in with administrator privileges account",
+    code_358:
+      "Deletion failed, please log in with administrator privileges account",
     code_359: "User login name already exists",
     code_360: "Home current configuration as the default configuration",
     code_361: "EZVIZ appkey and secret information is not configured",
@@ -1169,13 +1220,17 @@ function getEnLanguage() {
     code_366: "The number of substations reaches the upper limit",
     code_367: "The number of instruments reaches the upper limit",
     code_368: "Without this substation",
-    code_369: "You can not find any information on the organization of the substation",
+    code_369:
+      "You can not find any information on the organization of the substation",
     code_370: "admin user can not be disabled",
     code_371: "You can not modify the admin user organization or role",
     code_372: "All the user has not selected substation",
-    code_373: "The template and its subordinate template has been used in a substation",
-    code_374: "The substation number is out of range, can not be used to automatically generate",
-    code_375: "Present in the system numbered 10,109,999 substation, can not be automatically generated, please contact the administrator",
+    code_373:
+      "The template and its subordinate template has been used in a substation",
+    code_374:
+      "The substation number is out of range, can not be used to automatically generate",
+    code_375:
+      "Present in the system numbered 10,109,999 substation, can not be automatically generated, please contact the administrator",
     code_376: "In this substation, meter number at the gateway already exists",
     code_5000: "The request failed server abnormal",
     code_377: "The substation id available",
@@ -1183,21 +1238,27 @@ function getEnLanguage() {
     code_379: "Primary key of the record already exists",
     code_380: "Equipment same name",
     code_381: "The substation equipment is no packet",
-    code_382: "The current substation equipment under the same name already exists in the device grouping, proposed changes",
-    code_383: "The queue server connection timed out, please check if the queue server configuration is correct",
-    code_384: "Queue creation failed, please check that the queue server account used has sufficient operation rights",
-    code_385: "Business queue does not exist, please check whether the corresponding business field is correct",
+    code_382:
+      "The current substation equipment under the same name already exists in the device grouping, proposed changes",
+    code_383:
+      "The queue server connection timed out, please check if the queue server configuration is correct",
+    code_384:
+      "Queue creation failed, please check that the queue server account used has sufficient operation rights",
+    code_385:
+      "Business queue does not exist, please check whether the corresponding business field is correct",
     code_386: "Version number already exists",
     code_387: "Parameter does not exist",
     code_388: "The activation code has expired and cannot be updated",
-    code_389: "Under the current alarm classification, the alarm type already exists, and the alarm classification cannot be deleted",
+    code_389:
+      "Under the current alarm classification, the alarm type already exists, and the alarm classification cannot be deleted",
     code_390: "Invalid subscription",
     code_391: "Alarm type template cannot be deleted",
     code_392: "Hosting has expired, please contact the administrator",
     code_393: "Parameter value does not meet specifications",
     code_394: "Required parameters are missing",
     code_395: "Work notifications cannot be changed",
-    code_396: "The organization to which the user belongs has expired, please go to the organization management to update the usage time",
+    code_396:
+      "The organization to which the user belongs has expired, please go to the organization management to update the usage time",
     code_397: "Third party applicationkey cannot be empty",
     code_398: "Incorrect third party data not filled in",
     code_399: "Third party domain name cannot be empty",
