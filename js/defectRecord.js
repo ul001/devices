@@ -209,12 +209,14 @@ $(function () {
         $(".buttons-row .button").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
         });
+
         $("#today").click(function () {
             var myDate = new Date();
             var todayVal = myDate.format("yyyy-MM-dd");
             Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
             Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
         });
+
         $("#yestoday").click(function () {
             var myDate = new Date();
             myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
@@ -222,6 +224,7 @@ $(function () {
             Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
             Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
         });
+
         $("#thisMonth").click(function () {
             var myDate = new Date();
             var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
@@ -231,6 +234,7 @@ $(function () {
             Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
             Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
         });
+
         $("#lastMonth").click(function () {
             var myDate = new Date();
             var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);

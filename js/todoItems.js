@@ -347,8 +347,11 @@ jQuery(document).ready(function () {
       params['orderby'] = orderby;
     }
     Substation.getDataByAjaxNoLoading(url, params, function (data) {
-      var taskList = data.taskList;
-      if (taskList.hasOwnProperty("list") && taskList.list.length > 0) {
+      var taskList;
+      if (data.hasOwnProperty("taskList")) {
+        taskList = data.taskList;
+      }
+      if (taskList != undefined && taskList != '' && taskList.hasOwnProperty("list") && taskList.list.length > 0) {
         if (lastIndex == 0) {
           var list = "#listtab" + clickNum;
           $(list).empty();
