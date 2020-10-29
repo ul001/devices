@@ -417,6 +417,25 @@ function loadPage() {
       });
   }
 
+//保存后更新左侧分组
+  function updatePageDataH5() {
+    Substation.getDataByAjax(
+      "/subDeviceTreeSelectHideOrShowForCharger", {
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid
+      },
+      function (data) {
+        allGroupList = data.subDeviceGroupList;
+        if (pids.length>1) {
+          pids.splice(-1, 1);
+        }
+        var lastPId = pids[pids.length-1].pid;
+        fillData(lastPId);
+        $(".open-panel").click();
+      }
+    );
+  }
+
   function fillData(parentId) {
     /*        var params = {
                     fSubid: selectSubid,
@@ -712,7 +731,7 @@ function loadPage() {
     }, 1000);
     hasSave = true;
     saveThisPage();
-    updatePageData();
+    updatePageDataH5();
     //添加判断
     if ($(".buttons-tab .tab-link:last").hasClass("active")) {
       $(".icon-select").click();
