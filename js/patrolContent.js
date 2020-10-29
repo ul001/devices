@@ -410,7 +410,10 @@ function loadPage() {
         if (pids[clickNum + 1] != null) {
           pids.splice(-1, 1);
         }
-        clickNum--;
+        if(clickNum>0){
+            //点击数减一
+            clickNum--;
+        }
         var lastPId = pids[clickNum];
         pids.splice(-1, 1);
         fillData(lastPId.pid);
@@ -428,6 +431,10 @@ function loadPage() {
         allGroupList = data.subDeviceGroupList;
         if (pids.length>1) {
           pids.splice(-1, 1);
+          if(clickNum>0){
+              //点击数减一
+              clickNum--;
+          }
         }
         var lastPId = pids[pids.length-1].pid;
         fillData(lastPId);
