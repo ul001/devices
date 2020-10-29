@@ -205,7 +205,7 @@ function fillData() {
 $("#postAnalysis").click(function () {
   if (isAndroid) {
     android.goToWebActivity(
-      titleName,
+      Operation["ui_AlarmAnalysis"],
       "alarmAnalysisRank.html"
     );
   } else if (isIOS) {

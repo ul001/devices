@@ -410,9 +410,9 @@ function loadPage() {
         if (pids[clickNum + 1] != null) {
           pids.splice(-1, 1);
         }
-        if(clickNum>0){
-            //点击数减一
-            clickNum--;
+        if (clickNum > 0) {
+          //点击数减一
+          clickNum--;
         }
         var lastPId = pids[clickNum];
         pids.splice(-1, 1);
@@ -420,7 +420,7 @@ function loadPage() {
       });
   }
 
-//保存后更新左侧分组
+  //保存后更新左侧分组
   function updatePageDataH5() {
     Substation.getDataByAjax(
       "/subDeviceTreeSelectHideOrShowForCharger", {
@@ -710,13 +710,25 @@ function loadPage() {
     });
   }
 
+  //点击筛选
   function addLeftClick() {
     $(".icon-select").click(function () {
       if (canClick != "false" && !hasSave) {
         var str = Operation["ui_hasnosave"];
-        $.confirm(str, function () {
-          $(".open-panel").click();
-        });
+        $.confirm(str,
+          function () {
+            hasSave = true;
+            saveThisPage();
+            updatePageDataH5();
+            //添加判断
+            if ($(".buttons-tab .tab-link:last").hasClass("active")) {
+              $(".icon-select").click();
+            }
+            $(".open-panel").click();
+          },
+          function () {
+            $(".open-panel").click();
+          });
       } else {
         $(".open-panel").click();
       }
