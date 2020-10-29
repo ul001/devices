@@ -429,14 +429,10 @@ function loadPage() {
       },
       function (data) {
         allGroupList = data.subDeviceGroupList;
-        if (pids.length>1) {
+        if (pids[clickNum + 1] != null) {
           pids.splice(-1, 1);
-          if(clickNum>0){
-              //点击数减一
-              clickNum--;
-          }
         }
-        var lastPId = pids[pids.length-1].pid;
+        var lastPId = pids[clickNum].pid;
         fillData(lastPId);
         $(".open-panel").click();
       }
