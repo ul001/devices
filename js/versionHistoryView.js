@@ -25,6 +25,10 @@ if (isPush == "0" && historyLog) {
     } else {
         document.getElementById("videoplay").src = videoSrc;
         document.getElementById("videoplay").play();
+        var msgDic = {
+            videoUrl: videoSrc
+        };
+        window.webkit.messageHandlers.downloadVideo.postMessage(msgDic);
     }
     $("#updateLog").html(historyLog);
     //    document.getElementById("videoplay").play();
@@ -71,6 +75,10 @@ function getData() {
                             } else {
                                 document.getElementById("videoplay").src = videoSrc;
                                 document.getElementById("videoplay").play();
+                                var msgDic = {
+                                    videoUrl: videoSrc
+                                };
+                                window.webkit.messageHandlers.downloadVideo.postMessage(msgDic);
                             }
                             $("#updateLog").html(historyLog);
                         }
