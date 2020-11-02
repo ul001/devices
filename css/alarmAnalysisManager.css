@@ -1,99 +1,99 @@
 .sub_card {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .sub_card p {
-    margin: 0 0;
+  margin: 0 0;
 }
 
 .sub_card .subName {
-    font-weight: bold;
-    margin: 0.4rem 0;
-    font-size: 0.75rem;
+  font-weight: bold;
+  margin: 0.4rem 0;
+  font-size: 0.75rem;
 }
 
 .sub_card button {
-    border: none;
-    border-radius: 0.2rem;
-    padding: 0.2rem 0;
-    width: 100%;
-    margin: 0.1rem 0;
+  border: none;
+  border-radius: 0.2rem;
+  padding: 0.2rem 0;
+  width: 100%;
+  margin: 0.1rem 0;
+  background-color: #ffffff;
 }
 
 i.icon.icon-contact {
-    width: 0.8rem;
-    height: 0.8rem;
-    background-image: url(../img/i-contact.png);
+  width: 0.8rem;
+  height: 0.8rem;
+  background-image: url(../img/i-contact.png);
 }
 
 i.icon.icon-contactphone {
-    width: 0.8rem;
-    height: 0.8rem;
-    background-image: url(../img/i-contactPhone.png);
+  width: 0.8rem;
+  height: 0.8rem;
+  background-image: url(../img/i-contactPhone.png);
 }
 
 i.icon.icon-selectSome {
-    width: 1rem;
-    height: 1rem;
-    background-image: url(../img/i-selectSome.png);
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../img/i-selectSome.png);
 }
 
 .content-block .buttons-row .button {
-    font-size: .75rem;
-    border-color: #02A8A6;
-    color: #02A8A6;
+  font-size: 0.75rem;
+  border-color: #02a8a6;
+  color: #02a8a6;
 }
 
 .content-block .buttons-row .button.active {
-    font-size: .75rem;
-    border-color: #02A8A6;
-    color: #fff;
-    background-color: #02A8A6;
+  font-size: 0.75rem;
+  border-color: #02a8a6;
+  color: #fff;
+  background-color: #02a8a6;
 }
 
 .content-block {
-    max-height: 90%;
-    overflow: auto;
-    margin: 0;
+  max-height: 90%;
+  overflow: auto;
+  margin: 0;
 }
 
 .content-block {
-    color: #3d4145;
-
+  color: #3d4145;
 }
 
 #panel-right-demo {
-    background-color: #FFFFFF;
-    color: #3d4145;
-    overflow: hidden;
+  background-color: #ffffff;
+  color: #3d4145;
+  overflow: hidden;
 }
 
 .content-block label {
-    font-size: 0.9rem;
-    color: black;
+  font-size: 0.9rem;
+  color: black;
 }
 
 .button.button-fill.button-cancel {
-    background: #ccc;
-    color: #3d4145;
+  background: #ccc;
+  color: #3d4145;
 }
 
 #searchBtn,
 #commitBtn {
-    background: #02A8A6;
+  background: #02a8a6;
 }
 
 .btnBar {
-    /*position:absolute;*/
-    right: 0;
-    bottom: 0;
-    width: 100%;
-    position: fixed;
+  /*position:absolute;*/
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
 }
 
 .btnBar .button {
-    border-radius: initial;
+  border-radius: initial;
 }
 
 #dateStart,
@@ -101,34 +101,34 @@ i.icon.icon-selectSome {
 #fState,
 #dangerType,
 #search {
-    border-radius: 0.25rem;
-    border: 0.05rem solid #CCCCCC;
-    height: 1.5rem;
-    margin: 0.1rem 0 0.5rem 0;
+  border-radius: 0.25rem;
+  border: 0.05rem solid #cccccc;
+  height: 1.5rem;
+  margin: 0.1rem 0 0.5rem 0;
 }
 
 #dateStart,
 #dateEnd {
-    padding-left: 0.25rem;
-    width: 100%;
-    font-size: 0.75rem;
+  padding-left: 0.25rem;
+  width: 100%;
+  font-size: 0.75rem;
 }
 
 #selectStartTime,
 #selectEndTime {
-    float: left;
-    width: 46%;
+  float: left;
+  width: 46%;
 }
 
 #fState,
 #dangerType,
 #search {
-    width: 100%;
+  width: 100%;
 }
 
 i.icon.icon-clearAlarm {
-    width: 1rem;
-    height: 1rem;
-    background-image: url(../img/clear_alarm.png);
-    margin-left: .2rem;
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../img/clear_alarm.png);
+  margin-left: 0.2rem;
 }

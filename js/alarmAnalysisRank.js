@@ -63,7 +63,7 @@ function goToManager(subId, subname) {
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
     if (isAndroid) {
-        android.goToIn();
+        android.goToIn('alarmAnalysisManager.html');
         return;
     }
     window.location.href = "alarmAnalysisManager.html";
