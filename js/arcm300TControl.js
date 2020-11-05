@@ -340,6 +340,43 @@ $("#DO").click(function () {
         meterCode: metercode,
         substationId: subObj.subId,
         type: "DO",
+        value: "0"
+      });
+    });
+    if (controlJson.length == 0) {
+      $.toast(Operation["ui_selectNo"]);
+      return;
+    }
+    setTimeout(function () {
+      canclick = 1;
+      $(".footer_btn").removeClass("noclick");
+    }, 30000);
+    canclick = 0;
+    $(".footer_btn").addClass("noclick");
+    Substation.postDataWithRawByAjax(
+      "/sendMeterControlDemandHTTP",
+      JSON.stringify(controlJson),
+      function (data) {
+        if (data.data.a != undefined) {
+          $.alert(data.data.a);
+        }
+      }
+    );
+  } else {
+    $.alert(Operation["ui_operateAllTipOf30"]);
+  }
+});
+
+//合闸
+$("#He").click(function () {
+  if (canclick == 1) {
+    var controlJson = [];
+    $(".selectBox:checked").each(function (i, obj) {
+      var metercode = $(obj).attr("data-id");
+      controlJson.push({
+        meterCode: metercode,
+        substationId: subObj.subId,
+        type: "DO",
         value: "1"
       });
     });
@@ -366,6 +403,7 @@ $("#DO").click(function () {
     $.alert(Operation["ui_operateAllTipOf30"]);
   }
 });
+
 
 //消音
 $("#silent").click(function () {
