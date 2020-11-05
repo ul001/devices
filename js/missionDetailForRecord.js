@@ -56,8 +56,8 @@ function getNetData() {
             if (data.hasOwnProperty("placeCheckFormId")) {
                 placeCheckFormId = data.placeCheckFormId;
             }
-            if(data.hasOwnProperty("haveResult")){
-                haveResult = data.haveResult==true;
+            if (data.hasOwnProperty("haveResult")) {
+                haveResult = data.haveResult == true;
             }
             /*                if(data.taskInfo.fTaskstateid==2){
                                         $("#checkIn").removeClass("col-33");
@@ -75,11 +75,11 @@ function getNetData() {
                 missionsubid = taskInfo.fSubid;
                 $("#missionId").html(taskInfo.fTasknumber);
                 $("#missionType").html(taskInfo.fTasktypeexplain);
-                $("#missionName").html(taskInfo.fTaskname);
+                $("#missionName").html(taskInfo.fSubName);
                 $("#createName").html(taskInfo.fTaskcreateusername);
-                $("#createCall").attr("onclick","callPhone('"+taskInfo.fTaskcreateuserphone+"')");
+                $("#createCall").attr("onclick", "callPhone('" + taskInfo.fTaskcreateuserphone + "')");
                 $("#chargerName").html(taskInfo.fTaskchargername);
-                $("#chargerCall").attr("onclick","callPhone('"+taskInfo.fTaskchargerphone+"')");
+                $("#chargerCall").attr("onclick", "callPhone('" + taskInfo.fTaskchargerphone + "')");
                 $("#createTime").html(taskInfo.fStartdate.substring(0, 11));
                 $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 11));
 
@@ -204,9 +204,9 @@ function getNetData() {
                     localStorage.setItem("taskID", taskID);
                     if (missionTypeid == 1) {
                         //巡检任务
-                        if(haveResult){
+                        if (haveResult) {
                             window.location.href = "patrolContent.html";
-                        }else{
+                        } else {
                             $.toast(Operation['ui_noFormResult']);
                         }
                     } else if (missionTypeid == 2) {
@@ -246,8 +246,8 @@ function getNetData() {
                         '                                    <div class="item-inner">';
                     text +=
                         '<div class="item-title label row no-gutter" style="display:flex;align-items:center;">' +
-                        '<div class="limit-length" style="width:80%;">'+this.userName +'</div>'+
-                        "<img class='callPhone' onclick=\"callPhone('"+this.fUserphone+"')\" style='margin-left:0.3rem;margin-right:0.5rem;width:1rem;' src='img/call.png'>" +
+                        '<div class="limit-length" style="width:80%;">' + this.userName + '</div>' +
+                        "<img class='callPhone' onclick=\"callPhone('" + this.fUserphone + "')\" style='margin-left:0.3rem;margin-right:0.5rem;width:1rem;' src='img/call.png'>" +
                         "</div>";
                     text +=
                         '                                        <div class="item-input">';

@@ -109,7 +109,7 @@ function addItems(number) {
                         //                                                iconStr +
                         //                                               "                            </div>\n" +
                         "                            <div class=\"col-95\">\n" +
-                        "                                <p class=\"subName\">" + this.fTaskName + "<span class=\"blueColor\">(" + stateStr + ")</span></p>\n" +
+                        "                                <p class=\"subName\">" + this.fSubName + "<span class=\"blueColor\">(" + stateStr + ")</span></p>\n" +
                         //                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
                         "                                <p>" + Operation['ui_PatroltaskNumber'] + "<span class=\"blueColor\">" + this.fTasknumber + "</span></p>\n" +
                         "                                <p>" + Operation['ui_PatrolStartTime'] + "<span class=\"blueColor\">" + this.fCreatetime + "</span></p>\n" +
@@ -121,28 +121,7 @@ function addItems(number) {
                         "                        </div>\n" +
                         "                    </div>\n" +
                         "                </div>");
-                    /*$("#list-container").append("<div class=\"card noClick\" data-id=\""+this.fSubid+"\" id=\""+this.fPlacecheckformid+"\">\n" +
-                                              "                    <div class=\"card-content\">\n" +
-                                              "                        <div class=\"card-content-inner\">\n" +
-*/
-                    /*                                               "                            <div class=\"col-10\">\n" +
-                                                                   iconStr +
-                                                                  "                            </div>\n" +*/
-                    /*
-                                                                  "                                <p class=\"subName limit-length\">"+this.fTaskName+"<span class=\"blueColor\">("+stateStr+")</span></p>\n" +
-                    //                                               "                                <p>巡检人：<span class=\"blueColor\">"+this.fCreatebyuserid+"</span></p>\n" +
-                                                                                           '<div class=\"row no-gutter\">'+
-                                                                  "                            <div class=\"col-75\">\n" +
-                                                                  "                                <p>开始时间:<span class=\"blueColor\">"+this.fCreatetime+"</span></p>\n" +
-                                                                  "                                <p>发现缺陷:<span class=\"redColor\">"+this.fproblemTotal+" </span>个  未处理:<span class=\"redColor\">"+this.funsolvedTotal+" </span>个</p>\n" +
-                                                                  "                            </div>\n" +
-                                                                  "                            <div class=\"col-25\">\n" +
-                                                                                                   '<a href="#" class="button button-fill goTask" data-task="'+this.fTaskid+'">执行情况</a>' +
-                                                                                                   '<a href="#" class="button button-fill goPlace" style="margin-top:0.2rem;">巡检明细</a>' +
-                                                                  "                            </div>\n" +
-                                                                  "                        </div>\n" +
-                                                                  "                    </div>\n" +
-                                                                  "                </div>");*/
+
                 });
                 /*$(".goPlace").unbind().click(function(){
                     var fPlacecheckformid = $(this).parents(".card").attr("id");

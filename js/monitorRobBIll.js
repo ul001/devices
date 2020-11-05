@@ -63,7 +63,7 @@ function initialize() {
     }
     markersArr.forEach(function (marker) {
         var point = new BMap.Point(marker.fLongitude, marker.fLatitude);
-        var label = new BMap.Label(marker.fTaskname, {
+        var label = new BMap.Label(marker.fSubName, {
             offset: new BMap.Size(40, -10)
         });
         label.setStyle({

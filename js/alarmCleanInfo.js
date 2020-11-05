@@ -117,7 +117,7 @@ function creatView(dataParam) {
             "</div>";
         sb +=
             '                                    <div class="item-label subName">' +
-            (param.fSubname ? param.fSubname : "") +
+            (taskParam.fSubname ? taskParam.fSubname : "") +
             "</div>";
         sb += "                                </div>";
         sb += "                            </li>";

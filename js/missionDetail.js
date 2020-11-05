@@ -83,7 +83,7 @@ jQuery(document).ready(function () {
                     missionsubid = taskInfo.fSubid;
                     $("#missionId").html(taskInfo.fTasknumber);
                     $("#missionType").html(taskInfo.fTasktypeexplain);
-                    $("#missionName").html(taskInfo.fTaskname);
+                    $("#missionName").html(taskInfo.fSubName);
                     $("#createName").html(taskInfo.fTaskcreateusername);
                     $("#chargerName").html(taskInfo.fTaskchargername);
                     $("#createTime").html(taskInfo.fStartdate.substring(0, 10));

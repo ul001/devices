@@ -127,7 +127,7 @@ function getNetData() {
             $("#missionType").html(taskInfo.fTasktypeexplain);
             missionTypeName = taskInfo.fTasktypeexplain;
             localStorage.setItem("missionTypeName", missionTypeName);
-            $("#missionName").html(taskInfo.fTaskname);
+            $("#missionName").html(taskInfo.fSubName);
             $("#createName").html(taskInfo.fTaskcreateusername);
             $("#createCall").attr(
                 "onclick",
