@@ -17,15 +17,20 @@
 
 <body>
     <div class="page-group">
-
         <div class="page">
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left click_btn back_btn">
                     <span class="icon icon-left"></span>
                     <span data-i18n="ui_back"></span>
                 </a>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
                 <h1 class="title title_color"><span data-i18n="ui_FileList"></span></h1>
             </header>
+            <div class="bar bar-header-secondary limit-length" style="line-height:2.2rem;">
+                <i class="icon icon-sub"></i><span id="subName"> --- </span>
+            </div>
             <div class="content">
                 <div class="list-block">
                     <ul class="list-container">
@@ -52,6 +57,37 @@
                     </li>-->
                     </ul>
                 </div>
+            </div>
+            <div id="outTip"
+                style="width: 100%;height: 100%;position: fixed;top: 2.2rem;left: 0;z-index: 1999;background: #575757;">
+                <!-- <img src="img/firstTip.png" style="width:100%;"> -->
+            </div>
+        </div>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id='panel-right-demo'>
+            <div class="content-block">
+                <div>
+                    <label><span data-i18n="ui_Substationname"></span></label><br>
+                    <div class="searchbar">
+                        <div class="search-input">
+                            <label class="icon icon-search" for="search"></label>
+                            <input type="search" id='search' placeholder='' data-placeholder="ui_enterkeywords" /><i
+                                class="icon icon-clear"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-block">
+                    <ul id="listContainer">
+
+                    </ul>
+                </div>
+            </div>
+            <div class="btnBar row no-gutter">
+                <div class="col-50"><a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-50"><a href="#" class="button button-big button-fill" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a></div>
             </div>
         </div>
     </div>

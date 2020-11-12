@@ -9,8 +9,24 @@ if (isIOS) {
     var storage = localStorage.getItem("accessToken");
     storage = JSON.parse(storage);
     menuId = storage.fmenuId;
-} else if(isAndroid){
+} else if (isAndroid) {
     menuId = android.getMenuId();
+}
+
+var clickSubid;
+var subObj = JSON.parse(localStorage.getItem("subObj"));
+try {
+    if (isAndroid) {
+        subObj = JSON.parse(android.getSpItem("subObj"));
+    }
+} catch (e) {}
+var selectSubid = "";
+var clickName;
+if (subObj != null && subObj != undefined) {
+    selectSubid = subObj.subId;
+    clickName = subObj.subName;
+    $("#subName").text(clickName);
+    //  $("#search").val(subObj.subName);
 }
 
 // window.addEventListener('pageshow', function (e) {
@@ -32,11 +48,21 @@ function loadMenu() {
     $(".list-container").empty();
     $.showPreloader(Operation['ui_loading']);
     Substation.getDataByAjaxNoLoading("/selectDocumentCategory", {
-        pid: menuId
+        pid: menuId,
+        fSubId: selectSubid
     }, function (data) {
+        //增加常驻按钮 全部
+        $(".list-container").append("<li class=\"item-content item-link selectLine\" \" value=\"" + -1 + "\"\">\n" +
+            "                        <div class=\"item-media\"><i class=\"icon icon-file\"></i></div>\n" +
+            "                        <div class=\"item-inner\">\n" +
+            "                            <div class=\"item-title\">全部</div>\n" +
+            '                         <div class="item-after" id=""itemAfter"></div>\n' +
+            "                        </div>\n" +
+            "                    </li>")
+
         if (data.hasOwnProperty("documentsCategories") && data.documentsCategories.length > 0) {
             $(data.documentsCategories).each(function () {
-                $(".list-container").append("<li class=\"item-content item-link\" \" value=\"" + this.fCategoryid + "\">\n" +
+                $(".list-container").append("<li class=\"item-content item-link selectLine\" \" value=\"" + this.fCategoryid + "\"\">\n" +
                     "                        <div class=\"item-media\"><i class=\"icon icon-file\"></i></div>\n" +
                     "                        <div class=\"item-inner\">\n" +
                     "                            <div class=\"item-title\">" + this.fCategoryname + "</div>\n" +
@@ -47,7 +73,7 @@ function loadMenu() {
             fillData(0);
         }
         $.hidePreloader();
-    },function(errorcode){});
+    }, function (errorcode) {});
 }
 
 function fillData(parentId) {
@@ -99,12 +125,12 @@ function fillData(parentId) {
     // });
     var upLoadClicktag = true;
     $(".item-link").unbind().click(function () {
-        if(!upLoadClicktag){
-          return;
+        if (!upLoadClicktag) {
+            return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
-          upLoadClicktag = true;
+        setTimeout(function () {
+            upLoadClicktag = true;
         }, 1000);
         var clickId = $(this).attr("value");
         var titleName = $(this).find($(".item-title")).text();
@@ -130,6 +156,124 @@ function fillData(parentId) {
 
 }
 
+$('#searchBtn').click(function () {
+    // var start = new Date($("#dateStart").val().replace(/-/g, '/'));
+    // var end = new Date($("#dateEnd").val().replace(/-/g, '/'));
+    // if (start > end) {
+    //     $.toast(Operation['ui_dateselecttip']);
+    //     return;
+    // }
+    $(".close-panel").click();
+    /*    if(saveParam!=null){
+            clickSubid = saveParam['fSubid'];
+            saveParam=null;
+        }*/
+    if ($("#search").val() == "") {
+        //        $("#subName").text("所有变电所");
+        selectSubid = "";
+    } else if (clickSubid != "") {
+        //        $("#subName").text($("#search").val());
+        selectSubid = clickSubid;
+        var subObj = {
+            subId: clickSubid,
+            subName: clickName
+        };
+        localStorage.setItem("subObj", JSON.stringify(subObj));
+        try {
+            if (isAndroid) {
+                android.setSpItem("subObj", JSON.stringify(ubObj));
+            }
+        } catch (e) {}
+        clickSubid = "";
+        $("#subName").text(clickName);
+    }
+    $("#outTip").hide();
+    loadMenu();
+});
+
+$("#dateStart").calendar();
+$("#dateEnd").calendar();
+$("#listContainer").hide();
+
+$("#outTip").click(function () {
+    $("#outTip").hide();
+});
+
+function getSomeSubstation(isAll) {
+    var url = "/getSubListByLetter";
+    if (isAll == 1) {
+        url = "/getSubstationListByUser";
+    }
+    var listObj = [];
+    var searchKey = $("#search").val();
+    var params = {
+        key: searchKey
+    }
+    $("#listContainer").empty();
+    Substation.getDataByAjaxNoLoading(url, params, function (data) {
+        if (isAll == 1) {
+            listObj = data.list;
+        } else {
+            listObj = data;
+        }
+        $(listObj).each(function () {
+            $("#listContainer").append('<li class="item-content" data-id="' + this.fSubid + '">' +
+                '<div class="item-inner">' +
+                '<div class="item-title showTitleImg">' + this.fSubname + '</div>' +
+                '</div>' +
+                '</li>');
+        });
+        $("#listContainer").show();
+        $("#listContainer .item-content").unbind().click(function () {
+            clickSubid = $(this).attr("data-id");
+            clickName = $(this).find(".item-title").text();
+            $("#search").val(clickName);
+            $("#listContainer").empty();
+            $("#listContainer").hide();
+            //            $("#subName").text(clickName);
+        });
+    });
+}
+
+$('#search').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+        if ($("#search").text() == "") {
+            getSomeSubstation(1);
+        } else {
+            getSomeSubstation();
+        }
+        document.activeElement.blur();
+    }
+});
+
+$('#search').on("input", function () {
+    if ($("#search").val().length > 0) {
+        $(".icon.icon-clear").show();
+    } else {
+        $(".icon.icon-clear").hide();
+    }
+});
+
+$('#search').on("focus", function () {
+    if ($("#search").val().length > 0) {
+        $(".icon.icon-clear").show();
+    } else {
+        $(".icon.icon-clear").hide();
+    }
+});
+
+/*$('#search').blur(function(){
+    $(".icon.icon-clear").hide();
+});*/
+
+$(".icon.icon-clear").click(function () {
+    $("#search").val("");
+    getSomeSubstation(1);
+    $(this).hide();
+
+});
+getSomeSubstation(1);
+
 $(".back_btn").click(function () {
     if (isIOS) {
         localStorage.clear();
@@ -139,6 +283,12 @@ $(".back_btn").click(function () {
     }
 });
 
-loadMenu();
+if (selectSubid != '' && selectSubid != undefined) {
+    loadMenu();
+    $("#outTip").hide();
+} else {
+    $(".pull-right").click();
+    $.toast(Operation['ui_subSelectTip']);
+}
 
 $.init();

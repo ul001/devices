@@ -72,14 +72,25 @@ function addItems(number, lastIndex) {
     //     //$(".title").html("平台运行报警");
     // }
     // var searchKey = $("#search").val();
-    var params = {
-        category: clickID, //类别id
-        // subId: subId, //变电所id
-        // startTime: "",
-        // endTime: "",
-        pageNo: pageNum,
-        pageSize: number
-    };
+    var params;
+    if (clickID == '-1') {
+        params = {
+            // subId: subId, //变电所id
+            // startTime: "",
+            // endTime: "",
+            pageNo: pageNum,
+            pageSize: number
+        };
+    } else {
+        params = {
+            category: clickID, //类别id
+            // subId: subId, //变电所id
+            // startTime: "",
+            // endTime: "",
+            pageNo: pageNum,
+            pageSize: number
+        };
+    }
     if (selectSubid != "") {
         params['subId'] = selectSubid;
     }
@@ -263,6 +274,16 @@ $("#searchBtn").click(function () {
     } else if (clickSubid != "") {
         //        $("#subName").text($("#search").val());
         selectSubid = clickSubid;
+        var subObj = {
+            subId: clickSubid,
+            subName: clickName
+        };
+        localStorage.setItem("subObj", JSON.stringify(subObj));
+        try {
+            if (isAndroid) {
+                android.setSpItem("subObj", JSON.stringify(ubObj));
+            }
+        } catch (e) {}
         clickSubid = "";
     }
     getFirstPage();
