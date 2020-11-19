@@ -1,24 +1,23 @@
-var appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-if (isAndroid) {
-  appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-} else if (isIOS) {
-  appId = "iose70eeb320a58230925c02e7";
-}
+// var appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
+// if (isAndroid) {
+//   appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
+// } else if (isIOS) {
+//   appId = "iose70eeb320a58230925c02e7";
+// }
 
 var videoUrl;
 
 function getData() {
   $.ajax({
     type: "GET",
-    url:
-      "http://www.acrelcloud.cn/SubstationWEBV2/sys/listFunctionInstructionForServer",
+    url: "http://www.acrelcloud.cn/SubstationWEBV2/sys/listFunctionInstructionForServer",
     data: {},
-    beforeSend: function(request) {
+    beforeSend: function (request) {
       // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
       //                        request.setRequestHeader("Authorization", tokenFromAPP);
       $.showPreloader(Operation["ui_loading"]);
     },
-    success: function(data) {
+    success: function (data) {
       if (data == undefined) {
         $("#noDataDiv").show();
         return;
@@ -30,22 +29,22 @@ function getData() {
           } else {
             videoUrl = "http://www.acrelcloud.cn/" + data.data.fileURL + "/";
             if (data.data.list != undefined && data.data.list.length > 0) {
-              $(data.data.list).each(function() {
+              $(data.data.list).each(function () {
                 $(".list-container").append(
                   '<li class="item-content item-link update-li" data-str=\'' +
-                    this.fFilename +
-                    "'  data-str2=" +
-                    this.fFilecode +
-                    ">\n" +
-                    ' <div class="item-media"><img src="img/i-shipin.png" style="width: 1rem;"></div>' +
-                    '                        <div class="item-inner">\n' +
-                    '                            <div class="item-title-row">\n' +
-                    '                                <div class="item-title">' +
-                    this.fFilename +
-                    "</div>\n" +
-                    "                            </div>\n" +
-                    "                        </div>\n" +
-                    "                    </li>"
+                  this.fFilename +
+                  "'  data-str2=" +
+                  this.fFilecode +
+                  ">\n" +
+                  ' <div class="item-media"><img src="img/i-shipin.png" style="width: 1rem;"></div>' +
+                  '                        <div class="item-inner">\n' +
+                  '                            <div class="item-title-row">\n' +
+                  '                                <div class="item-title">' +
+                  this.fFilename +
+                  "</div>\n" +
+                  "                            </div>\n" +
+                  "                        </div>\n" +
+                  "                    </li>"
                 );
                 // $(".list-container").append("<li class=\"item-content item-link update-li\" data-str='" + JSON.stringify(this.fUpdatelog.replace(/\r\n/g, '<br>').replace(/\n/g, '<br>')) + "'>\n" +
                 //     "                        <div class=\"item-inner\">\n" +
@@ -69,21 +68,21 @@ function getData() {
         }
       }
     },
-    error: function(data) {
+    error: function (data) {
       if (data.status == 0) {
         $.toast(Operation["ui_neterror"]);
       } else {
         $.toast(Operation["code_fail"]);
       }
     },
-    complete: function() {
+    complete: function () {
       $.hidePreloader();
     }
   });
 }
 
 function addClick() {
-  $(".item-link.update-li").click(function() {
+  $(".item-link.update-li").click(function () {
     var thisLog = $(this).attr("data-str");
     localStorage.setItem("updateLog", thisLog);
     var url = $(this).attr("data-str2");
@@ -106,7 +105,7 @@ function addClick() {
 
 getData();
 
-$(".back_btn").click(function() {
+$(".back_btn").click(function () {
   if (isIOS) {
     window.webkit.messageHandlers.goBackiOS.postMessage("");
   } else if (isAndroid) {

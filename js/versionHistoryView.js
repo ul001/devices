@@ -1,11 +1,11 @@
 var historyLog = localStorage.getItem("updateLog");
 var videoSrc = localStorage.getItem("videoUrl"); //新的视频播放地址
-var appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-if (isAndroid) {
-  appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-} else if (isIOS) {
-  appId = "iose70eeb320a58230925c02e7";
-}
+// var appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
+// if (isAndroid) {
+//   appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
+// } else if (isIOS) {
+//   appId = "iose70eeb320a58230925c02e7";
+// }
 
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
@@ -49,19 +49,18 @@ function getData() {
     data: {
       fId: appId
     },
-    beforeSend: function(request) {
+    beforeSend: function (request) {
       // request.setRequestHeader("Authorization", localStorage.getItem("Authorization"));
       //                        request.setRequestHeader("Authorization", tokenFromAPP);
       $.showPreloader(Operation["ui_loading"]);
     },
-    success: function(data) {
+    success: function (data) {
       $.hidePreloader();
       if (data == undefined) {
         return;
       } else {
         if (data.code == "200") {
-          if (data.data == null || data.data == "" || data.data == undefined) {
-          } else {
+          if (data.data == null || data.data == "" || data.data == undefined) {} else {
             videoUrl = "http://www.acrelcloud.cn/" + data.data.fileURL + "/";
             if (data.data.list != undefined && data.data.list.length > 0) {
               var showDate = data.data.list[0];
@@ -94,20 +93,20 @@ function getData() {
         }
       }
     },
-    error: function(data) {
+    error: function (data) {
       if (data.status == 0) {
         $.toast(Operation["ui_neterror"]);
       } else {
         $.toast(Operation["code_fail"]);
       }
     },
-    complete: function() {
+    complete: function () {
       $.hidePreloader();
     }
   });
 }
 
-$(".back_btn").click(function() {
+$(".back_btn").click(function () {
   localStorage.removeItem("historyLog");
   localStorage.removeItem("videoUrl");
   if (isPush == "1") {

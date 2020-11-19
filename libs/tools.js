@@ -10,12 +10,19 @@ var ipAddress = "http://116.236.149.165:8090/";
 var userId = "1";
 //语言字段传参
 var languageOption = "zh";
+var appId = "";
 
 //iOS安卓基础传参
 var u = navigator.userAgent,
   app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+if (isAndroid) {
+  appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
+} else if (isIOS) {
+  appId = "iose70eeb320a58230925c02e7";
+}
+
 //判断数组中是否包含某字符串
 try {
   if (isIOS) {
@@ -28,6 +35,7 @@ try {
     tokenFromAPP = storage.token;
     ipAddress = storage.ipAddress;
     userId = storage.userID;
+    appId = storage.appId;
     languageOption = storage.languageType;
     // localStorage.setItem("ImagePath", ipAddress);
   } else {
@@ -35,6 +43,7 @@ try {
     tokenFromAPP = android.getToken();
     ipAddress = android.getIpAddress();
     userId = android.getUserid();
+    appId = android.getAppId();
     languageOption = android.postLanguage();
     // localStorage.setItem("ImagePath", ipAddress);
   }
@@ -2214,6 +2223,9 @@ var Substation = {
     $("#" + element).calendar({
       value: [changeVal]
     });
+  },
+  getAPPID: function () {
+    return appId;
   }
 };
 

@@ -1,11 +1,11 @@
 var historyLog = localStorage.getItem("updateLog");
 var videoSrc = localStorage.getItem("videoUrl"); //新的视频播放地址
-var appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-if (isAndroid) {
-    appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-} else if (isIOS) {
-    appId = "iose70eeb320a58230925c02e7";
-}
+
+// if (isAndroid) {
+//     appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
+// } else if (isIOS) {
+//     appId = "iose70eeb320a58230925c02e7";
+// }
 
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
