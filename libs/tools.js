@@ -5,13 +5,13 @@
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
 var tokenFromAPP =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ1NjEzOTgsInVzZXJuYW1lIjoibmFuYXlhIn0.QFZ6kHSLNc7P4u8H3lfwkvUXZzNZrP-kmImbjR3JjLg";
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ1NTI0MzksInVzZXJuYW1lIjoiaGFoYWhhIn0.hItIFHgDbwF48epFZiiHm5sm6zRgs9oRZJ3QOp7lgCA";
 var ipAddress = "http://116.236.149.165:8090/";
-var userId = "1";
+var userId = "315";
 //语言字段传参
 var languageOption = "zh";
 var appId = "";
-var serviceId = "";
+var serviceId = "219626";
 
 //iOS安卓基础传参
 var u = navigator.userAgent,
@@ -46,7 +46,7 @@ try {
     ipAddress = android.getIpAddress();
     userId = android.getUserid();
     appId = android.getAppId();
-    serviceId = android.serviceId();
+    serviceId = android.getServiceId();
     languageOption = android.postLanguage();
     // localStorage.setItem("ImagePath", ipAddress);
   }
