@@ -110,7 +110,7 @@ function initialize() {
         }
         // baseUrlFromAPP = baseUrlFromAPP.replace(/./g, '-');
         // var baseUrl = (baseUrlFromAPP.replace(/:/g, '_')).split('.');
-        var params = "ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb" + "&service_id=219626" +
+        var params = "ak=T9c1avrrhrkA5z5RacH7myHGg9VDt4Cb" + "&service_id=" + serviceId +
             "&entity_name=" + baseNew + '-' + useID +
             "&start_time=" + fTrackstarttime +
             "&end_time=" + fTrackendtime +

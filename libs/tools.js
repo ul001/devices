@@ -11,6 +11,7 @@ var userId = "1";
 //语言字段传参
 var languageOption = "zh";
 var appId = "";
+var serviceId = "";
 
 //iOS安卓基础传参
 var u = navigator.userAgent,
@@ -36,6 +37,7 @@ try {
     ipAddress = storage.ipAddress;
     userId = storage.userID;
     appId = storage.appId;
+    serviceId = storage.serviceId;
     languageOption = storage.languageType;
     // localStorage.setItem("ImagePath", ipAddress);
   } else {
@@ -44,6 +46,7 @@ try {
     ipAddress = android.getIpAddress();
     userId = android.getUserid();
     appId = android.getAppId();
+    serviceId = android.serviceId();
     languageOption = android.postLanguage();
     // localStorage.setItem("ImagePath", ipAddress);
   }
@@ -2223,9 +2226,6 @@ var Substation = {
     $("#" + element).calendar({
       value: [changeVal]
     });
-  },
-  getAPPID: function () {
-    return appId;
   }
 };
 
