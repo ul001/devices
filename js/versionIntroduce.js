@@ -1,10 +1,3 @@
-var appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-if (isAndroid) {
-    appId = "ab55ce55Ac213hlkhl23419f179c5f6f";
-} else if (isIOS) {
-    appId = "iose70eeb320a58230925c02e7";
-}
-
 var videoUrl;
 
 function getData() {
