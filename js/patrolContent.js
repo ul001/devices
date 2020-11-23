@@ -717,9 +717,9 @@ function loadPage() {
         var str = Operation["ui_hasnosave"];
         $.confirm(str,
           function () {
-            hasSave = true;
-            saveThisPage();
-            updatePageDataH5();
+//            hasSave = true;
+//            saveThisPage();
+            $("#saveBtn").click();
             //添加判断
             if ($(".buttons-tab .tab-link:last").hasClass("active")) {
               $(".icon-select").click();
@@ -745,12 +745,25 @@ function loadPage() {
       upLoadClicktag = true;
     }, 1000);
     hasSave = true;
+    if ($("input[data-state='true']")) {
+        var thisTemp = false;
+        $("input[data-state='true']").each(function () {
+          if ($(this).val() == "") {
+            $.toast(Operation["ui_fillrequireditems"]);
+            thisTemp = true;
+            return;
+          }
+        });
+        if (thisTemp) {
+          return;
+        }
+    }
     saveThisPage();
     updatePageDataH5();
     //添加判断
-    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
-      $(".icon-select").click();
-    }
+//    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
+//      $(".icon-select").click();
+//    }
   });
 
   fillData(-1);
@@ -1089,19 +1102,7 @@ function loadPage3(fDeviceproblemid) {
 
 function saveThisPage() {
   var changeJson = [];
-  if ($("input[data-state='true']")) {
-    var thisTemp = false;
-    $("input[data-state='true']").each(function () {
-      if ($(this).val() == "") {
-        $.toast(Operation["ui_fillrequireditems"]);
-        thisTemp = true;
-        return;
-      }
-    });
-    if (thisTemp) {
-      return;
-    }
-  }
+
   $(".tabs .tab").each(function () {
     var deviceJson = {};
     var deviceId = $(this).attr("id");
@@ -1162,11 +1163,11 @@ function saveThisPage() {
           //                fillData(thisGroupid);
           if (isAndroid) {
             //android持久化储存
-            try {
-              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
-            } catch (e) {
-              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-            }
+//            try {
+//              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
+//            } catch (e) {
+//              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+//            }
           } else {
             localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
           }
