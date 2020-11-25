@@ -62,6 +62,8 @@ function goToManager(subId, subname) {
     }, 1000);
     localStorage.setItem("fSubid", subId);
     localStorage.setItem("fSubname", subname);
+    localStorage.setItem("dateStartTime", $("#dateStart").val());
+    localStorage.setItem("dateEndTime", $("#dateEnd").val());
     if (isAndroid) {
         android.goToIn('alarmAnalysisManager.html');
         return;
@@ -115,7 +117,13 @@ var year = myDate.getFullYear(); //获取当前年
 var mon = myDate.getMonth() + 1; //获取当前月
 var date = myDate.getDate(); //获取当前日
 var nowDate = year + "-" + format0(mon) + "-" + format0(date);
-$("#dateStart").val(nowDate);
+//获取三十天前日期
+let lw = new Date(myDate - 1000 * 60 * 60 * 24 * 30); //最后一个数字30可改，30天的意思
+let lastY = lw.getFullYear();
+let lastM = lw.getMonth() + 1;
+let lastD = lw.getDate();
+let lastdate = lastY + "-" + (lastM < 10 ? "0" + lastM : lastM) + "-" + (lastD < 10 ? "0" + lastD : lastD); //三十天之前日期
+$("#dateStart").val(lastdate);
 $("#dateEnd").val(nowDate);
 
 function getFirstPage() {
@@ -331,12 +339,43 @@ $(".icon.icon-clear").click(function () {
 });
 
 //时间快捷按钮
-// $(".buttons-row .button").click(function () {
-//     $(this)
-//         .addClass("active")
-//         .siblings()
-//         .removeClass("active");
-// });
+$(".buttons-row .button").click(function () {
+    $(this)
+        .addClass("active")
+        .siblings()
+        .removeClass("active");
+});
+$("#today").click(function () {
+    var myDate = new Date();
+    var todayVal = myDate.format("yyyy-MM-dd");
+    Substation.changeCalendar(todayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(todayVal, "dateEnd", "selectEndTime");
+});
+$("#yestoday").click(function () {
+    var myDate = new Date();
+    myDate.setTime(myDate.getTime() - 24 * 60 * 60 * 1000);
+    var yestodayVal = myDate.format("yyyy-MM-dd");
+    Substation.changeCalendar(yestodayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(yestodayVal, "dateEnd", "selectEndTime");
+});
+$("#thisMonth").click(function () {
+    var myDate = new Date();
+    var firstDay = new Date(myDate.getFullYear(), myDate.getMonth(), 1);
+    var lastDay = new Date(myDate.getFullYear(), myDate.getMonth() + 1, 0);
+    var firstDayVal = firstDay.format("yyyy-MM-dd");
+    var lastDayVal = lastDay.format("yyyy-MM-dd");
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
+});
+$("#lastMonth").click(function () {
+    var myDate = new Date();
+    var firstDay = new Date(myDate.getFullYear(), myDate.getMonth() - 1, 1);
+    var lastDay = new Date(myDate.getFullYear(), myDate.getMonth(), 0);
+    var firstDayVal = firstDay.format("yyyy-MM-dd");
+    var lastDayVal = lastDay.format("yyyy-MM-dd");
+    Substation.changeCalendar(firstDayVal, "dateStart", "selectStartTime");
+    Substation.changeCalendar(lastDayVal, "dateEnd", "selectEndTime");
+});
 
 Date.prototype.format = function (fmt) {
     //author: meizz
