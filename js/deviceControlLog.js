@@ -226,7 +226,8 @@ function addItems(number) {
             }
             var askTime = "-";
             if (this.fAcktime != undefined && this.fAcktime != "") {
-              askTime = formatDate(this.fAcktime);
+              // askTime = formatDate(this.fAcktime);
+              askTime = this.fAcktime;
             }
             var askResult = Operation["ui_noResult"];
             if (this.fResult != undefined && this.fResult != "") {

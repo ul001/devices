@@ -90,9 +90,13 @@ function getPersonsPage() {
 function getCarPage() {
     Substation.postDataByAjaxForCarLoc("/getCarLocationList", {}, function (data) {
         if (data != undefined) {
-            markerCarArr = data.data;
-            //绘制点
-            loadScript();
+            if (data.code == 422 || data.code == 420) {
+                loadScript();
+            } else {
+                markerCarArr = data.data;
+                //绘制点
+                loadScript();
+            }
         } else if (data.code == 422 || data.code == 420) {
             loadScript();
         }
