@@ -96,6 +96,7 @@ function getCarPage() {
                 markerCarArr = data.data;
                 //绘制点
                 loadScript();
+
             }
         } else if (data.code == 422 || data.code == 420) {
             loadScript();

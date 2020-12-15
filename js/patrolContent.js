@@ -65,12 +65,23 @@ function loadPage() {
   var showState = 0;
   //主页内容
   function fillRightData() {
-    Substation.getDataByAjax(
-      "/getDeviceInspectionTemplate", {
+    var param = {};
+    if (canClick == "false") {
+      param = {
         fSubdevicegroupid: thisGroupid,
         fSubid: selectSubid,
         fPlacecheckformid: fPlacecheckformid
-      },
+      }
+    } else {
+      param = {
+        fSubdevicegroupid: thisGroupid,
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid,
+        fState: 0
+      }
+    }
+    Substation.getDataByAjax(
+      "/getDeviceInspectionTemplate", param,
       function (data) {
         $(".content-block .tabs").empty();
         $(".buttons-tab").empty();
@@ -717,8 +728,8 @@ function loadPage() {
         var str = Operation["ui_hasnosave"];
         $.confirm(str,
           function () {
-//            hasSave = true;
-//            saveThisPage();
+            //            hasSave = true;
+            //            saveThisPage();
             $("#saveBtn").click();
             //添加判断
             if ($(".buttons-tab .tab-link:last").hasClass("active")) {
@@ -746,27 +757,40 @@ function loadPage() {
     }, 1000);
     hasSave = true;
     if ($("input[data-state='true']")) {
-        var thisTemp = false;
-        $("input[data-state='true']").each(function () {
-          if ($(this).val() == "") {
-            $.toast(Operation["ui_fillrequireditems"]);
-            thisTemp = true;
-            return;
-          }
-        });
-        if (thisTemp) {
+      var thisTemp = false;
+      $("input[data-state='true']").each(function () {
+        if ($(this).val() == "") {
+          $.toast(Operation["ui_fillrequireditems"]);
+          thisTemp = true;
           return;
         }
+      });
+      if (thisTemp) {
+        return;
+      }
     }
     saveThisPage();
     updatePageDataH5();
     //添加判断
-//    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
-//      $(".icon-select").click();
-//    }
+    //    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
+    //      $(".icon-select").click();
+    //    }
   });
 
   fillData(-1);
+
+  $("#pushBtn").click(function () {
+    if (!upLoadClicktag) {
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function () {
+      upLoadClicktag = true;
+    }, 1000);
+
+    window.webkit.messageHandlers.scanQRcode.postMessage("");
+
+  });
 
   //    $(".open-panel").click();
 
@@ -1163,11 +1187,11 @@ function saveThisPage() {
           //                fillData(thisGroupid);
           if (isAndroid) {
             //android持久化储存
-//            try {
-//              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
-//            } catch (e) {
-//              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-//            }
+            //            try {
+            //              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
+            //            } catch (e) {
+            //              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+            //            }
           } else {
             localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
           }

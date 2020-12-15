@@ -267,3 +267,21 @@ label.label-checkbox i.icon-form-checkbox {
   width: 0.8rem;
   height: 0.8rem;
 }
+
+i.icon.icon-selectSome {
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../img/i-selectSome.png);
+}
+
+i.icon.icon-scanQRcode {
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../img/i-saoma.png);
+}
+
+i.icon.icon-scanQRcodeBlack {
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../img/i-saoma2.png);
+}
