@@ -95,6 +95,7 @@ function loadPage() {
         $("#saveBtn").hide();
         hasSave = true;
       }
+      $("#subName").text(data.devicePathName);
       if (data.list.length > 0) {
         var itemNum = 0;
         var bindedDeivceID = data.bindedDeivceID;
@@ -637,7 +638,7 @@ function loadPage() {
         });
         clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
         var titleTreeName = titleTree.substring(1, titleTree.length - 1);
-        $("#subName").text(titleTreeName);
+        // $("#subName").text(titleTreeName);
         $(".content-block .close-panel").click();
         fillRightData();
         //            });
@@ -815,7 +816,7 @@ function loadPage() {
     });
     clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
     var titleTreeName = titleTree.substring(1, titleTree.length - 1);
-    $("#subName").text(titleTreeName);
+    // $("#subName").text(titleTreeName);
     fillRightData();
     //        $(".close-panel").click();
     $("#" + clickItemNum).click();

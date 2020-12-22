@@ -8,7 +8,7 @@ $("#goBackLastPid").click(function () {
     // localStorage.setItem("pid", jumpPid);
     // localStorage.setItem("clickNum", lastClickNum);
     if (isAndroid) {
-        android.refresh();
+        // android.refresh();
         android.goBack();
     } else {
         localStorage.setItem("need-refresh", "true");
@@ -85,32 +85,47 @@ $("#scanCodebind").click(function () {
 function getQRresultAndPush(param) {
     if (param && param.length > 0) {
         var strArr = param.split("_");
-        if (strArr[0] != "acrel") {
+        if (param == "" || param == undefined) {
+            return;
+        }
+        if (strArr[0] != "arcel") {
             $.toast("非本平台二维码");
             return;
         }
-        var fCodeid = strArr[1];
-        Substation.getDataByAjax(
-            "/getQrCodeDeivceInfo", {
-                fSubdeviceinfoid: subdeviceinfoid,
-                fCodeid: param
+        // var codeid = strArr[1];
+        $.confirm(
+            "是否将设备绑定至二维码？",
+            function () {
+                Substation.getDataByAjax(
+                    "/bindQrCodeWithDeivce", {
+                        fSubdeviceinfoid: subdeviceinfoid,
+                        fCodeid: param
+                    },
+                    function (data) {
+                        $.toast(Operation["ui_delsuccess"]);
+                        getPageInfo();
+                        // if (data.filePath && data.fileName) {
+                        //     $(".content-block").empty();
+                        //     var imgPath =
+                        //         Substation.ipAddressFromAPP + data.filePath + "/" + data.fileName;
+                        //     var img =
+                        //         '<img class="up-img pic" name="' + data.fileName + '" style="width:100%" onclick="imgDisplay(this)" src = "' +
+                        //         imgPath +
+                        //         '" > ';
+                        //     $(".content-block").append(img);
+                        //     $.toast(Operation["ui_successfully"]);
+                        // }
+                    }
+                );
             },
-            function (data) {
-                if (data.filePath && data.fileName) {
-                    $(".content-block").empty();
-                    var imgPath =
-                        Substation.ipAddressFromAPP + data.filePath + "/" + data.fileName;
-                    var img =
-                        '<img class="up-img pic" name="' + data.fileName + '" style="width:100%" onclick="imgDisplay(this)" src = "' +
-                        imgPath +
-                        '" > ';
-                    $(".content-block").append(img);
-                    $.toast(Operation["ui_successfully"]);
-                }
-
-
+            function () {
+                $(":radio[name='" + radioName + "'][value='yes']").prop(
+                    "checked",
+                    true
+                );
             }
         );
+
     }
 
 }

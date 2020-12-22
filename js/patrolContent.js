@@ -60,6 +60,15 @@ function updatePageData() {
 updatePageData();
 // }
 function getQRresultAndPush(param) {
+  var strArr = param.split("_");
+  if (param == "" || param == undefined) {
+    return;
+  }
+  if (strArr[0] != "arcel") {
+    $.toast("非本平台二维码");
+    return;
+  }
+  // var codeid = strArr[1];
   localStorage.setItem("QRcode", param);
   localStorage.setItem("fPlacecheckformid", fPlacecheckformid);
   window.location.href = "patrolContentQRcode.html";

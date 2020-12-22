@@ -315,12 +315,12 @@ var CustomerDevice = (function () {
 
         function makeQRImg(fSubdeviceinfoid) {
             //获取二维码
-            $(".showImg").empty();
             Substation.getDataByAjax(
                 "/getDeviceDetailById", {
                     fSubdeviceinfoid: fSubdeviceinfoid
                 },
                 function (data) {
+                    $(".showImg").empty();
                     if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
                         var imgPath =
                             Substation.ipAddressFromAPP + data.qrCodeFilePath + "/" + data.qrCodeFile.fQrcodefile;
