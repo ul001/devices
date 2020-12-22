@@ -80,7 +80,7 @@ var CustomerDevice = (function () {
                 name +
                 '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
                 count +
-                '"></div></div>';
+                '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' + decodeURIComponent(val.fDevicename) + '" value="' + val.fSubdeviceinfoid + '" onclick="QRcodePush(this)">二维码</button></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
             // '<div id="addVarContain' + count + '"></div></div>';
 
@@ -226,10 +226,12 @@ var CustomerDevice = (function () {
                                     name +
                                     '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
                                     count +
-                                    '"></div></div>';
+                                    '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' + decodeURIComponent(val.fDevicename) + '" value="' + val.fSubdeviceinfoid + '" onclick="QRcodePush(this)">二维码</button></div></div>';
                                 if (val.fRealimg != undefined) {
                                     imageListChange = JSON.parse(val.fRealimg);
                                 }
+                                //默认加载第一张二维码
+                                makeQRImg(val.fSubdeviceinfoid);
                             } else {
                                 // var string = '<li role="presentation" name="' + val.fId + '">' +
                                 //     '<a href="#' + name + '" aria-controls="home" role="tab" data-toggle="tab">' + decodeURIComponent(val.fPagename) + '</a></li>';
@@ -251,8 +253,10 @@ var CustomerDevice = (function () {
                                     name +
                                     '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane" id="addVarContain' +
                                     count +
-                                    '"></div></div>';
+                                    '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' + decodeURIComponent(val.fDevicename) + '" value="' + val.fSubdeviceinfoid + '" onclick="QRcodePush(this)">二维码</button></div></div>';
                             }
+
+
                             $("#addDataUL").append(string);
                             $(".tab-content").append(containStr);
                             if (count == 101) {
@@ -288,6 +292,7 @@ var CustomerDevice = (function () {
                 if (data.currentTarget.name == val.fSubdeviceinfoid) {
                     var savedInfo = [],
                         arr = [];
+                    makeQRImg(val.fSubdeviceinfoid);
                     // 如果存在设备实例模板
                     if (val.fRealimg !== undefined) {
                         savedInfo = JSON.parse(val.fRealimg)
@@ -303,9 +308,31 @@ var CustomerDevice = (function () {
                     $.initFile($("#upImage" + val.fSubdeviceinfoid), function (list) {
                         fileList = list
                     }, arr, val.fSubdeviceinfoid)
+
                 }
             })
         })
+
+        function makeQRImg(fSubdeviceinfoid) {
+            //获取二维码
+            $(".showImg").empty();
+            Substation.getDataByAjax(
+                "/getDeviceDetailById", {
+                    fSubdeviceinfoid: fSubdeviceinfoid
+                },
+                function (data) {
+                    if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
+                        var imgPath =
+                            Substation.ipAddressFromAPP + data.qrCodeFilePath + "/" + data.qrCodeFile.fQrcodefile;
+                        var img =
+                            '<img class="smallpic" name="' + data.fileName + '" onclick="imgDisplay(this)" src = "' +
+                            imgPath +
+                            '" >';
+                        $(".showImg").append(img);
+                    }
+                }
+            );
+        }
 
         function getData() {
             // $("body").showLoading();
@@ -854,6 +881,12 @@ jQuery(document).ready(function () {
     var Subname = localStorage.getItem("fSubname");
     $("#titleContent").html(Subname);
 
+    //二维码点击事件
+    // $(".QRcode").on("click", function () {
+    //     var deviceID = this.name;
+
+    // });
+
     // 新增按钮
     $("#Add").on("click", function () {
         if (!upLoadClicktag) {
@@ -1021,6 +1054,69 @@ jQuery(document).ready(function () {
                         }
                     } else {
                         $.toast(Operation['ui_delFail']);
+                    }
+                }
+            );
+        });
+    });
+
+    // 禁用按钮
+    $("#disable").on("click", function () {
+        if (!upLoadClicktag) {
+            return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function () {
+            upLoadClicktag = true;
+        }, 500);
+        var canCopy = $(".tab-link").hasClass("button");
+        if (!canCopy) {
+            $.toast(Operation['ui_cannotdel']);
+            return;
+        }
+        var selectId = $(".active[role='presentation']").attr("name");
+        if (selectId === undefined) {
+            //            $.toast("当前设备暂未保存！");
+            var id = $(".active[role='presentation']").attr("href");
+            var prevLi = $(".active[role='presentation']").prev();
+            var nextLi = $(".active[role='presentation']").next();
+            // var prevLi = $(".active[role='presentation']");
+            $(".active[role='presentation']").remove();
+            $(id).remove();
+            if (prevLi != undefined && prevLi.length > 0) {
+                //TODO: 如有其它tab则选中它
+                prevLi.click();
+                // $(prevLi).tab("show");
+                // $("a", $(prevLi)).tab("show");
+            } else {
+                nextLi.click();
+            }
+            return;
+        }
+        var name = $(".active[role='presentation']").text();
+        $.confirm(Operation['ui_suredis'] + name + Operation['ui_question'], function () {
+            Substation.getDataByAjaxAllData(
+                "/setDeviceState",
+                "subDeviceInfoId=" + selectId + "&fState=1",
+                function (data) {
+                    if (data.code == 200) {
+                        $.toast(Operation['ui_dissuccess']);
+                        var id = $(".active[role='presentation']").attr("href");
+                        var prevLi = $(".active[role='presentation']").prev();
+                        var nextLi = $(".active[role='presentation']").next();
+                        // var prevLi = $(".active[role='presentation']");
+                        $(".active[role='presentation']").remove();
+                        $(id).remove();
+                        if (prevLi != undefined && prevLi.length > 0) {
+                            //TODO: 如有其它tab则选中它
+                            prevLi.click();
+                            // $(prevLi).tab("show");
+                            // $("a", $(prevLi)).tab("show");
+                        } else {
+                            nextLi.click();
+                        }
+                    } else {
+                        $.toast(Operation['ui_disFail']);
                     }
                 }
             );
@@ -1303,6 +1399,14 @@ jQuery(document).ready(function () {
     }
     // $.init();
 });
+
+//二维码点击事件
+function QRcodePush(obj) {
+    //
+    localStorage.setItem("deviceName", obj.name);
+    window.location.href =
+        "AutoloadQRcode.html?fSubdeviceinfoid=" + obj.value;
+}
 
 function downloadFile(file) {
     var fileName = $(file).parent().children('.nameInputInfo').attr("data-file")

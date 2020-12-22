@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+    <title>二维码绑定</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="libs/messageBoxStyle.css" />
+    <link rel="stylesheet" href="css/AutoloadQRcode.css" />
+    <link rel="stylesheet" href="libs/imgUp/imgUp.css" />
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="route5">
+            <header class="bar bar-nav bar_color">
+                <a href="#" class="button button-link button-nav pull-left click_btn" id="goBackLastPid">
+                    <span class="icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color">
+                    <p class="limit-length" id="titleContent"></p>
+                </h1>
+                <div class="bar bar-header-secondary row" style="line-height:2.2rem;">
+                    <div class="col-33">
+                        <a href="#" class="button button-fill button-success" id="Add"><i
+                                class="icon icon-add"></i><span data-i18n="ui_generateQRcode"></span></a>
+                    </div>
+                    <div class="col-33">
+                        <a href="#" class="button button-fill button-success" id="scanCodebind"><i
+                                class="icon icon-delete"></i><span data-i18n="ui_scanCodebind"></span></a>
+                    </div>
+                    <div class="col-33">
+                        <a href="#" class="button button-fill button-success" id="deleteQRcode"><i
+                                class="icon icon-jinyong"></i><span data-i18n="ui_deleteQRcode"></span></a>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="content-block">
+                    <!-- <div class="tabs tab-content pull-to-refresh-container"> -->
+                    <!-- </div> -->
+                    <!-- <img class="up-img pic" name="264" style="width:100%" onclick="imgDisplay(this)" -->
+                    <!-- src="http://116.236.149.165:8090/fileVersion/pageCustom/bd5eb364600a4c59903904f28b48fe05.jpg"> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src="libs/language.js"></script>
+    <script src="libs/messagebox.js"></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/config.js"></script>
+    <script src="libs/tools.js"></script>
+    <script src="libs/imgUp/imgUp.js"></script>
+    <script src="js/AutoloadQRcode.js"></script>
+</body>
+
+</html>

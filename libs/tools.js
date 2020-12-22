@@ -73,6 +73,7 @@ var Substation = {
   },
 
   removeUnDefinedStr: function (data) {
+    Substation
     var dataStr = data == undefined ? "-" : data;
     return dataStr;
   },
@@ -291,7 +292,11 @@ var Substation = {
             Substation.showCodeTips(data.code);
             Substation.reportError(JSON.stringify(data.data.stackTrace));
           } else {
-            Substation.showCodeTips(data.code);
+            if (data.msg && data.msg.length > 0) {
+              $.toast(data.msg);
+            } else {
+              Substation.showCodeTips(data.code);
+            }
           }
         }
       },

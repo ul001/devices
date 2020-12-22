@@ -1,149 +1,203 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>抢单位置</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="libs/light7.min.css">
-    <link rel="stylesheet" href="libs/light7-swiper.min.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/RobBillLocation.css">
-</head>
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1,user-scalable=no"
+    />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/RobBillLocation.css" />
+  </head>
 
-<body>
+  <body>
     <div class="page-group">
-        <div class="page page-current" id="mainPage">
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left external click_btn suibian">
-                    <span class="icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </a>
-                <!-- <a class="button button-link button-nav pull-right open-popup" id="clickPop" data-popup=".popup-about">
+      <div class="page page-current" id="mainPage">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left external click_btn suibian"
+          >
+            <span class="icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <!-- <a class="button button-link button-nav pull-right open-popup" id="clickPop" data-popup=".popup-about">
                     <span class="icon icon-menu" style="color:white"></span>
                 </a> -->
-                <!-- <p class="buttons-row">
+          <!-- <p class="buttons-row">
                     <a href="#" class="button buttonTab active">步行</a><a href="#" class="button buttonTab">驾车</a><a
                         href="#" class="button buttonTab">公交</a>
                 </p> -->
-                <h1 class="title title_color"><span data-i18n="ui_RobBillDetails"></span></h1>
-
-            </header>
-            <div class="content">
-                <div id="container" style="width:100%;height:100%"></div>
-            </div>
-            <div id="control">
-                <div onclick="walk()" class="button button-link buttonTab"><img class="col-15" src="img/buxing.png"
-                        style="height:1rem;vertical-align:middle;"><span data-i18n="ui_walk"></span></div>
-                <div onclick="drive()" class="button button-link buttonTab"><img class="col-15" src="img/jiache.png"
-                        style="height:1rem;vertical-align:middle;"><span data-i18n="ui_drive"></span></div>
-                <div onclick="navigation()" class="button button-link buttonTab"><img class="col-15"
-                        src="img/daohang.png" style="height:1rem;vertical-align:middle;"><span
-                        data-i18n="ui_navigation"></span></div>
-            </div>
-            <div class="bottomUp"><a class="button open-popup" id="clickPopup" data-popup=".popup-about"
-                    style="border:white"><img class="col-15" src="img/xiangshangjiantou.png" style="height:1rem;"></a>
-            </div>
+          <h1 class="title title_color">
+            <span data-i18n="ui_RobBillDetails"></span>
+          </h1>
+        </header>
+        <div class="content">
+          <div id="container" style="width:100%;height:100%"></div>
         </div>
-        <div id="page1" class="page">
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left click_btn" onclick="clickSelectPersonBack();">
-                    <span class=" icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </a>
-                <h1 class="title title_color"><span data-i18n="ui_selectPeople"></span><span id="peopleType"></span>
-                </h1>
-            </header>
-            <div class="bar bar-header-secondary">
-                <div class="searchbar">
-                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
-                    <div class="search-input">
-                        <label class="icon icon-search" for="searchUser"></label>
-                        <input type="search" id="searchUser" placeholder="" data-placeholder="ui_selectUser" />
-                    </div>
-                </div>
+        <div id="control">
+          <div onclick="walk()" class="button button-link buttonTab">
+            <img
+              class="col-15"
+              src="img/buxing.png"
+              style="height:1rem;vertical-align:middle;"
+            /><span data-i18n="ui_walk"></span>
+          </div>
+          <div onclick="drive()" class="button button-link buttonTab">
+            <img
+              class="col-15"
+              src="img/jiache.png"
+              style="height:1rem;vertical-align:middle;"
+            /><span data-i18n="ui_drive"></span>
+          </div>
+          <div onclick="navigation()" class="button button-link buttonTab">
+            <img
+              class="col-15"
+              src="img/daohang.png"
+              style="height:1rem;vertical-align:middle;"
+            /><span data-i18n="ui_navigation"></span>
+          </div>
+        </div>
+        <div class="bottomUp">
+          <a
+            class="button open-popup"
+            id="clickPopup"
+            data-popup=".popup-about"
+            style="border:white"
+            ><img
+              class="col-15"
+              src="img/xiangshangjiantou.png"
+              style="height:1rem;"
+          /></a>
+        </div>
+      </div>
+      <div id="page1" class="page">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn"
+            onclick="clickSelectPersonBack();"
+          >
+            <span class=" icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color">
+            <span data-i18n="ui_selectPeople"></span
+            ><span id="peopleType"></span>
+          </h1>
+        </header>
+        <div class="bar bar-header-secondary">
+          <div class="searchbar">
+            <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+            <div class="search-input">
+              <label class="icon icon-search" for="searchUser"></label>
+              <input
+                type="search"
+                id="searchUser"
+                placeholder=""
+                data-placeholder="ui_selectUser"
+              />
             </div>
-            <nav class="bar bar-footer">
-                <span id="showSelected"><span data-i18n="ui_hasSelected"></span>:</span>
-                <a href="#" class="button bg-primary col-33" onclick="saveSelectedPeople()" data-i18n="ui_confirm"></a>
-            </nav>
-            <div class="content">
-                <div class="list-block">
-                    <ul id="classList">
-                        <li id="subClass">
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">
-
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li id="peopleClass">
-                            <div class="item-content">
-                                <div class="item-inner">
-                                    <div class="item-title">
-                                        <span data-id="-1" data-i18n="ui_organization"></span>
-                                        <!--<i class="icon icon-right"></i>
+          </div>
+        </div>
+        <nav class="bar bar-footer">
+          <span id="showSelected"
+            ><span data-i18n="ui_hasSelected"></span>:</span
+          >
+          <a
+            href="#"
+            class="button bg-primary col-33"
+            onclick="saveSelectedPeople()"
+            data-i18n="ui_confirm"
+          ></a>
+        </nav>
+        <div class="content">
+          <div class="list-block">
+            <ul id="classList">
+              <li id="subClass">
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title"></div>
+                  </div>
+                </div>
+              </li>
+              <li id="peopleClass">
+                <div class="item-content">
+                  <div class="item-inner">
+                    <div class="item-title">
+                      <span data-id="-1" data-i18n="ui_organization"></span>
+                      <!--<i class="icon icon-right"></i>
                                     <span class="preClass">安科瑞运维小组</span><i class="icon icon-right"></i>
                                     <span>运维测试</span>-->
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-
-                    <ul class="classUl">
-
-                    </ul>
-                    <ul class="personUl" id="selectAll">
-                        <li>
-                            <label class="label-checkbox item-content" data-id="10100001">
-                                <input type="checkbox" name="my-checkbox">
-                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-title" data-i18n="ui_SelectAll"></div>
-                                </div>
-                            </label>
-                        </li>
-                    </ul>
-                    <ul class="personUl" id="personListUl">
-
-                    </ul>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        <div id="page2" class="page">
-            <header class="bar bar-nav bar_color">
-                <a class="button button-link button-nav pull-left click_btn" onclick="$.router.back();">
-                    <span class=" icon icon-left"></span>
-                    <span data-i18n="ui_back"></span>
-                </a>
-                <h1 class="title title_color"><span data-i18n="ui_hasSelected"></span><span
-                        id="numberShow">3</span><span data-i18n="ui_personNum"></span></h1>
-                <a class="button button-link button-nav pull-right click_btn" data-i18n="ui_confirm"
-                    onclick="$.router.back();">
-                </a>
-            </header>
-            <div class="content">
-                <div class="list-block">
-                    <ul id="selectedUl">
+              </li>
+            </ul>
 
-                    </ul>
-                </div>
-            </div>
+            <ul class="classUl"></ul>
+            <ul class="personUl" id="selectAll">
+              <li>
+                <label class="label-checkbox item-content" data-id="10100001">
+                  <input type="checkbox" name="my-checkbox" />
+                  <div class="item-media">
+                    <i class="icon icon-form-checkbox"></i>
+                  </div>
+                  <div class="item-inner">
+                    <div class="item-title" data-i18n="ui_SelectAll"></div>
+                  </div>
+                </label>
+              </li>
+            </ul>
+            <ul class="personUl" id="personListUl"></ul>
+          </div>
         </div>
-        <div class="popup popup-about" style="display: none;">
-            <div class="content native-scroll">
-                <div class="content-inner">
-                    <p><a class="button close-popup" id="clickDown"><img class="col-15" src="img/xiangxiajiantou.png"
-                                style="height:1rem;"></a></p>
-                    <div class="content-block" id="taskDetail">
-                        <!-- <p class="subName limit-length">清华大学光华路校区</p>
+      </div>
+      <div id="page2" class="page">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn"
+            onclick="$.router.back();"
+          >
+            <span class=" icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color">
+            <span data-i18n="ui_hasSelected"></span
+            ><span id="numberShow">3</span
+            ><span data-i18n="ui_personNum"></span>
+          </h1>
+          <a
+            class="button button-link button-nav pull-right click_btn"
+            data-i18n="ui_confirm"
+            onclick="$.router.back();"
+          >
+          </a>
+        </header>
+        <div class="content">
+          <div class="list-block">
+            <ul id="selectedUl"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="popup popup-about" style="display: none;">
+        <div class="content native-scroll">
+          <div class="content-inner">
+            <p>
+              <a class="button close-popup" id="clickDown"
+                ><img
+                  class="col-15"
+                  src="img/xiangxiajiantou.png"
+                  style="height:1rem;"
+              /></a>
+            </p>
+            <div class="content-block" id="taskDetail">
+              <!-- <p class="subName limit-length">清华大学光华路校区</p>
                         <p class="missionNo row" style="color:#ADB2C1;">
                             <span class="col-85" style="margin-left:0rem;">任务单号：T9999</span>
                             <img class="col-15" src="img/video_watch.png" style="height: 0.9rem;width: 1.5rem;"
@@ -154,57 +208,91 @@
                         <p class="missionList">任务内容：XXX</p>
                         <p class="missionList">计划开始时间：XXX</p>
                         <p class="missionList">计划完成时间：XXX</p> -->
-                    </div>
-                    <div class="popBottomBtn">
-                        <a class="button open-popup sureBtn" data-popup=".popup-services" data-i18n="ui_RobBill"></a>
-                    </div>
-                    <div class="popBottomBtn2">
-                        <a class="button sureBtn" onclick="pushTaskDetails()"><span data-i18n="ui_seeDetail"></span></a>
-                    </div>
-                </div>
             </div>
+            <div class="popBottomBtn">
+              <a
+                class="button open-popup sureBtn"
+                data-popup=".popup-services"
+                data-i18n="ui_RobBill"
+              ></a>
+            </div>
+            <div class="popBottomBtn2">
+              <a class="button sureBtn" onclick="pushTaskDetails()"
+                ><span data-i18n="ui_seeDetail"></span
+              ></a>
+            </div>
+          </div>
         </div>
-        <div class="popup popup-services">
-            <div class="content native-scroll">
-                <div class="content-inner">
-                    <div class="content-block">
-                        <p class="subName limit-length"><span data-i18n="ui_isSureRobBill"></span></p>
-                        <div class="list-block">
-                            <ul>
-                                <li>
-                                    <div id="worker" class="item-content item-link item-add">
-                                        <div class="item-inner">
-                                            <div class="item-title"><span class="redColor">* </span><span
-                                                    data-i18n="ui_pleaseSelectPerson"></span></div>
-                                        </div>
-                                    </div>
-                                    <div class="peopleList worker">
-                                        <!-- <span class="common">徐航<i class="icon icon-close"></i></span> -->
-                                    </div>
-                                </li>
-                            </ul>
+      </div>
+      <div class="popup popup-services">
+        <div class="content native-scroll">
+          <div class="content-inner">
+            <div class="content-block">
+              <p class="subName limit-length">
+                <span data-i18n="ui_isSureRobBill"></span>
+              </p>
+              <div class="list-block">
+                <ul>
+                  <li>
+                    <div id="worker" class="item-content item-link item-add">
+                      <div class="item-inner">
+                        <div class="item-title">
+                          <span class="redColor">* </span
+                          ><span data-i18n="ui_pleaseSelectPerson"></span>
                         </div>
-                        <!-- <p class="missionNo row" style="color:#ADB2C1;">
+                      </div>
+                    </div>
+                    <div class="peopleList worker">
+                      <!-- <span class="common">徐航<i class="icon icon-close"></i></span> -->
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <!-- <p class="missionNo row" style="color:#ADB2C1;">
                             <span class="col-85" style="margin-left:0rem;">请选择执行人</span>
                         </p> -->
-                        <div class="serviceBottomBtn">
-                            <p><a class="button sureBtn" onclick="publishRobTask()" id=""><span
-                                        data-i18n="ui_confirm"></span></a></p>
-                            <p><a class="button close-popup" data-popup=".popup-services" id="cancel"
-                                    data-i18n="ui_cancel"></a></p>
-                        </div>
-                    </div>
-                </div>
+              <div class="serviceBottomBtn">
+                <p>
+                  <a class="button sureBtn" onclick="publishRobTask()" id=""
+                    ><span data-i18n="ui_confirm"></span
+                  ></a>
+                </p>
+                <p>
+                  <a
+                    class="button close-popup"
+                    data-popup=".popup-services"
+                    id="cancel"
+                    data-i18n="ui_cancel"
+                  ></a>
+                </p>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script
+      type="text/javascript"
+      src="libs/jquery-1.12.4.min.js"
+      charset="utf-8"
+    ></script>
+    <script
+      type="text/javascript"
+      src="libs/light7.min.js"
+      charset="utf-8"
+    ></script>
     <script src="libs/language.js"></script>
-    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script
+      type="text/javascript"
+      src="libs/light7-swiper.min.js"
+      charset="utf-8"
+    ></script>
     <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=Ysaj307vcP9KgGcn8w2qqaxIdybbBG6d"></script>-->
-    <script type='text/javascript' src="libs/tools.js" charset="utf-8"></script>
-    <script type='text/javascript' src="js/RobBillLocation.js" charset="utf-8"></script>
-</body>
-
+    <script type="text/javascript" src="libs/tools.js" charset="utf-8"></script>
+    <script
+      type="text/javascript"
+      src="js/RobBillLocation.js"
+      charset="utf-8"
+    ></script>
+  </body>
 </html>

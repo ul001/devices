@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta http-equiv="Access-Control-Allow-Origin" content="*" />
   <title>台账登记</title>
   <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
   <link rel="shortcut icon" href="/favicon.ico" />
@@ -22,27 +22,20 @@
 <body>
   <div class="page-group">
     <div class="page" id="route5">
-      <!-- <head class="bar bar-nav">
-                <a class="button button-link button-nav pull-left back" href="/demos">
-                    <span class="icon icon-left"></span>
-                    返回
-                </a>
-                <h1 class="title">设备配置</h1>
-            </head> -->
-      <!-- <div class="content-block">
-                <div class="row" id="tab-nav">
-                    <div class="col-25"><a href="#" class="button button-big button-fill button-success" id="Add">新增</a>
-                    </div>
-                    <div class="col-25"><a href="#" class="button button-big button-fill button-success"
-                            id="delete">删除</a>
-                    </div>
-                    <div class="col-25"><a href="#" class="button button-big button-fill button-success"
-                            id="copy">复制</a>
-                    </div>
-                    <div class="col-25"><a href="#" class="button button-big button-fill button-success"
-                            id="save">保存</a>
-                    </div>
-                </div> -->
+      <!-- {
+      "fSubdeviceinfoid": 264,
+      "fSubid": 10100001,
+      "fSubdevicegroupid": 41,
+      "fDevicejson": "[{\"name\": \"设备信息\", \"value\": [{\"name\": \"当前状态\", \"type\": \"select\", \"value\": \"运行\"}]},
+      {\"name\": \"测试\", \"value\": [{\"name\": \"型号规格\", \"type\": \"input\", \"value\": \"1321232131\"}]}]",
+      "fDevicename": "户外隔离刀闸",
+      "fCreatetime": "2019-10-28 14:40:30",
+      "fUserid": 1,
+      "fDevicenamepath": "10kV进线部分-户外隔离刀闸",
+      "fSubdevicewarranty": 2,
+      "fSubdevicebaoxiu": "2个月",
+      "fState": 0
+      }, -->
       <header class="bar bar-nav bar_color">
         <a href="#" class="button button-link button-nav pull-left click_btn" id="goBackLastPid">
           <span class="icon icon-left"></span>
@@ -52,19 +45,23 @@
           <p class="limit-length" id="titleContent"></p>
         </h1>
         <div class="bar bar-header-secondary row" style="line-height:2.2rem;">
-          <div class="col-25">
+          <div class="col-20">
             <a href="#" class="button button-fill button-success" id="Add"><i class="icon icon-add"></i><span
                 data-i18n="ui_add"></span></a>
           </div>
-          <div class="col-25">
+          <div class="col-20">
             <a href="#" class="button button-fill button-success" id="delete"><i class="icon icon-delete"></i><span
                 data-i18n="ui_delete"></span></a>
           </div>
-          <div class="col-25">
+          <div class="col-20">
+            <a href="#" class="button button-fill button-success" id="disable"><i class="icon icon-jinyong"></i><span
+                data-i18n="ui_disable"></span></a>
+          </div>
+          <div class="col-20">
             <a href="#" class="button button-fill button-success" id="copy"><i class="icon icon-clone"></i><span
                 data-i18n="ui_copy"></span></a>
           </div>
-          <div class="col-25">
+          <div class="col-20">
             <a href="#" class="button button-fill button-success" id="save"><i class="icon icon-save"></i><span
                 data-i18n="ui_save"></span></a>
           </div>
@@ -224,7 +221,6 @@
   <script src="libs/tools.js"></script>
   <script src="libs/imgUp/imgUp.js"></script>
   <script src="js/AutoloadDetail.js"></script>
-
 </body>
 
 </html>
