@@ -68,14 +68,22 @@ function getQRresultAndPush(param) {
     $.toast("非本平台二维码");
     return;
   }
-  // var codeid = strArr[1];
+  // if (!hasSave && canClick != "false") {
+  //   $.confirm(
+  //     Operation["ui_noSaveWantOut"],
+  //     function () {
+  //       clickBackBtn = 1;
+
+  //     },
+  //     function () {}
+  //   );
+  // } else {
+  saveThisPage();
+  // }
+  clickBackBtn = 1;
   localStorage.setItem("QRcode", param);
   localStorage.setItem("fPlacecheckformid", fPlacecheckformid);
   window.location.href = "patrolContentQRcode.html";
-}
-
-window.onbeforeunload = function () {
-  return "确认离开当前页面前往扫码页面吗？当前未保存的数据将会丢失";
 }
 
 function loadPage() {
@@ -1120,81 +1128,82 @@ function loadPage3(fDeviceproblemid) {
 
 function saveThisPage() {
   var changeJson = [];
-
-  $(".tabs .tab").each(function () {
-    var deviceJson = {};
-    var deviceId = $(this).attr("id");
-    var inputArray = [];
-    $("#" + deviceId + " .card").each(function (index, obj) {
-      var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
-      var thisObj = {};
-      if (thisInput) {
-        thisObj["code"] = $(thisInput).attr("data-code");
-        thisObj["name"] = $(thisInput).attr("data-name");
-        thisObj["value"] = $(thisInput).attr("value");
-        thisObj["type"] = "radio";
-      } else {
-        thisObj["code"] = $(obj)
-          .find($("input"))
-          .attr("data-code");
-        thisObj["name"] = $(obj)
-          .find($("input"))
-          .attr("data-name");
-        thisObj["value"] = $(obj)
-          .find($("input"))
-          .val();
-        thisObj["type"] = "input";
-      }
-      inputArray.push(thisObj);
-    });
-    deviceJson["fInspectionslipjson"] = inputArray;
-    deviceJson["fSubdeviceinfoid"] = deviceId;
-    deviceJson["fPlacecheckformid"] = fPlacecheckformid;
-    deviceJson["fItemnum"] = tempNum;
-    changeJson.push(deviceJson);
-  });
-  var jsonStr = JSON.stringify(changeJson);
-  Substation.postDataByAjax(
-    "/updateInspectionDetail", {
-      fPlacecheckformid: fPlacecheckformid,
-      deviceList: jsonStr
-    },
-    function (data) {
-      if (data.code == 200) {
-        $.toast(Operation["ui_savesuccess"]);
-        var thisGroupid = pids[pids.length - 1].pid;
-        var needChange = true;
-        $.each(allGroupList, function (i, obj) {
-          if (thisGroupid == obj.id) {
-            if (obj.fenzuTotal == "0") {
-              needChange = true;
-            } else {
-              needChange = false;
-            }
-            return false;
-          }
-        });
-        if (needChange) {
-          $(pids).each(function () {
-            changeListVal(this.pid);
-          });
-          //                fillData(thisGroupid);
-          if (isAndroid) {
-            //android持久化储存
-            //            try {
-            //              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
-            //            } catch (e) {
-            //              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-            //            }
-          } else {
-            localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-          }
-          $("#" + thisGroupid + " .item-inner").addClass("finished");
+  if ($(".tabs .tab").length > 0) {
+    $(".tabs .tab").each(function () {
+      var deviceJson = {};
+      var deviceId = $(this).attr("id");
+      var inputArray = [];
+      $("#" + deviceId + " .card").each(function (index, obj) {
+        var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
+        var thisObj = {};
+        if (thisInput) {
+          thisObj["code"] = $(thisInput).attr("data-code");
+          thisObj["name"] = $(thisInput).attr("data-name");
+          thisObj["value"] = $(thisInput).attr("value");
+          thisObj["type"] = "radio";
+        } else {
+          thisObj["code"] = $(obj)
+            .find($("input"))
+            .attr("data-code");
+          thisObj["name"] = $(obj)
+            .find($("input"))
+            .attr("data-name");
+          thisObj["value"] = $(obj)
+            .find($("input"))
+            .val();
+          thisObj["type"] = "input";
         }
-        //            localStorage.setItem("need-refresh", "true");
+        inputArray.push(thisObj);
+      });
+      deviceJson["fInspectionslipjson"] = inputArray;
+      deviceJson["fSubdeviceinfoid"] = deviceId;
+      deviceJson["fPlacecheckformid"] = fPlacecheckformid;
+      deviceJson["fItemnum"] = tempNum;
+      changeJson.push(deviceJson);
+    });
+    var jsonStr = JSON.stringify(changeJson);
+    Substation.postDataByAjax(
+      "/updateInspectionDetail", {
+        fPlacecheckformid: fPlacecheckformid,
+        deviceList: jsonStr
+      },
+      function (data) {
+        if (data.code == 200) {
+          $.toast(Operation["ui_savesuccess"]);
+          var thisGroupid = pids[pids.length - 1].pid;
+          var needChange = true;
+          $.each(allGroupList, function (i, obj) {
+            if (thisGroupid == obj.id) {
+              if (obj.fenzuTotal == "0") {
+                needChange = true;
+              } else {
+                needChange = false;
+              }
+              return false;
+            }
+          });
+          if (needChange) {
+            $(pids).each(function () {
+              changeListVal(this.pid);
+            });
+            //                fillData(thisGroupid);
+            if (isAndroid) {
+              //android持久化储存
+              //            try {
+              //              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
+              //            } catch (e) {
+              //              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+              //            }
+            } else {
+              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+            }
+            $("#" + thisGroupid + " .item-inner").addClass("finished");
+          }
+          //            localStorage.setItem("need-refresh", "true");
+        }
       }
-    }
-  );
+    );
+  }
 }
 
 function changeListVal(thisId) {
@@ -1459,6 +1468,10 @@ window.addEventListener("resize", function () {
   }
 });
 
+// window.addEventListener('blur', function () {
+// console.log('blur');
+// });
+
 $(window).bind("beforeunload", function (e) {
   if (canClick != "false") {
     if (!hasSave && clickBackBtn != 1) {
@@ -1467,5 +1480,15 @@ $(window).bind("beforeunload", function (e) {
     }
   }
 });
+
+// window.addEventListener("popstate", function (e) {
+//   if (canClick != "false") {
+//     if (!hasSave && clickBackBtn != 1) {
+//       (e || window.event).returnValue = Operation["ui_noSaveWantOut"];
+//       return Operation["ui_noSaveWantOut"];
+//     }
+//   }
+// }, false);
+
 
 $.init();
