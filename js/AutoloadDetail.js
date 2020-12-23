@@ -902,7 +902,7 @@ jQuery(document).ready(function () {
 
     $("#goBackLastPid").click(function () {
         /*window.location.href =
-                "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
+                    "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
         localStorage.setItem("pid", jumpPid);
         localStorage.setItem("clickNum", lastClickNum);
         if (isAndroid) {
@@ -1512,7 +1512,6 @@ jQuery(document).ready(function () {
 var sdeviceinfoid = "";
 //二维码点击事件
 function QRcodePush(obj) {
-
     // localStorage.setItem("deviceName", obj.name);
     // window.location.href =
     //     "AutoloadQRcode.html?fSubdeviceinfoid=" + obj.value;
@@ -1545,11 +1544,18 @@ function getPageInfo() {
             // qrCodeFilePath: "fileSystem/deviceImg"
             if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
                 var imgPath =
-                    Substation.ipAddressFromAPP + data.qrCodeFilePath + "/" + data.qrCodeFile.fQrcodefile;
+                    Substation.ipAddressFromAPP +
+                    data.qrCodeFilePath +
+                    "/" +
+                    data.qrCodeFile.fQrcodefile;
                 var img =
-                    '<img class="up-img pic" name="' + data.fileName + '" style="width:100%" onclick="imgDisplay(this)" src = "' +
+                    '<img class="up-img pic" name="' +
+                    data.fileName +
+                    '" style="width:100%" onclick="imgDisplay(this)" src = "' +
                     imgPath +
-                    '" > <p class="QRtime" style="text-align:center;">二维码生成时间: ' + data.qrCodeFile.fCreatetime + '</p>';
+                    '" > <p class="QRtime" style="text-align:center;">二维码生成时间: ' +
+                    data.qrCodeFile.fCreatetime +
+                    "</p>";
                 $("#contentQRCode").append(img);
                 // $.toast(Operation["ui_successfully"]);
             }
@@ -1570,7 +1576,9 @@ $("#Add2").click(function () {
                 var imgPath =
                     Substation.ipAddressFromAPP + data.filePath + "/" + data.fileName;
                 var img =
-                    '<img class="up-img pic" name="' + data.fileName + '" style="width:100%" onclick="imgDisplay(this)" src = "' +
+                    '<img class="up-img pic" name="' +
+                    data.fileName +
+                    '" style="width:100%" onclick="imgDisplay(this)" src = "' +
                     imgPath +
                     '" > ';
                 $("#contentQRCode").append(img);
@@ -1591,12 +1599,13 @@ $("#scanCodebind").click(function () {
 
 //原生回调
 function getQRresultAndPush(param) {
+    // $.toast("二维码" + param);
     if (param && param.length > 0) {
         var strArr = param.split("_");
         if (param == "" || param == undefined) {
             return;
         }
-        if (strArr[0] != "arcel") {
+        if (strArr[0] != "acqr") {
             $.toast("非本平台二维码");
             return;
         }
@@ -1633,9 +1642,7 @@ function getQRresultAndPush(param) {
                 );
             }
         );
-
     }
-
 }
 
 //二维码解绑

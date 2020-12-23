@@ -88,7 +88,7 @@ function getQRresultAndPush(param) {
         if (param == "" || param == undefined) {
             return;
         }
-        if (strArr[0] != "arcel") {
+        if (strArr[0] != "acqr") {
             $.toast("非本平台二维码");
             return;
         }

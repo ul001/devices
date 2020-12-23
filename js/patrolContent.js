@@ -64,7 +64,7 @@ function getQRresultAndPush(param) {
   if (param == "" || param == undefined) {
     return;
   }
-  if (strArr[0] != "arcel") {
+  if (strArr[0] != "acqr") {
     $.toast("非本平台二维码");
     return;
   }
@@ -72,6 +72,10 @@ function getQRresultAndPush(param) {
   localStorage.setItem("QRcode", param);
   localStorage.setItem("fPlacecheckformid", fPlacecheckformid);
   window.location.href = "patrolContentQRcode.html";
+}
+
+window.onbeforeunload = function () {
+  return "确认离开当前页面前往扫码页面吗？当前未保存的数据将会丢失";
 }
 
 function loadPage() {
