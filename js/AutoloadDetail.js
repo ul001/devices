@@ -50,7 +50,6 @@ var CustomerDevice = (function () {
             return fileList;
         };
 
-
         // 新增一个设备
         this.addModal = function (data, tabName) {
             // 取消选中tabpanel
@@ -78,9 +77,13 @@ var CustomerDevice = (function () {
             var containStr =
                 '<div role="tabpanel" class="tab pull-to-refresh-content active" id="' +
                 name +
-                '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
+                '"><div class="pull-to-refresh-layer"></div><div class="content-block tab-pane active" id="addVarContain' +
                 count +
-                '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' + decodeURIComponent(val.fDevicename) + '" value="' + val.fSubdeviceinfoid + '" onclick="QRcodePush(this)">二维码</button></div></div>';
+                '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' +
+                decodeURIComponent(val.fDevicename) +
+                '" value="' +
+                val.fSubdeviceinfoid +
+                '" onclick="QRcodePush(this)">二维码</button></div></div>';
             // var containStr = '<div role="tabpanel" class="tab-pane active" id="' + name + '">' +
             // '<div id="addVarContain' + count + '"></div></div>';
 
@@ -111,45 +114,55 @@ var CustomerDevice = (function () {
                     arr = [];
                 // 如果所选设备有模板图片
                 if (selectInfo.fPreviewfiles !== undefined) {
-                    savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+                    savedInfo = JSON.parse(selectInfo.fPreviewfiles);
                 }
                 $.each(savedInfo, function (i, val) {
-                    arr.push(Substation.ipAddressFromAPP + imagePath + '/' + val)
-                })
+                    arr.push(Substation.ipAddressFromAPP + imagePath + "/" + val);
+                });
                 var imgid = name.substr(8);
                 //新增必然是模板图片 传true
-                $.initFile($("#upImage" + imgid), function (list) {
-                    fileList = list
-                }, arr, imgid, true)
+                $.initFile(
+                    $("#upImage" + imgid),
+                    function (list) {
+                        fileList = list;
+                    },
+                    arr,
+                    imgid,
+                    true
+                );
                 addEdit();
             }
-
-
         };
 
         //添加编辑按钮事件
         function addEdit() {
-            $(".icon-edit").unbind().click(function (e) {
-                var thisSpan = $(this).prev();
-                var thisDeviceId = $(this).parent().attr("name");
-                $.prompt(Operation['ui_rename'], function (value) {
-                    if (thisDeviceId == undefined) {
-                        thisSpan.text(value);
-                    } else {
-                        Substation.postDataByAjax("/updateDevice", {
-                            fSubdeviceinfoid: thisDeviceId,
-                            fDevicename: value
-                        }, function (data) {
-                            $.toast(Operation['ui_renamesuccess']);
+            $(".icon-edit")
+                .unbind()
+                .click(function (e) {
+                    var thisSpan = $(this).prev();
+                    var thisDeviceId = $(this)
+                        .parent()
+                        .attr("name");
+                    $.prompt(Operation["ui_rename"], function (value) {
+                        if (thisDeviceId == undefined) {
                             thisSpan.text(value);
-                        });
-                    }
+                        } else {
+                            Substation.postDataByAjax(
+                                "/updateDevice", {
+                                    fSubdeviceinfoid: thisDeviceId,
+                                    fDevicename: value
+                                },
+                                function (data) {
+                                    $.toast(Operation["ui_renamesuccess"]);
+                                    thisSpan.text(value);
+                                }
+                            );
+                        }
+                    });
+                    $(".modal-text-input").val(thisSpan.text());
+                    //                $(".modal-text-input").select();
+                    e.stopPropagation();
                 });
-                $(".modal-text-input").val(thisSpan.text());
-                //                $(".modal-text-input").select();
-                e.stopPropagation();
-            });
-
         }
 
         // 初始化获取信息
@@ -224,9 +237,13 @@ var CustomerDevice = (function () {
                                 containStr =
                                     '<div role="tabpanel" class="tab pull-to-refresh-content" id="' +
                                     name +
-                                    '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane active" id="addVarContain' +
+                                    '"><div class="pull-to-refresh-layer"></div><div class="content-block tab-pane active" id="addVarContain' +
                                     count +
-                                    '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' + decodeURIComponent(val.fDevicename) + '" value="' + val.fSubdeviceinfoid + '" onclick="QRcodePush(this)">二维码</button></div></div>';
+                                    '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' +
+                                    decodeURIComponent(val.fDevicename) +
+                                    '" value="' +
+                                    val.fSubdeviceinfoid +
+                                    '" onclick="QRcodePush(this)">二维码</button></div></div>';
                                 if (val.fRealimg != undefined) {
                                     imageListChange = JSON.parse(val.fRealimg);
                                 }
@@ -251,11 +268,14 @@ var CustomerDevice = (function () {
                                 containStr =
                                     '<div role="tabpanel" class="tab pull-to-refresh-content" id="' +
                                     name +
-                                    '"><div class=\"pull-to-refresh-layer\"></div><div class="content-block tab-pane" id="addVarContain' +
+                                    '"><div class="pull-to-refresh-layer"></div><div class="content-block tab-pane" id="addVarContain' +
                                     count +
-                                    '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' + decodeURIComponent(val.fDevicename) + '" value="' + val.fSubdeviceinfoid + '" onclick="QRcodePush(this)">二维码</button></div></div>';
+                                    '"><div class="content-block-title" style="margin-top: -1rem;">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' +
+                                    decodeURIComponent(val.fDevicename) +
+                                    '" value="' +
+                                    val.fSubdeviceinfoid +
+                                    '" onclick="QRcodePush(this)">二维码</button></div></div>';
                             }
-
 
                             $("#addDataUL").append(string);
                             $(".tab-content").append(containStr);
@@ -264,7 +284,12 @@ var CustomerDevice = (function () {
                             }
                             //创建模板
                             var select = $("#addVarContain" + count);
-                            creatInfo(selectInfo.fFunctionfield, $("#addVarContain" + count), count, name);
+                            creatInfo(
+                                selectInfo.fFunctionfield,
+                                $("#addVarContain" + count),
+                                count,
+                                name
+                            );
                             if (
                                 val.fDevicejson != undefined &&
                                 val.fDevicejson != "undefined"
@@ -278,7 +303,7 @@ var CustomerDevice = (function () {
                         $("#copy").attr("disabled", true);
                         $("#save").attr("disabled", true);
                         $("#container-info")
-                            .html(Operation['ui_nodata'] + "！")
+                            .html(Operation["ui_nodata"] + "！")
                             .css("text-align", "center");
                     }
                     addEdit();
@@ -287,7 +312,7 @@ var CustomerDevice = (function () {
         }
 
         //点击Tab 切换图片数据
-        $(document).on('click', '#addDataUL a', function (data) {
+        $(document).on("click", "#addDataUL a", function (data) {
             $.each(curNodeInfo, function (i, val) {
                 if (data.currentTarget.name == val.fSubdeviceinfoid) {
                     var savedInfo = [],
@@ -295,23 +320,27 @@ var CustomerDevice = (function () {
                     makeQRImg(val.fSubdeviceinfoid);
                     // 如果存在设备实例模板
                     if (val.fRealimg !== undefined) {
-                        savedInfo = JSON.parse(val.fRealimg)
+                        savedInfo = JSON.parse(val.fRealimg);
                     } else {
                         if (selectInfo.fPreviewfiles !== undefined) {
-                            savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+                            savedInfo = JSON.parse(selectInfo.fPreviewfiles);
                         }
                     }
                     $.each(savedInfo, function (i, val) {
-                        arr.push(Substation.ipAddressFromAPP + imagePath + '/' + val)
-                    })
+                        arr.push(Substation.ipAddressFromAPP + imagePath + "/" + val);
+                    });
 
-                    $.initFile($("#upImage" + val.fSubdeviceinfoid), function (list) {
-                        fileList = list
-                    }, arr, val.fSubdeviceinfoid)
-
+                    $.initFile(
+                        $("#upImage" + val.fSubdeviceinfoid),
+                        function (list) {
+                            fileList = list;
+                        },
+                        arr,
+                        val.fSubdeviceinfoid
+                    );
                 }
-            })
-        })
+            });
+        });
 
         function makeQRImg(fSubdeviceinfoid) {
             //获取二维码
@@ -323,9 +352,14 @@ var CustomerDevice = (function () {
                     $(".showImg").empty();
                     if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
                         var imgPath =
-                            Substation.ipAddressFromAPP + data.qrCodeFilePath + "/" + data.qrCodeFile.fQrcodefile;
+                            Substation.ipAddressFromAPP +
+                            data.qrCodeFilePath +
+                            "/" +
+                            data.qrCodeFile.fQrcodefile;
                         var img =
-                            '<img class="smallpic" name="' + data.fileName + '" onclick="imgDisplay(this)" src = "' +
+                            '<img class="smallpic" name="' +
+                            data.fileName +
+                            '" onclick="imgDisplay(this)" src = "' +
                             imgPath +
                             '" >';
                         $(".showImg").append(img);
@@ -521,23 +555,34 @@ var CustomerDevice = (function () {
                         //暂时容错网页保存的：:
                         name = name.substr(0, name.length - 1);
                     }
-                    var prevLable = $(parent).children(".baseInfoDiv[name='" + val.name + "']").find(".item-title:contains('" + name + "')");
+                    var prevLable = $(parent)
+                        .children(".baseInfoDiv[name='" + val.name + "']")
+                        .find(".item-title:contains('" + name + "')");
                     var info = value.value;
                     switch (value.type) {
                         case "input":
-                            $(prevLable).next("div").find("input").val(decodeURIComponent(value.value));
+                            $(prevLable)
+                                .next("div")
+                                .find("input")
+                                .val(decodeURIComponent(value.value));
                             break;
                         case "radio":
                             if (info == "yes") {
-                                $(prevLable).next("input[value='yes']").attr("checked", true);
+                                $(prevLable)
+                                    .next("input[value='yes']")
+                                    .attr("checked", true);
                             }
                             if (info == "no") {
-                                $(prevLable).next("input[value='no']").attr("checked", true);
+                                $(prevLable)
+                                    .next("input[value='no']")
+                                    .attr("checked", true);
                             }
                             break;
                         case "select":
                             var selectOption = decodeURIComponent(value.value);
-                            var options = $(prevLable).next("select").children("option");
+                            var options = $(prevLable)
+                                .next("select")
+                                .children("option");
                             var select = $(prevLable).next("select");
                             $.each(options, function (key, value2) {
                                 if (value2.innerHTML == selectOption) {
@@ -547,38 +592,46 @@ var CustomerDevice = (function () {
                             });
                             break;
                         case "date":
-                            $(prevLable).next($(".dateTime")).val(value.value);
+                            $(prevLable)
+                                .next($(".dateTime"))
+                                .val(value.value);
                             try {
-                                $(prevLable).next($(".datetime-local")).val(value.value.replace(" ", "T"));
+                                $(prevLable)
+                                    .next($(".datetime-local"))
+                                    .val(value.value.replace(" ", "T"));
                             } catch (e) {}
                             break;
                             // imgAdd
                         case "image":
                             var arr = [];
-                            var savedInfo = []
+                            var savedInfo = [];
 
                             if (imageListChange !== undefined) {
                                 savedInfo = imageListChange;
                             } else {
                                 if (selectInfo.fPreviewfiles !== undefined) {
-                                    savedInfo = JSON.parse(selectInfo.fPreviewfiles)
+                                    savedInfo = JSON.parse(selectInfo.fPreviewfiles);
                                 }
                             }
 
                             $.each(savedInfo, function (i, val) {
-                                arr.push(Substation.ipAddressFromAPP + imagePath + '/' + val)
-                            })
+                                arr.push(Substation.ipAddressFromAPP + imagePath + "/" + val);
+                            });
 
-                            $.initFile($("#upImage" + imgid), function (list) {
-                                fileList = list
-                            }, arr, imgid)
+                            $.initFile(
+                                $("#upImage" + imgid),
+                                function (list) {
+                                    fileList = list;
+                                },
+                                arr,
+                                imgid
+                            );
                             break;
                     }
-                })
-            })
+                });
+            });
             // console.log(pageInfo);
         }
-
 
         function showInfo(val, select, name) {
             count++;
@@ -639,14 +692,18 @@ var CustomerDevice = (function () {
                             count +
                             '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' +
                             count +
-                            '">' + Operation['ui_yes'] + '</label>' +
+                            '">' +
+                            Operation["ui_yes"] +
+                            "</label>" +
                             '<input type="radio" id="operationNo' +
                             count +
                             '" name="operation' +
                             count +
                             '" value="no"><label style="margin-right: 10px" for="operationNo' +
                             count +
-                            '">' + Operation['ui_no'] + '</label>' +
+                            '">' +
+                            Operation["ui_no"] +
+                            "</label>" +
                             "</div></div></li>";
                     }
                     if (val.value == "no") {
@@ -666,14 +723,18 @@ var CustomerDevice = (function () {
                             count +
                             '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' +
                             count +
-                            '">' + Operation['ui_yes'] + '</label>' +
+                            '">' +
+                            Operation["ui_yes"] +
+                            "</label>" +
                             '<input type="radio" id="operationNo' +
                             count +
                             '" name="operation' +
                             count +
                             '" value="no" checked><label style="margin-right: 10px" for="operationNo' +
                             count +
-                            '">' + Operation['ui_no'] + '</label>' +
+                            '">' +
+                            Operation["ui_no"] +
+                            "</label>" +
                             "</div></div></li>";
                     }
                     break;
@@ -684,7 +745,12 @@ var CustomerDevice = (function () {
                         // if (opval.opType == true) {
                         //     opString += "<option selected>" + opval.opName + "</option>";
                         // } else {
-                        opString += '<option value=' + opval.opName + '>' + opval.opName + "</option>";
+                        opString +=
+                            "<option value=" +
+                            opval.opName +
+                            ">" +
+                            opval.opName +
+                            "</option>";
                         // }
                     });
                     opString += "</select>";
@@ -713,7 +779,8 @@ var CustomerDevice = (function () {
                     //     '<label class="nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' + ':' +
                     //     '<input type="text" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '">';
                     if (val.value == "devInstall") {
-                        string = '<li><div class="showDiv item-content"><div class="item-inner">' +
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" style="width:initial;" name="date">' +
                             decodeURIComponent(val.name) +
                             "</label>" +
@@ -721,15 +788,19 @@ var CustomerDevice = (function () {
                             count +
                             ' datetime-local" style="text-align:end;" min="2010-01-01T00:00" max="2050-01-01T00:00" value=""/></div></div></li>';
                     } else if (val.value == "devicewarranty") {
-                        string = '<li><div class="showDiv item-content"><div class="item-inner">' +
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" name="date">' +
                             decodeURIComponent(val.name) +
                             "</label>" +
                             '<input type="number" class="daycalendarBox' +
                             count +
-                            ' dateTime" value="">' + Operation['ui_month'] + '</div></div></li>';
+                            ' dateTime" value="">' +
+                            Operation["ui_month"] +
+                            "</div></div></li>";
                     } else {
-                        string = '<li><div class="showDiv item-content"><div class="item-inner">' +
+                        string =
+                            '<li><div class="showDiv item-content"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" name="date">' +
                             decodeURIComponent(val.name) +
                             "</label>" +
@@ -742,33 +813,49 @@ var CustomerDevice = (function () {
                     break;
                     // imgAdd
                 case "image":
-                    string = '<li><div class="showDiv z_photo upimg-div"><div class="item-inner" style="display: block;">' +
+                    string =
+                        '<li><div class="showDiv z_photo upimg-div"><div class="item-inner" style="display: block;">' +
                         '<label class="nameInputInfo item-title" name="image">' +
                         '<span class="compareName"></span>' +
-                        '</label>' +
+                        "</label>" +
                         '<section class="z_file">' +
                         '<img class="add-img" src="img/chooseImg.png">' +
-                        '<input type="file" id="upImage' + imgid + '" class="nameInput file" data-device="devImg" name="image">' +
-                        '</section>' +
-                        '</div></div></li>';
+                        '<input type="file" id="upImage' +
+                        imgid +
+                        '" class="nameInput file" data-device="devImg" name="image">' +
+                        "</section>" +
+                        "</div></div></li>";
                     break;
                     // instructionAdd
                 case "instruction":
-                    if (selectInfo.fInstruction !== undefined && selectInfo.fInstruction !== "") {
-                        string = '<li><div class="showDiv"><div class="item-inner">' +
-                            '<label class="item-title label nameInputInfo" name="instruction" data-file="' + selectInfo.fInstruction + '">' +
+                    if (
+                        selectInfo.fInstruction !== undefined &&
+                        selectInfo.fInstruction !== ""
+                    ) {
+                        string =
+                            '<li><div class="showDiv"><div class="item-inner">' +
+                            '<label class="item-title label nameInputInfo" name="instruction" data-file="' +
+                            selectInfo.fInstruction +
+                            '">' +
                             '<span class="compareName">资料：</span>' +
-                            '</label>' +
-                            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '" onclick="downloadFile(this)" data-name="' + val.value + '">' +
+                            "</label>" +
+                            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" data-file="' +
+                            selectInfo.fInstruction +
+                            '" value="' +
+                            val.value +
+                            '" onclick="downloadFile(this)" data-name="' +
+                            val.value +
+                            '">' +
                             // '<input type="button" class="nameInput" id="fileClick' + imgid + '" data-device="devInstruction" name="instruction" data-file="' + selectInfo.fInstruction + '" value="' + val.value + '" onclick="downloadFile(this)" data-name="' + val.value + '">' +
-                            '</div>';
+                            "</div>";
                     } else {
-                        string = '<li><div class="showDiv"><div class="item-inner">' +
+                        string =
+                            '<li><div class="showDiv"><div class="item-inner">' +
                             '<label class="item-title label nameInputInfo" name="instruction">' +
                             '<span class="compareName">资料：</span>' +
-                            '</label>' +
+                            "</label>" +
                             '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="无" disabled>' +
-                            '</div></div></li>';
+                            "</div></div></li>";
                     }
 
                     break;
@@ -791,7 +878,6 @@ var CustomerDevice = (function () {
         }
     }
 
-
     return _customerDevice;
 })();
 
@@ -802,7 +888,6 @@ jQuery(document).ready(function () {
     var subid = localStorage.getItem("fSubid");
     var jumpPid = localStorage.getItem("pid");
     var lastClickNum = localStorage.getItem("clickNum");
-
 
     // $("#fileClick").click(function (select) {
     //     var fileName = $(select).parent().children('.nameInputInfo').attr("data-file")
@@ -817,7 +902,7 @@ jQuery(document).ready(function () {
 
     $("#goBackLastPid").click(function () {
         /*window.location.href =
-            "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
+                "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
         localStorage.setItem("pid", jumpPid);
         localStorage.setItem("clickNum", lastClickNum);
         if (isAndroid) {
@@ -831,7 +916,10 @@ jQuery(document).ready(function () {
 
     //解决键盘遮挡问题
     window.addEventListener("resize", function () {
-        if (document.activeElement.tagName == "INPUT" || document.activeElement.tagName == "TEXTAREA") {
+        if (
+            document.activeElement.tagName == "INPUT" ||
+            document.activeElement.tagName == "TEXTAREA"
+        ) {
             window.setTimeout(function () {
                 document.activeElement.scrollIntoViewIfNeeded();
             }, 0);
@@ -898,7 +986,7 @@ jQuery(document).ready(function () {
         }, 500);
         var info = customerDevice.getselectInfo();
         if (info.fFunctionfield == undefined) {
-            $.toast(Operation['ui_nodevice']);
+            $.toast(Operation["ui_nodevice"]);
             return;
         }
 
@@ -912,7 +1000,7 @@ jQuery(document).ready(function () {
         formdata.append("fSubid", subid);
         formdata.append("fDevicenamepath", clickGroupTree);
         formdata.append("fSubdevicegroupid", deviceGroupId);
-        formdata.append("fDevicename", /*encodeURIComponent*/ (fDevicename));
+        formdata.append("fDevicename", /*encodeURIComponent*/ fDevicename);
         // formdata.append("fPagejson", json);
         if (newJson != undefined) {
             formdata.append("fPagejson", newJson);
@@ -933,7 +1021,7 @@ jQuery(document).ready(function () {
         // );
         $("#addDataUL").scrollLeft(10000);
         $("#save").removeAttr("disabled");
-        $.prompt(Operation['ui_deviceName'], function (value) {
+        $.prompt(Operation["ui_deviceName"], function (value) {
             $(".tab-link.active span").text(value);
             $("#addDataUL").scrollLeft(10000);
         });
@@ -952,12 +1040,12 @@ jQuery(document).ready(function () {
         }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast(Operation['ui_cannotcopy']);
+            $.toast(Operation["ui_cannotcopy"]);
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
         if (selectId === undefined) {
-            $.toast(Operation['ui_nosave']);
+            $.toast(Operation["ui_nosave"]);
             return;
         }
         var info = customerDevice.getselectInfo();
@@ -969,7 +1057,7 @@ jQuery(document).ready(function () {
         var json;
         var selectDevice = $(".active[role='presentation']").attr("name");
         $.each(nodeInfo, function (key, val) {
-            if (selectDevice == (val.fSubdeviceinfoid).toString()) {
+            if (selectDevice == val.fSubdeviceinfoid.toString()) {
                 json = val.fDevicejson;
                 return false;
             }
@@ -987,11 +1075,14 @@ jQuery(document).ready(function () {
         var url = "/addDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                $.toast(Operation['ui_copyFail']);
+                $.toast(Operation["ui_copyFail"]);
             } else {
                 customerDevice.addModal(json, deviceName);
-                $(".active[role='presentation']").attr("name", data.data.fSubdeviceinfoid);
-                $.toast(Operation['ui_copySuccess']);
+                $(".active[role='presentation']").attr(
+                    "name",
+                    data.data.fSubdeviceinfoid
+                );
+                $.toast(Operation["ui_copySuccess"]);
                 $("#addDataUL").scrollLeft(10000);
             }
         });
@@ -1008,7 +1099,7 @@ jQuery(document).ready(function () {
         }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast(Operation['ui_cannotdel']);
+            $.toast(Operation["ui_cannotdel"]);
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
@@ -1031,33 +1122,36 @@ jQuery(document).ready(function () {
             return;
         }
         var name = $(".active[role='presentation']").text();
-        $.confirm(Operation['ui_suredel'] + name + Operation['ui_question'], function () {
-            Substation.getDataByAjaxAllData(
-                "/deleteDevice",
-                "deleteId=" + selectId,
-                function (data) {
-                    if (data.code == 200) {
-                        $.toast(Operation['ui_delsuccess']);
-                        var id = $(".active[role='presentation']").attr("href");
-                        var prevLi = $(".active[role='presentation']").prev();
-                        var nextLi = $(".active[role='presentation']").next();
-                        // var prevLi = $(".active[role='presentation']");
-                        $(".active[role='presentation']").remove();
-                        $(id).remove();
-                        if (prevLi != undefined && prevLi.length > 0) {
-                            //TODO: 如有其它tab则选中它
-                            prevLi.click();
-                            // $(prevLi).tab("show");
-                            // $("a", $(prevLi)).tab("show");
+        $.confirm(
+            Operation["ui_suredel"] + name + Operation["ui_question"],
+            function () {
+                Substation.getDataByAjaxAllData(
+                    "/deleteDevice",
+                    "deleteId=" + selectId,
+                    function (data) {
+                        if (data.code == 200) {
+                            $.toast(Operation["ui_delsuccess"]);
+                            var id = $(".active[role='presentation']").attr("href");
+                            var prevLi = $(".active[role='presentation']").prev();
+                            var nextLi = $(".active[role='presentation']").next();
+                            // var prevLi = $(".active[role='presentation']");
+                            $(".active[role='presentation']").remove();
+                            $(id).remove();
+                            if (prevLi != undefined && prevLi.length > 0) {
+                                //TODO: 如有其它tab则选中它
+                                prevLi.click();
+                                // $(prevLi).tab("show");
+                                // $("a", $(prevLi)).tab("show");
+                            } else {
+                                nextLi.click();
+                            }
                         } else {
-                            nextLi.click();
+                            $.toast(Operation["ui_delFail"]);
                         }
-                    } else {
-                        $.toast(Operation['ui_delFail']);
                     }
-                }
-            );
-        });
+                );
+            }
+        );
     });
 
     // 禁用按钮
@@ -1071,7 +1165,7 @@ jQuery(document).ready(function () {
         }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast(Operation['ui_cannotdel']);
+            $.toast(Operation["ui_cannotdel"]);
             return;
         }
         var selectId = $(".active[role='presentation']").attr("name");
@@ -1094,33 +1188,36 @@ jQuery(document).ready(function () {
             return;
         }
         var name = $(".active[role='presentation']").text();
-        $.confirm(Operation['ui_suredis'] + name + Operation['ui_question'], function () {
-            Substation.getDataByAjaxAllData(
-                "/setDeviceState",
-                "subDeviceInfoId=" + selectId + "&fState=1",
-                function (data) {
-                    if (data.code == 200) {
-                        $.toast(Operation['ui_dissuccess']);
-                        var id = $(".active[role='presentation']").attr("href");
-                        var prevLi = $(".active[role='presentation']").prev();
-                        var nextLi = $(".active[role='presentation']").next();
-                        // var prevLi = $(".active[role='presentation']");
-                        $(".active[role='presentation']").remove();
-                        $(id).remove();
-                        if (prevLi != undefined && prevLi.length > 0) {
-                            //TODO: 如有其它tab则选中它
-                            prevLi.click();
-                            // $(prevLi).tab("show");
-                            // $("a", $(prevLi)).tab("show");
+        $.confirm(
+            Operation["ui_suredis"] + name + Operation["ui_question"],
+            function () {
+                Substation.getDataByAjaxAllData(
+                    "/setDeviceState",
+                    "subDeviceInfoId=" + selectId + "&fState=1",
+                    function (data) {
+                        if (data.code == 200) {
+                            $.toast(Operation["ui_dissuccess"]);
+                            var id = $(".active[role='presentation']").attr("href");
+                            var prevLi = $(".active[role='presentation']").prev();
+                            var nextLi = $(".active[role='presentation']").next();
+                            // var prevLi = $(".active[role='presentation']");
+                            $(".active[role='presentation']").remove();
+                            $(id).remove();
+                            if (prevLi != undefined && prevLi.length > 0) {
+                                //TODO: 如有其它tab则选中它
+                                prevLi.click();
+                                // $(prevLi).tab("show");
+                                // $("a", $(prevLi)).tab("show");
+                            } else {
+                                nextLi.click();
+                            }
                         } else {
-                            nextLi.click();
+                            $.toast(Operation["ui_disFail"]);
                         }
-                    } else {
-                        $.toast(Operation['ui_disFail']);
                     }
-                }
-            );
-        });
+                );
+            }
+        );
     });
 
     // 保存按钮点击
@@ -1134,7 +1231,7 @@ jQuery(document).ready(function () {
         }, 500);
         var canCopy = $(".tab-link").hasClass("button");
         if (!canCopy) {
-            $.toast(Operation['ui_nosave']);
+            $.toast(Operation["ui_nosave"]);
             return;
         }
         var isTrue = true;
@@ -1154,10 +1251,13 @@ jQuery(document).ready(function () {
             $.each(divList, function (key, val) {
                 var text = $(val).attr("name");
                 fPagejson.push({
-                    name: /*encodeURIComponent*/ (text),
+                    name: /*encodeURIComponent*/ text,
                     value: []
                 });
-                var infoList = $(val).children().children().children('.showDiv');
+                var infoList = $(val)
+                    .children()
+                    .children()
+                    .children(".showDiv");
                 $.each(infoList, function (index, val) {
                     var row = {};
                     // var select = $(val).children(".nameInputInfo");
@@ -1169,7 +1269,9 @@ jQuery(document).ready(function () {
                     var value;
                     switch (type) {
                         case "input":
-                            value = $(val).find($(".valueInput")).val();
+                            value = $(val)
+                                .find($(".valueInput"))
+                                .val();
                             // value = $(val).children().children(".item-input").val();
                             // var row = {};
                             // row.inpName = $(val).find($(".valueInput")).val();
@@ -1177,31 +1279,41 @@ jQuery(document).ready(function () {
                             // value = JSON.stringify(row);
                             break;
                         case "radio":
-                            value = $(val).children().find($("input:checked")).val();
+                            value = $(val)
+                                .children()
+                                .find($("input:checked"))
+                                .val();
                             break;
                         case "select":
-                            value = $(val).find('select option:selected').val();
+                            value = $(val)
+                                .find("select option:selected")
+                                .val();
                             // value = $(val).children().children("select").val();
                             break;
                         case "date":
                             // value = $(val).children().children(".dateTime").val();
                             if ($(val).find($(".dateTime"))) {
-                                value = $(val).find($(".dateTime")).val();
+                                value = $(val)
+                                    .find($(".dateTime"))
+                                    .val();
                             }
                             if ($(val).find($(".datetime-local"))) {
                                 try {
-                                    value = $(val).find($(".datetime-local")).val().replace("T", " ");
+                                    value = $(val)
+                                        .find($(".datetime-local"))
+                                        .val()
+                                        .replace("T", " ");
                                 } catch (e) {}
                             }
                             break;
                         case "image":
-                            value = 'image';
-                            name = "image"
+                            value = "image";
+                            name = "image";
                             break;
                     }
                     row.type = type;
-                    row.name = /*encodeURIComponent*/ (name);
-                    row.value = /*encodeURIComponent*/ (value);
+                    row.name = /*encodeURIComponent*/ name;
+                    row.value = /*encodeURIComponent*/ value;
                     fPagejson[key].value.push(row);
                 });
             });
@@ -1216,15 +1328,17 @@ jQuery(document).ready(function () {
     });
 
     function fileDown(select) {
-        var fileName = $(select).parent().children('.nameInputInfo').attr("data-file")
-        var name = $(select).attr("data-name")
-        alert('正在导出...', '', '', {
-            type: 'export',
+        var fileName = $(select)
+            .parent()
+            .children(".nameInputInfo")
+            .attr("data-file");
+        var name = $(select).attr("data-name");
+        alert("正在导出...", "", "", {
+            type: "export",
             showConfirmButton: false
         });
         var formdata = new FormData();
         formdata.append("fileName", fileName);
-
     }
 
     function insertDevice(fDevicejson) {
@@ -1249,7 +1363,7 @@ jQuery(document).ready(function () {
         var info = customerDevice.getselectInfo();
 
         if (info.fFunctionfield == undefined) {
-            $.alert(Operation['ui_devicetemplate']);
+            $.alert(Operation["ui_devicetemplate"]);
             return;
         }
 
@@ -1285,7 +1399,7 @@ jQuery(document).ready(function () {
 
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.msg != "ok") {
-                $.toast(Operation['ui_addFail']);
+                $.toast(Operation["ui_addFail"]);
             } else {
                 // customerDevice.addModal();
                 $(".active[role='presentation']").attr(
@@ -1293,7 +1407,7 @@ jQuery(document).ready(function () {
                     data.data.fSubdeviceinfoid
                 );
                 $("#save").removeAttr("disabled");
-                $.toast(Operation['ui_savesuccess']);
+                $.toast(Operation["ui_savesuccess"]);
                 setTimeout(function () {
                     customerDevice.reNewCurNodeInfo();
                 }, 2000);
@@ -1301,9 +1415,7 @@ jQuery(document).ready(function () {
                 // upData(fDevicejson);
             }
         });
-
     }
-
 
     function upData(fPagejson) {
         // var json = JSON.stringify(fPagejson);
@@ -1332,7 +1444,7 @@ jQuery(document).ready(function () {
         var url = "/updateDevice";
         Substation.postFormDataByAjax(url, formdata, function (data) {
             if (data.code == 200) {
-                $.toast(Operation['ui_savesuccess']);
+                $.toast(Operation["ui_savesuccess"]);
                 setTimeout(function () {
                     customerDevice.reNewCurNodeInfo();
                 }, 2000);
@@ -1390,8 +1502,6 @@ jQuery(document).ready(function () {
         }
     }
 
-
-
     // input选中事件
     function focusEvent(select) {
         Substation.Validator.setFocus($(select));
@@ -1399,17 +1509,185 @@ jQuery(document).ready(function () {
     }
     // $.init();
 });
-
+var sdeviceinfoid = "";
 //二维码点击事件
 function QRcodePush(obj) {
-    //
-    localStorage.setItem("deviceName", obj.name);
-    window.location.href =
-        "AutoloadQRcode.html?fSubdeviceinfoid=" + obj.value;
+
+    // localStorage.setItem("deviceName", obj.name);
+    // window.location.href =
+    //     "AutoloadQRcode.html?fSubdeviceinfoid=" + obj.value;
+    sdeviceinfoid = obj.value;
+    $.router.loadPage("#route6");
+    loadPage2(obj.name);
 }
 
+function loadPage2(deviceName) {
+    $("#titleContent2").html(deviceName);
+    getPageInfo();
+}
+
+function getPageInfo() {
+    //获取二维码
+    Substation.getDataByAjax(
+        "/getDeviceDetailById", {
+            fSubdeviceinfoid: sdeviceinfoid
+        },
+        function (data) {
+            $("#contentQRCode").empty();
+            // qrCodeFile: {
+            //     fId: 1,
+            //     fCodeid: "3hr2hAB4uL8BS",
+            //     fQrcodefile: "3hr2hAB4uL8BS.png",
+            //     fSubdeviceinfoid: 264,
+            //     fCreatetime: "2020-12-21 16:18:54",
+            //     …
+            // }
+            // qrCodeFilePath: "fileSystem/deviceImg"
+            if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
+                var imgPath =
+                    Substation.ipAddressFromAPP + data.qrCodeFilePath + "/" + data.qrCodeFile.fQrcodefile;
+                var img =
+                    '<img class="up-img pic" name="' + data.fileName + '" style="width:100%" onclick="imgDisplay(this)" src = "' +
+                    imgPath +
+                    '" > <p class="QRtime" style="text-align:center;">二维码生成时间: ' + data.qrCodeFile.fCreatetime + '</p>';
+                $("#contentQRCode").append(img);
+                // $.toast(Operation["ui_successfully"]);
+            }
+        }
+    );
+}
+
+//生成二维码
+$("#Add2").click(function () {
+    //接口获取二维码
+    // $(".content-block").empty();
+    Substation.getDataByAjax(
+        "/generateQrCodeForCertainDevice", {
+            fSubdeviceinfoid: sdeviceinfoid
+        },
+        function (data) {
+            if (data.filePath && data.fileName) {
+                var imgPath =
+                    Substation.ipAddressFromAPP + data.filePath + "/" + data.fileName;
+                var img =
+                    '<img class="up-img pic" name="' + data.fileName + '" style="width:100%" onclick="imgDisplay(this)" src = "' +
+                    imgPath +
+                    '" > ';
+                $("#contentQRCode").append(img);
+                $.toast(Operation["ui_successfully"]);
+            }
+        }
+    );
+});
+
+//扫码绑定
+$("#scanCodebind").click(function () {
+    if (isIOS) {
+        window.webkit.messageHandlers.scanQRcode.postMessage("");
+    } else {
+        android.pushToZXActivity();
+    }
+});
+
+//原生回调
+function getQRresultAndPush(param) {
+    if (param && param.length > 0) {
+        var strArr = param.split("_");
+        if (param == "" || param == undefined) {
+            return;
+        }
+        if (strArr[0] != "arcel") {
+            $.toast("非本平台二维码");
+            return;
+        }
+        // var codeid = strArr[1];
+        $.confirm(
+            "是否将设备绑定至二维码？",
+            function () {
+                Substation.getDataByAjax(
+                    "/bindQrCodeWithDeivce", {
+                        fSubdeviceinfoid: sdeviceinfoid,
+                        fCodeid: param
+                    },
+                    function (data) {
+                        $.toast(Operation["ui_delsuccess"]);
+                        getPageInfo();
+                        // if (data.filePath && data.fileName) {
+                        //     $(".content-block").empty();
+                        //     var imgPath =
+                        //         Substation.ipAddressFromAPP + data.filePath + "/" + data.fileName;
+                        //     var img =
+                        //         '<img class="up-img pic" name="' + data.fileName + '" style="width:100%" onclick="imgDisplay(this)" src = "' +
+                        //         imgPath +
+                        //         '" > ';
+                        //     $(".content-block").append(img);
+                        //     $.toast(Operation["ui_successfully"]);
+                        // }
+                    }
+                );
+            },
+            function () {
+                $(":radio[name='" + radioName + "'][value='yes']").prop(
+                    "checked",
+                    true
+                );
+            }
+        );
+
+    }
+
+}
+
+//二维码解绑
+$("#deleteQRcode").click(function () {
+    Substation.getDataByAjax(
+        "/unbindQrCodeWithDeivce", {
+            fSubdeviceinfoid: sdeviceinfoid
+        },
+        function (data) {
+            $("#contentQRCode").empty();
+            $.toast(Operation["ui_successfully"]);
+        }
+    );
+});
+
+//内联返回
+$("#goBackLd")
+    .unbind()
+    .click(function () {
+        pushfDeviceproblemid = "";
+        localStorage.setItem("need-refresh", "true");
+        $.router.back();
+        //获取二维码
+        Substation.getDataByAjax(
+            "/getDeviceDetailById", {
+                fSubdeviceinfoid: sdeviceinfoid
+            },
+            function (data) {
+                $(".showImg").empty();
+                if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
+                    var imgPath =
+                        Substation.ipAddressFromAPP +
+                        data.qrCodeFilePath +
+                        "/" +
+                        data.qrCodeFile.fQrcodefile;
+                    var img =
+                        '<img class="smallpic" name="' +
+                        data.fileName +
+                        '" onclick="imgDisplay(this)" src = "' +
+                        imgPath +
+                        '" >';
+                    $(".showImg").append(img);
+                }
+            }
+        );
+    });
+
 function downloadFile(file) {
-    var fileName = $(file).parent().children('.nameInputInfo').attr("data-file")
+    var fileName = $(file)
+        .parent()
+        .children(".nameInputInfo")
+        .attr("data-file");
     if (!upLoadClicktag) {
         return;
     }
@@ -1418,15 +1696,13 @@ function downloadFile(file) {
         upLoadClicktag = true;
     }, 1000);
     if (isAndroid) {
-        android.openFile(
-            Substation.ipAddressFromAPP + imagePath + "/" + fileName
-        );
+        android.openFile(Substation.ipAddressFromAPP + imagePath + "/" + fileName);
     } else {
         if (fileName) {
             var dic = {
-                'fFilepath': imagePath,
-                'fFilecode': fileName,
-                'fFilename': fileName
+                fFilepath: imagePath,
+                fFilecode: fileName,
+                fFilename: fileName
             };
             window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
         }

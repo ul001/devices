@@ -17,11 +17,12 @@
   <link rel="stylesheet" href="libs/messageBoxStyle.css" />
   <link rel="stylesheet" href="css/AutoloadDetail.css" />
   <link rel="stylesheet" href="libs/imgUp/imgUp.css" />
+  <link rel="stylesheet" href="css/AutoloadQRcode.css" />
 </head>
 
 <body>
   <div class="page-group">
-    <div class="page" id="route5">
+    <div class="page page-current" id="route5">
       <!-- {
       "fSubdeviceinfoid": 264,
       "fSubid": 10100001,
@@ -78,6 +79,40 @@
           <div class="tabs tab-content pull-to-refresh-container"></div>
         </div>
 
+      </div>
+    </div>
+    <div class="page" id="route6">
+      <header class="bar bar-nav bar_color">
+        <a href="#" class="button button-link button-nav pull-left click_btn" id="goBackLd">
+          <span class="icon icon-left"></span>
+          <span data-i18n="ui_back"></span>
+        </a>
+        <h1 class="title title_color" style="margin-top: -0.85rem;">
+          <p class="limit-length" id="titleContent2"></p>
+        </h1>
+        <div class="bar bar-header-secondary row" style="line-height:2.2rem;">
+          <div class="col-33">
+            <a href="#" class="button button-fill button-success" id="Add2"><i class="icon icon-add"></i><span
+                data-i18n="ui_generateQRcode"></span></a>
+          </div>
+          <div class="col-33">
+            <a href="#" class="button button-fill button-success" id="scanCodebind"><i
+                class="icon icon-delete"></i><span data-i18n="ui_scanCodebind"></span></a>
+          </div>
+          <div class="col-33">
+            <a href="#" class="button button-fill button-success" id="deleteQRcode"><i
+                class="icon icon-jinyong"></i><span data-i18n="ui_deleteQRcode"></span></a>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="content-block" id="contentQRCode">
+          <!-- <div class="tabs tab-content pull-to-refresh-container"> -->
+          <!-- </div> -->
+          <!-- <img class="up-img pic" name="264" style="width:100%" onclick="imgDisplay(this)" -->
+          <!-- src="http://116.236.149.165:8090/fileVersion/pageCustom/bd5eb364600a4c59903904f28b48fe05.jpg"> -->
+        </div>
       </div>
     </div>
   </div>

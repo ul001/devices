@@ -1,8 +1,8 @@
 var subdeviceinfoid = Substation.GetQueryString("fSubdeviceinfoid");
 var deviceName = localStorage.getItem("deviceName");
-$("#titleContent").html(decodeURIComponent(deviceName));
+$("#titleContent2").html(decodeURIComponent(deviceName));
 
-$("#goBackLastPid").click(function () {
+$("#goBackLd").click(function () {
     /*window.location.href =
           "deviceClass.html?pid=" + jumpPid + "&clickNum=" + lastClickNum;*/
     // localStorage.setItem("pid", jumpPid);
@@ -50,7 +50,7 @@ function getPageInfo() {
 }
 
 //生成二维码
-$("#Add").click(function () {
+$("#Add2").click(function () {
     //接口获取二维码
     // $(".content-block").empty();
     Substation.getDataByAjax(
