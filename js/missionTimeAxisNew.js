@@ -455,6 +455,7 @@ function getNetData() {
                     //总任务
                     var lineData = data;
                     $(lineData).each(function () {
+                        var strArr = this.F_Done.split(";");
                         var strVar = "";
                         strVar += " <li>";
                         strVar +=
@@ -462,9 +463,11 @@ function getNetData() {
                             this.F_TimeTitle +
                             "</h3>";
                         strVar += "                                            <dl>";
-                        strVar += "                                                <dt style=\"font: 16px/22px 微软雅黑;\">";
-                        strVar += this.F_Done;
-                        strVar += "                                                </dt>";
+                        $(strArr).each(function () {
+                            strVar += "                                                <dt style=\"font: 15px/22px 微软雅黑;\">";
+                            strVar += this;
+                            strVar += "                                                </dt>";
+                        });
                         strVar += "                                            </dl>";
                         strVar += "                                        </li>";
                         $(".history-ul").append(strVar);
