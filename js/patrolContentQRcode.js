@@ -25,6 +25,11 @@ var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓�
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
 
 var pushfDeviceproblemid;
+//设备档案信息
+var selectInfo;
+var fileList = []; //设备图片
+var imageListChange = []; //实时图片
+var needSaveID = ""; //需要保存的ID
 
 if (canClick == "false") {
   $("#saveBtn").css("display", "none");
@@ -72,6 +77,7 @@ function loadPage() {
     param = {
       fCodeid: QRcode,
       fPlacecheckformid: fPlacecheckformid,
+      fSubdeviceinfoid: 265
     };
 
     //获取信息接口
@@ -103,6 +109,7 @@ function loadPage() {
           if (obj.fSubdeviceinfoid == bindedDeivceID) {
             itemNum++;
             var thisValueJson = [];
+            needSaveID = obj.fSubdeviceinfoid;
             if (this.hasOwnProperty("fInspectionslipjson")) {
               if (
                 this.fInspectionslipjson != "" &&
@@ -308,14 +315,63 @@ function loadPage() {
               //没有值则全隐藏
               $(".pushtoDetail").hide();
             }
+
+            if (data.hasOwnProperty("deviceDetail")) {
+              //增加第二设备详情模块
+              var val = data.deviceDetail;
+              selectInfo = data.deviceDetail;
+
+              $(".buttons-tab").append(
+                '<a href="#' + (val.fSubdeviceinfoid + 1) + '" data-id="2" class="tab-link button">设备详情</a>'
+              );
+              var tempStr2 = '<div class="content-block-title">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' +
+                decodeURIComponent(val.fDevicename) +
+                '" value="' +
+                (val.fSubdeviceinfoid + 1) +
+                '" onclick="QRcodePush(this)" style="margin: 0.5rem;display:none;">二维码</button></div></div>';
+              //默认加载第一张二维码`
+              makeQRImg(val.fSubdeviceinfoid);
+              $(".content-block .tabs").append(
+                '<div id="' +
+                (val.fSubdeviceinfoid + 1) +
+                '" class="tab pull-to-refresh-content">\n' +
+                '<div class="pull-to-refresh-layer"></div>\n' +
+                '<div class="content-block" style="padding: 0 .75rem;" id="addVarContain' + (val.fSubdeviceinfoid + 1) + '" > \n ' +
+                tempStr2 +
+                "</div>\n" +
+                "</div>"
+              );
+              //创建模板
+              var select = $("#addVarContain" + (val.fSubdeviceinfoid + 1));
+              creatInfo(
+                val.fFunctionfield,
+                $("#addVarContain" + (val.fSubdeviceinfoid + 1)),
+                (val.fSubdeviceinfoid + 1),
+                val.fSubdeviceinfoid
+              );
+              //填充数据
+              showPageInfo(val.fDevicejson, select, val.fSubdeviceinfoid);
+            }
+
             $(".tab-link.button")
               .unbind()
               .click(function () {
                 var clickItemNum = $(this).attr("data-id");
+                var NumId = $(this).attr("id");
                 clickGroupTree += "-" + $(this).text();
                 localStorage.setItem("itemNum", clickItemNum);
                 localStorage.setItem("clickTree", clickGroupTree);
+                $(this)
+                  .addClass("active")
+                  .siblings()
+                  .removeClass("active");
+
               });
+            // $("#detailShow")
+            //   .unbind()
+            //   .click(function () {
+
+            //   });
             $(".icon-tips")
               .unbind()
               .click(function () {
@@ -398,6 +454,406 @@ function loadPage() {
         $(".upload_img_wrap .upload_img").unbind();
       }
     });
+  }
+
+  function makeQRImg(fSubdeviceinfoid) {
+    //获取二维码
+    Substation.getDataByAjax(
+      "/getDeviceDetailById", {
+        fSubdeviceinfoid: fSubdeviceinfoid
+      },
+      function (data) {
+        $(".showImg").empty();
+        if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
+          var imgPath =
+            Substation.ipAddressFromAPP +
+            data.qrCodeFilePath +
+            "/" +
+            data.qrCodeFile.fQrcodefile;
+          var img =
+            '<img class="smallpic" name="' +
+            data.fileName +
+            '" style="width: 5rem;" onclick="imgDisplay(this)" src = "' +
+            imgPath +
+            '" >';
+          $(".showImg").append(img);
+        }
+      }
+    );
+  }
+  //创建设备
+  function creatInfo(data, select, count, name) {
+    if (data != "") {
+      var info = JSON.parse(data);
+      if (info != undefined) {
+        var divHeight = "300";
+        $.each(info.deviceInfo, function (index, val) {
+          var id = "showInfoDiv" + count + index;
+          $(select).append(
+            '<div class="content-block-title">' +
+            decodeURIComponent(val.name) +
+            '</div><div id="' +
+            id +
+            '" class="list-block baseInfoDiv" name="' +
+            decodeURIComponent(val.name) +
+            '"><ul class="selectUl"></ul></div>'
+          );
+          // $(select).append('<div class="content-block-title">' + decodeURIComponent(val.name) +
+          //     '</div><div id="' + id + '" class="list-block baseInfoDiv" name="' + decodeURIComponent(val.name) + '"><ul></ul></div>');
+          $.each(val.value, function (key, value) {
+            showInfo(value, $("#" + id + " .selectUl"), name);
+          });
+        });
+      }
+    }
+  }
+
+  function showInfo(val, select, name) {
+    var count = 100;
+    count++;
+    var string;
+    var imgid = name;
+    // var functionfield = JSON.parse(selectInfo.fFunctionfield);
+    // var info = functionfield.deviceInfo;
+    switch (val.type) {
+      case "input":
+        var info = JSON.parse(decodeURIComponent(val.value));
+        // var info = JSON.parse(decodeURIComponent(selectInfo.fFunctionfield));
+        if (info == true) {
+          // string = '<div class="showDiv">' +
+          // '<label class="nameInputInfo" name="input">' + decodeURIComponent(val.name) + '</label>' + ':' +
+          // '<input type="text" id="input' + count + '" class="valueInput" value="' + info.inpName + '" name="'
+          //  + info.inpType + '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' + '</div>';
+          string =
+            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" style="width:5.5rem;" name="input">' +
+            val.name +
+            '</div> <div class="item-input">' +
+            '<input type="text" id="input' +
+            count +
+            '" class="valueInput" value="' +
+            //                            info.inpName +
+            '" name="' +
+            //                            info.inpType +
+            '" validator="required" onblur="blurEvent(this)" onfocus="focusEvent(this)">' +
+            "</div></div></li>";
+        }
+        if (info == false) {
+          string =
+            '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" style="width:5.5rem;" name="input">' +
+            val.name +
+            '</div> <div class="item-input">' +
+            '<input type="text" class="valueInput" value="' +
+            //                            info.inpName +
+            '" name="' +
+            //                            info.inpType +
+            '">' +
+            "</div></div></li>";
+        }
+        break;
+      case "radio":
+        if (val.value == "yes") {
+          // string = '<div class="showDiv">' +
+          //     '<label class="nameInputInfo" name="radio">' + decodeURIComponent(val.name) + '</label>' + ':' +
+          //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' + count + '">'+Operation['ui_yes']+'</label>' +
+          //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no"><label style="margin-right: 10px" for="operationNo' + count + '">'+Operation['ui_no']+'</label>' +
+          //     '</div>';
+          string =
+            '<li><div class="showDiv item-content"><div class="item-inner">' +
+            '<label class="item-title label nameInputInfo" style="width:5.5rem;" name="radio">' +
+            decodeURIComponent(val.name) +
+            "</label>" +
+            '<input type="radio" id="operation' +
+            count +
+            '" name="operation' +
+            count +
+            '" value="yes" style="margin-left: 10px" checked><label style="margin-right: 10px" for="operation' +
+            count +
+            '">' +
+            Operation["ui_yes"] +
+            "</label>" +
+            '<input type="radio" id="operationNo' +
+            count +
+            '" name="operation' +
+            count +
+            '" value="no"><label style="margin-right: 10px" for="operationNo' +
+            count +
+            '">' +
+            Operation["ui_no"] +
+            "</label>" +
+            "</div></div></li>";
+        }
+        if (val.value == "no") {
+          // string = '<div class="showDiv">' +
+          //     '<label class="nameInputInfo" name="radio">' + decodeURIComponent(val.name) + '</label>' + ':' +
+          //     '<input type="radio" id="operation' + count + '" name="operation' + count + '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' + count + '">'+Operation['ui_yes']+'</label>' +
+          //     '<input type="radio" id="operationNo' + count + '" name="operation' + count + '" value="no" checked><label style="margin-right: 10px" for="operationNo' + count + '">'+Operation['ui_no']+'</label>' +
+          //     '</div>';
+          string =
+            '<li><div class="showDiv item-content"><div class="item-inner">' +
+            '<label class="item-title label nameInputInfo" style="width:5.5rem;" name="radio">' +
+            decodeURIComponent(val.name) +
+            "</label>" +
+            '<input type="radio" id="operation' +
+            count +
+            '" name="operation' +
+            count +
+            '" value="yes" style="margin-left: 10px"><label style="margin-right: 10px" for="operation' +
+            count +
+            '">' +
+            Operation["ui_yes"] +
+            "</label>" +
+            '<input type="radio" id="operationNo' +
+            count +
+            '" name="operation' +
+            count +
+            '" value="no" checked><label style="margin-right: 10px" for="operationNo' +
+            count +
+            '">' +
+            Operation["ui_no"] +
+            "</label>" +
+            "</div></div></li>";
+        }
+        break;
+      case "select":
+        var list = JSON.parse(decodeURIComponent(val.value));
+        var opString = "<select>";
+        $.each(list, function (key, opval) {
+          // if (opval.opType == true) {
+          //     opString += "<option selected>" + opval.opName + "</option>";
+          // } else {
+          opString +=
+            "<option value=" +
+            opval.opName +
+            ">" +
+            opval.opName +
+            "</option>";
+          // }
+        });
+        opString += "</select>";
+
+        string =
+          '<li><div class="showDiv item-content"><div class="item-inner">' +
+          '<label class="nameInputInfo item-title label" style="width:5.5rem;" name="select">' +
+          decodeURIComponent(val.name) +
+          "</label>" +
+          opString +
+          "</div></div></li>";
+        break;
+      case "date":
+        //         <li>
+        //     <div class="item-content">
+        //         <div class="item-media"><i class="icon icon-form-calendar"></i></div>
+        //         <div class="item-inner">
+        //             <div class="item-title label">生日</div>
+        //             <div class="item-input">
+        //                 <input type="date" placeholder="Birth day" value="2014-04-30">
+        //             </div>
+        //         </div>
+        //     </div>
+        // </li>
+        // string = '<div class="showDiv">' +
+        //     '<label class="nameInputInfo" name="date">' + decodeURIComponent(val.name) + '</label>' + ':' +
+        //     '<input type="text" class="daycalendarBox' + count + ' dateTime" value="' + decodeURIComponent(val.value) + '">';
+        if (val.value == "devInstall") {
+          string =
+            '<li><div class="showDiv item-content"><div class="item-inner">' +
+            '<label class="item-title label nameInputInfo" style="width:initial;" name="date">' +
+            decodeURIComponent(val.name) +
+            "</label>" +
+            '<input type="datetime-local" class="daycalendarBox' +
+            count +
+            ' datetime-local" style="text-align:end;" min="2010-01-01T00:00" max="2050-01-01T00:00" value=""/></div></div></li>';
+        } else if (val.value == "devicewarranty") {
+          string =
+            '<li><div class="showDiv item-content"><div class="item-inner">' +
+            '<label class="item-title label nameInputInfo" style="width:5.5rem;" name="date">' +
+            decodeURIComponent(val.name) +
+            "</label>" +
+            '<input type="number" class="daycalendarBox' +
+            count +
+            ' dateTime" value="">' +
+            Operation["ui_month"] +
+            "</div></div></li>";
+        } else {
+          string =
+            '<li><div class="showDiv item-content"><div class="item-inner">' +
+            '<label class="item-title label nameInputInfo" style="width:5.5rem;" name="date">' +
+            decodeURIComponent(val.name) +
+            "</label>" +
+            '<input type="date" class="daycalendarBox' +
+            count +
+            ' dateTime" value="' +
+            decodeURIComponent(val.value) +
+            '"></div></div></li>';
+        }
+        break;
+        // imgAdd
+      case "image":
+        string =
+          '<li><div class="showDiv z_photo upimg-div"><div class="item-inner" style="display: block;">' +
+          '<label class="nameInputInfo item-title" name="image">' +
+          '<span class="compareName"></span>' +
+          "</label>" +
+          '<section class="z_file">' +
+          '<img class="add-img" src="img/chooseImg.png">' +
+          '<input type="file" id="upImage' +
+          imgid +
+          '" class="nameInput file" data-device="devImg" name="image">' +
+          "</section>" +
+          "</div></div></li>";
+        break;
+        // instructionAdd
+      case "instruction":
+        if (
+          selectInfo.fInstruction !== undefined &&
+          selectInfo.fInstruction !== ""
+        ) {
+          string =
+            '<li><div class="showDiv"><div class="item-inner">' +
+            '<label class="item-title label nameInputInfo" name="instruction" data-file="' +
+            selectInfo.fInstruction +
+            '">' +
+            '<span class="compareName">资料：</span>' +
+            "</label>" +
+            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" data-file="' +
+            selectInfo.fInstruction +
+            '" value="' +
+            val.value +
+            '" onclick="downloadFile(this)" data-name="' +
+            val.value +
+            '">' +
+            "</div>";
+        } else {
+          string =
+            '<li><div class="showDiv"><div class="item-inner">' +
+            '<label class="item-title label nameInputInfo" name="instruction">' +
+            '<span class="compareName">资料：</span>' +
+            "</label>" +
+            '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" value="无" disabled>' +
+            "</div></div></li>";
+        }
+
+        break;
+    }
+    $(select).append(string);
+    if (val.type == "date") {
+      // initDate($(".daycalendarBox" + count));
+    }
+  }
+
+  //根据真实数据填充
+  function showPageInfo(data, parent, name) {
+    var pageInfo = JSON.parse(data);
+    var imgid = name;
+    pageInfo.forEach(function (val, i) {
+      val.value.forEach(function (value) {
+        var name = value.name;
+        if (name.length > 1) {
+          //暂时容错网页保存的：:
+          name = name.substr(0, name.length - 1);
+        }
+        var prevLable = $(parent)
+          .children(".baseInfoDiv[name='" + val.name + "']")
+          .find(".item-title:contains('" + name + "')");
+        var info = value.value;
+        switch (value.type) {
+          case "input":
+            $(prevLable)
+              .next("div")
+              .find("input")
+              .val(decodeURIComponent(value.value));
+            break;
+          case "radio":
+            if (info == "yes") {
+              $(prevLable)
+                .next("input[value='yes']")
+                .attr("checked", true);
+            }
+            if (info == "no") {
+              $(prevLable)
+                .next("input[value='no']")
+                .attr("checked", true);
+            }
+            break;
+          case "select":
+            var selectOption = decodeURIComponent(value.value);
+            var options = $(prevLable)
+              .next("select")
+              .children("option");
+            var select = $(prevLable).next("select");
+            $.each(options, function (key, value2) {
+              if (value2.innerHTML == selectOption) {
+                // $(value2).attr('selected', true);
+                $(select).val(value2.value);
+              }
+            });
+            break;
+          case "date":
+            $(prevLable)
+              .next($(".dateTime"))
+              .val(value.value);
+            try {
+              $(prevLable)
+                .next($(".datetime-local"))
+                .val(value.value.replace(" ", "T"));
+            } catch (e) {}
+            break;
+            // imgAdd
+          case "image":
+            var arr = [];
+            var savedInfo = [];
+
+            if (imageListChange !== undefined) {
+              savedInfo = imageListChange;
+            } else {
+              if (selectInfo.fPreviewfiles !== undefined) {
+                savedInfo = JSON.parse(selectInfo.fPreviewfiles);
+              }
+            }
+
+            $.each(savedInfo, function (i, val) {
+              arr.push(Substation.ipAddressFromAPP + imagePath + "/" + val);
+            });
+
+            $.initFile(
+              $("#upImage" + imgid),
+              function (list) {
+                fileList = list;
+              },
+              arr,
+              imgid
+            );
+            break;
+        }
+      });
+    });
+    // console.log(pageInfo);
+  }
+
+  function downloadFile(file) {
+    var fileName = $(file)
+      .parent()
+      .children(".nameInputInfo")
+      .attr("data-file");
+    if (!upLoadClicktag) {
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function () {
+      upLoadClicktag = true;
+    }, 1000);
+    if (isAndroid) {
+      android.openFile(Substation.ipAddressFromAPP + imagePath + "/" + fileName);
+    } else {
+      if (fileName) {
+        var dic = {
+          fFilepath: imagePath,
+          fFilecode: fileName,
+          fFilename: fileName
+        };
+        window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
+      }
+    }
   }
 
   function getGroupidContent() {
@@ -747,6 +1203,7 @@ function loadPage() {
   }
   addLeftClick();
 
+  //点击保存
   $("#saveBtn").click(function () {
     if (!upLoadClicktag) {
       return;
@@ -1132,34 +1589,36 @@ function saveThisPage() {
   $(".tabs .tab").each(function () {
     var deviceJson = {};
     var deviceId = $(this).attr("id");
-    var inputArray = [];
-    $("#" + deviceId + " .card").each(function (index, obj) {
-      var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
-      var thisObj = {};
-      if (thisInput) {
-        thisObj["code"] = $(thisInput).attr("data-code");
-        thisObj["name"] = $(thisInput).attr("data-name");
-        thisObj["value"] = $(thisInput).attr("value");
-        thisObj["type"] = "radio";
-      } else {
-        thisObj["code"] = $(obj)
-          .find($("input"))
-          .attr("data-code");
-        thisObj["name"] = $(obj)
-          .find($("input"))
-          .attr("data-name");
-        thisObj["value"] = $(obj)
-          .find($("input"))
-          .val();
-        thisObj["type"] = "input";
-      }
-      inputArray.push(thisObj);
-    });
-    deviceJson["fInspectionslipjson"] = inputArray;
-    deviceJson["fSubdeviceinfoid"] = deviceId;
-    deviceJson["fPlacecheckformid"] = fPlacecheckformid;
-    deviceJson["fItemnum"] = tempNum;
-    changeJson.push(deviceJson);
+    if (needSaveID == deviceId) {
+      var inputArray = [];
+      $("#" + deviceId + " .card").each(function (index, obj) {
+        var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
+        var thisObj = {};
+        if (thisInput) {
+          thisObj["code"] = $(thisInput).attr("data-code");
+          thisObj["name"] = $(thisInput).attr("data-name");
+          thisObj["value"] = $(thisInput).attr("value");
+          thisObj["type"] = "radio";
+        } else {
+          thisObj["code"] = $(obj)
+            .find($("input"))
+            .attr("data-code");
+          thisObj["name"] = $(obj)
+            .find($("input"))
+            .attr("data-name");
+          thisObj["value"] = $(obj)
+            .find($("input"))
+            .val();
+          thisObj["type"] = "input";
+        }
+        inputArray.push(thisObj);
+      });
+      deviceJson["fInspectionslipjson"] = inputArray;
+      deviceJson["fSubdeviceinfoid"] = deviceId;
+      deviceJson["fPlacecheckformid"] = fPlacecheckformid;
+      deviceJson["fItemnum"] = tempNum;
+      changeJson.push(deviceJson);
+    }
   });
   var jsonStr = JSON.stringify(changeJson);
   Substation.postDataByAjax(
