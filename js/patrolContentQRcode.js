@@ -30,6 +30,9 @@ var selectInfo;
 var fileList = []; //设备图片
 var imageListChange = []; //实时图片
 var needSaveID = ""; //需要保存的ID
+//设备照片信息
+var templateInfo;
+var imagePath;
 
 if (canClick == "false") {
   $("#saveBtn").css("display", "none");
@@ -81,15 +84,14 @@ function loadPage() {
     };
 
     //获取信息接口
-    Substation.getDataByAjax("/getQrCodeDeivceInfo", param, function (
-      data
-    ) {
+    Substation.getDataByAjax("/getQrCodeDeivceInfo", param, function (data) {
       $(".content-block .tabs").empty();
       $(".buttons-tab").empty();
       var tempJson = "";
       if (data.hasOwnProperty("template")) {
+        templateInfo = data.template;
         tempJson = data.template;
-        tempJson = JSON.parse(tempJson);
+        tempJson = JSON.parse(tempJson.fFunctionfield);
         tempNum = tempJson.checkInfo.length;
       }
       if (tempNum == 0) {
@@ -320,11 +322,14 @@ function loadPage() {
               //增加第二设备详情模块
               var val = data.deviceDetail;
               selectInfo = data.deviceDetail;
-
+              imagePath = data.filePath;
               $(".buttons-tab").append(
-                '<a href="#' + (val.fSubdeviceinfoid + 1) + '" data-id="2" class="tab-link button">设备详情</a>'
+                '<a href="#' +
+                (val.fSubdeviceinfoid + 1) +
+                '" data-id="2" class="tab-link button">设备详情</a>'
               );
-              var tempStr2 = '<div class="content-block-title">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' +
+              var tempStr2 =
+                '<div class="content-block-title">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' +
                 decodeURIComponent(val.fDevicename) +
                 '" value="' +
                 (val.fSubdeviceinfoid + 1) +
@@ -336,7 +341,9 @@ function loadPage() {
                 (val.fSubdeviceinfoid + 1) +
                 '" class="tab pull-to-refresh-content">\n' +
                 '<div class="pull-to-refresh-layer"></div>\n' +
-                '<div class="content-block" style="padding: 0 .75rem;" id="addVarContain' + (val.fSubdeviceinfoid + 1) + '" > \n ' +
+                '<div class="content-block" style="padding: 0 .75rem;" id="addVarContain' +
+                (val.fSubdeviceinfoid + 1) +
+                '" > \n ' +
                 tempStr2 +
                 "</div>\n" +
                 "</div>"
@@ -346,7 +353,7 @@ function loadPage() {
               creatInfo(
                 val.fFunctionfield,
                 $("#addVarContain" + (val.fSubdeviceinfoid + 1)),
-                (val.fSubdeviceinfoid + 1),
+                val.fSubdeviceinfoid + 1,
                 val.fSubdeviceinfoid
               );
               //填充数据
@@ -365,7 +372,6 @@ function loadPage() {
                   .addClass("active")
                   .siblings()
                   .removeClass("active");
-
               });
             // $("#detailShow")
             //   .unbind()
@@ -423,7 +429,6 @@ function loadPage() {
                 }
               });
           }
-
         });
         if (canClick == "false") {
           if ($(".buttons-tab").html().length == 0) {
@@ -622,11 +627,7 @@ function loadPage() {
           //     opString += "<option selected>" + opval.opName + "</option>";
           // } else {
           opString +=
-            "<option value=" +
-            opval.opName +
-            ">" +
-            opval.opName +
-            "</option>";
+            "<option value=" + opval.opName + ">" + opval.opName + "</option>";
           // }
         });
         opString += "</select>";
@@ -705,18 +706,18 @@ function loadPage() {
         // instructionAdd
       case "instruction":
         if (
-          selectInfo.fInstruction !== undefined &&
-          selectInfo.fInstruction !== ""
+          templateInfo.fInstruction !== undefined &&
+          templateInfo.fInstruction !== ""
         ) {
           string =
             '<li><div class="showDiv"><div class="item-inner">' +
             '<label class="item-title label nameInputInfo" name="instruction" data-file="' +
-            selectInfo.fInstruction +
+            templateInfo.fInstruction +
             '">' +
             '<span class="compareName">资料：</span>' +
             "</label>" +
             '<input type="button" class="nameInput" data-device="devInstruction" name="instruction" data-file="' +
-            selectInfo.fInstruction +
+            templateInfo.fInstruction +
             '" value="' +
             val.value +
             '" onclick="downloadFile(this)" data-name="' +
@@ -828,32 +829,6 @@ function loadPage() {
       });
     });
     // console.log(pageInfo);
-  }
-
-  function downloadFile(file) {
-    var fileName = $(file)
-      .parent()
-      .children(".nameInputInfo")
-      .attr("data-file");
-    if (!upLoadClicktag) {
-      return;
-    }
-    upLoadClicktag = false;
-    setTimeout(function () {
-      upLoadClicktag = true;
-    }, 1000);
-    if (isAndroid) {
-      android.openFile(Substation.ipAddressFromAPP + imagePath + "/" + fileName);
-    } else {
-      if (fileName) {
-        var dic = {
-          fFilepath: imagePath,
-          fFilecode: fileName,
-          fFilename: fileName
-        };
-        window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
-      }
-    }
   }
 
   function getGroupidContent() {
@@ -1933,6 +1908,34 @@ $("#backBtn").click(function () {
     window.history.back();
   }
 });
+
+function downloadFile(file) {
+  var fileName = $(file)
+    .parent()
+    .children(".nameInputInfo")
+    .attr("data-file");
+  if (!upLoadClicktag) {
+    return;
+  }
+  upLoadClicktag = false;
+  setTimeout(function () {
+    upLoadClicktag = true;
+  }, 1000);
+  if (isAndroid) {
+    android.openFile(
+      Substation.ipAddressFromAPP + imagePath + "/" + fileName
+    );
+  } else {
+    if (fileName) {
+      var dic = {
+        fFilepath: imagePath,
+        fFilecode: fileName,
+        fFilename: fileName
+      };
+      window.webkit.messageHandlers.pushDownFileVC.postMessage(dic);
+    }
+  }
+}
 
 //内联返回
 $("#page2Back")
