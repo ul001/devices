@@ -80,7 +80,7 @@ function loadPage() {
     param = {
       fCodeid: QRcode,
       fPlacecheckformid: fPlacecheckformid,
-      fSubdeviceinfoid: 265
+      // fSubdeviceinfoid: 265
     };
 
     //获取信息接口
@@ -1922,9 +1922,7 @@ function downloadFile(file) {
     upLoadClicktag = true;
   }, 1000);
   if (isAndroid) {
-    android.openFile(
-      Substation.ipAddressFromAPP + imagePath + "/" + fileName
-    );
+    android.openFile(Substation.ipAddressFromAPP + imagePath + "/" + fileName);
   } else {
     if (fileName) {
       var dic = {
