@@ -334,6 +334,9 @@ function loadPage() {
                 '" value="' +
                 (val.fSubdeviceinfoid + 1) +
                 '" onclick="QRcodePush(this)" style="margin: 0.5rem;display:none;">二维码</button></div></div>';
+              if (val.fRealimg != undefined) {
+                imageListChange = JSON.parse(val.fRealimg);
+              }
               //默认加载第一张二维码`
               makeQRImg(val.fSubdeviceinfoid);
               $(".content-block .tabs").append(
@@ -533,7 +536,7 @@ function loadPage() {
             '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" style="width:5.5rem;" name="input">' +
             val.name +
             '</div> <div class="item-input">' +
-            '<input type="text" id="input' +
+            '<input type="text" readonly id="input' +
             count +
             '" class="valueInput" value="' +
             //                            info.inpName +
@@ -547,7 +550,7 @@ function loadPage() {
             '<li><div class="item-content showDiv"><div class="item-inner"><div class="item-title label" style="width:5.5rem;" name="input">' +
             val.name +
             '</div> <div class="item-input">' +
-            '<input type="text" class="valueInput" value="' +
+            '<input type="text" readonly class="valueInput" value="' +
             //                            info.inpName +
             '" name="' +
             //                            info.inpType +
@@ -576,7 +579,7 @@ function loadPage() {
             '">' +
             Operation["ui_yes"] +
             "</label>" +
-            '<input type="radio" id="operationNo' +
+            '<input type="radio" readonly id="operationNo' +
             count +
             '" name="operation' +
             count +
@@ -598,7 +601,7 @@ function loadPage() {
             '<label class="item-title label nameInputInfo" style="width:5.5rem;" name="radio">' +
             decodeURIComponent(val.name) +
             "</label>" +
-            '<input type="radio" id="operation' +
+            '<input type="radio" readonly id="operation' +
             count +
             '" name="operation' +
             count +
@@ -661,7 +664,7 @@ function loadPage() {
             '<label class="item-title label nameInputInfo" style="width:initial;" name="date">' +
             decodeURIComponent(val.name) +
             "</label>" +
-            '<input type="datetime-local" class="daycalendarBox' +
+            '<input type="datetime-local" readonly class="daycalendarBox' +
             count +
             ' datetime-local" style="text-align:end;" min="2010-01-01T00:00" max="2050-01-01T00:00" value=""/></div></div></li>';
         } else if (val.value == "devicewarranty") {
@@ -670,7 +673,7 @@ function loadPage() {
             '<label class="item-title label nameInputInfo" style="width:5.5rem;" name="date">' +
             decodeURIComponent(val.name) +
             "</label>" +
-            '<input type="number" class="daycalendarBox' +
+            '<input type="number" readonly class="daycalendarBox' +
             count +
             ' dateTime" value="">' +
             Operation["ui_month"] +
@@ -681,7 +684,7 @@ function loadPage() {
             '<label class="item-title label nameInputInfo" style="width:5.5rem;" name="date">' +
             decodeURIComponent(val.name) +
             "</label>" +
-            '<input type="date" class="daycalendarBox' +
+            '<input type="date" readonly class="daycalendarBox' +
             count +
             ' dateTime" value="' +
             decodeURIComponent(val.value) +
@@ -696,7 +699,7 @@ function loadPage() {
           '<span class="compareName"></span>' +
           "</label>" +
           '<section class="z_file">' +
-          '<img class="add-img" src="img/chooseImg.png">' +
+          // '<img class="add-img" src="img/chooseImg.png">' +
           '<input type="file" id="upImage' +
           imgid +
           '" class="nameInput file" data-device="devImg" name="image">' +

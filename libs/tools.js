@@ -5,7 +5,7 @@
  */
 var baseUrlFromAPP = "http://116.236.149.165:8090/SubstationWEBV2/v5";
 var tokenFromAPP =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MDQ1NTI0MzksInVzZXJuYW1lIjoiaGFoYWhhIn0.hItIFHgDbwF48epFZiiHm5sm6zRgs9oRZJ3QOp7lgCA";
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTA1MDEzODUsInVzZXJuYW1lIjoibmFuYXlhIn0.7zjYRQ5Nbw0rT6-boj8HJuLylTtdoUIpzWRPkuMeHns";
 var ipAddress = "http://116.236.149.165:8090/";
 var userId = "315";
 //语言字段传参

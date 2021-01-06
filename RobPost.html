@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>断电通知发布</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/alarmCleanPost.css" />
+</head>
+
+<body>
+    <div class="page-group">
+        <div id="mainPage" class="page page-current">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" onclick="">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color" data-i18n="ui_RobPostNotific"></h1>
+                <!-- <a class="button button-link button-nav pull-right" id="postHistory">
+                    <i class="icon icon-history"></i>
+                </a> -->
+            </header>
+            <div class="content">
+                <div class="list-block">
+                    <ul>
+                        <li class="inputSelect qiang">
+                            <div class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor">* </span><span data-i18n="ui_Title"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <select id="selectType">
+                                            <option value="1" data-i18n="ui_Blackoutnotification">断电通知</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!-- <li class="inputSelect qiang">
+                            <div class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor">* </span><span data-i18n="ui_taskType"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <select id="selectType">
+                                            <option value="1" data-i18n="ui_xunjian"></option>
+                                            <option value="3" data-i18n="ui_xiaoque"></option>
+                                            <option value="6" data-i18n="ui_qiangxiu"></option>
+                                            <option id="qiangOption" value="7" data-i18n="ui_RobBill"></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </li> -->
+                        <li class="inputSelect">
+                            <div class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor">* </span><span data-i18n="ui_Limitednumber"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <input type="text" id="Limit1" placeholder=""
+                                            data-placeholder="ui_pleaseInputNum" class="textRight" />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="inputSelect">
+                            <div class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor">* </span><span data-i18n="ui_Limitedsingleload"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <input type="text" id="Limit2" placeholder=""
+                                            data-placeholder="ui_pleaseInputload" class="textRight" />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="inputSelect">
+                            <div class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor">* </span><span data-i18n="ui_startTime"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <input type="text" id="dateStart" placeholder=""
+                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="inputSelect">
+                            <div class="item-content item-link">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor">* </span><span data-i18n="ui_RobendTime"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <input type="text" id="dateEnd" placeholder=""
+                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li class="qiang">
+                            <div class="item-content item-link item-sum">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor">* </span><span data-i18n="ui_selectinstitutions"></span>
+                                    </div>
+                                    <div class="item-input">
+                                        <input type="text" id="worker" class="item-add" readonly />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="peopleList worker">
+                                <!--                            <span class="common">徐航<i class="icon icon-close"></i></span>-->
+                            </div>
+                        </li>
+                    </ul>
+                    <ul>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">
+                                        <span class="redColor rushContent">* </span><span
+                                            data-i18n="ui_notificationContent"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item-input">
+                                <textarea name="taskContent" id="taskContent" cols="30" rows="10" placeholder=""
+                                    data-placeholder="ui_notificationContentTip" style="-webkit-user-select:text
+                                    !important"></textarea>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="bottomDiv">
+                        <a class="button button-bottom button-fill" data-i18n="ui_submit" onclick="postTask()"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="page1" class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="$.router.back();">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_selectPeople"></span><span id="peopleType"></span>
+                </h1>
+            </header>
+            <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="searchUser"></label>
+                        <input type="search" id="searchUser" placeholder="" data-placeholder="ui_selectUser" />
+                    </div>
+                </div>
+            </div>
+            <nav class="bar bar-footer">
+                <span id="showSelected"><span data-i18n="ui_hasSelected"></span>:</span>
+                <a href="#" class="button bg-primary col-33" onclick="saveSelectedPeople()" data-i18n="ui_confirm"></a>
+            </nav>
+            <div class="content">
+                <div class="list-block">
+                    <ul id="classList">
+                        <li id="subClass">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li id="peopleClass">
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title">
+                                        <span data-id="-1" data-i18n="ui_organizations"></span>
+                                        <!--<i class="icon icon-right"></i>
+                                    <span class="preClass">安科瑞运维小组</span><i class="icon icon-right"></i>
+                                    <span>运维测试</span>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="classUl">
+                        <!--                    <li>
+                                            <div class="item-content" data-id="10100001">
+                                                <div class="item-inner">
+                                                    <div class="item-title">安科瑞运维小组</div>
+                                                    <div class="item-after">
+                                                        <span class="nextClass">
+                                                            <i class="icon icon-nextclass"></i>下级
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>-->
+                    </ul>
+                    <ul class="personUl" id="selectAll">
+                        <li>
+                            <label class="label-checkbox item-content" data-id="10100001">
+                                <input type="checkbox" name="my-checkbox" />
+                                <div class="item-media">
+                                    <i class="icon icon-form-checkbox"></i>
+                                </div>
+                                <div class="item-inner">
+                                    <div class="item-title" data-i18n="ui_SelectAll"></div>
+                                </div>
+                            </label>
+                        </li>
+                    </ul>
+                    <ul class="personUl" id="personListUl">
+                        <!--                    <li>
+                                            <label class="label-checkbox item-content" data-id="10100001">
+                                                <input type="checkbox" name="my-checkbox">
+                                                <div class="item-media"><i class="icon icon-form-checkbox"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-title">xuhang</div>
+                                                </div>
+                                            </label>
+                                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="page2" class="page">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn" onclick="$.router.back();">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_hasSelected"></span><span id="numberShow">3</span><span
+                        data-i18n="ui_personNum"></span>
+                </h1>
+                <a class="button button-link button-nav pull-right click_btn" data-i18n="ui_confirm"
+                    onclick="$.router.back();">
+                </a>
+            </header>
+            <div class="content">
+                <div class="list-block">
+                    <ul id="selectedUl">
+                        <!--                    <li>
+                                            <div class="item-content">
+                                                <div class="item-inner">
+                                                    <div class="item-title">江苏安科瑞运维</div>
+                                                    <div class="item-after">
+                                                        <span class="removeUser redColor">
+                                                            移除
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
+    <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
+    <script src="libs/language.js"></script>
+    <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/RobPost.js"></script>
+</body>
+
+</html>

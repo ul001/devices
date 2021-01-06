@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>通知工单详情</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="libs/light7-swipeout.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/missionDetail.css" />
+    <!-- 引入ystep样式 -->
+    <!-- <link rel="stylesheet" href="libs/ystep/ystep.css"> -->
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=XWWTK5DwIWdF6stShGYzMgDTDLfHwsM4">
+    </script>
+</head>
+
+<body>
+    <div class="page-group">
+        <div class="page" id="route6">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <a class="button button-link button-nav pull-right" onclick="gotoMissionTimeAxis()">
+                    <i class="icon icon-Refresh"></i>
+                </a>
+                <h1 class="title title_color"><span data-i18n="ui_Noticedetails"></span>
+                </h1>
+            </header>
+            <div class="content">
+                <!-- ystep容器 -->
+                <!-- <div class="ystep1"></div> -->
+                <div class="content-block" id="addVarContain123">
+                    <div class="content-block-title"><span data-i18n="ui_Noticedetails"></span></div>
+                    <div id="12" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_notificNumber"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="missionId"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_Title"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="missionType"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_Subname"></span></div>
+                                        <div class="item-input row no-gutter" style="display:flex;">
+                                            <div class="item-label col-85" id="missionName"></div>
+                                            <div class="col-15" style="display:flex;align-items:center;">
+                                                <img style="width:1.2rem;" src="img/go_map1.png" id="goMap" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label" data-i18n="ui_SubVideo"></div>
+                                        <div class="item-input" style="display:flex;">
+                                            <img src="img/video_watch.png" style="height:1.2rem;" id="jumpVideo">
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> -->
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_Originator"></span></div>
+                                        <div class="item-input row no-gutter" style="display:flex;">
+                                            <div class="item-label col-85" id="createName"></div>
+                                            <div class="col-15" style="display:flex;align-items:center;">
+                                                <img style="width:1rem;" src="img/call.png" id="createCall"
+                                                    class="callPhone" onclick="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_Principal"></span></div>
+                                        <div class="item-input row no-gutter" style="display:flex;">
+                                            <div class="item-label col-85" id="chargerName"></div>
+                                            <div class="col-15" style="display:flex;align-items:center;">
+                                                <img style="width:1rem;" src="img/call.png" id="chargerCall"
+                                                    class="callPhone" onclick="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> -->
+                            <!-- <li>
+                                <div class="showDiv item-content" id="checkerDiv" style="display:none;">
+                                    <div class="item-inner">
+                                        <div class="item-title label">客户:</div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="checkerName"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> -->
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_orderStarttime"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="createTime"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_orderEndtime"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="finishTime"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_notificationContent"></span>
+                                        </div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="missionCont">-</div>
+                                            <!-- <textarea id="missionContent" readonly="readonly"></textarea> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_TaskStartTime"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="ActStartTime">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_TaskFinishTime"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="ActFinishTime">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> -->
+                            <li id="totaldefect1">
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_Limitednumber"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="TotalDefectNum">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li id="defectUntreatNum">
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span data-i18n="ui_Limitedsingleload2"></span>
+                                        </div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="Unprocessednumber">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="showDiv item-content">
+                                    <div class="item-inner">
+                                        <div class="item-title label"><span
+                                                data-i18n="ui_Implementationsituation"></span></div>
+                                        <div class="item-input">
+                                            <div class="item-label" id="TotalDefect">-</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain124" style="display:none;">
+                    <div class="content-block-title"><span data-i18n="ui_TaskRemarks"></span></div>
+                    <div id="13" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul>
+                            <li>
+                                <div class="item-content showDiv">
+                                    <div class="item-inner">
+                                        <!-- <div class="item-title label">任务备注:</div> -->
+                                        <div class="item-input"><textarea placeholder=""
+                                                data-placeholder="ui_Entertexthere" id="textareaDetail"
+                                                style="-webkit-user-select:text !important"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="content-block" id="addVarContain125">
+                    <div class="content-block-title"><span data-i18n="ui_Implementationsituation"></span>
+                        <!-- <nobr> -->
+                        <a href="#" id="clickManager" name="clickManager"
+                            style="z-index:9999;display: inline-block"><span data-i18n="ui_seeDetail"></span>>></a>
+                        <!-- </nobr> -->
+                    </div>
+                    <div id="14" class="list-block baseInfoDiv" name="zhejiuduile">
+                        <ul id="missionState">
+                            <!-- <li>
+                        <div class="item-content showDiv">
+                            <div class="item-inner">
+                                <div class="item-title label">1 李四</div>
+                                <div class="item-input">
+                                    <input type="text" readonly="readonly" id="input9" class="valueInput"
+                                        value="执行中" name="number" validator="required" style="color:red">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="item-content showDiv">
+                            <div class="item-inner">
+                                <div class="item-title label">2 王五</div>
+                                <div class="item-input">
+                                    <input type="text" readonly="readonly" id="input10" class="valueInput"
+                                        value="已完成" name="number" validator="required"
+                                        style="color:springgreen">
+                                </div>
+                            </div>
+                        </div>
+                    </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="buttonsEvent">
+                    <div class="row no-gutter">
+                        <a id="startTask" href="#" class="col-66 button button-big button-fill bottom-btn"><i
+                                class="icon icon-starttask"></i><span data-i18n="ui_openTask"></span></a>
+                        <a id="taskIn" href="#" class="col-66 button button-big button-fill bottom-btn"><i
+                                class="icon icon-checkIn"></i><span data-i18n="ui_siteSign"></span></a>
+                        <a id="doTask" href="#" class="doDetail col-40 button button-big button-fill bottom-btn"><i
+                                class="icon icon-missionAction"></i><span data-i18n="ui_doTask"></span></a>
+                        <a id="submitTask" href="#" class="col-40 button button-big button-fill bottom-btn"><i
+                                class="icon icon-upload"></i><span data-i18n="ui_taskSubmit"></span></a>
+                        <a id="doDetail" href="#" class="doDetail col-66 button button-big button-fill bottom-btn"><i
+                                class="icon icon-missionDetail"></i><span data-i18n="ui_doingDetail"></span></a>
+                        <a id="chargeTask" href="#" class="doDetail col-28 button button-big button-fill bottom-btn"><i
+                                class="icon icon-missionDetail"></i><span data-i18n="ui_chargeTask"></span></a>
+                        <a id="chargeReturn" href="#" class="col-28 button button-big button-fill bottom-btn"><i
+                                class="icon icon-chargeReturn"></i><span data-i18n="ui_chargeReturn"></span></a>
+                        <a id="chargeSubmit" href="#" class="col-28 button button-big button-fill bottom-btn"><i
+                                class="icon icon-upload"></i><span data-i18n="ui_chargeSubmit"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="allmap"></div>
+    <script src="libs/jquery-1.12.4.min.js"></script>
+    <script src="libs/light7.min.js"></script>
+    <script src="libs/language.js"></script>
+    <script src="libs/light7-swiper.min.js"></script>
+    <script src="libs/config.js"></script>
+    <script src="libs/tools.js"></script>
+    <!-- 引入jquery -->
+    <!-- <script src="libs/ystep/jquery.min.js"></script> -->
+    <!-- 引入ystep插件 -->
+    <!-- <script src="libs/ystep/ystep.js"></script> -->
+    <!-- <script src="js/missionDetailtest.js"></script> -->
+    <script src="js/RobNotificDetail.js"></script>
+</body>
+
+</html>
