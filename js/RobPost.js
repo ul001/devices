@@ -169,15 +169,17 @@ function addCloseFunction() {
     }
 }
 
-//发布
+//发布提交
 function postTask() {
     var startTime = $("#dateStart").val();
     var completeTime = $("#dateEnd").val();
     var taskContent = $("#taskContent").val();
+    var LimitNum = $("#LimitNum").val();
+    var LimitLoad = $("#LimitLoad").val();
     // if ($("#selectType").val() != undefined) {
     selectType = $("#selectType").val();
     // }
-    if (subList.length == 0) {
+    if (workerUser.length == 0) {
         $.toast(Operation['ui_substation'] + Operation['ui_notEmpty']);
         return;
     }
@@ -201,64 +203,66 @@ function postTask() {
         }
     }
     var subIds = [];
-    $(subList).each(function (i, obj) {
+    $(workerUser).each(function (i, obj) {
         subIds.push(obj.userId);
     });
     var subStr = subIds.join(",");
     var params = {};
-    if (qiangdan == "7") {
-        params = {
-            fTasktypeid: qiangdan,
-            fStartdate: startTime + " 00:00:00",
-            fDeadlinedate: completeTime + " 23:59:59",
-            fTaskcontent: taskContent,
-            subIds: subStr
-        };
-        Substation.postDataByAjax("/releaseOrderTask", params, function (data) {
-            if (data.code == "200") {
-                $.alert(Operation['ui_postSuccess'], function () {
-                    if (isAndroid) {
-                        android.refresh();
-                        android.goBack();
-                    } else {
-                        localStorage.setItem("need-refresh", "true");
-                        window.history.back();
-                    }
-                });
-            }
-        });
-    } else {
-        if (chargerUser.length == 0) {
-            $.toast(Operation['ui_charger'] + Operation['ui_notEmpty']);
-            return;
+    // if (qiangdan == "7") {
+    params = {
+        fTitle: selectType,
+        fPlantime: startTime + " 00:00:00",
+        fDeadlinetime: completeTime + " 23:59:59",
+        fLimitnumber: LimitNum,
+        fTargetload: LimitLoad,
+        fWorkcontent: taskContent,
+        fTargetcompany: subStr
+    };
+    Substation.postDataByAjax("/releaseWorkOrder", params, function (data) {
+        if (data.code == "200") {
+            $.alert(Operation['ui_postSuccess'], function () {
+                if (isAndroid) {
+                    android.refresh();
+                    android.goBack();
+                } else {
+                    localStorage.setItem("need-refresh", "true");
+                    window.history.back();
+                }
+            });
         }
-        if (workerUser.length == 0) {
-            $.toast(Operation['ui_worker'] + Operation['ui_notEmpty']);
-            return;
-        }
-        var chargerId = chargerUser[0].userId;
-        var workerIdList = [];
-        $(workerUser).each(function (i, obj) {
-            workerIdList.push(obj.userId);
-        });
-        var workerIdStr = workerIdList.join(",");
-        params = {
-            userIds: workerIdStr,
-            fTaskchargerid: chargerId,
-            fTasktypeid: selectType,
-            fStartdate: startTime + " 00:00:00",
-            fDeadlinedate: completeTime + " 23:59:59",
-            fTaskcontent: taskContent,
-            subIds: subStr
-        };
-        Substation.postDataByAjax("/releaseTask", params, function (data) {
-            if (data.code == "200") {
-                $.alert(Operation['ui_postSuccess'], function () {
-                    location.reload();
-                });
-            }
-        });
-    }
+    });
+    // } else {
+    //     if (chargerUser.length == 0) {
+    //         $.toast(Operation['ui_charger'] + Operation['ui_notEmpty']);
+    //         return;
+    //     }
+    //     if (workerUser.length == 0) {
+    //         $.toast(Operation['ui_worker'] + Operation['ui_notEmpty']);
+    //         return;
+    //     }
+    //     var chargerId = chargerUser[0].userId;
+    //     var workerIdList = [];
+    //     $(workerUser).each(function (i, obj) {
+    //         workerIdList.push(obj.userId);
+    //     });
+    //     var workerIdStr = workerIdList.join(",");
+    //     params = {
+    //         userIds: workerIdStr,
+    //         fTaskchargerid: chargerId,
+    //         fTasktypeid: selectType,
+    //         fStartdate: startTime + " 00:00:00",
+    //         fDeadlinedate: completeTime + " 23:59:59",
+    //         fTaskcontent: taskContent,
+    //         subIds: subStr
+    //     };
+    //     Substation.postDataByAjax("/releaseTask", params, function (data) {
+    //         if (data.code == "200") {
+    //             $.alert(Operation['ui_postSuccess'], function () {
+    //                 location.reload();
+    //             });
+    //         }
+    //     });
+    // }
 }
 
 //page1
@@ -269,49 +273,20 @@ function getGroupClass(pid) {
     $("#classList").show();
     // if (peopleType == "substation") {
     //     //组织机构
-    //     Substation.getDataByAjax("/getCompanyListBypIdV2", {
-    //         fCoaccountno: pid
-    //     }, function (data) {
-    //         if (data.hasOwnProperty("tBdCompany") && data.tBdCompany.length > 0) {
-    //             $(".classUl").show();
-    //             var html = "";
-    //             $(data.tBdCompany).each(function () {
-    //                 html += "<li>\n" +
-    //                     "    <div class=\"item-content\">\n" +
-    //                     "        <div class=\"item-inner\">\n" +
-    //                     "            <div class=\"item-title\">" + Substation.removeUndefined(this.fConame) + "</div>\n" +
-    //                     "            <div class=\"item-after\">\n" +
-    //                     "                <span class=\"nextClass\" data-id=\"" + this.fCoaccountno + "\" data-name=\"" + Substation.removeUndefined(this.fConame) + "\">\n" +
-    //                     "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
-    //                     "                </span>\n" +
-    //                     "            </div>\n" +
-    //                     "        </div>\n" +
-    //                     "    </div>\n" +
-    //                     "</li>";
-    //             });
-    //             $(".classUl").html(html);
-    //             $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
-    //         } else {
-    //             $(".classUl").hide();
-    //         }
-    //         getPersonList(pid);
-    //     });
-    // } else {
-    Substation.getDataByAjax("/selectUserGroupByPid", {
-        userGroupPid: pid
+    Substation.getDataByAjax("/getCompanyListBypIdV2", {
+        fCoaccountno: pid
     }, function (data) {
-        if (data.hasOwnProperty("userGroupList") && data.userGroupList.length > 0) {
+        if (data.hasOwnProperty("tBdCompany") && data.tBdCompany.length > 0) {
             $(".classUl").show();
             var html = "";
-            $(data.userGroupList).each(function () {
+            $(data.tBdCompany).each(function () {
                 html += "<li>\n" +
                     "    <div class=\"item-content\">\n" +
                     "        <div class=\"item-inner orgCheckbox\">\n" +
-                    "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fUsergroupid + "\" data-name=\"" + Substation.removeUndefined(this.fUsergroupname) + "\">\n" +
-                    // "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                    "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsergroupname) + "</div>\n" +
+                    "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fCoaccountno + "\" data-name=\"" + Substation.removeUndefined(this.fConame) + "\">\n" +
+                    "            <div class=\"item-title\">" + Substation.removeUndefined(this.fConame) + "</div>\n" +
                     "            <div class=\"item-after\">\n" +
-                    "                <span class=\"nextClass\" data-id=\"" + this.fUsergroupid + "\" data-name=\"" + Substation.removeUndefined(this.fUsergroupname) + "\">\n" +
+                    "                <span class=\"nextClass\" data-id=\"" + this.fCoaccountno + "\" data-name=\"" + Substation.removeUndefined(this.fConame) + "\">\n" +
                     "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
                     "                </span>\n" +
                     "            </div>\n" +
@@ -324,68 +299,100 @@ function getGroupClass(pid) {
         } else {
             $(".classUl").hide();
         }
+        // checkSelectPeople();
         getPersonList(pid);
     });
+    // } else {
+    // Substation.getDataByAjax("/selectUserGroupByPid", {
+    //     userGroupPid: pid
+    // }, function (data) {
+    //     if (data.hasOwnProperty("userGroupList") && data.userGroupList.length > 0) {
+    //         $(".classUl").show();
+    //         var html = "";
+    //         $(data.userGroupList).each(function () {
+    //             html += "<li>\n" +
+    //                 "    <div class=\"item-content\">\n" +
+    //                 "        <div class=\"item-inner orgCheckbox\">\n" +
+    //                 "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fUsergroupid + "\" data-name=\"" + Substation.removeUndefined(this.fUsergroupname) + "\">\n" +
+    //                 // "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+    //                 "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsergroupname) + "</div>\n" +
+    //                 "            <div class=\"item-after\">\n" +
+    //                 "                <span class=\"nextClass\" data-id=\"" + this.fUsergroupid + "\" data-name=\"" + Substation.removeUndefined(this.fUsergroupname) + "\">\n" +
+    //                 "                    <i class=\"icon icon-nextclass\"></i>" + Operation['ui_nextClass'] + "\n" +
+    //                 "                </span>\n" +
+    //                 "            </div>\n" +
+    //                 "        </div>\n" +
+    //                 "    </div>\n" +
+    //                 "</li>";
+    //         });
+    //         $(".classUl").html(html);
+    //         $(".nextClass").off("click", nextClassClick).on("click", nextClassClick);
+    //     } else {
+    //         $(".classUl").hide();
+    //     }
+    //     getPersonList(pid);
+    // });
     // }
 }
 
 function getPersonList(gid) {
     $("#personListUl").empty();
+
     // if (peopleType == "substation") {
-    //     Substation.postDataByAjax("/getSubstationListBySubGroupId", {
-    //         fCoaccountno: gid
-    //     }, function (data) {
-    //         if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
-    //             $(".personUl").show();
-    //             //修改单选
-    //             $("#selectAll").hide();
-    //             var html = "";
-    //             $(data.data.list).each(function () {
-    //                 html += "<li>\n" +
-    //                     "    <label class=\"label-checkbox item-content\">\n" +
-    //                     "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
-    //                     "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-    //                     "        <div class=\"item-inner\">\n" +
-    //                     "            <div class=\"item-title\">" + Substation.removeUndefined(this.fSubname) + "</div>\n" +
-    //                     "        </div>\n" +
-    //                     "    </label>\n" +
-    //                     "</li>"
-    //             });
-    //             $("#personListUl").html(html);
-    //             $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
-    //             checkSelectPeople();
-    //         } else {
-    //             $(".personUl").hide();
-    //         }
-    //     });
+    // Substation.postDataByAjax("/getSubstationListBySubGroupId", {
+    //     fCoaccountno: gid
+    // }, function (data) {
+    //     if (data.data.hasOwnProperty("list") && data.data.list.length > 0) {
+    //         $(".personUl").show();
+    //         //修改单选
+    //         $("#selectAll").hide();
+    //         var html = "";
+    //         $(data.data.list).each(function () {
+    //             html += "<li>\n" +
+    //                 "    <label class=\"label-checkbox item-content\">\n" +
+    //                 "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
+    //                 "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+    //                 "        <div class=\"item-inner\">\n" +
+    //                 "            <div class=\"item-title\">" + Substation.removeUndefined(this.fSubname) + "</div>\n" +
+    //                 "        </div>\n" +
+    //                 "    </label>\n" +
+    //                 "</li>"
+    //         });
+    //         $("#personListUl").html(html);
+    $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+    checkSelectPeople();
+    //     } else {
+    //         $(".personUl").hide();
+    //     }
+    // });
     // } else {
-    Substation.getDataByAjax("/selectUserListByGroupId", {
-        groupId: gid
-    }, function (data) {
-        if (data.hasOwnProperty("userList") && data.userList.length > 0) {
-            $(".personUl").show();
-            if (peopleType == "charger") {
-                $("#selectAll").hide();
-            }
-            var html = "";
-            $(data.userList).each(function () {
-                html += "<li>\n" +
-                    "    <label class=\"label-checkbox item-content\">\n" +
-                    "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.fUsername) + "\">\n" +
-                    "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-                    "        <div class=\"item-inner\">\n" +
-                    "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsername) + "</div>\n" +
-                    "        </div>\n" +
-                    "    </label>\n" +
-                    "</li>"
-            });
-            $("#personListUl").html(html);
-            $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
-            checkSelectPeople();
-        } else {
-            $(".personUl").hide();
-        }
-    });
+    // Substation.getDataByAjax("/selectUserListByGroupId", {
+    //     groupId: gid
+    // }, function (data) {
+    //     if (data.hasOwnProperty("userList") && data.userList.length > 0) {
+    //         $(".personUl").show();
+    //         if (peopleType == "charger") {
+    //             $("#selectAll").hide();
+    //         }
+    //         var html = "";
+    //         $(data.userList).each(function () {
+    //             html += "<li>\n" +
+    //                 "    <label class=\"label-checkbox item-content\">\n" +
+    //                 "        <input type=\"checkbox\" name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.fUsername) + "\">\n" +
+    //                 "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+    //                 "        <div class=\"item-inner\">\n" +
+    //                 "            <div class=\"item-title\">" + Substation.removeUndefined(this.fUsername) + "</div>\n" +
+    //                 "        </div>\n" +
+    //                 "    </label>\n" +
+    //                 "</li>"
+    //         });
+    //         $("#personListUl").html(html);
+    //         $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+    //         checkSelectPeople();
+    //     } else {
+    //         $(".personUl").hide();
+    //     }
+    // });
     // }
 }
 
@@ -516,37 +523,17 @@ function getSearchUser() {
         $("#selectAll").show();
     }
     // if (peopleType == "substation") {
-    //     Substation.postDataByAjax("/getSubstationListBySubGroupId", {
-    //         search: $("#searchUser").val()
-    //     }, function (data) {
-    //         var html = "";
-    //         $(data.data.list).each(function () {
-    //             html += "<li>\n" +
-    //                 "    <label class=\"label-checkbox item-content\">\n" +
-    //                 "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
-    //                 "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
-    //                 "        <div class=\"item-inner\">\n" +
-    //                 "            <div class=\"item-title\">" + Substation.removeUndefined(this.fSubname) + "(" + Substation.removeUndefined(this.fSubid) + ")</div>\n" +
-    //                 "        </div>\n" +
-    //                 "    </label>\n" +
-    //                 "</li>";
-    //         });
-    //         $("#personListUl").html(html);
-    //         $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
-    //         checkSelectPeople();
-    //     });
-    // } else {
-    Substation.postDataByAjax("/getUserListByCondition", {
-        searchKey: $("#searchUser").val()
+    Substation.postDataByAjax("/getSubstationListBySubGroupId", {
+        search: $("#searchUser").val()
     }, function (data) {
         var html = "";
-        $(data.data).each(function () {
+        $(data.data.list).each(function () {
             html += "<li>\n" +
                 "    <label class=\"label-checkbox item-content\">\n" +
-                "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.userName) + "\">\n" +
+                "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fSubid + "\" data-name=\"" + Substation.removeUndefined(this.fSubname) + "\">\n" +
                 "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
                 "        <div class=\"item-inner\">\n" +
-                "            <div class=\"item-title\">" + Substation.removeUndefined(this.userName) + "(" + Substation.removeUndefined(this.fLoginname) + ")</div>\n" +
+                "            <div class=\"item-title\">" + Substation.removeUndefined(this.fSubname) + "(" + Substation.removeUndefined(this.fSubid) + ")</div>\n" +
                 "        </div>\n" +
                 "    </label>\n" +
                 "</li>";
@@ -555,6 +542,26 @@ function getSearchUser() {
         $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
         checkSelectPeople();
     });
+    // } else {
+    // Substation.postDataByAjax("/getUserListByCondition", {
+    //     searchKey: $("#searchUser").val()
+    // }, function (data) {
+    //     var html = "";
+    //     $(data.data).each(function () {
+    //         html += "<li>\n" +
+    //             "    <label class=\"label-checkbox item-content\">\n" +
+    //             "        <input " + typeStr + " name=\"my-checkbox\" id=\"" + this.fUserid + "\" data-name=\"" + Substation.removeUndefined(this.userName) + "\">\n" +
+    //             "        <div class=\"item-media\"><i class=\"icon icon-form-checkbox\"></i></div>\n" +
+    //             "        <div class=\"item-inner\">\n" +
+    //             "            <div class=\"item-title\">" + Substation.removeUndefined(this.userName) + "(" + Substation.removeUndefined(this.fLoginname) + ")</div>\n" +
+    //             "        </div>\n" +
+    //             "    </label>\n" +
+    //             "</li>";
+    //     });
+    //     $("#personListUl").html(html);
+    //     $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+    //     checkSelectPeople();
+    // });
     // }
 }
 
@@ -618,15 +625,16 @@ function removeUser() {
 }
 
 $(".back_btn").click(function () {
-    var u = navigator.userAgent,
-        app = navigator.appVersion;
-    var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
-    var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-    if (isIOS) {
-        window.webkit.messageHandlers.goBackiOS.postMessage("");
-    } else {
-        android.goBack();
-    }
+    $.router.back();
+    // var u = navigator.userAgent,
+    //     app = navigator.appVersion;
+    // var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //安卓系统
+    // var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
+    // if (isIOS) {
+    //     window.webkit.messageHandlers.goBackiOS.postMessage("");
+    // } else {
+    //     android.goBack();
+    // }
 });
 
 $("#postHistory").click(function () {

@@ -5,6 +5,7 @@ var loading = false;
 var itemsPerLoad = 10;
 var pageNum = 1;
 var typeId = 1;
+var grabbed = 0;
 
 $(".back_btn").click(function () {
     if (isIOS) {
@@ -97,27 +98,25 @@ function addItems(number, clickNum) {
     var url = "";
     var params = {};
     if (clickNum == 1) {
-        url = "/getUnGrabbedOrderTaskList";
+        url = "/getWorkOrderList";
         params = {
-            pageNo: pageNum,
+            pageNum: pageNum,
             pageSize: number,
-            userlongitude: lon,
-            userlatitude: lat
+            orderState: 0
         };
     } else if (clickNum == 2) {
-        url = "/getGrabbedOrderTaskList";
+        url = "/getWorkOrderList";
         params = {
-            pageNo: pageNum,
+            pageNum: pageNum,
             pageSize: number,
-            userlongitude: lon,
-            userlatitude: lat
+            myOrderUserId: userId
         };
     } else if (clickNum == 3) {
-        url = "/getTaskListCreatedByMe";
+        url = "/getWorkOrderList";
         params = {
-            pageNo: pageNum,
+            pageNum: pageNum,
             pageSize: number,
-            fTasktypeid: 7
+            fPublisherUserId: userId
         };
     }
     if (clickNum == 1 || clickNum == 2) {
@@ -130,47 +129,133 @@ function addItems(number, clickNum) {
                     $(listDom).empty();
                 }
                 var thisList;
-                if (data.hasOwnProperty("orderList")) {
-                    thisList = data.orderList;
+                if (data.hasOwnProperty("pageInfo")) {
+                    thisList = data.pageInfo.list;
                 }
                 if (thisList != undefined && thisList != '' && thisList.length > 0) {
                     var html = "";
                     $(thisList).each(function () {
-                        var distance = this.userDistance;
-                        if (distance == undefined) {
-                            distance = "";
-                        } else {
-                            distance = Number(distance);
-                            if (distance >= 1000) {
-                                distance = (distance / 1000).toFixed(2);
-                            } else {
-                                distance = distance.toFixed(2);
-                            }
-                        }
+                        var distance = "";
+                        // if (distance == undefined) {
+                        //     distance = "";
+                        // } else {
+                        //     distance = Number(distance);
+                        //     if (distance >= 1000) {
+                        //         distance = (distance / 1000).toFixed(2);
+                        //     } else {
+                        //         distance = distance.toFixed(2);
+                        //     }
+                        // }
                         var color = "";
                         //切换右上角颜色
-                        if (this) {
-                            color = "text-align:center;border-radius:.15rem;background:#FFA629;color:#fff;";
-                        }
-                        html += `<div class="card" onclick="goToDetail('${this.fTaskid}')">
+                        // if (this) {
+                        //     color = "text-align:center;border-radius:.15rem;background:#FFA629;color:#fff;";
+                        // }
+                        html += `<div class="card" onclick="goToDetail('${this.fWorkorderid}','${this.grabbed}')">
                                   <div class="card-content">
                                       <div class="card-content-inner">
                                           <div class="row" style="margin-left:0;">
                                              <p class="row"><span class="subName col-80">${
-                                               this.fSubName
+                                               this.fTitle
                                              } </span><span class="col-20"
                                                     style=${color}>${distance}</span></p>
                                           </div>
                                           <p class="row"><span class="showTask"><span style="color:gray;">${
                                             Operation["ui_RobNotificContent"]
-                                          }</span>${this.fTaskcontent}</span>
+                                          } </span>${this.fWorkcontent}</span>
                                              </p>
                                              <p class="row"><span class="showTask"><span style="color:gray;">${
                                             Operation["ui_RobReleasetime"]
-                                          }</span>${ this.fStartdate.substring(
-                                              0,
-                                              10
-                                            )}</span>
+                                          } </span>${this.fOrdercreatetime}</span>
+                                             </p>
+                                      </div>
+                                  </div>
+                              </div>`;
+                    });
+                    // grabbed
+                    $(listDom).html(html);
+                    pageNum++;
+                    clickNum == 1 ? $(".showRobImg").show() : $(".showRobImg").hide();
+                } else {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html(
+                        "<span class='bottomTip'>--" +
+                        Operation["ui_nomoredata"] +
+                        "--</span>"
+                    );
+                    return;
+                }
+                if (thisList.length < itemsPerLoad) {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html(
+                        "<span class='bottomTip'>--" +
+                        Operation["ui_nomoredata"] +
+                        "--</span>"
+                    );
+                    return;
+                }
+            },
+            function (errorCode) {
+                if (errorCode == 0) {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html(
+                        "--" + Operation["ui_neterror"] + "--"
+                    );
+                } else {
+                    $.detachInfiniteScroll($(".infinite-scroll"));
+                    $(".infinite-scroll-preloader").html("");
+                }
+                return;
+            }
+        );
+    } else if (clickNum == 3) {
+        Substation.getDataByAjaxNoLoading(
+            url,
+            params,
+            function (data) {
+                var listDom = "#listtab" + clickNum;
+                if (pageNum == 1) {
+                    $(listDom).empty();
+                }
+                var thisList;
+                if (data.hasOwnProperty("pageInfo")) {
+                    thisList = data.pageInfo.list;
+                }
+                if (thisList != undefined && thisList != '' && thisList.length > 0) {
+                    var html = "";
+                    $(thisList).each(function () {
+                        var distance = "";
+                        // if (distance == undefined) {
+                        //     distance = "";
+                        // } else {
+                        //     distance = Number(distance);
+                        //     if (distance >= 1000) {
+                        //         distance = (distance / 1000).toFixed(2);
+                        //     } else {
+                        //         distance = distance.toFixed(2);
+                        //     }
+                        // }
+                        var color = "";
+                        //切换右上角颜色
+                        // if (this) {
+                        //     color = "text-align:center;border-radius:.15rem;background:#FFA629;color:#fff;";
+                        // }
+                        html += `<div class="card" onclick="goToDetail('${this.fWorkorderid}','${this.grabbed}')">
+                                  <div class="card-content">
+                                      <div class="card-content-inner">
+                                          <div class="row" style="margin-left:0;">
+                                             <p class="row"><span class="subName col-80">${
+                                               this.fTitle
+                                             } </span><span class="col-20"
+                                                    style=${color}>${distance}</span></p>
+                                          </div>
+                                          <p class="row"><span class="showTask"><span style="color:gray;">${
+                                            Operation["ui_RobNotificContent"]
+                                          } </span>${this.fWorkcontent}</span>
+                                             </p>
+                                             <p class="row"><span class="showTask"><span style="color:gray;">${
+                                            Operation["ui_RobReleasetime"]
+                                          } </span>${this.fOrdercreatetime}</span>
                                              </p>
                                       </div>
                                   </div>
@@ -211,70 +296,6 @@ function addItems(number, clickNum) {
                 return;
             }
         );
-    } else if (clickNum == 3) {
-        Substation.postDataByAjaxNoLoading(url, params, function (data) {
-            if (data.hasOwnProperty("pageInfo") && data.pageInfo.list.length > 0) {
-                var listDom = "#listtab" + clickNum;
-                if (pageNum == 1) {
-                    $(listDom).empty();
-                }
-                var html = "";
-                $(data.pageInfo.list).each(function () {
-                    html += `<div class="card" onclick="goToHistoryDetail('${
-            this.fTaskid
-          }')">
-                              <div class="card-content">
-                                  <div class="card-content-inner">
-                                      <div class="row" style="margin-left:0;">
-                                         <p class="subName limit-length col-80">${
-                                           this.fSubName
-                                         }</p>
-                                         <p class="col-20 showRobImg" style="text-align:right;"><span class="showType">${
-                                           Operation["ui_RobBill"]
-                                         }</span></p>
-                                      </div>
-                                      <p class="row"><span class="col-66"><span style="color:gray;">${
-                                        Operation["ui_TaskContent"]
-                                      }</span>${this.fTaskcontent}</span>
-                                          <span class="col-33"
-                                                style="color:#ADB2C1;text-align:right;"></span></p>
-                                      <p class="row"><span class="col-50 showTime">${Operation[
-                                        "ui_StarPlanTime"
-                                      ] +
-                                        this.fStartdate.substring(0, 10)}</span>
-                                          <span class="col-50 showTime">${Operation[
-                                            "ui_endPlanTime"
-                                          ] +
-                                            this.fDeadlinedate.substring(
-                                              0,
-                                              10
-                                            )}</span></p>
-                                  </div>
-                              </div>
-                          </div>`;
-                });
-                $(listDom).append(html);
-                pageNum++;
-                clickNum == 1 ? $(".showRobImg").show() : $(".showRobImg").hide();
-            } else {
-                $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html(
-                    "<span class='bottomTip'>--" +
-                    Operation["ui_nomoredata"] +
-                    "--</span>"
-                );
-                return;
-            }
-            if (data.pageInfo.list.length < itemsPerLoad) {
-                $.detachInfiniteScroll($(".infinite-scroll"));
-                $(".infinite-scroll-preloader").html(
-                    "<span class='bottomTip'>--" +
-                    Operation["ui_nomoredata"] +
-                    "--</span>"
-                );
-                return;
-            }
-        });
     }
 }
 
@@ -323,9 +344,9 @@ function goToMonitorRobBill() {
 //    var fDistance = map.getDistance(point1, point2);
 //    console.log(fDistance);
 
-function goToDetail(taskId) {
+function goToDetail(taskId, grabbed) {
     localStorage.setItem("robTaskId", taskId);
-    // localStorage.setItem("userlatitude", lat);
+    localStorage.setItem("grabbed", grabbed);
     // localStorage.setItem("userlongitude", lon);
     if (isAndroid) {
         android.goToInHtml("RobNotificDetail.html");
@@ -334,8 +355,9 @@ function goToDetail(taskId) {
     }
 }
 
-function goToHistoryDetail(taskId) {
+function goToHistoryDetail(taskId, grabbed) {
     localStorage.setItem("robTaskId", taskId);
+    localStorage.setItem("grabbed", grabbed);
     // localStorage.setItem("userlatitude", lat);
     // localStorage.setItem("userlongitude", lon);
     localStorage.setItem("postTask", "true");

@@ -61,7 +61,8 @@ try {
 var upLoadClicktag = true;
 
 //任务id
-var taskID = localStorage.getItem("taskID");
+var taskID = localStorage.getItem("robTaskId");
+var grabbedNum = localStorage.getItem("grabbed");
 // var tasktypeid = localStorage.getItem("tasktypeid");
 var jumpId = Substation.GetQueryString("jumpId");
 var isPush = "0";
@@ -99,36 +100,38 @@ var isChangeReturnCount = 0;
 var userList = [];
 
 function getNetData() {
-    Substation.getDataByAjax("/selectTaskByTaskId", "taskId=" + taskID, function (
+    Substation.getDataByAjax("/getWorkOrderDetail", "fWorkorderid=" + taskID, function (
         data
     ) {
-        if (data.hasOwnProperty("placeCheckFormId")) {
-            placeCheckFormId = data.placeCheckFormId;
+        var detail;
+        if (data.hasOwnProperty("detail")) {
+            detail = data.detail;
+            placeCheckFormId = detail.fWorkorderid;
         }
-        if (data.hasOwnProperty("haveResult")) {
-            haveResult = data.haveResult == true;
-        }
-        taskInfo = data.taskInfo;
-        userList = data.taskUserList;
+        // if (data.hasOwnProperty("haveResult")) {
+        //     haveResult = data.haveResult == true;
+        // }
+        taskInfo = detail;
+        userList = data.tDevWorkOrderDetails;
         if (taskInfo != null && taskInfo != undefined) {
-            subLon = taskInfo.fLongitude;
-            subLat = taskInfo.fLatitude;
+            // subLon = taskInfo.fLongitude;
+            // subLat = taskInfo.fLatitude;
             missionsubid = taskInfo.fSubid;
             missionsubname = taskInfo.fSubName;
             localStorage.setItem("subName", missionsubname);
-            if (taskInfo.hasOwnProperty("fTaskandalarmeventid")) {
-                fTaskandalarmeventid = taskInfo.fTaskandalarmeventid;
-            }
-            if (taskInfo.hasOwnProperty("fTaskandrushrepairid")) {
-                fTaskandalarmeventid = taskInfo.fTaskandrushrepairid;
-            }
-            $("#missionId").html(taskInfo.fTasknumber);
-            TaskNumber = taskInfo.fTasknumber;
-            $("#missionType").html(taskInfo.fTasktypeexplain);
-            missionTypeName = taskInfo.fTasktypeexplain;
+            // if (taskInfo.hasOwnProperty("fTaskandalarmeventid")) {
+            //     fTaskandalarmeventid = taskInfo.fTaskandalarmeventid;
+            // }
+            // if (taskInfo.hasOwnProperty("fTaskandrushrepairid")) {
+            //     fTaskandalarmeventid = taskInfo.fTaskandrushrepairid;
+            // }
+            $("#missionId").html(taskInfo.fWorkorderid);
+            TaskNumber = taskInfo.fWorkorderid;
+            $("#missionType").html(taskInfo.fTitle);
+            missionTypeName = taskInfo.fTitle;
             localStorage.setItem("missionTypeName", missionTypeName);
             $("#missionName").html(taskInfo.fSubName);
-            $("#createName").html(taskInfo.fTaskcreateusername);
+            $("#createName").html(taskInfo.fPublishername);
             $("#createCall").attr(
                 "onclick",
                 "callPhone('" + taskInfo.fTaskcreateuserphone + "')"
@@ -138,13 +141,14 @@ function getNetData() {
                 "onclick",
                 "callPhone('" + taskInfo.fTaskchargerphone + "')"
             );
-            $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
-            $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
+            $("#postTime").html(taskInfo.fOrdercreatetime);
+            $("#createTime").html(taskInfo.fPlantime);
+            $("#finishTime").html(taskInfo.fDeadlinetime);
             //任务开始时间
             $("#ActStartTime").html(taskInfo.fTaskstartdate);
             //任务提交时间
             $("#ActFinishTime").html(taskInfo.fTaskfinishdate);
-            var missionContent = taskInfo.fTaskcontent;
+            var missionContent = taskInfo.fWorkcontent;
             $("#missionCont").html(missionContent);
 
             missionTypeid = taskInfo.fTasktypeid;
@@ -154,307 +158,372 @@ function getNetData() {
             var thisUser = {};
 
             //任务执行结果
-            if (taskInfo.taskResult == 3) {
-                $("#TotalDefect").html(Operation["ui_plannedDone"]);
-                $("#TotalDefect").css("color", "springgreen");
-            } else if (taskInfo.taskResult == 4) {
-                $("#TotalDefect").html(Operation["ui_overLimitDone"]);
-                $("#TotalDefect").css("color", "red");
-            } else if (taskInfo.taskResult == 5) {
-                $("#TotalDefect").html(Operation["ui_unDone"]);
-                $("#TotalDefect").css("color", "red");
-            } else {
-                $("#TotalDefect").html("-");
-            }
+            $("#TotalDefect").html(taskInfo.fOrderstateexplain);
+            // if (taskInfo.taskResult == 3) {
+            //     $("#TotalDefect").html(Operation["ui_plannedDone"]);
+            //     $("#TotalDefect").css("color", "springgreen");
+            // } else if (taskInfo.taskResult == 4) {
+            //     $("#TotalDefect").html(Operation["ui_overLimitDone"]);
+            //     $("#TotalDefect").css("color", "red");
+            // } else if (taskInfo.taskResult == 5) {
+            //     $("#TotalDefect").html(Operation["ui_unDone"]);
+            //     $("#TotalDefect").css("color", "red");
+            // } else {
+            //     $("#TotalDefect").html("-");
+            // }
 
-            if (userList != undefined && userList.length > 0) {
-                $(userList).each(function () {
-                    if (this.fUserid == loginUserid) {
-                        temp = true;
-                        thisUser = this;
-                        // missionState = this.fTaskstateid;
-                    }
 
-                    var taskStateName = "";
-                    if (this.fExesituation == 7) {
-                        taskStateName =
-                            "<span style='color:gray;'>" +
-                            Operation["ui_notCheck"] +
-                            "</span>";
-                        allCommit = false;
-                    } else if (this.fExesituation == 8) {
-                        taskStateName =
-                            "<span style='color:blue;'>" +
-                            Operation["ui_checked"] +
-                            "</span>";
-                        allCommit = false;
-                    } else if (this.fExesituation == 9) {
-                        taskStateName =
-                            "<span style='color:springgreen;'>" +
-                            Operation["ui_submitted"] +
-                            "</span>";
-                        // if (isUseTrace == "1") {
-                        //     taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_progress'] + '</a>';
-                        //     // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
-                        //     // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
-                        // }
-                        isChangeReturnCount++;
-                    } else {}
-                    if (isUseTrace == "1") {
-                        taskStateName +=
-                            '<a href="#" class="button" style="width:55%;display:inline-block;float:right;" onClick="gotoMissionTimeAxis(' +
-                            this.fUserid +
-                            ",'" +
-                            this.fTaskstarttime +
-                            "','" +
-                            this.fCreatetime +
-                            "')\">" +
-                            Operation["ui_progress"] +
-                            "</a>";
-                        // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
-                    } else {
-                        taskStateName +=
-                            '<a href="#" class="button" style="width:55%;display:inline-block;float:right;" onClick="gotoMissionTimeAxis(' +
-                            this.fUserid +
-                            ',"","")">' +
-                            Operation["ui_progress"] +
-                            "</a>";
-                    }
-                    // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;color:#02AB93;border-color:#02AB93;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ",\"\",\"\")\">" + Operation['ui_progress'] + '</a>';
+            //获取执行人列表
+            // if (userList != undefined && userList.length > 0) {
+            //     $(userList).each(function () {
+            //         if (this.fUserid == loginUserid) {
+            //             temp = true;
+            //             thisUser = this;
+            //             // missionState = this.fTaskstateid;
+            //         }
 
-                    var text = "";
-                    text += "<li>";
-                    text +=
-                        '                                <div class="item-content showDiv">';
-                    text +=
-                        '                                    <div class="item-inner">';
-                    text +=
-                        '                                        <div class="item-title label row no-gutter" style="display:flex;align-items:center;">' +
-                        '<div class="limit-length" style="width:80%;">' +
-                        this.userName +
-                        "</div>" +
-                        "<img class='callPhone' onclick=\"callPhone('" +
-                        this.fUserphone +
-                        "')\" style='margin-left:0.3rem;margin-right:0.5rem;width:1rem;' src='img/call.png'>" +
-                        "</div>";
-                    text +=
-                        '                                        <div class="item-input">';
-                    text +=
-                        '                                            <div class = "item-label" id="input' +
-                        this.fUserid +
-                        '" ';
-                    text +=
-                        '                                                name="number" >' +
-                        taskStateName +
-                        "</div>";
-                    text += "                                        </div>";
-                    text += "                                    </div>";
-                    text += "                                </div>";
-                    text += "                            </li>";
-                    $("#missionState").append(text);
-                });
-            }
+            //         var taskStateName = "";
+            //         if (this.fExesituation == 7) {
+            //             taskStateName =
+            //                 "<span style='color:gray;'>" +
+            //                 Operation["ui_notCheck"] +
+            //                 "</span>";
+            //             allCommit = false;
+            //         } else if (this.fExesituation == 8) {
+            //             taskStateName =
+            //                 "<span style='color:blue;'>" +
+            //                 Operation["ui_checked"] +
+            //                 "</span>";
+            //             allCommit = false;
+            //         } else if (this.fExesituation == 9) {
+            //             taskStateName =
+            //                 "<span style='color:springgreen;'>" +
+            //                 Operation["ui_submitted"] +
+            //                 "</span>";
+            //             // if (isUseTrace == "1") {
+            //             //     taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_progress'] + '</a>';
+            //             //     // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:55%;display:inline-block;float:right;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Trackquery'] + '</a>';
+            //             //     // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
+            //             // }
+            //             isChangeReturnCount++;
+            //         } else {}
+            //         if (isUseTrace == "1") {
+            //             taskStateName +=
+            //                 '<a href="#" class="button" style="width:55%;display:inline-block;float:right;" onClick="gotoMissionTimeAxis(' +
+            //                 this.fUserid +
+            //                 ",'" +
+            //                 this.fTaskstarttime +
+            //                 "','" +
+            //                 this.fCreatetime +
+            //                 "')\">" +
+            //                 Operation["ui_progress"] +
+            //                 "</a>";
+            //             // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;margin-left:0.4rem;\" onClick=\"selectTrace(" + this.fUserid + ",'" + this.fTaskstarttime + "','" + this.fCreatetime + "')\">" + Operation['ui_Track'] + '</a>';
+            //         } else {
+            //             taskStateName +=
+            //                 '<a href="#" class="button" style="width:55%;display:inline-block;float:right;" onClick="gotoMissionTimeAxis(' +
+            //                 this.fUserid +
+            //                 ',"","")">' +
+            //                 Operation["ui_progress"] +
+            //                 "</a>";
+            //         }
+            //         // taskStateName += "<a href=\"#\" class=\"button\" style=\"width:30%;display:inline-block;float:right;color:#02AB93;border-color:#02AB93;\" onClick=\"gotoMissionTimeAxis(" + this.fUserid + ",\"\",\"\")\">" + Operation['ui_progress'] + '</a>';
 
-            //是执行人
+            //         var text = "";
+            //         text += "<li>";
+            //         text +=
+            //             '                                <div class="item-content showDiv">';
+            //         text +=
+            //             '                                    <div class="item-inner">';
+            //         text +=
+            //             '                                        <div class="item-title label row no-gutter" style="display:flex;align-items:center;">' +
+            //             '<div class="limit-length" style="width:80%;">' +
+            //             this.userName +
+            //             "</div>" +
+            //             "<img class='callPhone' onclick=\"callPhone('" +
+            //             this.fUserphone +
+            //             "')\" style='margin-left:0.3rem;margin-right:0.5rem;width:1rem;' src='img/call.png'>" +
+            //             "</div>";
+            //         text +=
+            //             '                                        <div class="item-input">';
+            //         text +=
+            //             '                                            <div class = "item-label" id="input' +
+            //             this.fUserid +
+            //             '" ';
+            //         text +=
+            //             '                                                name="number" >' +
+            //             taskStateName +
+            //             "</div>";
+            //         text += "                                        </div>";
+            //         text += "                                    </div>";
+            //         text += "                                </div>";
+            //         text += "                            </li>";
+            //         $("#missionState").append(text);
+            //     });
+            // }
+
+            //是发起人
             //按钮显隐判断
-            if (temp) {
-                $("#addVarContain124").show();
-                if (
-                    thisUser.fTaskstarttime == undefined &&
-                    thisUser.fTaskstateid == "1"
-                ) {
-                    $("#startTask").show();
-                } else if (thisUser.fTaskstateid == "2") {
-                    if (thisUser.fSignintime == undefined) {
-                        $("#taskIn").show();
-                    } else {
-                        if (thisUser.fCreatetime == undefined) {
-                            $("#doTask").show();
-                            $("#submitTask").show();
-                            localStorage.setItem("canClick", "true");
-                        } else {
-                            if (thisUser.fExesituation == 8) {
-                                $("#doTask").show();
-                                $("#submitTask").show();
-                                localStorage.setItem("canClick", "true");
-                            } else {
-                                $("#textareaDetail").attr("placeholder", "");
-                                $("#textareaDetail").attr("readonly", true);
-                                $("#textareaDetail").val(thisUser.fExplain);
-                                $("#doDetail").show();
-                                localStorage.setItem("canClick", "false");
-                            }
-                        }
-                    }
-                } else {
-                    $("#textareaDetail").attr("placeholder", "");
-                    $("#textareaDetail").attr("readonly", true);
-                    $("#textareaDetail").val(thisUser.fExplain);
-                    $("#doDetail").show();
-                    localStorage.setItem("canClick", "false");
-                }
-            } else {
+            // fOrderpublisher 判断按钮显隐
+            if (userId == taskInfo.fOrderpublisher && taskInfo.fOrderstate != 3) {
+                $("#doDetail").show();
                 localStorage.setItem("canClick", "false");
-                if (loginUserid == taskchargerid) {
-                    //负责人按钮
-                    if (taskInfo.fTaskfinishdate == undefined) {
-                        //根据提交数配置
-                        if (isChangeReturnCount == userList.length) {
-                            $("#chargeTask").css("width", "28%");
-                            $("#chargeSubmit").css("width", "28%");
-                            $("#chargeTask span").text(Operation["ui_chargeTask"]);
-                            $("#chargeSubmit span").text(Operation["ui_chargeSubmit"]);
-                            $("#chargeTask").show();
-                            $("#chargeReturn").show();
-                            $("#chargeSubmit").show();
-                        } else {
-                            $("#chargeTask").css("width", "40%");
-                            $("#chargeSubmit").css("width", "40%");
-                            $("#chargeTask span").text(Operation["ui_doingDetail"]);
-                            $("#chargeSubmit span").text(Operation["ui_taskSubmit"]);
-                            $("#chargeTask").show();
-                            $("#chargeSubmit").show();
+                temp = false;
+            } else if (grabbedNum == 0) {
+                temp = true;
+                //抢单按钮
+                $("#startTask").show();
+            } else if (grabbedNum == 1 && userList != undefined && userList.length > 0) {
+                //开始或结束任务
+                $(userList).each(function () {
+                    if (this.fExecutor == userId) {
+                        temp = true;
+                        if (this.fOrderstate == 0) {
+                            $("#taskIn").show();
+                        } else if (this.fOrderstate == 1) {
+                            $("#submitTask").show();
                         }
-                    } else {
-                        $("#doDetail").show();
                     }
-                } else {
-                    $("#doDetail").show();
-                }
+                });
+            } else {
+                //均不显示按钮
             }
+
+            // if (temp) {
+            //     $("#addVarContain124").show();
+            //     if (
+            //         thisUser.fTaskstarttime == undefined &&
+            //         thisUser.fTaskstateid == "1"
+            //     ) {
+            //         $("#startTask").show();
+            //     } else if (thisUser.fTaskstateid == "2") {
+            //         if (thisUser.fSignintime == undefined) {
+            //             $("#taskIn").show();
+            //         } else {
+            //             if (thisUser.fCreatetime == undefined) {
+            //                 $("#doTask").show();
+            //                 $("#submitTask").show();
+            //                 localStorage.setItem("canClick", "true");
+            //             } else {
+            //                 if (thisUser.fExesituation == 8) {
+            //                     $("#doTask").show();
+            //                     $("#submitTask").show();
+            //                     localStorage.setItem("canClick", "true");
+            //                 } else {
+            //                     $("#textareaDetail").attr("placeholder", "");
+            //                     $("#textareaDetail").attr("readonly", true);
+            //                     $("#textareaDetail").val(thisUser.fExplain);
+            //                     $("#doDetail").show();
+            //                     localStorage.setItem("canClick", "false");
+            //                 }
+            //             }
+            //         }
+            //     } else {
+            //         $("#textareaDetail").attr("placeholder", "");
+            //         $("#textareaDetail").attr("readonly", true);
+            //         $("#textareaDetail").val(thisUser.fExplain);
+            //         $("#doDetail").show();
+            //         localStorage.setItem("canClick", "false");
+            //     }
+            // } else {
+            //     localStorage.setItem("canClick", "false");
+            //     if (loginUserid == taskchargerid) {
+            //         //负责人按钮
+            //         if (taskInfo.fTaskfinishdate == undefined) {
+            //             //根据提交数配置
+            //             if (isChangeReturnCount == userList.length) {
+            //                 $("#chargeTask").css("width", "28%");
+            //                 $("#chargeSubmit").css("width", "28%");
+            //                 $("#chargeTask span").text(Operation["ui_chargeTask"]);
+            //                 $("#chargeSubmit span").text(Operation["ui_chargeSubmit"]);
+            //                 $("#chargeTask").show();
+            //                 $("#chargeReturn").show();
+            //                 $("#chargeSubmit").show();
+            //             } else {
+            //                 $("#chargeTask").css("width", "40%");
+            //                 $("#chargeSubmit").css("width", "40%");
+            //                 $("#chargeTask span").text(Operation["ui_doingDetail"]);
+            //                 $("#chargeSubmit span").text(Operation["ui_taskSubmit"]);
+            //                 $("#chargeTask").show();
+            //                 $("#chargeSubmit").show();
+            //             }
+            //         } else {
+            //             $("#doDetail").show();
+            //         }
+            //     } else {
+            //         $("#doDetail").show();
+            //     }
+            // }
 
             //执行人管理按钮
             if (loginUserid != taskchargerid && loginUserid != taskCreatId) {
                 $("#clickManager").css("display", "none");
             }
 
-            //缺陷总数
-            $("#TotalDefectNum").html(taskInfo.deviceProblemSum);
-            if (taskInfo.deviceProblemSum > 0) {
-                $("#TotalDefectNum").css("color", "red");
-                $("#TotalDefectNum").click(function () {
-                    if (!upLoadClicktag) {
-                        return;
-                    }
-                    upLoadClicktag = false;
-                    setTimeout(function () {
-                        upLoadClicktag = true;
-                    }, 1000);
-                    //缺陷整改
-                    localStorage.setItem("missionTypeid", missionTypeid);
-                    localStorage.setItem("taskID", taskID);
-                    if (temp) {
-                        if ($("#startTask").css("display") != "none") {
-                            $.toast(Operation["ui_openTaskTip"]);
-                            return;
-                        }
-                        if ($("#taskIn").css("display") != "none") {
-                            $.toast(Operation["ui_signinTip"]);
-                            return;
-                        }
-                    }
-                    window.location.href = "defectRectification.html";
-                });
-            }
+            //限定抢单个数
+            $("#TotalDefectNum").html(taskInfo.fLimitnumber);
+            // if (taskInfo.deviceProblemSum > 0) {
+            // $("#TotalDefectNum").css("color", "red");
+            // $("#TotalDefectNum").click(function () {
+            //     if (!upLoadClicktag) {
+            //         return;
+            //     }
+            //     upLoadClicktag = false;
+            //     setTimeout(function () {
+            //         upLoadClicktag = true;
+            //     }, 1000);
+            //     //缺陷整改
+            //     localStorage.setItem("missionTypeid", missionTypeid);
+            //     localStorage.setItem("taskID", taskID);
+            //     if (temp) {
+            //         if ($("#startTask").css("display") != "none") {
+            //             $.toast(Operation["ui_openTaskTip"]);
+            //             return;
+            //         }
+            //         if ($("#taskIn").css("display") != "none") {
+            //             $.toast(Operation["ui_signinTip"]);
+            //             return;
+            //         }
+            //     }
+            //     window.location.href = "defectRectification.html";
+            // });
+            // }
             //缺陷未处理数
-            $("#Unprocessednumber").html(taskInfo.deviceProblemUnresolved);
-            if (taskInfo.deviceProblemUnresolved > 0) {
-                $("#Unprocessednumber").css("color", "red");
-                $("#Unprocessednumber").click(function () {
-                    if (!upLoadClicktag) {
-                        return;
-                    }
-                    upLoadClicktag = false;
-                    setTimeout(function () {
-                        upLoadClicktag = true;
-                    }, 1000);
-                    //缺陷整改
-                    localStorage.setItem("missionTypeid", missionTypeid);
-                    localStorage.setItem("taskID", taskID);
-                    if (temp) {
-                        if ($("#startTask").css("display") != "none") {
-                            $.toast(Operation["ui_openTaskTip"]);
-                            return;
-                        }
-                        if ($("#taskIn").css("display") != "none") {
-                            $.toast(Operation["ui_signinTip"]);
-                            return;
-                        }
-                    }
-                    window.location.href = "defectRectification.html?value=0";
-                });
-            }
+            $("#Unprocessednumber").html(taskInfo.fTargetload);
+            // if (taskInfo.deviceProblemUnresolved > 0) {
+            //     $("#Unprocessednumber").css("color", "red");
+            //     $("#Unprocessednumber").click(function () {
+            //         if (!upLoadClicktag) {
+            //             return;
+            //         }
+            //         upLoadClicktag = false;
+            //         setTimeout(function () {
+            //             upLoadClicktag = true;
+            //         }, 1000);
+            //         //缺陷整改
+            //         localStorage.setItem("missionTypeid", missionTypeid);
+            //         localStorage.setItem("taskID", taskID);
+            //         if (temp) {
+            //             if ($("#startTask").css("display") != "none") {
+            //                 $.toast(Operation["ui_openTaskTip"]);
+            //                 return;
+            //             }
+            //             if ($("#taskIn").css("display") != "none") {
+            //                 $.toast(Operation["ui_signinTip"]);
+            //                 return;
+            //             }
+            //         }
+            //         window.location.href = "defectRectification.html?value=0";
+            //     });
+            // }
             //如果是消警5、抢单7、抢修6任务，则剔除
-            if (missionTypeid == 5 || missionTypeid == 6 || missionTypeid == 7) {
-                $("#totaldefect1").remove();
-                $("#defectUntreatNum").remove();
-            }
+            // if (missionTypeid == 5 || missionTypeid == 6 || missionTypeid == 7) {
+            //     $("#totaldefect1").remove();
+            //     $("#defectUntreatNum").remove();
+            // }
         }
     });
 }
 
 getNetData();
 
-//开启任务
+//抢单按钮
 $("#startTask").click(function () {
     $.showPreloader(Operation["ui_loading"]);
-    Substation.getDataByAjax("/taskStart", "taskId=" + taskID, function (data) {
-        if (temp && isUseTrace == "1") {
-            //开启轨迹
-            try {
-                if (isIOS) {
-                    localStorage.setItem("need-refresh", "true");
-                    var isOpen = localStorage.isOpenTrack;
-                    if (isOpen == "false") {
-                        $.confirm(
-                            Operation["ui_openTraceTip"],
-                            function () {
-                                trailStart();
-                                var taskDIC = {
-                                    fTaskNumber: TaskNumber
-                                };
-                                window.webkit.messageHandlers.openTrackFunc.postMessage(
-                                    taskDIC
-                                );
-                                location.reload();
-                            },
-                            function () {
-                                location.reload();
+    var sb =
+        '                <div class="outContain" style="width: auto;">';
+    sb += '                  <div class="codeDiv">';
+    sb +=
+        '                    <input id="phoneInput" type="text" class="sendInput" value="15151853872" disabled';
+    sb += '                      autocomplete="off">';
+    sb += '                    <span class="icon codePhoneImg"></span>';
+    sb += '                    <label class="errorInfo"></label>';
+    sb += "                  </div>";
+    sb += '                  <div class="codeDiv">';
+    sb +=
+        '                    <input id="canvasInput" type="text" class="sendInput" placeholder="请输入验证码"';
+    sb +=
+        '                      autocomplete="off" style="width:6.2rem;">';
+    // sb += '                    <span class="icon codeCanvasImg"></span>';
+    sb +=
+        '                    <canvas id="canvas" width="100" height="38"></canvas>';
+    sb += "                  </div>";
+    sb += "";
+    sb += '                  <div class="codeDiv">';
+    sb +=
+        '                    <input id="code" class="sendInput" type="text" placeholder="请输入短信验证码" autocomplete="off" style="width:6.2rem;"/>';
+    sb += '                    <span class="icon codeMsgImg"></span>';
+    sb +=
+        '                    <input id="btnSendCode" type="button" class="btn btn-default" disabled value="获取验证码" />';
+    sb += "                  </div>";
+    // sb += '                  <button class="btn" id="checkBtn" disabled>验证</button>';
+    sb += "                </div>";
+    // sb += '      </div>';
+    var modal = $.modal({
+        title: "手机动态验证码",
+        text: "需要通过手机动态验证码才能控制设备。",
+        afterText: sb,
+        buttons: [{
+                text: "取消"
+            },
+            {
+                text: "验证",
+                bold: true,
+                onClick: function () {
+                    var code = $("#code").val();
+                    Substation.getDataByAjaxNoLoading(
+                        "/checkSMSValid", {
+                            code: code,
+                            msgId: msgId
+                        },
+                        function (data) {
+                            console.log(data);
+                            if (data == true) {
+                                controlClick();
+                            } else {
+                                if (data.msg) {
+                                    $.toast(data.msg);
+                                } else {
+                                    $.toast("验证失败");
+                                }
                             }
-                        );
-                    } else {
-                        location.reload();
-                    }
-                } else if (isAndroid) {
-                    android.refresh();
-                    //android关闭轨迹
-                    var isOpen = android.getTrackOpen();
-                    if (isOpen == "false") {
-                        $.confirm(
-                            Operation["ui_openTraceTip"],
-                            function () {
-                                trailStart();
-                                android.startTrace(TaskNumber);
-                                location.reload();
-                            },
-                            function () {
-                                location.reload();
-                            }
-                        );
-                    } else {
-                        location.reload();
-                    }
-                } else {
-                    localStorage.setItem("need-refresh", "true");
+                            // sendCommand();
+                        }
+                    );
                 }
-            } catch (e) {
-                location.reload();
             }
-        } else {
-            location.reload();
-        }
+        ]
     });
+    showModel2("13761392712");
+    // $.swiper($(modal).find('.swiper-container'), {
+    //   pagination: '.swiper-pagination'
+    // });
+    //   }
+    // });
+    // Substation.getDataByAjax("/taskStart", "taskId=" + taskID, function (data) {
+    //     if (temp && isUseTrace == "1") {
+
+    //     }
+    // });
 });
+
+function showModel2(userPhone) {
+    $("#phoneInput").val(userPhone);
+    $.codeDraw($("#canvas"), $("#canvasInput"), function () {
+        $.countInterval($("#phoneInput"), $("#btnSendCode"), function () {
+            Substation.getDataByAjaxNoLoading("/sendSMSValid", {}, function (data) {
+                msgId = data;
+                // $("#checkBtn").removeAttr('disabled');
+                // $("#checkBtn").unbind('click').on('click', function () {
+                //   var code = $("#code").val();
+                //   Substation.getDataByAjaxNoLoading("/checkSMSValid", {}, function (data) {
+                //     // sendCommand();
+                //   })
+                // })
+            });
+        });
+    });
+}
 
 function trailStart() {
     Substation.getDataByAjax("/trailStart", "taskId=" + taskID, function (
