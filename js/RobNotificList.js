@@ -28,6 +28,13 @@ window.addEventListener(
     false
 );
 
+$('#searchBtn').click(function () {
+    $(".close-panel").click();
+    pageNum = 1;
+    var tabName = $(".tab-link.button.active").attr("name");
+    getFirstPage(tabName);
+
+});
 // window.addEventListener("pageshow", function (e) {
 //     // ios系统 返回页面 不刷新的问题 Safari内核缓存机制导致 方案一 方案二：设置meta标签，清除页面缓存
 //     var u = navigator.userAgent,
@@ -99,11 +106,20 @@ function addItems(number, clickNum) {
     var params = {};
     if (clickNum == 1) {
         url = "/getWorkOrderList";
-        params = {
-            pageNum: pageNum,
-            pageSize: number,
-            orderState: 0
-        };
+        var fTasktypeid = $("#taskType").val();
+        if (fTasktypeid == "1") {
+            params = {
+                pageNum: pageNum,
+                pageSize: number
+            };
+        } else {
+            params = {
+                pageNum: pageNum,
+                pageSize: number,
+                orderState: 0
+            };
+        }
+
     } else if (clickNum == 2) {
         url = "/getWorkOrderList";
         params = {

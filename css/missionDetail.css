@@ -121,6 +121,10 @@ i.icon.icon-Refresh {
     background-image: url(../img/refeshnew.png);
 }
 
+.codename {
+    float: left;
+}
+
 /* #addVarContan126 .row {
     justify-content: center;
     display: flex;

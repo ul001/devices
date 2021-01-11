@@ -32,7 +32,7 @@
                     <ul>
                         <li class="inputSelect qiang">
                             <div class="item-content item-link">
-                                <div class="item-inner">
+                                <div class="item-inner" style="background-image: none;">
                                     <div class="item-title label">
                                         <span class="redColor">* </span><span data-i18n="ui_Title"></span>
                                     </div>
@@ -67,7 +67,7 @@
                         </li> -->
                         <li class="inputSelect">
                             <div class="item-content item-link">
-                                <div class="item-inner">
+                                <div class="item-inner" style="background-image: none;">
                                     <div class="item-title label">
                                         <span class="redColor">* </span><span data-i18n="ui_Limitednumber"></span>
                                     </div>
@@ -80,7 +80,7 @@
                         </li>
                         <li class="inputSelect">
                             <div class="item-content item-link">
-                                <div class="item-inner">
+                                <div class="item-inner" style="background-image: none;">
                                     <div class="item-title label">
                                         <span class="redColor">* </span><span data-i18n="ui_Limitedsingleload"></span>
                                     </div>
@@ -98,11 +98,18 @@
                                         <span class="redColor">* </span><span data-i18n="ui_startTime"></span>
                                     </div>
                                     <div class="item-input">
-                                        <input type="text" id="dateStart" placeholder=""
+                                        <input type="datetime-local" id="dateStart"
+                                            class="daycalendarBox datetime-local" style="text-align:end;"
+                                            min="2010-01-01T00:00" max="2050-01-01T00:00"
+                                            data-placeholder="ui_pleaseSelect" value="" />
+                                        <!-- <input type="text" id="dateStart" placeholder=""
                                             data-placeholder="ui_pleaseSelect" class="textRight" readonly />
+                                             string =
+                            -->
                                     </div>
                                 </div>
                             </div>
+
                         </li>
                         <li class="inputSelect">
                             <div class="item-content item-link">
@@ -111,8 +118,11 @@
                                         <span class="redColor">* </span><span data-i18n="ui_RobendTime"></span>
                                     </div>
                                     <div class="item-input">
-                                        <input type="text" id="dateEnd" placeholder=""
-                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly />
+                                        <input type="datetime-local" id="dateEnd" class="daycalendarBox datetime-local"
+                                            style="text-align:end;" min="2010-01-01T00:00"
+                                            data-placeholder="ui_pleaseSelect" max="2050-01-01T00:00" value="" />
+                                        <!-- <input type="text" id="dateEnd" placeholder=""
+                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly /> -->
                                     </div>
                                 </div>
                             </div>

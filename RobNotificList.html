@@ -23,6 +23,9 @@
                     <span class="icon icon-left"></span>
                     <span data-i18n="ui_back"></span>
                 </button>
+                <a class="button button-link button-nav pull-right open-panel">
+                    <i class="icon icon-selectSome"></i>
+                </a>
                 <h1 class="title title_color">
                     <p class="limit-length" id="titleContent"><span data-i18n="ui_RobNotific"></span></p>
                 </h1>
@@ -111,6 +114,96 @@
             </div>
             <div>
                 <div class="overButton" href="#"><img class="overImg" src="img/add_task.png"></div>
+            </div>
+        </div>
+        <div class="panel panel-right panel-reveal" id="panel-right-demo">
+            <div class="content-block">
+                <!-- <div id="postTime">
+                    <label><span data-i18n="ui_postTime"></span></label><br />
+                    <p class="buttons-row">
+                        <a href="#" class="button" id="today"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                    <div id="selectStartTime">
+                        <input type="text" id="dateStart" placeholder="" data-placeholder="ui_startTime" readonly />
+                    </div>
+                    <div style="margin: 0.25rem;float: left;">-</div>
+                    <div id="selectEndTime">
+                        <input type="text" id="dateEnd" placeholder="" data-placeholder="ui_endTime" readonly />
+                    </div>
+                </div>
+                <div id="startTime">
+                    <label><span data-i18n="ui_planStarttime"></span></label><br />
+                    <p class="buttons-row">
+                        <a href="#" class="button" id="today1"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday1"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth1"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth1"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                    <div id="selectStartTime1">
+                        <input type="text" id="dateStart1" placeholder="" data-placeholder="ui_startTime" readonly />
+                    </div>
+                    <div style="margin: 0.25rem;float: left;">-</div>
+                    <div id="selectEndTime1">
+                        <input type="text" id="dateEnd1" placeholder="" data-placeholder="ui_endTime" readonly />
+                    </div>
+                </div>
+                <div id="finishTime">
+                    <label><span data-i18n="ui_plandonetime"></span></label><br />
+                    <p class="buttons-row">
+                        <a href="#" class="button" id="today2"><span data-i18n="ui_today"></span></a>
+                        <a href="#" class="button" id="yestoday2"><span data-i18n="ui_yday"></span></a>
+                        <a href="#" class="button" id="thisMonth2"><span data-i18n="ui_curr"></span></a>
+                        <a href="#" class="button" id="lastMonth2"><span data-i18n="ui_Uult"></span></a>
+                    </p>
+                    <div id="selectStartTime2">
+                        <input type="text" id="dateStart2" placeholder="" data-placeholder="ui_startTime" readonly />
+                    </div>
+                    <div style="margin: 0.25rem;float: left;">-</div>
+                    <div id="selectEndTime2">
+                        <input type="text" id="dateEnd2" placeholder="" data-placeholder="ui_endTime" readonly />
+                    </div>
+                </div>
+                <div>
+                    <label><span data-i18n="ui_timeRank"></span></label><br />
+                    <select id="timeRank">
+                        <option value="" data-i18n="ui_timeRank0"></option>
+                        <option value="createASC" data-i18n="ui_timeRank1"></option>
+                        <option value="createDESC" data-i18n="ui_timeRank2"></option>
+                        <option value="planASC" data-i18n="ui_timeRank3"></option>
+                        <option value="planDESC" data-i18n="ui_timeRank4"></option>
+                        <option value="DeadlineASC" data-i18n="ui_timeRank5"></option>
+                        <option value="DeadlineDESC" data-i18n="ui_timeRank6"></option>
+                    </select>
+                </div> -->
+                <div>
+                    <label><span data-i18n="ui_RobType"></span></label><br />
+                    <select id="taskType">
+                        <option value="1" data-i18n="ui_All"></option>
+                        <option value="0" data-i18n="ui_noRobBill"></option>
+                    </select>
+                </div>
+                <!-- <div>
+                    <label><span data-i18n="ui_charger"></span></label><input id="chargeSelect" type="text" />
+                </div>
+                <div>
+                    <label><span data-i18n="ui_worker"></span></label><input id="doSelect" type="text" />
+                </div> -->
+            </div>
+            <div class="btnBar row no-gutter" style="height:2.3rem;">
+                <div class="col-33">
+                    <a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-33">
+                    <a href="#" class="button button-big button-fill button-reset" data-i18n="ui_resetclear"></a>
+                </div>
+                <div class="col-33">
+                    <a href="#" class="button button-big button-fill button-success" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a>
+                </div>
             </div>
         </div>
     </div>

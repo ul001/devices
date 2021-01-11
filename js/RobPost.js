@@ -72,15 +72,15 @@ function addRedNeed() {
 
 addRedNeed();
 
-$("#dateStart").calendar();
-$("#dateEnd").calendar();
+// $("#dateStart").calendar();
+// $("#dateEnd").calendar();
 var myDate = new Date;
 var year = myDate.getFullYear(); //获取当前年
 var mon = myDate.getMonth() + 1; //获取当前月
 var date = myDate.getDate(); //获取当前日
 var nowDate = year + "-" + format0(mon) + "-" + format0(date);
-$("#dateStart").val(nowDate);
-$("#dateEnd").val(nowDate);
+// $("#dateStart").val(nowDate);
+// $("#dateEnd").val(nowDate);
 
 function format0(num) {
     if (num < 10) {
@@ -208,11 +208,13 @@ function postTask() {
     });
     var subStr = subIds.join(",");
     var params = {};
+    startTime = startTime.replace("T", " ");
+    completeTime = completeTime.replace("T", " ");
     // if (qiangdan == "7") {
     params = {
         fTitle: selectType,
-        fPlantime: startTime + " 00:00:00",
-        fDeadlinetime: completeTime + " 23:59:59",
+        fPlantime: startTime,
+        fDeadlinetime: completeTime,
         fLimitnumber: LimitNum,
         fTargetload: LimitLoad,
         fWorkcontent: taskContent,
