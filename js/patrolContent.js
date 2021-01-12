@@ -61,7 +61,7 @@ updatePageData();
 // }
 function getQRresultAndPush(param) {
   var strArr = param.split("_");
-  if (param == "" || param == undefined) {
+  if (param == "" || param == undefined || !strArr.length) {
     return;
   }
   if (strArr[0] != "acqr") {
@@ -78,6 +78,7 @@ function getQRresultAndPush(param) {
   //     function () {}
   //   );
   // } else {
+  $.router.back();
   saveThisPage();
   // }
   clickBackBtn = 1;
@@ -455,23 +456,23 @@ function loadPage() {
   }
 
   //保存后更新左侧分组
-  function updatePageDataH5() {
-    Substation.getDataByAjax(
-      "/subDeviceTreeSelectHideOrShowForCharger", {
-        fSubid: selectSubid,
-        fPlacecheckformid: fPlacecheckformid
-      },
-      function (data) {
-        allGroupList = data.subDeviceGroupList;
-        if (pids[clickNum + 1] != null) {
-          pids.splice(-1, 1);
-        }
-        var lastPId = pids[clickNum].pid;
-        fillData(lastPId);
-        $(".open-panel").click();
-      }
-    );
-  }
+  // function updatePageDataH5() {
+  //   Substation.getDataByAjax(
+  //     "/subDeviceTreeSelectHideOrShowForCharger", {
+  //       fSubid: selectSubid,
+  //       fPlacecheckformid: fPlacecheckformid
+  //     },
+  //     function (data) {
+  //       allGroupList = data.subDeviceGroupList;
+  //       if (pids[clickNum + 1] != null) {
+  //         pids.splice(-1, 1);
+  //       }
+  //       var lastPId = pids[clickNum].pid;
+  //       fillData(lastPId);
+  //       // $(".open-panel").click();
+  //     }
+  //   );
+  // }
 
   function fillData(parentId) {
     /*        var params = {
@@ -575,10 +576,10 @@ function loadPage() {
       return thisList;
     }
     if (showState == 0) {
-      $("#showOrHide").text(Operation["ui_showalldevice"]);
+      // $("#showOrHide").text(Operation["ui_showalldevice"]);
       $(".item-dis").css("display", "none");
     } else {
-      $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+      // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
       $(".item-dis").css("display", "flex");
     }
     $("#showOrHide")
@@ -586,11 +587,11 @@ function loadPage() {
       .click(function () {
         if (showState == 0) {
           showState = 1;
-          $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+          // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
           $(".item-dis").css("display", "flex");
         } else {
           showState = 0;
-          $("#showOrHide").text(Operation["ui_showalldevice"]);
+          // $("#showOrHide").text(Operation["ui_showalldevice"]);
           $(".item-dis").css("display", "none");
         }
       });
@@ -630,6 +631,20 @@ function loadPage() {
             pid: clickId,
             pname: clickName
           });
+          if (pids.length > 2) {
+            var titleTrees = "";
+            $(pids).each(function () {
+              if (this.pid == -1) {
+
+              } else {
+                titleTrees += this.pname + ">";
+              }
+            });
+            // var titleTreeName = titleTree.substring(1, titleTree.length - 1);
+            $("#subName2").text(titleTrees);
+          } else {
+            $("#subName2").text(clickName);
+          }
           $(".parent-page").css("display", "none");
           $(".child-page").css("display", "block");
           fillData(clickId);
@@ -664,7 +679,9 @@ function loadPage() {
         clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
         var titleTreeName = titleTree.substring(1, titleTree.length - 1);
         $("#subName").text(titleTreeName);
-        $(".content-block .close-panel").click();
+        $("#subName2").text(titleTreeName);
+        $.router.back();
+        // $(".content-block .close-panel").click();
         fillRightData();
         //            });
         event.stopPropagation();
@@ -759,14 +776,14 @@ function loadPage() {
             if ($(".buttons-tab .tab-link:last").hasClass("active")) {
               $(".icon-select").click();
             }
-            $(".open-panel").click();
+            // $(".open-panel").click();
           },
           function () {
-            $(".open-panel").click();
+            // $(".open-panel").click();
           }
         );
       } else {
-        $(".open-panel").click();
+        // $(".open-panel").click();
       }
     });
   }
@@ -795,7 +812,8 @@ function loadPage() {
       }
     }
     saveThisPage();
-    updatePageDataH5();
+
+
     //添加判断
     //    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
     //      $(".icon-select").click();
@@ -805,7 +823,7 @@ function loadPage() {
   fillData(-1);
 
   $("#pushBtn").click(function () {
-    //二维码跳转原生
+    //二维码page1跳转原生
     if (!upLoadClicktag) {
       return;
     }
@@ -820,13 +838,30 @@ function loadPage() {
     }
   });
 
-  //    $(".open-panel").click();
+  $("#pushQRBtn").click(function () {
+    //二维码page3跳转原生
+    if (!upLoadClicktag) {
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function () {
+      upLoadClicktag = true;
+    }, 1000);
+    if (isIOS) {
+      window.webkit.messageHandlers.scanQRcode.postMessage("");
+    } else {
+      android.pushToZXActivity();
+    }
+  });
+  //每次进入页面优先弹出
+  $(".open-panel").click();
 
   //保存状态
+
   var savePids = JSON.parse(localStorage.getItem("clickPids"));
   localStorage.removeItem("clickPids");
   if (savePids == null) {
-    $(".open-panel").click();
+    // $(".open-panel").click();
   }
   var clickItemNum = localStorage.getItem("itemNum");
   localStorage.removeItem("itemNum");
@@ -842,6 +877,7 @@ function loadPage() {
     clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
     var titleTreeName = titleTree.substring(1, titleTree.length - 1);
     $("#subName").text(titleTreeName);
+    $("#subName2").text(titleTreeName);
     fillRightData();
     //        $(".close-panel").click();
     $("#" + clickItemNum).click();
@@ -1169,6 +1205,7 @@ function saveThisPage() {
       },
       function (data) {
         if (data.code == 200) {
+          updatePageDataH5();
           $.toast(Operation["ui_savesuccess"]);
           var thisGroupid = pids[pids.length - 1].pid;
           var needChange = true;
@@ -1204,6 +1241,25 @@ function saveThisPage() {
       }
     );
   }
+}
+
+function updatePageDataH5() {
+  Substation.getDataByAjax(
+    "/subDeviceTreeSelectHideOrShowForCharger", {
+      fSubid: selectSubid,
+      fPlacecheckformid: fPlacecheckformid
+    },
+    function (data) {
+      allGroupList = data.subDeviceGroupList;
+      if (pids[clickNum + 1] != null) {
+        pids.splice(-1, 1);
+      }
+      var lastPId = pids[clickNum].pid;
+      fillData(lastPId);
+      $.toast(Operation["ui_savesuccess"]);
+      // $(".open-panel").click();
+    }
+  );
 }
 
 function changeListVal(thisId) {
@@ -1447,8 +1503,22 @@ $("#backBtn").click(function () {
   }
 });
 
+//点击筛选
+$(".open-panel").click(function () {
+  $.router.loadPage("#page3");
+});
+
 //内联返回
 $("#page2Back")
+  .unbind()
+  .click(function () {
+    pushfDeviceproblemid = "";
+    localStorage.setItem("need-refresh", "true");
+    $.router.back();
+  });
+
+//内联返回列表页面
+$("#page3Back")
   .unbind()
   .click(function () {
     pushfDeviceproblemid = "";

@@ -291,3 +291,9 @@ i.icon.icon-detail {
   height: 1rem;
   background-image: url(../img/i-xiangqing.png);
 }
+
+i.icon-showOrHideBtn {
+  width: 1rem;
+  height: 1rem;
+  background-image: url(../img/mapImg04.png);
+}

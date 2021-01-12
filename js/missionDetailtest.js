@@ -548,12 +548,14 @@ $(".doDetail").click(function () {
             var attion = Operation["ui_attention"];
             var attiondetail = Operation["ui_executionprompt"];
             $.confirm(attiondetail, attion, function () {
-                window.location.href = "patrolContent.html";
+                // window.location.href = "patrolContent.html";
+                window.location.href = "patrolContentBackup.html";
             });
         } else {
             //巡检任务
             if (haveResult) {
-                window.location.href = "patrolContent.html";
+                // window.location.href = "patrolContent.html";
+                window.location.href = "patrolContentBackup.html";
             } else {
                 $.toast(Operation["ui_noFormResult"]);
             }

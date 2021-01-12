@@ -158,6 +158,7 @@ function getZhLanguage() {
     //patrolContent
     ui_Subinspection: "变电所巡检",
     ui_selectSub: "选择设备分组",
+    ui_selectSubDevice: "设备分组",
     //patrolContent
     ui_showOnlydevice: "仅显示有巡检项的设备分类",
     ui_DefectRegist: "缺陷登记",
@@ -446,6 +447,7 @@ function getZhLanguage() {
     //发布任务
     ui_substation: "变电所",
     ui_taskPost: "发布任务",
+
     ui_selectSubTip: "请输入变电所名称或编号进行搜索",
     ui_selectPosTip: "请输入仪表点位名称或编号进行搜索",
     ui_repairInfo: "抢修信息",
@@ -725,6 +727,7 @@ function getEnLanguage() {
     ui_personlocation: "PersonLocation",
     ui_unRoblocation: "Unrob Location",
     ui_selectSub: "Select a substation",
+    ui_selectSubDevice: "Select Device",
     ui_subHolder: "Please enter the substation name or number",
     ui_notifSearch: "Please enter the Alarm name",
     ui_subHolderNoCode: "Please enter the task number/task content/substation name",

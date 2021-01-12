@@ -35,7 +35,7 @@
       </header>
       <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;">
         <!-- <i class="icon icon-select"></i> -->
-        <span id="subName"><span data-i18n="ui_selectSub"></span></span>
+        <span id="subName"><span data-i18n="ui_selectSubDevice"></span></span>
         <!-- <a class="open-panel" style="display:none;"></a> -->
       </div>
       <div class="content">
@@ -194,21 +194,36 @@
             </ul>
           </form>
         </div>
-
       </div>
     </div>
     <div class="panel-overlay"></div>
-    <div class="panel panel-right panel-reveal" id="panel-left-demo" style="background:white">
-      <div class="content-block">
-        <a href="#" class="close-panel" style="display:none;">关闭</a>
-        <button id="showOrHide" type="button" class="button" data-i18n="ui_showOnlydevice">
-          <!-- <i class="icon icon-scanQRcodeBlack"></i> -->
-        </button>
-        <!-- <a class="button" id="pushBtn2"> -->
-        <!-- <i class="icon icon-scanQRcodeBlack"></i> -->
-        <!-- </a> -->
+    <div class="page" id="page3" style="background:white">
+      <header class="bar bar-nav bar_color">
+        <a class="button button-link button-nav pull-left click_btn back_btn" id="page3Back">
+          <span class=" icon icon-left"></span>
+          <span data-i18n="ui_back"></span>
+        </a>
+        <h1 class="title title_color">
+          <span data-i18n="ui_selectSubDevice"></span>
+        </h1>
+        <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushQRBtn">
+          <i class="icon icon-scanQRcode"></i>
+        </a>
+        <a class="button button-link button-nav pull-right click_btn" id="showOrHide">
+          <i class="icon icon-showOrHideBtn"></i>
+        </a>
+      </header>
+      <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;">
+        <!-- <i class="icon icon-select"></i> -->
+        <span id="subName2"><span data-i18n="ui_selectSubDevice"></span></span>
+        <!-- <a class="open-panel" style="display:none;"></a> -->
       </div>
-      <div class="list-block">
+      <!-- <div class="content-block">
+        <button id="showOrHide" type="button" class="button" data-i18n="ui_showOnlydevice">
+        </button>
+      </div> -->
+      <!-- <div class="content"> -->
+      <div class="list-block" style="margin-top:4.4rem;">
         <ul class="list-container">
           <!--<li class="item-content item-link">
                     <div class="item-inner">
@@ -221,6 +236,7 @@
                     </div>
                 </li>-->
         </ul>
+        <!-- </div> -->
       </div>
     </div>
   </div>
