@@ -1959,6 +1959,10 @@ window.addEventListener("resize", function () {
   }
 });
 
+$(".tab-link")
+  .eq(0)
+  .click();
+
 $(window).bind("beforeunload", function (e) {
   if (canClick != "false") {
     if (!hasSave && clickBackBtn != 1) {

@@ -22,8 +22,10 @@ var u = navigator.userAgent,
   app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-
+var clickBackBtn = 0;
 var pushfDeviceproblemid;
+// localStorage.setItem("acqrType", "0");
+var acqrType = localStorage.getItem("acqrType");
 
 if (canClick == "false") {
   $("#saveBtn").css("display", "none");
@@ -62,7 +64,13 @@ updatePageData();
 // }
 function getQRresultAndPush(param) {
   var strArr = param.split("_");
-  if (param == "" || param == undefined || strArr == null || strArr == "(null)" || strArr == undefined) {
+  if (
+    param == "" ||
+    param == undefined ||
+    strArr == null ||
+    strArr == "(null)" ||
+    strArr == undefined
+  ) {
     return;
   }
   if (strArr[0] != "acqr") {
@@ -86,6 +94,42 @@ function getQRresultAndPush(param) {
   localStorage.setItem("QRcode", param);
   localStorage.setItem("fPlacecheckformid", fPlacecheckformid);
   window.location.href = "patrolContentQRcode.html";
+}
+
+//二页面调用
+function getQRresultAndPushAcqr(param) {
+  var strArr = param.split("_");
+  if (
+    param == "" ||
+    param == undefined ||
+    strArr == null ||
+    strArr == "(null)" ||
+    strArr == undefined
+  ) {
+    return;
+  }
+  if (strArr[0] != "acqr") {
+    $.toast("非本平台二维码");
+    return;
+  }
+  // if (!hasSave && canClick != "false") {
+  //   $.confirm(
+  //     Operation["ui_noSaveWantOut"],
+  //     function () {
+  //       clickBackBtn = 1;
+
+  //     },
+  //     function () {}
+  //   );
+  // } else {
+  // $.router.back();
+  saveThisPage();
+  // }
+  clickBackBtn = 1;
+  localStorage.setItem("QRcode", param);
+  localStorage.setItem("fPlacecheckformid", fPlacecheckformid);
+  window.location.href = "patrolContentQRcode.html";
+  localStorage.setItem("acqrType", "1");
 }
 
 //loadPage
@@ -581,10 +625,10 @@ function loadPage() {
       return thisList;
     }
     if (showState == 0) {
-      // $("#showOrHide").text(Operation["ui_showalldevice"]);
+      $("#showOrHide").text(Operation["ui_showalldevice"]);
       $(".item-dis").css("display", "none");
     } else {
-      // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+      $("#showOrHide").text(Operation["ui_showOnlydevice"]);
       $(".item-dis").css("display", "flex");
     }
     $("#showOrHide")
@@ -592,11 +636,11 @@ function loadPage() {
       .click(function () {
         if (showState == 0) {
           showState = 1;
-          // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+          $("#showOrHide").text(Operation["ui_showOnlydevice"]);
           $(".item-dis").css("display", "flex");
         } else {
           showState = 0;
-          // $("#showOrHide").text(Operation["ui_showalldevice"]);
+          $("#showOrHide").text(Operation["ui_showalldevice"]);
           $(".item-dis").css("display", "none");
         }
       });
@@ -639,9 +683,7 @@ function loadPage() {
           if (pids.length > 2) {
             var titleTrees = "";
             $(pids).each(function () {
-              if (this.pid == -1) {
-
-              } else {
+              if (this.pid == -1) {} else {
                 titleTrees += this.pname + ">";
               }
             });
@@ -859,9 +901,9 @@ function loadPage() {
       window.webkit.messageHandlers.scanQRcode.postMessage("");
     } else {
       android.pushToZXActivity();
+      // android.pushToZXActivityTwo();
     }
   });
-
 
   //保存状态
   var savePids = JSON.parse(localStorage.getItem("clickPids"));
@@ -889,8 +931,13 @@ function loadPage() {
     $("#" + clickItemNum).click();
   }
 
-  //每次进入页面优先弹出
-  $(".open-panel").click();
+  if (acqrType == "1") {
+    localStorage.setItem("acqrType", "0");
+  } else {
+    //每次进入页面优先弹出
+    $(".open-panel").click();
+  }
+
 
   //page1
 }
@@ -1255,7 +1302,6 @@ function saveThisPage() {
   }
 }
 
-
 function changeListVal(thisId) {
   $.each(allGroupList, function (i, obj) {
     if (obj.id == thisId) {
@@ -1480,12 +1526,12 @@ function goToInfo() {
       });
   }
 }
-var clickBackBtn = 0;
 //返回按钮
 $("#backBtn").click(function () {
   if (!hasSave && canClick != "false") {
     if (pids.length == 1) {
       //未选中直接返回
+      clickBackBtn = 1;
       window.history.back();
     } else {
       $.confirm(
@@ -1531,6 +1577,7 @@ $("#page3Back")
       //     function () {}
       //   );
       // } else {
+      clickBackBtn = 1;
       window.history.back();
       // }
     } else {
@@ -1565,8 +1612,6 @@ $(window).bind("beforeunload", function (e) {
   }
 });
 
-
-
 // window.addEventListener("popstate", function (e) {
 //   if (canClick != "false") {
 //     if (!hasSave && clickBackBtn != 1) {
@@ -1575,6 +1620,5 @@ $(window).bind("beforeunload", function (e) {
 //     }
 //   }
 // }, false);
-
 
 $.init();
