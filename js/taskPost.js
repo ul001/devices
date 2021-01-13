@@ -72,13 +72,15 @@ function addRedNeed() {
 
 addRedNeed();
 
-$("#dateStart").calendar();
-$("#dateEnd").calendar();
+// $("#dateStart").calendar();
+// $("#dateEnd").calendar();
 var myDate = new Date;
 var year = myDate.getFullYear(); //获取当前年
 var mon = myDate.getMonth() + 1; //获取当前月
 var date = myDate.getDate(); //获取当前日
-var nowDate = year + "-" + format0(mon) + "-" + format0(date);
+var hours = myDate.getHours(); //获取当前小时
+var mins = myDate.getMinutes(); //获取当分钟
+var nowDate = year + "-" + format0(mon) + "-" + format0(date) + "T" + format0(hours) + ":" + format0(mins);
 $("#dateStart").val(nowDate);
 $("#dateEnd").val(nowDate);
 
@@ -206,11 +208,13 @@ function postTask() {
     });
     var subStr = subIds.join(",");
     var params = {};
+    startTime = startTime.replace("T", " ");
+    completeTime = completeTime.replace("T", " ");
     if (qiangdan == "7") {
         params = {
             fTasktypeid: qiangdan,
-            fStartdate: startTime + " 00:00:00",
-            fDeadlinedate: completeTime + " 23:59:59",
+            fStartdate: startTime + ":00",
+            fDeadlinedate: completeTime + ":00",
             fTaskcontent: taskContent,
             subIds: subStr
         };
@@ -246,8 +250,8 @@ function postTask() {
             userIds: workerIdStr,
             fTaskchargerid: chargerId,
             fTasktypeid: selectType,
-            fStartdate: startTime + " 00:00:00",
-            fDeadlinedate: completeTime + " 23:59:59",
+            fStartdate: startTime + ":00",
+            fDeadlinedate: completeTime + ":00",
             fTaskcontent: taskContent,
             subIds: subStr
         };

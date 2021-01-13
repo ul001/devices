@@ -78,9 +78,11 @@ var myDate = new Date;
 var year = myDate.getFullYear(); //获取当前年
 var mon = myDate.getMonth() + 1; //获取当前月
 var date = myDate.getDate(); //获取当前日
-var nowDate = year + "-" + format0(mon) + "-" + format0(date);
-// $("#dateStart").val(nowDate);
-// $("#dateEnd").val(nowDate);
+var hours = myDate.getHours(); //获取当前小时
+var mins = myDate.getMinutes(); //获取当分钟
+var nowDate = year + "-" + format0(mon) + "-" + format0(date) + "T" + format0(hours) + ":" + format0(mins);
+$("#dateStart").val(nowDate);
+$("#dateEnd").val(nowDate);
 
 function format0(num) {
     if (num < 10) {

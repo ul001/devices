@@ -86,8 +86,8 @@ jQuery(document).ready(function () {
                     $("#missionName").html(taskInfo.fSubName);
                     $("#createName").html(taskInfo.fTaskcreateusername);
                     $("#chargerName").html(taskInfo.fTaskchargername);
-                    $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
-                    $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
+                    $("#createTime").html(taskInfo.fStartdate);
+                    $("#finishTime").html(taskInfo.fDeadlinedate);
 
                     //任务开始时间
                     $("#ActStartTime").html(taskInfo.fTaskstartdate);

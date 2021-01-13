@@ -138,8 +138,8 @@ function getNetData() {
                 "onclick",
                 "callPhone('" + taskInfo.fTaskchargerphone + "')"
             );
-            $("#createTime").html(taskInfo.fStartdate.substring(0, 10));
-            $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 10));
+            $("#createTime").html(taskInfo.fStartdate);
+            $("#finishTime").html(taskInfo.fDeadlinedate);
             //任务开始时间
             $("#ActStartTime").html(taskInfo.fTaskstartdate);
             //任务提交时间

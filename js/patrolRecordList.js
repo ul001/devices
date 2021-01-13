@@ -37,10 +37,10 @@ function addItems(number) {
         var startTime = params['ftimeStart'];
         var endTime = params['ftimeEnd'];
         if (startTime != "" && startTime != null) {
-            $("#dateStart").val(startTime.substring(0, 10));
+            $("#dateStart").val(startTime);
         }
         if (endTime != "" && endTime != null) {
-            $("#dateEnd").val(endTime.substring(0, 10));
+            $("#dateEnd").val(endTime);
         }
         if (params['fTaskstateid'] != undefined) {
             $("#fState").val(params['fTaskstateid']);

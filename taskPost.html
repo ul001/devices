@@ -68,8 +68,12 @@
                                     <div class="item-title label"><span class="redColor">* </span><span
                                             data-i18n="ui_startTime"></span></div>
                                     <div class="item-input">
-                                        <input type="text" id="dateStart" placeholder=""
-                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly>
+                                        <input type="datetime-local" id="dateStart"
+                                            class="daycalendarBox datetime-local"
+                                            style="text-align:end;font-size:0.75rem;" min="2010-01-01T00:00"
+                                            max="2050-01-01T00:00" data-placeholder="ui_pleaseSelect" value="" />
+                                        <!-- <input type="text" id="dateStart" placeholder=""
+                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly> -->
                                     </div>
                                 </div>
                             </div>
@@ -80,8 +84,11 @@
                                     <div class="item-title label"><span class="redColor">* </span><span
                                             data-i18n="ui_askFinishTime"></span></div>
                                     <div class="item-input">
-                                        <input type="text" id="dateEnd" placeholder=""
-                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly>
+                                        <input type="datetime-local" id="dateEnd" class="daycalendarBox datetime-local"
+                                            style="text-align:end;font-size:0.75rem;" min="2010-01-01T00:00"
+                                            data-placeholder="ui_pleaseSelect" max="2050-01-01T00:00" value="" />
+                                        <!-- <input type="text" id="dateEnd" placeholder=""
+                                            data-placeholder="ui_pleaseSelect" class="textRight" readonly> -->
                                     </div>
                                 </div>
                             </div>

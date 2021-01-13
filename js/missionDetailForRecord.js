@@ -80,8 +80,8 @@ function getNetData() {
                 $("#createCall").attr("onclick", "callPhone('" + taskInfo.fTaskcreateuserphone + "')");
                 $("#chargerName").html(taskInfo.fTaskchargername);
                 $("#chargerCall").attr("onclick", "callPhone('" + taskInfo.fTaskchargerphone + "')");
-                $("#createTime").html(taskInfo.fStartdate.substring(0, 11));
-                $("#finishTime").html(taskInfo.fDeadlinedate.substring(0, 11));
+                $("#createTime").html(taskInfo.fStartdate);
+                $("#finishTime").html(taskInfo.fDeadlinedate);
 
                 //任务开始时间
                 $("#ActStartTime").html(taskInfo.fTaskstartdate);
