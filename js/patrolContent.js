@@ -27,6 +27,7 @@ var pushfDeviceproblemid;
 
 if (canClick == "false") {
   $("#saveBtn").css("display", "none");
+  $(".buttonsEvent").css("display", "none");
 }
 var getSaveList = localStorage.getItem(missiontaskID);
 //android持久化储存
@@ -61,7 +62,7 @@ updatePageData();
 // }
 function getQRresultAndPush(param) {
   var strArr = param.split("_");
-  if (param == "" || param == undefined || !strArr.length) {
+  if (param == "" || param == undefined || strArr == null || strArr == "(null)" || strArr == undefined) {
     return;
   }
   if (strArr[0] != "acqr") {
@@ -78,7 +79,7 @@ function getQRresultAndPush(param) {
   //     function () {}
   //   );
   // } else {
-  $.router.back();
+  // $.router.back();
   saveThisPage();
   // }
   clickBackBtn = 1;
@@ -87,6 +88,7 @@ function getQRresultAndPush(param) {
   window.location.href = "patrolContentQRcode.html";
 }
 
+//loadPage
 function loadPage() {
   var clickNum = 0;
   var showState = 0;
@@ -125,6 +127,7 @@ function loadPage() {
           Operation["ui_patrolinformationadd"]
         );
         $("#saveBtn").hide();
+        $(".buttonsEvent").hide();
         hasSave = true;
       }
       if (data.list.length > 0) {
@@ -284,6 +287,7 @@ function loadPage() {
             );
             if (tempStr != "") {
               $("#saveBtn").show();
+              $(".buttonsEvent").show();
             }
           }
           //给模板赋值
@@ -403,6 +407,7 @@ function loadPage() {
         }
       } else {
         $("#saveBtn").css("display", "none");
+        $(".buttonsEvent").css("display", "none");
         $.alert(Operation["ui_nodeviceInThis"]);
         hasSave = true;
       }
@@ -456,23 +461,23 @@ function loadPage() {
   }
 
   //保存后更新左侧分组
-  // function updatePageDataH5() {
-  //   Substation.getDataByAjax(
-  //     "/subDeviceTreeSelectHideOrShowForCharger", {
-  //       fSubid: selectSubid,
-  //       fPlacecheckformid: fPlacecheckformid
-  //     },
-  //     function (data) {
-  //       allGroupList = data.subDeviceGroupList;
-  //       if (pids[clickNum + 1] != null) {
-  //         pids.splice(-1, 1);
-  //       }
-  //       var lastPId = pids[clickNum].pid;
-  //       fillData(lastPId);
-  //       // $(".open-panel").click();
-  //     }
-  //   );
-  // }
+  function updatePageDataH5() {
+    Substation.getDataByAjax(
+      "/subDeviceTreeSelectHideOrShowForCharger", {
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid
+      },
+      function (data) {
+        allGroupList = data.subDeviceGroupList;
+        if (pids[clickNum + 1] != null) {
+          pids.splice(-1, 1);
+        }
+        var lastPId = pids[clickNum].pid;
+        fillData(lastPId);
+        // $(".open-panel").click();
+      }
+    );
+  }
 
   function fillData(parentId) {
     /*        var params = {
@@ -680,8 +685,11 @@ function loadPage() {
         var titleTreeName = titleTree.substring(1, titleTree.length - 1);
         $("#subName").text(titleTreeName);
         $("#subName2").text(titleTreeName);
-        $.router.back();
-        // $(".content-block .close-panel").click();
+        if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
+          $.router.loadPage("#page1");
+        } else {
+          $.router.back();
+        }
         fillRightData();
         //            });
         event.stopPropagation();
@@ -776,14 +784,14 @@ function loadPage() {
             if ($(".buttons-tab .tab-link:last").hasClass("active")) {
               $(".icon-select").click();
             }
-            // $(".open-panel").click();
+            $(".open-panel").click();
           },
           function () {
-            // $(".open-panel").click();
+            $(".open-panel").click();
           }
         );
       } else {
-        // $(".open-panel").click();
+        $(".open-panel").click();
       }
     });
   }
@@ -812,7 +820,7 @@ function loadPage() {
       }
     }
     saveThisPage();
-
+    updatePageDataH5();
 
     //添加判断
     //    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
@@ -853,11 +861,9 @@ function loadPage() {
       android.pushToZXActivity();
     }
   });
-  //每次进入页面优先弹出
-  $(".open-panel").click();
+
 
   //保存状态
-
   var savePids = JSON.parse(localStorage.getItem("clickPids"));
   localStorage.removeItem("clickPids");
   if (savePids == null) {
@@ -882,6 +888,11 @@ function loadPage() {
     //        $(".close-panel").click();
     $("#" + clickItemNum).click();
   }
+
+  //每次进入页面优先弹出
+  $(".open-panel").click();
+
+  //page1
 }
 
 function loadPage2() {
@@ -1205,8 +1216,8 @@ function saveThisPage() {
       },
       function (data) {
         if (data.code == 200) {
-          updatePageDataH5();
-          $.toast(Operation["ui_savesuccess"]);
+          // updatePageDataH5();
+          // $.toast(Operation["ui_savesuccess"]);
           var thisGroupid = pids[pids.length - 1].pid;
           var needChange = true;
           $.each(allGroupList, function (i, obj) {
@@ -1236,6 +1247,7 @@ function saveThisPage() {
             }
             $("#" + thisGroupid + " .item-inner").addClass("finished");
           }
+          $.toast(Operation["ui_savesuccess"]);
           //            localStorage.setItem("need-refresh", "true");
         }
       }
@@ -1243,24 +1255,6 @@ function saveThisPage() {
   }
 }
 
-function updatePageDataH5() {
-  Substation.getDataByAjax(
-    "/subDeviceTreeSelectHideOrShowForCharger", {
-      fSubid: selectSubid,
-      fPlacecheckformid: fPlacecheckformid
-    },
-    function (data) {
-      allGroupList = data.subDeviceGroupList;
-      if (pids[clickNum + 1] != null) {
-        pids.splice(-1, 1);
-      }
-      var lastPId = pids[clickNum].pid;
-      fillData(lastPId);
-      $.toast(Operation["ui_savesuccess"]);
-      // $(".open-panel").click();
-    }
-  );
-}
 
 function changeListVal(thisId) {
   $.each(allGroupList, function (i, obj) {
@@ -1490,14 +1484,19 @@ var clickBackBtn = 0;
 //返回按钮
 $("#backBtn").click(function () {
   if (!hasSave && canClick != "false") {
-    $.confirm(
-      Operation["ui_noSaveWantOut"],
-      function () {
-        clickBackBtn = 1;
-        window.history.back();
-      },
-      function () {}
-    );
+    if (pids.length == 1) {
+      //未选中直接返回
+      window.history.back();
+    } else {
+      $.confirm(
+        Operation["ui_noSaveWantOut"],
+        function () {
+          clickBackBtn = 1;
+          window.history.back();
+        },
+        function () {}
+      );
+    }
   } else {
     window.history.back();
   }
@@ -1521,9 +1520,24 @@ $("#page2Back")
 $("#page3Back")
   .unbind()
   .click(function () {
-    pushfDeviceproblemid = "";
-    localStorage.setItem("need-refresh", "true");
-    $.router.back();
+    if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
+      // if (!hasSave && canClick != "false") {
+      //   $.confirm(
+      //     Operation["ui_noSaveWantOut"],
+      //     function () {
+      //       clickBackBtn = 1;
+      //       window.history.back();
+      //     },
+      //     function () {}
+      //   );
+      // } else {
+      window.history.back();
+      // }
+    } else {
+      pushfDeviceproblemid = "";
+      localStorage.setItem("need-refresh", "true");
+      $.router.back();
+    }
   });
 
 //解决键盘遮挡问题
@@ -1550,6 +1564,8 @@ $(window).bind("beforeunload", function (e) {
     }
   }
 });
+
+
 
 // window.addEventListener("popstate", function (e) {
 //   if (canClick != "false") {

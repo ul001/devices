@@ -11,12 +11,10 @@ var clickDeviceInfoId = -1;
 var itemCode = "";
 var tempNum = -1;
 var imgNum = 0;
-var pids = [
-  {
-    pid: -1,
-    pname: ""
-  }
-];
+var pids = [{
+  pid: -1,
+  pname: ""
+}];
 var thisGroupid = -1;
 var clickGroupTree = "";
 var hasSave = false;
@@ -86,7 +84,7 @@ function loadPage() {
     };
 
     //获取信息接口
-    Substation.getDataByAjax("/getQrCodeDeivceInfo", param, function(data) {
+    Substation.getDataByAjax("/getQrCodeDeivceInfo", param, function (data) {
       $(".content-block .tabs").empty();
       $(".buttons-tab").empty();
       var tempJson = "";
@@ -99,8 +97,8 @@ function loadPage() {
       if (tempNum == 0) {
         $.alert(
           Operation["ui_gotowebpagedevice"] +
-            $("#subName").text() +
-            Operation["ui_patrolinformationadd"]
+          $("#subName").text() +
+          Operation["ui_patrolinformationadd"]
         );
         $("#saveBtn").hide();
         hasSave = true;
@@ -109,7 +107,7 @@ function loadPage() {
       if (data.list.length > 0) {
         var itemNum = 0;
         var bindedDeivceID = data.bindedDeivceID;
-        $(data.list).each(function(index, obj) {
+        $(data.list).each(function (index, obj) {
           if (obj.fSubdeviceinfoid == bindedDeivceID) {
             itemNum++;
             var thisValueJson = [];
@@ -125,7 +123,7 @@ function loadPage() {
             var tempStr = "";
             var num = 0;
             var clickDeviceId = $(".tab.active").attr("id");
-            $(tempJson.checkInfo).each(function() {
+            $(tempJson.checkInfo).each(function () {
               num++;
               if (this.type == "radio") {
                 inputStr =
@@ -225,37 +223,15 @@ function loadPage() {
               if (thisValueJson.length > 0) {
                 $(".buttons-tab").append(
                   '<a href="#' +
-                    obj.fSubdeviceinfoid +
-                    '" data-id="' +
-                    itemNum +
-                    '" class="tab-link button">' +
-                    obj.fDevicename +
-                    "</a>"
-                );
-                $(".content-block .tabs").append(
-                  '<div id="' +
-                    obj.fSubdeviceinfoid +
-                    '" class="tab pull-to-refresh-content">\n' +
-                    '<div class="pull-to-refresh-layer"></div>\n' +
-                    '<div class="content-block">\n' +
-                    tempStr +
-                    "</div>\n" +
-                    "</div>"
-                );
-              }
-              $(".icon.icon-tips").hide();
-            } else {
-              $(".buttons-tab").append(
-                '<a href="#' +
                   obj.fSubdeviceinfoid +
                   '" data-id="' +
                   itemNum +
                   '" class="tab-link button">' +
                   obj.fDevicename +
                   "</a>"
-              );
-              $(".content-block .tabs").append(
-                '<div id="' +
+                );
+                $(".content-block .tabs").append(
+                  '<div id="' +
                   obj.fSubdeviceinfoid +
                   '" class="tab pull-to-refresh-content">\n' +
                   '<div class="pull-to-refresh-layer"></div>\n' +
@@ -263,6 +239,28 @@ function loadPage() {
                   tempStr +
                   "</div>\n" +
                   "</div>"
+                );
+              }
+              $(".icon.icon-tips").hide();
+            } else {
+              $(".buttons-tab").append(
+                '<a href="#' +
+                obj.fSubdeviceinfoid +
+                '" data-id="' +
+                itemNum +
+                '" class="tab-link button">' +
+                obj.fDevicename +
+                "</a>"
+              );
+              $(".content-block .tabs").append(
+                '<div id="' +
+                obj.fSubdeviceinfoid +
+                '" class="tab pull-to-refresh-content">\n' +
+                '<div class="pull-to-refresh-layer"></div>\n' +
+                '<div class="content-block">\n' +
+                tempStr +
+                "</div>\n" +
+                "</div>"
               );
               if (tempStr != "") {
                 $("#saveBtn").show();
@@ -270,7 +268,7 @@ function loadPage() {
             }
             //给模板赋值
             if (thisValueJson.length > 0) {
-              $(thisValueJson).each(function() {
+              $(thisValueJson).each(function () {
                 // htmlbutton =
                 //   '<button style="z-index:120;position: absolute;opacity: 0.5;" id="clickBtnEvent"' +
                 //   this.code +
@@ -278,40 +276,40 @@ function loadPage() {
                 if (this.type == "radio") {
                   $(
                     "input[name='" +
-                      (obj.fSubdeviceinfoid + "" + this.code) +
-                      "'][value='" +
-                      this.value +
-                      "']"
+                    (obj.fSubdeviceinfoid + "" + this.code) +
+                    "'][value='" +
+                    this.value +
+                    "']"
                   ).attr("checked", true);
 
                   var code = $(
                     "input[name='" +
-                      (obj.fSubdeviceinfoid + "" + this.code) +
-                      "'][value='" +
-                      this.value +
-                      "']"
+                    (obj.fSubdeviceinfoid + "" + this.code) +
+                    "'][value='" +
+                    this.value +
+                    "']"
                   ).attr("data-code");
                   if (this.value == "yes" && canClick != "false") {
                     //显示缺陷详情按钮
                     $(
                       "button[name='" +
-                        (obj.fSubdeviceinfoid + "" + this.code) +
-                        "']"
+                      (obj.fSubdeviceinfoid + "" + this.code) +
+                      "']"
                     ).show();
                   } else {
                     $(
                       "button[name='" +
-                        (obj.fSubdeviceinfoid + "" + this.code) +
-                        "']"
+                      (obj.fSubdeviceinfoid + "" + this.code) +
+                      "']"
                     ).hide();
                   }
                 } else {
                   $(
                     "#" +
-                      obj.fSubdeviceinfoid +
-                      " input[data-code='" +
-                      this.code +
-                      "']"
+                    obj.fSubdeviceinfoid +
+                    " input[data-code='" +
+                    this.code +
+                    "']"
                   ).val(this.value);
                 }
               });
@@ -327,8 +325,8 @@ function loadPage() {
               imagePath = data.filePath;
               $(".buttons-tab").append(
                 '<a href="#' +
-                  (val.fSubdeviceinfoid + 1) +
-                  '" data-id="2" class="tab-link button">设备详情</a>'
+                (val.fSubdeviceinfoid + 1) +
+                '" data-id="2" class="tab-link button">设备详情</a>'
               );
               var tempStr2 =
                 '<div class="content-block-title">设备二维码</div><div class="showImg"></div><button type="button" class="button QRcode" name="' +
@@ -343,15 +341,15 @@ function loadPage() {
               makeQRImg(val.fSubdeviceinfoid);
               $(".content-block .tabs").append(
                 '<div id="' +
-                  (val.fSubdeviceinfoid + 1) +
-                  '" class="tab pull-to-refresh-content">\n' +
-                  '<div class="pull-to-refresh-layer"></div>\n' +
-                  '<div class="content-block" style="padding: 0 .75rem;" id="addVarContain' +
-                  (val.fSubdeviceinfoid + 1) +
-                  '" > \n ' +
-                  tempStr2 +
-                  "</div>\n" +
-                  "</div>"
+                (val.fSubdeviceinfoid + 1) +
+                '" class="tab pull-to-refresh-content">\n' +
+                '<div class="pull-to-refresh-layer"></div>\n' +
+                '<div class="content-block" style="padding: 0 .75rem;" id="addVarContain' +
+                (val.fSubdeviceinfoid + 1) +
+                '" > \n ' +
+                tempStr2 +
+                "</div>\n" +
+                "</div>"
               );
               //创建模板
               var select = $("#addVarContain" + (val.fSubdeviceinfoid + 1));
@@ -367,7 +365,7 @@ function loadPage() {
 
             $(".tab-link.button")
               .unbind()
-              .click(function() {
+              .click(function () {
                 var clickItemNum = $(this).attr("data-id");
                 var NumId = $(this).attr("id");
                 clickGroupTree += "-" + $(this).text();
@@ -385,7 +383,7 @@ function loadPage() {
             //   });
             $(".icon-tips")
               .unbind()
-              .click(function() {
+              .click(function () {
                 var tipStr = $(this).attr("data-value");
                 $("#popShow").text(Operation["ui_identify"] + "：" + tipStr);
                 //                        $(".open-popover").click();
@@ -393,7 +391,7 @@ function loadPage() {
             //点击详情事件
             $(".pushtoDetail")
               .unbind()
-              .click(function() {
+              .click(function () {
                 var thisRadio = $(this)
                   .prevAll()
                   .find(":radio:checked");
@@ -415,7 +413,7 @@ function loadPage() {
                   Substation.getDataByAjax(
                     "/getDeviceProblemIDOnClickingYes",
                     params,
-                    function(data) {
+                    function (data) {
                       if (data != "" && data != null) {
                         localStorage.setItem("clickPids", JSON.stringify(pids));
                         // localStorage.setItem("fDeviceproblemid", data);
@@ -452,13 +450,13 @@ function loadPage() {
         .eq(0)
         .click();
       if (canClick == "false") {
-        $($("input")).each(function() {
+        $($("input")).each(function () {
           $(this).attr("readonly", true);
         });
-        $($(":radio")).each(function() {
+        $($(":radio")).each(function () {
           $(this).attr("disabled", true);
         });
-        $($("select")).each(function() {
+        $($("select")).each(function () {
           $(this).attr("disabled", true);
         });
         $(".upload_img_wrap .upload_img").unbind();
@@ -469,11 +467,10 @@ function loadPage() {
   function makeQRImg(fSubdeviceinfoid) {
     //获取二维码
     Substation.getDataByAjax(
-      "/getDeviceDetailById",
-      {
+      "/getDeviceDetailById", {
         fSubdeviceinfoid: fSubdeviceinfoid
       },
-      function(data) {
+      function (data) {
         $(".showImg").empty();
         if (data.qrCodeFilePath && data.qrCodeFile.fQrcodefile) {
           var imgPath =
@@ -498,20 +495,20 @@ function loadPage() {
       var info = JSON.parse(data);
       if (info != undefined) {
         var divHeight = "300";
-        $.each(info.deviceInfo, function(index, val) {
+        $.each(info.deviceInfo, function (index, val) {
           var id = "showInfoDiv" + count + index;
           $(select).append(
             '<div class="content-block-title">' +
-              decodeURIComponent(val.name) +
-              '</div><div id="' +
-              id +
-              '" class="list-block baseInfoDiv" name="' +
-              decodeURIComponent(val.name) +
-              '"><ul class="selectUl"></ul></div>'
+            decodeURIComponent(val.name) +
+            '</div><div id="' +
+            id +
+            '" class="list-block baseInfoDiv" name="' +
+            decodeURIComponent(val.name) +
+            '"><ul class="selectUl"></ul></div>'
           );
           // $(select).append('<div class="content-block-title">' + decodeURIComponent(val.name) +
           //     '</div><div id="' + id + '" class="list-block baseInfoDiv" name="' + decodeURIComponent(val.name) + '"><ul></ul></div>');
-          $.each(val.value, function(key, value) {
+          $.each(val.value, function (key, value) {
             showInfo(value, $("#" + id + " .selectUl"), name);
           });
         });
@@ -628,7 +625,7 @@ function loadPage() {
       case "select":
         var list = JSON.parse(decodeURIComponent(val.value));
         var opString = "<select>";
-        $.each(list, function(key, opval) {
+        $.each(list, function (key, opval) {
           // if (opval.opType == true) {
           //     opString += "<option selected>" + opval.opName + "</option>";
           // } else {
@@ -694,7 +691,7 @@ function loadPage() {
             '"></div></div></li>';
         }
         break;
-      // imgAdd
+        // imgAdd
       case "image":
         string =
           '<li><div class="showDiv z_photo upimg-div"><div class="item-inner" style="display: block;">' +
@@ -709,7 +706,7 @@ function loadPage() {
           "</section>" +
           "</div></div></li>";
         break;
-      // instructionAdd
+        // instructionAdd
       case "instruction":
         if (
           templateInfo.fInstruction !== undefined &&
@@ -752,8 +749,8 @@ function loadPage() {
   function showPageInfo(data, parent, name) {
     var pageInfo = JSON.parse(data);
     var imgid = name;
-    pageInfo.forEach(function(val, i) {
-      val.value.forEach(function(value) {
+    pageInfo.forEach(function (val, i) {
+      val.value.forEach(function (value) {
         var name = value.name;
         if (name.length > 1) {
           //暂时容错网页保存的：:
@@ -788,7 +785,7 @@ function loadPage() {
               .next("select")
               .children("option");
             var select = $(prevLable).next("select");
-            $.each(options, function(key, value2) {
+            $.each(options, function (key, value2) {
               if (value2.innerHTML == selectOption) {
                 // $(value2).attr('selected', true);
                 $(select).val(value2.value);
@@ -805,7 +802,7 @@ function loadPage() {
                 .val(value.value.replace(" ", "T"));
             } catch (e) {}
             break;
-          // imgAdd
+            // imgAdd
           case "image":
             var arr = [];
             var savedInfo = [];
@@ -818,13 +815,13 @@ function loadPage() {
               }
             }
 
-            $.each(savedInfo, function(i, val) {
+            $.each(savedInfo, function (i, val) {
               arr.push(Substation.ipAddressFromAPP + imagePath + "/" + val);
             });
 
             $.initFile(
               $("#upImage" + imgid),
-              function(list) {
+              function (list) {
                 fileList = list;
               },
               arr,
@@ -852,7 +849,7 @@ function loadPage() {
   function addBackClick() {
     $(".back-parent")
       .unbind()
-      .click(function() {
+      .click(function () {
         if (pids[clickNum + 1] != null) {
           pids.splice(-1, 1);
         }
@@ -869,12 +866,11 @@ function loadPage() {
   //保存后更新左侧分组
   function updatePageDataH5() {
     Substation.getDataByAjax(
-      "/subDeviceTreeSelectHideOrShowForCharger",
-      {
+      "/subDeviceTreeSelectHideOrShowForCharger", {
         fSubid: selectSubid,
         fPlacecheckformid: fPlacecheckformid
       },
-      function(data) {
+      function (data) {
         allGroupList = data.subDeviceGroupList;
         if (pids[clickNum + 1] != null) {
           pids.splice(-1, 1);
@@ -904,7 +900,7 @@ function loadPage() {
 
   //根据pid获取分组
   function getSubDeviceListByPid(allList, pid) {
-    return allList.filter(function(obj) {
+    return allList.filter(function (obj) {
       return obj.pId == pid;
     });
   }
@@ -918,15 +914,15 @@ function loadPage() {
       ul = $(".list-block .list-container");
       ul.html(
         '<li class="item-content back-parent">\n' +
-          '                        <div class="item-inner">\n' +
-          '                            <div class="item-title"><i class="icon icon-goprev"></i>' +
-          Operation["ui_upperlevel"] +
-          "</div>\n" +
-          "                        </div>\n" +
-          "                    </li>"
+        '                        <div class="item-inner">\n' +
+        '                            <div class="item-title"><i class="icon icon-goprev"></i>' +
+        Operation["ui_upperlevel"] +
+        "</div>\n" +
+        "                        </div>\n" +
+        "                    </li>"
       );
     }
-    $(thisList).each(function() {
+    $(thisList).each(function () {
       var li = "";
       var linkStr = '<li class="item-content item-link';
       if (this.displayOrHideState == false) {
@@ -939,7 +935,7 @@ function loadPage() {
       }
 
       function getChildNum(allList) {
-        $.each(allList, function(i, obj) {
+        $.each(allList, function (i, obj) {
           var thisCList = selectChildrenList(allGroupList, obj.id);
           if (thisCList.length > 0) {
             getChildNum(thisCList);
@@ -950,8 +946,7 @@ function loadPage() {
       }
       var classCss = "";
       if (num == 0) {
-        if (this.fenzuTotal == "0") {
-        } else {
+        if (this.fenzuTotal == "0") {} else {
           classCss = " finished";
         }
       } else {
@@ -983,7 +978,7 @@ function loadPage() {
     });
 
     function selectChildrenList(allList, thisid) {
-      var thisList = allList.filter(function(obj) {
+      var thisList = allList.filter(function (obj) {
         return obj.pId == thisid && obj.displayOrHideState;
       });
       return thisList;
@@ -997,7 +992,7 @@ function loadPage() {
     }
     $("#showOrHide")
       .unbind()
-      .click(function() {
+      .click(function () {
         if (showState == 0) {
           showState = 1;
           $("#showOrHide").text(Operation["ui_showOnlydevice"]);
@@ -1015,12 +1010,12 @@ function loadPage() {
   function linkClick(parentId) {
     $(".list-block .item-link")
       .unbind()
-      .click(function(event) {
+      .click(function (event) {
         if (!upLoadClicktag) {
           return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
           upLoadClicktag = true;
         }, 200);
         var clickId = $(this).attr("id");
@@ -1071,7 +1066,7 @@ function loadPage() {
         }
         var titleTree = "";
         clickGroupTree = "";
-        $(pids).each(function() {
+        $(pids).each(function () {
           titleTree += this.pname + ">";
           clickGroupTree += this.pname + "-";
         });
@@ -1086,12 +1081,12 @@ function loadPage() {
   }
 
   function addRadioClick() {
-    $(":radio").change(function() {
+    $(":radio").change(function () {
       if (!upLoadClicktag) {
         return;
       }
       upLoadClicktag = false;
-      setTimeout(function() {
+      setTimeout(function () {
         upLoadClicktag = true;
       }, 1000);
       var clickDeviceId = $(".tab.active").attr("id");
@@ -1130,7 +1125,7 @@ function loadPage() {
       } else {
         $.confirm(
           Operation["ui_noSaveWantDelete"],
-          function() {
+          function () {
             var params = {
               fSubdeviceinfoid: clickDeviceId,
               fPlacecheckformid: fPlacecheckformid,
@@ -1139,7 +1134,7 @@ function loadPage() {
             Substation.getDataByAjax(
               "/deleteCheckItemProblems",
               params,
-              function() {
+              function () {
                 $.toast(Operation["ui_delsuccess"]);
                 saveThisPage();
                 localStorage.setItem("need-refresh", "true");
@@ -1147,7 +1142,7 @@ function loadPage() {
               }
             );
           },
-          function() {
+          function () {
             $(":radio[name='" + radioName + "'][value='yes']").prop(
               "checked",
               true
@@ -1160,12 +1155,12 @@ function loadPage() {
 
   //点击筛选
   function addLeftClick() {
-    $(".icon-select").click(function() {
+    $(".icon-select").click(function () {
       if (canClick != "false" && !hasSave) {
         var str = Operation["ui_hasnosave"];
         $.confirm(
           str,
-          function() {
+          function () {
             //            hasSave = true;
             //            saveThisPage();
             $("#saveBtn").click();
@@ -1175,7 +1170,7 @@ function loadPage() {
             }
             $(".open-panel").click();
           },
-          function() {
+          function () {
             $(".open-panel").click();
           }
         );
@@ -1187,18 +1182,18 @@ function loadPage() {
   addLeftClick();
 
   //点击保存
-  $("#saveBtn").click(function() {
+  $("#saveBtn").click(function () {
     if (!upLoadClicktag) {
       return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
+    setTimeout(function () {
       upLoadClicktag = true;
     }, 1000);
     hasSave = true;
     if ($("input[data-state='true']")) {
       var thisTemp = false;
-      $("input[data-state='true']").each(function() {
+      $("input[data-state='true']").each(function () {
         if ($(this).val() == "") {
           $.toast(Operation["ui_fillrequireditems"]);
           thisTemp = true;
@@ -1210,7 +1205,7 @@ function loadPage() {
       }
     }
     saveThisPage();
-    updatePageDataH5();
+    // updatePageDataH5();
     //添加判断
     //    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
     //      $(".icon-select").click();
@@ -1219,13 +1214,13 @@ function loadPage() {
 
   fillData(-1);
 
-  $("#pushBtn").click(function() {
+  $("#pushBtn").click(function () {
     //二维码跳转原生
     if (!upLoadClicktag) {
       return;
     }
     upLoadClicktag = false;
-    setTimeout(function() {
+    setTimeout(function () {
       upLoadClicktag = true;
     }, 1000);
     if (isIOS) {
@@ -1250,7 +1245,7 @@ function loadPage() {
     thisGroupid = pids[pids.length - 1].pid;
     var titleTree = "";
     clickGroupTree = "";
-    $(pids).each(function() {
+    $(pids).each(function () {
       titleTree += this.pname + ">";
       clickGroupTree += this.pname + "-";
     });
@@ -1276,17 +1271,17 @@ function loadPage2() {
   if (defectPosition != "" && defectPosition != null) {
     $(".redColor").show();
     var defectPositionArray = defectPosition.split(";");
-    $(defectPositionArray).each(function(index, obj) {
+    $(defectPositionArray).each(function (index, obj) {
       $("#defectPosition").append(
         '<input type="checkbox" value="' +
-          obj +
-          '" id="' +
-          index +
-          '"><label for="' +
-          index +
-          '">' +
-          obj +
-          "</label><br>"
+        obj +
+        '" id="' +
+        index +
+        '"><label for="' +
+        index +
+        '">' +
+        obj +
+        "</label><br>"
       );
     });
   } else {
@@ -1302,7 +1297,7 @@ function loadPage2() {
 
   $("#inputBox").html("");
   $("#imgBox").html('<img class="upload_img" src="img/upload_img.png"/>');
-  $(".upload_img_wrap .upload_img").on("click", function() {
+  $(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
@@ -1314,10 +1309,10 @@ function loadPage2() {
       //        }else{
       $("#inputBox").append(
         '<input type="file" class="fileInput"  capture="camera" name="file" data-id="' +
-          index +
-          '" title="请选择图片" id="file' +
-          index +
-          '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
+        index +
+        '" title="请选择图片" id="file' +
+        index +
+        '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
       );
       //        }
     }
@@ -1330,7 +1325,7 @@ function loadPage2() {
     }
     $("#file" + index)
       .unbind()
-      .change(function(e) {
+      .change(function (e) {
         var index = e.currentTarget.dataset.id;
         if ($("#file" + index).val() == "") {
           $("#inputBox input")
@@ -1360,17 +1355,17 @@ function loadPage3(fDeviceproblemid) {
   if (defectPosition != "" && defectPosition != null) {
     $(".redColor").show();
     var defectPositionArray = defectPosition.split(";");
-    $(defectPositionArray).each(function(index, obj) {
+    $(defectPositionArray).each(function (index, obj) {
       $("#defectPosition").append(
         '<input type="checkbox" value="' +
-          obj +
-          '" id="' +
-          index +
-          '"><label for="' +
-          index +
-          '">' +
-          obj +
-          "</label><br>"
+        obj +
+        '" id="' +
+        index +
+        '"><label for="' +
+        index +
+        '">' +
+        obj +
+        "</label><br>"
       );
     });
   } else {
@@ -1392,7 +1387,7 @@ function loadPage3(fDeviceproblemid) {
   }
   $("#inputBox").html("");
   $("#imgBox").html('<img class="upload_img" src="img/upload_img.png"/>');
-  $(".upload_img_wrap .upload_img").on("click", function() {
+  $(".upload_img_wrap .upload_img").on("click", function () {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
@@ -1404,10 +1399,10 @@ function loadPage3(fDeviceproblemid) {
       //        }else{
       $("#inputBox").append(
         '<input type="file" class="fileInput"  capture="camera" name="file" data-id="' +
-          index +
-          '" title="请选择图片" id="file' +
-          index +
-          '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
+        index +
+        '" title="请选择图片" id="file' +
+        index +
+        '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
       );
       //        }
     }
@@ -1420,7 +1415,7 @@ function loadPage3(fDeviceproblemid) {
     }
     $("#file" + index)
       .unbind()
-      .change(function(e) {
+      .change(function (e) {
         var index = e.currentTarget.dataset.id;
         if ($("#file" + index).val() == "") {
           $("#inputBox input")
@@ -1441,7 +1436,7 @@ function loadPage3(fDeviceproblemid) {
   var problemParam = {
     fDeviceproblemid: fDeviceproblemid
   };
-  Substation.getDataByAjax(url, problemParam, function(data) {
+  Substation.getDataByAjax(url, problemParam, function (data) {
     var imgUrl = data.imgUrl;
     var defectJson = data.tDevDeviceproblem;
     var beforeimg = data.beforeimg;
@@ -1471,20 +1466,20 @@ function loadPage3(fDeviceproblemid) {
       var defectPositionVal = fProblemlocation.split(",")[1];
       var defectPositionArray = defectPosition.split(";");
       var defectPositionValArray = defectPositionVal.split(";");
-      $(defectPositionArray).each(function(index, obj) {
+      $(defectPositionArray).each(function (index, obj) {
         $("#defectPosition").append(
           '<input type="checkbox" value="' +
-            obj +
-            '" id="' +
-            index +
-            '"><label for="' +
-            index +
-            '">' +
-            obj +
-            "</label><br>"
+          obj +
+          '" id="' +
+          index +
+          '"><label for="' +
+          index +
+          '">' +
+          obj +
+          "</label><br>"
         );
       });
-      $(defectPositionValArray).each(function() {
+      $(defectPositionValArray).each(function () {
         $("input[type='checkbox'][value='" + this + "']").attr("checked", true);
       });
     }
@@ -1502,7 +1497,7 @@ function loadPage3(fDeviceproblemid) {
     // $("#fResolution").val(Substation.removeUnDefinedStr(defectJson.fResolution));
 
     if (beforeimg.length > 0) {
-      $.each(beforeimg, function(i, value) {
+      $.each(beforeimg, function (i, value) {
         imgNum++;
         if (value.fDeviceproblemimgurlMin == undefined) {
           var imgDiv =
@@ -1569,12 +1564,12 @@ function loadPage3(fDeviceproblemid) {
 function saveThisPage() {
   var changeJson = [];
 
-  $(".tabs .tab").each(function() {
+  $(".tabs .tab").each(function () {
     var deviceJson = {};
     var deviceId = $(this).attr("id");
     if (needSaveID == deviceId) {
       var inputArray = [];
-      $("#" + deviceId + " .card").each(function(index, obj) {
+      $("#" + deviceId + " .card").each(function (index, obj) {
         var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
         var thisObj = {};
         if (thisInput) {
@@ -1605,17 +1600,16 @@ function saveThisPage() {
   });
   var jsonStr = JSON.stringify(changeJson);
   Substation.postDataByAjax(
-    "/updateInspectionDetail",
-    {
+    "/updateInspectionDetail", {
       fPlacecheckformid: fPlacecheckformid,
       deviceList: jsonStr
     },
-    function(data) {
+    function (data) {
       if (data.code == 200) {
         $.toast(Operation["ui_savesuccess"]);
         var thisGroupid = pids[pids.length - 1].pid;
         var needChange = true;
-        $.each(allGroupList, function(i, obj) {
+        $.each(allGroupList, function (i, obj) {
           if (thisGroupid == obj.id) {
             if (obj.fenzuTotal == "0") {
               needChange = true;
@@ -1626,7 +1620,7 @@ function saveThisPage() {
           }
         });
         if (needChange) {
-          $(pids).each(function() {
+          $(pids).each(function () {
             changeListVal(this.pid);
           });
           //                fillData(thisGroupid);
@@ -1649,7 +1643,7 @@ function saveThisPage() {
 }
 
 function changeListVal(thisId) {
-  $.each(allGroupList, function(i, obj) {
+  $.each(allGroupList, function (i, obj) {
     if (obj.id == thisId) {
       // allGroupList[i].taskFinishFlag = Number(obj.taskFinishFlag) + 1 + "";
       allGroupList[i].fenzuTotal = Number(obj.fenzuTotal) + 1 + "";
@@ -1673,21 +1667,21 @@ function changeImg(e, filePath, index) {
   var reader = new FileReader();
   reader.readAsDataURL(e.target.files[0]);
   //    var timeStr = e.target.files[0].lastModified;
-  reader.onloadend = function() {
+  reader.onloadend = function () {
     // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
     var dataURL = reader.result;
     //        if(isAndroid){
     // 显示图片
     $("#imgBox").append(
       '<div class="imgContainer" data-index=' +
-        index +
-        "><img   src=" +
-        dataURL +
-        " name=" +
-        dataURL +
-        ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
-        index +
-        ')"  class="imgDelete" src="img/del_img.png" /></div>'
+      index +
+      "><img   src=" +
+      dataURL +
+      " name=" +
+      dataURL +
+      ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
+      index +
+      ')"  class="imgDelete" src="img/del_img.png" /></div>'
     );
     //        }else{
     //            shuiyin(dataURL,timeStr,index);
@@ -1721,8 +1715,8 @@ function removeImg(obj, index) {
   for (var i = 0; i < $(".imgContainer").length; i++) {
     if (
       $(".imgContainer")
-        .eq(i)
-        .attr("data-index") == index
+      .eq(i)
+      .attr("data-index") == index
     ) {
       var imgId = $(".imgContainer")
         .eq(i)
@@ -1735,16 +1729,15 @@ function removeImg(obj, index) {
       } else {
         //                if(confirm("确定要删除已保存的图片？")){
 
-        $.confirm(Operation["ui_noSaveWantDelete"], function() {
+        $.confirm(Operation["ui_noSaveWantDelete"], function () {
           $(".imgContainer")
             .eq(i)
             .remove();
           Substation.getDataByAjax(
-            "/deleteSubstationImg",
-            {
+            "/deleteSubstationImg", {
               fId: imgId
             },
-            function() {}
+            function () {}
           );
         });
         /*$(".imgContainer").eq(i).remove();
@@ -1801,10 +1794,10 @@ function saveFormData() {
     return;
   }
   upLoadClicktag = false;
-  setTimeout(function() {
+  setTimeout(function () {
     upLoadClicktag = true;
   }, 1000);
-  $(".fileInput").each(function() {
+  $(".fileInput").each(function () {
     if ($(this).val() == "" || $(this).val() == null) {
       $(this).remove();
     }
@@ -1823,7 +1816,7 @@ function saveFormData() {
       return;
     } else {
       var checkedVal = ",";
-      $("input:checkbox:checked").each(function() {
+      $("input:checkbox:checked").each(function () {
         checkedVal += $(this).val() + ";";
       });
       checkedVal = checkedVal.substring(0, checkedVal.length - 1);
@@ -1843,7 +1836,7 @@ function saveFormData() {
   if (pushfDeviceproblemid != "" && pushfDeviceproblemid != undefined) {
     params.append("fDeviceproblemid", pushfDeviceproblemid);
   }
-  Substation.postFormDataByAjax("/saveCheckItemProblem", params, function(
+  Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (
     data
   ) {
     if (data.code == 200) {
@@ -1854,7 +1847,7 @@ function saveFormData() {
       );
       pushfDeviceproblemid = "";
       localStorage.setItem("need-refresh", "true");
-      setTimeout(function() {
+      setTimeout(function () {
         $.router.back();
         saveThisPage();
         $("button[name='" + clickRadioName + "']").show();
@@ -1868,12 +1861,12 @@ function goToInfo() {
   if (canClick == "false") {
     $(".card-content")
       .unbind()
-      .click(function() {
+      .click(function () {
         if (!upLoadClicktag) {
           return;
         }
         upLoadClicktag = false;
-        setTimeout(function() {
+        setTimeout(function () {
           upLoadClicktag = true;
         }, 1000);
         var thisRadio = $(this).find(":radio:checked");
@@ -1888,7 +1881,7 @@ function goToInfo() {
           Substation.getDataByAjax(
             "/getDeviceProblemIDOnClickingYes",
             params,
-            function(data) {
+            function (data) {
               if (data != "" && data != null) {
                 localStorage.setItem("clickPids", JSON.stringify(pids));
                 window.location.href =
@@ -1904,15 +1897,15 @@ function goToInfo() {
 }
 var clickBackBtn = 0;
 //返回按钮
-$("#backBtn").click(function() {
+$("#backBtn").click(function () {
   if (!hasSave && canClick != "false") {
     $.confirm(
       Operation["ui_noSaveWantOut"],
-      function() {
+      function () {
         clickBackBtn = 1;
         window.history.back();
       },
-      function() {}
+      function () {}
     );
   } else {
     window.history.back();
@@ -1928,7 +1921,7 @@ function downloadFile(file) {
     return;
   }
   upLoadClicktag = false;
-  setTimeout(function() {
+  setTimeout(function () {
     upLoadClicktag = true;
   }, 1000);
   if (isAndroid) {
@@ -1948,25 +1941,25 @@ function downloadFile(file) {
 //内联返回
 $("#page2Back")
   .unbind()
-  .click(function() {
+  .click(function () {
     pushfDeviceproblemid = "";
     localStorage.setItem("need-refresh", "true");
     $.router.back();
   });
 
 //解决键盘遮挡问题
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   if (
     document.activeElement.tagName == "INPUT" ||
     document.activeElement.tagName == "TEXTAREA"
   ) {
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       document.activeElement.scrollIntoViewIfNeeded();
     }, 0);
   }
 });
 
-$(window).bind("beforeunload", function(e) {
+$(window).bind("beforeunload", function (e) {
   if (canClick != "false") {
     if (!hasSave && clickBackBtn != 1) {
       (e || window.event).returnValue = Operation["ui_noSaveWantOut"];

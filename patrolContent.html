@@ -25,7 +25,7 @@
         <h1 class="title title_color">
           <span data-i18n="ui_Subinspection"></span>
         </h1>
-        <a class="button button-link button-nav pull-right click_btn" id="saveBtn"><span data-i18n="ui_save"></span></a>
+        <!-- <a class="button button-link button-nav pull-right click_btn" id="saveBtn"><span data-i18n="ui_save"></span></a> -->
         <a class="button button-link button-nav pull-right open-panel">
           <i class="icon icon-selectSome"></i>
         </a>
@@ -38,10 +38,16 @@
         <span id="subName"><span data-i18n="ui_selectSubDevice"></span></span>
         <!-- <a class="open-panel" style="display:none;"></a> -->
       </div>
-      <div class="content">
+      <div class="content" style="margin-bottom: 3rem;">
         <div class="buttons-tab" style="overflow:auto;overflow-y:hidden;"></div>
         <div class="content-block">
           <div class="tabs pull-to-refresh-container"></div>
+        </div>
+      </div>
+      <div class="buttonsEvent">
+        <div class="row no-gutter">
+          <a id="saveBtn" href="#" class="col-66 button button-big button-fill bottom-btn"><i
+              class="icon icon-starttask"></i><span data-i18n="ui_save"></span></a>
         </div>
       </div>
     </div>
@@ -206,12 +212,13 @@
         <h1 class="title title_color">
           <span data-i18n="ui_selectSubDevice"></span>
         </h1>
-        <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushQRBtn">
-          <i class="icon icon-scanQRcode"></i>
-        </a>
         <a class="button button-link button-nav pull-right click_btn" id="showOrHide">
           <i class="icon icon-showOrHideBtn"></i>
         </a>
+        <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushQRBtn">
+          <i class="icon icon-scanQRcode"></i>
+        </a>
+
       </header>
       <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;">
         <!-- <i class="icon icon-select"></i> -->

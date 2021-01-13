@@ -297,3 +297,23 @@ i.icon-showOrHideBtn {
   height: 1rem;
   background-image: url(../img/mapImg04.png);
 }
+
+.buttonsEvent .row.no-gutter {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  bottom: .1rem;
+  width: 100%;
+}
+
+.button-fill.bottom-btn {
+  background-color: #02AB93;
+}
+
+.icon-starttask {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  margin-bottom: 0.2rem;
+  background-image: url(../img/i-baocunban.png);
+}
