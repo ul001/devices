@@ -88,7 +88,7 @@ function getQRresultAndPush(param) {
   //   );
   // } else {
   // $.router.back();
-  saveThisPage();
+  // saveThisPage();
   // }
   clickBackBtn = 1;
   localStorage.setItem("QRcode", param);
@@ -937,7 +937,6 @@ function loadPage() {
     //每次进入页面优先弹出
     $(".open-panel").click();
   }
-
 
   //page1
 }
