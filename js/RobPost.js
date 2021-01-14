@@ -215,8 +215,8 @@ function postTask() {
     // if (qiangdan == "7") {
     params = {
         fTitle: selectType,
-        fPlantime: startTime,
-        fDeadlinetime: completeTime,
+        fPlantime: startTime + ":00",
+        fDeadlinetime: completeTime + ":00",
         fLimitnumber: LimitNum,
         fTargetload: LimitLoad,
         fWorkcontent: taskContent,
