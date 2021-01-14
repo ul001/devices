@@ -938,7 +938,50 @@ function loadPage() {
     $(".open-panel").click();
   }
 
+  $('#searchUser').bind('keydown', function (event) {
+    if (event.keyCode == 13) {
+      if ($("#searchUser").val() != "") {
+        getSearchUser();
+        document.activeElement.blur();
+      }
+    }
+  });
+
+  $(".searchbar-cancel").click(function () {
+    $("#searchUser").val("");
+    fillData(-1);
+    // getGroupClass(thisGroupid);
+  });
+  //模糊搜索
+  function getSearchUser() {
+    $("#personListUl").empty();
+    $(".personUl").show();
+    $(".classUl").hide();
+    $("#classList").hide();
+    var typeStr = "";
+    typeStr = "type=\"checkbox\"";
+
+    // if (peopleType == "substation") {
+    Substation.postDataByAjax("/getSubstationListBySubGroupId", {
+      search: $("#searchUser").val()
+    }, function (data) {
+      var html = "";
+      // this.fSubid Substation.removeUndefined(this.fSubname)
+      $(data.data.list).each(function () {
+        html += "<li class=\"item-content item-link\" id=\"" + this.fSubid + "\">\n" +
+          "   <div class=\"item-inner finished\">\n" +
+          "       <div class=\"item-title\">" + this.fSubname + "<\/div>\n" +
+          "        </div>\n" +
+          "</li>";
+      });
+      $("#personListUl").html(html);
+      // $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+      // checkSelectPeople();
+    });
+
+  }
   //page1
+
 }
 
 function loadPage2() {

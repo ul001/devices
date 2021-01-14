@@ -220,7 +220,19 @@
         </a> -->
 
       </header>
-      <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;">
+      <!-- <div class="bar bar-header-secondary">
+        <div class="searchbar">
+          <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+          <div class="search-input">
+            <label class="icon icon-search" for="searchUser"></label>
+            <input type="search" id="searchUser" placeholder="" data-placeholder="ui_selectTerminalGroup" />
+          </div>
+        </div>
+      </div> -->
+      <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;"
+        id="showSubName">
+        <!-- <div class="bar bar-header-secondary"
+        style="margin-top:2.2rem;line-height:2.1rem;white-space: nowrap;overflow-y: auto;" id="showSubName"> -->
         <!-- <i class="icon icon-select"></i> -->
         <span id="subName2"><span data-i18n="ui_selectSubDevice"></span></span>
         <!-- <a class="open-panel" style="display:none;"></a> -->
@@ -231,6 +243,7 @@
       </div> -->
       <!-- <div class="content"> -->
       <div class="list-block" style="margin-top:4.4rem;">
+        <!-- <div class="list-block" style="margin-top:6.4rem;"> -->
         <ul class="list-container">
           <!--<li class="item-content item-link">
                     <div class="item-inner">
@@ -243,6 +256,7 @@
                     </div>
                 </li>-->
         </ul>
+        <ul class="personUl" id="personListUl"></ul>
         <!-- </div> -->
       </div>
     </div>
