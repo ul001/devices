@@ -394,7 +394,7 @@ function goToHistoryDetail(taskId, grabbed) {
 //         getLocAndCheckIn(loc);
 //     }
 // } else {
-//     getFirstPage(typeId);
+getFirstPage(typeId);
 // }
 
 // function getLocAndCheckIn(loc) {

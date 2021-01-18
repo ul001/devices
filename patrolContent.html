@@ -1,226 +1,323 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/patrolContent.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title></title>
-  <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  <link rel="stylesheet" href="libs/light7.min.css" />
-  <link rel="stylesheet" href="libs/light7-swiper.min.css" />
-  <link rel="stylesheet" href="css/general.css" />
-  <link rel="stylesheet" href="css/patrolContent.css" />
-</head>
-
-<body>
-  <div class="page-group">
-    <div class="page page-current" id="page1">
-      <header class="bar bar-nav bar_color">
-        <a class="button button-link button-nav pull-left click_btn back_btn" id="backBtn">
-          <span class=" icon icon-left"></span>
-          <span data-i18n="ui_back"></span>
-        </a>
-        <h1 class="title title_color">
-          <span data-i18n="ui_Subinspection"></span>
-        </h1>
-        <!-- <a class="button button-link button-nav pull-right click_btn" id="saveBtn"><span data-i18n="ui_save"></span></a> -->
-        <a class="button button-link button-nav pull-right open-panel">
-          <i class="icon icon-selectSome"></i>
-        </a>
-        <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushBtn">
-          <i class="icon icon-scanQRcode"></i>
-        </a>
-      </header>
-      <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;">
-        <!-- <i class="icon icon-select"></i> -->
-        <span id="subName"><span data-i18n="ui_selectSubDevice"></span></span>
-        <!-- <a class="open-panel" style="display:none;"></a> -->
-      </div>
-      <div class="content" style="margin-bottom: 3rem;">
-        <div class="buttons-tab" style="overflow:auto;overflow-y:hidden;"></div>
-        <div class="content-block">
-          <div class="tabs pull-to-refresh-container"></div>
+  <body>
+    <div class="page-group">
+      <div class="page page-current" id="page1">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn back_btn"
+            id="backBtn"
+          >
+            <span class=" icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color">
+            <span data-i18n="ui_Subinspection"></span>
+          </h1>
+          <!-- <a class="button button-link button-nav pull-right click_btn" id="saveBtn"><span data-i18n="ui_save"></span></a> -->
+          <a class="button button-link button-nav pull-right open-panel">
+            <i class="icon icon-selectSome"></i>
+          </a>
+          <a
+            class="button button-link button-nav pull-right click_QRcodebtn"
+            id="pushBtn"
+          >
+            <i class="icon icon-scanQRcode"></i>
+          </a>
+        </header>
+        <div
+          class="bar bar-header-secondary"
+          style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;"
+        >
+          <!-- <i class="icon icon-select"></i> -->
+          <span id="subName"><span data-i18n="ui_selectSubDevice"></span></span>
+          <!-- <a class="open-panel" style="display:none;"></a> -->
+        </div>
+        <div class="content" style="margin-bottom: 3rem;">
+          <div
+            class="buttons-tab"
+            style="overflow:auto;overflow-y:hidden;"
+          ></div>
+          <div class="content-block">
+            <div class="tabs pull-to-refresh-container"></div>
+          </div>
+        </div>
+        <div class="buttonsEvent">
+          <div class="row no-gutter">
+            <a
+              id="saveBtn"
+              href="#"
+              class="col-66 button button-big button-fill bottom-btn"
+              ><i class="icon icon-starttask"></i
+              ><span data-i18n="ui_save"></span
+            ></a>
+          </div>
         </div>
       </div>
-      <div class="buttonsEvent">
-        <div class="row no-gutter">
-          <a id="saveBtn" href="#" class="col-66 button button-big button-fill bottom-btn"><i
-              class="icon icon-starttask"></i><span data-i18n="ui_save"></span></a>
-        </div>
-      </div>
-    </div>
-    <div class="page" id="page2">
-      <header class="bar bar-nav bar_color">
-        <a class="button button-link button-nav pull-left click_btn back_btn" id="page2Back">
-          <span class="icon icon-left"></span>
-          <span data-i18n="ui_back"></span>
-        </a>
-        <h1 class="title title_color">
-          <span data-i18n="ui_DefectRegist"></span>
-        </h1>
-        <a class="button button-link button-nav pull-right click_btn" onclick="saveFormData()">
-          <span data-i18n="ui_upload"></span>
-        </a>
-      </header>
-      <div class="content">
-        <div class="list-block">
-          <form id="form1" method="post" enctype="multipart/form-data">
-            <ul id="listContainer">
-              <!-- Text inputs -->
-              <li>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label blueColor" data-i18n="ui_DefectExplain"></div>
-                    <div class="item-input">
-                      <input type="text" id="defectDiscribe" name="fDeviceproblemdes" value="" />
+      <div class="page" id="page2">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn back_btn"
+            id="page2Back"
+          >
+            <span class="icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color">
+            <span data-i18n="ui_DefectRegist"></span>
+          </h1>
+          <a
+            class="button button-link button-nav pull-right click_btn"
+            onclick="saveFormData()"
+          >
+            <span data-i18n="ui_upload"></span>
+          </a>
+        </header>
+        <div class="content">
+          <div class="list-block">
+            <form id="form1" method="post" enctype="multipart/form-data">
+              <ul id="listContainer">
+                <!-- Text inputs -->
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div
+                        class="item-title label blueColor"
+                        data-i18n="ui_DefectExplain"
+                      ></div>
+                      <div class="item-input">
+                        <input
+                          type="text"
+                          id="defectDiscribe"
+                          name="fDeviceproblemdes"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label">
-                      <span class="redColor">*</span><span class="blueColor" data-i18n="ui_defectPoision"></span>
-                    </div>
-                    <div class="item-input" id="defectPosition">
-                      <!--                                        <input type="checkbox" value="A" id="checkA"><label
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <span class="redColor">*</span
+                        ><span
+                          class="blueColor"
+                          data-i18n="ui_defectPoision"
+                        ></span>
+                      </div>
+                      <div class="item-input" id="defectPosition">
+                        <!--                                        <input type="checkbox" value="A" id="checkA"><label
                                             for="checkA">A相</label>
                                         <input type="checkbox" value="B" id="checkB"><label
                                             for="checkB">B相</label>
                                         <input type="checkbox" value="C" id="checkC"><label
                                             for="checkC">C相</label>-->
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label blueColor" data-i18n="ui_categories"></div>
-                    <div class="item-input">
-                      <select name="fProblemtype" id="dangerCategory">
-                        <option value="导电类">导电类</option>
-                        <option value="标识类">标识类</option>
-                        <option value="支撑类">支撑类</option>
-                        <option value="保护类">保护类</option>
-                        <option value="环境类">环境类</option>
-                        <option value="土建类">土建类</option>
-                        <option value="防护类">防护类</option>
-                        <option value="控制类">控制类</option>
-                        <option value="设施类">设施类</option>
-                        <option value="量测类">量测类</option>
-                        <option value="防鼠类">防鼠类</option>
-                        <option value="框架类">框架类</option>
-                        <option value="工具类">工具类</option>
-                      </select>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div
+                        class="item-title label blueColor"
+                        data-i18n="ui_categories"
+                      ></div>
+                      <div class="item-input">
+                        <select name="fProblemtype" id="dangerCategory">
+                          <option value="导电类">导电类</option>
+                          <option value="标识类">标识类</option>
+                          <option value="支撑类">支撑类</option>
+                          <option value="保护类">保护类</option>
+                          <option value="环境类">环境类</option>
+                          <option value="土建类">土建类</option>
+                          <option value="防护类">防护类</option>
+                          <option value="控制类">控制类</option>
+                          <option value="设施类">设施类</option>
+                          <option value="量测类">量测类</option>
+                          <option value="防鼠类">防鼠类</option>
+                          <option value="框架类">框架类</option>
+                          <option value="工具类">工具类</option>
+                        </select>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label blueColor" data-i18n="ui_SeverityGrade"></div>
-                    <div class="item-input">
-                      <select name="fProblemlevel" id="dangerType">
-                        <option value="一般" data-i18n="ui_dangerLevel1"></option>
-                        <option value="重大" data-i18n="ui_dangerLevel2"></option>
-                        <option value="紧急" data-i18n="ui_dangerLevel3"></option>
-                      </select>
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div
+                        class="item-title label blueColor"
+                        data-i18n="ui_SeverityGrade"
+                      ></div>
+                      <div class="item-input">
+                        <select name="fProblemlevel" id="dangerType">
+                          <option
+                            value="一般"
+                            data-i18n="ui_dangerLevel1"
+                          ></option>
+                          <option
+                            value="重大"
+                            data-i18n="ui_dangerLevel2"
+                          ></option>
+                          <option
+                            value="紧急"
+                            data-i18n="ui_dangerLevel3"
+                          ></option>
+                        </select>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label" data-i18n="ui_EliminationPeriod"></div>
-                    <div class="item-input">
-                      <input type="text" name="fTimelimit" id="deadline" value="" disabled />
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div
+                        class="item-title label"
+                        data-i18n="ui_EliminationPeriod"
+                      ></div>
+                      <div class="item-input">
+                        <input
+                          type="text"
+                          name="fTimelimit"
+                          id="deadline"
+                          value=""
+                          disabled
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <!-- Date -->
-              <li>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label blueColor" data-i18n="ui_detriment"></div>
-                    <div class="item-input">
-                      <input type="text" name="fProblemharm" id="dangerous" value="" />
+                </li>
+                <!-- Date -->
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div
+                        class="item-title label blueColor"
+                        data-i18n="ui_detriment"
+                      ></div>
+                      <div class="item-input">
+                        <input
+                          type="text"
+                          name="fProblemharm"
+                          id="dangerous"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li>
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label blueColor" data-i18n="ui_suggestion"></div>
-                    <div class="item-input">
-                      <input type="text" name="fResolution" id="suggest" value="" />
+                </li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div
+                        class="item-title label blueColor"
+                        data-i18n="ui_suggestion"
+                      ></div>
+                      <div class="item-input">
+                        <input
+                          type="text"
+                          name="fResolution"
+                          id="suggest"
+                          value=""
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </li>
-              <li class="align-top">
-                <div class="item-content">
-                  <div class="item-inner">
-                    <div class="item-title label">
-                      <!--<span
-                                                class="redColor">*</span>--><span class="blueColor"
-                        data-i18n="ui_Scenephotos"></span>
-                    </div>
-                    <div class="item-input">
-                      <div class="custom_img">
-                        <!--点击上传图片 触发下面的div 点击事件-->
-                        <div class="upload_img_wrap">
-                          <div id="imgBox">
-                            <img class="upload_img" src="img/upload_img.png" />
+                </li>
+                <li class="align-top">
+                  <div class="item-content">
+                    <div class="item-inner">
+                      <div class="item-title label">
+                        <!--<span
+                                                class="redColor">*</span>--><span
+                          class="blueColor"
+                          data-i18n="ui_Scenephotos"
+                        ></span>
+                      </div>
+                      <div class="item-input">
+                        <div class="custom_img">
+                          <!--点击上传图片 触发下面的div 点击事件-->
+                          <div class="upload_img_wrap">
+                            <div id="imgBox">
+                              <img
+                                class="upload_img"
+                                src="img/upload_img.png"
+                              />
+                            </div>
+                            <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
                           </div>
-                          <!--<img style="display:none" class="upload_img" data-id="3" src="image/upload_img.png" />-->
-                        </div>
-                        <div style="display: none;width: 100%;height: 100vh;position: relative;">
-                          <div style="display: none;" id="inputBox">
-                            <input type="file" name="file" data-id="1" title="请选择图片" id="file1"
-                              accept="image/png,image/jpg,image/gif,image/JPEG" />
-                            <!--
+                          <div
+                            style="display: none;width: 100%;height: 100vh;position: relative;"
+                          >
+                            <div style="display: none;" id="inputBox">
+                              <input
+                                type="file"
+                                name="file"
+                                data-id="1"
+                                title="请选择图片"
+                                id="file1"
+                                accept="image/png,image/jpg,image/gif,image/JPEG"
+                              />
+                              <!--
                                             <input type="file" name="image[]" data-id="2" title="请选择图片" id="file2" accept="image/png,image/jpg,image/gif,image/JPEG" />
                                             <input type="file" name="image[]" data-id="3" title="请选择图片" id="file3" accept="image/png,image/jpg,image/gif,image/JPEG" /> 点击选择图片-->
+                            </div>
+                            <input
+                              style="display:none"
+                              type="submit"
+                              id="sub"
+                            />
                           </div>
-                          <input style="display:none" type="submit" id="sub" />
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </li>
-            </ul>
-          </form>
+                </li>
+              </ul>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="panel-overlay"></div>
-    <div class="page" id="page3" style="background:white">
-      <header class="bar bar-nav bar_color">
-        <a class="button button-link button-nav pull-left click_btn back_btn" id="page3Back">
-          <span class=" icon icon-left"></span>
-          <span data-i18n="ui_back"></span>
-        </a>
-        <h1 class="title title_color">
-          <span data-i18n="ui_selectSubDevice"></span>
-        </h1>
-        <a class="button button-link button-nav pull-right click_btn" id="showOrHide" data-i18n="ui_showOnlydevice">
-          <!-- <i class="icon icon-showOrHideBtn"></i> -->
-        </a>
-        <!-- <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushQRBtn">
+      <div class="panel-overlay"></div>
+      <div class="page" id="page3" style="background:white">
+        <header class="bar bar-nav bar_color">
+          <a
+            class="button button-link button-nav pull-left click_btn back_btn"
+            id="page3Back"
+          >
+            <span class=" icon icon-left"></span>
+            <span data-i18n="ui_back"></span>
+          </a>
+          <h1 class="title title_color">
+            <span data-i18n="ui_selectSubDevice"></span>
+          </h1>
+          <a
+            class="button button-link button-nav pull-right click_btn"
+            id="showOrHide"
+            data-i18n="ui_showOnlydevice"
+          >
+            <!-- <i class="icon icon-showOrHideBtn"></i> -->
+          </a>
+          <!-- <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushQRBtn">
           <i class="icon icon-scanQRcode"></i>
         </a> -->
-
-      </header>
-      <!-- <div class="bar bar-header-secondary">
+        </header>
+        <!-- <div class="bar bar-header-secondary">
         <div class="searchbar">
           <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
           <div class="search-input">
@@ -229,23 +326,28 @@
           </div>
         </div>
       </div> -->
-      <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;"
-        id="showSubName">
-        <!-- <div class="bar bar-header-secondary"
+        <div
+          class="bar bar-header-secondary"
+          style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;"
+          id="showSubName"
+        >
+          <!-- <div class="bar bar-header-secondary"
         style="margin-top:2.2rem;line-height:2.1rem;white-space: nowrap;overflow-y: auto;" id="showSubName"> -->
-        <!-- <i class="icon icon-select"></i> -->
-        <span id="subName2"><span data-i18n="ui_selectSubDevice"></span></span>
-        <!-- <a class="open-panel" style="display:none;"></a> -->
-      </div>
-      <!-- <div class="content-block">
+          <!-- <i class="icon icon-select"></i> -->
+          <span id="subName2"
+            ><span data-i18n="ui_selectSubDevice"></span
+          ></span>
+          <!-- <a class="open-panel" style="display:none;"></a> -->
+        </div>
+        <!-- <div class="content-block">
         <button id="showOrHide" type="button" class="button" data-i18n="ui_showOnlydevice">
         </button>
       </div> -->
-      <!-- <div class="content"> -->
-      <div class="list-block" style="margin-top:4.4rem;">
-        <!-- <div class="list-block" style="margin-top:6.4rem;"> -->
-        <ul class="list-container">
-          <!--<li class="item-content item-link">
+        <!-- <div class="content"> -->
+        <div class="list-block" style="margin-top:4.4rem;">
+          <!-- <div class="list-block" style="margin-top:6.4rem;"> -->
+          <ul class="list-container">
+            <!--<li class="item-content item-link">
                     <div class="item-inner">
                         <div class="item-title">型号</div>
                     </div>
@@ -255,33 +357,44 @@
                         <div class="item-title">型号</div>
                     </div>
                 </li>-->
-        </ul>
-        <ul class="personUl" id="personListUl"></ul>
-        <!-- </div> -->
+          </ul>
+          <ul class="personUl" id="personListUl"></ul>
+          <!-- </div> -->
+        </div>
       </div>
     </div>
-  </div>
 
-  <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
-  <script>
-    $.config = {
-      swipePanelOnlyClose: true
-    };
-  </script>
-  <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
-  <script src="libs/language.js"></script>
-  <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
-  <script src="libs/tools.js"></script>
-  <script src="js/patrolContent.js"></script>
-  <div class="popover popover-links">
-    <!-- Popover's angle arrow -->
-    <div class="popover-angle"></div>
+    <script
+      type="text/javascript"
+      src="libs/jquery-1.12.4.min.js"
+      charset="utf-8"
+    ></script>
+    <script>
+      $.config = {
+        swipePanelOnlyClose: true
+      };
+    </script>
+    <script
+      type="text/javascript"
+      src="libs/light7.min.js"
+      charset="utf-8"
+    ></script>
+    <script src="libs/language.js"></script>
+    <script
+      type="text/javascript"
+      src="libs/light7-swiper.min.js"
+      charset="utf-8"
+    ></script>
+    <script src="libs/tools.js"></script>
+    <script src="js/patrolContent.js"></script>
+    <div class="popover popover-links">
+      <!-- Popover's angle arrow -->
+      <div class="popover-angle"></div>
 
-    <!-- Popover content -->
-    <div class="popover-inner">
-      <span id="popShow">Link 4</span>
+      <!-- Popover content -->
+      <div class="popover-inner">
+        <span id="popShow">Link 4</span>
+      </div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
