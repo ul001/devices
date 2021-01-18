@@ -60,6 +60,7 @@ function updatePageData() {
   );
 }
 
+
 updatePageData();
 // }
 function getQRresultAndPush(param) {
@@ -624,6 +625,7 @@ function loadPage() {
       });
       return thisList;
     }
+
     if (showState == 0) {
       $("#showOrHide").text(Operation["ui_showalldevice"]);
       $(".item-dis").css("display", "none");
@@ -950,36 +952,80 @@ function loadPage() {
   $(".searchbar-cancel").click(function () {
     $("#searchUser").val("");
     fillData(-1);
+    $(".personUl").hide();
+    $("#deviceList").show();
+    $("#showSubName").show();
     // getGroupClass(thisGroupid);
   });
+
   //模糊搜索
   function getSearchUser() {
     $("#personListUl").empty();
     $(".personUl").show();
+    $("#deviceList").hide();
     $(".classUl").hide();
     $("#classList").hide();
+    $("#showSubName").hide();
     var typeStr = "";
     typeStr = "type=\"checkbox\"";
 
     // if (peopleType == "substation") {
-    Substation.postDataByAjax("/getSubstationListBySubGroupId", {
+    Substation.postDataByAjax("/subDeviceTreeSelectHideOrShowForChargerNew", {
+      fSubid: selectSubid,
+      fPlacecheckformid: fPlacecheckformid,
       search: $("#searchUser").val()
     }, function (data) {
       var html = "";
       // this.fSubid Substation.removeUndefined(this.fSubname)
-      $(data.data.list).each(function () {
-        html += "<li class=\"item-content item-link\" id=\"" + this.fSubid + "\">\n" +
-          "   <div class=\"item-inner finished\">\n" +
-          "       <div class=\"item-title\">" + this.fSubname + "<\/div>\n" +
+      $(data.data.subDeviceGroupList).each(function () {
+        var classCss = "";
+        var finishRadio = this.fenzuTotal;
+        if (finishRadio < 1 && finishRadio > 0) {
+          classCss = " halfFinished";
+        } else if (finishRadio == 1) {
+          classCss = " finished";
+        } else {
+          //                    classCss = " halfFinished";
+        }
+        html += "<li class=\"item-content item-link\" id=\"" + this.fSubdevicegroupid + "\">\n" +
+          "   <div class=\"item-inner " + classCss + "\">\n" +
+          "       <div class=\"item-title\">" + this.fSubdevicegroupname + "<\/div>\n" +
           "        </div>\n" +
           "</li>";
       });
       $("#personListUl").html(html);
       // $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
       // checkSelectPeople();
+      $(".personUl .item-link")
+        .unbind()
+        .click(function (event) {
+          if (!upLoadClicktag) {
+            return;
+          }
+          upLoadClicktag = false;
+          setTimeout(function () {
+            upLoadClicktag = true;
+          }, 200);
+          var clickId = $(this).attr("id");
+          thisGroupid = clickId;
+          $("#" + clickId)
+            .addClass("selectLi")
+            .siblings()
+            .removeClass("selectLi");
+          hasSave = false;
+          if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
+            $.router.loadPage("#page1");
+          } else {
+            $.router.back();
+          }
+          fillRightData();
+          //            });
+          event.stopPropagation();
+        });
+      event.stopPropagation();
     });
-
   }
+
   //page1
 
 }

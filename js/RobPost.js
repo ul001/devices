@@ -105,7 +105,7 @@ $(".item-add").click(function () {
         $("#searchUser").prop("placeholder", Operation['ui_selectorganizations']);
         selectUserList = workerUser;
     } else if (peopleType == "substation") {
-        $("#peopleType").text(Operation['ui_substation']);
+        $("#peopleType").text(Operation['ui_organizations']);
         $("#searchUser").prop("placeholder", Operation['ui_selectSubTip']);
         selectUserList = subList;
     }
@@ -182,7 +182,8 @@ function postTask() {
     selectType = $("#selectType").val();
     // }
     if (workerUser.length == 0) {
-        $.toast(Operation['ui_substation'] + Operation['ui_notEmpty']);
+        // ui_organizations
+        $.toast(Operation['ui_organizations'] + Operation['ui_notEmpty']);
         return;
     }
     if (startTime == "" || startTime == undefined) {
@@ -204,11 +205,22 @@ function postTask() {
             return;
         }
     }
+    //30字符
+    if ($("#selectType").val().length > 30) {
+        $.toast("标题长度超出限制！");
+        return;
+    }
+    //250字符
     var subIds = [];
     $(workerUser).each(function (i, obj) {
         subIds.push(obj.userId);
     });
     var subStr = subIds.join(",");
+    if (subStr.length > 250) {
+        $.toast("机构长度超出限制！");
+        return;
+    }
+
     var params = {};
     startTime = startTime.replace("T", " ");
     completeTime = completeTime.replace("T", " ");

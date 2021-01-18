@@ -189,7 +189,7 @@ function addItems(number, clickNum) {
                               </div>`;
                     });
                     // grabbed
-                    $(listDom).html(html);
+                    $(listDom).append(html);
                     pageNum++;
                     clickNum == 1 ? $(".showRobImg").show() : $(".showRobImg").hide();
                 } else {
@@ -277,7 +277,7 @@ function addItems(number, clickNum) {
                                   </div>
                               </div>`;
                     });
-                    $(listDom).html(html);
+                    $(listDom).append(html);
                     pageNum++;
                     clickNum == 1 ? $(".showRobImg").show() : $(".showRobImg").hide();
                 } else {
