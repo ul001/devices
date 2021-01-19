@@ -1024,7 +1024,9 @@ function loadPage() {
           }
           var address = $('span', this).text();
           address = address.replace("(", "").replace(")", "");
-          $("#subName").text(address);
+          var arrResult = address.split(',');
+          var strResult = arrResult.join('>');
+          $("#subName").text(strResult);
           fillRightData();
           //            });
           event.stopPropagation();
