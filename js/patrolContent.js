@@ -464,7 +464,11 @@ function loadPage() {
         .click();
       if (canClick == "false") {
         $($("input")).each(function () {
-          $(this).attr("readonly", true);
+          if (this.type == "search") {
+
+          } else {
+            $(this).attr("readonly", true);
+          }
         });
         $($(":radio")).each(function () {
           $(this).attr("disabled", true);
