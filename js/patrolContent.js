@@ -1023,7 +1023,7 @@ function loadPage() {
             $.router.back();
           }
           var address = $('span', this).text();
-          address = address.replace("(", "").replace(")", "").replace("-", ">");
+          address = address.replace("(", "").replace(")", "");
           $("#subName").text(address);
           fillRightData();
           //            });
