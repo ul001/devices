@@ -1024,7 +1024,7 @@ function loadPage() {
           }
           var address = $('span', this).text();
           address = address.replace("(", "").replace(")", "");
-          var arrResult = address.split(',');
+          var arrResult = address.split('-');
           var strResult = arrResult.join('>');
           $("#subName").text(strResult);
           fillRightData();
