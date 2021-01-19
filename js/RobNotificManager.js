@@ -378,6 +378,9 @@ function getNetData() {
                         }
                     }
                 });
+            } else {
+                $.toast(Operation['ui_noOneRob']);
+                $("#missionDetail").append('<p style="text-align:center;">' + Operation['ui_noOneRob'] + '</p>');
             }
         }
     });

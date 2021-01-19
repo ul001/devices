@@ -176,9 +176,9 @@ function addItems(number, clickNum) {
                                              } </span><span class="col-20"
                                                     style=${color}>${distance}</span></p>
                                           </div>
-                                          <p class="row"><span class="showTask"><span style="color:gray;">${
+                                          <p class="row"><span class="showTask col-30"><span style="color:gray;">${
                                             Operation["ui_RobNotificContent"]
-                                          } </span>${this.fWorkcontent}</span>
+                                          } </span></span><span class="col-70 workcontent" style="float:initial;">${this.fWorkcontent}</span>
                                              </p>
                                              <p class="row"><span class="showTask"><span style="color:gray;">${
                                             Operation["ui_RobReleasetime"]
@@ -265,9 +265,11 @@ function addItems(number, clickNum) {
                                              } </span><span class="col-20"
                                                     style=${color}>${distance}</span></p>
                                           </div>
-                                          <p class="row"><span class="showTask"><span style="color:gray;">${
+                                          <p class="row"><span class="showTask col-30"><span style="color:gray;">${
                                             Operation["ui_RobNotificContent"]
-                                          } </span>${this.fWorkcontent}</span>
+                                          } </span></span><span class="col-70 workcontent" style="float:initial;">${
+                                              this.fWorkcontent
+                                          } </span>
                                              </p>
                                              <p class="row"><span class="showTask"><span style="color:gray;">${
                                             Operation["ui_RobReleasetime"]

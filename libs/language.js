@@ -499,6 +499,7 @@ function getZhLanguage() {
     ui_RobPrincipal: "任务负责人：",
     ui_RobExecutor: "任务执行人：",
     ui_noFormResult: "该任务巡检单数据为空，暂无巡检结果！",
+    ui_noOneRob: "暂无人抢单",
     //断电通知
     ui_RobPostNotific: "发布通知",
     ui_RobNotific: "通知",
@@ -512,6 +513,7 @@ function getZhLanguage() {
     ui_Limitedsingleload: "限定抢单负荷(kW)",
     ui_pleaseInputload: "请输入负荷量",
     ui_selectinstitutions: "选择机构",
+    ui_Publisher: "发布机构",
     ui_RobendTime: "截止时间",
     ui_notificNumber: "通知编号",
     ui_Noticedetails: "通知详情",
@@ -1214,6 +1216,7 @@ function getEnLanguage() {
     ui_RobPrincipal: "Principal：",
     ui_RobExecutor: "Executor：",
     ui_noFormResult: "The data of this task inspection list is empty!",
+    ui_noOneRob: "No one grabs order",
     //断电通知
     ui_RobPostNotific: "PostNotification",
     ui_RobNotific: "Notification",
@@ -1227,6 +1230,7 @@ function getEnLanguage() {
     ui_Limitedsingleload: "Limited single load(kW)",
     ui_pleaseInputload: "Please enter the load",
     ui_selectinstitutions: "Select institutions",
+    ui_Publisher: "Publisher",
     ui_RobendTime: "End Time",
     ui_notificNumber: "Notice No:",
     ui_Noticedetails: "Notice details",
