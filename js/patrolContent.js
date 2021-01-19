@@ -993,7 +993,7 @@ function loadPage() {
         }
         html += "<li class=\"item-content item-link\" id=\"" + this.fSubdevicegroupid + "\">\n" +
           "   <div class=\"item-inner " + classCss + "\">\n" +
-          "       <div class=\"item-title\">" + this.fSubdevicegroupname + "<\/div>\n" +
+          "       <div class=\"item-title\">" + this.fSubdevicegroupname + "<span class=\"namepath\" style=\"font-size: 0.7rem;color: gray;\">(" + this.namepath + ")</span><\/div>\n" +
           "        </div>\n" +
           "</li>";
       });
@@ -1022,6 +1022,9 @@ function loadPage() {
           } else {
             $.router.back();
           }
+          var address = $('span', this).text();
+          address = address.replace("(", "").replace(")", "").replace("-", ">");
+          $("#subName").text(address);
           fillRightData();
           //            });
           event.stopPropagation();
