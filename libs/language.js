@@ -708,11 +708,14 @@ function getZhLanguage() {
     code_452: "用户或密码输入错误",
     code_453: "非admin用户，操作权限不足",
     code_454: "非组织机构负责人，没有权限查看",
-    code_455: "该机构暂未配置负责人，请联系管理员",
+    code_455: "非组织机构负责人，没有权限查看通知工单，请联系管理员",
     code_456: "抢单失败，抢单流程已结束",
     code_457: "您已拥有该工单，无需重复抢单",
     code_458: "抢单失败",
     code_459: "非工单发布人，无法关闭工单",
+    code_460: "无效验证码",
+    code_461: "不能包含发布人所在机构",
+    code_462: "xxxx组织机构未配置负责人或手机号",
     code_other: "操作失败",
     code_fail: "服务器异常"
   };
@@ -1428,6 +1431,9 @@ function getEnLanguage() {
     code_457: "you already have the work order, so there is no need to repeat the order.",
     code_458: "order grabbing failed",
     code_459: "the work order cannot be closed because it is not issued by the work order.",
+    code_460: "无效验证码",
+    code_461: "不能包含发布人所在机构",
+    code_462: "xxxx组织机构未配置负责人或手机号",
     code_other: "Operation failed",
     code_fail: "Server exception"
   };
