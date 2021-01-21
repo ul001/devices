@@ -955,6 +955,13 @@ function loadPage() {
 
   $(".searchbar-cancel").click(function () {
     $("#searchUser").val("");
+    //清除筛选页的subName2，详情页subName保留
+    // $("#subName2").text(Operation["ui_selectSubDevice"]);
+    // $("#subName").text(Operation["ui_selectSubDevice"]);
+    pids = [{
+      pid: -1,
+      pname: ""
+    }];
     fillData(-1);
     $(".personUl").hide();
     $("#deviceList").show();

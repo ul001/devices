@@ -184,7 +184,16 @@ function getNetData() {
                 if (organizations.length > 0) {
                     var orghtml = "";
                     $(organizations).each(function () {
-                        orghtml += '<span class="common">' + Substation.removeUndefined(this.fConame) + '<i data-type=\"' + this.fPatentid + '\" data-id=\"' + this.pId + '\" data-name=\"' + Substation.removeUndefined(this.fConame) + '\" class="icon icon-close"></i></span>';
+                        orghtml +=
+                            '<span class="common">' +
+                            Substation.removeUndefined(this.fConame) +
+                            '<i data-type="' +
+                            this.fPatentid +
+                            '" data-id="' +
+                            this.pId +
+                            '" data-name="' +
+                            Substation.removeUndefined(this.fConame) +
+                            '" class="icon icon-close"></i></span>';
                     });
                     $(".peopleList").html(orghtml);
                 }
@@ -396,7 +405,7 @@ $("#startTask").click(function () {
     sb += '                  <div class="codeDiv">';
     sb +=
         '                    <span class="codename">负 荷 </span><input id="canvasInput" type="text" class="sendInput" placeholder="请输入负荷(kW)"';
-    sb += '                      autocomplete="off" style="width:8rem;">';
+    sb += '                      autocomplete="off" style="width:8rem;margin-left: 0.3rem;">';
     // sb += '                    <span class="icon codeCanvasImg"></span>';
     //   sb +=
     // '                    <canvas id="canvas" width="100" height="38"></canvas>';
@@ -404,16 +413,16 @@ $("#startTask").click(function () {
     sb += "";
     sb += '                  <div class="codeDiv">';
     sb +=
-        '                    <span class="codename">验证码</span><input id="code" class="sendInput" type="text" placeholder="请输入短信验证码" autocomplete="off" style="width:4.1rem;"/>';
-    sb += '                    <span class="icon codeMsgImg"></span>';
-    sb +=
-        '                    <input id="btnSendCode" type="button" class="btn btn-default" disabled value="获取验证码" style="width:3.8rem;" />';
+        '                    <span class="codename">验证码</span><input id="code" class="sendInput" type="text" placeholder="请输入通知验证码"  autocomplete="off" style="width:8rem;margin-left: -0.3rem;"/>';
+    // sb += '                    <span class="icon codeMsgImg"></span>';
+    // sb +=
+    // '                    <input id="btnSendCode" type="button" class="btn btn-default" disabled value="获取验证码" style="width:3.8rem;" />';
     sb += "                  </div>";
     // sb += '                  <button class="btn" id="checkBtn" disabled>验证</button>';
     sb += "                </div>";
     // sb += '      </div>';
     var modal = $.modal({
-        title: "手机动态验证码",
+        title: "通知工单验证码",
         text: "*填写验证码即必须按通知内容执行",
         afterText: sb,
         buttons: [{
@@ -423,31 +432,31 @@ $("#startTask").click(function () {
                 text: "确定",
                 bold: true,
                 onClick: function () {
-                    var code = $("#code").val();
-                    Substation.getDataByAjaxNoLoading(
-                        "/checkSMSValid2", {
-                            code: code,
-                            msgId: msgId
-                        },
-                        function (data) {
-                            console.log(data);
-                            if (data == true) {
-                                controlClick();
-                            } else {
-                                if (data.msg) {
-                                    $.toast(data.msg);
-                                } else {
-                                    $.toast("验证失败");
-                                }
-                            }
-                            // sendCommand();
-                        }
-                    );
+                    // var code = $("#code").val();
+                    // Substation.getDataByAjaxNoLoading(
+                    //     "/checkSMSValid2", {
+                    //         code: code,
+                    //         msgId: msgId
+                    //     },
+                    //     function (data) {
+                    //         console.log(data);
+                    //         if (data == true) {
+                    controlClick();
+                    // } else {
+                    //     if (data.msg) {
+                    //         $.toast(data.msg);
+                    //     } else {
+                    //         $.toast("验证失败");
+                    //     }
+                    // }
+                    // sendCommand();
+                    //     }
+                    // );
                 }
             }
         ]
     });
-    showModel2(userPhone);
+    // showModel2(userPhone);
     // $.swiper($(modal).find('.swiper-container'), {
     //   pagination: '.swiper-pagination'
     // });
@@ -467,7 +476,7 @@ function showModel2(userPhone) {
         Substation.getDataByAjaxNoLoading("/sendSMSValid2", {}, function (data) {
             msgId = data;
             //负荷
-            targetload = $("#canvasInput").val();
+            // targetload = $("#canvasInput").val();
             // $("#checkBtn").removeAttr('disabled');
             // $("#checkBtn").unbind('click').on('click', function () {
             //   var code = $("#code").val();
@@ -483,10 +492,13 @@ function showModel2(userPhone) {
 //点击抢单
 function controlClick() {
     $.showPreloader(Operation["ui_loading"]);
+    var code = $("#code").val();
+    targetload = $("#canvasInput").val();
     Substation.getDataByAjaxNoLoading(
         "/grabWorkOrder", {
             fTargetload: targetload,
-            fWorkorderid: TaskNumber
+            fWorkorderid: TaskNumber,
+            verifyCode: code
         },
         function (data) {
             $.hidePreloader();
@@ -728,8 +740,8 @@ $("#clickManager").click(function () {
         upLoadClicktag = true;
     }, 1000);
     /*    localStorage.setItem("fSubname", "执行情况");
-                localStorage.setItem("missionSubid", missionsubid);
-                localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
+                  localStorage.setItem("missionSubid", missionsubid);
+                  localStorage.setItem("missionPlaceCheckFormId", placeCheckFormId);*/
     localStorage.setItem("taskID", taskID);
     if (missionState != "3") {
         localStorage.setItem("hiddenBtn", "NO");

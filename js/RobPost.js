@@ -171,6 +171,11 @@ function addCloseFunction() {
     }
 }
 
+// LimitNum
+$("#LimitNum").bind("input propertychange", function () {
+
+});
+
 //发布提交
 function postTask() {
     var startTime = $("#dateStart").val();
@@ -181,6 +186,10 @@ function postTask() {
     // if ($("#selectType").val() != undefined) {
     selectType = $("#selectType").val();
     // }
+    if (isNaN(parseFloat(LimitNum)) || parseFloat(LimitNum) <= 0) {
+        $.toast("限定抢单个数只能是正整数");
+        return;
+    }
     if (workerUser.length == 0) {
         // ui_organizations
         $.toast(Operation['ui_organizations'] + Operation['ui_notEmpty']);
@@ -236,15 +245,21 @@ function postTask() {
     };
     Substation.postDataByAjax("/releaseWorkOrder", params, function (data) {
         if (data.code == "200") {
-            $.alert(Operation['ui_postSuccess'], function () {
-                if (isAndroid) {
-                    android.refresh();
-                    android.goBack();
-                } else {
-                    localStorage.setItem("need-refresh", "true");
-                    window.history.back();
-                }
+            var workOrder = data.data.workOrderId;
+            Substation.getDataByAjax("/sendSMSValid2", {
+                workOrderId: workOrder
+            }, function (data) {
+                $.alert(Operation['ui_postSuccess'], function () {
+                    if (isAndroid) {
+                        android.refresh();
+                        android.goBack();
+                    } else {
+                        localStorage.setItem("need-refresh", "true");
+                        window.history.back();
+                    }
+                });
             });
+
         }
     });
     // } else {

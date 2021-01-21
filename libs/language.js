@@ -507,7 +507,7 @@ function getZhLanguage() {
     ui_Blackoutnotification: "断电通知",
     ui_notificationContent: "通知内容",
     ui_notificationContentTip: "请输入通知内容",
-    ui_pleaseInputNum: "请输入个数数量",
+    ui_pleaseInputNum: "请输入个数数量(正整数)",
     ui_pleaseInputTitle: "请输入标题",
     ui_Limitednumber: "限定抢单个数",
     ui_Limitedsingleload: "限定抢单负荷(kW)",

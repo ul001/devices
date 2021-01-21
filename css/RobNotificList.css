@@ -1,5 +1,6 @@
 .card p {
     margin: 0;
+    max-height: 3rem;
 }
 
 .card .card-content-inner {
