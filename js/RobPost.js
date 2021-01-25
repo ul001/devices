@@ -63,11 +63,11 @@ $("#selectType").change(function () {
 });
 
 function addRedNeed() {
-    if ($("#selectType").val() == 6 || $("#selectType").val() == 7) {
-        $(".rushContent").show();
-    } else {
-        $(".rushContent").hide();
-    }
+    // if ($("#selectType").val() == 6 || $("#selectType").val() == 7) {
+    $(".rushContent").show();
+    // } else {
+    //     $(".rushContent").hide();
+    // }
 }
 
 addRedNeed();
@@ -208,12 +208,12 @@ function postTask() {
         $.toast(Operation['ui_timeSelectError']);
         return;
     }
-    if ($("#selectType").val() == 6 || $("#selectType").val() == 7) {
-        if (taskContent == "" || taskContent == undefined) {
-            $.toast(Operation['ui_alarmTaskContent'] + Operation['ui_notEmpty']);
-            return;
-        }
+    // if ($("#selectType").val() == 6 || $("#selectType").val() == 7) {
+    if (taskContent == "" || taskContent == undefined) {
+        $.toast(Operation['ui_alarmTaskContent'] + Operation['ui_notEmpty']);
+        return;
     }
+    // }
     //30字符
     if ($("#selectType").val().length > 30) {
         $.toast("标题长度超出限制！");

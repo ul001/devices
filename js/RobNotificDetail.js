@@ -113,6 +113,7 @@ function getNetData() {
             if (data.hasOwnProperty("detail")) {
                 detail = data.detail;
                 placeCheckFormId = detail.fWorkorderid;
+                grabbedNum = detail.grabbed;
             }
             // if (data.hasOwnProperty("haveResult")) {
             //     haveResult = data.haveResult == true;
@@ -456,6 +457,7 @@ $("#startTask").click(function () {
             }
         ]
     });
+    $("#phoneInput").val(userPhone);
     // showModel2(userPhone);
     // $.swiper($(modal).find('.swiper-container'), {
     //   pagination: '.swiper-pagination'
@@ -470,7 +472,7 @@ $("#startTask").click(function () {
 });
 
 function showModel2(userPhone) {
-    $("#phoneInput").val(userPhone);
+
     //   $.codeDraw($("#canvas"), $("#canvasInput"), function() {
     $.countInterval($("#phoneInput"), $("#btnSendCode"), function () {
         Substation.getDataByAjaxNoLoading("/sendSMSValid2", {}, function (data) {
@@ -722,6 +724,7 @@ $(".pull-left.click_btn").click(function () {
             //            window.history.back();
         }
     } else {
+        localStorage.setItem("need-refresh", "true");
         if (isAndroid) {
             android.goBack();
         } else {

@@ -50,13 +50,13 @@ var p2;
 var missionType = "";
 
 //返回按钮事件
-$(".suibian").click(function() {
+$(".suibian").click(function () {
   if (isPush == "1") {
     //推送详情点击返回事件
     if (isAndroid) {
       if (isLocJump != undefined && isLocJump != null && isLocJump != "") {
         window.history.back();
-      }else{
+      } else {
         android.goBack();
       }
     } else if (isIOS) {
@@ -65,11 +65,11 @@ $(".suibian").click(function() {
     }
   } else {
     if (isAndroid) {
-        if (isLocJump != undefined && isLocJump != null && isLocJump != "") {
-            window.history.back();
-        }else{
-          android.goBack();
-        }
+      if (isLocJump != undefined && isLocJump != null && isLocJump != "") {
+        window.history.back();
+      } else {
+        android.goBack();
+      }
     } else {
       window.history.back();
     }
@@ -100,7 +100,7 @@ function initialize() {
     offset: new BMap.Size(30, -30) //设置文本偏移量
   };
   var output = "驾车时间：";
-  var searchComplete = function(results) {
+  var searchComplete = function (results) {
     if (!results || JSON.stringify(results) == "{}") {
       return;
     }
@@ -153,7 +153,7 @@ function walk() {
     offset: new BMap.Size(30, -30) //设置文本偏移量
   };
   var output = "步行时间：";
-  var searchComplete = function(results) {
+  var searchComplete = function (results) {
     if (!results || JSON.stringify(results) == "{}") {
       $.toast("未查询到步行路线，建议选择其他交通方式！");
       return;
@@ -206,7 +206,7 @@ function drive() {
     offset: new BMap.Size(30, -30) //设置文本偏移量
   };
   var output = "驾车时间：";
-  var searchComplete = function(results) {
+  var searchComplete = function (results) {
     if (!results || JSON.stringify(results) == "{}") {
       $.toast("查询失败");
       return;
@@ -302,8 +302,7 @@ function getLocAndCheckIn(loc) {
   }
   if (myLat && myLon) {
     loadScript();
-  } else {
-  }
+  } else {}
 }
 
 // deviceProblemSum: 0
@@ -331,14 +330,14 @@ function getNetData() {
   Substation.getDataByAjax(
     "/getOrderTaskDetailByfTaskid",
     "fTaskid=" + taskid,
-    function(data) {
+    function (data) {
       if (data.hasOwnProperty("orderTaskDetail")) {
         var userList = data.orderTaskDetail.userids;
         subDetail = data.orderTaskDetail;
         var strVar;
         if (userList && userList.length > 0) {
           var namelist = [];
-          $.each(userList, function(i, value) {
+          $.each(userList, function (i, value) {
             namelist.push(value.userName);
           });
           var showUsers = namelist.join(",");
@@ -420,7 +419,7 @@ function getNetData() {
         localStorage.removeItem("postTask");
         // localStorage.setItem("postTask", "false");
         //跳转视频
-        $("#jumpVideo").click(function() {
+        $("#jumpVideo").click(function () {
           if (isAndroid) {
             android.videoWatch(subDetail.fSubid);
           } else if (isIOS) {
@@ -481,7 +480,7 @@ function navigation() {
 }
 
 //选人
-$(".item-add").click(function() {
+$(".item-add").click(function () {
   $.closeModal(".popup-services");
   peopleType = $(this).attr("id");
   $.router.loadPage("#page1");
@@ -501,10 +500,10 @@ $(".item-add").click(function() {
   if (selectUserList.length > 0) {
     $("#showSelected").html(
       Operation["ui_hasSelected"] +
-        ":" +
-        selectUserList.length +
-        Operation["ui_personNum"] +
-        "<i class='icon icon-up'></i>"
+      ":" +
+      selectUserList.length +
+      Operation["ui_personNum"] +
+      "<i class='icon icon-up'></i>"
     );
     $("#showSelected")
       .off("click", goToSelectedPage)
@@ -518,7 +517,7 @@ $(".item-add").click(function() {
 function listPeople(thisType, userList) {
   var html = "";
   if (userList.length > 0) {
-    $(userList).each(function() {
+    $(userList).each(function () {
       html +=
         '<span class="common">' +
         Substation.removeUndefined(this.userName) +
@@ -546,18 +545,17 @@ function getGroupClass(pid) {
   $("#classList").show();
 
   Substation.getDataByAjax(
-    "/selectUserGroupByPid",
-    {
+    "/selectUserGroupByPid", {
       userGroupPid: pid
     },
-    function(data) {
+    function (data) {
       if (
         data.hasOwnProperty("userGroupList") &&
         data.userGroupList.length > 0
       ) {
         $(".classUl").show();
         var html = "";
-        $(data.userGroupList).each(function() {
+        $(data.userGroupList).each(function () {
           html +=
             "<li>\n" +
             '    <div class="item-content">\n' +
@@ -595,18 +593,17 @@ function getGroupClass(pid) {
 function getPersonList(gid) {
   $("#personListUl").empty();
   Substation.getDataByAjax(
-    "/selectUserListByGroupId",
-    {
+    "/selectUserListByGroupId", {
       groupId: gid
     },
-    function(data) {
+    function (data) {
       if (data.hasOwnProperty("userList") && data.userList.length > 0) {
         $(".personUl").show();
         if (peopleType == "charger") {
           $("#selectAll").hide();
         }
         var html = "";
-        $(data.userList).each(function() {
+        $(data.userList).each(function () {
           html +=
             "<li>\n" +
             '    <label class="label-checkbox item-content">\n' +
@@ -648,10 +645,10 @@ function nextClassClick() {
     .on("click", preClick);
   $("#classList .item-title").append(
     '<i class="icon icon-nextArrow"></i><span data-id="' +
-      clickPid +
-      '">' +
-      clickName +
-      "</span>"
+    clickPid +
+    '">' +
+    clickName +
+    "</span>"
   );
   $("#classList .item-title").scrollLeft(10000);
   getGroupClass(clickPid);
@@ -680,7 +677,7 @@ function addChangeListener() {
         userName: thisUsername
       });
     } else {
-      $(selectUserList).each(function(i, obj) {
+      $(selectUserList).each(function (i, obj) {
         if (obj.userId == thisUserid) {
           selectUserList.splice(i, 1);
           return false;
@@ -692,10 +689,10 @@ function addChangeListener() {
     if (selectUserList.length > 0) {
       $("#showSelected").html(
         Operation["ui_hasSelected"] +
-          ":" +
-          selectUserList.length +
-          Operation["ui_personNum"] +
-          "<i class='icon icon-up'></i>"
+        ":" +
+        selectUserList.length +
+        Operation["ui_personNum"] +
+        "<i class='icon icon-up'></i>"
       );
       $("#showSelected")
         .off("click", goToSelectedPage)
@@ -707,7 +704,7 @@ function addChangeListener() {
   }
 }
 
-$("#selectAll").change(function() {
+$("#selectAll").change(function () {
   if ($("#selectAll input[type='checkbox']").prop("checked")) {
     $("#personListUl input[type='checkbox']:not(:checked)").click();
   } else {
@@ -717,7 +714,7 @@ $("#selectAll").change(function() {
 
 //选择的人员复选框选中
 function checkSelectPeople() {
-  $(selectUserList).each(function() {
+  $(selectUserList).each(function () {
     $("#" + this.userId).prop("checked", true);
   });
 }
@@ -733,7 +730,7 @@ function showPage2List() {
   $("#page2 .content").scrollTop(0);
   $("#selectedUl").empty();
   var html = "";
-  $(selectUserList).each(function() {
+  $(selectUserList).each(function () {
     html +=
       '<li data-remove="' +
       this.userId +
@@ -792,13 +789,12 @@ function getSearchUser() {
   }
   if (peopleType == "substation") {
     Substation.postDataByAjax(
-      "/getSubstationListBySubGroupId",
-      {
+      "/getSubstationListBySubGroupId", {
         search: $("#searchUser").val()
       },
-      function(data) {
+      function (data) {
         var html = "";
-        $(data.data.list).each(function() {
+        $(data.data.list).each(function () {
           html +=
             "<li>\n" +
             '    <label class="label-checkbox item-content">\n' +
@@ -829,13 +825,12 @@ function getSearchUser() {
     );
   } else {
     Substation.postDataByAjax(
-      "/getUserListByCondition",
-      {
+      "/getUserListByCondition", {
         searchKey: $("#searchUser").val()
       },
-      function(data) {
+      function (data) {
         var html = "";
-        $(data.data).each(function() {
+        $(data.data).each(function () {
           html +=
             "<li>\n" +
             '    <label class="label-checkbox item-content">\n' +
@@ -867,7 +862,7 @@ function getSearchUser() {
   }
 }
 
-$("#searchUser").bind("keydown", function(event) {
+$("#searchUser").bind("keydown", function (event) {
   if (event.keyCode == 13) {
     if ($("#searchUser").val() != "") {
       getSearchUser();
@@ -876,7 +871,7 @@ $("#searchUser").bind("keydown", function(event) {
   }
 });
 
-$(".searchbar-cancel").click(function() {
+$(".searchbar-cancel").click(function () {
   $("#searchUser").val("");
   getGroupClass(thisGroupid);
 });
@@ -886,7 +881,7 @@ function showPage2List() {
   $("#page2 .content").scrollTop(0);
   $("#selectedUl").empty();
   var html = "";
-  $(selectUserList).each(function() {
+  $(selectUserList).each(function () {
     html +=
       '<li data-remove="' +
       this.userId +
@@ -926,7 +921,7 @@ function addCloseFunction() {
   var thisUsername = $(this).attr("data-name");
   var thisType = $(this).attr("data-type");
   if (thisType == "charger") {
-    $(chargerUser).each(function(i, obj) {
+    $(chargerUser).each(function (i, obj) {
       if (obj.userId == thisUserid) {
         chargerUser.splice(i, 1);
         return false;
@@ -936,7 +931,7 @@ function addCloseFunction() {
       $(".peopleList.charger").hide();
     }
   } else if (thisType == "worker") {
-    $(workerUser).each(function(i, obj) {
+    $(workerUser).each(function (i, obj) {
       if (obj.userId == thisUserid) {
         workerUser.splice(i, 1);
         return false;
@@ -946,7 +941,7 @@ function addCloseFunction() {
       $(".peopleList.worker").hide();
     }
   } else if (thisType == "substation") {
-    $(subList).each(function(i, obj) {
+    $(subList).each(function (i, obj) {
       if (obj.userId == thisUserid) {
         subList.splice(i, 1);
         return false;
@@ -963,7 +958,7 @@ function removeUser() {
   var thisUserid = $(this).attr("data-id");
   var thisUsername = $(this).attr("data-name");
   $("li[data-remove='" + thisUserid + "']").remove();
-  $(selectUserList).each(function(i, obj) {
+  $(selectUserList).each(function (i, obj) {
     if (obj.userId == thisUserid) {
       selectUserList.splice(i, 1);
       return false;
@@ -973,10 +968,10 @@ function removeUser() {
   if (selectUserList.length > 0) {
     $("#showSelected").html(
       Operation["ui_hasSelected"] +
-        ":" +
-        selectUserList.length +
-        Operation["ui_personNum"] +
-        "<i class='icon icon-up'></i>"
+      ":" +
+      selectUserList.length +
+      Operation["ui_personNum"] +
+      "<i class='icon icon-up'></i>"
     );
     $("#showSelected")
       .off("click", goToSelectedPage)
@@ -988,7 +983,7 @@ function removeUser() {
   $("#numberShow").html(selectUserList.length);
 }
 
-$("#cancel").on("click", function() {
+$("#cancel").on("click", function () {
   $.popup(".popup-about");
 });
 
@@ -996,17 +991,16 @@ $("#cancel").on("click", function() {
 function publishRobTask() {
   if (selectUserList.length && subDetail) {
     var userIds = [];
-    $(selectUserList).each(function(i, obj) {
+    $(selectUserList).each(function (i, obj) {
       userIds.push(obj.userId);
     });
     var userStrs = userIds.join(",");
     Substation.getDataByAjax(
-      "/achieveOrderTask",
-      {
+      "/achieveOrderTask", {
         fTaskid: taskid,
         userIds: userStrs
       },
-      function(data) {
+      function (data) {
         $.toast("抢单成功！");
         localStorage.setItem("need-refresh", "true");
         if (isAndroid) {
@@ -1022,7 +1016,7 @@ function publishRobTask() {
 
 //解决键盘遮挡问题
 var h = $(window).height();
-window.addEventListener("resize", function() {
+window.addEventListener("resize", function () {
   if ($(window).height() < h) {
     $(".bar.bar-footer").hide();
     $(".bar-footer~.content").css("bottom", "0");
@@ -1035,7 +1029,7 @@ window.addEventListener("resize", function() {
     document.activeElement.tagName == "INPUT" ||
     document.activeElement.tagName == "TEXTAREA"
   ) {
-    window.setTimeout(function() {
+    window.setTimeout(function () {
       document.activeElement.scrollIntoViewIfNeeded();
     }, 0);
   }
