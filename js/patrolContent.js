@@ -12,7 +12,7 @@ var tempNum = -1;
 var imgNum = 0;
 var pids = [{
   pid: -1,
-  pname: "设备分组"
+  pname: Operation["ui_selectSubDevice"]
 }];
 var thisGroupid = -1;
 var clickGroupTree = "";
@@ -475,7 +475,12 @@ function loadPage() {
           $(this).attr("disabled", true);
         });
         $($("select")).each(function () {
-          $(this).attr("disabled", true);
+          var selectID = $(this).attr('id');
+          if (selectID == 'taskType') {
+
+          } else {
+            $(this).attr("disabled", true);
+          }
         });
         $(".upload_img_wrap .upload_img").unbind();
       }
@@ -656,11 +661,11 @@ function loadPage() {
       $(".close-panel").click();
       var fTasktypeid = $("#taskType").val();
       if (fTasktypeid == 1) {
-        // showState = 1;
+        showState = 1;
         // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
         $(".item-dis").css("display", "flex");
       } else {
-        // showState = 0;
+        showState = 0;
         // $("#showOrHide").text(Operation["ui_showalldevice"]);
         $(".item-dis").css("display", "none");
       }
@@ -1047,7 +1052,7 @@ function loadPage() {
     // $("#subName").text(Operation["ui_selectSubDevice"]);
     // pids = [{
     //   pid: -1,
-    //   pname: "设备分组"
+    //   pname: Operation["ui_selectSubDevice"]
     // }];
     // clickNum = 0;
     // $("#subName2").empty();
@@ -1125,10 +1130,10 @@ function loadPage() {
           address = address.replace("(", "").replace(")", "");
           var arrResult = address.split('-');
           var strResult = arrResult.join('>');
-          $("#subName").text("设备分组>" + strResult);
+          $("#subName").text(Operation["ui_selectSubDevice"] + ">" + strResult);
           // pids = [{
           //   pid: -1,
-          //   pname: "设备分组"
+          //   pname: Operation["ui_selectSubDevice"]
           // }];
           // clickNum = 0;
           // $("#subName2").empty();

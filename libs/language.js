@@ -161,7 +161,7 @@ function getZhLanguage() {
     //patrolContent
     ui_Subinspection: "变电所巡检",
     ui_selectSub: "选择设备分组",
-    ui_selectSubDevice: "设备分组",
+    ui_selectSubDevice: "查找设备",
     //patrolContent
     // ui_showOnlydevice: "仅显示有巡检项的设备分类",
     ui_showOnlydevice: "仅显示含巡检项的分类",
