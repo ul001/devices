@@ -269,6 +269,12 @@ label.label-checkbox i.icon-form-checkbox {
 }
 
 i.icon.icon-selectSome {
+  width: 1.1rem;
+  height: 1.1rem;
+  background-image: url(../img/xunselect.png);
+}
+
+i.icon.icon-selectSome2 {
   width: 1rem;
   height: 1rem;
   background-image: url(../img/i-selectSome.png);
@@ -316,4 +322,97 @@ i.icon-showOrHideBtn {
   height: 1rem;
   margin-bottom: 0.2rem;
   background-image: url(../img/i-baocunban.png);
+}
+
+#panel-right-demo {
+  background-color: #ffffff;
+  color: #3d4145;
+  overflow: hidden;
+}
+
+#taskType,
+#timeRank {
+  width: 100%;
+}
+
+.btnBar {
+  /*position:absolute;*/
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  position: fixed;
+}
+
+.btnBar .button {
+  border-radius: initial;
+}
+
+#searchBtn {
+  background: #02a8a6;
+}
+
+/* 
+.button.button-fill.button-cancel {
+    background: #ccc;
+    color: #3d4145;
+} */
+
+.content-block .buttons-row .button {
+  font-size: 0.75rem;
+  border-color: #02a8a6;
+  color: #02a8a6;
+}
+
+.content-block .buttons-row .button.active {
+  font-size: 0.75rem;
+  border-color: #02a8a6;
+  color: #fff;
+  background-color: #02a8a6;
+}
+
+.content-block .buttons-row {
+  margin: 0.3rem 0;
+}
+
+#panel-right-demo .content-block {
+  height: calc(100% - 5.9rem);
+  overflow: auto;
+}
+
+#chargeSelect,
+#doSelect {
+  border-radius: 0.25rem;
+  border: 0.05rem solid #cccccc;
+  height: 1.5rem;
+  margin: 0.1rem 0 0.5rem 0;
+  width: 100%;
+  padding-left: 0.25rem;
+}
+
+.button.button-fill.button-reset {
+  background-color: #dcdcdc;
+  color: #3d4145;
+}
+
+
+.preClass {
+  color: #01ADA8;
+}
+
+i.icon.icon-nextclass {
+  width: 0.7rem;
+  height: 0.7rem;
+  background-image: url(../img/i-nextclass.png);
+  margin-bottom: .1rem;
+}
+
+i.icon.icon-nextArrow {
+  width: 0.75rem;
+  height: 0.75rem;
+  background-image: url(../img/i-nextarrow.png);
+}
+
+.nextClass {
+  color: #01ADA8;
+  font-size: .7rem;
 }

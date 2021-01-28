@@ -27,14 +27,14 @@
     width: 0.7rem;
     height: 0.7rem;
     margin-bottom: 0.2rem;
-    background-image: url(../img/i-saoma3.png);
+    background-image: url(../img/i-delete.png);
 }
 
 .icon.icon-jinyong {
     width: 0.7rem;
     height: 0.7rem;
     margin-bottom: 0.2rem;
-    background-image: url(../img/i-delete.png);
+    background-image: url(../img/i-jinyong.png);
 }
 
 .icon.icon-clone {

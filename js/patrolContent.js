@@ -12,7 +12,7 @@ var tempNum = -1;
 var imgNum = 0;
 var pids = [{
   pid: -1,
-  pname: ""
+  pname: "设备分组"
 }];
 var thisGroupid = -1;
 var clickGroupTree = "";
@@ -553,21 +553,21 @@ function loadPage() {
 
   function fillH5(parentId, thisList) {
     var ul;
-    if (parentId == -1) {
-      ul = $(".list-block .list-container");
-      ul.empty();
-    } else {
-      ul = $(".list-block .list-container");
-      ul.html(
-        '<li class="item-content back-parent">\n' +
-        '                        <div class="item-inner">\n' +
-        '                            <div class="item-title"><i class="icon icon-goprev"></i>' +
-        Operation["ui_upperlevel"] +
-        "</div>\n" +
-        "                        </div>\n" +
-        "                    </li>"
-      );
-    }
+    // if (parentId == -1) {
+    ul = $(".list-block .list-container");
+    ul.empty();
+    // } else {
+    //   ul = $(".list-block .list-container");
+    //   ul.html(
+    //     '<li class="item-content back-parent">\n' +
+    //     '                        <div class="item-inner">\n' +
+    //     '                            <div class="item-title"><i class="icon icon-goprev"></i>' +
+    //     Operation["ui_upperlevel"] +
+    //     "</div>\n" +
+    //     "                        </div>\n" +
+    //     "                    </li>"
+    //   );
+    // }
     $(thisList).each(function () {
       var li = "";
       var linkStr = '<li class="item-content item-link';
@@ -631,10 +631,10 @@ function loadPage() {
     }
 
     if (showState == 0) {
-      $("#showOrHide").text(Operation["ui_showalldevice"]);
+      // $("#showOrHide").text(Operation["ui_showalldevice"]);
       $(".item-dis").css("display", "none");
     } else {
-      $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+      // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
       $(".item-dis").css("display", "flex");
     }
     $("#showOrHide")
@@ -642,16 +642,70 @@ function loadPage() {
       .click(function () {
         if (showState == 0) {
           showState = 1;
-          $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+          // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
           $(".item-dis").css("display", "flex");
         } else {
           showState = 0;
-          $("#showOrHide").text(Operation["ui_showalldevice"]);
+          // $("#showOrHide").text(Operation["ui_showalldevice"]);
           $(".item-dis").css("display", "none");
         }
       });
     linkClick(parentId);
     addBackClick();
+  }
+
+  //跳下级事件
+  // function nextClassClick() {
+  //   var clickPid = $(this).attr("data-id");
+  //   thisGroupid = clickPid;
+  //   // $("#selectAll input[type='checkbox']").removeAttr("checked");
+  //   var clickName = $(this).attr("data-name");
+  //   $("#subName2 span").addClass("preClass");
+  //   $(".preClass").off("click", preClick).on("click", preClick);
+  //   $("#subName2").append("<i class=\"icon icon-nextArrow\"></i><span data-id=\"" + clickPid + "\">" + clickName + "</span>")
+  //   $("#subName2").scrollLeft(10000);
+  //   fillData(clickPid);
+  // }
+
+  function getPidIndex(arr, clickpid) {
+    var i = arr.length;
+    while (i--) {
+      if (arr[i].pid == clickpid) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  //跳上级事件
+  function preClick() {
+    var clickPid = $(this).attr("data-id");
+    // thisGroupid = clickPid;
+    // $("#selectAll input[type='checkbox']").removeAttr("checked");
+    var index = getPidIndex(pids, clickPid) + 1;
+    var delIndex = pids.length - index;
+    pids.splice(index, delIndex);
+    $(this).removeClass("preClass");
+    $(this).nextAll().remove();
+    if (clickNum > 0) {
+      //点击数减一
+      clickNum = clickNum - delIndex + 1;
+    }
+    fillData(clickPid);
+    var titleTree = "";
+    clickGroupTree = "";
+    if (pids.length > 1) {
+      $(pids).each(function () {
+        titleTree += this.pname + ">";
+        clickGroupTree += this.pname + "-";
+      });
+    } else {
+      titleTree = this.pname;
+      clickGroupTree = this.pname;
+    }
+    clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
+    var titleTreeName = titleTree.substring(0, titleTree.length - 1);
+    $("#subName").text(titleTreeName);
   }
 
   function linkClick(parentId) {
@@ -686,18 +740,11 @@ function loadPage() {
             pid: clickId,
             pname: clickName
           });
-          if (pids.length > 2) {
-            var titleTrees = "";
-            $(pids).each(function () {
-              if (this.pid == -1) {} else {
-                titleTrees += this.pname + ">";
-              }
-            });
-            // var titleTreeName = titleTree.substring(1, titleTree.length - 1);
-            $("#subName2").text(titleTrees);
-          } else {
-            $("#subName2").text(clickName);
-          }
+
+          $("#subName2 span").addClass("preClass");
+          $(".preClass").off("click", preClick).on("click", preClick);
+          $("#subName2").append("<i class=\"icon icon-nextArrow\"></i><span data-id=\"" + clickId + "\">" + clickName + "</span>")
+          $("#subName2").scrollLeft(10000);
           $(".parent-page").css("display", "none");
           $(".child-page").css("display", "block");
           fillData(clickId);
@@ -712,16 +759,23 @@ function loadPage() {
         hasSave = false;
         var thisId = clickId;
         var clickName = $("#" + thisId + " .item-title").text();
-        if (pids[clickNum + 1] == null) {
+        var lastList = getSubDeviceListByPid(allGroupList, pids[pids.length - 1].pid);
+        var needPush = 0;
+        $(lastList).each(function () {
+          if (this.name == clickName) {
+            needPush = 1;
+          }
+        });
+        if (needPush == 0) {
+          pids[pids.length - 1] = {
+            pid: thisId,
+            pname: clickName
+          };
+        } else {
           pids.push({
             pid: thisId,
             pname: clickName
           });
-        } else {
-          pids[clickNum + 1] = {
-            pid: thisId,
-            pname: clickName
-          };
         }
         var titleTree = "";
         clickGroupTree = "";
@@ -730,9 +784,9 @@ function loadPage() {
           clickGroupTree += this.pname + "-";
         });
         clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
-        var titleTreeName = titleTree.substring(1, titleTree.length - 1);
+        var titleTreeName = titleTree.substring(0, titleTree.length - 1);
         $("#subName").text(titleTreeName);
-        $("#subName2").text(titleTreeName);
+        // $("#subName2").text(titleTreeName);
         if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
           $.router.loadPage("#page1");
         } else {
@@ -832,14 +886,14 @@ function loadPage() {
             if ($(".buttons-tab .tab-link:last").hasClass("active")) {
               $(".icon-select").click();
             }
-            $(".open-panel").click();
+            // $(".open-panel").click();
           },
           function () {
-            $(".open-panel").click();
+            // $(".open-panel").click();
           }
         );
       } else {
-        $(".open-panel").click();
+        // $(".open-panel").click();
       }
     });
   }
@@ -929,9 +983,9 @@ function loadPage() {
       clickGroupTree += this.pname + "-";
     });
     clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
-    var titleTreeName = titleTree.substring(1, titleTree.length - 1);
+    var titleTreeName = titleTree.substring(0, titleTree.length - 1);
     $("#subName").text(titleTreeName);
-    $("#subName2").text(titleTreeName);
+    // $("#subName2").text(titleTreeName);
     fillRightData();
     //        $(".close-panel").click();
     $("#" + clickItemNum).click();
@@ -941,7 +995,7 @@ function loadPage() {
     localStorage.setItem("acqrType", "0");
   } else {
     //每次进入页面优先弹出
-    $(".open-panel").click();
+    $(".showNext").click();
   }
 
   $('#searchUser').bind('keydown', function (event) {
@@ -958,11 +1012,14 @@ function loadPage() {
     //清除筛选页的subName2，详情页subName保留
     // $("#subName2").text(Operation["ui_selectSubDevice"]);
     // $("#subName").text(Operation["ui_selectSubDevice"]);
-    pids = [{
-      pid: -1,
-      pname: ""
-    }];
-    fillData(-1);
+    // pids = [{
+    //   pid: -1,
+    //   pname: "设备分组"
+    // }];
+    // clickNum = 0;
+    // $("#subName2").empty();
+    // $("#subName2").html('<span data-id="-1" class="preClass">设备分组</span>');
+    // fillData(-1);
     $(".personUl").hide();
     $("#deviceList").show();
     $("#showSubName").show();
@@ -1033,7 +1090,14 @@ function loadPage() {
           address = address.replace("(", "").replace(")", "");
           var arrResult = address.split('-');
           var strResult = arrResult.join('>');
-          $("#subName").text(strResult);
+          $("#subName").text("设备分组>" + strResult);
+          // pids = [{
+          //   pid: -1,
+          //   pname: "设备分组"
+          // }];
+          // clickNum = 0;
+          // $("#subName2").empty();
+          // $("#subName2").html('<span data-id="-1" class="preClass">设备分组</span>');
           fillRightData();
           //            });
           event.stopPropagation();
@@ -1653,7 +1717,7 @@ $("#backBtn").click(function () {
 });
 
 //点击筛选
-$(".open-panel").click(function () {
+$(".showNext").click(function () {
   $.router.loadPage("#page3");
 });
 

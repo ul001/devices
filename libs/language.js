@@ -163,6 +163,7 @@ function getZhLanguage() {
     //patrolContent
     // ui_showOnlydevice: "仅显示有巡检项的设备分类",
     ui_showOnlydevice: "含巡检项分类",
+    ui_InspectionItemsOvertCovert: "巡检项显隐",
     ui_DefectRegist: "缺陷登记",
     ui_hasnosave: "当前巡检信息尚未保存，是否需要保存？",
     ui_nodeviceInThis: "此分组下无设备！",
@@ -894,6 +895,7 @@ function getEnLanguage() {
     ui_Subinspection: "Substation inspection",
     //patrolContent
     ui_showOnlydevice: "Show only device",
+    ui_InspectionItemsOvertCovert: "Inspection Items Overt or Covert",
     ui_DefectRegist: "Defect Regist",
     ui_hasnosave: "The current patrol information has not been saved. Are you want to save?",
     ui_nodeviceInThis: "No devices under this group!",
