@@ -75,6 +75,8 @@ function getZhLanguage() {
     ui_copySuccess: "复制成功！",
     ui_generateQRcode: "生成二维码",
     ui_scanCodebind: "扫码绑定",
+    ui_scanandscan: "扫一扫",
+    ui_findDevices: "查找设备",
     ui_deleteQRcode: "删除二维码",
     //allPatrolRecord
     ui_Patrolrecord: "巡检记录",
@@ -162,8 +164,8 @@ function getZhLanguage() {
     ui_selectSubDevice: "设备分组",
     //patrolContent
     // ui_showOnlydevice: "仅显示有巡检项的设备分类",
-    ui_showOnlydevice: "含巡检项分类",
-    ui_InspectionItemsOvertCovert: "巡检项显隐",
+    ui_showOnlydevice: "仅显示含巡检项的分类",
+    ui_InspectionItemsOvertCovert: "设备分组显隐",
     ui_DefectRegist: "缺陷登记",
     ui_hasnosave: "当前巡检信息尚未保存，是否需要保存？",
     ui_nodeviceInThis: "此分组下无设备！",
@@ -439,7 +441,7 @@ function getZhLanguage() {
     ui_selectPeople: "选择",
     ui_selectPosition: "选择仪表点位",
     ui_selectUser: "请输入用户名或姓名进行搜索",
-    ui_selectTerminalGroup: "请输入末端分组名称进行搜索",
+    ui_selectTerminalGroup: "输入末端设备分类名称进行搜索",
     ui_hasSelected: "已选择",
     ui_organization: "用户组",
     ui_personNum: "个",
@@ -798,6 +800,8 @@ function getEnLanguage() {
     ui_copySuccess: "Copy Success！",
     ui_generateQRcode: "GenerateQRcode",
     ui_scanCodebind: "ScanCodebind",
+    ui_scanandscan: "Scan",
+    ui_findDevices: "FindDevices",
     ui_deleteQRcode: "DeleteQRcode",
     //allPatrolRecord
     ui_Patrolrecord: "Patrol Record",
@@ -895,7 +899,7 @@ function getEnLanguage() {
     ui_Subinspection: "Substation inspection",
     //patrolContent
     ui_showOnlydevice: "Show only device",
-    ui_InspectionItemsOvertCovert: "Inspection Items Overt or Covert",
+    ui_InspectionItemsOvertCovert: "Device Items Overt or Covert",
     ui_DefectRegist: "Defect Regist",
     ui_hasnosave: "The current patrol information has not been saved. Are you want to save?",
     ui_nodeviceInThis: "No devices under this group!",

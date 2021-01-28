@@ -60,7 +60,6 @@ function updatePageData() {
   );
 }
 
-
 updatePageData();
 // }
 function getQRresultAndPush(param) {
@@ -78,6 +77,8 @@ function getQRresultAndPush(param) {
     $.toast("非本平台二维码");
     return;
   }
+  //隐藏空白页
+  $("#outTip").hide();
   // if (!hasSave && canClick != "false") {
   //   $.confirm(
   //     Operation["ui_noSaveWantOut"],
@@ -637,19 +638,33 @@ function loadPage() {
       // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
       $(".item-dis").css("display", "flex");
     }
-    $("#showOrHide")
-      .unbind()
-      .click(function () {
-        if (showState == 0) {
-          showState = 1;
-          // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
-          $(".item-dis").css("display", "flex");
-        } else {
-          showState = 0;
-          // $("#showOrHide").text(Operation["ui_showalldevice"]);
-          $(".item-dis").css("display", "none");
-        }
-      });
+    // $("#showOrHide")
+    //   .unbind()
+    //   .click(function () {
+    //     if (showState == 0) {
+    //       showState = 1;
+    //       // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+    //       $(".item-dis").css("display", "flex");
+    //     } else {
+    //       showState = 0;
+    //       // $("#showOrHide").text(Operation["ui_showalldevice"]);
+    //       $(".item-dis").css("display", "none");
+    //     }
+    //   });
+
+    $('#searchBtn').click(function () {
+      $(".close-panel").click();
+      var fTasktypeid = $("#taskType").val();
+      if (fTasktypeid == 1) {
+        // showState = 1;
+        // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+        $(".item-dis").css("display", "flex");
+      } else {
+        // showState = 0;
+        // $("#showOrHide").text(Operation["ui_showalldevice"]);
+        $(".item-dis").css("display", "none");
+      }
+    });
     linkClick(parentId);
     addBackClick();
   }
@@ -786,6 +801,8 @@ function loadPage() {
         clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
         var titleTreeName = titleTree.substring(0, titleTree.length - 1);
         $("#subName").text(titleTreeName);
+        //隐藏空白页
+        $("#outTip").hide();
         // $("#subName2").text(titleTreeName);
         if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
           $.router.loadPage("#page1");
@@ -948,8 +965,8 @@ function loadPage() {
     }
   });
 
-  $("#pushQRBtn").click(function () {
-    //二维码page3跳转原生
+  $("#scanShowBtn").click(function () {
+    //二维码page1跳转原生
     if (!upLoadClicktag) {
       return;
     }
@@ -961,9 +978,25 @@ function loadPage() {
       window.webkit.messageHandlers.scanQRcode.postMessage("");
     } else {
       android.pushToZXActivity();
-      // android.pushToZXActivityTwo();
     }
   });
+
+  // $("#pushQRBtn").click(function () {
+  //   //二维码page3跳转原生
+  //   if (!upLoadClicktag) {
+  //     return;
+  //   }
+  //   upLoadClicktag = false;
+  //   setTimeout(function () {
+  //     upLoadClicktag = true;
+  //   }, 1000);
+  //   if (isIOS) {
+  //     window.webkit.messageHandlers.scanQRcode.postMessage("");
+  //   } else {
+  //     android.pushToZXActivity();
+  //     // android.pushToZXActivityTwo();
+  //   }
+  // });
 
   //保存状态
   var savePids = JSON.parse(localStorage.getItem("clickPids"));
@@ -995,7 +1028,7 @@ function loadPage() {
     localStorage.setItem("acqrType", "0");
   } else {
     //每次进入页面优先弹出
-    $(".showNext").click();
+    // $(".showNext").click();
   }
 
   $('#searchUser').bind('keydown', function (event) {
@@ -1081,6 +1114,8 @@ function loadPage() {
             .siblings()
             .removeClass("selectLi");
           hasSave = false;
+          //隐藏空白页
+          $("#outTip").hide();
           if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
             $.router.loadPage("#page1");
           } else {
@@ -1718,6 +1753,11 @@ $("#backBtn").click(function () {
 
 //点击筛选
 $(".showNext").click(function () {
+  $.router.loadPage("#page3");
+});
+
+//搜索筛选
+$("#searchShowBtn").click(function () {
   $.router.loadPage("#page3");
 });
 
