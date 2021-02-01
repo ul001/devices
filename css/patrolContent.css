@@ -48,6 +48,14 @@ p.limit-length {
   margin: 0;
 }
 
+#personListUl {
+  margin-top: -2rem;
+  z-index: 999;
+  position: absolute;
+  overflow: auto;
+  max-height: 88%;
+}
+
 .card-content-inner {
   padding: 0.5rem;
   clear: both;

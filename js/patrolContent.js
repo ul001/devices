@@ -465,9 +465,7 @@ function loadPage() {
         .click();
       if (canClick == "false") {
         $($("input")).each(function () {
-          if (this.type == "search") {
-
-          } else {
+          if (this.type == "search") {} else {
             $(this).attr("readonly", true);
           }
         });
@@ -475,10 +473,8 @@ function loadPage() {
           $(this).attr("disabled", true);
         });
         $($("select")).each(function () {
-          var selectID = $(this).attr('id');
-          if (selectID == 'taskType') {
-
-          } else {
+          var selectID = $(this).attr("id");
+          if (selectID == "taskType") {} else {
             $(this).attr("disabled", true);
           }
         });
@@ -657,7 +653,7 @@ function loadPage() {
     //     }
     //   });
 
-    $('#searchBtn').click(function () {
+    $("#searchBtn").click(function () {
       $(".close-panel").click();
       var fTasktypeid = $("#taskType").val();
       if (fTasktypeid == 1) {
@@ -706,7 +702,9 @@ function loadPage() {
     var delIndex = pids.length - index;
     pids.splice(index, delIndex);
     $(this).removeClass("preClass");
-    $(this).nextAll().remove();
+    $(this)
+      .nextAll()
+      .remove();
     if (clickNum > 0) {
       //点击数减一
       clickNum = clickNum - delIndex + 1;
@@ -762,8 +760,16 @@ function loadPage() {
           });
 
           $("#subName2 span").addClass("preClass");
-          $(".preClass").off("click", preClick).on("click", preClick);
-          $("#subName2").append("<i class=\"icon icon-nextArrow\"></i><span data-id=\"" + clickId + "\">" + clickName + "</span>")
+          $(".preClass")
+            .off("click", preClick)
+            .on("click", preClick);
+          $("#subName2").append(
+            '<i class="icon icon-nextArrow"></i><span data-id="' +
+            clickId +
+            '">' +
+            clickName +
+            "</span>"
+          );
           $("#subName2").scrollLeft(10000);
           $(".parent-page").css("display", "none");
           $(".child-page").css("display", "block");
@@ -779,7 +785,10 @@ function loadPage() {
         hasSave = false;
         var thisId = clickId;
         var clickName = $("#" + thisId + " .item-title").text();
-        var lastList = getSubDeviceListByPid(allGroupList, pids[pids.length - 1].pid);
+        var lastList = getSubDeviceListByPid(
+          allGroupList,
+          pids[pids.length - 1].pid
+        );
         var needPush = 0;
         $(lastList).each(function () {
           if (this.name == clickName) {
@@ -1036,7 +1045,7 @@ function loadPage() {
     // $(".showNext").click();
   }
 
-  $('#searchUser').bind('keydown', function (event) {
+  $("#searchUser").bind("keydown", function (event) {
     if (event.keyCode == 13) {
       if ($("#searchUser").val() != "") {
         getSearchUser();
@@ -1073,81 +1082,97 @@ function loadPage() {
     $("#classList").hide();
     $("#showSubName").hide();
     var typeStr = "";
-    typeStr = "type=\"checkbox\"";
+    typeStr = 'type="checkbox"';
 
     // if (peopleType == "substation") {
-    Substation.postDataByAjax("/subDeviceTreeSelectHideOrShowForChargerNew", {
-      fSubid: selectSubid,
-      fPlacecheckformid: fPlacecheckformid,
-      search: $("#searchUser").val()
-    }, function (data) {
-      var html = "";
-      // this.fSubid Substation.removeUndefined(this.fSubname)
-      $(data.data.subDeviceGroupList).each(function () {
-        var classCss = "";
-        var finishRadio = this.fenzuTotal;
-        if (finishRadio < 1 && finishRadio > 0) {
-          classCss = " halfFinished";
-        } else if (finishRadio == 1) {
-          classCss = " finished";
-        } else {
-          //                    classCss = " halfFinished";
-        }
-        html += "<li class=\"item-content item-link\" id=\"" + this.fSubdevicegroupid + "\">\n" +
-          "   <div class=\"item-inner " + classCss + "\">\n" +
-          "       <div class=\"item-title\">" + this.fSubdevicegroupname + "<span class=\"namepath\" style=\"font-size: 0.7rem;color: gray;\">(" + this.namepath + ")</span><\/div>\n" +
-          "        </div>\n" +
-          "</li>";
-      });
-      $("#personListUl").html(html);
-      // $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
-      // checkSelectPeople();
-      $(".personUl .item-link")
-        .unbind()
-        .click(function (event) {
-          if (!upLoadClicktag) {
-            return;
-          }
-          upLoadClicktag = false;
-          setTimeout(function () {
-            upLoadClicktag = true;
-          }, 200);
-          var clickId = $(this).attr("id");
-          thisGroupid = clickId;
-          $("#" + clickId)
-            .addClass("selectLi")
-            .siblings()
-            .removeClass("selectLi");
-          hasSave = false;
-          //隐藏空白页
-          $("#outTip").hide();
-          if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
-            $.router.loadPage("#page1");
+    Substation.postDataByAjax(
+      "/subDeviceTreeSelectHideOrShowForChargerNew", {
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid,
+        search: $("#searchUser").val()
+      },
+      function (data) {
+        var html = "";
+        // this.fSubid Substation.removeUndefined(this.fSubname)
+        $(data.data.subDeviceGroupList).each(function () {
+          var classCss = "";
+          var finishRadio = this.fenzuTotal;
+          if (finishRadio < 1 && finishRadio > 0) {
+            classCss = " halfFinished";
+          } else if (finishRadio == 1) {
+            classCss = " finished";
           } else {
-            $.router.back();
+            //                    classCss = " halfFinished";
           }
-          var address = $('span', this).text();
-          address = address.replace("(", "").replace(")", "");
-          var arrResult = address.split('-');
-          var strResult = arrResult.join('>');
-          $("#subName").text(Operation["ui_selectSubDevice"] + ">" + strResult);
-          // pids = [{
-          //   pid: -1,
-          //   pname: Operation["ui_selectSubDevice"]
-          // }];
-          // clickNum = 0;
-          // $("#subName2").empty();
-          // $("#subName2").html('<span data-id="-1" class="preClass">设备分组</span>');
-          fillRightData();
-          //            });
-          event.stopPropagation();
+          html +=
+            '<li class="item-content item-link" id="' +
+            this.fSubdevicegroupid +
+            '">\n' +
+            '   <div class="item-inner ' +
+            classCss +
+            '">\n' +
+            '       <div class="item-title">' +
+            this.fSubdevicegroupname +
+            '<span class="namepath" style="font-size: 0.7rem;color: gray;">(' +
+            this.namepath +
+            ")</span></div>\n" +
+            "        </div>\n" +
+            "</li>";
         });
-      event.stopPropagation();
-    });
+        $("#personListUl").html(html);
+        // $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+        // checkSelectPeople();
+        $(".personUl .item-link")
+          .unbind()
+          .click(function (event) {
+            if (!upLoadClicktag) {
+              return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function () {
+              upLoadClicktag = true;
+            }, 200);
+            var clickId = $(this).attr("id");
+            thisGroupid = clickId;
+            $("#" + clickId)
+              .addClass("selectLi")
+              .siblings()
+              .removeClass("selectLi");
+            hasSave = false;
+            //隐藏空白页
+            $("#outTip").hide();
+            if (
+              $.router.stack.back.length == 0 ||
+              $.router.stack.back == "[]"
+            ) {
+              $.router.loadPage("#page1");
+            } else {
+              $.router.back();
+            }
+            var address = $("span", this).text();
+            address = address.replace("(", "").replace(")", "");
+            var arrResult = address.split("-");
+            var strResult = arrResult.join(">");
+            $("#subName").text(
+              Operation["ui_selectSubDevice"] + ">" + strResult
+            );
+            // pids = [{
+            //   pid: -1,
+            //   pname: Operation["ui_selectSubDevice"]
+            // }];
+            // clickNum = 0;
+            // $("#subName2").empty();
+            // $("#subName2").html('<span data-id="-1" class="preClass">设备分组</span>');
+            fillRightData();
+            //            });
+            event.stopPropagation();
+          });
+        event.stopPropagation();
+      }
+    );
   }
 
   //page1
-
 }
 
 function loadPage2() {
