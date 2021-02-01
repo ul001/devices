@@ -16,7 +16,7 @@
 
 <body>
     <div class="page-group">
-        <div class="page page-current" id="page1">
+        <div class="page" id="page1">
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left click_btn back_btn" id="backBtn">
                     <span class=" icon icon-left"></span>
@@ -29,27 +29,27 @@
                 <a class="button button-link button-nav pull-right showNext">
                     <i class="icon icon-selectSome"></i>
                 </a>
-                <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushBtn">
+                <!-- <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushBtn">
                     <i class="icon icon-scanQRcode"></i>
-                </a>
+                </a> -->
             </header>
             <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;">
                 <!-- <i class="icon icon-select"></i> -->
                 <span id="subName"><span data-i18n="ui_selectSubDevice"></span></span>
                 <!-- <a class="open-panel" style="display:none;"></a> -->
             </div>
-            <div class="content" style="margin-bottom: 3rem;">
+            <div class="content" style="margin-bottom: 0rem;">
                 <div class="buttons-tab" style="overflow:auto;overflow-y:hidden;"></div>
                 <div class="content-block">
                     <div class="tabs pull-to-refresh-container"></div>
                 </div>
             </div>
-            <div class="buttonsEvent">
+            <!-- <div class="buttonsEvent">
                 <div class="row no-gutter">
                     <a id="saveBtn" href="#" class="col-66 button button-big button-fill bottom-btn"><i
                             class="icon icon-starttask"></i><span data-i18n="ui_save"></span></a>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="page" id="page2">
             <header class="bar bar-nav bar_color">
@@ -205,8 +205,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="page" id="page3" style="background:white">
+        <div class="page page-current" id="page3" style="background:white">
             <header class="bar bar-nav bar_color">
                 <a class="button button-link button-nav pull-left click_btn back_btn" id="page3Back">
                     <span class=" icon icon-left"></span>
@@ -302,7 +301,7 @@
     <script src="libs/language.js"></script>
     <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
     <script src="libs/tools.js"></script>
-    <script src="js/patrolContent.js"></script>
+    <script src="js/patrolContent1.js"></script>
     <div class="popover popover-links">
         <!-- Popover's angle arrow -->
         <div class="popover-angle"></div>

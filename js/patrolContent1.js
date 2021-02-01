@@ -1765,6 +1765,15 @@ function goToInfo() {
             function (data) {
               if (data != "" && data != null) {
                 localStorage.setItem("clickPids", JSON.stringify(pids));
+
+                // // localStorage.setItem("fDeviceproblemid", data);
+                // pushfDeviceproblemid = data;
+                // localStorage.setItem(
+                //   "defectJson",
+                //   thisRadio.attr("data-json")
+                // );
+                // $.router.loadPage("#page2");
+                // loadPage3(data);
                 window.location.href =
                   "defectInfo.html?fDeviceproblemid=" + data;
               } else {
@@ -1794,7 +1803,8 @@ $("#backBtn").click(function () {
       );
     }
   } else {
-    window.history.back();
+    $.router.back();
+    // window.history.back();
   }
 });
 
@@ -1813,7 +1823,7 @@ $("#page2Back")
   .unbind()
   .click(function () {
     pushfDeviceproblemid = "";
-    localStorage.setItem("need-refresh", "true");
+    // localStorage.setItem("need-refresh", "true");
     $.router.back();
   });
 
@@ -1821,25 +1831,25 @@ $("#page2Back")
 $("#page3Back")
   .unbind()
   .click(function () {
-    if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
-      // if (!hasSave && canClick != "false") {
-      //   $.confirm(
-      //     Operation["ui_noSaveWantOut"],
-      //     function () {
-      //       clickBackBtn = 1;
-      //       window.history.back();
-      //     },
-      //     function () {}
-      //   );
-      // } else {
-      clickBackBtn = 1;
-      window.history.back();
-      // }
-    } else {
-      pushfDeviceproblemid = "";
-      localStorage.setItem("need-refresh", "true");
-      $.router.back();
-    }
+    // if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
+    // if (!hasSave && canClick != "false") {
+    //   $.confirm(
+    //     Operation["ui_noSaveWantOut"],
+    //     function () {
+    //       clickBackBtn = 1;
+    //       window.history.back();
+    //     },
+    //     function () {}
+    //   );
+    // } else {
+    clickBackBtn = 1;
+    window.history.back();
+    // }
+    // } else {
+    //   pushfDeviceproblemid = "";
+    //   localStorage.setItem("need-refresh", "true");
+    //   $.router.back();
+    // }
   });
 
 //解决键盘遮挡问题
