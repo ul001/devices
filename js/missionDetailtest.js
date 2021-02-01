@@ -555,8 +555,8 @@ $(".doDetail").click(function () {
         } else {
             //巡检任务
             if (haveResult) {
-                // window.location.href = "patrolContent1.html";
-                window.location.href = "patrolContent.html";
+                window.location.href = "patrolContent1.html";
+                // window.location.href = "patrolContent.html";
                 // window.location.href = "patrolContentBackup.html";
             } else {
                 $.toast(Operation["ui_noFormResult"]);

@@ -174,7 +174,7 @@ function getZhLanguage() {
     ui_selectDefectLoc: "请选择缺陷位置！",
     ui_uploadSuccess: "上传成功",
     ui_noDefectRecord: "没有该缺陷详情记录！",
-    ui_noSaveWantOut: "消息尚未保存，确定退出吗？",
+    ui_noSaveWantOut: "消息尚未保存，是否返回到任务详情页？",
     ui_noSaveWantDelete: "确定要删除已保存的缺陷？",
     ui_fillrequireditems: "请填入必填项",
     ui_gotowebpagedevice: "可前往网页端设备管理->设备定义->选择(",

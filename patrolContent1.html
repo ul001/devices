@@ -2,16 +2,16 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title></title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="stylesheet" href="libs/light7.min.css">
-    <link rel="stylesheet" href="libs/light7-swiper.min.css">
-    <link rel="stylesheet" href="css/general.css">
-    <link rel="stylesheet" href="css/patrolContent.css">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="stylesheet" href="libs/light7.min.css" />
+    <link rel="stylesheet" href="libs/light7-swiper.min.css" />
+    <link rel="stylesheet" href="css/general.css" />
+    <link rel="stylesheet" href="css/patrolContent.css" />
 </head>
 
 <body>
@@ -22,342 +22,32 @@
                     <span class=" icon icon-left"></span>
                     <span data-i18n="ui_back"></span>
                 </a>
-                <h1 class="title title_color"><span data-i18n="ui_Subinspection"></span></h1>
-                <a class="button button-link button-nav pull-right click_btn" id="saveBtn"><span
-                        data-i18n="ui_save"></span></a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_Subinspection"></span>
+                </h1>
+                <!-- <a class="button button-link button-nav pull-right click_btn" id="saveBtn"><span data-i18n="ui_save"></span></a> -->
+                <a class="button button-link button-nav pull-right showNext">
+                    <i class="icon icon-selectSome"></i>
+                </a>
+                <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushBtn">
+                    <i class="icon icon-scanQRcode"></i>
+                </a>
             </header>
             <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;">
-                <i class="icon icon-select"></i><span id="subName"><span data-i18n="ui_selectSub"></span></span>
-                <a class="open-panel" style="display:none;"></a>
+                <!-- <i class="icon icon-select"></i> -->
+                <span id="subName"><span data-i18n="ui_selectSubDevice"></span></span>
+                <!-- <a class="open-panel" style="display:none;"></a> -->
             </div>
-            <div class="content">
-                <div class="buttons-tab" style="overflow:auto;overflow-y:hidden;">
-                    <!--<a href="#tab1" class="tab-link button">All</a>
-                <a href="#tab2" class="tab-link button active">Potatos</a>
-                <a href="#tab2" class="tab-link button">Potatos</a>
-                <a href="#tab2" class="tab-link button">Potatos</a>
-                <a href="#tab3" class="tab-link button">Tomatos</a>
-                <a href="#tab3" class="tab-link button">Tomatos</a>
-                <a href="#tab3" class="tab-link button">Tomatos</a>
-                <a href="#tab3" class="tab-link button">Tomatos</a>-->
-                </div>
+            <div class="content" style="margin-bottom: 3rem;">
+                <div class="buttons-tab" style="overflow:auto;overflow-y:hidden;"></div>
                 <div class="content-block">
-                    <div class="tabs pull-to-refresh-container">
-                        <!--<div id="tab1" class="tab pull-to-refresh-content">-->
-                        <!--<div class="content-block">-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯文本的简但你来-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio1" value="1">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio1" value="0"-->
-                        <!--checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯文本的简但-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio2">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio2" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯文本的-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio3">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio3" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio4">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="my-radio4" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div id="tab2" class="tab pull-to-refresh-content active">-->
-                        <!--<div class="preloader"></div>-->
-                        <!--<div class="content-block">-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯文本的简但你来-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio1">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio1" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯文本的简但-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio2">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio2" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯文本的-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio3">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio3" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯粤北立法i俄国录geqwg-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯粤北立法i俄国录geqwg-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯粤北立法i俄国录geqwg-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--这是一个用纯粤北立法i俄国录geqwg-->
-                        <!--<div class="pull-right">-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4">-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--是-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--&nbsp;-->
-                        <!--<label class="label-checkbox item-content">-->
-                        <!--<input type="radio" name="tab2_my-radio4" checked>-->
-                        <!--<div class="item-media"><i-->
-                        <!--class="icon icon-form-checkbox"></i></div>-->
-                        <!--<div class="item-inner">-->
-                        <!--否-->
-                        <!--</div>-->
-                        <!--</label>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-
-                        <!--<div class="card">-->
-                        <!--<div class="card-content">-->
-                        <!--<div class="card-content-inner">-->
-                        <!--你好大概六七杠两千二海里去而忽略日期额过去问让他去厉-->
-                        <!--<div class="pull-right">-->
-                        <!--<input type="text" placeholder="Your name">-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                        <!--<div id="tab3" class="tab pull-to-refresh-content">-->
-                        <!--<div class="content-block">-->
-                        <!--<p>This is tab 3 content</p>-->
-                        <!--</div>-->
-                        <!--</div>-->
-                    </div>
+                    <div class="tabs pull-to-refresh-container"></div>
+                </div>
+            </div>
+            <div class="buttonsEvent">
+                <div class="row no-gutter">
+                    <a id="saveBtn" href="#" class="col-66 button button-big button-fill bottom-btn"><i
+                            class="icon icon-starttask"></i><span data-i18n="ui_save"></span></a>
                 </div>
             </div>
         </div>
@@ -367,7 +57,9 @@
                     <span class="icon icon-left"></span>
                     <span data-i18n="ui_back"></span>
                 </a>
-                <h1 class="title title_color"><span data-i18n="ui_DefectRegist"></span></h1>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_DefectRegist"></span>
+                </h1>
                 <a class="button button-link button-nav pull-right click_btn" onclick="saveFormData()">
                     <span data-i18n="ui_upload"></span>
                 </a>
@@ -382,7 +74,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label blueColor" data-i18n="ui_DefectExplain"></div>
                                         <div class="item-input">
-                                            <input type="text" id="defectDiscribe" name="fDeviceproblemdes" value="">
+                                            <input type="text" id="defectDiscribe" name="fDeviceproblemdes" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -390,8 +82,10 @@
                             <li>
                                 <div class="item-content">
                                     <div class="item-inner">
-                                        <div class="item-title label"><span class="redColor">*</span><span
-                                                class="blueColor" data-i18n="ui_defectPoision"></span></div>
+                                        <div class="item-title label">
+                                            <span class="redColor">*</span><span class="blueColor"
+                                                data-i18n="ui_defectPoision"></span>
+                                        </div>
                                         <div class="item-input" id="defectPosition">
                                             <!--                                        <input type="checkbox" value="A" id="checkA"><label
                                             for="checkA">A相</label>
@@ -446,7 +140,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label" data-i18n="ui_EliminationPeriod"></div>
                                         <div class="item-input">
-                                            <input type="text" name="fTimelimit" id="deadline" value="" disabled>
+                                            <input type="text" name="fTimelimit" id="deadline" value="" disabled />
                                         </div>
                                     </div>
                                 </div>
@@ -457,7 +151,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label blueColor" data-i18n="ui_detriment"></div>
                                         <div class="item-input">
-                                            <input type="text" name="fProblemharm" id="dangerous" value="">
+                                            <input type="text" name="fProblemharm" id="dangerous" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -467,7 +161,7 @@
                                     <div class="item-inner">
                                         <div class="item-title label blueColor" data-i18n="ui_suggestion"></div>
                                         <div class="item-input">
-                                            <input type="text" name="fResolution" id="suggest" value="">
+                                            <input type="text" name="fResolution" id="suggest" value="" />
                                         </div>
                                     </div>
                                 </div>
@@ -478,7 +172,8 @@
                                         <div class="item-title label">
                                             <!--<span
                                                 class="redColor">*</span>--><span class="blueColor"
-                                                data-i18n="ui_Scenephotos"></span></div>
+                                                data-i18n="ui_Scenephotos"></span>
+                                        </div>
                                         <div class="item-input">
                                             <div class="custom_img">
                                                 <!--点击上传图片 触发下面的div 点击事件-->
@@ -508,99 +203,53 @@
                         </ul>
                     </form>
                 </div>
-                <!--<div class="list-block">-->
-                <!--<ul>-->
-                <!--&lt;!&ndash; Text inputs &ndash;&gt;-->
-                <!--<li>-->
-                <!--<div class="item-content">-->
-                <!--<div class="item-inner">-->
-                <!--<div class="item-title label">Name</div>-->
-                <!--<div class="item-input">-->
-                <!--<input type="text" placeholder="Your name">-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--<li>-->
-                <!--<div class="item-content">-->
-                <!--<div class="item-inner">-->
-                <!--<div class="item-title label">E-mail</div>-->
-                <!--<div class="item-input">-->
-                <!--<input type="email" placeholder="E-mail">-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--<li>-->
-                <!--<div class="item-content">-->
-                <!--<div class="item-inner">-->
-                <!--<div class="item-title label">Password</div>-->
-                <!--<div class="item-input">-->
-                <!--<input type="password" placeholder="Password" class="">-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--<li>-->
-                <!--<div class="item-content">-->
-                <!--<div class="item-inner">-->
-                <!--<div class="item-title label">Gender</div>-->
-                <!--<div class="item-input">-->
-                <!--<select>-->
-                <!--<option>Male</option>-->
-                <!--<option>Female</option>-->
-                <!--</select>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--&lt;!&ndash; Date &ndash;&gt;-->
-                <!--<li>-->
-                <!--<div class="item-content">-->
-                <!--<div class="item-inner">-->
-                <!--<div class="item-title label">Birth date</div>-->
-                <!--<div class="item-input">-->
-                <!--<input type="date" placeholder="Birth day" value="2014-04-30">-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--&lt;!&ndash; Switch (Checkbox) &ndash;&gt;-->
-                <!--<li>-->
-                <!--<div class="item-content">-->
-                <!--<div class="item-inner">-->
-                <!--<div class="item-title label">Switch</div>-->
-                <!--<div class="item-input">-->
-                <!--<label class="label-switch">-->
-                <!--<input type="checkbox">-->
-                <!--<div class="checkbox"></div>-->
-                <!--</label>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--<li class="align-top">-->
-                <!--<div class="item-content">-->
-                <!--<div class="item-inner">-->
-                <!--<div class="item-title label">Textarea</div>-->
-                <!--<div class="item-input">-->
-                <!--<textarea></textarea>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</li>-->
-                <!--</ul>-->
-                <!--</div>-->
             </div>
         </div>
-        <div class="panel-overlay"></div>
-        <div class="panel panel-left panel-reveal" id='panel-left-demo'>
-            <div class="content-block">
-                <a href="#" class="close-panel" style="display:none;">关闭</a>
-                <button id="showOrHide" type="button" class="button" data-i18n="ui_showOnlydevice"></button>
+
+        <div class="page" id="page3" style="background:white">
+            <header class="bar bar-nav bar_color">
+                <a class="button button-link button-nav pull-left click_btn back_btn" id="page3Back">
+                    <span class=" icon icon-left"></span>
+                    <span data-i18n="ui_back"></span>
+                </a>
+                <h1 class="title title_color">
+                    <span data-i18n="ui_selectSubDevice"></span>
+                </h1>
+                <!-- <a class="button button-link button-nav pull-right click_btn" id="showOrHide" data-i18n="ui_showOnlydevice"> -->
+                <!-- <i class="icon icon-showOrHideBtn"></i> -->
+                <!-- </a> -->
+                <a class="button button-link button-nav pull-right click_btn open-panel" id="showOrHide">
+                    <i class="icon icon-selectSome2"></i>
+                </a>
+                <!-- <a class="button button-link button-nav pull-right click_QRcodebtn" id="pushQRBtn">
+          <i class="icon icon-scanQRcode"></i>
+        </!-->
+            </header>
+            <div class="bar bar-header-secondary">
+                <div class="searchbar">
+                    <a class="searchbar-cancel" data-i18n="ui_cancel"></a>
+                    <div class="search-input">
+                        <label class="icon icon-search" for="searchUser"></label>
+                        <input type="search" id="searchUser" placeholder="" data-placeholder="ui_selectTerminalGroup" />
+                    </div>
+                </div>
             </div>
-            <div class="list-block">
-                <ul class="list-container">
+            <!-- <div class="bar bar-header-secondary" style="line-height:2.1rem;white-space: nowrap;overflow-y: auto;"
+        id="showSubName"> -->
+            <div class="bar bar-header-secondary"
+                style="margin-top:2.2rem;line-height:2.1rem;white-space: nowrap;overflow-y: auto;" id="showSubName">
+                <!-- <i class="icon icon-select"></i> -->
+                <span id="subName2"><span data-id="-1" data-i18n="ui_selectSubDevice"></span></span>
+                <!-- <a class="open-panel" style="display:none;"></a> -->
+            </div>
+            <!-- <div class="content-block">
+        <button id="showOrHide" type="button" class="button" data-i18n="ui_showOnlydevice">
+        </button>
+      </div> -->
+            <!-- <div class="content"> -->
+            <!-- <div class="list-block" style="margin-top:4.4rem;"> -->
+            <div class="list-block" style="margin-top:6.4rem;overflow:auto;max-height:80%;">
+                <ul class="list-container" id="deviceList">
                     <!--<li class="item-content item-link">
                     <div class="item-inner">
                         <div class="item-title">型号</div>
@@ -612,19 +261,46 @@
                     </div>
                 </li>-->
                 </ul>
+                <ul class="personUl" id="personListUl" style="display: none;"></ul>
+                <!-- </div> -->
+            </div>
+        </div>
+        <div class="panel-overlay"></div>
+        <div class="panel panel-right panel-reveal" id="panel-right-demo">
+            <div class="content-block">
+                <div>
+                    <label><span data-i18n="ui_InspectionItemsOvertCovert"></span></label>
+                    <select id="taskType">
+                        <option value="0" data-i18n="ui_showOnlydevice"></option>
+                        <option value="1" data-i18n="ui_showalldevice"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="btnBar row no-gutter" style="height:2.3rem;">
+                <div class="col-33">
+                    <a href="#" class="button button-big button-fill button-cancel close-panel"><span
+                            data-i18n="ui_cancel"></span></a>
+                </div>
+                <div class="col-33">
+                    <a href="#" class="button button-big button-fill button-reset" data-i18n="ui_resetclear"></a>
+                </div>
+                <div class="col-33">
+                    <a href="#" class="button button-big button-fill button-success" id="searchBtn"><span
+                            data-i18n="ui_query"></span></a>
+                </div>
             </div>
         </div>
     </div>
 
-    <script type='text/javascript' src='libs/jquery-1.12.4.min.js' charset='utf-8'></script>
+    <script type="text/javascript" src="libs/jquery-1.12.4.min.js" charset="utf-8"></script>
     <script>
         $.config = {
             swipePanelOnlyClose: true
-        }
+        };
     </script>
-    <script type='text/javascript' src='libs/light7.min.js' charset='utf-8'></script>
+    <script type="text/javascript" src="libs/light7.min.js" charset="utf-8"></script>
     <script src="libs/language.js"></script>
-    <script type='text/javascript' src='libs/light7-swiper.min.js' charset='utf-8'></script>
+    <script type="text/javascript" src="libs/light7-swiper.min.js" charset="utf-8"></script>
     <script src="libs/tools.js"></script>
     <script src="js/patrolContent.js"></script>
     <div class="popover popover-links">

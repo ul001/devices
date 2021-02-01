@@ -31,6 +31,11 @@ if (canClick == "false") {
   $("#saveBtn").css("display", "none");
   $(".buttonsEvent").css("display", "none");
 }
+var state = $('#outTip').is(":hidden");
+if (!state) {
+  $("#saveBtn").css("display", "none");
+  $(".buttonsEvent").css("display", "none");
+}
 var getSaveList = localStorage.getItem(missiontaskID);
 //android持久化储存
 if (isAndroid) {
@@ -79,6 +84,10 @@ function getQRresultAndPush(param) {
   }
   //隐藏空白页
   $("#outTip").hide();
+  if (canClick != "false") {
+    $("#saveBtn").show();
+    $(".buttonsEvent").show();
+  }
   // if (!hasSave && canClick != "false") {
   //   $.confirm(
   //     Operation["ui_noSaveWantOut"],
@@ -817,6 +826,10 @@ function loadPage() {
         $("#subName").text(titleTreeName);
         //隐藏空白页
         $("#outTip").hide();
+        if (canClick != "false") {
+          $("#saveBtn").show();
+          $(".buttonsEvent").show();
+        }
         // $("#subName2").text(titleTreeName);
         if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
           $.router.loadPage("#page1");
@@ -1141,6 +1154,10 @@ function loadPage() {
             hasSave = false;
             //隐藏空白页
             $("#outTip").hide();
+            if (canClick != "false") {
+              $("#saveBtn").show();
+              $(".buttonsEvent").show();
+            }
             if (
               $.router.stack.back.length == 0 ||
               $.router.stack.back == "[]"

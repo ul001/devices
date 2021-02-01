@@ -12,7 +12,7 @@ var tempNum = -1;
 var imgNum = 0;
 var pids = [{
   pid: -1,
-  pname: ""
+  pname: Operation["ui_selectSubDevice"]
 }];
 var thisGroupid = -1;
 var clickGroupTree = "";
@@ -22,11 +22,19 @@ var u = navigator.userAgent,
   app = navigator.appVersion;
 var isAndroid = u.indexOf("Android") > -1 || u.indexOf("Linux") > -1; //安卓系统
 var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios系统
-
+var clickBackBtn = 0;
 var pushfDeviceproblemid;
+// localStorage.setItem("acqrType", "0");
+var acqrType = localStorage.getItem("acqrType");
 
 if (canClick == "false") {
   $("#saveBtn").css("display", "none");
+  $(".buttonsEvent").css("display", "none");
+}
+var state = $('#outTip').is(":hidden");
+if (!state) {
+  $("#saveBtn").css("display", "none");
+  $(".buttonsEvent").css("display", "none");
 }
 var getSaveList = localStorage.getItem(missiontaskID);
 //android持久化储存
@@ -52,26 +60,113 @@ function updatePageData() {
     },
     function (data) {
       allGroupList = data.subDeviceGroupList;
-      // fillRightData();
+      loadPage();
     }
   );
 }
 
 updatePageData();
 // }
+function getQRresultAndPush(param) {
+  var strArr = param.split("_");
+  if (
+    param == "" ||
+    param == undefined ||
+    strArr == null ||
+    strArr == "(null)" ||
+    strArr == undefined
+  ) {
+    return;
+  }
+  if (strArr[0] != "acqr") {
+    $.toast("非本平台二维码");
+    return;
+  }
+  //隐藏空白页
+  $("#outTip").hide();
+  if (canClick != "false") {
+    $("#saveBtn").show();
+    $(".buttonsEvent").show();
+  }
+  // if (!hasSave && canClick != "false") {
+  //   $.confirm(
+  //     Operation["ui_noSaveWantOut"],
+  //     function () {
+  //       clickBackBtn = 1;
 
-// function loadPage() {
-var clickNum = 0;
-var showState = 0;
-//主页内容
-function fillRightData() {
-  Substation.getDataByAjax(
-    "/getDeviceInspectionTemplate", {
-      fSubdevicegroupid: thisGroupid,
-      fSubid: selectSubid,
-      fPlacecheckformid: fPlacecheckformid
-    },
-    function (data) {
+  //     },
+  //     function () {}
+  //   );
+  // } else {
+  // $.router.back();
+  // saveThisPage();
+  // }
+  clickBackBtn = 1;
+  localStorage.setItem("QRcode", param);
+  localStorage.setItem("fPlacecheckformid", fPlacecheckformid);
+  window.location.href = "patrolContentQRcode.html";
+}
+
+//二页面调用
+function getQRresultAndPushAcqr(param) {
+  var strArr = param.split("_");
+  if (
+    param == "" ||
+    param == undefined ||
+    strArr == null ||
+    strArr == "(null)" ||
+    strArr == undefined
+  ) {
+    return;
+  }
+  if (strArr[0] != "acqr") {
+    $.toast("非本平台二维码");
+    return;
+  }
+  // if (!hasSave && canClick != "false") {
+  //   $.confirm(
+  //     Operation["ui_noSaveWantOut"],
+  //     function () {
+  //       clickBackBtn = 1;
+
+  //     },
+  //     function () {}
+  //   );
+  // } else {
+  // $.router.back();
+  saveThisPage();
+  // }
+  clickBackBtn = 1;
+  localStorage.setItem("QRcode", param);
+  localStorage.setItem("fPlacecheckformid", fPlacecheckformid);
+  window.location.href = "patrolContentQRcode.html";
+  localStorage.setItem("acqrType", "1");
+}
+
+//loadPage
+function loadPage() {
+  var clickNum = 0;
+  var showState = 0;
+  //主页内容
+  function fillRightData() {
+    var param = {};
+    if (canClick == "false") {
+      param = {
+        fSubdevicegroupid: thisGroupid,
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid
+      };
+    } else {
+      param = {
+        fSubdevicegroupid: thisGroupid,
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid,
+        fState: 0
+      };
+    }
+    Substation.getDataByAjax("/getDeviceInspectionTemplate", param, function (
+      data
+    ) {
       $(".content-block .tabs").empty();
       $(".buttons-tab").empty();
       var tempJson = "";
@@ -87,6 +182,7 @@ function fillRightData() {
           Operation["ui_patrolinformationadd"]
         );
         $("#saveBtn").hide();
+        $(".buttonsEvent").hide();
         hasSave = true;
       }
       if (data.list.length > 0) {
@@ -246,6 +342,7 @@ function fillRightData() {
             );
             if (tempStr != "") {
               $("#saveBtn").show();
+              $(".buttonsEvent").show();
             }
           }
           //给模板赋值
@@ -297,9 +394,7 @@ function fillRightData() {
             });
           } else {
             //没有值则全隐藏
-            $(
-              ".pushtoDetail"
-            ).hide();
+            $(".pushtoDetail").hide();
           }
           $(".tab-link.button")
             .unbind()
@@ -367,7 +462,8 @@ function fillRightData() {
         }
       } else {
         $("#saveBtn").css("display", "none");
-        // $.alert(Operation["ui_nodeviceInThis"]);
+        $(".buttonsEvent").css("display", "none");
+        $.alert(Operation["ui_nodeviceInThis"]);
         hasSave = true;
       }
       addRadioClick();
@@ -378,267 +474,476 @@ function fillRightData() {
         .click();
       if (canClick == "false") {
         $($("input")).each(function () {
-          $(this).attr("readonly", true);
+          if (this.type == "search") {} else {
+            $(this).attr("readonly", true);
+          }
         });
         $($(":radio")).each(function () {
           $(this).attr("disabled", true);
         });
         $($("select")).each(function () {
-          $(this).attr("disabled", true);
+          var selectID = $(this).attr("id");
+          if (selectID == "taskType") {} else {
+            $(this).attr("disabled", true);
+          }
         });
         $(".upload_img_wrap .upload_img").unbind();
       }
-    }
-  );
-}
-
-function getGroupidContent() {
-  if (thisGroupid == -1) {
-    $(".content").css("display", "none");
-  } else {
-    $(".content").css("display", "block");
-  }
-}
-
-getGroupidContent();
-
-//左侧菜单
-function addBackClick() {
-  $(".back-parent")
-    .unbind()
-    .click(function () {
-      if (pids[clickNum + 1] != null) {
-        pids.splice(-1, 1);
-      }
-      if (clickNum > 0) {
-        //点击数减一
-        clickNum--;
-      }
-      var lastPId = pids[clickNum];
-      pids.splice(-1, 1);
-      fillData(lastPId.pid);
     });
-}
+  }
 
-//保存后更新左侧分组
-function updatePageDataH5() {
-  Substation.getDataByAjax(
-    "/subDeviceTreeSelectHideOrShowForCharger", {
-      fSubid: selectSubid,
-      fPlacecheckformid: fPlacecheckformid
-    },
-    function (data) {
-      allGroupList = data.subDeviceGroupList;
-      if (pids[clickNum + 1] != null) {
-        pids.splice(-1, 1);
-      }
-      var lastPId = pids[clickNum].pid;
-      fillData(lastPId);
-      $(".open-panel").click();
+  function getGroupidContent() {
+    if (thisGroupid == -1) {
+      $(".content").css("display", "none");
+    } else {
+      $(".content").css("display", "block");
     }
-  );
-}
+  }
 
-function fillData(parentId) {
-  /*        var params = {
-                  fSubid: selectSubid,
-                  fParentId: parentId
-              }
-              Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
-                  if (data.hasOwnProperty("menuList")) {
-                      if (data.menuList.length > 0) {
-                          fillH5(parentId, data.menuList);
-                      }
-                  }
-              });*/
-  var someList = getSubDeviceListByPid(allGroupList, parentId);
-  fillH5(parentId, someList);
-}
+  getGroupidContent();
 
-//根据pid获取分组
-function getSubDeviceListByPid(allList, pid) {
-  return allList.filter(function (obj) {
-    return obj.pId == pid;
-  });
-}
+  //左侧菜单
+  function addBackClick() {
+    $(".back-parent")
+      .unbind()
+      .click(function () {
+        if (pids[clickNum + 1] != null) {
+          pids.splice(-1, 1);
+        }
+        if (clickNum > 0) {
+          //点击数减一
+          clickNum--;
+        }
+        var lastPId = pids[clickNum];
+        pids.splice(-1, 1);
+        fillData(lastPId.pid);
+      });
+  }
 
-function fillH5(parentId, thisList) {
-  var ul;
-  if (parentId == -1) {
-    ul = $(".list-block .list-container");
-    ul.empty();
-  } else {
-    ul = $(".list-block .list-container");
-    ul.html(
-      '<li class="item-content back-parent">\n' +
-      '                        <div class="item-inner">\n' +
-      '                            <div class="item-title"><i class="icon icon-goprev"></i>' +
-      Operation["ui_upperlevel"] +
-      "</div>\n" +
-      "                        </div>\n" +
-      "                    </li>"
+  //保存后更新左侧分组
+  function updatePageDataH5() {
+    Substation.getDataByAjax(
+      "/subDeviceTreeSelectHideOrShowForCharger", {
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid
+      },
+      function (data) {
+        allGroupList = data.subDeviceGroupList;
+        if (pids[clickNum + 1] != null) {
+          pids.splice(-1, 1);
+        }
+        var lastPId = pids[clickNum].pid;
+        fillData(lastPId);
+        // $(".open-panel").click();
+      }
     );
   }
-  $(thisList).each(function () {
-    var li = "";
-    var linkStr = '<li class="item-content item-link';
-    if (this.displayOrHideState == false) {
-      linkStr = '<li class="item-content item-link item-dis';
-    }
-    var thisCList = selectChildrenList(allGroupList, this.fSubdevicegroupid);
-    var num = 0;
-    if (thisCList.length > 0) {
-      getChildNum(thisCList);
-    }
 
-    function getChildNum(allList) {
-      $.each(allList, function (i, obj) {
-        var thisCList = selectChildrenList(allGroupList, obj.id);
-        if (thisCList.length > 0) {
-          getChildNum(thisCList);
-        } else {
-          num++;
-        }
-      });
-    }
-    var classCss = "";
-    if (num == 0) {
-      if (this.fenzuTotal == "0") {} else {
-        classCss = " finished";
-      }
-    } else {
-      var finishRadio = this.fenzuTotal;
-      // var finishRadio = Number(this.fenzujindu) / num;
-      // var finishRadio = this.fenzujindu;
-      if (finishRadio < 1 && finishRadio > 0) {
-        classCss = " halfFinished";
-      } else if (finishRadio == 1) {
-        classCss = " finished";
-      } else {
-        //                    classCss = " halfFinished";
-      }
-    }
-    li =
-      linkStr +
-      '" id="' +
-      this.fSubdevicegroupid +
-      '">\n' +
-      '                        <div class="item-inner' +
-      classCss +
-      '">\n' +
-      '                            <div class="item-title">' +
-      this.fSubdevicegroupname +
-      "</div>\n" +
-      "                        </div>\n" +
-      "                    </li>";
-    ul.append(li);
-  });
+  function fillData(parentId) {
+    /*        var params = {
+                    fSubid: selectSubid,
+                    fParentId: parentId
+                }
+                Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+                    if (data.hasOwnProperty("menuList")) {
+                        if (data.menuList.length > 0) {
+                            fillH5(parentId, data.menuList);
+                        }
+                    }
+                });*/
+    var someList = getSubDeviceListByPid(allGroupList, parentId);
+    fillH5(parentId, someList);
+  }
 
-  function selectChildrenList(allList, thisid) {
-    var thisList = allList.filter(function (obj) {
-      return obj.pId == thisid && obj.displayOrHideState;
+  //根据pid获取分组
+  function getSubDeviceListByPid(allList, pid) {
+    return allList.filter(function (obj) {
+      return obj.pId == pid;
     });
-    return thisList;
   }
-  if (showState == 0) {
-    $("#showOrHide").text(Operation["ui_showalldevice"]);
-    $(".item-dis").css("display", "none");
-  } else {
-    $("#showOrHide").text(Operation["ui_showOnlydevice"]);
-    $(".item-dis").css("display", "flex");
-  }
-  $("#showOrHide")
-    .unbind()
-    .click(function () {
-      if (showState == 0) {
+
+  function fillH5(parentId, thisList) {
+    var ul;
+    // if (parentId == -1) {
+    ul = $(".list-block .list-container");
+    ul.empty();
+    // } else {
+    //   ul = $(".list-block .list-container");
+    //   ul.html(
+    //     '<li class="item-content back-parent">\n' +
+    //     '                        <div class="item-inner">\n' +
+    //     '                            <div class="item-title"><i class="icon icon-goprev"></i>' +
+    //     Operation["ui_upperlevel"] +
+    //     "</div>\n" +
+    //     "                        </div>\n" +
+    //     "                    </li>"
+    //   );
+    // }
+    $(thisList).each(function () {
+      var li = "";
+      var linkStr = '<li class="item-content item-link';
+      if (this.displayOrHideState == false) {
+        linkStr = '<li class="item-content item-link item-dis';
+      }
+      var thisCList = selectChildrenList(allGroupList, this.fSubdevicegroupid);
+      var num = 0;
+      if (thisCList.length > 0) {
+        getChildNum(thisCList);
+      }
+
+      function getChildNum(allList) {
+        $.each(allList, function (i, obj) {
+          var thisCList = selectChildrenList(allGroupList, obj.id);
+          if (thisCList.length > 0) {
+            getChildNum(thisCList);
+          } else {
+            num++;
+          }
+        });
+      }
+      var classCss = "";
+      if (num == 0) {
+        if (this.fenzuTotal == "0") {} else {
+          classCss = " finished";
+        }
+      } else {
+        var finishRadio = this.fenzuTotal;
+        // var finishRadio = Number(this.fenzujindu) / num;
+        // var finishRadio = this.fenzujindu;
+        if (finishRadio < 1 && finishRadio > 0) {
+          classCss = " halfFinished";
+        } else if (finishRadio == 1) {
+          classCss = " finished";
+        } else {
+          //                    classCss = " halfFinished";
+        }
+      }
+      li =
+        linkStr +
+        '" id="' +
+        this.fSubdevicegroupid +
+        '">\n' +
+        '                        <div class="item-inner' +
+        classCss +
+        '">\n' +
+        '                            <div class="item-title">' +
+        this.fSubdevicegroupname +
+        "</div>\n" +
+        "                        </div>\n" +
+        "                    </li>";
+      ul.append(li);
+    });
+
+    function selectChildrenList(allList, thisid) {
+      var thisList = allList.filter(function (obj) {
+        return obj.pId == thisid && obj.displayOrHideState;
+      });
+      return thisList;
+    }
+
+    if (showState == 0) {
+      // $("#showOrHide").text(Operation["ui_showalldevice"]);
+      $(".item-dis").css("display", "none");
+    } else {
+      // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+      $(".item-dis").css("display", "flex");
+    }
+    // $("#showOrHide")
+    //   .unbind()
+    //   .click(function () {
+    //     if (showState == 0) {
+    //       showState = 1;
+    //       // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+    //       $(".item-dis").css("display", "flex");
+    //     } else {
+    //       showState = 0;
+    //       // $("#showOrHide").text(Operation["ui_showalldevice"]);
+    //       $(".item-dis").css("display", "none");
+    //     }
+    //   });
+
+    $("#searchBtn").click(function () {
+      $(".close-panel").click();
+      var fTasktypeid = $("#taskType").val();
+      if (fTasktypeid == 1) {
         showState = 1;
-        $("#showOrHide").text(Operation["ui_showOnlydevice"]);
+        // $("#showOrHide").text(Operation["ui_showOnlydevice"]);
         $(".item-dis").css("display", "flex");
       } else {
         showState = 0;
-        $("#showOrHide").text(Operation["ui_showalldevice"]);
+        // $("#showOrHide").text(Operation["ui_showalldevice"]);
         $(".item-dis").css("display", "none");
       }
     });
-  linkClick(parentId);
-  addBackClick();
-}
+    linkClick(parentId);
+    addBackClick();
+  }
 
-function linkClick(parentId) {
-  $(".list-block .item-link")
-    .unbind()
-    .click(function (event) {
+  //跳下级事件
+  // function nextClassClick() {
+  //   var clickPid = $(this).attr("data-id");
+  //   thisGroupid = clickPid;
+  //   // $("#selectAll input[type='checkbox']").removeAttr("checked");
+  //   var clickName = $(this).attr("data-name");
+  //   $("#subName2 span").addClass("preClass");
+  //   $(".preClass").off("click", preClick).on("click", preClick);
+  //   $("#subName2").append("<i class=\"icon icon-nextArrow\"></i><span data-id=\"" + clickPid + "\">" + clickName + "</span>")
+  //   $("#subName2").scrollLeft(10000);
+  //   fillData(clickPid);
+  // }
+
+  function getPidIndex(arr, clickpid) {
+    var i = arr.length;
+    while (i--) {
+      if (arr[i].pid == clickpid) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+  //跳上级事件
+  function preClick() {
+    var clickPid = $(this).attr("data-id");
+    // thisGroupid = clickPid;
+    // $("#selectAll input[type='checkbox']").removeAttr("checked");
+    var index = getPidIndex(pids, clickPid) + 1;
+    var delIndex = pids.length - index;
+    pids.splice(index, delIndex);
+    $(this).removeClass("preClass");
+    $(this)
+      .nextAll()
+      .remove();
+    if (clickNum > 0) {
+      //点击数减一
+      clickNum = clickNum - delIndex + 1;
+    }
+    fillData(clickPid);
+    var titleTree = "";
+    clickGroupTree = "";
+    if (pids.length > 1) {
+      $(pids).each(function () {
+        titleTree += this.pname + ">";
+        clickGroupTree += this.pname + "-";
+      });
+    } else {
+      titleTree = this.pname;
+      clickGroupTree = this.pname;
+    }
+    clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
+    var titleTreeName = titleTree.substring(0, titleTree.length - 1);
+    $("#subName").text(titleTreeName);
+  }
+
+  function linkClick(parentId) {
+    $(".list-block .item-link")
+      .unbind()
+      .click(function (event) {
+        if (!upLoadClicktag) {
+          return;
+        }
+        upLoadClicktag = false;
+        setTimeout(function () {
+          upLoadClicktag = true;
+        }, 200);
+        var clickId = $(this).attr("id");
+        //            var params = {
+        //                fSubid: selectSubid,
+        //                fParentId: clickId
+        //            }
+        //            Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
+        var someList = getSubDeviceListByPid(allGroupList, clickId);
+        if (someList.length > 0) {
+          //                    if (data.menuList.length > 0) {
+          $(".selectLi").removeClass("selectLi");
+          var clickName = $("#" + clickId + " .item-title").text();
+          if (clickNum == 0) {
+            if (pids[clickNum + 1] != null) {
+              pids.splice(-1, 1);
+            }
+          }
+          clickNum++;
+          pids.push({
+            pid: clickId,
+            pname: clickName
+          });
+
+          $("#subName2 span").addClass("preClass");
+          $(".preClass")
+            .off("click", preClick)
+            .on("click", preClick);
+          $("#subName2").append(
+            '<i class="icon icon-nextArrow"></i><span data-id="' +
+            clickId +
+            '">' +
+            clickName +
+            "</span>"
+          );
+          $("#subName2").scrollLeft(10000);
+          $(".parent-page").css("display", "none");
+          $(".child-page").css("display", "block");
+          fillData(clickId);
+          return;
+          //                    }
+        }
+        thisGroupid = clickId;
+        $("#" + clickId)
+          .addClass("selectLi")
+          .siblings()
+          .removeClass("selectLi");
+        hasSave = false;
+        var thisId = clickId;
+        var clickName = $("#" + thisId + " .item-title").text();
+        var lastList = getSubDeviceListByPid(
+          allGroupList,
+          pids[pids.length - 1].pid
+        );
+        var needPush = 0;
+        $(lastList).each(function () {
+          if (this.name == clickName) {
+            needPush = 1;
+          }
+        });
+        if (needPush == 0) {
+          pids[pids.length - 1] = {
+            pid: thisId,
+            pname: clickName
+          };
+        } else {
+          pids.push({
+            pid: thisId,
+            pname: clickName
+          });
+        }
+        var titleTree = "";
+        clickGroupTree = "";
+        $(pids).each(function () {
+          titleTree += this.pname + ">";
+          clickGroupTree += this.pname + "-";
+        });
+        clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
+        var titleTreeName = titleTree.substring(0, titleTree.length - 1);
+        $("#subName").text(titleTreeName);
+        //隐藏空白页
+        $("#outTip").hide();
+        if (canClick != "false") {
+          $("#saveBtn").show();
+          $(".buttonsEvent").show();
+        }
+        // $("#subName2").text(titleTreeName);
+        if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
+          $.router.loadPage("#page1");
+        } else {
+          $.router.back();
+        }
+        fillRightData();
+        //            });
+        event.stopPropagation();
+      });
+  }
+
+  function addRadioClick() {
+    $(":radio").change(function () {
       if (!upLoadClicktag) {
         return;
       }
       upLoadClicktag = false;
       setTimeout(function () {
         upLoadClicktag = true;
-      }, 200);
-      var clickId = $(this).attr("id");
-      //            var params = {
-      //                fSubid: selectSubid,
-      //                fParentId: clickId
-      //            }
-      //            Substation.getDataByAjax("/selectSubDeviceGroupListByPid", params, function (data) {
-      var someList = getSubDeviceListByPid(allGroupList, clickId);
-      if (someList.length > 0) {
-        //                    if (data.menuList.length > 0) {
-        $(".selectLi").removeClass("selectLi");
-        var clickName = $("#" + clickId + " .item-title").text();
-        if (clickNum == 0) {
-          if (pids[clickNum + 1] != null) {
-            pids.splice(-1, 1);
-          }
-        }
-        clickNum++;
-        pids.push({
-          pid: clickId,
-          pname: clickName
-        });
-        $(".parent-page").css("display", "none");
-        $(".child-page").css("display", "block");
-        fillData(clickId);
-        return;
-        //                    }
-      }
-      thisGroupid = clickId;
-      $("#" + clickId)
-        .addClass("selectLi")
-        .siblings()
-        .removeClass("selectLi");
-      hasSave = false;
-      var thisId = clickId;
-      var clickName = $("#" + thisId + " .item-title").text();
-      if (pids[clickNum + 1] == null) {
-        pids.push({
-          pid: thisId,
-          pname: clickName
-        });
-      } else {
-        pids[clickNum + 1] = {
-          pid: thisId,
-          pname: clickName
-        };
-      }
-      var titleTree = "";
-      clickGroupTree = "";
-      $(pids).each(function () {
-        titleTree += this.pname + ">";
-        clickGroupTree += this.pname + "-";
-      });
-      clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
-      var titleTreeName = titleTree.substring(1, titleTree.length - 1);
-      $("#subName").text(titleTreeName);
-      $(".content-block .close-panel").click();
-      fillRightData();
-      //            });
-      event.stopPropagation();
-    });
-}
+      }, 1000);
+      var clickDeviceId = $(".tab.active").attr("id");
+      var radioName = $(this).attr("name");
+      var deviceItemCode = $(this).attr("data-code");
+      if ($(this).val() == "yes") {
+        localStorage.setItem("defectJson", $(this).attr("data-json"));
+        //                window.location.href="defectPage.html?fSubdeviceinfoid="+clickDeviceId;
+        clickDeviceInfoId = clickDeviceId;
+        clickRadioName = radioName;
+        itemCode = deviceItemCode;
+        $(":radio[name='" + clickRadioName + "'][value='no']").prop(
+          "checked",
+          true
+        );
+        $.router.loadPage("#page2");
+        loadPage2();
 
-function addRadioClick() {
-  $(":radio").change(function () {
+        //显示缺陷详情按钮
+        // $("button[name='" + clickRadioName + "']").show();
+
+        // $("#pushDetailBtn" + $(this).attr("data-code")).show();
+        //是 的时候添加事件  否的时候删除事件
+        // //是的时候添加按钮
+        // $(
+        //   "input[name='" +
+        //     (obj.fSubdeviceinfoid + "" + this.code) +
+        //     "'][value='" +
+        //     $(this).val() +
+        //     "']"
+        // ).after(htmlbutton);
+        // //是的事件
+        // $("#clickBtnEvent" + this.code).click(function() {
+        //   $.alert(Operation["ui_noDeviceRecord"]);
+        // });
+      } else {
+        $.confirm(
+          Operation["ui_noSaveWantDelete"],
+          function () {
+            var params = {
+              fSubdeviceinfoid: clickDeviceId,
+              fPlacecheckformid: fPlacecheckformid,
+              fDeviceitem: deviceItemCode
+            };
+            Substation.getDataByAjax(
+              "/deleteCheckItemProblems",
+              params,
+              function () {
+                $.toast(Operation["ui_delsuccess"]);
+                saveThisPage();
+                localStorage.setItem("need-refresh", "true");
+                $("button[name='" + radioName + "']").hide();
+              }
+            );
+          },
+          function () {
+            $(":radio[name='" + radioName + "'][value='yes']").prop(
+              "checked",
+              true
+            );
+          }
+        );
+      }
+    });
+  }
+
+  //点击筛选
+  function addLeftClick() {
+    $(".icon-select").click(function () {
+      if (canClick != "false" && !hasSave) {
+        var str = Operation["ui_hasnosave"];
+        $.confirm(
+          str,
+          function () {
+            //            hasSave = true;
+            //            saveThisPage();
+            $("#saveBtn").click();
+            //添加判断
+            if ($(".buttons-tab .tab-link:last").hasClass("active")) {
+              $(".icon-select").click();
+            }
+            // $(".open-panel").click();
+          },
+          function () {
+            // $(".open-panel").click();
+          }
+        );
+      } else {
+        // $(".open-panel").click();
+      }
+    });
+  }
+  addLeftClick();
+
+  $("#saveBtn").click(function () {
     if (!upLoadClicktag) {
       return;
     }
@@ -646,156 +951,246 @@ function addRadioClick() {
     setTimeout(function () {
       upLoadClicktag = true;
     }, 1000);
-    var clickDeviceId = $(".tab.active").attr("id");
-    var radioName = $(this).attr("name");
-    var deviceItemCode = $(this).attr("data-code");
-    if ($(this).val() == "yes") {
-      localStorage.setItem("defectJson", $(this).attr("data-json"));
-      //                window.location.href="defectPage.html?fSubdeviceinfoid="+clickDeviceId;
-      clickDeviceInfoId = clickDeviceId;
-      clickRadioName = radioName;
-      itemCode = deviceItemCode;
-      $(":radio[name='" + clickRadioName + "'][value='no']").prop(
-        "checked",
-        true
-      );
-      $.router.loadPage("#page2");
-      loadPage2();
-
-      //显示缺陷详情按钮
-      // $("button[name='" + clickRadioName + "']").show();
-
-      // $("#pushDetailBtn" + $(this).attr("data-code")).show();
-      //是 的时候添加事件  否的时候删除事件
-      // //是的时候添加按钮
-      // $(
-      //   "input[name='" +
-      //     (obj.fSubdeviceinfoid + "" + this.code) +
-      //     "'][value='" +
-      //     $(this).val() +
-      //     "']"
-      // ).after(htmlbutton);
-      // //是的事件
-      // $("#clickBtnEvent" + this.code).click(function() {
-      //   $.alert(Operation["ui_noDeviceRecord"]);
-      // });
-    } else {
-      $.confirm(
-        Operation["ui_noSaveWantDelete"],
-        function () {
-          var params = {
-            fSubdeviceinfoid: clickDeviceId,
-            fPlacecheckformid: fPlacecheckformid,
-            fDeviceitem: deviceItemCode
-          };
-          Substation.getDataByAjax(
-            "/deleteCheckItemProblems",
-            params,
-            function () {
-              $.toast(Operation["ui_delsuccess"]);
-              saveThisPage();
-              localStorage.setItem("need-refresh", "true");
-              $("button[name='" + radioName + "']").hide();
-            }
-          );
-        },
-        function () {
-          $(":radio[name='" + radioName + "'][value='yes']").prop(
-            "checked",
-            true
-          );
+    hasSave = true;
+    if ($("input[data-state='true']")) {
+      var thisTemp = false;
+      $("input[data-state='true']").each(function () {
+        if ($(this).val() == "") {
+          $.toast(Operation["ui_fillrequireditems"]);
+          thisTemp = true;
+          return;
         }
-      );
-    }
-  });
-}
-
-//点击筛选
-function addLeftClick() {
-  $(".icon-select").click(function () {
-    if (canClick != "false" && !hasSave) {
-      var str = Operation["ui_hasnosave"];
-      $.confirm(str,
-        function () {
-          //            hasSave = true;
-          //            saveThisPage();
-          $("#saveBtn").click();
-          //添加判断
-          if ($(".buttons-tab .tab-link:last").hasClass("active")) {
-            $(".icon-select").click();
-          }
-          $(".open-panel").click();
-        },
-        function () {
-          $(".open-panel").click();
-        });
-    } else {
-      $(".open-panel").click();
-    }
-  });
-}
-addLeftClick();
-
-$("#saveBtn").click(function () {
-  if (!upLoadClicktag) {
-    return;
-  }
-  upLoadClicktag = false;
-  setTimeout(function () {
-    upLoadClicktag = true;
-  }, 1000);
-  hasSave = true;
-  if ($("input[data-state='true']")) {
-    var thisTemp = false;
-    $("input[data-state='true']").each(function () {
-      if ($(this).val() == "") {
-        $.toast(Operation["ui_fillrequireditems"]);
-        thisTemp = true;
+      });
+      if (thisTemp) {
         return;
       }
-    });
-    if (thisTemp) {
+    }
+    saveThisPage();
+    updatePageDataH5();
+
+    //添加判断
+    //    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
+    //      $(".icon-select").click();
+    //    }
+  });
+
+  fillData(-1);
+
+  $("#pushBtn").click(function () {
+    //二维码page1跳转原生
+    if (!upLoadClicktag) {
       return;
     }
-  }
-  saveThisPage();
-  // updatePageDataH5();
-  //添加判断
-  //    if ($(".buttons-tab .tab-link:last").hasClass("active")) {
-  //      $(".icon-select").click();
-  //    }
-});
-
-fillData(-1);
-
-//    $(".open-panel").click();
-
-//保存状态
-var savePids = JSON.parse(localStorage.getItem("clickPids"));
-localStorage.removeItem("clickPids");
-if (savePids == null) {
-  $(".open-panel").click();
-}
-var clickItemNum = localStorage.getItem("itemNum");
-localStorage.removeItem("itemNum");
-if (savePids != "" && savePids != null) {
-  pids = savePids;
-  thisGroupid = pids[pids.length - 1].pid;
-  var titleTree = "";
-  clickGroupTree = "";
-  $(pids).each(function () {
-    titleTree += this.pname + ">";
-    clickGroupTree += this.pname + "-";
+    upLoadClicktag = false;
+    setTimeout(function () {
+      upLoadClicktag = true;
+    }, 1000);
+    if (isIOS) {
+      window.webkit.messageHandlers.scanQRcode.postMessage("");
+    } else {
+      android.pushToZXActivity();
+    }
   });
-  clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
-  var titleTreeName = titleTree.substring(1, titleTree.length - 1);
-  $("#subName").text(titleTreeName);
-  fillRightData();
-  //        $(".close-panel").click();
 
-  $("#" + clickItemNum).click();
+  $("#scanShowBtn").click(function () {
+    //二维码page1跳转原生
+    if (!upLoadClicktag) {
+      return;
+    }
+    upLoadClicktag = false;
+    setTimeout(function () {
+      upLoadClicktag = true;
+    }, 1000);
+    if (isIOS) {
+      window.webkit.messageHandlers.scanQRcode.postMessage("");
+    } else {
+      android.pushToZXActivity();
+    }
+  });
+
+  // $("#pushQRBtn").click(function () {
+  //   //二维码page3跳转原生
+  //   if (!upLoadClicktag) {
+  //     return;
+  //   }
+  //   upLoadClicktag = false;
+  //   setTimeout(function () {
+  //     upLoadClicktag = true;
+  //   }, 1000);
+  //   if (isIOS) {
+  //     window.webkit.messageHandlers.scanQRcode.postMessage("");
+  //   } else {
+  //     android.pushToZXActivity();
+  //     // android.pushToZXActivityTwo();
+  //   }
+  // });
+
+  //保存状态
+  var savePids = JSON.parse(localStorage.getItem("clickPids"));
+  localStorage.removeItem("clickPids");
+  if (savePids == null) {
+    // $(".open-panel").click();
+  }
+  var clickItemNum = localStorage.getItem("itemNum");
+  localStorage.removeItem("itemNum");
+  if (savePids != "" && savePids != null) {
+    pids = savePids;
+    thisGroupid = pids[pids.length - 1].pid;
+    var titleTree = "";
+    clickGroupTree = "";
+    $(pids).each(function () {
+      titleTree += this.pname + ">";
+      clickGroupTree += this.pname + "-";
+    });
+    clickGroupTree = clickGroupTree.substring(1, clickGroupTree.length - 1);
+    var titleTreeName = titleTree.substring(0, titleTree.length - 1);
+    $("#subName").text(titleTreeName);
+    // $("#subName2").text(titleTreeName);
+    fillRightData();
+    //        $(".close-panel").click();
+    $("#" + clickItemNum).click();
+  }
+
+  if (acqrType == "1") {
+    localStorage.setItem("acqrType", "0");
+  } else {
+    //每次进入页面优先弹出
+    // $(".showNext").click();
+  }
+
+  $("#searchUser").bind("keydown", function (event) {
+    if (event.keyCode == 13) {
+      if ($("#searchUser").val() != "") {
+        getSearchUser();
+        document.activeElement.blur();
+      }
+    }
+  });
+
+  $(".searchbar-cancel").click(function () {
+    $("#searchUser").val("");
+    //清除筛选页的subName2，详情页subName保留
+    // $("#subName2").text(Operation["ui_selectSubDevice"]);
+    // $("#subName").text(Operation["ui_selectSubDevice"]);
+    // pids = [{
+    //   pid: -1,
+    //   pname: Operation["ui_selectSubDevice"]
+    // }];
+    // clickNum = 0;
+    // $("#subName2").empty();
+    // $("#subName2").html('<span data-id="-1" class="preClass">设备分组</span>');
+    // fillData(-1);
+    $(".personUl").hide();
+    $("#deviceList").show();
+    $("#showSubName").show();
+    // getGroupClass(thisGroupid);
+  });
+
+  //模糊搜索
+  function getSearchUser() {
+    $("#personListUl").empty();
+    $(".personUl").show();
+    $("#deviceList").hide();
+    $(".classUl").hide();
+    $("#classList").hide();
+    $("#showSubName").hide();
+    var typeStr = "";
+    typeStr = 'type="checkbox"';
+
+    // if (peopleType == "substation") {
+    Substation.postDataByAjax(
+      "/subDeviceTreeSelectHideOrShowForChargerNew", {
+        fSubid: selectSubid,
+        fPlacecheckformid: fPlacecheckformid,
+        search: $("#searchUser").val()
+      },
+      function (data) {
+        var html = "";
+        // this.fSubid Substation.removeUndefined(this.fSubname)
+        $(data.data.subDeviceGroupList).each(function () {
+          var classCss = "";
+          var finishRadio = this.fenzuTotal;
+          if (finishRadio < 1 && finishRadio > 0) {
+            classCss = " halfFinished";
+          } else if (finishRadio == 1) {
+            classCss = " finished";
+          } else {
+            //                    classCss = " halfFinished";
+          }
+          html +=
+            '<li class="item-content item-link" id="' +
+            this.fSubdevicegroupid +
+            '">\n' +
+            '   <div class="item-inner ' +
+            classCss +
+            '">\n' +
+            '       <div class="item-title">' +
+            this.fSubdevicegroupname +
+            '<span class="namepath" style="font-size: 0.7rem;color: gray;">(' +
+            this.namepath +
+            ")</span></div>\n" +
+            "        </div>\n" +
+            "</li>";
+        });
+        $("#personListUl").html(html);
+        // $("input[name='my-checkbox']").off("change", addChangeListener).on("change", addChangeListener);
+        // checkSelectPeople();
+        $(".personUl .item-link")
+          .unbind()
+          .click(function (event) {
+            if (!upLoadClicktag) {
+              return;
+            }
+            upLoadClicktag = false;
+            setTimeout(function () {
+              upLoadClicktag = true;
+            }, 200);
+            var clickId = $(this).attr("id");
+            thisGroupid = clickId;
+            $("#" + clickId)
+              .addClass("selectLi")
+              .siblings()
+              .removeClass("selectLi");
+            hasSave = false;
+            //隐藏空白页
+            $("#outTip").hide();
+            if (canClick != "false") {
+              $("#saveBtn").show();
+              $(".buttonsEvent").show();
+            }
+            if (
+              $.router.stack.back.length == 0 ||
+              $.router.stack.back == "[]"
+            ) {
+              $.router.loadPage("#page1");
+            } else {
+              $.router.back();
+            }
+            var address = $("span", this).text();
+            address = address.replace("(", "").replace(")", "");
+            var arrResult = address.split("-");
+            var strResult = arrResult.join(">");
+            $("#subName").text(
+              Operation["ui_selectSubDevice"] + ">" + strResult
+            );
+            // pids = [{
+            //   pid: -1,
+            //   pname: Operation["ui_selectSubDevice"]
+            // }];
+            // clickNum = 0;
+            // $("#subName2").empty();
+            // $("#subName2").html('<span data-id="-1" class="preClass">设备分组</span>');
+            fillRightData();
+            //            });
+            event.stopPropagation();
+          });
+        event.stopPropagation();
+      }
+    );
+  }
+
+  //page1
 }
-// }
 
 function loadPage2() {
   var defectJson = JSON.parse(localStorage.getItem("defectJson"));
@@ -1072,112 +1467,89 @@ function loadPage3(fDeviceproblemid) {
         $("#imgBox").append(imgDiv);
       });
     }
-
-    // if (canClick == "false") {
-    //   $($("input")).each(function () {
-    //     if (
-    //       $(this).attr("id") == "fProblemharm" ||
-    //       $(this).attr("id") == "fResolution"
-    //     ) {
-    //       var thisValue = $(this).val();
-    //       var thisInput = $(this).parent();
-    //       thisInput.html('<div class="item-label">' + thisValue + "</div>");
-    //     } else {
-    //       $(this).attr("readonly", true);
-    //     }
-    //   });
-    //   $($("select")).each(function () {
-    //     var thisInput = $(this).parent();
-    //     var thisValue = "";
-    //     if (this.selectedIndex != -1) {
-    //       thisValue = this.options[this.selectedIndex].innerText;
-    //     }
-    //     thisInput.html(
-    //       '<input type="text" readonly value="' + thisValue + '">'
-    //     );
-    //   });
-    // }
   });
 }
 
 function saveThisPage() {
   var changeJson = [];
-
-  $(".tabs .tab").each(function () {
-    var deviceJson = {};
-    var deviceId = $(this).attr("id");
-    var inputArray = [];
-    $("#" + deviceId + " .card").each(function (index, obj) {
-      var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
-      var thisObj = {};
-      if (thisInput) {
-        thisObj["code"] = $(thisInput).attr("data-code");
-        thisObj["name"] = $(thisInput).attr("data-name");
-        thisObj["value"] = $(thisInput).attr("value");
-        thisObj["type"] = "radio";
-      } else {
-        thisObj["code"] = $(obj)
-          .find($("input"))
-          .attr("data-code");
-        thisObj["name"] = $(obj)
-          .find($("input"))
-          .attr("data-name");
-        thisObj["value"] = $(obj)
-          .find($("input"))
-          .val();
-        thisObj["type"] = "input";
-      }
-      inputArray.push(thisObj);
-    });
-    deviceJson["fInspectionslipjson"] = inputArray;
-    deviceJson["fSubdeviceinfoid"] = deviceId;
-    deviceJson["fPlacecheckformid"] = fPlacecheckformid;
-    deviceJson["fItemnum"] = tempNum;
-    changeJson.push(deviceJson);
-  });
-  var jsonStr = JSON.stringify(changeJson);
-  Substation.postDataByAjax(
-    "/updateInspectionDetail", {
-      fPlacecheckformid: fPlacecheckformid,
-      deviceList: jsonStr
-    },
-    function (data) {
-      if (data.code == 200) {
-        updatePageDataH5();
-        $.toast(Operation["ui_savesuccess"]);
-        var thisGroupid = pids[pids.length - 1].pid;
-        var needChange = true;
-        $.each(allGroupList, function (i, obj) {
-          if (thisGroupid == obj.id) {
-            if (obj.fenzuTotal == "0") {
-              needChange = true;
-            } else {
-              needChange = false;
-            }
-            return false;
-          }
-        });
-        if (needChange) {
-          $(pids).each(function () {
-            changeListVal(this.pid);
-          });
-          //                fillData(thisGroupid);
-          if (isAndroid) {
-            //android持久化储存
-            //            try {
-            //              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
-            //            } catch (e) {
-            //              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-            //            }
-          } else {
-            localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
-          }
-          $("#" + thisGroupid + " .item-inner").addClass("finished");
+  if ($(".tabs .tab").length > 0) {
+    $(".tabs .tab").each(function () {
+      var deviceJson = {};
+      var deviceId = $(this).attr("id");
+      var inputArray = [];
+      $("#" + deviceId + " .card").each(function (index, obj) {
+        var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
+        var thisObj = {};
+        if (thisInput) {
+          thisObj["code"] = $(thisInput).attr("data-code");
+          thisObj["name"] = $(thisInput).attr("data-name");
+          thisObj["value"] = $(thisInput).attr("value");
+          thisObj["type"] = "radio";
+        } else {
+          thisObj["code"] = $(obj)
+            .find($("input"))
+            .attr("data-code");
+          thisObj["name"] = $(obj)
+            .find($("input"))
+            .attr("data-name");
+          thisObj["value"] = $(obj)
+            .find($("input"))
+            .val();
+          thisObj["type"] = "input";
         }
-        //            localStorage.setItem("need-refresh", "true");
+        inputArray.push(thisObj);
+      });
+      deviceJson["fInspectionslipjson"] = inputArray;
+      deviceJson["fSubdeviceinfoid"] = deviceId;
+      deviceJson["fPlacecheckformid"] = fPlacecheckformid;
+      deviceJson["fItemnum"] = tempNum;
+      changeJson.push(deviceJson);
+    });
+    var jsonStr = JSON.stringify(changeJson);
+    Substation.postDataByAjax(
+      "/updateInspectionDetail", {
+        fPlacecheckformid: fPlacecheckformid,
+        deviceList: jsonStr
+      },
+      function (data) {
+        if (data.code == 200) {
+          // updatePageDataH5();
+          // $.toast(Operation["ui_savesuccess"]);
+          var thisGroupid = pids[pids.length - 1].pid;
+          var needChange = true;
+          $.each(allGroupList, function (i, obj) {
+            if (thisGroupid == obj.id) {
+              if (obj.fenzuTotal == "0") {
+                needChange = true;
+              } else {
+                needChange = false;
+              }
+              return false;
+            }
+          });
+          if (needChange) {
+            $(pids).each(function () {
+              changeListVal(this.pid);
+            });
+            //                fillData(thisGroupid);
+            if (isAndroid) {
+              //android持久化储存
+              //            try {
+              //              android.setSPItem(missiontaskID, JSON.stringify(allGroupList));
+              //            } catch (e) {
+              //              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+              //            }
+            } else {
+              localStorage.setItem(missiontaskID, JSON.stringify(allGroupList));
+            }
+            $("#" + thisGroupid + " .item-inner").addClass("finished");
+          }
+          $.toast(Operation["ui_savesuccess"]);
+          //            localStorage.setItem("need-refresh", "true");
+        }
       }
-    }
-  );
+    );
+  }
 }
 
 function changeListVal(thisId) {
@@ -1189,10 +1561,6 @@ function changeListVal(thisId) {
     }
   });
 }
-
-//function returnClick(){
-//    $(":radio[name='"+clickRadioName+"'][value='no']").prop("checked",true);
-//}
 
 function changeImg(e, filePath, index) {
   fileFormat = filePath.substring(filePath.lastIndexOf(".")).toLowerCase();
@@ -1221,33 +1589,8 @@ function changeImg(e, filePath, index) {
       index +
       ')"  class="imgDelete" src="img/del_img.png" /></div>'
     );
-    //        }else{
-    //            shuiyin(dataURL,timeStr,index);
-    //        }
-    // console.log(dataURL)
   };
 }
-
-//function shuiyin(imgurl, addtext, index) {
-//    var img = new Image();
-//    img.src = imgurl;
-//    var url = "";
-//    img.onload = function () {
-//        // 创建 canvas 用来绘制图片和水印
-//        let canvas = document.createElement('canvas')
-//        // var canvas = document.getElementById(canvasid);
-//        // 在 canvas 上绘制原图
-//        canvas.width = img.width;
-//        canvas.height = img.height;
-//        var ctx = canvas.getContext("2d");
-//        ctx.drawImage(img, 0, 0);
-//        ctx.font = "14px 微软雅黑";
-//        ctx.fillStyle = "rgba(252,255,255,0.8)";
-//        ctx.fillText(addtext, img.width - 100-20, img.height -20,100); //选择位置
-//        url = canvas.toDataURL("image/png", 0.5);
-//        $("#imgBox").append('<div class="imgContainer" data-index=' + index + '><img src=' + url + ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' + index + ')"  class="imgDelete" src="img/del_img.png" /></div>');
-//    }
-//}
 
 function removeImg(obj, index) {
   for (var i = 0; i < $(".imgContainer").length; i++) {
@@ -1433,29 +1776,71 @@ function goToInfo() {
       });
   }
 }
-var clickBackBtn = 0;
 //返回按钮
 $("#backBtn").click(function () {
   if (!hasSave && canClick != "false") {
-    $.confirm(
-      Operation["ui_noSaveWantOut"],
-      function () {
-        clickBackBtn = 1;
-        window.history.back();
-      },
-      function () {}
-    );
+    if (pids.length == 1) {
+      //未选中直接返回
+      clickBackBtn = 1;
+      window.history.back();
+    } else {
+      $.confirm(
+        Operation["ui_noSaveWantOut"],
+        function () {
+          clickBackBtn = 1;
+          window.history.back();
+        },
+        function () {}
+      );
+    }
   } else {
     window.history.back();
   }
 });
 
+//点击筛选
+$(".showNext").click(function () {
+  $.router.loadPage("#page3");
+});
+
+//搜索筛选
+$("#searchShowBtn").click(function () {
+  $.router.loadPage("#page3");
+});
+
 //内联返回
-$("#page2Back").unbind().click(function () {
-  pushfDeviceproblemid = "";
-  localStorage.setItem("need-refresh", "true");
-  $.router.back();
-})
+$("#page2Back")
+  .unbind()
+  .click(function () {
+    pushfDeviceproblemid = "";
+    localStorage.setItem("need-refresh", "true");
+    $.router.back();
+  });
+
+//内联返回列表页面
+$("#page3Back")
+  .unbind()
+  .click(function () {
+    if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
+      // if (!hasSave && canClick != "false") {
+      //   $.confirm(
+      //     Operation["ui_noSaveWantOut"],
+      //     function () {
+      //       clickBackBtn = 1;
+      //       window.history.back();
+      //     },
+      //     function () {}
+      //   );
+      // } else {
+      clickBackBtn = 1;
+      window.history.back();
+      // }
+    } else {
+      pushfDeviceproblemid = "";
+      localStorage.setItem("need-refresh", "true");
+      $.router.back();
+    }
+  });
 
 //解决键盘遮挡问题
 window.addEventListener("resize", function () {
@@ -1469,6 +1854,10 @@ window.addEventListener("resize", function () {
   }
 });
 
+// window.addEventListener('blur', function () {
+// console.log('blur');
+// });
+
 $(window).bind("beforeunload", function (e) {
   if (canClick != "false") {
     if (!hasSave && clickBackBtn != 1) {
@@ -1477,5 +1866,14 @@ $(window).bind("beforeunload", function (e) {
     }
   }
 });
+
+// window.addEventListener("popstate", function (e) {
+//   if (canClick != "false") {
+//     if (!hasSave && clickBackBtn != 1) {
+//       (e || window.event).returnValue = Operation["ui_noSaveWantOut"];
+//       return Operation["ui_noSaveWantOut"];
+//     }
+//   }
+// }, false);
 
 $.init();
