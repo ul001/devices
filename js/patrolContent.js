@@ -1781,8 +1781,16 @@ $("#backBtn").click(function () {
   if (!hasSave && canClick != "false") {
     if (pids.length == 1) {
       //未选中直接返回
-      clickBackBtn = 1;
-      window.history.back();
+      // clickBackBtn = 1;
+      // window.history.back();
+      $.confirm(
+        Operation["ui_saveedWantOut"],
+        function () {
+          clickBackBtn = 1;
+          window.history.back();
+        },
+        function () {}
+      );
     } else {
       $.confirm(
         Operation["ui_noSaveWantOut"],
@@ -1794,7 +1802,13 @@ $("#backBtn").click(function () {
       );
     }
   } else {
-    window.history.back();
+    $.confirm(
+      Operation["ui_saveedWantOut"],
+      function () {
+        window.history.back();
+      },
+      function () {}
+    );
   }
 });
 
