@@ -10,10 +10,12 @@ var clickDeviceInfoId = -1;
 var itemCode = "";
 var tempNum = -1;
 var imgNum = 0;
-var pids = [{
-  pid: -1,
-  pname: Operation["ui_selectSubDevice"]
-}];
+var pids = [
+  {
+    pid: -1,
+    pname: Operation["ui_selectSubDevice"]
+  }
+];
 var thisGroupid = -1;
 var clickGroupTree = "";
 var hasSave = false;
@@ -31,7 +33,7 @@ if (canClick == "false") {
   $("#saveBtn").css("display", "none");
   $(".buttonsEvent").css("display", "none");
 }
-var state = $('#outTip').is(":hidden");
+var state = $("#outTip").is(":hidden");
 if (!state) {
   $("#saveBtn").css("display", "none");
   $(".buttonsEvent").css("display", "none");
@@ -54,11 +56,12 @@ if (getSaveList != null && getSaveList != "") {
 // } else {
 function updatePageData() {
   Substation.getDataByAjax(
-    "/subDeviceTreeSelectHideOrShowForCharger", {
+    "/subDeviceTreeSelectHideOrShowForCharger",
+    {
       fSubid: selectSubid,
       fPlacecheckformid: fPlacecheckformid
     },
-    function (data) {
+    function(data) {
       allGroupList = data.subDeviceGroupList;
       loadPage();
     }
@@ -164,7 +167,7 @@ function loadPage() {
         fState: 0
       };
     }
-    Substation.getDataByAjax("/getDeviceInspectionTemplate", param, function (
+    Substation.getDataByAjax("/getDeviceInspectionTemplate", param, function(
       data
     ) {
       $(".content-block .tabs").empty();
@@ -178,8 +181,8 @@ function loadPage() {
       if (tempNum == 0) {
         $.alert(
           Operation["ui_gotowebpagedevice"] +
-          $("#subName").text() +
-          Operation["ui_patrolinformationadd"]
+            $("#subName").text() +
+            Operation["ui_patrolinformationadd"]
         );
         $("#saveBtn").hide();
         $(".buttonsEvent").hide();
@@ -187,7 +190,7 @@ function loadPage() {
       }
       if (data.list.length > 0) {
         var itemNum = 0;
-        $(data.list).each(function (index, obj) {
+        $(data.list).each(function(index, obj) {
           itemNum++;
           var thisValueJson = [];
           if (this.hasOwnProperty("fInspectionslipjson")) {
@@ -201,7 +204,7 @@ function loadPage() {
           var tempStr = "";
           var num = 0;
           var clickDeviceId = $(".tab.active").attr("id");
-          $(tempJson.checkInfo).each(function () {
+          $(tempJson.checkInfo).each(function() {
             num++;
             if (this.type == "radio") {
               inputStr =
@@ -301,15 +304,37 @@ function loadPage() {
             if (thisValueJson.length > 0) {
               $(".buttons-tab").append(
                 '<a href="#' +
+                  obj.fSubdeviceinfoid +
+                  '" data-id="' +
+                  itemNum +
+                  '" class="tab-link button">' +
+                  obj.fDevicename +
+                  "</a>"
+              );
+              $(".content-block .tabs").append(
+                '<div id="' +
+                  obj.fSubdeviceinfoid +
+                  '" class="tab pull-to-refresh-content">\n' +
+                  '<div class="pull-to-refresh-layer"></div>\n' +
+                  '<div class="content-block">\n' +
+                  tempStr +
+                  "</div>\n" +
+                  "</div>"
+              );
+            }
+            $(".icon.icon-tips").hide();
+          } else {
+            $(".buttons-tab").append(
+              '<a href="#' +
                 obj.fSubdeviceinfoid +
                 '" data-id="' +
                 itemNum +
                 '" class="tab-link button">' +
                 obj.fDevicename +
                 "</a>"
-              );
-              $(".content-block .tabs").append(
-                '<div id="' +
+            );
+            $(".content-block .tabs").append(
+              '<div id="' +
                 obj.fSubdeviceinfoid +
                 '" class="tab pull-to-refresh-content">\n' +
                 '<div class="pull-to-refresh-layer"></div>\n' +
@@ -317,28 +342,6 @@ function loadPage() {
                 tempStr +
                 "</div>\n" +
                 "</div>"
-              );
-            }
-            $(".icon.icon-tips").hide();
-          } else {
-            $(".buttons-tab").append(
-              '<a href="#' +
-              obj.fSubdeviceinfoid +
-              '" data-id="' +
-              itemNum +
-              '" class="tab-link button">' +
-              obj.fDevicename +
-              "</a>"
-            );
-            $(".content-block .tabs").append(
-              '<div id="' +
-              obj.fSubdeviceinfoid +
-              '" class="tab pull-to-refresh-content">\n' +
-              '<div class="pull-to-refresh-layer"></div>\n' +
-              '<div class="content-block">\n' +
-              tempStr +
-              "</div>\n" +
-              "</div>"
             );
             if (tempStr != "") {
               $("#saveBtn").show();
@@ -347,7 +350,7 @@ function loadPage() {
           }
           //给模板赋值
           if (thisValueJson.length > 0) {
-            $(thisValueJson).each(function () {
+            $(thisValueJson).each(function() {
               // htmlbutton =
               //   '<button style="z-index:120;position: absolute;opacity: 0.5;" id="clickBtnEvent"' +
               //   this.code +
@@ -355,40 +358,40 @@ function loadPage() {
               if (this.type == "radio") {
                 $(
                   "input[name='" +
-                  (obj.fSubdeviceinfoid + "" + this.code) +
-                  "'][value='" +
-                  this.value +
-                  "']"
+                    (obj.fSubdeviceinfoid + "" + this.code) +
+                    "'][value='" +
+                    this.value +
+                    "']"
                 ).attr("checked", true);
 
                 var code = $(
                   "input[name='" +
-                  (obj.fSubdeviceinfoid + "" + this.code) +
-                  "'][value='" +
-                  this.value +
-                  "']"
+                    (obj.fSubdeviceinfoid + "" + this.code) +
+                    "'][value='" +
+                    this.value +
+                    "']"
                 ).attr("data-code");
                 if (this.value == "yes" && canClick != "false") {
                   //显示缺陷详情按钮
                   $(
                     "button[name='" +
-                    (obj.fSubdeviceinfoid + "" + this.code) +
-                    "']"
+                      (obj.fSubdeviceinfoid + "" + this.code) +
+                      "']"
                   ).show();
                 } else {
                   $(
                     "button[name='" +
-                    (obj.fSubdeviceinfoid + "" + this.code) +
-                    "']"
+                      (obj.fSubdeviceinfoid + "" + this.code) +
+                      "']"
                   ).hide();
                 }
               } else {
                 $(
                   "#" +
-                  obj.fSubdeviceinfoid +
-                  " input[data-code='" +
-                  this.code +
-                  "']"
+                    obj.fSubdeviceinfoid +
+                    " input[data-code='" +
+                    this.code +
+                    "']"
                 ).val(this.value);
               }
             });
@@ -398,7 +401,7 @@ function loadPage() {
           }
           $(".tab-link.button")
             .unbind()
-            .click(function () {
+            .click(function() {
               var clickItemNum = $(this).attr("data-id");
               clickGroupTree += "-" + $(this).text();
               localStorage.setItem("itemNum", clickItemNum);
@@ -406,7 +409,7 @@ function loadPage() {
             });
           $(".icon-tips")
             .unbind()
-            .click(function () {
+            .click(function() {
               var tipStr = $(this).attr("data-value");
               $("#popShow").text(Operation["ui_identify"] + "：" + tipStr);
               //                        $(".open-popover").click();
@@ -414,7 +417,7 @@ function loadPage() {
           //点击详情事件
           $(".pushtoDetail")
             .unbind()
-            .click(function () {
+            .click(function() {
               var thisRadio = $(this)
                 .prevAll()
                 .find(":radio:checked");
@@ -436,7 +439,7 @@ function loadPage() {
                 Substation.getDataByAjax(
                   "/getDeviceProblemIDOnClickingYes",
                   params,
-                  function (data) {
+                  function(data) {
                     if (data != "" && data != null) {
                       localStorage.setItem("clickPids", JSON.stringify(pids));
                       // localStorage.setItem("fDeviceproblemid", data);
@@ -473,17 +476,19 @@ function loadPage() {
         .eq(0)
         .click();
       if (canClick == "false") {
-        $($("input")).each(function () {
-          if (this.type == "search") {} else {
+        $($("input")).each(function() {
+          if (this.type == "search") {
+          } else {
             $(this).attr("readonly", true);
           }
         });
-        $($(":radio")).each(function () {
+        $($(":radio")).each(function() {
           $(this).attr("disabled", true);
         });
-        $($("select")).each(function () {
+        $($("select")).each(function() {
           var selectID = $(this).attr("id");
-          if (selectID == "taskType") {} else {
+          if (selectID == "taskType") {
+          } else {
             $(this).attr("disabled", true);
           }
         });
@@ -506,7 +511,7 @@ function loadPage() {
   function addBackClick() {
     $(".back-parent")
       .unbind()
-      .click(function () {
+      .click(function() {
         if (pids[clickNum + 1] != null) {
           pids.splice(-1, 1);
         }
@@ -523,11 +528,12 @@ function loadPage() {
   //保存后更新左侧分组
   function updatePageDataH5() {
     Substation.getDataByAjax(
-      "/subDeviceTreeSelectHideOrShowForCharger", {
+      "/subDeviceTreeSelectHideOrShowForCharger",
+      {
         fSubid: selectSubid,
         fPlacecheckformid: fPlacecheckformid
       },
-      function (data) {
+      function(data) {
         allGroupList = data.subDeviceGroupList;
         if (pids[clickNum + 1] != null) {
           pids.splice(-1, 1);
@@ -557,7 +563,7 @@ function loadPage() {
 
   //根据pid获取分组
   function getSubDeviceListByPid(allList, pid) {
-    return allList.filter(function (obj) {
+    return allList.filter(function(obj) {
       return obj.pId == pid;
     });
   }
@@ -579,7 +585,7 @@ function loadPage() {
     //     "                    </li>"
     //   );
     // }
-    $(thisList).each(function () {
+    $(thisList).each(function() {
       var li = "";
       var linkStr = '<li class="item-content item-link';
       if (this.displayOrHideState == false) {
@@ -592,7 +598,7 @@ function loadPage() {
       }
 
       function getChildNum(allList) {
-        $.each(allList, function (i, obj) {
+        $.each(allList, function(i, obj) {
           var thisCList = selectChildrenList(allGroupList, obj.id);
           if (thisCList.length > 0) {
             getChildNum(thisCList);
@@ -603,7 +609,8 @@ function loadPage() {
       }
       var classCss = "";
       if (num == 0) {
-        if (this.fenzuTotal == "0") {} else {
+        if (this.fenzuTotal == "0") {
+        } else {
           classCss = " finished";
         }
       } else {
@@ -635,7 +642,7 @@ function loadPage() {
     });
 
     function selectChildrenList(allList, thisid) {
-      var thisList = allList.filter(function (obj) {
+      var thisList = allList.filter(function(obj) {
         return obj.pId == thisid && obj.displayOrHideState;
       });
       return thisList;
@@ -662,7 +669,7 @@ function loadPage() {
     //     }
     //   });
 
-    $("#searchBtn").click(function () {
+    $("#searchBtn").click(function() {
       $(".close-panel").click();
       var fTasktypeid = $("#taskType").val();
       if (fTasktypeid == 1) {
@@ -722,7 +729,7 @@ function loadPage() {
     var titleTree = "";
     clickGroupTree = "";
     if (pids.length > 1) {
-      $(pids).each(function () {
+      $(pids).each(function() {
         titleTree += this.pname + ">";
         clickGroupTree += this.pname + "-";
       });
@@ -738,12 +745,12 @@ function loadPage() {
   function linkClick(parentId) {
     $(".list-block .item-link")
       .unbind()
-      .click(function (event) {
+      .click(function(event) {
         if (!upLoadClicktag) {
           return;
         }
         upLoadClicktag = false;
-        setTimeout(function () {
+        setTimeout(function() {
           upLoadClicktag = true;
         }, 200);
         var clickId = $(this).attr("id");
@@ -774,10 +781,10 @@ function loadPage() {
             .on("click", preClick);
           $("#subName2").append(
             '<i class="icon icon-nextArrow"></i><span data-id="' +
-            clickId +
-            '">' +
-            clickName +
-            "</span>"
+              clickId +
+              '">' +
+              clickName +
+              "</span>"
           );
           $("#subName2").scrollLeft(10000);
           $(".parent-page").css("display", "none");
@@ -799,7 +806,7 @@ function loadPage() {
           pids[pids.length - 1].pid
         );
         var needPush = 0;
-        $(lastList).each(function () {
+        $(lastList).each(function() {
           if (this.name == clickName) {
             needPush = 1;
           }
@@ -817,7 +824,7 @@ function loadPage() {
         }
         var titleTree = "";
         clickGroupTree = "";
-        $(pids).each(function () {
+        $(pids).each(function() {
           titleTree += this.pname + ">";
           clickGroupTree += this.pname + "-";
         });
@@ -843,12 +850,12 @@ function loadPage() {
   }
 
   function addRadioClick() {
-    $(":radio").change(function () {
+    $(":radio").change(function() {
       if (!upLoadClicktag) {
         return;
       }
       upLoadClicktag = false;
-      setTimeout(function () {
+      setTimeout(function() {
         upLoadClicktag = true;
       }, 1000);
       var clickDeviceId = $(".tab.active").attr("id");
@@ -887,7 +894,7 @@ function loadPage() {
       } else {
         $.confirm(
           Operation["ui_noSaveWantDelete"],
-          function () {
+          function() {
             var params = {
               fSubdeviceinfoid: clickDeviceId,
               fPlacecheckformid: fPlacecheckformid,
@@ -896,7 +903,7 @@ function loadPage() {
             Substation.getDataByAjax(
               "/deleteCheckItemProblems",
               params,
-              function () {
+              function() {
                 $.toast(Operation["ui_delsuccess"]);
                 saveThisPage();
                 localStorage.setItem("need-refresh", "true");
@@ -904,7 +911,7 @@ function loadPage() {
               }
             );
           },
-          function () {
+          function() {
             $(":radio[name='" + radioName + "'][value='yes']").prop(
               "checked",
               true
@@ -917,12 +924,12 @@ function loadPage() {
 
   //点击筛选
   function addLeftClick() {
-    $(".icon-select").click(function () {
+    $(".icon-select").click(function() {
       if (canClick != "false" && !hasSave) {
         var str = Operation["ui_hasnosave"];
         $.confirm(
           str,
-          function () {
+          function() {
             //            hasSave = true;
             //            saveThisPage();
             $("#saveBtn").click();
@@ -932,7 +939,7 @@ function loadPage() {
             }
             // $(".open-panel").click();
           },
-          function () {
+          function() {
             // $(".open-panel").click();
           }
         );
@@ -943,18 +950,18 @@ function loadPage() {
   }
   addLeftClick();
 
-  $("#saveBtn").click(function () {
+  $("#saveBtn").click(function() {
     if (!upLoadClicktag) {
       return;
     }
     upLoadClicktag = false;
-    setTimeout(function () {
+    setTimeout(function() {
       upLoadClicktag = true;
     }, 1000);
     hasSave = true;
     if ($("input[data-state='true']")) {
       var thisTemp = false;
-      $("input[data-state='true']").each(function () {
+      $("input[data-state='true']").each(function() {
         if ($(this).val() == "") {
           $.toast(Operation["ui_fillrequireditems"]);
           thisTemp = true;
@@ -976,13 +983,13 @@ function loadPage() {
 
   fillData(-1);
 
-  $("#pushBtn").click(function () {
+  $("#pushBtn").click(function() {
     //二维码page1跳转原生
     if (!upLoadClicktag) {
       return;
     }
     upLoadClicktag = false;
-    setTimeout(function () {
+    setTimeout(function() {
       upLoadClicktag = true;
     }, 1000);
     if (isIOS) {
@@ -992,13 +999,13 @@ function loadPage() {
     }
   });
 
-  $("#scanShowBtn").click(function () {
+  $("#scanShowBtn").click(function() {
     //二维码page1跳转原生
     if (!upLoadClicktag) {
       return;
     }
     upLoadClicktag = false;
-    setTimeout(function () {
+    setTimeout(function() {
       upLoadClicktag = true;
     }, 1000);
     if (isIOS) {
@@ -1038,7 +1045,7 @@ function loadPage() {
     thisGroupid = pids[pids.length - 1].pid;
     var titleTree = "";
     clickGroupTree = "";
-    $(pids).each(function () {
+    $(pids).each(function() {
       titleTree += this.pname + ">";
       clickGroupTree += this.pname + "-";
     });
@@ -1058,7 +1065,7 @@ function loadPage() {
     // $(".showNext").click();
   }
 
-  $("#searchUser").bind("keydown", function (event) {
+  $("#searchUser").bind("keydown", function(event) {
     if (event.keyCode == 13) {
       if ($("#searchUser").val() != "") {
         getSearchUser();
@@ -1067,7 +1074,7 @@ function loadPage() {
     }
   });
 
-  $(".searchbar-cancel").click(function () {
+  $(".searchbar-cancel").click(function() {
     $("#searchUser").val("");
     //清除筛选页的subName2，详情页subName保留
     // $("#subName2").text(Operation["ui_selectSubDevice"]);
@@ -1099,15 +1106,16 @@ function loadPage() {
 
     // if (peopleType == "substation") {
     Substation.postDataByAjax(
-      "/subDeviceTreeSelectHideOrShowForChargerNew", {
+      "/subDeviceTreeSelectHideOrShowForChargerNew",
+      {
         fSubid: selectSubid,
         fPlacecheckformid: fPlacecheckformid,
         search: $("#searchUser").val()
       },
-      function (data) {
+      function(data) {
         var html = "";
         // this.fSubid Substation.removeUndefined(this.fSubname)
-        $(data.data.subDeviceGroupList).each(function () {
+        $(data.data.subDeviceGroupList).each(function() {
           var classCss = "";
           var finishRadio = this.fenzuTotal;
           if (finishRadio < 1 && finishRadio > 0) {
@@ -1137,12 +1145,12 @@ function loadPage() {
         // checkSelectPeople();
         $(".personUl .item-link")
           .unbind()
-          .click(function (event) {
+          .click(function(event) {
             if (!upLoadClicktag) {
               return;
             }
             upLoadClicktag = false;
-            setTimeout(function () {
+            setTimeout(function() {
               upLoadClicktag = true;
             }, 200);
             var clickId = $(this).attr("id");
@@ -1205,17 +1213,17 @@ function loadPage2() {
   if (defectPosition != "" && defectPosition != null) {
     $(".redColor").show();
     var defectPositionArray = defectPosition.split(";");
-    $(defectPositionArray).each(function (index, obj) {
+    $(defectPositionArray).each(function(index, obj) {
       $("#defectPosition").append(
         '<input type="checkbox" value="' +
-        obj +
-        '" id="' +
-        index +
-        '"><label for="' +
-        index +
-        '">' +
-        obj +
-        "</label><br>"
+          obj +
+          '" id="' +
+          index +
+          '"><label for="' +
+          index +
+          '">' +
+          obj +
+          "</label><br>"
       );
     });
   } else {
@@ -1231,7 +1239,7 @@ function loadPage2() {
 
   $("#inputBox").html("");
   $("#imgBox").html('<img class="upload_img" src="img/upload_img.png"/>');
-  $(".upload_img_wrap .upload_img").on("click", function () {
+  $(".upload_img_wrap .upload_img").on("click", function() {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
@@ -1243,10 +1251,10 @@ function loadPage2() {
       //        }else{
       $("#inputBox").append(
         '<input type="file" class="fileInput"  capture="camera" name="file" data-id="' +
-        index +
-        '" title="请选择图片" id="file' +
-        index +
-        '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
+          index +
+          '" title="请选择图片" id="file' +
+          index +
+          '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
       );
       //        }
     }
@@ -1259,7 +1267,7 @@ function loadPage2() {
     }
     $("#file" + index)
       .unbind()
-      .change(function (e) {
+      .change(function(e) {
         var index = e.currentTarget.dataset.id;
         if ($("#file" + index).val() == "") {
           $("#inputBox input")
@@ -1289,17 +1297,17 @@ function loadPage3(fDeviceproblemid) {
   if (defectPosition != "" && defectPosition != null) {
     $(".redColor").show();
     var defectPositionArray = defectPosition.split(";");
-    $(defectPositionArray).each(function (index, obj) {
+    $(defectPositionArray).each(function(index, obj) {
       $("#defectPosition").append(
         '<input type="checkbox" value="' +
-        obj +
-        '" id="' +
-        index +
-        '"><label for="' +
-        index +
-        '">' +
-        obj +
-        "</label><br>"
+          obj +
+          '" id="' +
+          index +
+          '"><label for="' +
+          index +
+          '">' +
+          obj +
+          "</label><br>"
       );
     });
   } else {
@@ -1321,7 +1329,7 @@ function loadPage3(fDeviceproblemid) {
   }
   $("#inputBox").html("");
   $("#imgBox").html('<img class="upload_img" src="img/upload_img.png"/>');
-  $(".upload_img_wrap .upload_img").on("click", function () {
+  $(".upload_img_wrap .upload_img").on("click", function() {
     //console.log(ev.currentTarget.dataset.id)
     var index = imgNum + 1;
     if ($("#file" + index).length < 1) {
@@ -1333,10 +1341,10 @@ function loadPage3(fDeviceproblemid) {
       //        }else{
       $("#inputBox").append(
         '<input type="file" class="fileInput"  capture="camera" name="file" data-id="' +
-        index +
-        '" title="请选择图片" id="file' +
-        index +
-        '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
+          index +
+          '" title="请选择图片" id="file' +
+          index +
+          '" accept="image/png,image/jpg,image/gif,image/JPEG" />'
       );
       //        }
     }
@@ -1349,7 +1357,7 @@ function loadPage3(fDeviceproblemid) {
     }
     $("#file" + index)
       .unbind()
-      .change(function (e) {
+      .change(function(e) {
         var index = e.currentTarget.dataset.id;
         if ($("#file" + index).val() == "") {
           $("#inputBox input")
@@ -1370,7 +1378,7 @@ function loadPage3(fDeviceproblemid) {
   var problemParam = {
     fDeviceproblemid: fDeviceproblemid
   };
-  Substation.getDataByAjax(url, problemParam, function (data) {
+  Substation.getDataByAjax(url, problemParam, function(data) {
     var imgUrl = data.imgUrl;
     var defectJson = data.tDevDeviceproblem;
     var beforeimg = data.beforeimg;
@@ -1400,20 +1408,20 @@ function loadPage3(fDeviceproblemid) {
       var defectPositionVal = fProblemlocation.split(",")[1];
       var defectPositionArray = defectPosition.split(";");
       var defectPositionValArray = defectPositionVal.split(";");
-      $(defectPositionArray).each(function (index, obj) {
+      $(defectPositionArray).each(function(index, obj) {
         $("#defectPosition").append(
           '<input type="checkbox" value="' +
-          obj +
-          '" id="' +
-          index +
-          '"><label for="' +
-          index +
-          '">' +
-          obj +
-          "</label><br>"
+            obj +
+            '" id="' +
+            index +
+            '"><label for="' +
+            index +
+            '">' +
+            obj +
+            "</label><br>"
         );
       });
-      $(defectPositionValArray).each(function () {
+      $(defectPositionValArray).each(function() {
         $("input[type='checkbox'][value='" + this + "']").attr("checked", true);
       });
     }
@@ -1431,7 +1439,7 @@ function loadPage3(fDeviceproblemid) {
     // $("#fResolution").val(Substation.removeUnDefinedStr(defectJson.fResolution));
 
     if (beforeimg.length > 0) {
-      $.each(beforeimg, function (i, value) {
+      $.each(beforeimg, function(i, value) {
         imgNum++;
         if (value.fDeviceproblemimgurlMin == undefined) {
           var imgDiv =
@@ -1473,11 +1481,11 @@ function loadPage3(fDeviceproblemid) {
 function saveThisPage() {
   var changeJson = [];
   if ($(".tabs .tab").length > 0) {
-    $(".tabs .tab").each(function () {
+    $(".tabs .tab").each(function() {
       var deviceJson = {};
       var deviceId = $(this).attr("id");
       var inputArray = [];
-      $("#" + deviceId + " .card").each(function (index, obj) {
+      $("#" + deviceId + " .card").each(function(index, obj) {
         var thisInput = $(obj).find($("input[type='radio']:checked"))[0];
         var thisObj = {};
         if (thisInput) {
@@ -1507,17 +1515,18 @@ function saveThisPage() {
     });
     var jsonStr = JSON.stringify(changeJson);
     Substation.postDataByAjax(
-      "/updateInspectionDetail", {
+      "/updateInspectionDetail",
+      {
         fPlacecheckformid: fPlacecheckformid,
         deviceList: jsonStr
       },
-      function (data) {
+      function(data) {
         if (data.code == 200) {
           // updatePageDataH5();
           // $.toast(Operation["ui_savesuccess"]);
           var thisGroupid = pids[pids.length - 1].pid;
           var needChange = true;
-          $.each(allGroupList, function (i, obj) {
+          $.each(allGroupList, function(i, obj) {
             if (thisGroupid == obj.id) {
               if (obj.fenzuTotal == "0") {
                 needChange = true;
@@ -1528,7 +1537,7 @@ function saveThisPage() {
             }
           });
           if (needChange) {
-            $(pids).each(function () {
+            $(pids).each(function() {
               changeListVal(this.pid);
             });
             //                fillData(thisGroupid);
@@ -1553,7 +1562,7 @@ function saveThisPage() {
 }
 
 function changeListVal(thisId) {
-  $.each(allGroupList, function (i, obj) {
+  $.each(allGroupList, function(i, obj) {
     if (obj.id == thisId) {
       // allGroupList[i].taskFinishFlag = Number(obj.taskFinishFlag) + 1 + "";
       allGroupList[i].fenzuTotal = Number(obj.fenzuTotal) + 1 + "";
@@ -1573,21 +1582,21 @@ function changeImg(e, filePath, index) {
   var reader = new FileReader();
   reader.readAsDataURL(e.target.files[0]);
   //    var timeStr = e.target.files[0].lastModified;
-  reader.onloadend = function () {
+  reader.onloadend = function() {
     // 图片的 base64 格式, 可以直接当成 img 的 src 属性值
     var dataURL = reader.result;
     //        if(isAndroid){
     // 显示图片
     $("#imgBox").append(
       '<div class="imgContainer" data-index=' +
-      index +
-      "><img   src=" +
-      dataURL +
-      " name=" +
-      dataURL +
-      ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
-      index +
-      ')"  class="imgDelete" src="img/del_img.png" /></div>'
+        index +
+        "><img   src=" +
+        dataURL +
+        " name=" +
+        dataURL +
+        ' onclick="imgDisplay(this)"><img onclick="removeImg(this,' +
+        index +
+        ')"  class="imgDelete" src="img/del_img.png" /></div>'
     );
   };
 }
@@ -1596,8 +1605,8 @@ function removeImg(obj, index) {
   for (var i = 0; i < $(".imgContainer").length; i++) {
     if (
       $(".imgContainer")
-      .eq(i)
-      .attr("data-index") == index
+        .eq(i)
+        .attr("data-index") == index
     ) {
       var imgId = $(".imgContainer")
         .eq(i)
@@ -1610,15 +1619,16 @@ function removeImg(obj, index) {
       } else {
         //                if(confirm("确定要删除已保存的图片？")){
 
-        $.confirm(Operation["ui_noSaveWantDelete"], function () {
+        $.confirm(Operation["ui_noSaveWantDelete"], function() {
           $(".imgContainer")
             .eq(i)
             .remove();
           Substation.getDataByAjax(
-            "/deleteSubstationImg", {
+            "/deleteSubstationImg",
+            {
               fId: imgId
             },
-            function () {}
+            function() {}
           );
         });
         /*$(".imgContainer").eq(i).remove();
@@ -1675,10 +1685,10 @@ function saveFormData() {
     return;
   }
   upLoadClicktag = false;
-  setTimeout(function () {
+  setTimeout(function() {
     upLoadClicktag = true;
   }, 1000);
-  $(".fileInput").each(function () {
+  $(".fileInput").each(function() {
     if ($(this).val() == "" || $(this).val() == null) {
       $(this).remove();
     }
@@ -1697,7 +1707,7 @@ function saveFormData() {
       return;
     } else {
       var checkedVal = ",";
-      $("input:checkbox:checked").each(function () {
+      $("input:checkbox:checked").each(function() {
         checkedVal += $(this).val() + ";";
       });
       checkedVal = checkedVal.substring(0, checkedVal.length - 1);
@@ -1717,7 +1727,7 @@ function saveFormData() {
   if (pushfDeviceproblemid != "" && pushfDeviceproblemid != undefined) {
     params.append("fDeviceproblemid", pushfDeviceproblemid);
   }
-  Substation.postFormDataByAjax("/saveCheckItemProblem", params, function (
+  Substation.postFormDataByAjax("/saveCheckItemProblem", params, function(
     data
   ) {
     if (data.code == 200) {
@@ -1728,7 +1738,7 @@ function saveFormData() {
       );
       pushfDeviceproblemid = "";
       localStorage.setItem("need-refresh", "true");
-      setTimeout(function () {
+      setTimeout(function() {
         $.router.back();
         saveThisPage();
         $("button[name='" + clickRadioName + "']").show();
@@ -1742,12 +1752,12 @@ function goToInfo() {
   if (canClick == "false") {
     $(".card-content")
       .unbind()
-      .click(function () {
+      .click(function() {
         if (!upLoadClicktag) {
           return;
         }
         upLoadClicktag = false;
-        setTimeout(function () {
+        setTimeout(function() {
           upLoadClicktag = true;
         }, 1000);
         var thisRadio = $(this).find(":radio:checked");
@@ -1762,7 +1772,7 @@ function goToInfo() {
           Substation.getDataByAjax(
             "/getDeviceProblemIDOnClickingYes",
             params,
-            function (data) {
+            function(data) {
               if (data != "" && data != null) {
                 localStorage.setItem("clickPids", JSON.stringify(pids));
                 window.location.href =
@@ -1777,7 +1787,7 @@ function goToInfo() {
   }
 }
 //返回按钮
-$("#backBtn").click(function () {
+$("#backBtn").click(function() {
   if (!hasSave && canClick != "false") {
     if (pids.length == 1) {
       //未选中直接返回
@@ -1785,47 +1795,47 @@ $("#backBtn").click(function () {
       // window.history.back();
       $.confirm(
         Operation["ui_saveedWantOut"],
-        function () {
+        function() {
           clickBackBtn = 1;
           window.history.back();
         },
-        function () {}
+        function() {}
       );
     } else {
       $.confirm(
         Operation["ui_noSaveWantOut"],
-        function () {
+        function() {
           clickBackBtn = 1;
           window.history.back();
         },
-        function () {}
+        function() {}
       );
     }
   } else {
     $.confirm(
       Operation["ui_saveedWantOut"],
-      function () {
+      function() {
         window.history.back();
       },
-      function () {}
+      function() {}
     );
   }
 });
 
 //点击筛选
-$(".showNext").click(function () {
+$(".showNext").click(function() {
   $.router.loadPage("#page3");
 });
 
 //搜索筛选
-$("#searchShowBtn").click(function () {
+$("#searchShowBtn").click(function() {
   $.router.loadPage("#page3");
 });
 
 //内联返回
 $("#page2Back")
   .unbind()
-  .click(function () {
+  .click(function() {
     pushfDeviceproblemid = "";
     localStorage.setItem("need-refresh", "true");
     $.router.back();
@@ -1834,7 +1844,7 @@ $("#page2Back")
 //内联返回列表页面
 $("#page3Back")
   .unbind()
-  .click(function () {
+  .click(function() {
     if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
       // if (!hasSave && canClick != "false") {
       //   $.confirm(
@@ -1857,12 +1867,12 @@ $("#page3Back")
   });
 
 //解决键盘遮挡问题
-window.addEventListener("resize", function () {
+window.addEventListener("resize", function() {
   if (
     document.activeElement.tagName == "INPUT" ||
     document.activeElement.tagName == "TEXTAREA"
   ) {
-    window.setTimeout(function () {
+    window.setTimeout(function() {
       document.activeElement.scrollIntoViewIfNeeded();
     }, 0);
   }
@@ -1872,7 +1882,7 @@ window.addEventListener("resize", function () {
 // console.log('blur');
 // });
 
-$(window).bind("beforeunload", function (e) {
+$(window).bind("beforeunload", function(e) {
   if (canClick != "false") {
     if (!hasSave && clickBackBtn != 1) {
       (e || window.event).returnValue = Operation["ui_noSaveWantOut"];

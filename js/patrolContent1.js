@@ -833,6 +833,11 @@ function loadPage() {
         // $("#subName2").text(titleTreeName);
         if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
           $.router.loadPage("#page1");
+          // $.router.replace(path)
+          $.router.stack.back = "[]";
+          $.router.state.back = "[]";
+          // $.router.remove();
+          // $.router.load('', true);
         } else {
           $.router.back();
         }
@@ -1803,8 +1808,25 @@ $("#backBtn").click(function () {
       );
     }
   } else {
-    $.router.back();
-    // window.history.back();
+    if ($.router.stack.back.length == 0 || $.router.stack.back == "[]") {
+      $.router.back();
+      $.confirm(
+        Operation["ui_saveedWantOut"],
+        function () {
+          clickBackBtn = 1;
+          window.history.back();
+        },
+        function () {}
+      );
+      // setTimeout(function () {
+      //   window.history.back();
+      // }, 100);
+
+      localStorage.removeItem("clickPids");
+    } else {
+      $.router.back();
+    }
+
   }
 });
 
